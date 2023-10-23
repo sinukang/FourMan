@@ -9,6 +9,53 @@ public class contentsVo {
 	private String mapx;
 	private String mapy;
 	private String cat1;
+	private String cat2;
+	private String cat3;
+	private String addr1;
+	private String addr2;
+	private String createdtime;
+	private String tel;
+	private String zipcode;
+	private String modifiedtime;
+	
+	
+	
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getCreatedtime() {
+		return createdtime;
+	}
+	public void setCreatedtime(String createdtime) {
+		this.createdtime = createdtime;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getModifiedtime() {
+		return modifiedtime;
+	}
+	public void setModifiedtime(String modifiedtime) {
+		this.modifiedtime = modifiedtime;
+	}
 	public String getContentid() {
 		return contentid;
 	}
@@ -69,8 +116,6 @@ public class contentsVo {
 	public void setCat3(String cat3) {
 		this.cat3 = cat3;
 	}
-	private String cat2;
-	private String cat3;
 	
 	
 
