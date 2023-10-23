@@ -14,13 +14,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/ContentsController")
 public class ContentsController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	
     private String location;
+    
     public ContentsController(String location) {
 		this.location = location;
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if (location.equals("contentsList.do")) {
 			String path ="/contents/contentsList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
