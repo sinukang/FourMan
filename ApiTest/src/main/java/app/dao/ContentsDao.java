@@ -1,6 +1,7 @@
 package app.dao;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,14 +15,44 @@ import app.domain.ContentsVo;
 import app.domain.PageMaker;
 
 public class ContentsDao {
+	private String key;
+	private String uri;
+	private String area;
+	private String sigungu;
+	
+	public ContentsDao() {
+		this.key = "qlp8EQg1WmON%2Bq8mTCBOz6N6tqUVBW16y1jVWyBiMGsYplEooRtbId0RBawLiFfSIU1HnD4pxdFv3svkl1GHqA%3D%3D";
+		this.uri = "https://apis.data.go.kr/B551011/KorService1/";
+		this.area = "37";
+		this.sigungu = "12";
+	}
+	
+	public static JSONArray GetItem(String apiURL) throws Exception {
+		URL url = new URL(apiURL);
+		HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+		BufferedReader br;
+		
+		if(responseCode==200) { // 정상 호출
+			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		} else {  // 에러 발생
+			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		}
+		String result = br.readLine();
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
+		JSONObject jsonResponse = (JSONObject)jsonObject.get("response");
+		JSONObject body = (JSONObject)jsonResponse.get("body");
+		JSONObject items = (JSONObject)body.get("items");
+		JSONArray item = (JSONArray)items.get("item");
+		return item;
+	}
+	
 	public ArrayList<ContentsVo> ContentsList(PageMaker pm){
 		
 		ArrayList<ContentsVo> alist = new ArrayList<ContentsVo>();
-		
-		String key = "qlp8EQg1WmON%2Bq8mTCBOz6N6tqUVBW16y1jVWyBiMGsYplEooRtbId0RBawLiFfSIU1HnD4pxdFv3svkl1GHqA%3D%3D";
 		String uriType = "areaBasedList1";
-		String area = "37";
-		String sigungu = "12";
 		String page = Integer.toString(pm.getScri().getPage());
 		String numOfRows = Integer.toString(pm.getScri().getNumOfRows());
 		String contentTypeId = "";
@@ -42,31 +73,12 @@ public class ContentsDao {
 			uriType = "searchKeyword1";
 			query += "&keyword=" + keyword;
 		}
-		String result = "";
+		String apiURL = uri
+		+ uriType
+		+ query;
 		
 		try{
-			String apiURL = "https://apis.data.go.kr/B551011/KorService1/"
-					+ uriType
-    				+ query;
-			System.out.println(apiURL);
-			URL url = new URL(apiURL);
-			HttpURLConnection con = (HttpURLConnection)url.openConnection();
-			con.setRequestMethod("GET");
-			int responseCode = con.getResponseCode();
-			BufferedReader br;
-			
-			if(responseCode==200) { // 정상 호출
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			} else {  // 에러 발생
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-			}
-			result = br.readLine();
-			JSONParser jsonParser = new JSONParser();
-			JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
-			JSONObject jsonResponse = (JSONObject)jsonObject.get("response");
-			JSONObject body = (JSONObject)jsonResponse.get("body");
-			JSONObject items = (JSONObject)body.get("items");
-			JSONArray item = (JSONArray)items.get("item");
+			JSONArray item = GetItem(apiURL);
 			for(int i = 0; i < item.size(); i++) {
 				ContentsVo cv = new ContentsVo();
 				JSONObject contents = (JSONObject)item.get(i);
@@ -98,7 +110,47 @@ public class ContentsDao {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	return alist;	
+		return alist;	
 	}
 
+	public ContentsVo ContentsViewDetail(int contentid) {
+		ContentsVo cv = new ContentsVo();
+		String contentId = Integer.toString(contentid);
+		String uriType = "detailCommon1";
+		String query = "?serviceKey=";
+		query += key;
+		query += "&MobileApp=AppTest&MobileOS=ETC&_type=json&defaultYN=Y&firstImageYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y";
+		query += "&contentId=" + contentId;
+		
+		String apiURL = uri
+		+ uriType
+		+ query;
+		System.out.println(apiURL);
+		
+		try {
+			JSONArray item = GetItem(apiURL);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cv;
+	}
+	public ContentsVo ContentsViewIntro(int contentid, int contenttypeid) {
+		ContentsVo cv = new ContentsVo();
+		return cv;
+	}
+	public ContentsVo ContentsViewDetailInfo(int contentid, int contenttypeid) {
+		ContentsVo cv = new ContentsVo();
+		return cv;
+	}
+	public ContentsVo ContentsViewDetailInfoCourse(int contentid, int contenttypeid) {
+		ContentsVo cv = new ContentsVo();
+		return cv;
+	}
+	public ContentsVo ContentsViewDetailInfoRoom(int contentid, int contenttypeid) {
+		ContentsVo cv = new ContentsVo();
+		return cv;
+	}
 }
