@@ -29,21 +29,53 @@ a:visited {
 <!-- <button type="button" onclick="zoomIn()">+</button> -->
 <!-- <button type="button" onclick="zoomOut()">-</button> -->
 <script>
-	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(35.8183333748, 127.1536778411), //지도의 중심좌표.
-		draggable: false,	//드래그로 다른 위치로 변경하는 기능 비활성화
-		level: 3 //지도의 레벨(확대, 축소 정도)
+	var mapContainer = document.getElementById('map'), 						//지도를 담을 영역의 DOM 레퍼런스
+		mapOption = { 														//지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(35.8183333748, 127.1536778411), 	//지도의 중심좌표.
+			//draggable: false,												//드래그로 다른 위치로 변경하는 기능 비활성화
+			level: 3 														//지도의 레벨(확대, 축소 정도)
 	};
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	
-	var markerPosition = new kakao.maps.LatLng(35.8183333748, 127.1536778411); //마커의 좌표값 할당
+	var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
 	
-	var marker = new kakao.maps.Marker({	//좌표값을 지정해 마커 생성
-		position : markerPosition,
-		clickable : true
-	});
-	marker.setMap(map);		//지도위에 마커를 생성
+// 	var markerPosition = new kakao.maps.LatLng(35.8183333748, 127.1536778411); //마커의 좌표값 할당
+	
+	var positions = [
+			{title: '가족회관', latlng: new kakao.maps.LatLng(35.8170667179, 127.1459591164)}
+			,{title: '객사길', latlng: new kakao.maps.LatLng(35.8176666120, 127.1437287440)}
+			,{title: '덕진공원', latlng: new kakao.maps.LatLng(35.8475156135, 127.1218687977)}
+			,{title: '전북 전주 한옥마을 [슬로시티]', latlng: new kakao.maps.LatLng(35.8183333748, 127.1536778411)}
+		];
+		
+	for (var i = 0; i < positions.length; i++) {
+		var marker = new kakao.maps.Marker({	//좌표값을 지정해 마커 생성
+			map : map,
+			position : positions[i].latlng,
+			title : positions[i].title,
+			clickable : true
+		});		
+		
+		// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		var iwContent = '<div style="padding: 5px;">'
+					  +	'<a href="https://map.kakao.com/link/map/Hello World!,'+positions[i].latlng+' class="a1" target="_blank">큰 지도보기</a>'
+					  + '<a href="https://map.kakao.com/link/to/Hello World!,'+positions[i].latlng+' class="a2" target="_blank">길찾기</a>'
+					  + '</div>',
+			iwPosition = positions[i].latlng, //new kakao.maps.LatLng(35.8183333748, 127.1536778411),	//인포윈도우 표시 위치입니다
+			iwRemoveable = true;
+					  
+		var infowindow = new kakao.maps.InfoWindow({
+			position : iwPosition,
+			content : iwContent,
+			removable : iwRemoveable
+		});
+		
+		kakao.maps.event.addListener(marker, "click", function(){
+			infowindow.open(map, marker);
+		});
+		
+	}
+
+// 	marker.setMap(map);		//지도위에 마커를 생성
 	
 	function setDraggable(draggable){
 		map.setDraggable(draggable);
@@ -62,28 +94,13 @@ a:visited {
 		
 // 		map.setLevel(level + 1);
 // 	}
+
+
 	
-	var iwContent = "<div style='padding: 5px;'>"
-				  +	"<a href='https://map.kakao.com/link/map/Hello World!,33.450701,126.570667' class='a1' target='_blank'>큰 지도보기</a>"
-				  + "<a href='https://map.kakao.com/link/to/Hello World!,33.450701,126.570667' class='a2' target='_blank'>길찾기</a>"
-				  + "</div>",
-		iwPosition = new kakao.maps.LatLng(35.8183333748, 127.1536778411),
-		iwRemoveable = true;
-				  
-	var infowindow = new kakao.maps.InfoWindow({
-		position : iwPosition,
-		content : iwContent,
-		removable : iwRemoveable
-	});
-	
-	kakao.maps.event.addListener(marker, "click", function(){
-		infowindow.open(map, marker);
-	});
-	
-	var mapTypeControl = new kakao.maps.MapTypeControl();
+	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 	
-	var zoomControl = new kakao.maps.ZoomControl();
+	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
 	
