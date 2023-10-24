@@ -41,10 +41,34 @@ a:visited {
 // 	var markerPosition = new kakao.maps.LatLng(35.8183333748, 127.1536778411); //마커의 좌표값 할당
 	
 	var positions = [
-			{title: '가족회관', latlng: new kakao.maps.LatLng(35.8170667179, 127.1459591164)}
-			,{title: '객사길', latlng: new kakao.maps.LatLng(35.8176666120, 127.1437287440)}
-			,{title: '덕진공원', latlng: new kakao.maps.LatLng(35.8475156135, 127.1218687977)}
-			,{title: '전북 전주 한옥마을 [슬로시티]', latlng: new kakao.maps.LatLng(35.8183333748, 127.1536778411)}
+			{title: '가족회관',
+			 content: 	"<div style='padding: 5px;'>"
+					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8170667179,127.1459591164' class='a1' target='_blank'>큰 지도보기</a>"
+					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,' class='a2' target='_blank'>길찾기</a>"
+					  + "</div>",
+			 latlng: new kakao.maps.LatLng(35.8170667179, 127.1459591164)
+			},
+			{title: '객사길',
+			 content: 	"<div style='padding: 5px;'>"
+					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8176666120, 127.1437287440' class='a1' target='_blank'>큰 지도보기</a>"
+					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,' class='a2' target='_blank'>길찾기</a>"
+					  + "</div>",
+			 latlng: new kakao.maps.LatLng(35.8176666120, 127.1437287440)
+			},
+			{title: '덕진공원',
+			 content: 	"<div style='padding: 5px;'>"
+					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8475156135, 127.1218687977' class='a1' target='_blank'>큰 지도보기</a>"
+					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,' class='a2' target='_blank'>길찾기</a>"
+					  + "</div>",
+			 latlng: new kakao.maps.LatLng(35.8475156135, 127.1218687977)
+			},
+			{title: '전북 전주 한옥마을 [슬로시티]',
+			 content: 	"<div style='padding: 5px;'>"
+					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8183333748, 127.1536778411' class='a1' target='_blank'>큰 지도보기</a>"
+					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,' class='a2' target='_blank'>길찾기</a>"
+					  + "</div>",
+			 latlng: new kakao.maps.LatLng(35.8183333748, 127.1536778411)
+			}
 		];
 		
 	for (var i = 0; i < positions.length; i++) {
@@ -55,25 +79,40 @@ a:visited {
 			clickable : true
 		});		
 		
-		// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		var iwContent = '<div style="padding: 5px;">'
-					  +	'<a href="https://map.kakao.com/link/map/Hello World!,'+positions[i].latlng+' class="a1" target="_blank">큰 지도보기</a>'
-					  + '<a href="https://map.kakao.com/link/to/Hello World!,'+positions[i].latlng+' class="a2" target="_blank">길찾기</a>'
-					  + '</div>',
-			iwPosition = positions[i].latlng, //new kakao.maps.LatLng(35.8183333748, 127.1536778411),	//인포윈도우 표시 위치입니다
-			iwRemoveable = true;
-					  
 		var infowindow = new kakao.maps.InfoWindow({
-			position : iwPosition,
-			content : iwContent,
-			removable : iwRemoveable
+			content : positions[i].content,
+			removable : true
 		});
 		
-		kakao.maps.event.addListener(marker, "click", function(){
-			infowindow.open(map, marker);
-		});
+		kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+	    //kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 		
+// 		kakao.maps.event.addListener(marker, "click", function(){
+// 			infowindow.open(map, marker);
+// 		});
+					  
+// 		// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+// 		var iwContent = '<div style="padding: 5px;">'
+// 					  +	'<a href="https://map.kakao.com/link/map/Hello World!,'+positions[i].latlng+'" class="a1" target="_blank">큰 지도보기</a>'
+// 					  + '<a href="https://map.kakao.com/link/to/Hello World!,'+positions[i].latlng+'" class="a2" target="_blank">길찾기</a>'
+// 					  + '</div>',
+// 			iwPosition = positions[i].latlng, //new kakao.maps.LatLng(35.8183333748, 127.1536778411),	//인포윈도우 표시 위치입니다
+// 			iwRemoveable = true;
 	}
+	
+	function makeOverListener(map, marker, infowindow) {
+	    return function() {
+	        infowindow.open(map, marker);
+	    };
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
+	}
+	
 
 // 	marker.setMap(map);		//지도위에 마커를 생성
 	
