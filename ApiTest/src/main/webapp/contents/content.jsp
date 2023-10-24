@@ -25,9 +25,9 @@ a:visited {
 </style>
 </head>
 <body>
-<div id="map" style="width:500px;height:400px;"></div>
-<!-- <button type="button" onclick="zoomIn()">+</button> -->
-<!-- <button type="button" onclick="zoomOut()">-</button> -->
+	<div id="map" style="width:500px;height:400px;"></div>
+	<!-- <button type="button" onclick="zoomIn()">+</button> -->
+	<!-- <button type="button" onclick="zoomOut()">-</button> -->
 <script>
 	var mapContainer = document.getElementById('map'), 						//지도를 담을 영역의 DOM 레퍼런스
 		mapOption = { 														//지도를 생성할 때 필요한 기본 옵션
@@ -110,7 +110,7 @@ a:visited {
 	
 	function makeClickListener(map, marker, infowindow) {
 	    return function() {
-	    	closeInfoWindow()
+	    	closeInfoWindow();
 	        infowindow.open(map, marker);
 	    };
 	}
