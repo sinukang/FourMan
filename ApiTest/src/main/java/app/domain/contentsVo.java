@@ -3,8 +3,8 @@ package app.domain;
 public class contentsVo {
 	private String contentid;
 	private String contenttypeid;
-	private String contentfirstimage;
-	private String contentfirstimage2;
+	private String firstimage;
+	private String firstimage2;
 	private String title;
 	private String mapx;
 	private String mapy;
@@ -68,17 +68,17 @@ public class contentsVo {
 	public void setContenttypeid(String contenttypeid) {
 		this.contenttypeid = contenttypeid;
 	}
-	public String getContentfirstimage() {
-		return contentfirstimage;
+	public String getFirstimage() {
+		return firstimage;
 	}
-	public void setContentfirstimage(String contentfirstimage) {
-		this.contentfirstimage = contentfirstimage;
+	public void setFirstimage(String contentfirstimage) {
+		this.firstimage = contentfirstimage;
 	}
-	public String getContentfirstimage2() {
-		return contentfirstimage2;
+	public String getFirstimage2() {
+		return firstimage2;
 	}
-	public void setContentfirstimage2(String contentfirstimage2) {
-		this.contentfirstimage2 = contentfirstimage2;
+	public void setFirstimage2(String contentfirstimage2) {
+		this.firstimage2 = contentfirstimage2;
 	}
 	public String getTitle() {
 		return title;

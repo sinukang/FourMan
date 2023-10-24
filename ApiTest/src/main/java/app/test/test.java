@@ -26,7 +26,7 @@ public class test {
 			cv.setTitle(contents.get("title").toString());
 			cv.setTel(contents.get("tel").toString());
 			cv.setZipcode(contents.get("zipcode").toString());
-			cv.setContentfirstimage2(contents.get("firstimage2").toString());
+			cv.setFirstimage2(contents.get("firstimage2").toString());
 			cv.setMapx(contents.get("mapx").toString());
 			cv.setMapy(contents.get("mapy").toString());
 			alist.add(cv);
@@ -83,7 +83,7 @@ public class test {
 				System.out.println("타입 : " + cv.getContenttypeid());
 				System.out.println("위도 : " + cv.getMapx());
 				System.out.println("경도 : " + cv.getMapy());
-				System.out.println("썸네일 : " + cv.getContentfirstimage2());
+				System.out.println("썸네일 : " + cv.getFirstimage2());
 				System.out.println("---------------------------------");
 			}
 		}catch(Exception e){
