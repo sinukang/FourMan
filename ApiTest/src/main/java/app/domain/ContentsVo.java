@@ -1,6 +1,6 @@
 package app.domain;
 
-public class contentsVo {
+public class ContentsVo {
 	private String contentid;
 	private String contenttypeid;
 	private String firstimage;

@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import app.dao.ContentsDao;
+import app.domain.ContentsVo;
+import app.domain.PageMaker;
+import app.domain.SearchCriteria;
 
 /**
  * Servlet implementation class ContentsController
@@ -26,6 +32,25 @@ public class ContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (location.equals("contentsList.do")) {
+			ContentsDao cd = new ContentsDao();
+			SearchCriteria scri = new SearchCriteria();
+			PageMaker pm = new PageMaker();
+			String contentTypeId = request.getParameter("contentTypeId");
+			String keyword = request.getParameter("keyword");
+			String page = request.getParameter("page");
+			if(contentTypeId==null) { contentTypeId = ""; }
+			if(keyword==null) { keyword = ""; }
+			if(page==null) { page = "1"; }
+			
+			scri.setSearchTypeId(contentTypeId);
+			scri.setKeyword(keyword);
+			scri.setPage(Integer.parseInt(page));
+			pm.setScri(scri);
+			
+			ArrayList<ContentsVo> alist = cd.ContentsList(pm);
+			request.setAttribute("alist", alist);
+			request.setAttribute("pm", pm);
+			
 			String path ="/contents/contentsList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);

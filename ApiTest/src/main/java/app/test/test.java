@@ -11,13 +11,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import app.domain.contentsVo;
+import app.domain.ContentsVo;
 
 public class test {
-	public static ArrayList<contentsVo> GetContentsList(JSONArray item){
-		ArrayList<contentsVo> alist = new ArrayList<contentsVo>();
+	public static ArrayList<ContentsVo> GetContentsList(JSONArray item){
+		ArrayList<ContentsVo> alist = new ArrayList<ContentsVo>();
 		for(int i = 0; i < item.size(); i++) {
-			contentsVo cv = new contentsVo();
+			ContentsVo cv = new ContentsVo();
 			JSONObject contents = (JSONObject)item.get(i);
 			cv.setAddr1(contents.get("addr1").toString());
 			cv.setContentid(contents.get("contentid").toString());
@@ -73,9 +73,9 @@ public class test {
 			JSONObject items = (JSONObject)body.get("items");
 			JSONArray item = (JSONArray)items.get("item");
 			
-			ArrayList<contentsVo> alist = test.GetContentsList(item);
+			ArrayList<ContentsVo> alist = test.GetContentsList(item);
 			for(int i = 0; i < alist.size(); i++) {
-				contentsVo cv = alist.get(i);
+				ContentsVo cv = alist.get(i);
 				System.out.println("리스트 번호 : " + (i + 1));
 				System.out.println("제목 : " + cv.getTitle());
 				System.out.println("주소 : " + cv.getAddr1());
