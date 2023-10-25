@@ -2,7 +2,7 @@
 
 body { 
 	font-family: Helvetica Neue,"Pretendard-Regular", Helvetica, Arial, sans-serif;
-	background: #567ff2;
+	background: #4e71d3;
 }
 
 .container {
@@ -13,7 +13,7 @@ body {
 	width: 400px;
 	height: 550px;
 	background: white;
-	border-radius: 20px;
+	border-radius: 15px;
 	padding: 20px;
 	box-shadow: 8px 7px 29px 0px rgba(27, 13, 75, 0.62);
 	position: absolute;
@@ -37,6 +37,10 @@ input {
 	margin-bottom: 10px;
 	border-radius: 5px;
 	border: 2px solid #9eafdd;
+}
+
+input:focus {
+	outline: #9eafdd solid 2px;
 }
 
 .body-pwd {
@@ -67,5 +71,20 @@ input {
 .text-join {
 	color: #6c757d;
 	font-size: 14px;
+}
+
+.text-join a {
 	text-decoration-line: none;
+	color: #022ba5bd;
+	font-weight: 600;
+}
+
+input[name="btn"] { 
+	cursor: pointer;
+}
+
+input[name="btn"]:hover { 
+	background: #1d3477;
+	box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
+	transition: 0.3s;
 }
