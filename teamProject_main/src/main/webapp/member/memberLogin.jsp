@@ -28,9 +28,6 @@
 					<div class="login-btn">
 						<input type="submit" name="btn" value="Login" onclick="check();">
 					</div>
-					<div class="join-btn">
-						<input type="button" name="btn" value="Join" onclick="location.href='memberJoin.jsp'">
-					</div>
 					<br>
 					<div class="text-join">
 						<a class="" href="아이디찾기 경로">아이디 찾기</a> /
