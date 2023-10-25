@@ -7,25 +7,10 @@
 <meta charset="UTF-8">
 <title>contentPage</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096"></script>
-<style>
-a{
-	font-weight: bold;
-	text-decoration: none;
-}
-a:visited {
-	color: blue;
-}
-.a1{
-	margin-left: 15px;
-}
-.a2{
-	margin-left: 15px;
-	margin-right: 15px;
-}
-</style>
+<link href="${pageContext.request.contextPath}/resources/css/content.css" rel="stylesheet">
 </head>
 <body>
-	<div id="map" style="width:500px;height:400px;"></div>
+	<div id="map" style="width:500px; height:400px;"></div>
 	<!-- <button type="button" onclick="zoomIn()">+</button> -->
 	<!-- <button type="button" onclick="zoomOut()">-</button> -->
 <script>
@@ -43,6 +28,7 @@ a:visited {
 	var positions = [
 			{title: '가족회관',
 			 content: 	"<div style='padding: 5px;'>"
+				 	  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8170667179,127.1459591164' class='a1' target='_blank'>큰 지도보기</a>"
 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8170667179,127.1459591164' class='a2' target='_blank'>길찾기</a>"
 					  + "</div>",
@@ -50,6 +36,7 @@ a:visited {
 			},
 			{title: '객사길',
 			 content: 	"<div style='padding: 5px;'>"
+				      +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8176666120,127.1437287440' class='a1' target='_blank'>큰 지도보기</a>"
 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8176666120,127.1437287440' class='a2' target='_blank'>길찾기</a>"
 					  + "</div>",
@@ -57,6 +44,7 @@ a:visited {
 			},
 			{title: '덕진공원',
 			 content: 	"<div style='padding: 5px;'>"
+					  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8475156135, 127.1218687977' class='a1' target='_blank'>큰 지도보기</a>"
 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8475156135, 127.1218687977' class='a2' target='_blank'>길찾기</a>"
 					  + "</div>",
@@ -64,6 +52,7 @@ a:visited {
 			},
 			{title: '전북 전주 한옥마을 [슬로시티]',
 			 content: 	"<div style='padding: 5px;'>"
+			 		  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8183333748, 127.1536778411' class='a1' target='_blank'>큰 지도보기</a>"
 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8183333748, 127.1536778411' class='a2' target='_blank'>길찾기</a>"
 					  + "</div>",
@@ -72,29 +61,84 @@ a:visited {
 		];
 		
 	var bounds = new kakao.maps.LatLngBounds();
-	var infoWindowArray = [];
+	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
 	
-	for (var i = 0; i < positions.length; i++) {
+	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
+		var data = positions[i];
+		displayMarker(data);
+	}
+	
+	function displayMarker(data){
+		
 		var marker = new kakao.maps.Marker({	//좌표값을 지정해 마커 생성
 			map : map,
-			position : positions[i].latlng,
-			title : positions[i].title,
+			position : data.latlng,
+			title : data.title,
 			clickable : true
 		});		
 		
-		var infowindow = new kakao.maps.InfoWindow({
-			content : positions[i].content,
-			removable : true
+		var overlay = new kakao.maps.CustomOverlay({	//마커를 클릭하면 띄워줄 오버레이
+			yAnchor: 3,
+			position: marker.getPosition()
 		});
 		
-		bounds.extend(positions[i].latlng);
-		infoWindowArray.push(infowindow);
+		let Address = "전라북도, 전주시, 도로명";
+		let JibunAddress = "우편번호() 지번주소";
 		
-		kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
-// 		kakao.maps.event.addListener(infowindow, 'mouseout', makeOutListener(infowindow));
-// 	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+// 		content.innerHTML
+// 	    var content = document.createElement('div');	//오버레이에 들어갈 정보들 
+// 	    var content =  "<div class='overlay-wrap'>"
+// 	    			+  	"<div class='overlay-div1'>"
+// 	    			+		"<div class='overlay-title'>"+data.title+"</div>"
+// 			 	  	+		"<div class='overlay-closeBtn' onclick='closeOverlay()'>X</div>"
+// 			 	  	+  	"</div>"
+// 			 	  	+	"<div class='overlay-div2'>"
+// 			 	  	+		"<img class='overlay-img' src='${pageContext.request.contextPath}/resources/images/한옥마을.jpg'>"
+// 			 	  	+	"</div>"
+//    				  	+  	"<div class='overlay-div3'>"
+// 				  	+  		"<a href='https://map.kakao.com/link/map/Hello World!,35.8183333748, 127.1536778411' class='a1' target='_blank'>큰 지도보기</a>"
+// 				  	+  		"<a href='https://map.kakao.com/link/map/Hello World!,35.8183333748, 127.1536778411' class='a1' target='_blank'>큰 지도보기</a>"
+// 				  	+  		"<a href='https://map.kakao.com/link/to/Hello World!,35.8183333748, 127.1536778411' class='a2' target='_blank'>길찾기</a>"
+// 			 	  	+  	"</div>"
+// 				  	+ "</div>";
+				  	
+	  	var content = '<div class="wrap">' + 
+			          '    <div class="info">' + 
+			          '        <div class="title">' + 
+			          '            '+data.title+'' + 
+			          '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+			          '        </div>' + 
+			          '        <div class="body">' + 
+			          '            <div class="img">' +
+			          '                <img src="${pageContext.request.contextPath}/resources/images/한옥마을.jpg" width="73" height="70">' +
+			          '           </div>' + 
+			          '            <div class="desc">' + 
+			          '                <div class="ellipsis">'+Address+'</div>' + 
+			          '                <div class="jibun ellipsis">'+JibunAddress+'</div>' + 
+			          '                <div><a href="https://map.kakao.com/link/to/Hello World!,35.8183333748, 127.1536778411" class="a2" target="_blank">길찾기</a></div>' + 
+			          '            </div>' + 
+			          '        </div>' + 
+			          '    </div>' +    
+			          '</div>';
+				  	
+	    
+	    overlay.setContent(content);	//만든 컨텐츠들을 overlay에 할당해줌
+
+	    kakao.maps.event.addListener(marker, 'click', function() {	//클릭 시 오버레이 띄움
+	    	closeOverlay();
+	        overlay.setMap(map);
+	    });		
 		
+		bounds.extend(data.latlng);
+		overlayArray.push(overlay);
 	}
+	
+// 	function makeClickListener(map, marker, infowindow) {
+//	    return function() {
+//	    	closeOverlay();
+//	        infowindow.open(map, marker);
+//	    };
+//	}	
 	
 	function setBounds() {
 	    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
@@ -102,18 +146,16 @@ a:visited {
 	    map.setBounds(bounds);
 	}
 	
-	function closeInfoWindow(){
-		for (let i = 0; i < infoWindowArray.length; i++) {
-			infoWindowArray[i].close();
+	function closeOverlay(){	//다른 마커 클릭 시 열려있는 다른 오버레이 닫아줌
+		for (let i = 0; i < overlayArray.length; i++) {
+			overlayArray[i].setMap(null);
 		}
 	}
 	
-	function makeClickListener(map, marker, infowindow) {
-	    return function() {
-	    	closeInfoWindow();
-	        infowindow.open(map, marker);
-	    };
-	}
+// 	function closeOverlay() {
+// 	    overlay.setMap(null);     
+// 	}
+
 
 	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 	function makeOutListener(infowindow) {
