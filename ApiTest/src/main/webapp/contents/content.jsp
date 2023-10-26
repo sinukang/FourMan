@@ -26,37 +26,45 @@
 // 	var markerPosition = new kakao.maps.LatLng(35.8183333748, 127.1536778411); //마커의 좌표값 할당
 	
 	var positions = [
-			{title: '가족회관',
-			 content: 	"<div style='padding: 5px;'>"
-				 	  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
-					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8170667179,127.1459591164' class='a1' target='_blank'>큰 지도보기</a>"
-					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8170667179,127.1459591164' class='a2' target='_blank'>길찾기</a>"
-					  + "</div>",
-			 latlng: new kakao.maps.LatLng(35.8170667179, 127.1459591164)
-			},
-			{title: '객사길',
-			 content: 	"<div style='padding: 5px;'>"
-				      +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
-					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8176666120,127.1437287440' class='a1' target='_blank'>큰 지도보기</a>"
-					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8176666120,127.1437287440' class='a2' target='_blank'>길찾기</a>"
-					  + "</div>",
-			 latlng: new kakao.maps.LatLng(35.8176666120, 127.1437287440)
-			},
-			{title: '덕진공원',
-			 content: 	"<div style='padding: 5px;'>"
-					  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
-					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8475156135, 127.1218687977' class='a1' target='_blank'>큰 지도보기</a>"
-					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8475156135, 127.1218687977' class='a2' target='_blank'>길찾기</a>"
-					  + "</div>",
-			 latlng: new kakao.maps.LatLng(35.8475156135, 127.1218687977)
-			},
-			{title: '전북 전주 한옥마을 [슬로시티]',
-			 content: 	"<div style='padding: 5px;'>"
+// 			{title: '가족회관',
+// 			 content: 	"<div style='padding: 5px;'>"
+// 				 	  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
+// 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8170667179,127.1459591164' class='a1' target='_blank'>큰 지도보기</a>"
+// 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8170667179,127.1459591164' class='a2' target='_blank'>길찾기</a>"
+// 					  + "</div>",
+// 			 latlng: new kakao.maps.LatLng(35.8170667179, 127.1459591164)
+// 			},
+// 			{title: '객사길',
+// 			 content: 	"<div style='padding: 5px;'>"
+// 				      +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
+// 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8176666120,127.1437287440' class='a1' target='_blank'>큰 지도보기</a>"
+// 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8176666120,127.1437287440' class='a2' target='_blank'>길찾기</a>"
+// 					  + "</div>",
+// 			 latlng: new kakao.maps.LatLng(35.8176666120, 127.1437287440)
+// 			},
+// 			{title: '덕진공원',
+// 			 content: 	"<div style='padding: 5px;'>"
+// 					  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
+// 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8475156135, 127.1218687977' class='a1' target='_blank'>큰 지도보기</a>"
+// 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8475156135, 127.1218687977' class='a2' target='_blank'>길찾기</a>"
+// 					  + "</div>",
+// 			 latlng: new kakao.maps.LatLng(35.8475156135, 127.1218687977)
+// 			},
+// 			{title: '전북 전주 한옥마을 [슬로시티]',
+// 			 content: 	"<div style='padding: 5px;'>"
+// 			 		  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
+// 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8183333748, 127.1536778411' class='a1' target='_blank'>큰 지도보기</a>"
+// 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8183333748, 127.1536778411' class='a2' target='_blank'>길찾기</a>"
+// 					  + "</div>",
+// 			 latlng: new kakao.maps.LatLng(35.8183333748, 127.1536778411)
+// 			}
+			{title: '${cv.title}',
+				 content: 	"<div style='padding: 5px;'>"
 			 		  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
-					  +		"<a href='https://map.kakao.com/link/map/Hello World!,35.8183333748, 127.1536778411' class='a1' target='_blank'>큰 지도보기</a>"
-					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,35.8183333748, 127.1536778411' class='a2' target='_blank'>길찾기</a>"
+					  +		"<a href='https://map.kakao.com/link/map/Hello World!,${cv.mapy}, ${cv.mapx}' class='a1' target='_blank'>큰 지도보기</a>"
+					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,${cv.mapy}, ${cv.mapx}' class='a2' target='_blank'>길찾기</a>"
 					  + "</div>",
-			 latlng: new kakao.maps.LatLng(35.8183333748, 127.1536778411)
+			 latlng: new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx})
 			}
 		];
 		
@@ -82,8 +90,8 @@
 			position: marker.getPosition()
 		});
 		
-		let Address = "전라북도, 전주시, 도로명";
-		let JibunAddress = "우편번호() 지번주소";
+// 		let Address = "전라북도, 전주시, 도로명";
+// 		let JibunAddress = "우편번호() 지번주소";
 		
 // 		content.innerHTML
 // 	    var content = document.createElement('div');	//오버레이에 들어갈 정보들 
@@ -110,11 +118,11 @@
 			          '        </div>' + 
 			          '        <div class="body">' + 
 			          '            <div class="img">' +
-			          '                <img src="${pageContext.request.contextPath}/resources/images/한옥마을.jpg" width="73" height="70">' +
+			          '                <img src="${cv.firstimage2}" width="73" height="70">' +
 			          '           </div>' + 
 			          '            <div class="desc">' + 
-			          '                <div class="ellipsis">'+Address+'</div>' + 
-			          '                <div class="jibun ellipsis">'+JibunAddress+'</div>' + 
+			          '                <div class="ellipsis">${cv.addr1}</div>' + 
+			          '                <div class="jibun ellipsis">${cv.zipcode}</div>' + 
 			          '                <div><a href="https://map.kakao.com/link/to/Hello World!,35.8183333748, 127.1536778411" class="a2" target="_blank">길찾기</a></div>' + 
 			          '            </div>' + 
 			          '        </div>' + 

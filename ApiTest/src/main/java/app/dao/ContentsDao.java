@@ -41,6 +41,7 @@ public class ContentsDao {
 		}
 		String result = br.readLine();
 		JSONParser jsonParser = new JSONParser();
+//		System.out.println(result);
 		JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
 		JSONObject jsonResponse = (JSONObject)jsonObject.get("response");
 		JSONObject body = (JSONObject)jsonResponse.get("body");
@@ -129,7 +130,17 @@ public class ContentsDao {
 		
 		try {
 			JSONArray item = GetItem(apiURL);
-			
+			JSONObject contents = (JSONObject)item.get(0);
+			cv.setAddr1(contents.get("addr1").toString());
+			cv.setContentid(contents.get("contentid").toString());
+			cv.setContenttypeid(contents.get("contenttypeid").toString());
+			cv.setCreatedtime(contents.get("createdtime").toString());
+			cv.setTitle(contents.get("title").toString());
+			cv.setTel(contents.get("tel").toString());
+			cv.setZipcode(contents.get("zipcode").toString());
+			cv.setFirstimage2(contents.get("firstimage2").toString());
+			cv.setMapx(contents.get("mapx").toString());
+			cv.setMapy(contents.get("mapy").toString());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
