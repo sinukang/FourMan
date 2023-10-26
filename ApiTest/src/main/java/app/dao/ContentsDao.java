@@ -148,9 +148,31 @@ public class ContentsDao {
 		
 		return cv;
 	}
-	public ContentsVo ContentsViewIntro(int contentid, int contenttypeid) {
-		ContentsVo cv = new ContentsVo();
-		return cv;
+	public JSONObject ContentsViewIntro(int contentid, int contenttypeid) {
+		JSONObject contents = new JSONObject();
+		String contentId = Integer.toString(contentid);
+		String contentTypeId = Integer.toString(contenttypeid);
+		String uriType = "detailIntro1";
+		String query = "?serviceKey=";
+		query += key;
+		query += "&MobileApp=AppTest&MobileOS=ETC&_type=json";
+		query += "&contentId=" + contentId;
+		query += "&contentTypeId=" + contentTypeId;
+		
+		String apiURL = uri
+		+ uriType
+		+ query;
+		System.out.println(apiURL);
+		
+		try {
+			JSONArray item = GetItem(apiURL);
+			contents = (JSONObject)item.get(0);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return contents;
 	}
 	public ContentsVo ContentsViewDetailInfo(int contentid, int contenttypeid) {
 		ContentsVo cv = new ContentsVo();
