@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import app.dao.ContentsDao;
 import app.domain.ContentsVo;
@@ -61,11 +64,34 @@ public class ContentsController extends HttpServlet {
 			if(request.getParameter("contentId") != null) {
 				int contentId = Integer.parseInt(request.getParameter("contentId"));
 			}
-			
+			SearchCriteria scri = new SearchCriteria();
+			PageMaker pm = new PageMaker();
+			String contentTypeId = request.getParameter("contentTypeId");
+			String keyword = request.getParameter("keyword");
+			String page = request.getParameter("page");
+			if(contentTypeId==null) { contentTypeId = ""; }
+			if(keyword==null) { keyword = ""; }
+			if(page==null) { page = "1"; }
+			scri.setSearchTypeId(contentTypeId);
+			scri.setKeyword(keyword);
+			scri.setPage(Integer.parseInt(page));
+			pm.setScri(scri);
+
+			ArrayList<ContentsVo> alist = cd.ContentsList(pm);
+			String arylist = "{";
+			for(int i = 0; i < alist.size(); i++) {
+				if(i > 0) {
+					arylist += ",";
+				}
+				arylist += i + ": {\"title\":\"" +alist.get(i).getTitle()+ "\",\"mapy\":\"" +alist.get(i).getMapy()+ "\",\"mapx\":\"" +alist.get(i).getMapx()+ "\"}";
+			}
+			arylist += "}";
+			System.out.println(arylist);
+			request.setAttribute("arylist", arylist);
 			ContentsVo cv = cd.ContentsViewDetail(264284);	//contentId
 			request.setAttribute("cv", cv);
 			
-			String path ="/contents/content.jsp";
+			String path ="/contents/content.jsp"; 
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}else if (location.equals("contents.do")) {
