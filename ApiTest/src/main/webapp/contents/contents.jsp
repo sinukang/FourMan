@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,20 +84,40 @@
 	<div class="cont_area">
 			<div class="cont" id="tab1">
 				<div class="top_list">
-					<ul>
-						<li>주소  전북 전주시 덕진구 권삼득로 390-1 전주덕진공원</li>
-						<li>홈페이지</li>
-					</ul>
+<!-- 					<ul> -->
+<!-- 						<li>주소  전북 전주시 덕진구 권삼득로 390-1 전주덕진공원</li> -->
+<!-- 						<li>홈페이지</li> -->
+<!-- 					</ul> -->
+					<table>
+						<tr>
+							<td>
+								주소
+							</td>
+							<td>
+								${cv.addr1}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								전화번호
+							</td>
+							<td>
+								${cv.addr1}
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div class="cont" id="tab2">
 				<div class="top_list">
-					<ul>
-						<li>문의 및 안내 063-281-8661</li>
-						<li>이용시간 24시간 개방공원입니다 연중무휴 </li>
-						<li>주차및 편의시설 단체이용가능, 주차,반려동물 동반, 남/녀화장실 구비</li>
-						<li>입장료 없음</li>
-					</ul>
+<!-- 					<ul> -->
+<!-- 						<li>문의 및 안내 063-281-8661</li> -->
+<!-- 						<li>이용시간 24시간 개방공원입니다 연중무휴 </li> -->
+<!-- 						<li>주차및 편의시설 단체이용가능, 주차,반려동물 동반, 남/녀화장실 구비</li> -->
+<!-- 						<li>입장료 없음</li> -->
+<!-- 					</ul> -->
+					<table id="table2">
+					</table>
 				</div>
 			</div>
 			<div class="cont" id="tab3">
@@ -180,24 +201,69 @@ function swapImages(clickedImage) {
 
 
 <script type="text/javascript">
+window.onlaod = swapTab("#tab1");
 //컨텐츠내용 상세보기 클릭 부분 
 function swapTab(tabId) {
     const tabList = document.querySelectorAll('.container .tab li');
     const contents = document.querySelectorAll('.container .cont_area .cont');
+	for(var i = 0; i < tabList.length; i++){
+		tabList[i].querySelector('.btn').addEventListener('click', function(e){
+			e.preventDefault();
+	   for (let i = 0; i < tabList.length; i++) {
+	       tabList[i].classList.remove('is_on');
+	       contents[i].style.display = 'none';
+	   }// 버튼 클릭시 해당 버튼의 부모요소(li태그)에 is_on클래스를 준다.
+		this.parentNode.classList.add('is_on');
+		
+		// 버튼 클릭시 컨텐츠 전환
+		activeCont = this.getAttribute('href');
+		document.querySelector(activeCont).style.display = 'block';
+		});
+	}
     
-    for (let i = 0; i < tabList.length; i++) {
-        tabList[i].classList.remove('is_on');
-        contents[i].style.display = 'none';
-    }
-    
-    const selectedTab = document.querySelector(`a[href="${tabId}"]`);
-    selectedTab.parentElement.classList.add('is_on');
-    const selectedContent = document.querySelector(tabId);
-    selectedContent.style.display = 'block';
+//     const selectedTab = document.querySelector(`a[href="${tabId}"]`);
+//     selectedTab.parentElement.classList.add('is_on');
+//     const selectedContent = document.querySelector(tabId);
+//     selectedContent.style.display = 'block';
 }
 </script>
 
 
+<script type="text/javascript">
+//Json 생성
+var cintro = ${cintro};
+//키값 인덱스 생성
+var keys = Object.keys(cintro);
+createIntroTable();
+
+//키값 인덱스 생성확인
+// for(var i in keys){
+// 	alert(keys[i]);
+// }
+// json파일이 들어온것 확인
+// alert("json 파일 : " + JSON.stringify(cintro))
+
+
+function createIntroTable(){
+	var table2 = "";
+	for(var i in keys){
+		var value = cintro[keys[i]];
+		//비어있는 밸류값 확인
+// 		if(!value){
+// 			alert(keys[i] + " : 비어있음");
+// 		}else{
+// 			alert(keys[i] + " : " + value);
+// 		}
+		if(!value || value=="0"){
+			continue;
+		}else{
+			table2 += "<tr><td>"+keys[i]+"</td><td>"+value+"</td></tr>"; 
+		}
+		
+	}
+	alert(table2);
+}
+</script>
 
 </body>
 </html>

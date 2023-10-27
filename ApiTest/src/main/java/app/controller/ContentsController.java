@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import app.dao.ContentsDao;
 import app.domain.ContentsVo;
 import app.domain.PageMaker;
@@ -67,6 +69,15 @@ public class ContentsController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}else if (location.equals("contents.do")) {
+			ContentsDao cd = new ContentsDao();
+			if(request.getParameter("contentId") != null) {
+				int contentId = Integer.parseInt(request.getParameter("contentId"));
+			}
+			ContentsVo cv = cd.ContentsViewDetail(126320);	//contentId
+			JSONObject contentsintro = cd.ContentsViewIntro(126320, 12);
+			request.setAttribute("cv", cv);
+			request.setAttribute("cintro", contentsintro);
+			
 			String path ="/contents/contents.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
