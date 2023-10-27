@@ -261,7 +261,7 @@ function createIntroTable(){
 		}
 		
 	}
-	alert(table2);
+	document.inner
 }
 </script>
 
