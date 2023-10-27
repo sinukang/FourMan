@@ -13,7 +13,6 @@
 	<div id="map" style="width:500px; height:400px;"></div>
 	<!-- <button type="button" onclick="zoomIn()">+</button> -->
 	<!-- <button type="button" onclick="zoomOut()">-</button> -->
-	<button onclick="test()">TEST</button>
 <script>
 
 	var mapContainer = document.getElementById('map'), 						//지도를 담을 영역의 DOM 레퍼런스
@@ -39,22 +38,8 @@
 			}
 		];
 	
-	var test = [];
-	test.push(positions[0]);
+	var info = [];
 	
-	function TEST(){
-		
-		for (let i = 0; i < test.length; i++) {
-			alert(test[i]);
-		}
-	}
-	<c:forEach var='cv' items='${cv}'>
-		let latlng = new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx});
-		let info = "{\"title\" : \""+${cv.title}+"\", \"latlng\" : \""+latlng+"\"}";
-		
-		positions.push(info);
-	</c:forEach>
-		
 	var bounds = new kakao.maps.LatLngBounds();
 	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
 	
