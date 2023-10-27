@@ -56,11 +56,12 @@ public class ContentsController extends HttpServlet {
 			rd.forward(request, response);
 		}else if (location.equals("content.do")) {
 			ContentsDao cd = new ContentsDao();
-			String contentId = request.getParameter("contentId");
+			if(request.getParameter("contentId") != null) {
+				int contentId = Integer.parseInt(request.getParameter("contentId"));
+			}
 			
-			ContentsVo cv = cd.ContentsViewDetail(264284);
+			ContentsVo cv = cd.ContentsViewDetail(264284);	//contentId
 			request.setAttribute("cv", cv);
-			
 			
 			String path ="/contents/content.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);

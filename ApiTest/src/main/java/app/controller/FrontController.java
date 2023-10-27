@@ -26,12 +26,12 @@ public class FrontController extends HttpServlet {
 		if(str.equals("contents")) {
 			ContentsController cc = new ContentsController(location);
 			cc.doGet(request, response);
-		
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

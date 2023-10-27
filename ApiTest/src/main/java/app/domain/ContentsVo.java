@@ -6,8 +6,8 @@ public class ContentsVo {
 	private String firstimage;
 	private String firstimage2;
 	private String title;
-	private String mapx;
-	private String mapy;
+	private String mapx;	//경도 ex) 127.1234...
+	private String mapy;	//위도 ex) 35.1234...
 	private String cat1;
 	private String cat2;
 	private String cat3;
