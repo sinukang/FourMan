@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>리스트 페이지</title>
-<link rel="stylesheet" type="text/css" href="./css/contents.css">
-</head>
+<meta charset="UTF-8">
+<title>컨텐츠 상세보기 페이지</title>
+<link rel="stylesheet" type="text/css" href="../css/contentsList.css">
+
+
+
 </head>
 <body>
 
@@ -44,88 +46,104 @@
 		</span>
 	</header>
 
-
-<form>	
-	
-	
-	
+<form>
+  <div class="contentsdetail">
+       	
+        <p  id="conname">전주덕진공원</p>
+	        <div class="favorite" id="favorite">즐겨찾기
+				<span class="favorite-icon" onclick="toggleFavorite()">&#9734;</span>
+			</div>
+        <div><img id="bigImage" src="../images/duck4.jpg" alt="Big Image"></div>
+        <div class="smallImageContainer">
+		    <img class="smallImage" src="../images/duck4.jpg" alt="Image 1" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck5.jpg" alt="Image 2" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck3.jpg" alt="Image 3" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck1.png" alt="Image 4" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck2.png" alt="Image 5" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck4.jpg" alt="Image 1" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck5.jpg" alt="Image 2" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck3.jpg" alt="Image 3" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck1.png" alt="Image 4" onclick="swapImages(this)">
+		    <img class="smallImage" src="../images/duck2.png" alt="Image 5" onclick="swapImages(this)">
+		</div>
+		
 		
 	<div class="container">
-		<button type="submit" class="listbutton">
-			<img src="/teamProject_bbeam/images/contents1.png"width="140px" height="150px">관광지
-		</button>
-		<button type="submit" class="listbutton">
-			<img src="/teamProject_bbeam/images/contents2.png"width="140px" height="150px">문화시설
-		</button>
-		<button type="submit" class="listbutton">
-			<img src="/teamProject_bbeam/images/contents3.png"width="140px" height="150px">음식점
-		</button>
-		<button type="submit" class="listbutton">
-			<img src="/teamProject_bbeam/images/contents4.png"width="140px" height="150px">숙박
-		</button>
-		<button type="submit" class="listbutton">
-			<img src="/teamProject_bbeam/images/contents5.png"width="140px" height="150px">축제공연
-		</button>	
+		<ul class="tab">
+			<li class="is_on">
+    			<a href="#tab1" class="btn" onclick="swapTab('#tab1')">기본정보</a>
+			</li>
+			  <li>
+				<a href="#tab2" class="btn" onclick="swapTab('#tab2')">이용안내</a>
+			</li>
+			  <li>
+			   <a href="#tab3" class="btn" onclick="swapTab('#tab3')">위치 및 상세정보</a>
+			</li>
+		</ul>
+	<div class="cont_area">
+			<div class="cont" id="tab1">
+				<div class="top_list">
+					<ul>
+						<li>주소  전북 전주시 덕진구 권삼득로 390-1 전주덕진공원</li>
+						<li>홈페이지</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cont" id="tab2">
+				<div class="top_list">
+					<ul>
+						<li>문의 및 안내 063-281-8661</li>
+						<li>이용시간 24시간 개방공원입니다 연중무휴 </li>
+						<li>주차및 편의시설 단체이용가능, 주차,반려동물 동반, 남/녀화장실 구비</li>
+						<li>입장료 없음</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cont" id="tab3">
+				<div class="top_list">
+					<ul>
+						<li>카카오맵 위치정보 주소  전북 전주시 덕진구 권삼득로 390-1 전주덕진공원
+						 호남고속도로 전주IC에서 시내로 들어가는 팔달로 변에 위치.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 	
-	<table class="search-bar">
-    <tr>
-        <th>키워드 검색</th>
-        <td>
-            <input type="text" id="keyword" placeholder="검색어를 입력하세요">
-        </td>
-        <td>
-            <button type="button" id="search-button">검색</button>
-        </td>
-    </tr>
-	</table>
-	<br>
-	<br>
-<div class="contentsbox1"> 
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	<button type="submit" class="contentsbutton"> 
-		 <img src="/teamProject_bbeam/images/hanok.png"width="250px" height="200px"> 전주한옥마을
-	</button>
-	
-	
+		
 </div>	
 	
 
-
-	<br>
-	<br>
-	<div class="pagination">
-    <a href="#" class="arrow">◀</a>
-    <a href="#" class="page">1</a>
-    <a href="#" class="page">2</a>
-    <a href="#" class="page">3</a>
-    <a href="#" class="arrow">▶</a>
+	
+	<!-- 댓글 입력 텍스트 박스와 글자수 표시 -->
+<div class="comment_area"> <p>방문자 후기 및 평가 </p>
+  <textarea id="commentInput" placeholder="후기 및 평가를 남겨주세요" oninput="updateCharacterCount()"></textarea>
+  <div class="char_count">글자수 제한 <span id="charCount">0</span>/100자</div>
+  <button onclick="addComment()">완료</button>
+	  <div class="heart_icons">
+		    <!-- HTML 내에 하트 아이콘 추가 부분 -->
+		<span class="heart" id="heart1" onclick="toggleHeart(1)">&#10084;</span>
+		<span class="heart" id="heart2" onclick="toggleHeart(2)">&#10084;</span>
+		<span class="heart" id="heart3" onclick="toggleHeart(3)">&#10084;</span>
+		<span class="heart" id="heart4" onclick="toggleHeart(4)">&#10084;</span>
+		<span class="heart" id="heart5" onclick="toggleHeart(5)">&#10084;</span>
+     </div>
+	
+  <div class="commentlist">
+  이곳에  댓글 목록이 나열됩니다 
+  
+  이곳에  댓글 목록이 나열됩니다 
+  이곳에  댓글 목록이 나열됩니다 
+  이곳에  댓글 목록이 나열됩니다 
+  이곳에  댓글 목록이 나열됩니다 
+  이곳에  댓글 목록이 나열됩니다 <br>
+  이곳에  댓글 목록이 나열됩니다 <br>
+  이곳에  댓글 목록이 나열됩니다 <br>
+  이곳에  댓글 목록이 나열됩니다 <br>
+  이곳에  댓글 목록이 나열됩니다 <br>
+  이곳에  댓글 목록이 나열됩니다 <br>
+  
+  </div>
 </div>
 	
 	
@@ -137,6 +155,49 @@
 	
 	
 	
-	</form>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</form>
+
+<script type="text/javascript">
+// 사진보기 클릭 변환 부분 
+function swapImages(clickedImage) {
+    const bigImage = document.getElementById('bigImage');
+    bigImage.src = clickedImage.src;
+    bigImage.alt = clickedImage.alt;
+}
+</script>
+
+
+<script type="text/javascript">
+//컨텐츠내용 상세보기 클릭 부분 
+function swapTab(tabId) {
+    const tabList = document.querySelectorAll('.container .tab li');
+    const contents = document.querySelectorAll('.container .cont_area .cont');
+    
+    for (let i = 0; i < tabList.length; i++) {
+        tabList[i].classList.remove('is_on');
+        contents[i].style.display = 'none';
+    }
+    
+    const selectedTab = document.querySelector(`a[href="${tabId}"]`);
+    selectedTab.parentElement.classList.add('is_on');
+    const selectedContent = document.querySelector(tabId);
+    selectedContent.style.display = 'block';
+}
+</script>
+
+
+
 </body>
 </html>
