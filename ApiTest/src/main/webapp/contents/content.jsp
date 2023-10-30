@@ -41,15 +41,16 @@
 			}
 		];
 
-	var TEST = [];
+	
 	var jsonlist = [];
 	var jsonsize = Object.keys(${arylist}).length;
-	for(var i=0;i<jsonsize;i++){
+	for(let i = 0; i < jsonsize; i++){
 		jsonlist.push(${arylist}[i]);
 	}
 	console.log(jsonlist);
 // 	for(var i; i < $[jsonlist].)
 	function test(){
+		var TEST = [];
 		for (var i = 0; i < jsonsize; i++) {
 			let info = "{\"title\" : \""+jsonlist[i]["title"]+"\", \"latlng\" :\""+jsonlist[i]["mapy"]+"\", \""+jsonlist[i]["mapx"]+"\"}";
 		
@@ -57,10 +58,7 @@
 		}	
 		console.log(TEST);
 	}
-
-
-
-		
+	
 	var bounds = new kakao.maps.LatLngBounds();
 	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
 	
