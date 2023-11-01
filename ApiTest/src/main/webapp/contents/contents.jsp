@@ -261,7 +261,7 @@ function createIntroTable(){
 		}
 		
 	}
-	document.inner
+	document.getElementById('table2').innerHtml=table2;
 }
 </script>
 

@@ -21,8 +21,8 @@ public class ContentsDao {
 	private String sigungu;
 	
 	public ContentsDao() {
-		this.key = "qlp8EQg1WmON%2Bq8mTCBOz6N6tqUVBW16y1jVWyBiMGsYplEooRtbId0RBawLiFfSIU1HnD4pxdFv3svkl1GHqA%3D%3D";	//인증키
-		this.uri = "https://apis.data.go.kr/B551011/KorService1/";	//parameter 제외한 부분
+		this.key = "qlp8EQg1WmON%2Bq8mTCBOz6N6tqUVBW16y1jVWyBiMGsYplEooRtbId0RBawLiFfSIU1HnD4pxdFv3svkl1GHqA%3D%3D";	//인증키	
+		this.uri = "https://apis.data.go.kr/B551011/EngService1/";	//parameter 제외한 부분
 		this.area = "37";	//전북 코드
 		this.sigungu = "12";	//전주시 코드
 	}
