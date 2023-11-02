@@ -8,7 +8,7 @@ public class DbConn {
 	
 	private String url ="jdbc:mysql://localhost:3306/b_beam?serverTimezone=UTC&useSSL=false";
 	private String user="root";
-	private String password="1111";
+	private String password="1234";
 	
 	public Connection getConnection() {
 		Connection conn = null;
