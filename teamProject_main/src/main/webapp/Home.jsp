@@ -51,7 +51,7 @@
 	<!-- Swiper -->
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide">Slide 1</div>
+			<div class="swiper-slide"><img src="http://tong.visitkorea.or.kr/cms/resource/71/3022871_image2_1.jpg"></div>
 			<div class="swiper-slide">Slide 2</div>
 			<div class="swiper-slide">Slide 3</div>
 			<div class="swiper-slide">Slide 4</div>
