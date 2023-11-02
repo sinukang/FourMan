@@ -9,6 +9,9 @@
 	<!-- Link Swiper's CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 	<link href="./css/home.css" type="text/css" rel="stylesheet">
+	
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
 
@@ -27,16 +30,16 @@
 					<a href="./Home.jsp">관광컨텐츠</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">자유게시판</a>
+					<a href="./Home.jsp">TOP10</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">로그인</a>
+					<a href="./Home.jsp">갤러리</a>
 				</li>
 				<li>
 					<a href="./Home.jsp">마이페이지</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">공지사항</a>
+					<a href="./Home.jsp">고객지원</a>
 				</li>
 			</ul>
 		</div>
@@ -51,7 +54,17 @@
 	<!-- Swiper -->
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
+<<<<<<< HEAD
+			<div class="swiper-slide">
+			<img src="./images/logo4.png" alt="메인화면으로 이동">
+				<div class="inner-cont">
+					<div class="title"> Subject </div>
+					<div class="contents"> Contents</div>
+				</div>
+			</div>
+=======
 			<div class="swiper-slide"><img src="http://tong.visitkorea.or.kr/cms/resource/71/3022871_image2_1.jpg"></div>
+>>>>>>> branch 'main' of https://github.com/sinukang/b_beam.git
 			<div class="swiper-slide">Slide 2</div>
 			<div class="swiper-slide">Slide 3</div>
 			<div class="swiper-slide">Slide 4</div>
@@ -62,19 +75,19 @@
 			<div class="swiper-slide">Slide 9</div>
 		</div>
 		<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-pagination"></div>
-  </div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-pagination"></div>
+	</div>
   
-  <div class="main-search">
-  	<div class="search-wrap">
-  		<input type="text" id="title" placeholder="찾고싶은 '관광데이터'명을 입력하세요." title="찾고싶은 '관광데이터'명을 입력하세요.">
-  		<button type="button">검색</button>
-  	</div>
-  </div>
+	<div class="main-search">
+		<div class="search-wrap">
+			<input type="text" id="title" placeholder="찾고싶은 '관광데이터'명을 입력하세요." title="찾고싶은 '관광데이터'명을 입력하세요.">
+			<button type="button">검색</button>
+		</div>
+	</div>
   
   
-  <!-- top3 탭 -->
+	<!-- top3 탭 -->
 
 	<div class="container">
 		<ul class="tab">
@@ -175,7 +188,22 @@
 			});
 		}
 	</script>
-  
+	
+	
+	<script type="text/javascript">
+	  var naver_id_login = new naver_id_login("GBMgKClIDVZzjMHwAaNw", "http://localhost:8080/teamProject_main/Home.jsp");
+	  // 접근 토큰 값 출력
+	  alert(naver_id_login.oauthParams.access_token);
+	  // 네이버 사용자 프로필 조회
+	  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+	  function naverSignInCallback() {
+	    alert(naver_id_login.getProfileData('email'));
+	    alert(naver_id_login.getProfileData('nickname'));
+	    alert(naver_id_login.getProfileData('age'));
+	  }
+	</script>
+	
 </body>
 
 </html>
