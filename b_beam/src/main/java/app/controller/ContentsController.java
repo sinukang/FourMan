@@ -31,9 +31,9 @@ public class ContentsController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("contentsList.do")) {
+		if (location.equals("contents.do")) {
 			
-			String path ="/main/contents/contentsList.jsp";
+			String path ="/main/contents/contents.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

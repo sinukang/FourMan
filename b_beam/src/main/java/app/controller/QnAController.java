@@ -31,9 +31,9 @@ public class QnAController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("contentsList.do")) {
+		if (location.equals("qna.do")) {
 			
-			String path ="/contents/contentsList.jsp";
+			String path ="main/qna/qna.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

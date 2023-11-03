@@ -26,9 +26,9 @@ public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("contentsList.do")) {
+		if (location.equals("board.do")) {
 			
-			String path ="/contents/contentsList.jsp";
+			String path ="/main/board/board.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

@@ -31,9 +31,9 @@ public class ReportController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("contentsList.do")) {
+		if (location.equals("report.do")) {
 			
-			String path ="/contents/contentsList.jsp";
+			String path ="/main/report/report.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

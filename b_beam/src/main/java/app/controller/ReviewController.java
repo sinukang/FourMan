@@ -31,9 +31,9 @@ public class ReviewController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("contentsList.do")) {
+		if (location.equals("review.do")) {
 			
-			String path ="/contents/contentsList.jsp";
+			String path ="/review/review.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}
