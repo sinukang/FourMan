@@ -14,7 +14,7 @@
 	<!-- <button type="button" onclick="zoomIn()">+</button> -->
 	<!-- <button type="button" onclick="zoomOut()">-</button> -->
 	<c:out value="${cv.title}"></c:out>
-	<div><button onclick="test()">테스트</button> </div>
+	<div><button onclick="test()">테스트</button></div>
 
 <script>
 
@@ -28,16 +28,15 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
 	
 // 	var markerPosition = new kakao.maps.LatLng(35.8183333748, 127.1536778411); //마커의 좌표값 할당
-
 	
 	var positions = [
-			{title: '${cv.title}',
+			{title: '전북 전주 한옥마을 [슬로시티]',	//${cv.title}
 // 			 content: 	"<div style='padding: 5px;'>"
 // 			 		  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
 // 					  +		"<a href='https://map.kakao.com/link/map/Hello World!,${cv.mapy}, ${cv.mapx}' class='a1' target='_blank'>큰 지도보기</a>"
 // 					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,${cv.mapy}, ${cv.mapx}' class='a2' target='_blank'>길찾기</a>"
 // 					  + "</div>",
-			 latlng: new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx})
+			 latlng: new kakao.maps.LatLng(35.8183333748, 127.1536778411)	//${cv.mapy}, ${cv.mapx}
 			}
 		];
 
@@ -99,7 +98,6 @@
 			          '        </div>' + 
 			          '    </div>' +    
 			          '</div>';
-				  	
 	    
 	    overlay.setContent(content);	//만든 컨텐츠들을 overlay에 할당해줌
 
