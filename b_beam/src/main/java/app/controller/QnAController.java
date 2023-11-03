@@ -28,7 +28,7 @@ public class QnAController extends HttpServlet {
     public QnAController(String location) {
 		this.location = location;
     }
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (location.equals("qna.do")) {
