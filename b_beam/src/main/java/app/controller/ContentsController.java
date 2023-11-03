@@ -33,7 +33,7 @@ public class ContentsController extends HttpServlet {
 		
 		if (location.equals("contents.do")) {
 			
-			String path ="/main/contents/contents.jsp";
+			String path ="/contents/contents.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

@@ -33,7 +33,7 @@ public class QnAController extends HttpServlet {
 		
 		if (location.equals("qna.do")) {
 			
-			String path ="main/qna/qna.jsp";
+			String path ="/qna/qna.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

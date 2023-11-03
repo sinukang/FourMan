@@ -33,7 +33,7 @@ public class CommentController extends HttpServlet {
 		
 		if (location.equals("comment.do")) {
 			
-			String path ="/main/comment/comment.jsp";
+			String path ="/comment/comment.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

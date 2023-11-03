@@ -33,7 +33,7 @@ public class ReportController extends HttpServlet {
 		
 		if (location.equals("report.do")) {
 			
-			String path ="/main/report/report.jsp";
+			String path ="/report/report.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

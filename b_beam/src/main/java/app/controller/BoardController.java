@@ -28,7 +28,7 @@ public class BoardController extends HttpServlet {
 		
 		if (location.equals("board.do")) {
 			
-			String path ="/main/board/board.jsp";
+			String path ="/board/board.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

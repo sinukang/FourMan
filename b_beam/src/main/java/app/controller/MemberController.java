@@ -33,7 +33,7 @@ public class MemberController extends HttpServlet {
 		
 		if (location.equals("member.do")) {
 			
-			String path ="/main/member/member.jsp";
+			String path ="/member/member.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}
