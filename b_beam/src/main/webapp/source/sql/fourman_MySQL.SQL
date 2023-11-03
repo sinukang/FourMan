@@ -24,6 +24,8 @@ bdcontag varchar(200) null,
 bddate datetime not null default now(),
 bddatem datetime null default now(),
 bddelyn varchar(2) not null default 'N', -- 'Y', 'N' : 삭제, 삭제x
+bdfilename varchar(200) null,
+bdlikecnt int not null,
 foreign key(mbno) references member(mbno) on update cascade
 );
 
@@ -43,7 +45,7 @@ cmdate datetime null default now(),
 cmdatem datetime null,
 cmdelyn varchar(2) not null default 'N', -- 'Y', 'N' : 삭제, 삭제x
 foreign key(mbno) references member(mbno) on update cascade,
-foreign key(mbno) references member(mbno) on update cascade
+foreign key(bdno) references board(bdno) on update cascade
 );
 
 create table tempcontents(
@@ -55,6 +57,7 @@ mapy varchar(30) null,
 firstimage varchar(100) null,
 contentdate datetime not null,
 contentdatem datetime null,
+bookmarkcnt int null,
 contentdelyn varchar(2) not null -- 'Y', 'N' : 삭제, 삭제x
 );
 
@@ -83,7 +86,9 @@ rvpic varchar(200) null,
 rvrate int not null,
 rvdate datetime not null default now(),
 rvdatem datetime null,
-rvdelyn varchar(2) default 'N', -- 'Y', 'N' : 삭제, 삭제x
+rvlikecnt int null,
+rvdelyn varchar(2) default 'N', -- 'Y', 'N' : 삭제, 삭제
+foreign key(contentid) references tempcontents(contentid) on update cascade,
 foreign key(mbno) references member(mbno) on update cascade
 );
 
@@ -150,18 +155,18 @@ foreign key(mbno) references member(mbno) on update cascade
 
 -- 포인트, 좋아요, 신고, 패널티 테이블 추가
 
+drop table member;
+drop table board;
+drop table comment;
+drop table gallery;
+drop table tempcontents;
+drop table qna;
 drop table panalty;
 drop table report;
 drop table like_;
 drop table point;
-drop table qna;
 drop table bookmark;
 drop table review;
-drop table tempcontents;
-drop table comment;
-drop table gallery;
-drop table board;
-drop table member;
 
 select * from member;
 select * from board;
@@ -175,8 +180,6 @@ select * from point;
 select * from like_;
 select * from report;
 select * from panalty;
-
-
 
 
 
