@@ -11,38 +11,38 @@
 <body>
 
 <header class="header">
-		<div class="header-logo">
-			<h1 class="logo">
-				<a class="svgLogo" href="./Home.jsp">
-					<img src="./images/logo4.png" width="150" height="80" alt="메인화면으로 이동">
-				</a>
-			</h1>
-		</div>
-		<div class="menu">
-			<ul class="depth1">
-				<li>
-					<a href="./Home.jsp">관광컨텐츠</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">자유게시판</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">로그인</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">마이페이지</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">공지사항</a>
-				</li>
-			</ul>
-		</div>
-		<span calss="login">
-			<a class="loginbutton" href="로그인페이지">
-			<img src="./images/login.png">
+	<div class="header-logo">
+		<h1 class="logo">
+			<a class="svgLogo" href="./Home.jsp">
+				<img src="./images/logo4.png" width="150" height="80" alt="메인화면으로 이동">
 			</a>
-		</span>
-	</header>
+		</h1>
+	</div>
+	<div class="menu">
+		<ul class="depth1">
+			<li>
+				<a href="./Home.jsp">관광컨텐츠</a>
+			</li>
+			<li>
+				<a href="./Home.jsp">자유게시판</a>
+			</li>
+			<li>
+				<a href="./Home.jsp">로그인</a>
+			</li>
+			<li>
+				<a href="./Home.jsp">마이페이지</a>
+			</li>
+			<li>
+				<a href="./Home.jsp">공지사항</a>
+			</li>
+		</ul>
+	</div>
+	<span calss="login">
+		<a class="loginbutton" href="로그인페이지">
+		<img src="./images/login.png">
+		</a>
+	</span>
+</header>
 
 
 <form>	
