@@ -155,18 +155,18 @@ foreign key(mbno) references member(mbno) on update cascade
 
 -- 포인트, 좋아요, 신고, 패널티 테이블 추가
 
-drop table member;
-drop table board;
-drop table comment;
 drop table gallery;
-drop table tempcontents;
-drop table qna;
+drop table like_;
 drop table panalty;
 drop table report;
-drop table like_;
-drop table point;
-drop table bookmark;
 drop table review;
+drop table bookmark;
+drop table tempcontents;
+drop table qna;
+drop table point;
+drop table comment;
+drop table board;
+drop table member;
 
 select * from member;
 select * from board;
