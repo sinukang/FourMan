@@ -1,8 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/main/java/com/my0803/myapp/controller/MemberController.java=UTF-8
-encoding//src/main/java/com/my0803/myapp/domain/Criteria.java=UTF-8
-encoding//src/main/java/com/my0803/myapp/domain/MemberVo.java=UTF-8
-encoding//src/main/java/com/my0803/myapp/domain/PageMaker.java=UTF-8
-encoding//src/main/java/com/my0803/myapp/persistance/MemberService_Mapper.java=UTF-8
-encoding//src/main/java/com/my0803/myapp/service/MemberService.java=UTF-8
-encoding//src/main/webapp/WEB-INF/views/introduction.jsp=UTF-8
