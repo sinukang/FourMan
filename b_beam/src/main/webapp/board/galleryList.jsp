@@ -57,7 +57,7 @@
 				<tr>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
 							<tr>
 								<td colspan="2">닉네임</td>
 							</tr>
@@ -66,15 +66,15 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
 							<tr>
 								<td colspan="2">닉네임</td>
 							</tr>
@@ -83,15 +83,15 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
 							<tr>
 								<td colspan="2">닉네임</td>
 							</tr>
@@ -100,15 +100,15 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
 							<tr>
 								<td colspan="2">닉네임</td>
 							</tr>
@@ -117,8 +117,8 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
@@ -136,8 +136,8 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
@@ -153,8 +153,8 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
@@ -170,8 +170,8 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>
@@ -187,8 +187,8 @@
 								
 							</tr>
 							<tr>
-								<td>전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0;">전주 한옥마을 야경</td>
+								<td class="like" style="border-bottom:0;">♥</td>
 							</tr>
 						</table>
 					</div>

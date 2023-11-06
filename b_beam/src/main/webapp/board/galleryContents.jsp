@@ -51,7 +51,7 @@
 				<tr>
 					<td>
 						<div class="inner-table">
-							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+							<table class="table-cont">
 								<tr>
 									<td colspan="2" style="padding: 5px 0 5px 5px;">닉네임</td>
 								</tr>
@@ -64,11 +64,17 @@
 									<td class="like" style="border-bottom:0;">♥</td>
 								</tr>
 								<tr>
+									<td colspan="2" style="border: 0; color:#567ff2">
+										#전주 #한옥마을 #야경
+									</td>
+								</tr>
+								<tr>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div>
 											<input type="text" id="comment-write" placeholder="댓글을 작성해주세요.">
 										</div>
 										<div>
+											<label class="write-btn" for="comment-btn"><img src="../source/images/commentbtn.png"></label>
 											<input type="button" id="comment-btn" value="작성">
 										</div>
 									</td>
@@ -77,6 +83,30 @@
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div class="commnet-id">
 											<span>닉네임</span>
+										</div>
+										<div class="commnet-cont">
+											댓글을 작성하였습니다.
+										</div>
+									</td>
+									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
+										<div class="commnet-id">
+											닉네임
+										</div>
+										<div class="commnet-cont">
+											댓글을 작성하였습니다.
+										</div>
+									</td>
+									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
+										<div class="commnet-id">
+											닉네임
+										</div>
+										<div class="commnet-cont">
+											댓글을 작성하였습니다.
+										</div>
+									</td>
+									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
+										<div class="commnet-id">
+											닉네임
 										</div>
 										<div class="commnet-cont">
 											댓글을 작성하였습니다.
