@@ -35,7 +35,7 @@
 					<a href="./index.jsp">마이페이지</a>
 				</li>
 				<li>
-					<a href="./index.jsp">고객지원</a>
+					<a href="${pageContext.request.contextPath}/qna/qna.do">고객지원</a>
 				</li>
 			</ul>
 		</div>
