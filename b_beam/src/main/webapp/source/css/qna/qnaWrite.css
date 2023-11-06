@@ -89,19 +89,36 @@ a{
 	height: 600px;
 }
 .form{
-	
+	width: 100%;
 }
 .div-sub{
-	
+	width: 100%;
 }
 .input-sub{
+	border: none;
 	
 }
+.input-sub:focus{
+	outline: none;
+}
+.div-content{
+	width: 100%;
+}
 .textarea-content{
+	border: none;
+	resize: vertical;
+}
+.textarea-content:focus{
+	outline: none;
+}
+.div-file{
+	width: 100%;
+}
+.label-file{
 	
 }
 .input-file{
-	
+	display: none;
 }
 .btn-area{
 	margin-top: 20px;
@@ -117,6 +134,8 @@ a{
 	font-size: 1.1em;
 	font-weight: bold;
 	border: 0;
+	border-right: 5px;
+	border-bottom: 5px;
 	border-radius: 8px;
 	box-shadow: 5px 5px 15px -5px #333;
 }

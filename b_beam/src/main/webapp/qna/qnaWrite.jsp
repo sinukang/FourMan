@@ -54,21 +54,23 @@
 			<div class="write-area">
 				<form id="form" class="form">
 					<div class="div-sub">
-						<input type="text" class="input-sub">
+						<input type="text" class="input-sub" placeholder="제목">
 					</div>
-					<div class="div-sub">
-						<textarea class="textarea-content"></textarea>
+					<div class="div-content">
+						<textarea class="textarea-content" placeholder="내용"></textarea>
 					</div>
-					<div>
-						<input type="file" class="input-file">
+					<div class="div-file">
+						<label for="input-file" class="label-file">
+							<input type="file" id="input-file" class="input-file" multiple="multiple">	
+						</label>
 					</div>
 				</form>
 			</div>
 		</div>
 		<div class="btn-area">
-			<button id="btn-write" class="btn btn-write">확인</button>
+			<button id="btn-write" class="btn btn-write">등록</button>
 			<button id="btn-cancel" class="btn btn-cancel">취소</button>
-		</div>			
+		</div>
 	</div>
 </body>
 <script type="text/javascript">
