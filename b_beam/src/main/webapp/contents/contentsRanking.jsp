@@ -1,23 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>리스트 페이지</title>
-<link rel="stylesheet" type="text/css" href="../source/css/contents.css">
+<link rel="stylesheet" type="text/css" href="../source/css/contentsR.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("button1").addEventListener("click", function () {
-        // 버튼 1을 클릭했을 때 실행할 코드
-        var link = "<%=request.getContextPath() %>/contents/contentsList.jsp";
-        window.location.href = link;
-    });
-});
-</script>
 
 </head>
 </head>
@@ -58,172 +50,29 @@ document.addEventListener("DOMContentLoaded", function () {
 	</header>
 	
 	
-	
-	
-<div class="contentsbox">
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    
-  
-	
+<div>
+	<div class="rankinghead">
+		<h2 class="headtitle">
+			랭킹 Top10
+		</h2>
+	</div>
+	<div class="rankingbox">
+		<c:forEach var="i" begin="1" end="4" step="1">
+			<div class="contentsbox rank">
+				<h3 class="ranktitle">
+					XX Top10
+				</h3>
+				<c:forEach var="i" begin="1" end="10" step="1">
+				    <button type="button" class="listbutton rank" id="button1">
+				        <div class="contents-info">
+				            <img src="../source/images/duck4.jpg">
+				            <div class="contents-title">전주덕진공원</div>
+				        </div>
+				    </button>
+			    </c:forEach>
+			</div>	
+	    </c:forEach>
+	</div>
 </div>
-
-	
-
-
-
-
-	<div class="pagination">
-    <a href="#" class="arrow">◀</a>
-    <a href="#" class="page">1</a>
-    <a href="#" class="page">2</a>
-    <a href="#" class="page">3</a>
-    <a href="#" class="arrow">▶</a>
-</div>
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
