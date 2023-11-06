@@ -61,7 +61,7 @@
 					</div>
 					<div class="div-file">
 						<label for="input-file" class="label-file">
-							<input type="file" id="input-file" class="input-file" multiple="multiple">	
+							파일 선택<input type="file" id="input-file" class="input-file" multiple="multiple">	
 						</label>
 					</div>
 				</form>
