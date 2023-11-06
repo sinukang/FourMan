@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>리스트 페이지</title>
-<link rel="stylesheet" type="text/css" href="../source/css/contents.css">
+<link rel="stylesheet" type="text/css" href="../source/css/contents/contents.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
 
