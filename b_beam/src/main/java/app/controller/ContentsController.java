@@ -36,6 +36,11 @@ public class ContentsController extends HttpServlet {
 			String path ="/contents/contents.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("contentsRanking.do")) {
+			
+			String path ="/contents/contentsRanking.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}
 	}
 
