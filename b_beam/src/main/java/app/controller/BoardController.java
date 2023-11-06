@@ -31,6 +31,21 @@ public class BoardController extends HttpServlet {
 			String path ="/board/board.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("galleryList.do")) {
+			
+			String path ="/board/galleryList.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}else if (location.equals("galleryContents.do")) {
+			
+			String path ="/board/galleryContents.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}else if (location.equals("galleryWrite.do")) {
+			
+			String path ="/board/galleryWrite.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}
 	}
 

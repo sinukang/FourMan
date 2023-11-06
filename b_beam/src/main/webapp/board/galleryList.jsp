@@ -26,7 +26,7 @@
 					<a href="../index.jsp">TOP10</a>
 				</li>
 				<li>
-					<a href="./galleryList.jsp">갤러리</a>
+					<a href="${pageContext.request.contextPath}/board/galleryList.do">갤러리</a>
 				</li>
 				<li>
 					<a href="../index.jsp">마이페이지</a>
@@ -37,7 +37,7 @@
 			</ul>
 		</div>
 		<span class="login">
-			<a class="loginbutton" href="../member/memberLogin.jsp">
+			<a class="loginbutton" href="${pageContext.request.contextPath}/member/memberLogin.do">
 			<img src="../source/images/login.png">
 			</a>
 		</span>
@@ -51,7 +51,7 @@
 				<tr>
 					<td colspan="4" class="write-btn">
 						<label class="input-button" for="input-write">글쓰기</label>
-						<input type="button" id="input-write" name="btn" style="display:none;" onclick="location.href='galleryWrite.jsp';">
+						<input type="button" id="input-write" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryWrite.do';">
 					</td>
 				</tr>
 				<tr>
