@@ -87,12 +87,6 @@
  }	
 	
 	
-		/*------------------------------헤더----------------------------------------------- */	
-	/*------------------------------헤더----------------------------------------------- */	
-	/*------------------------------헤더----------------------------------------------- */	
-	/*------------------------------헤더----------------------------------------------- */	
-
-
 
 
 /* 컨텐츠 상세보기 스타일 */
@@ -273,7 +267,6 @@
   }
  
 #commentTable th, #commentTable td {
-  border: 1px solid black;
   padding: 8px; /* 내부 콘텐츠와 테두리 사이 간격 설정 */
 }
 #star {
@@ -290,17 +283,34 @@
 }
 
 #text {
+	text-align: left;
   width: 900px; /* 글내용 셀의 너비를 200px로 설정 */
 }
 
-#file {
-	width: 100px;
-	height: 80px;
+.imageContainer {
+    width: 100px; /* Set the width */
+    height: 80px; /* Set the height */
 }
+
+.imageContainer img {
+    width: 100%; /* Fill the width of the container */
+    height: 100%; /* Fill the height of the container */
+}
+
+
 
 #up,
 #down {
 	width: 30px;
+}
+
+/*좋아요 버튼 색상 변경 */
+.likebtn button.selected {
+    background-color: yellow; 
+}
+
+.likebtn button{
+	border: none;
 }
 
 

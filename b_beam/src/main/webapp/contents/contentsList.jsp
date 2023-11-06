@@ -150,15 +150,23 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 				<table id="commentTable">
 		        	<tr>
 		        		<th id="userId">피묻은각도기</th>
+		        		
 		        		<th id="star">★★★★★</th>
-		        		<th id="text" rowspan="2">글내용</th>
-		        		<th rowspan="2"><input id="file" src="../source/images/duck4.jpg"></th>
-		        		<th id="up" type="button" rowspan="2" class="likebtn"> 
-		        		 <button type="button" onclick="like('up', event)">👍
-		        		 </th>
-		        		 <th id="up" type="button" rowspan="2" class="likebtn"> 
-		        		 <button type="button" onclick="like('up', event)">👎
-		        		 </th>
+		        		
+		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 알럿창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+		        		
+		        		<th rowspan="2">
+						    <div class="imageContainer" onclick="showImagePopup()">
+			                    <img src="../source/images/duck4.jpg" class="commentImage">
+			                   
+			                </div>
+						</th>
+								        		
+		        		 <th id="up" type="button" rowspan="2" class="likebtn">
+			                <button type="button" onclick="like(this, 'up')">👍</button>
+			            </th>
+			            <th id="up" type="button" rowspan="2" class="likebtn">
+			                <button type="button" onclick="like(this, 'down')">👎</button>
 					</tr>
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.06</th>
@@ -204,23 +212,30 @@ document.querySelectorAll('.tab .btn').forEach(tab => {
 </script>
 
 <script>
-//좋아요 버튼 클릭 색상변경 부분 --------------------------------------------------
-function like(type, event) {
-  const buttons = document.querySelectorAll('.likebtn');
+// 좋아요(👍) 또는 싫어요(👎) 버튼 클릭 시 색상을 변경하는 JavaScript 함수
+function like(button, type) {
+    const buttons = document.querySelectorAll('.likebtn button');
 
-  buttons.forEach(btn => {
-    btn.classList.remove('selected');
-  });
+    buttons.forEach(btn => {
+        btn.classList.remove('selected');
+    });
 
-  if (type === 'up') {
-    event.target.classList.add('selected');
-    // 추가적인 기능을 구현할 수 있습니다.
-  } else if (type === 'down') {
-    event.target.classList.add('selected');
-    // 추가적인 기능을 구현할 수 있습니다.
-  }
+    button.classList.add('selected');
+    // 'type'에 따라 추가 기능을 구현할 수 있습니다.
+
+    // 예를 들어, 'type'이 'up'인 경우
+    if (type === 'up') {
+        // 여기에 좋아요(👍) 버튼을 눌렀을 때의 추가 동작을 구현할 수 있습니다.
+    } else if (type === 'down') {
+        // 'type'이 'down'인 경우 싫어요(👎) 버튼을 누르는 추가 동작을 구현할 수 있습니다.
+    }
 }
+
 </script>
+
+
+
+
 
 
 
