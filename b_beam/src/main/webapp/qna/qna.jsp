@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA</title>
+<title>고객지원</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/qna/qna.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 	<header class="header">
@@ -34,7 +35,7 @@
 					<a href="./Home.jsp">마이페이지</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">고객지원</a>
+					<a href="${pageContext.request.contextPath}/qna/qna.do">고객지원</a>
 				</li>
 			</ul>
 		</div>
@@ -56,23 +57,28 @@
 			<div class="table-area">
 				<table class="content-table">
 					<tr>
-						<td class="table-cate">글 번호</td>
-						<td class="table-cate">분류</td>
-						<td class="table-cate">글 제목</td>
-						<td class="table-cate">작성자</td>
-						<td class="table-cate">작성일</td>
-						<td class="table-cate">조회수</td>
+						<td class="td-head td-no">글 번호</td>
+						<td class="td-head td-cate">분류</td>
+						<td class="td-head td-sub">글 제목</td>
+						<td class="td-head td-writer">작성자</td>
+						<td class="td-head td-wdate">작성일</td>
+						<td class="td-head td-cnt">조회수</td>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>공지</td>
-						<td>안녕하세요</td>
-						<td>삠</td>
-						<td>2023-11-03</td>
-						<td>1</td>
-					</tr>				
+					<c:forEach var="i" begin="1" end="10" step="1">
+						<tr class="tr2">
+							<td class="td-body td-no">${i}</td>
+							<td class="td-body td-cate">공지${i}</td>
+							<td class="td-body td-sub">안녕하세요${i}</td>
+							<td class="td-body td-writer">삠${i}</td>
+							<td class="td-body td-wdate">2023-11-${i}</td>
+							<td class="td-body td-cnt">1${i}</td>
+						</tr>							
+					</c:forEach>
 				</table>
 			</div>
+			<div class="btn-area2">
+				<button class="btn-write">공지사항 등록</button>
+			</div>			
 			<div class="pagination-area">
 				<div class="paging-number-area">
 					<a href="#" class="a-arrow">
@@ -94,5 +100,6 @@
 			</div>
 		</div>
 	</div>
+	<a href="${pageContext.request.contextPath}/qna/qnaTest.do">qnaTest</a>
 </body>
 </html>
