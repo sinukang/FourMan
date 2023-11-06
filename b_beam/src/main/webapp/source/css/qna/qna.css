@@ -89,14 +89,14 @@ a{
 	justify-content: flex-start;
 	align-items: center;
 }
-.Notice-btn{
+.btn-Notice{
 	background-color: #5486C9;
 }
-.FAQ-btn{
+.btn-FAQ{
 	margin-left: 1%;
 	background-color: #3793A0;
 }
-.Notice-btn, .FAQ-btn{
+.btn-Notice, .btn-FAQ{
 	width: 13%;
 	height: 40px;
 	color: #fff;
@@ -104,17 +104,20 @@ a{
 	font-weight: bold;
 	border: 0;
 	border-radius: 8px;
+	box-shadow: 5px 5px 15px -5px #333;
 }
-.Notice-btn, .FAQ-btn:hover{
+.btn-Notice:hover, .btn-FAQ:hover{
 	cursor: pointer;
 }
-.Notice-btn:active, .FAQ-btn:active{
+.btn-Notice:active, .btn-FAQ:active{
 	transform: scale(0.95);
 }
 .table-area{
 	margin-top: 20px;
-	border: 0;
 	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	box-shadow: 5px 5px 15px -5px #333;
 }
 .content-table{
 	width: 100%;
@@ -143,20 +146,23 @@ a{
 .td-no, .td-cate, .td-wdate, .td-cnt{
 	width: 9%;
 }
-.tr2 .td-sub{
+.tr-body .td-sub{
 	padding-left: 20px;
 	text-align: left;
 	text-overflow: ellipsis;
 }
+.content-table .tr-body:last-of-type .td-body{
+	border-bottom: none;
+}
 .td-sub{
 	width: 44%;
-	
 }
+
 .td-writer{
 	width: 20%
 }
 .btn-area2{
-	margin-top: 10px;
+	margin-top: 20px;
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
@@ -171,6 +177,7 @@ a{
 	font-weight: bold;
 	border: 0;
 	border-radius: 8px;
+	box-shadow: 5px 5px 15px -5px #333;
 }
 .btn-write:active{
 	transform: scale(0.95);

@@ -15,7 +15,7 @@
 	<header class="header">
 		<div class="header-logo">
 			<h1 class="logo">
-				<a class="svgLogo" href="./Home.jsp">
+				<a class="svgLogo" href="${pageContext.request.contextPath}">
 					<img src="${pageContext.request.contextPath}/source/images/logo4.png" width="150" height="80" alt="메인화면으로 이동">
 				</a>
 			</h1>
@@ -51,8 +51,8 @@
 		</div>
 		<div class="content">
 			<div class="btn-area">
-				<button type="button" class="Notice-btn">공지사항</button>
-				<button type="button" class="FAQ-btn">자주 묻는 질문</button>
+				<button type="button" class="btn-Notice">공지사항</button>
+				<button type="button" class="btn-FAQ">자주 묻는 질문</button>
 			</div>
 			<div class="table-area">
 				<table class="content-table">
@@ -65,7 +65,7 @@
 						<td class="td-head td-cnt">조회수</td>
 					</tr>
 					<c:forEach var="i" begin="1" end="10" step="1">
-						<tr class="tr2">
+						<tr class="tr-body">
 							<td class="td-body td-no">${i}</td>
 							<td class="td-body td-cate">공지${i}</td>
 							<td class="td-body td-sub">안녕하세요${i}</td>
@@ -77,7 +77,7 @@
 				</table>
 			</div>
 			<div class="btn-area2">
-				<button class="btn-write">공지사항 등록</button>
+				<button id="btn-write" class="btn-write">공지사항 등록</button>
 			</div>			
 			<div class="pagination-area">
 				<div class="paging-number-area">
@@ -102,4 +102,13 @@
 	</div>
 	<a href="${pageContext.request.contextPath}/qna/qnaTest.do">qnaTest</a>
 </body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$("#btn-write").on("click", function(){
+			location.href = "${pageContext.request.contextPath}/qna/qnaWrite.do";
+		});
+		
+	});
+</script>
 </html>
