@@ -15,7 +15,7 @@
 	<header class="header">
 		<div class="header-logo">
 			<h1 class="logo">
-				<a class="svgLogo" href="./Home.jsp">
+				<a class="svgLogo" href="./index.jsp">
 					<img src="./source/images/logo4.png" width="150" height="80" alt="메인화면으로 이동">
 				</a>
 			</h1>
@@ -26,21 +26,21 @@
 					<a href="${pageContext.request.contextPath}/contents/contents.do">컨텐츠</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">TOP10</a>
+					<a href="./index.jsp">TOP10</a>
 				</li>
 				<li>
 					<a href="${pageContext.request.contextPath}/board/board.do">갤러리</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">마이페이지</a>
+					<a href="./index.jsp">마이페이지</a>
 				</li>
 				<li>
-					<a href="./Home.jsp">고객지원</a>
+					<a href="./index.jsp">고객지원</a>
 				</li>
 			</ul>
 		</div>
 		<span class="login">
-			<a class="loginbutton" href="./member/memberLogin.jsp">
+			<a class="loginbutton" href="${pageContext.request.contextPath}/member/memberLogin.do">
 			<img src="./source/images/login.png">
 			</a>
 		</span>
