@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -116,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -123,12 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -136,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -143,12 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -156,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -163,12 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -176,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -183,12 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -196,6 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -203,12 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -216,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -223,12 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
-        </div>
-    </button>
-    <button type="button" class="listbutton" id="button1">
-        <div class="content-info">
-            <img src="../source/images/duck4.jpg" width="250px" height="200px">
-            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -236,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
@@ -243,9 +221,105 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content-info">
             <img src="../source/images/duck4.jpg" width="250px" height="200px">
             <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
         </div>
     </button>
     
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+    
+    <button type="button" class="listbutton" id="button1">
+        <div class="content-info">
+            <img src="../source/images/duck4.jpg" width="250px" height="200px">
+            <div class="contents-title">전주덕진공원</div>
+            <span class="bookmark-icon">★</span>
+        </div>
+    </button>
+   
   
 	
 </div>
