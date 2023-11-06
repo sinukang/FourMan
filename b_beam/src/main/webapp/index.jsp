@@ -29,7 +29,7 @@
 					<a href="./index.jsp">TOP10</a>
 				</li>
 				<li>
-					<a href="${pageContext.request.contextPath}/board/board.do">갤러리</a>
+					<a href="${pageContext.request.contextPath}/board/galleryList.do">갤러리</a>
 				</li>
 				<li>
 					<a href="./index.jsp">마이페이지</a>
