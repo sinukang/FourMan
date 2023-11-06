@@ -214,16 +214,46 @@
 	    border: 3px solid #ebebeb;
 	    border-radius: 10px;
 	    background-color: #bdbdbd;
+    	transition: all 0.2s linear;
+	}
+	.contentsbox.rank:hover{
+		transform:scale(1.03)
+	}
+	.rankinghead hr{
+	    width: auto;
+	    height: 3px;
+	    background: #5684cd;
+	    border: 0;
 	}
 	.listbutton.rank{
 		margin : 10px;
 		border-radius : 10px;
+		width : 200px;
+    	transition: all 0.2s linear;
+	}
+	.listbutton.rank:hover{
+		transform:scale(1.1)
+	}
+	.rankcontainer{
+	    width: 1190px;
+	    margin: 0 auto;
+	    padding: 100px;
+	}
+	.contents-info.rank{
+		width: auto;
 	}
 
+	.contents-info.rank img{
+		width: 200px;
+		height : 160px;
+	}
 
-
-
-
+  .contents-title.rank {
+	  	width: 180px;
+        background-color: rgb(255, 255, 255); /* 뒷 배경 색상 */
+        color: rgb(0, 0, 0); /* 글자 색상 */
+        padding: 10px; /* 내용과 외곽선 간격 조절 */
+    }
 
 
 
