@@ -15,39 +15,7 @@
 </head>
 <body>
 
-<header class="header">
-		<div class="header-logo">
-			<h1 class="logo">
-				<a class="svgLogo" href="./index.jsp">
-					<img src="../source/images/logo4.png" width="150" height="80" alt="메인화면으로 이동">
-				</a>
-			</h1>
-		</div>
-		<div class="menu">
-			<ul class="depth1">
-				<li>
-					<a href="${pageContext.request.contextPath}/contents/contents.do">컨텐츠</a>
-				</li>
-				<li>
-					<a href="${pageContext.request.contextPath}/contents/contentsRanking.do">TOP10</a>
-				</li>
-				<li>
-					<a href="${pageContext.request.contextPath}/board/board.do">갤러리</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">마이페이지</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">고객지원</a>
-				</li>
-			</ul>
-		</div>
-		<span class="login">
-			<a class="loginbutton" href="./member/memberLogin.jsp">
-			<img src="../source/images/login.png">
-			</a>
-		</span>
-	</header>
+<jsp:include page="../source/include/header.jsp"/>
 	
 	
 <div class="rankcontainer">
@@ -74,5 +42,7 @@
 	    </c:forEach>
 	</div>
 </div>
+
+<jsp:include page="../source/include/footer.jsp"/>
 </body>
 </html>
