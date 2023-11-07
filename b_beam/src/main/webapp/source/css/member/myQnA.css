@@ -49,7 +49,7 @@ body{
 	margin-top: 25px;
 	margin-left: 40px;
 }
-li{
+header li{
 	margin: 0 2%;
 	width: 150px;
 	list-style: none;
@@ -57,11 +57,11 @@ li{
 	padding: 30px;
 	margin: 0 auto;
 }
-a:hover{
+header a:hover{
 	font-size: 120%;
 	font-weight: 120%;
 }
-a{
+header a{
 	text-decoration-line: none;
 	color: white;
 }
@@ -115,15 +115,46 @@ footer{
 .page-title{
 	font-size: 30px;
 }
+
+
+/*상단 탭 시작*/
+.mypageNavi {
+	margin: 50px 0 auto;
+	width: 100%;
+	
+}
+.tab.navi {
+	list-style: none;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	border-radius: 8px;
+	background-color:#567ff2;
+}
+.tab.navi li{
+	
+	padding: 30px;
+	height: 30px;
+	font-size: 20px;
+}
+.tab.navi li a{
+	display: inline-block;
+	color: #fff;
+	text-decoration-line: none;
+}
+/*상단 탭 끝*/
+
+
 .contents-area{
-	margin-top: 50px;
+	margin-top: 20px;
 }
 .btn-area{
+	margin-top: 20px;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 20px;
 }
-.btn{
+.btn2{
 	height: 40px;
 	color: #000;
 	font-size: 1.25em;
@@ -135,7 +166,6 @@ footer{
 .clicked{
 	color: #fff;
 	background-color: #5486C9;
-	
 }
 .list-area{
 	
