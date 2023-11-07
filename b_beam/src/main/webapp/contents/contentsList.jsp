@@ -26,11 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	  });
 	});
 	
-// 슬라이드 기능을 하기위한 스크립트 --------------------------------------------	
-$(document).on('click', '[data-toggle="lightbox"]', function(event) {
-    event.preventDefault();
-    $(this).ekkoLightbox();
-});
+
 </script>	
 
 </head>
@@ -132,9 +128,7 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 		        		 <th id="up" type="button" rowspan="2" class="likebtn">
 			                <button type="button" onclick="like(this, 'up')">👍</button>
 			            </th>
-			            <th id="up" type="button" rowspan="2" class="likebtn">
-			                <button type="button" onclick="like(this, 'down')">👎</button>
-					</tr>
+			            
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.06</th>
 		        		
@@ -180,25 +174,27 @@ document.querySelectorAll('.tab .btn').forEach(tab => {
 </script>
 
 <script>
-// 좋아요(👍) 또는 싫어요(👎) 버튼 클릭 시 색상을 변경하는 JavaScript 함수
+//좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수
 function like(button, type) {
+    // 버튼들 가져오기
     const buttons = document.querySelectorAll('.likebtn button');
 
+    // 현재 선택된 버튼인지 확인
+    const isSelected = button.classList.contains('selected');
+
+    // 모든 버튼의 선택 상태 제거
     buttons.forEach(btn => {
         btn.classList.remove('selected');
     });
 
-    button.classList.add('selected');
-    // 'type'에 따라 추가 기능을 구현할 수 있습니다.
-
-    // 예를 들어, 'type'이 'up'인 경우
-    if (type === 'up') {
-        // 여기에 좋아요(👍) 버튼을 눌렀을 때의 추가 동작을 구현할 수 있습니다.
-    } else if (type === 'down') {
-        // 'type'이 'down'인 경우 싫어요(👎) 버튼을 누르는 추가 동작을 구현할 수 있습니다.
+    // 선택 상태 toggle
+    if (!isSelected) {
+        button.classList.add('selected');
+        // 'up' 버튼을 눌렀을 때 추가적인 기능은 여기에 구현
+    } else {
+        // 버튼이 이미 선택된 상태일 때, 다시 클릭했을 때의 동작은 여기에 구현
     }
 }
-
 </script>
 
 

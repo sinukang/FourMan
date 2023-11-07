@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관</title>
+<title>관리자페이지</title>
 <link rel="stylesheet" type="text/css" href="../source/css/report.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
@@ -27,9 +27,8 @@ $(document).ready(function(){
 </head>
 <body>
 
-<jsp:include page="../source/include/header.jsp"/>
-	
 
+<jsp:include page="../source/include/header.jsp"/>
 <jsp:include page="../source/include/managerNavi.jsp"/>
 
 
@@ -53,8 +52,13 @@ $(document).ready(function(){
 			            <td>욕설</td>
 			            <td>맥그리거</td>
 			            <td>너 아빠없지?</td>
-			            <td>
-			            <button type="button" >처리하기</button>
+			             <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
 			        <tr>
@@ -63,8 +67,13 @@ $(document).ready(function(){
 			            <td>욕설</td>
 			            <td>타이슨</td>
 			            <td>너 T야?</td>
-			             <td>
-			            <button type="button" >처리하기</button>
+			              <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
 			        <tr>
@@ -73,116 +82,129 @@ $(document).ready(function(){
 			            <td>광고</td>
 			            <td>한호열</td>
 			            <td>&&& 300%수익률 &&& 해외사이트 ### 사다리 %%% 불법토토!!!</td>
+			              <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>4</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
 			             <td>
-			            <button type="button" >처리하기</button>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
 			        <tr>
-			            <td>1</td>
+			            <td>5</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>6</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>7</td>
 			            <td>분류1</td>
 			            <td>유형1</td>
 			            <td>닉네임1</td>
 			            <td>내용1</td>
 			             <td>
-			            <button type="button" >처리하기</button>
-			            </td>
-			        </tr>
-			        <tr>
-			            <td>1</td>
-			            <td>분류1</td>
-			            <td>유형1</td>
-			            <td>닉네임1</td>
-			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
-			            </td>
-			        </tr>
-			        <tr>
-			            <td>1</td>
-			            <td>분류1</td>
-			            <td>유형1</td>
-			            <td>닉네임1</td>
-			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
-			            </td>
-			        </tr>
-			        <tr>
-			            <td>1</td>
-			            <td>분류1</td>
-			            <td>유형1</td>
-			            <td>닉네임1</td>
-			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
 			         <tr>
-			            <td>1</td>
+			            <td>8</td>
 			            <td>분류1</td>
 			            <td>유형1</td>
 			            <td>닉네임1</td>
 			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
+			             <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
 			        <tr>
-			            <td>1</td>
+			            <td>9</td>
 			            <td>분류1</td>
 			            <td>유형1</td>
 			            <td>닉네임1</td>
 			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
+			             <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
 			         <tr>
-			            <td>1</td>
+			            <td>10</td>
 			            <td>분류1</td>
 			            <td>유형1</td>
 			            <td>닉네임1</td>
 			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
+			             <td>
+			            <button class="process-button">처리하기</button>
+		                    <select class="select-box" style="display: none;">
+		                        <option value="option1">옵션 1</option>
+		                        <option value="option2">옵션 2</option>
+		                        <option value="option3">옵션 3</option>
+		                    </select>
 			            </td>
 			        </tr>
-			        <tr>
-			            <td>1</td>
-			            <td>분류1</td>
-			            <td>유형1</td>
-			            <td>닉네임1</td>
-			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
-			            </td>
-			        </tr>
-			         <tr>
-			            <td>1</td>
-			            <td>분류1</td>
-			            <td>유형1</td>
-			            <td>닉네임1</td>
-			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
-			            </td>
-			        </tr>
-			        <tr>
-			            <td>1</td>
-			            <td>분류1</td>
-			            <td>유형1</td>
-			            <td>닉네임1</td>
-			            <td>내용1</td>
-			            <td>
-			            <button type="button" >처리하기</button>
-			            </td>
-			        </tr>
+			       
 			        
 			        <!-- 추가적인 게시물 -->
 			    </tbody>
 			</table>
 					
 				
+					
+		</div>
 				<div class="pagination">
 				    <a href="#" class="arrow">◀</a>
 				    <a href="#" class="page">1</a>
@@ -190,20 +212,18 @@ $(document).ready(function(){
 				    <a href="#" class="page">3</a>
 				    <a href="#" class="arrow">▶</a>
 				</div>
-					
-		</div>
 
 
 <div id="tab2" class="tabContent" style="display: none;">
-	ㅁ나엄낭먼암넝ㅁ나엄ㄴ아ㅓㅁㄴㅇ나ㅓㅇ나ㅓㅇ
+	이곳에 1:1문의가 들어갈거에요
 </div>
 
 <div id="tab3" class="tabContent" style="display: none;">
-		ㅣㅏㅂㄷ잊바이ㅏㅣㅁ나임나임ㄴ아임낭
+	공지사항
 </div>
 
 <div id="tab4" class="tabContent" style="display: none;">
-		ㄴㅇ리ㅏ얼이ㅏ럼ㄴ이라ㅓㅈ디ㅏㅓ289뎢ㅇ러ㅏ
+		자주묻는질문 
 	</div>
 
 
@@ -219,6 +239,19 @@ $(document).ready(function(){
 
 
 
+<script>
+$(document).ready(function() {
+    $(".process-button").click(function() {
+        var selectBox = $(this).siblings(".select-box");
+        if (selectBox.is(":hidden")) {
+            $(".select-box").hide();
+            selectBox.show();
+        } else {
+            selectBox.hide();
+        }
+    });
+});
+</script>
 
 
 
@@ -237,13 +270,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-<hr>
 
 <jsp:include page="../source/include/footer.jsp"/>
 </body>

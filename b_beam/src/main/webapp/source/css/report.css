@@ -109,27 +109,31 @@ hr {
 
 /* 기본 테이블 스타일 */
 .report-table {
-    width: 70%;
-  	margin: 200px auto;    
-	border-collapse: collapse;
+    width: 80%;
+    border-collapse: collapse;
+    border: none;
+    margin: 0 auto;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); 
+	 
+    
+}
+
+.report-table th, .report-table td {
+    padding: 12px;
     text-align: center;
 }
 
-
-
-
 .report-table th {
-	height: 50px;
-    background-color: rgb(128, 128, 128);
-    color: white;
+    background-color: #567ff2;
+    color: #333;
+    font-weight: bold;
+    
 }
 
-/* 줄 번갈아 가며 다른 배경색 부여 */
 .report-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* 마우스 호버시 배경색 변경 */
 .report-table tbody tr:hover {
     background-color: #e0e0e0;
 }
@@ -153,11 +157,20 @@ hr {
 	width: 80px;
  }
  
- .pagination{
-	 position: relative;	
+.pagination{
 	 text-align: center;
 	 margin: 0 auto;
-	 color: #567ff2;
+ }
+ .pagination a{
+	 color: rgb(0, 0, 0);
  }
  
  
+ .tabContent{
+	 position: relative;
+	 width: 100%;
+	 height: 500px;
+	 margin: 150px auto;
+	 text-align: center;
+	 
+ }
