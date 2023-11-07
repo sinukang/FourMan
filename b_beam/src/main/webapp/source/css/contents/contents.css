@@ -92,16 +92,22 @@
     margin: 0 30px; /* 좌우 여백 10px로 설정 (상하 여백은 0) */
 }
 
-
+.contentsbutton img {
+    width: 140px; /* 원하는 너비 설정 */
+    height: 150px; /* 원하는 높이 설정 */
+}
 
 
 .container {
+	position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 30vh;
 	background-color: rgb(255, 255, 255);
 }
+
+
 /* 페이지 네비게이션 스타일 */
 .pagination {
     text-align: center;
@@ -152,10 +158,15 @@
 
 
      .contentsbox {
+		position: relative;
+		left: 30px;
+		max-width: 85%;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
+        align-items: left;
+        margin: 0 auto;
+        justify-content: left;
+        text-align: center;
     }
 
     .listbutton {
@@ -166,15 +177,9 @@
         margin: 30px;
     }
     
- .bookmark-icon {
-    position: absolute;
-    top: 100px; /* 별 아이콘 위치 조정 */
-    left: 5px; /* 별 아이콘 위치 조정 */
-    color: gold; /* 별 색상 */
-    font-size: 20px; /* 별 크기 */
-}
-
+ 
     .content-info {
+		position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -189,22 +194,36 @@
         border-bottom-right-radius: 0; 
     }
 
- 
-
   .contents-title {
-	  	width: 230px;
-        background-color: rgb(255, 255, 255); /* 뒷 배경 색상 */
+	  	width: 250px;
+        background-color: rgb(209, 224, 254); /* 뒷 배경 색상 */
         color: rgb(0, 0, 0); /* 글자 색상 */
-        padding: 10px; /* 내용과 외곽선 간격 조절 */
+        padding: 0px; /* 내용과 외곽선 간격 조절 */
         border-top-left-radius: 0px; /* 좌측 상단 모서리는 각지게 유지 */
         border-bottom-left-radius: 10px; /* 좌측 하단 모서리는 각지게 유지 */
         border-top-right-radius: 0px; /* 우측 상단 모서리만 둥글게 */
         border-bottom-right-radius: 10px; /* 우측 하단 모서리만 둥글게 */
+	    display: flex;
+	    justify-content: center; /* 또는 필요에 따라 flex-end로 설정 */
+	    align-items: center;
     }
+ 
+ .title{
+	 font-weight: bold;
+ }
+ 
+.cmtCnt{
+	color: darkgray;
+}
 
-
-
-
+.likeStar{
+	position: absolute;
+	bottom: 205px;
+	right: 0px;
+	font-size: 30px;
+	color: rgb(255, 255, 0);
+	
+}
 
 
 
