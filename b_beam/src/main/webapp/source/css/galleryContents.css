@@ -4,9 +4,9 @@
 		margin: 0;
 	}
 	
-	.inner-table td {
+/* 	.inner-table td {
 		border-bottom: 1px solid;
-	}
+	} */
 	
 	.container	{
 		display: flex;
@@ -14,11 +14,13 @@
 	}
 	
 	.table-cont {
-		border: 1px solid white;
 		background: white;
 		box-shadow: 5px 5px 15px -5px #333;
 		width: 450px;
 		height: 750px;
+		border-spacing: 0px;
+		border-radius: 7px;
+		border: 1px solid #d2c7c7;
 	}
 	
 	.wrap-table {
@@ -98,3 +100,5 @@
 	label {
 		cursor: pointer;
 	}
+	
+	
