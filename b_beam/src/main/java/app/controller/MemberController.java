@@ -46,6 +46,16 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberLogin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("memberIdFind.do")) {
+			
+			String path ="/member/memberIdFind.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}else if (location.equals("memberPwdFind.do")) {
+			
+			String path ="/member/memberPwdFind.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}
 	}
 

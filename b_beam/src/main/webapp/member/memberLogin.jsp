@@ -43,8 +43,8 @@
 					</div>
 					<br>
 					<div class="text-join">
-						<a class="" href="아이디찾기 경로">아이디 찾기</a> /
-						<a class="" href="비밀번호찾기 경로">비밀번호 찾기</a>
+						<a class="" href="${pageContext.request.contextPath}/member/memberIdFind.do">아이디 찾기</a> /
+						<a class="" href="${pageContext.request.contextPath}/member/memberPwdFind.do">비밀번호 찾기</a>
 					</div>
 					<div class="text-join">
 					아직 회원이 아니신가요?
