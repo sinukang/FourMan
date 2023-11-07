@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-	<header class="header">
+	<%-- <header class="header">
 		<div class="header-logo">
 			<h1 class="logo">
 				<a class="svgLogo" href="${pageContext.request.contextPath}">
@@ -44,7 +44,10 @@
 				<img src="${pageContext.request.contextPath}/source/images/login.png">
 			</a>
 		</span>
-	</header>
+	</header> --%>
+	
+	<jsp:include page="../source/include/header.jsp"/>
+	
 	<div class="inner">
 		<div class="page-side">
 			<h2 class="page-title">고객지원</h2>
@@ -111,13 +114,14 @@
 			</div>
 		</div>
 	</div>
-	<a href="${pageContext.request.contextPath}/qna/qnaTest.do">qnaTest</a>
+	<jsp:include page="../source/include/footer.jsp"/>
+	
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
 		$("#btn-write").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/qna/qnaWrite.do";
+			location.href = "${pageContext.request.contextPath}/board/noticeWrite.do";
 		});
 		
 	});
