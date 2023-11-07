@@ -10,9 +10,9 @@
 
 </head>
 <body>
-
 	<jsp:include page="../source/include/header.jsp"/>
 	<jsp:include page="../source/include/mypageNavi.jsp"/>
+	
 
 	<div class="container">
 		<div class="member-info">
@@ -23,28 +23,14 @@
 					</a>
 				</h1>
 			</div>
-			<div class="login-body">
-				<div>
-					<h3>보유중인 포인트</h3>
-				</div>
-				<table class="info-cont" id="info-point">
-					<tr>
-						<td>
-							잔여포인트 : 12345p
-						</td>
-					</tr>
-				</table>
-			</div>
 			<div class="join-body">
 				<form name="frm">
-					<div>
-						<h3>전주사랑상품권 교환</h3>
-					</div>
 					<div class="join-id">
-						<input type="text" name="exc-point" id="exc-point" maxlength="30" placeholder=" 교환할 포인트를 입력해주세요">
+						<input type="text" name="memberId" id="memberId" maxlength="30" placeholder=" 비밀번호를 입력하세요">
+						<input type="button" name="btn" id="btn" value="확인">
 					</div>	
 					<div class="join-btn">
-						<input type="button" name="btn" value="신청하기" onclick="check();">
+						<input type="button" name="btn" value="회원탈퇴" onclick="check();">
 					</div>
 				</form>
 			</div>
