@@ -18,7 +18,7 @@
 			<h2 class="page-title">마이페이지</h2>
 		</div>
 		<div class="content">
-				<div class="btn-area">
+			<div class="btn-area">
 				<button type="button" class="btn-Notice">공지사항</button>
 				<button type="button" class="btn-FAQ">자주 묻는 질문</button>
 			</div>
