@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>공지사항 등록</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/qna/qnaWrite.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/board/noticeWrite.css">
 </head>
 <body>
 	<!-- 헤더 시작 -->
