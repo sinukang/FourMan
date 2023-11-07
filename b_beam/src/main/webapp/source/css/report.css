@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+
+
+
+
+
+/* 기본 테이블 스타일 */
+.report-table {
+    width: 70%;
+  	margin: 50px auto;    
+	border-collapse: collapse;
+    text-align: center;
+}
+
+
+
+
+.report-table th {
+    background-color: #567ff2;
+    color: white;
+}
+
+/* 줄 번갈아 가며 다른 배경색 부여 */
+.report-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 마우스 호버시 배경색 변경 */
+.report-table tbody tr:hover {
+    background-color: #e0e0e0;
+}
+
+#reportNum { 
+	width: 100px;
+ }
+#sort {
+	width: 100px;
+ }
+#breed {
+	width: 100px;
+ }
+#useName {  
+	width: 100px;
+}
+#ctn { 
+	width: 1000px;
+ }
+#clearYn {
+	display: flex;
+	width: 70px;
+ }
+ 
+ .pagination{
+	 position: relative;	
+	 text-align: center;
+	 margin: 50px auto;
+ }
+ 
+ 
+ .managerNavi {
+	width: 80%;
+	margin :0 auto;
+}
+.tab.navi {
+	width: 1100px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    border-radius: 5px;
+    background-color:#567ff2;
+}
+ 
