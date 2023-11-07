@@ -13,38 +13,36 @@
 	<jsp:include page="../source/include/header.jsp"/>
 	<div class="wrap">
 		<div class="container">
-			<table class="wrap-table">
-				<tr>
-					<td>
-					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-							<tr style="height:30px;">
-								<td >
-									<input type="text" id="input-sub" name="subject" placeholder=" 제목을 입력하세요.">
-								</td>
-							</tr>
-							<tr style="height:200px;">
-								<td>
-									<textarea id="input-cont" name="contents" placeholder="내용을 입력해주세요."></textarea>
-								</td>
-							</tr>
-							<tr style="height:20px;">
-								<td>
-									<label for="input-file">사진선택</label>
-									<input type="file" id="input-file" name="filename" style="display:none;">
-								</td>
-							</tr>
-							<tr style="height:20px;">
-								<td class="write-btn">
-									<label class="write-btn" for="input-write" style="padding:15px 226px;">글쓰기</label>
-									<input type="button" id="input-write" name="btn" style="display:none;" onclick="check();">
-								</td>
-							</tr>
-						</table>
-					</div>
-					</td>
-				</tr>
-			</table>
+			<div class="inner-table">
+				<div>
+					<label id="back-btn" for="input-write">뒤로가기</label>
+					<input type="button" id="input-write" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryList.do';">
+				</div>
+				<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+					<tr style="height:30px;">
+						<td >
+							<input type="text" id="input-sub" name="subject" placeholder=" 제목을 입력하세요.">
+						</td>
+					</tr>
+					<tr style="height:200px;">
+						<td>
+							<textarea id="input-cont" name="contents" placeholder="내용을 입력해주세요."></textarea>
+						</td>
+					</tr>
+					<tr style="height:20px;">
+						<td>
+							<label for="input-file">사진선택</label>
+							<input type="file" id="input-file" name="filename" style="display:none;">
+						</td>
+					</tr>
+					<tr style="height:20px;">
+						<td class="write-btn">
+							<label id="write-btn" for="input-write">글쓰기</label>
+							<input type="button" id="input-write" name="btn" style="display:none;" onclick="check();">
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../source/include/footer.jsp"/>

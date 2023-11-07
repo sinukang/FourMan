@@ -12,6 +12,7 @@
 		width: 500px;
 		height: 800px;
 		border-radius: 4px;
+		margin-top: 12px;
 	}
 	
 	.wrap-table {
@@ -19,7 +20,7 @@
 	}
 	
 	.inner-table {
-		padding: 30px;
+		padding: 80px;
 		transition: all 0.2s linear;
 	}
 	
@@ -63,3 +64,10 @@
 		transition: 0.3s;
 	}
 	
+	#back-btn {
+		padding:12px 25px;
+	}
+	
+	#write-btn {
+		padding:15px 226px
+	}

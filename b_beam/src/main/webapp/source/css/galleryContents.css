@@ -19,7 +19,7 @@
 		width: 450px;
 		height: 750px;
 		border-spacing: 0px;
-		border-radius: 7px;
+		border-radius: 5px;
 		border: 1px solid #d2c7c7;
 	}
 	
@@ -90,7 +90,7 @@
 	}
 	
 	.comment-area div {
-		padding: 5px 0 3px 15px;
+		padding: 5px 0 7px 15px;
 	}
 	
 	#comment-btn {
@@ -101,4 +101,7 @@
 		cursor: pointer;
 	}
 	
+	.comment-cont {
+		width: 290px;
+	}
 	

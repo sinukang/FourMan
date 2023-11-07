@@ -25,7 +25,7 @@
 									<td colspan="2" style="padding: 5px 0 5px 5px;">닉네임</td>
 								</tr>
 								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>
+									<td colspan="2"><img src="../source/images/testimg.png" id="cont-img"></td>
 									
 								</tr>
 								<tr>
@@ -52,10 +52,10 @@
 								</tr>
 								<tr>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											<span>닉네임</span>
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
 										</div>
 										<div>
@@ -63,51 +63,69 @@
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											닉네임
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
+										</div>
+										<div>
+											2023.11.06
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											닉네임
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
+										</div>
+										<div>
+											2023.11.06
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											닉네임
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
+										</div>
+										<div>
+											2023.11.06
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											닉네임
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
+										</div>
+										<div>
+											2023.11.06
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											닉네임
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
+										</div>
+										<div>
+											2023.11.06
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="commnet-id">
+										<div class="comment-id">
 											닉네임
 										</div>
-										<div class="commnet-cont">
+										<div class="comment-cont">
 											댓글을 작성하였습니다.
+										</div>
+										<div>
+											2023.11.06
 										</div>
 									</td>
 								</tr>
