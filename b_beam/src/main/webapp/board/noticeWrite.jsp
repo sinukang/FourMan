@@ -47,7 +47,7 @@
 	<!-- 헤더 끝 -->
 	<jsp:include page="../source/include/header.jsp"/>
 	
-	<div class="inner">
+	<div class="page-inner">
 		<div class="page-side">
 			<h2 class="page-title">공지사항 등록</h2>
 		</div>
@@ -67,24 +67,25 @@
 					</div>
 				</form>
 			</div>
-		</div>
-		<div class="btn-area">
-			<button id="btn-write" class="btn btn-write">등록</button>
-			<button id="btn-cancel" class="btn btn-cancel">취소</button>
+			<div class="btn-area">
+				<button id="btn-write" class="btn btn-write">등록</button>
+				<button id="btn-cancel" class="btn btn-cancel">취소</button>
+			</div>
 		</div>
 	</div>
+	
 	<jsp:include page="../source/include/footer.jsp"/>
 	
 </body>
 <script type="text/javascript">
-	$(docuemnt).ready(function(){
+	$(document).ready(function(){
 		
 		$("#btn-write").on("click", function(){
-			
+			location.href = "${pageContext.request.contextPath}/board/noticeList.do";
 		});
 		
 		$("#btn-cancel").on("click", function(){
-			
+			location.href = "${pageContext.request.contextPath}/qna/qna.do";
 		});
 	});
 </script>
