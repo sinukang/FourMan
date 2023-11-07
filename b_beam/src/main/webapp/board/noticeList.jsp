@@ -12,43 +12,10 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-	<%-- <header class="header">
-		<div class="header-logo">
-			<h1 class="logo">
-				<a class="svgLogo" href="${pageContext.request.contextPath}">
-					<img src="${pageContext.request.contextPath}/source/images/logo4.png" width="150" height="80" alt="메인화면으로 이동">
-				</a>
-			</h1>
-		</div>
-		<div class="menu">
-			<ul class="depth1">
-				<li>
-					<a href="${pageContext.request.contextPath}/contents/contents.do">컨텐츠</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">TOP10</a>
-				</li>
-				<li>
-					<a href="${pageContext.request.contextPath}/board/board.do">갤러리</a>
-				</li>
-				<li>
-					<a href="./Home.jsp">마이페이지</a>
-				</li>
-				<li>
-					<a href="${pageContext.request.contextPath}/qna/qna.do">고객지원</a>
-				</li>
-			</ul>
-		</div>
-		<span class="login">
-			<a class="loginbutton" href="${pageContext.request.contextPath}/member/memberLogin.jsp">
-				<img src="${pageContext.request.contextPath}/source/images/login.png">
-			</a>
-		</span>
-	</header> --%>
-	
+	<!-- header -->
 	<jsp:include page="../source/include/header.jsp"/>
 	
-	<div class="inner">
+	<div class="page-inner">
 		<div class="page-side">
 			<h2 class="page-title">고객지원</h2>
 		</div>
@@ -114,6 +81,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp"/>
 	
 </body>
