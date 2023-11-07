@@ -6,24 +6,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고처리하기</title>
+<title>관</title>
 <link rel="stylesheet" type="text/css" href="../source/css/report.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
+
+<script>
+$(document).ready(function(){
+    $(".tab a").click(function(e){
+        e.preventDefault();
+        var tabID = $(this).attr('href'); // 클릭된 탭의 ID를 가져옵니다.
+        $(".tab li").removeClass('is_on'); // 모든 탭의 활성 클래스를 제거합니다.
+        $(this).parent().addClass('is_on'); // 현재 선택된 탭에 활성 클래스를 추가합니다.
+        $(".tabContent").hide(); // 모든 탭 컨텐츠를 숨깁니다.
+        $(tabID).show(); // 선택된 탭의 컨텐츠를 표시합니다.
+    });
+});
+</script>
 
 </head>
 <body>
 
 <jsp:include page="../source/include/header.jsp"/>
 	
+
 <jsp:include page="../source/include/managerNavi.jsp"/>
 
-<hr>
-		<div> 
-			이곳에 관리자 페이지 네비게이션이 들어갑니다 
-		</div>
 
-		<div>
+
+		<div id="tab1" class="tabContent">
 			<table class="report-table">
 			    <thead>
 			        <tr>
@@ -106,6 +117,66 @@
 			            <button type="button" >처리하기</button>
 			            </td>
 			        </tr>
+			         <tr>
+			            <td>1</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button type="button" >처리하기</button>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>1</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button type="button" >처리하기</button>
+			            </td>
+			        </tr>
+			         <tr>
+			            <td>1</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button type="button" >처리하기</button>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>1</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button type="button" >처리하기</button>
+			            </td>
+			        </tr>
+			         <tr>
+			            <td>1</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button type="button" >처리하기</button>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>1</td>
+			            <td>분류1</td>
+			            <td>유형1</td>
+			            <td>닉네임1</td>
+			            <td>내용1</td>
+			            <td>
+			            <button type="button" >처리하기</button>
+			            </td>
+			        </tr>
 			        
 			        <!-- 추가적인 게시물 -->
 			    </tbody>
@@ -121,6 +192,40 @@
 				</div>
 					
 		</div>
+
+
+<div id="tab2" class="tabContent" style="display: none;">
+	ㅁ나엄낭먼암넝ㅁ나엄ㄴ아ㅓㅁㄴㅇ나ㅓㅇ나ㅓㅇ
+</div>
+
+<div id="tab3" class="tabContent" style="display: none;">
+		ㅣㅏㅂㄷ잊바이ㅏㅣㅁ나임나임ㄴ아임낭
+</div>
+
+<div id="tab4" class="tabContent" style="display: none;">
+		ㄴㅇ리ㅏ얼이ㅏ럼ㄴ이라ㅓㅈ디ㅏㅓ289뎢ㅇ러ㅏ
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

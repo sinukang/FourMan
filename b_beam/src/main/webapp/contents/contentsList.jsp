@@ -120,7 +120,7 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 		        		
 		        		<th id="star">★★★★★</th>
 		        		
-		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 알럿창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
 		        		
 		        		<th rowspan="2">
 						    <div class="imageContainer" onclick="showImagePopup()">
