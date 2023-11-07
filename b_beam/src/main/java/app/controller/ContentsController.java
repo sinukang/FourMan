@@ -41,6 +41,11 @@ public class ContentsController extends HttpServlet {
 			String path ="/contents/contentsRanking.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("bookmarkedContents.do")) {
+			
+			String path ="/contents/bookmarkedContents.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}
 	}
 
