@@ -61,6 +61,16 @@ public class MemberController extends HttpServlet {
 			String path ="/member/myQnA.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("memberInfo.do")) {
+			
+			String path ="/member/memberInfo.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}else if (location.equals("memberInfoModify.do")) {
+			
+			String path ="/member/memberInfoModify.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}
 	}
 

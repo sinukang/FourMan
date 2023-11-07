@@ -1,5 +1,7 @@
 <%@ page language="java" 
     pageEncoding="UTF-8"%>
+    
+<link href="../source/css/home.css" type="text/css" rel="stylesheet">
 <header class="header">
 	<div class="header-logo">
 		<h1 class="logo">
@@ -21,7 +23,7 @@
 				<a href="${pageContext.request.contextPath}/board/galleryList.do">갤러리</a>
 			</li>
 			<li>
-				<a href="${pageContext.request.contextPath}/member/member.do">마이페이지</a>
+				<a href="${pageContext.request.contextPath}/member/memberInfo.do">마이페이지</a>
 			</li>
 			<li>
 				<a href="${pageContext.request.contextPath}/board/noticeList.do">고객지원</a>

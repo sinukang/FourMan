@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Insert title here</title>
-	<link href="../source/css/memberJoin.css" type="text/css" rel="stylesheet">
+	<link href="../source/css/member/memberJoin.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -38,11 +38,11 @@
 						<input type="email" name="memberEmail" placeholder=" asdf@emali.com">
 						<select class="email-select" id="select" name="selectEmail">
 							<option value="">직접 입력</option>
-							<option value="@naver.com">naver.com</option>
-							<option value="@gmail.com">gmail.com</option>
-							<option value="@hanmail.net">hanmail.net</option>
-							<option value="@yahoo.com">yahoo.com</option>
-							<option value="@nate.com">nate.com</option>
+							<option value="naver.com">@naver.com</option>
+							<option value="gmail.com">@gmail.com</option>
+							<option value="hanmail.net">@hanmail.net</option>
+							<option value="yahoo.com">@yahoo.com</option>
+							<option value="nate.com">@nate.com</option>
 						</select>
 					</div>
 					<div class="email-certi">

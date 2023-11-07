@@ -6,15 +6,13 @@ body {
 }
 
 .container {
-	display: flex;
 	position: relative;
 }
 
-.join {
+.login {
 	width: 400px;
-	height: 600px;
 	background: white;
-	border-radius: 10px;
+	border-radius: 15px;
 	padding: 20px;
 	box-shadow: 8px 7px 29px 0px rgba(27, 13, 75, 0.62);
 	position: absolute;
@@ -24,8 +22,8 @@ body {
 	margin-top: 170px;
 }
 
-.join-body{
-	margin-top: 40px;
+.login-body{
+	margin-top: 70px;
 }
 
 .svgLogo img {
@@ -33,7 +31,7 @@ body {
 }
 
 input {
-	width: 392px;
+	width: 100%;
 	height: 40px;
 	margin-bottom: 10px;
 	border-radius: 5px;
@@ -49,71 +47,57 @@ input:focus {
 	
 }
 
+.text-join {
+	color: #6c757d;
+	font-size: 14px;
+}
 
-input[type="button"] { 
+.text-join a {
+	text-decoration-line: none;
+	color: #022ba5bd;
+	font-weight: 600;
+}
+
+input[name="btn"] { 
 	cursor: pointer;
+	font-weight: 550;
 	color : #fff;
-	font-size : 15px;
-	font-weight: 700;
+	font-size : 20px;
+	font-weight: 400;
 	background-color : #567ff2;
 	border: none;
 	box-shadow: 2px 1px 2px 0px rgba(27, 13, 75, 0.62);
 }
 
-input[type="button"]:hover { 
+input[name="btn"]:hover { 
 	background: #1d3477;
 	box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
 	transition: 0.3s;
 }
 
-.join-id {
+.info-cont {
+	width: 100%;
+	height: 200px;
+	border-collapse: separate;
+	border-spacing: 0 10px;
+}
+
+.info-cont td {
+	border-radius: 7px;
+	border: 3px solid #9eafdd;
+	background: #9eafdd;
+	padding: 10px;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	border: none;
+	box-shadow: 1px 1px 3px 1px rgba(27, 13, 75, 0.62);
+}
+
+.info-btn {
 	display: flex;
 }
 
-.join-id input[type="text"] {
-	width: 350px;
-}
-
-.join-id input[type="button"] {
-	width: 150px;
-	margin-left: 10px;
-}
-
-.join-name {
-	display: flex;
-}
-
-.join-name input[type="text"] {
-	width: 350px;
-}
-
-.join-name input[type="button"] {
-	width: 150px;
-	margin-left: 10px;
-}
-
-.join-email {
-	display: flex;
-}
-
-.join-email select {
-	width: 300px;
-	height: 45px;
-	margin-left: 10px;
-	border-radius: 5px;
-	border: 2px solid #9eafdd;
-}
-
-select:focus {
-	outline: #9eafdd solid 2px;
-}
-
-.email-certi {
-	display: flex;
-}
-
-.email-certi input[type="button"]{
-	width: 200px;
-	height: 45px;
-	margin-left: 10px;
+.info-btn input {
+	margin-right: 5px;
 }
