@@ -12,6 +12,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
+
 	<!-- header -->
 	<jsp:include page="../source/include/header.jsp"/>
 	
@@ -81,6 +82,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp"/>
 	
