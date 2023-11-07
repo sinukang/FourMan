@@ -1,9 +1,15 @@
 @charset "UTF-8";
 	
 	h1 {
-		margin: 0;
+		margin-bottom: 0;
 	}
 	
+	.gallery {
+		margin: 30px 0 0 60px;
+		position: relative;
+		font-size: 25px;
+		border-bottom: 4px solid;
+	}
 /* 	.inner-table td {
 		border-bottom: 1px solid;
 	} */
@@ -16,24 +22,30 @@
 	.table-cont {
 		background: white;
 		box-shadow: 5px 5px 15px -5px #333;
-		width: 450px;
-		height: 750px;
+		width: 300px;
+		height: 500px;
 		border-spacing: 0px;
 		border-radius: 5px;
 		border: 1px solid #d2c7c7;
 	}
 	
 	.wrap-table {
-		margin-top: 10px;
+		margin-top: 50px;
 	}
 	
 	.inner-table {
 		padding: 30px;
+		transition: all 0.2s linear;
+	}
+	
+	.inner-table:hover {
+		 transform: scale(1.1);
 	}
 	
 	.table-cont img {
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 	
 	.like {
@@ -74,34 +86,4 @@
 		transition: 0.3s;
 	}
 	
-	.comment-area {
-		display: flex;
-	}
-	
-	#comment-write {
-		width: 380px;
-		height: 25px;
-		border: 1px solid;
-		border-radius: 5px;
-	}
-	
-	#comment-write:focus {
-		outline: none;
-	}
-	
-	.comment-area div {
-		padding: 5px 0 7px 15px;
-	}
-	
-	#comment-btn {
-		display: none;
-	}
-	
-	label {
-		cursor: pointer;
-	}
-	
-	.comment-cont {
-		width: 290px;
-	}
 	

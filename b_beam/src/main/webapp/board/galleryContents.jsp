@@ -7,12 +7,12 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="../source/css/home.css" type="text/css" rel="stylesheet">
-	<link href="../source/css/galleryContents.css" type="text/css" rel="stylesheet">
+	<link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
 	<div class="wrap">
-		<div>
+		<div class="gallery">
 			<h1>GALLERY</h1>
 		</div>
 		<div class="container">

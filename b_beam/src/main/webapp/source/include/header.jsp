@@ -1,5 +1,7 @@
 <%@ page language="java" 
     pageEncoding="UTF-8"%>
+    
+<link href="../source/css/home.css" type="text/css" rel="stylesheet">
 <header class="header">
 	<div class="header-logo">
 		<h1 class="logo">
