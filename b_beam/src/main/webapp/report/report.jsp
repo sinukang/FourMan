@@ -240,6 +240,7 @@ $(document).ready(function(){
 
 
 <script>
+//처리하기 부분 샐랙트 박스---------------------------------
 $(document).ready(function() {
     $(".process-button").click(function() {
         var selectBox = $(this).siblings(".select-box");
@@ -252,10 +253,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
-
-
 
 
 

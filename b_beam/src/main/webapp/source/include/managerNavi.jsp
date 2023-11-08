@@ -1,6 +1,17 @@
 <%@ page language="java"
     pageEncoding="UTF-8"%>
     
+ <script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("btn3").addEventListener("click", function () {
+        // 버튼 1을 클릭했을 때 실행할 코드
+        var link = "<%=request.getContextPath() %>/board/noticeList.do";
+        window.location.href = link;
+    });
+});
+</script>   
+    
+    
 <style>
 	.managerNavi {
 	position: relative;
@@ -35,16 +46,16 @@ hr {
 <div class="managerNavi">
 	<ul class="tab navi">
 		<li class="is_on">
-			<a href="#tab1" class="btn" onclick="swapTab('#tab1')">신고내역</a>
+			<a href="#tab1" class="btn" id="btn1" onclick="swapTab('#tab1')">신고내역</a>
 		</li>
 		 <li>
-			<a href="#tab2" class="btn" onclick="swapTab('#tab2')">1:1문의</a>
+			<a href="#tab2" class="btn" id="btn2" onclick="swapTab('#tab2')">1:1문의</a>
 		</li>
 		 <li>
-		   <a href="#tab3" class="btn" onclick="swapTab('#tab3')">공지사항</a>
+		   <a href="#tab3" class="btn" id="btn3" onclick="swapTab('#tab3')">공지사항</a>
 		</li>
 		<li>
-		   <a href="#tab4" class="btn" onclick="swapTab('#tab4')">자주하는질문</a>
+		   <a href="#tab4" class="btn" id="btn4" onclick="swapTab('#tab4')">자주하는질문</a>
 		</li>
 	</ul>
 
