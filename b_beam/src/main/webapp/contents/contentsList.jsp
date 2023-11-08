@@ -8,10 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>컨텐츠 상세보기 페이지</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.css">
 <link rel="stylesheet" type="text/css" href="../source/css/contents/contentsList.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68d11d2bbd147dba922022847c11c1f1"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
 <script type="text/javascript">
 //사진클릭시 메인,서브 이미지 교체 부분 스크립트 ----------------------------------------
@@ -103,7 +106,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		    <button class="commentBtn" onclick="">완료</button>
 		    <div class="charCount">글자수 제한 <span>0</span>/100자</div>
 		    
-		    <input type="file" id="imageUpload" accept="image/*" multiple>
+			    <label for="imageUpload" class="custom-image-upload-button">
+			        <i class="fas fa-camera"></i> 
+			    </label>
+			    <input type="file" id="imageUpload" accept="image/*" multiple>
+			    
+			    <div class="image-preview">
+			        <img id="uploadedImage" alt="Uploaded Image" style="display: none;">
+			        <button class="remove-image-button" style="display: none;" onclick="removeImagePreview()">X</button>
+			    </div>
 		</div>
 			
 		<div class="commentReply">
@@ -116,19 +127,24 @@ document.addEventListener('DOMContentLoaded', function() {
 		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
 		        		
 		        		<th rowspan="2">
-						    <div class="imageContainer" onclick="showImagePopup()">
+						    <div class="imageContainer">
 			                    <img src="../source/images/duck4.jpg" class="commentImage">
 			                   
 			                </div>
 						</th>
 								        		
-		        		 <th id="up" type="button" rowspan="2" class="likebtn">
-			                <button type="button" onclick="like(this, 'up')">👍</button>
+			            <th id="report" type="button" class="reportbtn">
+			                <button type="button" onclick="">&#x1F6A8;</button>
 			            </th>
-			            
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.06</th>
 		        		
+		        		 <th id="up" type="button" class="likebtn">
+			                 <button class="like-button" onclick="like(this)">
+							    <i class="fas fa-heart"></i>
+							  </button>
+			                 <span id="likeCount">10</span>
+			            </th>
 		        	</tr>
 		    	</table>
 
@@ -139,60 +155,119 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 <script type="text/javascript">
 // 페이지가 로드될 때 'tab1'을 보여주기 위해 해당 탭 콘텐츠 호출--------------------------
-document.addEventListener('DOMContentLoaded', function() {
-    showTabContent('tab1');
-});
-
-// 선택한 탭 콘텐츠를 화면에 표시하는 함수
-function showTabContent(tabId) {
+// 탭 전환을 처리하는 함수
+function swapTab(tabId) {
     // 모든 탭 콘텐츠를 숨김
-    const allTabContents = document.querySelectorAll('.tab-content');
-    allTabContents.forEach(content => {
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => {
         content.style.display = 'none';
     });
 
     // 선택한 탭 콘텐츠를 화면에 표시
-    const selectedTabContent = document.getElementById(tabId);
-    if (selectedTabContent) {
-        selectedTabContent.style.display = 'block';
+    const selectedTab = document.querySelector(tabId);
+    if (selectedTab) {
+        selectedTab.style.display = 'block';
+    }
+
+    // 모든 탭에서 'is_on' 클래스 제거
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('is_on');
+    });
+
+    // 클릭한 탭에 'is_on' 클래스 추가
+    const clickedTab = document.querySelector(`a[href='${tabId}']`);
+    if (clickedTab) {
+        clickedTab.parentNode.classList.add('is_on');
     }
 }
 
-// 모든 탭 버튼에 클릭 이벤트를 추가하는 부분 
-document.querySelectorAll('.tab .btn').forEach(tab => {
+//모든 탭 버튼에 클릭 이벤트 추가---------------------------------------
+document.querySelectorAll('.btn').forEach(tab => {
     tab.addEventListener('click', function(event) {
-        // 기본 이벤트(링크 이동 등)를 취소
         event.preventDefault();
-        // 클릭된 버튼의 href 속성 값을 가져와서 #을 제외한 ID 값을 찾아서 해당 탭 콘텐츠 호출
-        const tabId = tab.getAttribute('href').replace('#', '');
-        showTabContent(tabId);
+        const tabId = tab.getAttribute('href');
+        swapTab(tabId);
+
+        // 모든 탭에서 'is_on' 클래스 제거
+        const tabs = document.querySelectorAll('.tab li');
+        tabs.forEach(tab => {
+            tab.classList.remove('is_on');
+        });
+
+        // 클릭한 탭에 'is_on' 클래스 추가
+        tab.parentElement.classList.add('is_on');
+    });
+});
+
+</script>
+
+
+<script>
+//좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수--------------
+ function like(button) { button.classList.toggle('liked');}
+</script>
+
+
+
+<script>
+//글자수 제한 카운트 증가 및 제한 스크립트---------------------------------------------- 
+function updateCharacterCount() {
+    const commentInput = document.getElementById('commentInput');
+    const charCount = document.querySelector('.charCount span');
+    const maxChar = 100; // 최대 글자 수
+
+    charCount.textContent = commentInput.value.length;
+
+    if (commentInput.value.length > maxChar) {
+        commentInput.value = commentInput.value.slice(0, maxChar);
+        charCount.textContent = maxChar;
+    }
+}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const imageUpload = document.getElementById('imageUpload');
+    const imagePreview = document.querySelector('.image-preview');
+
+    imageUpload.addEventListener('change', function() {
+        const files = imageUpload.files;
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '60px';
+                img.style.height = '80px';
+
+                const imageDiv = document.createElement('div');
+                imageDiv.classList.add('image-preview-item');
+                imageDiv.appendChild(img);
+
+                const closeButton = document.createElement('button');
+                closeButton.classList.add('remove-image-button');
+                closeButton.innerHTML = 'X';
+                closeButton.onclick = function() {
+                    imageDiv.remove(); // 클릭하여 이미지 미리보기 제거
+                };
+
+                imageDiv.appendChild(closeButton);
+
+                imagePreview.appendChild(imageDiv);
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        imageUpload.value = ''; // 파일 선택창 비우기
     });
 });
 </script>
 
-<script>
-//좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수
-function like(button, type) {
-    // 버튼들 가져오기
-    const buttons = document.querySelectorAll('.likebtn button');
-
-    // 현재 선택된 버튼인지 확인
-    const isSelected = button.classList.contains('selected');
-
-    // 모든 버튼의 선택 상태 제거
-    buttons.forEach(btn => {
-        btn.classList.remove('selected');
-    });
-
-    // 선택 상태 toggle
-    if (!isSelected) {
-        button.classList.add('selected');
-        // 'up' 버튼을 눌렀을 때 추가적인 기능은 여기에 구현
-    } else {
-        // 버튼이 이미 선택된 상태일 때, 다시 클릭했을 때의 동작은 여기에 구현
-    }
-}
-</script>
 
 
 

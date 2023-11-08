@@ -171,7 +171,7 @@
 	height: 380px;
 	list-style: none;
 	padding: 0;
-	background-color: rgb(192, 192, 192);
+	background-color: rgb(209, 225, 254);
 	justify-content: center;
 	align-items: center;
 	text-align: center;
@@ -183,10 +183,7 @@
     margin-right: 15px;
 }
 
-.tab a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
+
 
 /* 댓글 입력 텍스트박스, 평가 셀렉트 박스, 완료 버튼 스타일 */
 
@@ -194,7 +191,7 @@
 .commentArea {
 	position: relative;
 	bottom: 50px;
-	height: 150px;
+	height: 200px;
 	max-width: 70%;
    	margin: 20px auto;
     padding: 15px;
@@ -205,38 +202,37 @@
 
 .commentArea p {
 	position: absolute;
-	bottom: 130px;
+	bottom: 180px;
     font-size: 20px;
     margin-bottom: 10px;
 }
 
 #ratingSelect {
 	position: absolute;
-	bottom: 60px;
+	bottom: 100px;
 	height: 50px;
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 10px;
+    
 }
 
 #commentInput {
 	position: absolute;
 	left: 180px;
-	bottom: 50px;
+	bottom: 100px;
 	height: 40px;
     width:75%;
     padding: 10px;
     margin-bottom: 10px;
     resize: none;
-}
-
-#commentInput:focus {
-    border: 1px solid #567ff2;
+    border-radius: 10px;
 }
 
 .commentBtn {
 	position: absolute;
 	left: 1250px;
-	bottom:65px;
+	bottom:115px;
     padding: 20px 20px;
     background-color: #567ff2;
     color: white;
@@ -249,7 +245,7 @@
 .charCount {
 	position: absolute;
 	left: 1100px;
-	bottom: 35px;
+	bottom: 115px;
     font-size: 14px;
     color: #888;
 }
@@ -276,7 +272,7 @@
   #commentTable {
     border-collapse: collapse;
     width: 100%;
-    height: 100px;
+    height: 120px;
     margin-top: 10px;
   }
  
@@ -298,35 +294,67 @@
 
 #text {
 	text-align: left;
-  width: 900px; /* 글내용 셀의 너비를 200px로 설정 */
+  width: 1000px; /* 글내용 셀의 너비를 200px로 설정 */
 }
 
-.imageContainer {
-    width: 100px; /* Set the width */
-    height: 80px; /* Set the height */
-}
+
 
 .imageContainer img {
-    width: 100%; /* Fill the width of the container */
-    height: 100%; /* Fill the height of the container */
+   width: 140px; 
+    height: 100px;
 }
-
-
-
-#up,
-#down {
+#up{
 	width: 30px;
 }
 
-/*좋아요 버튼 색상 변경 */
-.likebtn button.selected {
-    background-color: yellow; 
+input[type="file"] {
+    display: none; /* 기본 파일 업로드 숨김 */
 }
 
-.likebtn button{
-	border: none;
-	font-size: 30px;
+.custom-image-upload-button {
+	position: absolute;
+	top: 130px;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: rgb(202, 149, 149);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* 이미지 미리보기 컨테이너 스타일 */
+.image-preview {
+  position: absolute;
+  top: 130px;
+  left: 80px;
+  justify-content: space-between; 
+  display: flex;
+  gap: 10px;
 }
 
+/* 닫기 ('X') 버튼 스타일 */
+.remove-image-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+}
+ 
+      .like-button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 20px;
+    }
 
+    .like-button i {
+      color: rgb(0, 0, 0);
+    }
 
+    .like-button.liked i {
+      color: red; /* 좋아요 누르면 색상 변경 */
+    }
