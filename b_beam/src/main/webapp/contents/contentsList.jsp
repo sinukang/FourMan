@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         	<p>title</p>
     	</div>
     	<div class="favorite" id="favorite" onclick="toggleFavorite()">
-       		 <span class="favorite-text">즐겨찾기</span>
        		 <span class="favorite-icon">&#9734;</span>
    		 </div>
 
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			<img class="smallImage" src="../source/images/duck4.jpg" style="width: 100px; height: 80px;" alt="Small Image">
 		</div>
 		
-	</div>
+	
 		
 		<div class="container">
 			<ul class="tab">
@@ -87,9 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	        </div>
 	        
 		</div>
-		
-		
-		
+	</div>
 		
 	
 		<div class="commentArea">
