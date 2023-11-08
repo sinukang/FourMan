@@ -2,9 +2,10 @@
 
 	/* 마이페이지 네비 헤더 */
 .mypageNavi {
-	width: 80%;
 	margin : auto;
 	margin-top: 150px;
+	display: flex;
+	justify-content: center;
 }
 .tab.navi {
 	list-style: none;
@@ -12,10 +13,13 @@
 	display: flex;
 	border-radius: 5px;
 	background-color:#567ff2;
+	width: 100%;
 }
 
 .container {
 	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
 .member-info {
@@ -25,7 +29,6 @@
 	padding: 20px;
 	box-shadow: 8px 7px 29px 0px rgba(27, 13, 75, 0.62);
 	position: relative;
-	margin: auto;
 	margin-bottom: 150px;
 }
 

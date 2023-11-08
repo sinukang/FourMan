@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	<link href="../source/css/home.css" type="text/css" rel="stylesheet">
 	<link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
+	<link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
@@ -16,11 +17,11 @@
 			<h1>GALLERY</h1>
 		</div>
 		<div class="container">
-			<table class="wrap-table">
+			<table class="wrap-conttable">
 				<tr>
 					<td>
-						<div class="inner-table">
-							<table class="table-cont">
+						<div class="inner-conttable">
+							<table class="conttable-cont">
 								<tr>
 									<td colspan="2" style="padding: 5px 0 5px 5px;">닉네임</td>
 								</tr>
@@ -44,7 +45,7 @@
 										</div>
 										<div>
 											<label class="write-btn" for="comment-btn">
-												<img src="../source/images/commentbtn.png">
+												<img src="../source/images/commentbtn.png" id="btn-img">
 											</label>
 											<input type="button" id="comment-btn" value="작성">
 										</div>
