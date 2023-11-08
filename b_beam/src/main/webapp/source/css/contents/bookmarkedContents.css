@@ -148,6 +148,7 @@
 	width: 1100px;
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
     border-radius: 5px;
     background-color:#567ff2;
@@ -165,163 +166,142 @@
 	padding: 50px;
 	overflow: auto;
 }
-
-
-
-
-
-.tab li {
-    margin-right: 15px;
+.bookmarked{
+    margin-top: 20px;
+	
+}
+.bookmarkedContents{
+    width: 1200px;
+    background: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+	border-radius: 10px;
+}
+.bookmarked-title{
+	font-weight:700;
+	font-size: 18px;
+}
+.bookmarked-cnt{
+	color:#0072de;
+}
+.bookmarked-data {
+	margin-top : 30px;
+    position: relative;
+}
+.contents-map {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    right: 0;
+    width: 60%;
+}
+.bookmarked-list {
+    width: calc(40% - 34px);
+    overflow:auto;
+}
+.bookmarked-list::-webkit-scrollbar{
+	width:auto;
+}
+.bookmarked-list::-webkit-scrollbar-thumb{
+    background-color: #0072de;
+    border-radius: 10px;
+}
+.bookmarked-list::-webkit-scrollbar-track{
+    background-color: #eee;
+    border-radius: 10px;
+}
+.bookmarked-list ul{
+    height: 800px;
+    padding-left: 10px;
+}
+.bookmarked-list li{
+	width : 80%;
+    border-bottom: 1px solid #ddd;
+    padding : 10px 40px 10px 20px;
+}
+.bookmarked-list .detailview{
+    padding: 10px 40px 10px 20px;
+    position: relative;
+    display: flex;
 }
 
-.tab a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
+.detailimage{
+    position: relative;
+    left: -10px;
+    top: -2px;
 }
-
-/* 댓글 입력 텍스트박스, 평가 셀렉트 박스, 완료 버튼 스타일 */
-
-
-.commentArea {
-	position: relative;
-	bottom: 600px;
-	max-width: 70%;
-   	margin: 20px auto;
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.detailimage img{
+	width: 150px;
+	height: 150px;
+	border-radius:10px;
 }
-
-.commentArea p {
-    font-size: 20px;
-    margin-bottom: 10px;
+.contenttype_label{
+    color: #0072de;
+    background-color: #f7f7f7;
+    display: block;
+    height: 16px;
+    padding: 5px 12px;
+    border-radius: 24px;
+    line-height: 1;
+    font-size: 0;
+    text-align: center;
 }
-
-#ratingSelect {
-	position: relative;
-	bottom: 32px;
-	height: 50px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-#commentInput {
-    width:80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    resize: none;
-}
-
-#commentInput:focus {
-    border: 1px solid #567ff2;
-}
-
-.commentBtn {
-	position: relative;
-	left: 10px;
-	bottom:30px;
-    padding: 20px 20px;
-    background-color: #567ff2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
-.charCount {
-	position: relative;
-	left: 85%;
-	bottom: 35px;
+.contenttype_label span{
+    font-style: normal;
+    font-weight: 700;
     font-size: 14px;
-    color: #888;
 }
-
-#imageUpload{
-	position: relative;
-	bottom: 20px;
+.detail-btn{
+    margin: 20px;
+    width: 100px;
+    align-items: center;
+    position: absolute;
+    left: 250px;
+    bottom: 5px;
 }
-
-/* 댓글 출력 창 --------------------------------*/
-.commentReply{
-	position: relative;
-	bottom: 600px;
-	max-width: 70%;
-	margin: 30px auto;
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
-}
-
-  /* 테이블 전체 스타일 */
-  #commentTable {
-    border-collapse: collapse;
+.detail-btn .btn{
     width: 100%;
-    height: 100px;
-    margin-top: 10px;
-  }
- 
-#commentTable th, #commentTable td {
-  padding: 8px; /* 내부 콘텐츠와 테두리 사이 간격 설정 */
+    height: 40px;
+    color: #fff;
+    background-color: #0072de;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 5px 5px 15px -5px #333;
 }
-#star {
-	width: 80px;	
+.list-btn{
+    margin: 20px;
+    width: 70px;
+	display:inline-block;
 }
-
-#day {
-	 color: rgb(172, 172, 172);
-	 text-align: left;
+.list-btn .btn{
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: #0072de;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 5px 5px 15px -5px #333;
 }
-
-#userId {
-  width: 80px; /* 작성자 셀의 너비를 100px로 설정 */
-}
-
-#text {
-	text-align: left;
-  width: 900px; /* 글내용 셀의 너비를 200px로 설정 */
-}
-
-.imageContainer {
-    width: 100px; /* Set the width */
-    height: 80px; /* Set the height */
-}
-
-.imageContainer img {
-    width: 100%; /* Fill the width of the container */
-    height: 100%; /* Fill the height of the container */
-}
-
-
-
-#up,
-#down {
-	width: 30px;
-}
-
-/*좋아요 버튼 색상 변경 */
-.likebtn button.selected {
-    background-color: yellow; 
-}
-
-.likebtn button{
-	border: none;
+.marker{
+    font-style: normal;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    width: 20px;
+    height: 27px;
+    background: url(../../images/list_marker.png) no-repeat;
+    background-position: 0px 0px;
+    background-size: 20px 27px;
 }
 
 
- .footer {
-	    width: 100%;
-	    height: 200px;
-	    position: relative;
-	    bottom: 0;
-	    z-index: 110;
-	    left: 0;
-		background-color:#567ff2 ;
-		display: flex;
-	}
 
 
 
