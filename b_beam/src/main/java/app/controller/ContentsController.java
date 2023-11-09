@@ -31,9 +31,9 @@ public class ContentsController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("contents.do")) {
+		if (location.equals("contentsList.do")) {
 			
-			String path ="/contents/contents.jsp";
+			String path ="/contents/contentsList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}else if (location.equals("contentsRanking.do")) {
@@ -44,6 +44,11 @@ public class ContentsController extends HttpServlet {
 		}else if (location.equals("bookmarkedContents.do")) {
 			
 			String path ="/contents/bookmarkedContents.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}else if (location.equals("contentsDetail.do")) {
+			
+			String path ="/contents/contentsDetail.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

@@ -55,9 +55,9 @@ $(document).ready(function(){
 			             <td>
 			            <button class="process-button">처리하기</button>
 		                    <select class="select-box" style="display: none;">
-		                        <option value="option1">옵션 1</option>
-		                        <option value="option2">옵션 2</option>
-		                        <option value="option3">옵션 3</option>
+		                        <option value="option1">패널티없음</option>
+		                        <option value="option2">이용정지(7일)</option>
+		                        <option value="option3">영구정지</option>
 		                    </select>
 			            </td>
 			        </tr>

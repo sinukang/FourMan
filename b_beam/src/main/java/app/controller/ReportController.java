@@ -36,7 +36,6 @@ public class ReportController extends HttpServlet {
 			String path ="/report/report.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		
 		}
 	}
 	

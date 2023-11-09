@@ -14,7 +14,7 @@
 	<div class="menu">
 		<ul class="depth1">
 			<li>
-				<a href="${pageContext.request.contextPath}/contents/contents.do">컨텐츠</a>
+				<a href="${pageContext.request.contextPath}/contents/contentsList.do">컨텐츠</a>
 			</li>
 			<li>
 				<a href="${pageContext.request.contextPath}/contents/contentsRanking.do">TOP10</a>

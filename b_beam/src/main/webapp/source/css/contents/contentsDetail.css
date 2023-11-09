@@ -1,0 +1,360 @@
+@charset "UTF-8";
+
+
+	/*------------------------------헤더----------------------------------------------- */	
+
+@font-face {
+		font-family: 'Pretendard-Regular';
+		src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+		font-weight: 400;
+		font-style: normal;
+	}
+
+	html,
+	body {
+		position: relative;
+		height: 100%;
+	}
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue,"Pretendard-Regular", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header {
+	    width: 100%;
+	    height: 120px;
+	    position: relative;
+	    top: 0;
+	    z-index: 110;
+	    left: 0;
+	    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAACiCAYAAACgYdB1AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAHqklEQVR4nO3ZQXLaMABAUdNj9jq9YS9EV82ExICxJZP5896qmSmSLYwt+Jfff/5elwPuv/jQsCfZdozvOZPzZr0uy3JZm/Gy5ZU/yfPjOXdVn3i6vkdmeed789rcu4/02/rNP+fvM5y9ztvvWR/Lc9nzjqzeEaa4njLPlzle+OxtP7rZ5zFppT7WYv/o73+SXlf+9aLVa+LYMT9+9az1WB9302wPPxfHro/1O8oPW4NJ539/hNHnf+C9X5bhn4Hz9ifXB3/tHO/F/dnzp+accx436spIK2vwrufh+Kffzrvz3eti5LOic61s20keX7vbeUau38F76n8791lnfKs949rbNfqB59Hs+9Tn71gz12/3fe/Fvczxb32jd7v735fRYy7LcrOeZ+xjR9+xv468/te4cceNv20vNuNqOfaKn/ndcfjz5MF7M+uK2DbSmOfiWXv62XPsemru/I36ffu+V165b75jtq3I3F9f5+ySN816+XxJnfPL7838g/7XOaMcH/3ZtfRrxOEAAAAAAAAA8H4CMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABECMAAAAAAAAECEAAwAAAAAAAAQIQADAAAAAAAARAjAAAAAAAAAABH/AKkKnnzerk4uAAAAAElFTkSuQmCC);
+		background-size: cover;
+		display: flex;
+	}
+	
+	.logo {
+		margin-left: 30px;
+	}
+	
+	.menu {
+		width: 100%;
+		display: inline-block;
+	}
+	
+	.depth1 {
+		width: 100%;
+		display: flex;
+		margin-top: 25px;
+		margin-left: 40px;
+	}
+	
+	li {
+	    margin: 0 2%;
+	    width: 150px;
+	    list-style: none;
+	    font-size: 20px;
+	    padding: 30px;
+	    margin: 0 auto;
+	}
+	
+	a:hover {
+		font-size: 120%;
+		font-weight: 120%;
+	}
+	
+	a {
+		text-decoration-line: none;
+		color: white;
+	}
+	
+	.loginbutton {
+		display: inline-block;
+	    padding: 50px;
+		background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: 50% 50% !important;
+	    border-radius: 100%;
+	}
+
+	
+
+
+/* 컨텐츠 상세보기 스타일 */
+.contentsdetail {
+	position: relative;
+    max-width: 70%;
+    height: 600px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 타이틀, 즐겨찾기, 대표 이미지 및 작은 이미지 섹션 스타일 */
+.title-section {
+	position: absolute;
+	bottom: 550px;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.favorite {
+	position: absolute;
+	top: 40px;
+	left: 450px;
+	bottom: 580px;
+}
+
+.favorite-icon {
+	color: rgb(0, 0, 0);
+	font-size: 20px;
+}
+/* 사진 영역  */
+.main-image-section {
+    position: absolute;
+    bottom: 120px;
+}
+
+.main-image-section img {
+	width: 450px;
+	height: 550px;
+}
+
+.small-images-section {
+	position: absolute;
+	bottom: 1px;
+    display: flex; /* 가로 방향으로 이미지를 정렬합니다. */
+     max-width: 450px; /* 최대 너비 설정 */
+  overflow-x: auto; /* 가로 스크롤바가 필요한 경우 스크롤을 생성합니다. */
+  margin-bottom: 20px; /* 하단 여백 설정 */
+}
+
+.small-images-section img {
+	width: 100px;
+	height: 150px;
+    margin-right: 10px; /* 이미지 간 간격 설정 */
+}
+
+
+
+/*컨텐츠  정보 박스 ---------------------------------------------*/
+.container {
+	position: absolute;
+	top: 50px;
+	left: 300px;
+	max-width: 700px;
+	 background-color:#567ff2;
+    border-top-left-radius: 10px; /* 좌측 상단 모서리만 둥글게 */
+    border-bottom-left-radius: 0px; /* 좌측 하단 모서리만 둥글게 */
+    border-top-right-radius: 10px; /* 우측 상단 모서리는 각지게 유지 */
+    border-bottom-right-radius: 0; 
+}
+.tab {
+	position: absolute;
+	right:300px;
+	width: 700px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+   
+}
+
+.tab-content{
+	max-width: 700px;
+	height: 380px;
+	list-style: none;
+	padding: 0;
+	background-color: rgb(209, 225, 254);
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 50px;
+	overflow: auto;
+}
+
+.tab li {
+    margin-right: 15px;
+}
+
+
+
+/* 댓글 입력 텍스트박스, 평가 셀렉트 박스, 완료 버튼 스타일 */
+
+
+.commentArea {
+	position: relative;
+	bottom: 50px;
+	height: 200px;
+	max-width: 70%;
+   	margin: 20px auto;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.commentArea p {
+	position: absolute;
+	bottom: 180px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#ratingSelect {
+	position: absolute;
+	bottom: 100px;
+	height: 50px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    
+}
+
+#commentInput {
+	position: absolute;
+	left: 180px;
+	bottom: 100px;
+	height: 40px;
+    width:75%;
+    padding: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    border-radius: 10px;
+}
+
+.commentBtn {
+	position: absolute;
+	left: 1250px;
+	bottom:115px;
+    padding: 20px 20px;
+    background-color: #567ff2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.charCount {
+	position: absolute;
+	left: 1100px;
+	bottom: 115px;
+    font-size: 14px;
+    color: #888;
+}
+
+#imageUpload{
+	position: absolute;
+	bottom: 20px;
+}
+
+/* 댓글 출력 창 --------------------------------*/
+.commentReply{
+	position: relative;
+	bottom:50px;
+	max-width: 70%;
+	margin: 10px auto;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+  /* 테이블 전체 스타일 */
+  #commentTable {
+    border-collapse: collapse;
+    width: 100%;
+    height: 120px;
+    margin-top: 10px;
+  }
+ 
+#commentTable th, #commentTable td {
+  padding: 8px; /* 내부 콘텐츠와 테두리 사이 간격 설정 */
+}
+#star {
+	width: 80px;	
+}
+
+#day {
+	 color: rgb(172, 172, 172);
+	 text-align: left;
+}
+
+#userId {
+  width: 80px; /* 작성자 셀의 너비를 100px로 설정 */
+}
+
+#text {
+	text-align: left;
+  width: 1000px; /* 글내용 셀의 너비를 200px로 설정 */
+}
+
+
+
+.imageContainer img {
+   width: 140px; 
+    height: 100px;
+}
+#up{
+	width: 30px;
+}
+
+input[type="file"] {
+    display: none; /* 기본 파일 업로드 숨김 */
+}
+
+.custom-image-upload-button {
+	position: absolute;
+	top: 130px;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: rgb(202, 149, 149);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* 이미지 미리보기 컨테이너 스타일 */
+.image-preview {
+  position: absolute;
+  top: 130px;
+  left: 80px;
+  justify-content: space-between; 
+  display: flex;
+  gap: 10px;
+}
+
+/* 닫기 ('X') 버튼 스타일 */
+.remove-image-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+}
+ 
+      .like-button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 20px;
+    }
+
+    .like-button i {
+      color: rgb(0, 0, 0);
+    }
+
+    .like-button.liked i {
+      color: red; /* 좋아요 누르면 색상 변경 */
+    }
