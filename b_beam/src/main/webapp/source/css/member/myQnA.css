@@ -94,6 +94,7 @@ header a{
 	grid-template-columns: repeat(4, 1fr);
 	place-items: center center;
 	border-radius: 8px;
+	color: #fff;
 	background-color:#567ff2;
 }
 .tab.navi li{
@@ -107,7 +108,6 @@ header a{
 }
 .tab.navi li a{
 	display: block;
-	color: #fff;
 	text-decoration-line: none;
 }
 .clicked2{
@@ -354,10 +354,9 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
-.list-area .btn{
+.btn-area2 .btn2{
 	width: 13%;
 	height: 40px;
-	color: #fff;
 	font-size: 1.1em;
 	font-weight: bold;
 	border: 0;
@@ -367,6 +366,7 @@ footer{
 	box-shadow: 5px 5px 15px -5px #333;
 }
 .btn-write{
+	color: #fff;
 	background-color: #219888;
 }
 .btn-cancel{
