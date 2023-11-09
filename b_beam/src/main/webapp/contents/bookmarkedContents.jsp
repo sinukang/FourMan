@@ -15,55 +15,57 @@
 <body>
 
 <jsp:include page="../source/include/header.jsp"/>
-	<div class="page-inner">
-		<div class="page-side">
-			<h2 class="page-title">마이페이지</h2>
+<div class="page-inner">
+	<div class="page-side">
+		<h2 class="page-title">마이페이지</h2>
+	</div>
+	<div class="bookmarkedContents">
+	<jsp:include page="../source/include/mypageNavi.jsp"/>
+		<div class="btn-area">
+			<button type="button" class="btn1 clicked">나의 즐겨찾기</button>
+			<button type="button" class="btn1">나의 후기</button>
 		</div>
-<div class="bookmarkedContents">
-<jsp:include page="../source/include/mypageNavi.jsp"/>
-	<div class="bookmarked">
-		<header class="bookmarked-head">
-			<strong class="bookmarked-title">총 <span class="bookmarked-cnt">7</span> 개</strong>
-		</header>
-		<div class="bookmarked-data">
-			<div class="contents-map">
-				<div id="map" style="width:100%;height:100%;border-radius:10px">
-				
+		<div class="bookmarked">
+			<header class="bookmarked-head">
+				<strong class="bookmarked-title">총 <span class="bookmarked-cnt">7</span> 개</strong>
+			</header>
+			<div class="bookmarked-data">
+				<div class="contents-map">
+					<div id="map" style="width:100%;height:100%;border-radius:10px"></div>
 				</div>
-			
-			</div>
-			<div class="bookmarked-list">
-				<ul>
-					<li class="detailview">
-						<div class="detailimage">
-							<img src="../source/images/duck4.jpg">
-						</div>
-						<div>
-							<span><strong class="contents-title">전주덕진공원</strong></span>
-							<span class="contenttype_label"><span>관광지</span></span>
-							<div class="detail-grade">
-								<span>★★★★☆</span><span>4.1/5.0</span>
+				<div class="bookmarked-list">
+					<ul>
+						<li class="detailview">
+							<div class="detailimage">
+								<img src="../source/images/duck4.jpg">
 							</div>
-							<div class="detail-btn">
-								<button class="btn">바로가기</button>
-							</div>		
-						</div>
-					</li>
-					<c:forEach var="i" begin="1" end="10" step="1">
-					<li class="bookmarked_li">
-						<span><i class="marker"></i><strong class="contents-title">전주덕진공원</strong></span>
-						<div class="list-btn">
-							<button class="btn">열기</button>
-						</div>
-					</li>
-					</c:forEach>
-				</ul>
+							<div>
+								<span><strong class="contents-title">전주덕진공원</strong></span>
+								<span class="contenttype_label"><span>관광지</span></span>
+								<div class="detail-grade">
+									<span>★★★★☆</span><span>4.1/5.0</span>
+								</div>
+								<div class="detail-btn2">
+									<button class="btn">즐찾해제</button>
+								</div>		
+								<div class="detail-btn">
+									<button class="btn">바로가기</button>
+								</div>		
+							</div>
+						</li>
+						<c:forEach var="i" begin="1" end="10" step="1">
+						<li class="bookmarked_li">
+							<span><i class="marker"></i><strong class="contents-title">전주덕진공원</strong></span>
+							<div class="list-btn">
+								<button class="btn">열기</button>
+							</div>
+						</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
-			
 		</div>
 	</div>
-	
-</div>
 </div>
 <jsp:include page="../source/include/footer.jsp"/>
 <script>
