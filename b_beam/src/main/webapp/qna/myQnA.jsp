@@ -35,9 +35,9 @@
 				<c:set var="j" value="6"></c:set>
 				<c:forEach var="i" begin="1" end="6" step="1">
 					<div class="QnA-item">
-						<h3 class="QnA-title">Q.어떻게 하나요?${j}</h3>
+						<h3 class="QnA-title">문의제목. 이거 어떻게 해요?${j}</h3>
 						<c:if test="${i ne 3}">
-							<p class="QnA-Answer">A.몰?루${j}</p>
+							<p class="QnA-Answer">문의내용. 해줘${j}</p>
 							<!-- <i class="fa-solid fa-chevron-down"></i> -->
 							<button type="button" class="QnA-toggle">
 								<i class="fas fa-chevron-down"></i>

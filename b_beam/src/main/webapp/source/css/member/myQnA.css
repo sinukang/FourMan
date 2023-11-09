@@ -163,7 +163,6 @@ footer{
 	margin-top: 20px;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-	/*grid-auto-rows: minmax(40px, auto);*/
 	gap: 10px 20px;
 }
 .btn1{
@@ -201,7 +200,7 @@ footer{
 }
 .QnA-item.active{
 	border: 1px solid #4b55dd;
-	transition: 0.3s ease;
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 /*.QnA-item::before, .QnA-item::after{
 	content: '\f075';

@@ -25,27 +25,54 @@
 		<div class="manager-navi">
 			<div class="report-tap tap">신고내역</div>
 			<div class="notice-tap tap">공지사항</div>
-			<div class="QnA-tap tap clicked">1:1 문의</div>
+			<div class="QnA-tap tap clicked">1:1 문의내역</div>
 			<div class="FAQ-tap tap">자주하는 질문</div>
 		</div>
 		<div class="contents-area">
 			<div class="list-area">
 				<c:set var="j" value="6"></c:set>
 				<c:forEach var="i" begin="1" end="6" step="1">
-					<div class="QnA-item">
-						<h3 class="QnA-title">Q.어떻게 하나요?${j}</h3>
-						<c:if test="${i ne 2}">
-							<p class="QnA-Answer">A.몰?루${j}</p>
-							<!-- <i class="fa-solid fa-chevron-down"></i> -->
-							<button type="button" class="QnA-toggle">
-								<i class="fas fa-chevron-down"></i>
-								<i class="fas fa-chevron-up"></i>
-							</button>						
-						</c:if>
-					</div>
-					<div class="Acheck">
-						<button class="btn-Answer btn" onclick="answer(${j})">답변하기</button>
-					</div>
+					<c:choose>
+						<c:when test="${i ne 2}">
+							<div class="QnA-item">
+								<h3 class="QnA-writer">유저${j}</h3>
+								<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
+								<p class="QnA-Answer">
+									<br>해줘${j}
+									<br>해줘${j}
+									<br>해줘${j}
+									<br>해줘${j}
+									<br>해줘${j}
+								</p>
+								<!-- <i class="fa-solid fa-chevron-down"></i> -->
+								<button type="button" class="QnA-toggle">
+									<i class="fas fa-chevron-down"></i>
+									<i class="fas fa-chevron-up"></i>
+								</button>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="not-answered">
+								<h3 class="QnA-writer">유저${j}</h3>
+								<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
+								<p class="QnA-Answer">
+									<br>해줘${j}
+									<br>해줘${j}
+									<br>해줘${j}
+									<br>해줘${j}
+									<br>해줘${j}
+								</p>
+								<!-- <i class="fa-solid fa-chevron-down"></i> -->
+								<button type="button" class="QnA-toggle">
+									<i class="fas fa-chevron-down"></i>
+									<i class="fas fa-chevron-up"></i>
+								</button>								
+								<div class="A-btn-area test${j}">
+									<button class="btn-Answer btn" onclick="answer(${j})">답변하기</button>
+								</div>							
+							</div>
+						</c:otherwise>						
+					</c:choose>
 					<c:set var="j" value="${j-1}"></c:set>
 				</c:forEach>
 			</div>
@@ -83,6 +110,16 @@
 			toggle.classList.toggle("active");
 		})
 	});
+	
+	const toggles2 = document.querySelectorAll(".not-answered"); /* .QnA-toggle */
+	
+	toggles2.forEach((toggle) => {
+		toggle.addEventListener("click", () => {
+			toggle.classList.toggle("active");
+		})
+	});	
+	
+	
 	
 	
 	
