@@ -16,13 +16,6 @@
 
 	<div class="container">
 		<div class="member-info">
-			<div class="join-logo">
-				<h1 class="logo" id="infoLogo">
-					<a class="imgLogo" href="../index.jsp">
-						<img src="../source/images/logo4.png" width="250" height="130" alt="메인화면으로 이동">
-					</a>
-				</h1>
-			</div>
 			<div class="login-body">
 				<div>
 					<h3>보유중인 포인트</h3>

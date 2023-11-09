@@ -64,138 +64,152 @@
 				<tr>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/test2.jpg"></td>
-								
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/test2.jpg"></td>
+									
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png"></td>
-								
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/testimg.png"></td>
+									
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/test3.jpg"></td>
-								
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/test3.jpg"></td>
+									
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/board/galleryContents.do';">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png"></td>
-								
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/testimg.png"></td>
+									
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
 					<div class="inner-table">
-						<button type="button" id="popupBtn"> <!-- 모달팝업 버튼 -->
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">클릭시 모달 팝업창</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png"></td>
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">클릭시 모달 팝업창</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/testimg.png"></td>
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
 						</button>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png"></td>
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/testimg.png"></td>
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png"></td>
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/testimg.png"></td>
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 					<td>
 					<div class="inner-table">
-						<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-							<tr>
-								<td colspan="2" style="padding-left: 10px;">닉네임</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png"></td>									
-							</tr>
-							<tr>
-								<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-								<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-							</tr>
-						</table>
+						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
+								<tr>
+									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+								</tr>
+								<tr>
+									<td colspan="2"><img src="../source/images/testimg.png"></td>									
+								</tr>
+								<tr>
+									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+								</tr>
+							</table>
+						</button>
 					</div>
 					</td>
 				</tr>
@@ -227,8 +241,10 @@
 
 	<div id="modalWrap">
 		<div id="modalBody">
-		<span id="closeBtn">&times;</span>
+			<span id="closeBtn">&times;</span>
+			<div id="modal-include">
 			<jsp:include page="../board/galleryContentsInclude.jsp"/>
+			</div>
 		</div>
 	</div>
 	<!-- 모달 팝업 영역 -->
@@ -240,23 +256,24 @@
 	<!-- 모달 팝업 스크립트 -->
 	<script type="text/javascript">
 
-		const btn = document.getElementById('popupBtn');
+		const popup = document.querySelectorAll('.popupBtn');
 		const modal = document.getElementById('modalWrap');
 		const closeBtn = document.getElementById('closeBtn');
-		const modalWrap = document.getElementById('modalWrap');
 		
-		btn.onclick = function() {
-			modal.style.display='block';
+		for(var i = 0; i < popup.length; i++) {
+			popup[i].onclick = function() {
+				modal.style.display='block';
+			}
 		}
-		
+	
 		closeBtn.onclick = function() {
 			modal.style.display = 'none';
 		}
 		
-		modal.onclick = function() {
+		modal.onclick = function(e) {
 			modal.style.display = 'none';
 		}
-		
+
 		window.onclick = function(event) {
 			if (event.target == modal) {
 				modal.style.display = "none";

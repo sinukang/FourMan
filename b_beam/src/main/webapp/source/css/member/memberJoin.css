@@ -21,6 +21,7 @@ body {
 
 .container {
 	display: flex;
+	justify-content: center;
 	position: relative;
 }
 
@@ -31,10 +32,7 @@ body {
 	padding: 20px;
 	box-shadow: 8px 7px 29px 0px rgba(27, 13, 75, 0.62);
 	position: absolute;
-	top: -50%;
-	left: 50%;
-	margin-left: -200px;
-	margin-top: 170px;
+	margin-top: 90px;
 }
 
 .join-body{
@@ -128,5 +126,18 @@ select:focus {
 .email-certi input[type="button"]{
 	width: 200px;
 	height: 45px;
+	margin-left: 10px;
+}
+
+#address-btn-area {
+	display: flex;
+}
+
+#sample4_roadAddress {
+	width: 350px;
+}
+
+#address-btn {
+	width: 150px;
 	margin-left: 10px;
 }

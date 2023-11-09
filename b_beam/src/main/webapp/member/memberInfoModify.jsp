@@ -16,12 +16,8 @@
 
 	<div class="container">
 		<div class="member-info">
-			<div class="join-logo">
-				<h1 class="logo" id="infoLogo">
-					<a class="imgLogo" href="../index.jsp">
-						<img src="../source/images/logo4.png" width="250" height="130" alt="메인화면으로 이동">
-					</a>
-				</h1>
+			<div class="tab-name-area">
+				<span> 회원 정보 수정 </span>
 			</div>
 			<div class="join-body">
 				<form name="frm">

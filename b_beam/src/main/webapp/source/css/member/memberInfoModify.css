@@ -23,13 +23,13 @@
 }
 
 .member-info {
-	width: 400px;
+	width: 450px;
 	background: white;
 	border-radius: 15px;
 	padding: 20px;
 	box-shadow: 8px 7px 29px 0px rgba(27, 13, 75, 0.62);
 	position: relative;
-	margin-bottom: 150px;
+	margin: 50px 0 150px 0;
 }
 
 .imgLogo {
@@ -87,10 +87,13 @@ input[name="btn"]:hover {
 
 .info-btn {
 	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
 
 .info-btn input {
 	margin-right: 5px;
+	width: 100px;
 }
 
 #infoLogo {
@@ -134,4 +137,12 @@ input[name="btn"]:hover {
 #exc-point {
 	width: 100%;
 	font-size: 18px;
+}
+
+.tab-name-area {
+	font-size: 30px;
+}
+
+h3 {
+	font-size: 25px;
 }
