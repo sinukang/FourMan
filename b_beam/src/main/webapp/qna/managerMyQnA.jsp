@@ -23,9 +23,9 @@
 			<h2 class="page-title">관리자 페이지</h2>
 		</div>
 		<div class="manager-navi">
-			<div class="report-tap tap clicked">신고</div>
+			<div class="report-tap tap">신고</div>
 			<div class="notice-tap tap">공지사항</div>
-			<div class="QnA-tap tap">1:1 문의</div>
+			<div class="QnA-tap tap clicked">1:1 문의</div>
 			<div class="FAQ-tap tap">자주하는 질문</div>
 		</div>
 		<div class="contents-area">

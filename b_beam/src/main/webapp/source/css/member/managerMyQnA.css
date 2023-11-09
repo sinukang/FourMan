@@ -13,7 +13,7 @@
 }
 .manager-navi{
 	margin-top: 50px;
-	height: 50px;
+	height: 75px;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-column-gap: 20px;
