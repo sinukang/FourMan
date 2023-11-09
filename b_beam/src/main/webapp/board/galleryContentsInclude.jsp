@@ -46,77 +46,78 @@
 										<span>닉네임</span>
 									</div>
 									<div class="comment-cont">
-										댓글을 작성하였습니다.
+										댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.
+									</div>
+									<div class="comment-date">
+										2023.11.06
 									</div>
 									<div>
-										2023.11.06
+										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
 								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 									<div class="comment-id">
-										닉네임
+										<span>닉네임</span>
 									</div>
 									<div class="comment-cont">
 										댓글을 작성하였습니다.
 									</div>
-									<div>
+									<div class="comment-date">
 										2023.11.06
+									</div>
+									<div>
+										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
 								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 									<div class="comment-id">
-										닉네임
+										<span>닉네임</span>
 									</div>
 									<div class="comment-cont">
 										댓글을 작성하였습니다.
 									</div>
-									<div>
+									<div class="comment-date">
 										2023.11.06
+									</div>
+									<div>
+										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
 								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 									<div class="comment-id">
-										닉네임
+										<span>닉네임</span>
 									</div>
 									<div class="comment-cont">
 										댓글을 작성하였습니다.
 									</div>
-									<div>
+									<div class="comment-date">
 										2023.11.06
+									</div>
+									<div>
+										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
 								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 									<div class="comment-id">
-										닉네임
+										<span>닉네임</span>
 									</div>
 									<div class="comment-cont">
 										댓글을 작성하였습니다.
 									</div>
-									<div>
+									<div class="comment-date">
 										2023.11.06
+									</div>
+									<div>
+										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										닉네임
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div>
-										2023.11.06
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										닉네임
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div>
-										2023.11.06
-									</div>
+								
+							</tr>
+							<tr>
+								<td colspan=3 style="text-align: right; padding: 5px 5px 9px 0;">
+									<button type="button" onclick="">수정</button>
+									<button type="button" onclick="">삭제</button>
+									<button type="button" onclick="">&#x1F6A8;</button>
 								</td>
 							</tr>
 						</table>

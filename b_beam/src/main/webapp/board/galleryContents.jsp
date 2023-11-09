@@ -130,6 +130,11 @@
 										</div>
 									</td>
 								</tr>
+								<tr>
+									<td>수정</td>
+									<td>삭제</td>
+									<td>신고</td>
+								</tr>
 							</table>
 						</div>
 					</td>

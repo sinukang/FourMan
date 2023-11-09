@@ -13,6 +13,9 @@
 </head>
 <body>
 	<div class="container">
+		<div class="back-btn">
+			<input type="button" style="height: 33px;" name="btn" value="≪" onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do';">
+		</div>
 		<div class="login">
 			<div class="login-logo">
 				<h1 class="logo">

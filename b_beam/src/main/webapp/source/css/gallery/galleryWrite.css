@@ -21,7 +21,7 @@
 		background: white;
 		box-shadow: 5px 5px 15px -5px #333;
 		width: 500px;
-		height: 800px;
+		height: 100%;
 		border-radius: 4px;
 		margin-top: 12px;
 	}
@@ -61,7 +61,7 @@
 	}
 	
 	label {
-		padding: 15px 206px;
+		padding: 15px 218px;
 		background-color:#567ff2;
 		border-radius: 3px;
 		color: white;
@@ -79,49 +79,58 @@
 		padding:12px 25px;
 	}
 	
-	#write-btn {
+	.write-btn {
+		    margin: 25px 0 20px 0;
+	}
+	
+	#write-label {
 		padding:15px 226px
 	}
 	
 	/*이미지 첨부*/
 	
-.file {
-  display: none;
-}
-
-.upload-box {
-  width: 100%;
-  box-sizing: border-box;
-  margin-right: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.upload-box .drag-file {
-  position: relative;
-  width: 100%;
-  height: 360px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 3px dashed #dbdbdb;
-}
-.upload-box .drag-file.highlight {
-  border: 3px dashed red;
-}
-.upload-box .drag-file .image {
-  width: 40px;
-}
-.upload-box .drag-file .message {
-  margin-bottom: 0;
-}
-.upload-box .drag-file .preview {
-  display: none;
-  position: absolute;
-  left: 0;
-  height: 0;
-  width: 100%;
-  height: 100%;
-}
+	.file {
+		display: none;
+	}
+	
+	.upload-box {
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.upload-box .drag-file {
+		position: relative;
+		width: 97%;
+		height: 360px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: 3px dashed #dbdbdb;
+		border-radius: 8px;
+	}
+	.upload-box .drag-file.highlight {
+		border: 3px dashed red;
+	}
+	.upload-box .drag-file .image {
+		width: 40px;
+	}
+	.upload-box .drag-file .message {
+		margin-bottom: 0;
+	}
+	.upload-box .drag-file .preview {
+		display: none;
+		position: absolute;
+		left: 0;
+		height: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.upload-btn {
+		margin: 25px 0 5px 0;
+	}

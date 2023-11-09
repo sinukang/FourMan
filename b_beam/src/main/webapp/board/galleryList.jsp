@@ -40,7 +40,7 @@
 			display: flex;
 			justify-content: center;
 			flex-direction: row-reverse;
-			margin: -40px 0 0 25px;
+			margin: -80px 0 0 25px;
 		}
 		
 		#closeBtn {
@@ -215,8 +215,10 @@
 				</tr>
 				<tr>
 					<td colspan="4" class="write-btn">
-						<label class="input-button" for="input-write">글쓰기</label>
-						<input type="button" id="input-write" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryWrite.do';">
+						<div style="margin-top: 28px;">
+							<label class="input-button" for="input-write">글쓰기</label>
+							<input type="button" id="input-write" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryWrite.do';">
+						</div>
 					</td>
 				</tr>
 			</table>

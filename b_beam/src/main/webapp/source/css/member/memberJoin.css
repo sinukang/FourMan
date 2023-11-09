@@ -25,6 +25,23 @@ body {
 	position: relative;
 }
 
+.back-btn {
+	margin: 100px 0 0 -390px;
+	z-index: 1;
+}
+
+#inner-back-btn {
+	cursor: pointer;
+	color : #fff;
+	font-size : 20px;
+	font-weight: bold;
+	background-color : #567ff2;
+	border: none;
+	box-shadow: 2px 1px 2px 0px rgba(27, 13, 75, 0.62);
+	height: 33px;
+	width: 100%;
+}
+
 .join {
 	width: 400px;
 	background: white;

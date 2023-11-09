@@ -10,6 +10,9 @@
 </head>
 <body>
 	<div class="container">
+		<div class="back-btn">
+			<input type="button" id="inner-back-btn" name="btn" value="≪" onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do';">
+		</div>
 		<div class="join">
 			<div class="join-logo">
 				<h1 class="logo">
