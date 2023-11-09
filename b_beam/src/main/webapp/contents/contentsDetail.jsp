@@ -209,14 +209,6 @@ document.querySelectorAll('.btn').forEach(tab => {
 </script>
 
 
-
-
-
-
-
-
-
-
 <script>
 //글자수 제한 카운트 증가 및 제한 스크립트---------------------------------------------- 
 function updateCharacterCount() {
@@ -234,6 +226,7 @@ function updateCharacterCount() {
 </script>
 
 <script>
+//이미지 업로드 파일 선택 + 선택된 파일 이미지를 미리보기할수있는 기능 -----------------------
 document.addEventListener('DOMContentLoaded', function() {
     const imageUpload = document.getElementById('imageUpload');
     const imagePreview = document.querySelector('.image-preview');
@@ -274,6 +267,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+
+<script>
+
+//"완료" 버튼 클릭 이벤트 핸들러
+document.querySelector('.commentBtn').addEventListener('click', function() {
+    const selectedRating = document.getElementById('ratingSelect').value; // 별점
+    const commentText = document.getElementById('commentInput').value; // 텍스트 입력
+    const imageFile = document.getElementById('imageUpload').files[0]; // 업로드된 이미지 파일
+
+    const formData = new FormData();
+    formData.append('rating', selectedRating);
+    formData.append('comment', commentText);
+    formData.append('image', imageFile);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // 성공적으로 데이터를 보낸 후의 동작
+    })
+    .catch(error => {
+        console.error('Error:', error); // 에러 핸들링
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

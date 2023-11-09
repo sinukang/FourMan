@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>리스트 페이지</title>
+<title>컨텐츠 리스트 페이지</title>
 <link rel="stylesheet" type="text/css" href="../source/css/contents/contentsList.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button2">
 	    <div class="content-info">
 	            <img src="../source/images/duck3.jpg" alt="14">
 	        <div class="contents-title">
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button3">
 	    <div class="content-info">
 	            <img src="../source/images/duck2.png" alt="32">
 	        <div class="contents-title">
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button4">
 	    <div class="content-info">
 	            <img src="../source/images/duck1.png" alt="32">
 	        <div class="contents-title">
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button5">
 	    <div class="content-info">
 	            <img src="../source/images/duck5.jpg" alt="12">
 	        <div class="contents-title">
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button6">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="14">
 	        <div class="contents-title">
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button7">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="39">
 	        <div class="contents-title">
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button8">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="39">
 	        <div class="contents-title">
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button9">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="15">
 	        <div class="contents-title">
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button10">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="15">
 	        <div class="contents-title">
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button11">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="15">
 	        <div class="contents-title">
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    </div>
 	</button>
 	
-	<button type="button" class="listbutton" id="button1">
+	<button type="button" class="listbutton" id="button12">
 	    <div class="content-info">
 	            <img src="../source/images/duck4.jpg" alt="14">
 	        <div class="contents-title">
@@ -245,31 +245,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 예를 들어 "관광지" 버튼 클릭 시
+    // "관광지" 버튼 클릭 시
     document.querySelector("#contentTypeId12").addEventListener("click", function () {
-        showContents("12"); // 여기서 "전주덕진공원"은 관광지 유형의 예시입니다.
+        showContents("12");
     });
 
-    // 다른 버튼에 대해서도 유형을 변경하여 이 함수를 재사용할 수 있습니다.
-    // 예를 들어 "문화시설" 버튼 클릭 시
+    // "문화시설" 버튼 클릭 시
     document.querySelector("#contentTypeId14").addEventListener("click", function () {
-        showContents("14"); 
+        showContents("14");
     });
-    
+
+    // "음식점" 버튼 클릭 시
     document.querySelector("#contentTypeId39").addEventListener("click", function () {
-        showContents("39"); 
+        showContents("39");
     });
 
-    
+    // "숙박" 버튼 클릭 시
     document.querySelector("#contentTypeId32").addEventListener("click", function () {
-        showContents("32"); 
+        showContents("32");
     });
-    
+
+    // "축제공연" 버튼 클릭 시
     document.querySelector("#contentTypeId15").addEventListener("click", function () {
-        showContents("15"); .
+        showContents("15");
     });
-
-
 });
 </script>	
 	
