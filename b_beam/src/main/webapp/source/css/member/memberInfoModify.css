@@ -2,24 +2,66 @@
 
 	/* 마이페이지 네비 헤더 */
 .mypageNavi {
-	margin : auto;
-	margin-top: 150px;
-	display: flex;
-	justify-content: center;
+	margin-top: 50px;
+    width: 100%;
 }
 .tab.navi {
-	list-style: none;
+	margin: 0;
 	padding: 0;
-	display: flex;
-	border-radius: 5px;
-	background-color:#567ff2;
 	width: 100%;
+	height: 100px;
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	place-items: center center;
+	border-radius: 8px;
+	color: #fff;
+	background-color: #567ff2;
+}
+
+.page-inner{	
+	width: 80%;
+	margin: 50px auto;
+}
+
+.page-side{
+	width: 100%;
+	margin: 0 auto;	
+}
+.page-title{
+	font-size: 30px;
 }
 
 .container {
 	position: relative;
-	display: flex;
-	justify-content: center;
+}
+
+.btn-area{
+	margin-top: 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+	/*grid-auto-rows: minmax(40px, auto);*/
+	gap: 10px 20px;
+}
+
+.btn1{
+	width: 100%;
+	height: 40px;
+	color: #000;
+	font-size: 1.25em;
+	font-weight: bold;
+	border: 0;
+	border-radius: 8px;
+	box-shadow: 5px 5px 15px -5px #333;
+}
+
+.btn1:hover{
+	transform: scale(1.05);
+}
+
+.clicked{
+	color: #fff;
+	background-color: #5486C9;
 }
 
 .member-info {
@@ -29,7 +71,7 @@
 	padding: 20px;
 	box-shadow: 8px 7px 29px 0px rgba(27, 13, 75, 0.62);
 	position: relative;
-	margin: 50px 0 150px 0;
+	margin: 50px auto;
 }
 
 .imgLogo {
@@ -70,7 +112,6 @@ input[name="btn"]:hover {
 	height: 200px;
 	border-collapse: separate;
 	border-spacing: 0 10px;
-	margin-top: 30px;
 }
 
 .info-cont td {
@@ -141,6 +182,7 @@ input[name="btn"]:hover {
 
 .tab-name-area {
 	font-size: 30px;
+	margin-bottom: 30px;
 }
 
 h3 {

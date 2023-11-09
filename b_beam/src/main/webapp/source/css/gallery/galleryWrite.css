@@ -61,7 +61,7 @@
 	}
 	
 	label {
-		padding: 15px 220px;
+		padding: 15px 206px;
 		background-color:#567ff2;
 		border-radius: 3px;
 		color: white;
@@ -82,3 +82,46 @@
 	#write-btn {
 		padding:15px 226px
 	}
+	
+	/*이미지 첨부*/
+	
+.file {
+  display: none;
+}
+
+.upload-box {
+  width: 100%;
+  box-sizing: border-box;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.upload-box .drag-file {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px dashed #dbdbdb;
+}
+.upload-box .drag-file.highlight {
+  border: 3px dashed red;
+}
+.upload-box .drag-file .image {
+  width: 40px;
+}
+.upload-box .drag-file .message {
+  margin-bottom: 0;
+}
+.upload-box .drag-file .preview {
+  display: none;
+  position: absolute;
+  left: 0;
+  height: 0;
+  width: 100%;
+  height: 100%;
+}

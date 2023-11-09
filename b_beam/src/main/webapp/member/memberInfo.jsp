@@ -14,38 +14,49 @@
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
-	<jsp:include page="../source/include/mypageNavi.jsp"/>
 	
-	<div class="container">
-		<div class="member-info">
-			<div class="tab-name-area">
-				<span> 회원 정보 </span>
+	<div class="page-inner">
+		<div class="page-side">
+			<h2 class="page-title">마이페이지</h2>
+		</div>
+		
+		<jsp:include page="../source/include/mypageNavi.jsp"/>
+		
+		<div class="container">
+			<div class="btn-area">
+				<button type="button" class="btn-QnAList btn1 clicked">내 정보</button>
+				<button type="button" class="btn-QnA btn1">나의 즐겨찾기</button>
+				<button type="button" class="btn-QnA btn1">나의 후기</button>
 			</div>
-			<div class="login-body">
-				<table class="info-cont">
-					<tr>
-						<td>
-							아이디 : test
-						</td>
-					</tr>
-					<tr>
-						<td>
-							비밀번호 :qwer1234
-						</td>
-					</tr><tr>
-						<td>
-							이메일 : asdf@naver.com
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="info-btn">
-				<input type="submit" name="btn" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';">
-				<input type="submit" name="btn" value="탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/memberResign.do';">
+			<div class="member-info">
+				<div class="tab-name-area">
+					<span> 회원 정보 </span>
+				</div>
+				<div class="login-body">
+					<table class="info-cont">
+						<tr>
+							<td>
+								아이디 : test
+							</td>
+						</tr>
+						<tr>
+							<td>
+								비밀번호 :qwer1234
+							</td>
+						</tr><tr>
+							<td>
+								이메일 : asdf@naver.com
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="info-btn">
+					<input type="submit" name="btn" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';">
+					<input type="submit" name="btn" value="탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/memberResign.do';">
+				</div>
 			</div>
 		</div>
 	</div>
-	
 	<jsp:include page="../source/include/footer.jsp"/>
 </body>
 </html>
