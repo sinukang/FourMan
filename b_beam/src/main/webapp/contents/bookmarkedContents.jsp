@@ -15,8 +15,12 @@
 <body>
 
 <jsp:include page="../source/include/header.jsp"/>
-<jsp:include page="../source/include/mypageNavi.jsp"/>
+	<div class="page-inner">
+		<div class="page-side">
+			<h2 class="page-title">마이페이지</h2>
+		</div>
 <div class="bookmarkedContents">
+<jsp:include page="../source/include/mypageNavi.jsp"/>
 	<div class="bookmarked">
 		<header class="bookmarked-head">
 			<strong class="bookmarked-title">총 <span class="bookmarked-cnt">7</span> 개</strong>
@@ -46,7 +50,7 @@
 						</div>
 					</li>
 					<c:forEach var="i" begin="1" end="10" step="1">
-					<li>
+					<li class="bookmarked_li">
 						<span><i class="marker"></i><strong class="contents-title">전주덕진공원</strong></span>
 						<div class="list-btn">
 							<button class="btn">열기</button>
@@ -60,7 +64,7 @@
 	</div>
 	
 </div>
-
+</div>
 <jsp:include page="../source/include/footer.jsp"/>
 <script>
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

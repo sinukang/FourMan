@@ -61,6 +61,11 @@ public class BoardController extends HttpServlet {
 			String path ="/board/notice.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("QnAList.do")) {
+			
+			String path ="/board/QnAList.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}
 	}
 
