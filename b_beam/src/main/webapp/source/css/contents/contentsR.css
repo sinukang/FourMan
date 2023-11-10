@@ -108,6 +108,7 @@
 	.rankingbox{
 		display : flex;
 		border : 2px solid #ebebeb;
+		margin-top : 50px;
 	}
 	
 	.ranktitle{
@@ -132,12 +133,6 @@
 	.contentsbox.rank:hover{
 		transform:scale(1.03)
 	}
-	.rankinghead hr{
-	    width: auto;
-	    height: 3px;
-	    background: #5684cd;
-	    border: 0;
-	}
 	.listbutton.rank{
 		margin : 10px;
 		border-radius : 10px;
@@ -150,7 +145,6 @@
 	.rankcontainer{
 	    width: 1190px;
 	    margin: 0 auto;
-	    padding: 100px;
 	}
 	.contents-info.rank{
 		width: auto;
