@@ -14,10 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
 <style>
 	.managerNavi {
-	position: relative;
-	top: 80px;
     width: 80%; /* 가로 폭 설정 */
-    margin: 0 auto; /* 화면 중앙으로 옮김 */
+    margin: 50px auto; /* 화면 중앙으로 옮김 */
     text-align: center; /* 내부 요소 수평 가운데 정렬 */
 }
 .tab.navi {
@@ -29,13 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     justify-content: center; /* 내부의 li 요소들을 수평 가운데 정렬 */
 }
 
-hr {
-	position:relative;
-	top : 100px;
-	width:100%;
-    border-color: #567ff2; /* 변경할 색상 */
-    border-width: 2px; /* 변경할 두께 */
-    }
+
     
 </style>
 
@@ -61,4 +53,4 @@ hr {
 
 
 </div>
-<hr>
+

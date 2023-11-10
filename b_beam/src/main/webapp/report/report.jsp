@@ -29,19 +29,26 @@ $(document).ready(function(){
 
 
 <jsp:include page="../source/include/header.jsp"/>
-<jsp:include page="../source/include/managerNavi.jsp"/>
 
 
 
-		<div id="tab1" class="tabContent">
 		
-				 <div id="">
-		            <button class="deleteBtn">신고 글 삭제</button>
-		        </div>
+<div class="container">
+	
+		<div class="gallery">
+			<h1>REPORT</h1>
+		</div>
+		<jsp:include page="../source/include/managerNavi.jsp"/>
+	
+		<div id="tab1" class="tabContent">
 		
 		
 		
 			<table class="report-table">
+				 <div id="delbutton">
+		            <button class="deleteBtn">신고 글 삭제</button>
+		        </div>
+		
 			    <thead>
 			        <tr>
 			        	<th id="delCheck"></th>
@@ -229,7 +236,7 @@ $(document).ready(function(){
 		자주묻는질문 
 	</div>
 
-
+</div>
 
 
 

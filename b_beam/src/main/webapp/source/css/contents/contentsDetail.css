@@ -82,8 +82,21 @@
 	    border-radius: 100%;
 	}
 
-	
+.gallery {
+		margin: 30px 0 0 60px;
+		position: relative;
+		font-size: 25px;
+		border-bottom: 4px solid;
+	}
 
+.gallery h1 {
+		margin-bottom: 0;
+	}
+
+.container {
+		width: 100%;
+		margin: 0;
+	}
 
 /* 컨텐츠 상세보기 스타일 */
 .contentsdetail {
@@ -107,14 +120,14 @@
 
 .favorite {
 	position: absolute;
-	top: 40px;
+	top: 25px;
 	left: 450px;
 	bottom: 580px;
 }
 
 .favorite-icon {
 	color: rgb(0, 0, 0);
-	font-size: 20px;
+	font-size: 25px;
 }
 /* 사진 영역  */
 .main-image-section {
@@ -144,11 +157,10 @@
 
 
 
-/*컨텐츠  정보 박스 ---------------------------------------------*/
-.container {
+.tabBox {
 	position: absolute;
-	top: 50px;
-	left: 300px;
+	top: 70px;
+	left: 650px;
 	max-width: 700px;
 	 background-color:#567ff2;
     border-top-left-radius: 10px; /* 좌측 상단 모서리만 둥글게 */

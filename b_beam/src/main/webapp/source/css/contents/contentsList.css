@@ -79,6 +79,32 @@
 	    border-radius: 100%;
 	}
 	
+
+
+	
+	.gallery {
+		margin: 30px 0 0 60px;
+		position: relative;
+		font-size: 25px;
+		border-bottom: 4px solid;
+	}
+
+	.gallery h1 {
+		margin-bottom: 0;
+	}
+
+
+	
+
+.container {
+    align-items: center;
+}
+.buttonBox{
+	display: flex;
+	justify-content: center;
+	margin: 50px;
+}	
+	
 	
 .contentsbutton {
     width: 150px;
@@ -97,6 +123,10 @@
     background-size: 200% 200%;
     transition: background-position 0.1s;
 }
+.contentsbutton img {
+    width: 140px; /* 원하는 너비 설정 */
+    height: 150px; /* 원하는 높이 설정 */
+}
 
 .contentsbutton:hover {
     animation: flowAnimation 2s linear infinite;
@@ -110,60 +140,15 @@
         background-position: 200% 200%;
     }
 }
-.contentsbutton img {
-    width: 140px; /* 원하는 너비 설정 */
-    height: 150px; /* 원하는 높이 설정 */
-}
 
-
-.container {
-	position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30vh;
-	background-color: rgb(255, 255, 255);
-}
-
-
-/* 페이지 네비게이션 스타일 */
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* 화살표 스타일 */
-.arrow {
-    display: inline-block;
-    font-size: 24px;
-    text-decoration: none;
-    margin: 0 10px;
-    color: rgb(79, 171, 247); /* 화살표 색상 */
-}
-
-/* 페이지 번호 스타일 */
-.page {
-    display: inline-block;
-    font-size: 18px;
-    text-decoration: none;
-    margin: 0 10px;
-    color: #000; /* 페이지 번호 색상 */
-}
 
 .search-bar {
     display: flex;
     align-items: center;
     justify-content: center; /* 가로 중앙 정렬을 위한 추가 */
-    margin-top: 10px;
-    padding: 0px 0; /* 위 아래 여백 조절 */
 }
 
-#keyword {
-    width: 500px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
 
 #search-button {
     background-color: rgb(79, 171, 247);
@@ -175,13 +160,11 @@
 }
 
 
-     .contentsbox {
-		position: relative;
-		left: 30px;
+.contentsbox {
+		
 		max-width: 85%;
         display: flex;
         flex-wrap: wrap;
-        align-items: left;
         margin: 0 auto;
         justify-content: left;
         text-align: center;
