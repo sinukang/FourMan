@@ -35,7 +35,7 @@ $(document).ready(function(){
 		
 <div class="container">
 	
-		<div class="gallery">
+		<div class="container-title">
 			<h1>REPORT</h1>
 		</div>
 		<jsp:include page="../source/include/managerNavi.jsp"/>
