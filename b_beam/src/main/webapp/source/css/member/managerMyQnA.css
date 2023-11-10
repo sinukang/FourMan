@@ -74,25 +74,10 @@
 .QnA-item:hover{
 	cursor: pointer;
 }
-.QnA-item.active{
+.active .QnA-item{	/*.QnA-item*/
 	border: 3px solid #219888;
 }
-.not-answered{
-	background-color: #fff;
-	border: 0;
-	border-radius: 10px;
-	margin: 20px 0;
-	padding: 30px;
-	position: relative;
-	overflow: hidden;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);	
-}
-.not-answered:hover{
-	cursor: pointer;
-}
-.not-answered.active{
-	border: 0;
-}
+
 .QnA-writer{
 	margin: 0 35px 5px 0;
 }
@@ -103,12 +88,10 @@
 	display: none;
 	margin: 30px 0 0;
 }
-.QnA-item.active .QnA-Answer{
+.active .QnA-Answer{	/*.QnA-item*/
 	display: block;
 }
-.not-answered.active .QnA-Answer{
-	display: block;
-}
+
 .QnA-toggle{
 	background-color: transparent;
 	border: 0;
@@ -131,21 +114,40 @@
 .QnA-toggle .fa-chevron-down{
 	color: #4b55dd;
 }
+.active .QnA-toggle .fa-chevron-down{ /*.QnA-item*/
+	display: none;
+} 
 .QnA-toggle .fa-chevron-up{
 	display: none;
 }
-.QnA-item.active .QnA-toggle .fa-chevron-up{
+.active .QnA-toggle .fa-chevron-up{ /*.QnA-item*/
 	color: #4b55dd;
 	display: block;
 } 
-.not-answered.active .QnA-toggle .fa-chevron-up{
+.not-answered{
+	background-color: #fff;
+	border: 0;
+	border-radius: 10px;
+	margin: 20px 0;
+	padding: 30px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);	
+}
+.not-answered:hover{
+	cursor: pointer;
+}
+.active .not-answered{
+	border: 0;
+}
+.active .not-answered .QnA-Answer{
+	display: block;
+}
+.active .not-answered .QnA-toggle .fa-chevron-up{
 	color: #4b55dd;
 	display: block;
 }
-.QnA-item.active .QnA-toggle .fa-chevron-down{
-	display: none;
-} 
-.not-answered.active .QnA-toggle .fa-chevron-down{
+.active .not-answered .QnA-toggle .fa-chevron-down{
 	display: none;
 }
 .A-btn-area{
@@ -155,7 +157,7 @@
 	align-items: center;
 	z-index: 1;
 }
-.active .A-btn-area{
+.active + .A-btn-area{
 	display: flex;
 }
 .dp-flex{
