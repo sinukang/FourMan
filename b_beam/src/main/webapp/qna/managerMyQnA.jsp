@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/member/managerMyQnA.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/qna/managerMyQnA.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
 	integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
 	crossorigin="anonymous"/>
@@ -34,8 +34,8 @@
 				<c:forEach var="i" begin="1" end="6" step="1">
 					<c:choose>
 						<c:when test="${i ne 2}">
-							<div class="QnA-wrapper">
-								<div class="QnA-item">
+							<div class="QnA-wrapper test${j}">
+								<div class="answered-item">
 									<h3 class="QnA-writer">유저${j}</h3>
 									<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
 									<p class="QnA-Answer">
@@ -52,10 +52,14 @@
 									</button>
 								</div>
 							</div>
+							<div class="Answered-btn-area test${j}">
+								<button class="btn-Delete btn" onclick="deleteAnswer(${j})">답변삭제</button>
+								<button class="btn-Modify btn" onclick="modifyAnswer(${j})">답변수정</button>
+							</div>	
 						</c:when>
 						<c:otherwise>
-							<div class="QnA-wrapper">
-								<div class="not-answered">
+							<div class="QnA-wrapper test${j}">
+								<div class="unanswered-item">
 									<h3 class="QnA-writer">유저${j}</h3>
 									<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
 									<p class="QnA-Answer">
@@ -72,14 +76,30 @@
 									</button>								
 								</div>
 							</div>
-							<div class="A-btn-area test${j}">
-								<button class="btn-Answer btn" onclick="answer(${j})">답변하기</button>
+							<div class="unAnswered-btn-area test${j}">
+								<button class="btn-Answer btn" onclick="writeAnswer(${j})">답변하기</button>
 							</div>
 						</c:otherwise>						
 					</c:choose>
 					<c:set var="j" value="${j-1}"></c:set>
 				</c:forEach>
 			</div>
+			<div class="write-area dp-none">
+				<div class="write-content">
+					<form id="form" class="form">
+						<div class="QnA-sub">
+							<input type="text" id="title" name="bdtitle" class="input-sup" placeholder="제목을 입력해주세요">
+						</div>
+						<div class="QnA-content">
+							<textarea id="content" name="bdcont" class="textarea-content"  placeholder="내용을 입력해주세요"></textarea>
+						</div>
+					</form>
+					<div class="btn-area2">
+						<button type="button" id="write" class="btn-write btn2">등록</button>
+						<button type="button" id="cancel" class="btn-cancel btn2">취소</button>
+					</div>
+				</div>
+			</div>			
 		</div>
 		
 		
@@ -115,15 +135,29 @@
 		})
 	});
 	
-// 	const toggles2 = document.querySelectorAll(".not-answered"); /* .QnA-toggle */
+	function writeAnswer(idx){
+		
+		let item = document.querySelectorAll(".QnA-wrapper");
+		for (let i = 0; i < item.length; i++) {
+			if(item[i].classList.contains("test"+idx)){
+				document.querySelector(".write-area").classList.remove("dp-none");
+				document.querySelector(".write-area").classList.add("dp-block");
+			}else{
+				item[i].classList.add("dp-none");
+			}
+		}
+		/* location.href = "${pageContext.request.contextPath}/qna/writeAnswer.do"; */
+	}
 	
-// 	toggles2.forEach((toggle) => {
-// 		toggle.addEventListener("click", () => {
-// 			toggle.classList.toggle("active");
-// 		})
-// 	});	
+	function modifyAnswer(){
+		
+		location.href = "";
+	}
 	
-	
+	function deleteAnswer(){
+		
+		location.href = "";
+	}
 	
 	
 	
