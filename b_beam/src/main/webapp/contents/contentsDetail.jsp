@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="container">
 
-	<div class="gallery">
+	<div class="container-title">
 				<h1>DETAIL CONTENTS</h1>
 			</div>
 		

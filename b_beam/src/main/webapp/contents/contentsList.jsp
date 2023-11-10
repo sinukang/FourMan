@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <title>컨텐츠 리스트 페이지</title>
 <link rel="stylesheet" type="text/css" href="../source/css/contents/contentsList.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
 
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 <div class="container">
 
-	<div class="gallery">
+	<div class="container-title">
 			<h1>CONTENTS</h1>
 		</div>
 	
@@ -59,22 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	
 	
-		<div class="search-bar">
-			<table >
-		    <tr>
-		        <th>키워드 검색</th>
-		        <td>
-		            <input type="text" id="keyword" placeholder="검색어를 입력하세요">
-		        </td>
-		        <td>
-		            <button type="button" id="search-button">검색</button>
-		        </td>
-		    </tr>
-			</table>
+		<div class="search">
+		    <input type="text" placeholder="search" name="keyword" maxlength="20">
+		    <button type="submit" name="sbt" >
+		        <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
+		    </button>
 		</div>
-	
-	
-	
 	
 		<div class="contentsbox">
 		  
