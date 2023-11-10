@@ -15,7 +15,9 @@
 	<jsp:include page="../source/include/header.jsp"/>
 	
 	<div class="container">
-		asdasda
+		<div class="page-inner">
+			<jsp:include page="../source/include/managerNavi.jsp"/>
+		</div>
 	</div>
 	
 	
