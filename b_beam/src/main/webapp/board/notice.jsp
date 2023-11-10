@@ -15,8 +15,8 @@
 
 	
 	<jsp:include page="../source/include/header.jsp"/>
-	
-	<div class="inner">
+<div class="container">
+	<div class="page-inner">
 		<div class="page-side">
 			<h2 class="page-title">공지사항</h2>
 		<hr><br><br>
@@ -47,6 +47,7 @@
 			
 		</div>
 	</div>
+</div>
 	<jsp:include page="../source/include/footer.jsp"/>
 	
 </body>

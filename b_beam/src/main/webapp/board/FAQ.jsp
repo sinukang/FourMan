@@ -15,7 +15,7 @@
 
 	<!-- header -->
 	<jsp:include page="../source/include/header.jsp"/>
-	
+<div class="container">
 	<div class="page-inner">
 		<div class="page-side">
 			<h2 class="page-title">고객지원</h2>
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 	</div>
-	
+</div>
 	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp"/>
 	
