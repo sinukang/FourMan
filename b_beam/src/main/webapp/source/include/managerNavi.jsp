@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <link href="../source/css/managerNavi.css" type="text/css" rel="stylesheet">
 <div class="manager-navi">
-	<div class="report-tap tap">신고내역</div>
-	<div class="notice-tap tap">공지사항</div>
-	<div class="QnA-tap tap clicked">1:1 문의내역</div>
-	<div class="FAQ-tap tap">자주하는 질문</div>
+	<div class="report-tap tap" onclick="mgNavi(0)">신고내역</div>
+	<div class="QnA-tap tap clicked" onclick="mgNavi(1)">1:1 문의내역</div>
+	<div class="notice-tap tap" onclick="mgNavi(2)">공지사항</div>
+	<div class="FAQ-tap tap" onclick="mgNavi(3)">자주하는 질문</div>
 </div>
 
 <script>
@@ -36,6 +36,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 	init1();	
+	
+	function mgNavi(e){
+		switch(e){
+		case 0 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+		case 1 : location.href="${pageContext.request.contextPath}/qna/managerMyQnA.do"; break;
+		case 2 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+		
+		}
+	}
 </script>    
     
     
