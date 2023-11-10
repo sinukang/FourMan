@@ -50,6 +50,14 @@
 										<i class="fas fa-chevron-down"></i>
 										<i class="fas fa-chevron-up"></i>
 									</button>
+									<div class="answer-area">
+										<h3 class="answer-writer">운영자${j}</h3>
+										<h3 class="answer-title">몰?루${j}</h3>
+										<p class="answer-content">
+											나도 몰?루${j}<br>나도 몰?루${j}<br>나도 몰?루${j}<br>
+											나도 몰?루${j}<br>나도 몰?루${j}<br>나도 몰?루${j}<br>
+										</p>
+									</div>									
 								</div>
 							</div>
 							<div class="Answered-btn-area test${j}">
@@ -96,7 +104,7 @@
 					</form>
 					<div class="btn-area2">
 						<button type="button" id="write" class="btn-write btn2">등록</button>
-						<button type="button" id="cancel" class="btn-cancel btn2">취소</button>
+						<button type="button" id="cancel" class="btn-cancel btn2" onclick="cancel()">취소</button>
 					</div>
 				</div>
 			</div>			
@@ -135,16 +143,24 @@
 		})
 	});
 	
+	//답변하기 버튼 클릭 시 해당 글만 남기고 나머지는 안보이게 + 답변 작성 영역 표시
 	function writeAnswer(idx){
 		
 		let item = document.querySelectorAll(".QnA-wrapper");
+		let item2 = document.querySelectorAll(".Answered-btn-area");
+		
 		for (let i = 0; i < item.length; i++) {
 			if(item[i].classList.contains("test"+idx)){
 				document.querySelector(".write-area").classList.remove("dp-none");
 				document.querySelector(".write-area").classList.add("dp-block");
 			}else{
 				item[i].classList.add("dp-none");
+				item[i].classList.remove("active");
 			}
+// 		for (let i = 0; i < item2.length; i++) {
+// 			item2[i].classList.add("dp-none");
+// 		}
+			
 		}
 		/* location.href = "${pageContext.request.contextPath}/qna/writeAnswer.do"; */
 	}
@@ -157,6 +173,26 @@
 	function deleteAnswer(){
 		
 		location.href = "";
+	}
+	
+	function cancel(){
+		
+		let item = document.querySelectorAll(".QnA-wrapper");
+		let item2 = document.querySelectorAll(".Answered-btn-area");
+		
+		for (let i = 0; i < item.length; i++) {
+			item[i].classList.remove("dp-none");
+			item[i].classList.add("dp-block");
+			document.querySelector(".write-area").classList.remove("dp-block");
+			document.querySelector(".write-area").classList.add("dp-none");
+			item[i].classList.remove("dp-none");
+			item[i].classList.add("dp-block");
+			item[i].classList.add("active");
+		}
+// 		for (let i = 0; i < item2.length; i++) {
+// 			item2[i].classList.remove("dp-none");
+// 			item2[i].classList.add("dp-flex");
+// 		}
 	}
 	
 	
