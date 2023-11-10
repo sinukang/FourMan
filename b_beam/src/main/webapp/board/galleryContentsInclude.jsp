@@ -32,7 +32,7 @@
 									<div>
 										<input type="text" id="comment-write" placeholder="댓글을 작성해주세요.">
 									</div>
-									<div>
+									<div style="width: 20px;">
 										<label class="write-btn" for="comment-btn">
 											<img src="../source/images/commentbtn.png" id="btn-img">
 										</label>
@@ -114,7 +114,7 @@
 								
 							</tr>
 							<tr>
-								<td colspan=3 style="text-align: right; padding: 5px 5px 9px 0;">
+								<td colspan=3 class="bottom-btn">
 									<button type="button" onclick="">수정</button>
 									<button type="button" onclick="">삭제</button>
 									<button type="button" onclick="">&#x1F6A8;</button>
