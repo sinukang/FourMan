@@ -44,6 +44,9 @@ public class FrontController extends HttpServlet {
 		}else if(str.equals("report")) {
 			ReportController rpc = new ReportController(location);
 			rpc.doGet(request, response);
+		}else if(str.equals("point")) {
+			PointController ptc = new PointController(location);
+			ptc.doGet(request, response);
 		}
 		
 	}
