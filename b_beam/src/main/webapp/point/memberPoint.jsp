@@ -10,18 +10,15 @@
 
 </head>
 <body>
-
 	<jsp:include page="../source/include/header.jsp"/>
 	
 	
-	<div class="page-inner">
-		<div class="page-side">
-			<h2 class="page-title">마이페이지</h2>
+	<div class="container">
+		<div class="container-title">
+			<h1>MyPage</h1>
 		</div>
-		
+		<div class="inner-container">
 		<jsp:include page="../source/include/mypageNavi.jsp"/>
-		
-		<div class="container">
 			<div class="btn-area">
 				<button type="button" class="btn-QnAList btn1 clicked">내 포인트</button>
 			</div>

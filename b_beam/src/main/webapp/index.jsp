@@ -17,9 +17,15 @@
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
-			<img src="./source/images/logo4.png">
+				<img src="https://tour.jeonju.go.kr/upload_data/popup/banner/169563461262747.jpg">
+				<div class="slide-text">
+					<h1>동아시아 문화도시 전주</h1>
+					<p>천년 문화도시, 전주의 자부심을 만나다 </p>
+				</div>
 			</div>
-			<div class="swiper-slide"><img src="http://tong.visitkorea.or.kr/cms/resource/71/3022871_image2_1.jpg"></div>
+			<div class="swiper-slide">
+				<img src="./source/images/logo4.png">
+			</div>
 			<div class="swiper-slide">Slide 2</div>
 			<div class="swiper-slide">Slide 3</div>
 			<div class="swiper-slide">Slide 4</div>
@@ -60,9 +66,15 @@
 			<div class="cont" id="tab1">
 				<div class="top_list">
 					<ul>
-						<li>오늘의 top1</li>
-						<li>오늘의 top2</li>
-						<li>오늘의 top3</li>
+						<li>
+							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg">
+						</li>
+						<li style="padding: 0 10px;">
+							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg">
+						</li>
+						<li>
+							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg">
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -86,7 +98,7 @@
 			</div>
 		</div>
 		<div class="top-more">
-			<input type="button" name="btn" value="더 보기" onclick="check();">
+			<input type="button" name="btn" value="더보기" onclick="check();">
 		</div>
 	</div>
 	

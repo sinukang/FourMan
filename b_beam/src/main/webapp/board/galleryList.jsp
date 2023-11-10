@@ -13,11 +13,11 @@
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
-	<div class="wrap">
-		<div class="gallery">
+	<div class="container">
+		<div class="container-title">
 			<h1>GALLERY</h1>
 		</div>
-		<div class="container">
+		<div class="inner-container">
 			<table class="wrap-table">
 				<tr>
 					<td>

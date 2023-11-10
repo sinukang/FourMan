@@ -16,7 +16,7 @@
 		<div class="gallery">
 			<h1>GALLERY</h1>
 		</div>
-		<div class="container">
+		<div class="modal-container">
 			<table class="wrap-conttable">
 				<tr>
 					<td>

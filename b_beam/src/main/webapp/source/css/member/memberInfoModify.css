@@ -19,21 +19,10 @@
 	background-color: #567ff2;
 }
 
-.page-inner{	
+
+.inner-container {
 	width: 80%;
 	margin: 50px auto;
-}
-
-.page-side{
-	width: 100%;
-	margin: 0 auto;	
-}
-.page-title{
-	font-size: 30px;
-}
-
-.container {
-	position: relative;
 }
 
 .btn-area{
