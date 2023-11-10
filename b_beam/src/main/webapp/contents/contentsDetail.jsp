@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	   		 </div>
 	
 	    	<div class="main-image-section">
-			    <img id="bigImage" src="../source/images/duck4.jpg" style="max-width: 550px; max-height: 450px;" alt="Main Image">
+			    <img id="bigImage" src="../source/images/duck4.jpg" alt="Main Image">
 			</div>
 			
 			<div class="small-images-section">
@@ -125,6 +125,16 @@ document.addEventListener('DOMContentLoaded', function() {
 			        <button class="remove-image-button" style="display: none;" onclick="removeImagePreview()">X</button>
 			    </div>
 		</div>
+
+<hr id="cutLine">		
+		
+		<div  class="commentArray">
+			<h2>총<span id="cmtCnt">1766</span>건</h2>
+			<button type="button"  id="1">인기순</button>
+			<button type="button" id="2">최신순</button>
+		</div>
+		
+		
 			
 		<div class="commentReply">
 				<table id="commentTable">
@@ -145,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			            <th id="report" type="button" class="reportbtn">
 			                <button type="button" onclick="">&#x1F6A8;</button>
 			            </th>
+			            <th rowspan="2">...</th>
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.06</th>
 		        		
@@ -152,7 +163,68 @@ document.addEventListener('DOMContentLoaded', function() {
 			                 <button class="like-button" onclick="like(this)">
 							    <i class="fas fa-heart"></i>
 							  </button>
-			                 <span id="likeCount">10</span>
+			                 <span id="likeCount">1104</span>
+			            </th>
+			            
+		        	</tr>
+		        	
+		    	</table>
+		    	
+		    	<table id="commentTable">
+		        	<tr>
+		        		<th id="userId">단단한점토</th>
+		        		
+		        		<th id="star">★★★</th>
+		        		
+		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+		        		
+		        		<th rowspan="2">
+						    <div class="imageContainer">
+			                    <img src="../source/images/duck4.jpg" class="commentImage">
+			                   
+			                </div>
+						</th>
+								        		
+			            <th id="report" type="button" class="reportbtn">
+			                <button type="button" onclick="">&#x1F6A8;</button>
+			            </th>
+		        	<tr>
+		        		<th id="day" colspan="2">2024.11.03</th>
+		        		
+		        		 <th id="up" type="button" class="likebtn">
+			                 <button class="like-button" onclick="like(this)">
+							    <i class="fas fa-heart"></i>
+							  </button>
+			                 <span id="likeCount">410</span>
+			            </th>
+		        	</tr>
+		    	</table>
+		    	<table id="commentTable">
+		        	<tr>
+		        		<th id="userId">+12수수깡</th>
+		        		
+		        		<th id="star">★★★★</th>
+		        		
+		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+		        		
+		        		<th rowspan="2">
+						    <div class="imageContainer">
+			                    <img src="../source/images/duck4.jpg" class="commentImage">
+			                   
+			                </div>
+						</th>
+								        		
+			            <th id="report" type="button" class="reportbtn">
+			                <button type="button" onclick="">&#x1F6A8;</button>
+			            </th>
+		        	<tr>
+		        		<th id="day" colspan="2">2024.11.06</th>
+		        		
+		        		 <th id="up" type="button" class="likebtn">
+			                 <button class="like-button" onclick="like(this)">
+							    <i class="fas fa-heart"></i>
+							  </button>
+			                 <span id="likeCount">21</span>
 			            </th>
 		        	</tr>
 		    	</table>
@@ -276,57 +348,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-
-<script>
-
-//"완료" 버튼 클릭 이벤트 핸들러
-document.querySelector('.commentBtn').addEventListener('click', function() {
-    const selectedRating = document.getElementById('ratingSelect').value; // 별점
-    const commentText = document.getElementById('commentInput').value; // 텍스트 입력
-    const imageFile = document.getElementById('imageUpload').files[0]; // 업로드된 이미지 파일
-
-    const formData = new FormData();
-    formData.append('rating', selectedRating);
-    formData.append('comment', commentText);
-    formData.append('image', imageFile);
-
-    fetch('/upload', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // 성공적으로 데이터를 보낸 후의 동작
-    })
-    .catch(error => {
-        console.error('Error:', error); // 에러 핸들링
-    });
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
