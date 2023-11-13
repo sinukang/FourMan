@@ -7,10 +7,10 @@
 		<div class="f-info">COPYRIGHT ⓒ FOURMAN. ALL RIGHT RESERVED</div>
 	</div>
 	<div class="footer-icon">
-		<div class="f-icon">
+		<div class="f-icon" onclick="location.href='#'">
 			<img src="https://korean.visitkorea.or.kr/resources/images/common/logo_foot_api.png?v=20230601001">
 		</div>
-		<div class="f-icon">
+		<div class="f-icon" onclick="location.href='#'">
 			<img src="${pageContext.request.contextPath}/source/images/logo-new2208.png">
 		</div>
 	</div>

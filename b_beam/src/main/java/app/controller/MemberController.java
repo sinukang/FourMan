@@ -41,6 +41,11 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberJoin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("memberJoinOk.do")) {
+			//멤버 join 확인
+			String path ="/member/memberLogin.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 		}else if (location.equals("memberLogin.do")) {
 			
 			String path ="/member/memberLogin.jsp";

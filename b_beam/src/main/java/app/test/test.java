@@ -7,7 +7,9 @@ public class test {
 		// 그 후 클래스 콘솔 실행
 		dbconntest dbcon = new dbconntest();
 		dbcon.memberInsert();
-		
+		// ignore 실험
+		// ignore 실험2
+		// ignore 실험3
 	}
 
 }
