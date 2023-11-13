@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DbConn {
 	
 	private String url ="jdbc:mysql://192.168.0.37:3306/b_beam?serverTimezone=UTC&useSSL=false";
-	private String user="root"; // 김진수 : kjs, 강희재 khj, 유효일 : uhi
+	private String user="uhi"; // 김진수 : kjs, 강희재 khj, 유효일 : uhi
 	private String password="1234";
 	
 	public Connection getConnection() {

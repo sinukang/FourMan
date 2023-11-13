@@ -4,6 +4,11 @@
 <link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
 <link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
 <link href="../source/css/home.css" type="text/css" rel="stylesheet">
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <div class="wrap">
 	<div class="container">
@@ -16,8 +21,24 @@
 								<td colspan="2" style="padding: 5px 0 5px 5px;">닉네임</td>
 							</tr>
 							<tr>
-								<td colspan="2"><img src="../source/images/testimg.png" id="cont-img"></td>
-								
+								<td colspan="2">
+									<div class="swiper mySwiper" style="height: 100%;">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+												<img src="../source/images/testimg.png" id="cont-img">
+											</div>
+											<div class="swiper-slide">
+												<img src="../source/images/test2.jpg" id="cont-img">
+											</div>
+											<div class="swiper-slide">
+												<img src="../source/images/test3.jpg" id="cont-img">
+											</div>
+										</div>
+										<div class="swiper-button-next" style="color: white;"></div>
+										<div class="swiper-button-prev" style="color: white;"></div>
+										<div class="swiper-pagination"></div>
+									</div>
+								</td>
 							</tr>
 						</table>
 						<table class="conttable2-cont">
@@ -331,3 +352,22 @@
 		</table>
 	</div>
 </div>
+
+ <!-- Swiper JS -->
+<!--	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+	Initialize Swiper
+	<script>
+		var swiper = new Swiper(".mySwiper", {
+			spaceBetween: 30,
+			centeredSlides: true,
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});
+	</script> -->

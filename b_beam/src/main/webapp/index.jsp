@@ -24,19 +24,22 @@
 				</div>
 			</div>
 			<div class="swiper-slide">
-				<img src="./source/images/logo4.png">
+				<img src="https://tour.jeonju.go.kr/upload_data/popup/banner/169563465074570.jpg">
+				<div class="slide-text">
+					<h1>가장 한국적인 도시 전주</h1>
+					<p>전주 향교</p>
+				</div>
 			</div>
-			<div class="swiper-slide">Slide 2</div>
-			<div class="swiper-slide">Slide 3</div>
-			<div class="swiper-slide">Slide 4</div>
-			<div class="swiper-slide">Slide 5</div>
-			<div class="swiper-slide">Slide 6</div>
-			<div class="swiper-slide">Slide 7</div>
-			<div class="swiper-slide">Slide 8</div>
-			<div class="swiper-slide">Slide 9</div>
+			<div class="swiper-slide">
+				<img src="	https://tour.jeonju.go.kr/upload_data/popup/banner/169563475042182.jpg">
+				<div class="slide-text">
+					<h1>가장 한국적인 도시 전주</h1>
+					<p>전주 한옥마을</p>
+				</div>
+			</div>
 		</div>
-		<div class="swiper-button-next"></div>
-		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;"></div>
+		<div class="swiper-button-prev" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;"></div>
 		<div class="swiper-pagination"></div>
 	</div>
   
@@ -103,5 +106,29 @@
 	</div>
 	
 	<jsp:include page="source/include/footer.jsp"/>
+	
+	
+	 <!-- Swiper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+	Initialize Swiper
+	<script>
+		var swiper = new Swiper(".mySwiper", {
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});
+	</script> 
 </body>
 </html>
