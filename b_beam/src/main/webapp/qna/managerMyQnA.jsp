@@ -95,9 +95,6 @@
 			<div class="write-area dp-none">
 				<div class="write-content">
 					<form id="form" class="form">
-						<div class="QnA-sub">
-							<input type="text" id="title" name="bdtitle" class="input-sup" placeholder="제목을 입력해주세요">
-						</div>
 						<div class="QnA-content">
 							<textarea id="content" name="bdcont" class="textarea-content"  placeholder="내용을 입력해주세요"></textarea>
 						</div>
@@ -148,6 +145,7 @@
 		
 		let item = document.querySelectorAll(".QnA-wrapper");
 		let item2 = document.querySelectorAll(".Answered-btn-area");
+		document.querySelector(".unAnswered-btn-area.test"+idx).classList.add("active");
 		
 		for (let i = 0; i < item.length; i++) {
 			if(item[i].classList.contains("test"+idx)){
@@ -179,6 +177,7 @@
 		
 		let item = document.querySelectorAll(".QnA-wrapper");
 		let item2 = document.querySelectorAll(".Answered-btn-area");
+		let btnAnswer = document.querySelectorAll(".QnA-wrapper + .unAnswered-btn-area");
 		
 		for (let i = 0; i < item.length; i++) {
 			item[i].classList.remove("dp-none");
@@ -187,12 +186,19 @@
 			document.querySelector(".write-area").classList.add("dp-none");
 			item[i].classList.remove("dp-none");
 			item[i].classList.add("dp-block");
-			item[i].classList.add("active");
+			/* item[i].classList.add("active"); */
+		
 		}
 // 		for (let i = 0; i < item2.length; i++) {
 // 			item2[i].classList.remove("dp-none");
 // 			item2[i].classList.add("dp-flex");
 // 		}
+		for (let i = 0; i < btnAnswer.length; i++) {
+			if(btnAnswer[i].classList.contains("active")){
+				btnAnswer[i].classList.remove("active");
+			}
+		}
+
 	}
 	
 	
