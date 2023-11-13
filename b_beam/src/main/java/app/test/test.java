@@ -8,6 +8,7 @@ public class test {
 		dbconntest dbcon = new dbconntest();
 		dbcon.memberInsert();
 		// ignore 실험
+		// ignore 실험2
 	}
 
 }
