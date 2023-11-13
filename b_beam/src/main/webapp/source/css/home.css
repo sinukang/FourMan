@@ -276,6 +276,9 @@
 	.f-icon{
 		margin: 0.6rem;
 	}
+	.f-icon:hover{
+		cursor: pointer;
+	}
 	.f-icon img{
 		height :30px
 	}
