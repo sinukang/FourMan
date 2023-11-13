@@ -57,11 +57,11 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
+								<td class="comment-area" style="border-bottom:0; justify-content: center;"> 
 									<div>
 										<input type="text" id="comment-write" placeholder="댓글을 작성해주세요.">
 									</div>
-									<div style="width: 20px;">
+									<div style="width: 24px;">
 										<label class="write-btn" for="comment-btn">
 											<img src="../source/images/commentbtn.png" id="btn-img">
 										</label>

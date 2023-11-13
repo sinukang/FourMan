@@ -101,7 +101,7 @@
 			</div>
 		</div>
 		<div class="top-more">
-			<input type="button" name="btn" value="더보기" onclick="check();">
+			<input type="button" name="btn" value="더보기" onclick="location.href='${pageContext.request.contextPath}/contents/contentsRanking.do';">
 		</div>
 	</div>
 	

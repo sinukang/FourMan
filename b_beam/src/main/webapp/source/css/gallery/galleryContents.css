@@ -18,6 +18,11 @@
 		border-radius: 5px 0 0 5px;
 	}
 	
+	.conttable1-cont td {
+		padding: 0;
+	}
+	
+	
 	.conttable2-cont {
 		background: #ffffffd6;
 		font-size: 16px;
@@ -25,6 +30,7 @@
 		max-height: 700px;
 		overflow-y: scroll;
 		border-radius: 0 5px 5px 0;
+		border-spacing: 0px;
 	}
 	#ffffffd6
 	
