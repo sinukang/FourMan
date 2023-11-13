@@ -41,18 +41,8 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberJoin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		}else if (location.equals("memberIdCheck.do")) {
-			//아이디체크, 반환값 0 또는 1
-			String path ="/member/memberLogin.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-		}else if (location.equals("memberNameCheck.do")) {
-			//닉네임체크, 반환값 0 또는 1
-			String path ="/member/memberLogin.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-		}else if (location.equals("memberEmailCheck.do")) {
-			//이메일체크 반환값 0 또는 1
+		}else if (location.equals("memberJoinOk.do")) {
+			//멤버 join 확인
 			String path ="/member/memberLogin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
