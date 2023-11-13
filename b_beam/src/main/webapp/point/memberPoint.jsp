@@ -43,6 +43,9 @@
 						<div class="join-id">
 							<input type="text" name="exc-point" id="exc-point" maxlength="30" placeholder=" 교환할 포인트를 입력해주세요">
 						</div>	
+						<div style="color: #6d6b70;">
+							＊10000p단위로 교환 가능합니다.
+						</div>
 						<div class="join-btn">
 							<input type="button" name="btn" value="신청하기" onclick="check();">
 						</div>

@@ -19,9 +19,9 @@
 		<div class="inner-container">
 			<jsp:include page="../source/include/mypageNavi.jsp"/>
 			<div class="btn-area">
-				<button type="button" class="btn-QnAList btn1 clicked">내 정보</button>
-				<button type="button" class="btn-QnA btn1">나의 즐겨찾기</button>
-				<button type="button" class="btn-QnA btn1">나의 후기</button>
+				<button type="button" class="btn-QnAList btn1" onclick="location.href='${pageContext.request.contextPath}/member/memberInfo.do';">내 정보</button>
+				<button type="button" class="btn-QnA btn1  clicked"  onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';" >내 정보 수정</button>
+				<button type="button" class="btn-QnA btn1" onclick="location.href='${pageContext.request.contextPath}/member/memberResign.do';">회원 탈퇴</button>
 			</div>
 			<div class="member-info">
 				<div class="tab-name-area">

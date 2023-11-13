@@ -13,10 +13,7 @@
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
 	<div class="wrap">
-		<div class="gallery">
-			<h1>GALLERY</h1>
-		</div>
-		<div class="modal-container">
+		<div class="container">
 			<table class="wrap-conttable">
 				<tr>
 					<td>
@@ -29,6 +26,8 @@
 									<td colspan="2"><img src="../source/images/testimg.png" id="cont-img"></td>
 									
 								</tr>
+								</table>
+								<table>
 								<tr>
 									<td style="border-bottom:0; padding: 5px 0 3px 15px;">전주 한옥마을 야경</td>
 									<td class="like" style="border-bottom:0; padding-right: 7px;">♥</td>
@@ -43,7 +42,7 @@
 										<div>
 											<input type="text" id="comment-write" placeholder="댓글을 작성해주세요.">
 										</div>
-										<div>
+										<div style="width: 20px;">
 											<label class="write-btn" for="comment-btn">
 												<img src="../source/images/commentbtn.png" id="btn-img">
 											</label>
@@ -57,83 +56,79 @@
 											<span>닉네임</span>
 										</div>
 										<div class="comment-cont">
-											댓글을 작성하였습니다.
+											댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.
+										</div>
+										<div class="comment-date">
+											2023.11.06
 										</div>
 										<div>
-											2023.11.06
+											<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div class="comment-id">
-											닉네임
+											<span>닉네임</span>
 										</div>
 										<div class="comment-cont">
 											댓글을 작성하였습니다.
 										</div>
-										<div>
+										<div class="comment-date">
 											2023.11.06
+										</div>
+										<div>
+											<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div class="comment-id">
-											닉네임
+											<span>닉네임</span>
 										</div>
 										<div class="comment-cont">
 											댓글을 작성하였습니다.
 										</div>
-										<div>
+										<div class="comment-date">
 											2023.11.06
+										</div>
+										<div>
+											<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div class="comment-id">
-											닉네임
+											<span>닉네임</span>
 										</div>
 										<div class="comment-cont">
 											댓글을 작성하였습니다.
 										</div>
-										<div>
+										<div class="comment-date">
 											2023.11.06
+										</div>
+										<div>
+											<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 										</div>
 									</td>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div class="comment-id">
-											닉네임
+											<span>닉네임</span>
 										</div>
 										<div class="comment-cont">
 											댓글을 작성하였습니다.
 										</div>
-										<div>
+										<div class="comment-date">
 											2023.11.06
 										</div>
-									</td>
-									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="comment-id">
-											닉네임
-										</div>
-										<div class="comment-cont">
-											댓글을 작성하였습니다.
-										</div>
 										<div>
-											2023.11.06
+											<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 										</div>
 									</td>
-									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-										<div class="comment-id">
-											닉네임
-										</div>
-										<div class="comment-cont">
-											댓글을 작성하였습니다.
-										</div>
-										<div>
-											2023.11.06
-										</div>
-									</td>
+									
 								</tr>
 								<tr>
-									<td>수정</td>
-									<td>삭제</td>
-									<td>신고</td>
+									<td colspan=3 class="bottom-btn">
+										<button type="button" onclick="">수정</button>
+										<button type="button" onclick="">삭제</button>
+										<button type="button" onclick="">&#x1F6A8;</button>
+									</td>
 								</tr>
 							</table>
 						</div>

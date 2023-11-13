@@ -9,27 +9,39 @@
 		justify-content: center;
 	}
 	
-	.conttable-cont {
+	.conttable1-cont {
 		background: #ffffffd6;
 		box-shadow: 5px 5px 15px -5px rgb(0, 0, 0);
-		width: 450px;
-		height: 750px;
+		width: 60%;
+		height: 650px;
 		border-spacing: 0px;
-		border-radius: 5px 5px 5px 5px;
+		border-radius: 5px 0 0 5px;
 	}
+	
+	.conttable2-cont {
+		background: #ffffffd6;
+		font-size: 16px;
+		display: block;
+		max-height: 650px;
+		overflow-y: scroll;
+		border-radius: 0 5px 5px 0;
+	}
+	#ffffffd6
 	
 	.wrap-conttable {
 		margin-top: 10px;
 	}
 	
 	.inner-conttable {
-		padding: 30px;
+		padding-top: 150px;
+		display: flex;
 	}
 	
 	#cont-img{
 		width: 100%;
 		height: 100%;
 		box-shadow: 0px 1px 5px 2px;
+		object-fit: cover;
 	}
 	
 	#btn-img{
@@ -39,6 +51,10 @@
 	
 	.like {
 		text-align: right;
+		border-bottom:0;
+		padding-right: 15px;
+		color:red;
+		font-size:20px;
 	}
 	
 	.page-num {
@@ -77,12 +93,14 @@
 	
 	.comment-area {
 		display: flex;
+		justify-content: space-between;
 	}
 	
 	#comment-write {
-		width: 380px;
-		height: 25px;
-		border: 1px solid;
+		width: 665px;
+		height: 30px;
+		background: #f1f1f1;
+		border: 2px solid;
 		border-radius: 5px;
 	}
 	
@@ -122,7 +140,6 @@
 		text-align: right; 
 		padding: 5px 5px 9px 0; 
 		background: #5562c8; 
-		border-radius: 0 0 4px 4px;
 	}
 	
 	button {
@@ -133,3 +150,15 @@
 		font-weight: bold;
 	}
 	
+	/* 스크롤 */
+	.conttable2-cont::-webkit-scrollbar{
+	width:10px;
+	}
+	.conttable2-cont::-webkit-scrollbar-thumb{
+		background-color: #0072de;
+		border-radius: 4px;
+	}
+	.conttable2-cont::-webkit-scrollbar-track{
+		background-color: #eee;
+		border-radius: 4px;
+	}

@@ -22,9 +22,9 @@
 		<div class="inner-container">
 			<jsp:include page="../source/include/mypageNavi.jsp"/>
 			<div class="btn-area">
-				<button type="button" class="btn-QnAList btn1 clicked">내 정보</button>
-				<button type="button" class="btn-QnA btn1">나의 즐겨찾기</button>
-				<button type="button" class="btn-QnA btn1">나의 후기</button>
+				<button type="button" class="btn-QnAList btn1 clicked" onclick="location.href='${pageContext.request.contextPath}/member/memberInfo.do';">내 정보</button>
+				<button type="button" class="btn-QnA btn1"  onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';" >내 정보 수정</button>
+				<button type="button" class="btn-QnA btn1" onclick="location.href='${pageContext.request.contextPath}/member/memberResign.do';">회원 탈퇴</button>
 			</div>
 			<div class="member-info">
 				<div class="tab-name-area">
@@ -34,16 +34,42 @@
 					<table class="info-cont">
 						<tr>
 							<td>
-								아이디 : test
+								아이디
+							</td>
+							<td>
+								test
 							</td>
 						</tr>
 						<tr>
 							<td>
-								비밀번호 :qwer1234
+								비밀번호
 							</td>
-						</tr><tr>
 							<td>
-								이메일 : asdf@naver.com
+								qwer1234
+							</td>
+						</tr>
+						<tr>
+							<td>
+								이메일
+							</td>
+							<td>
+								asdf@naver.com
+							</td>
+						</tr>
+						<tr>
+							<td>
+								포인트
+							</td>
+							<td>
+								123456p
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Lv
+							</td>
+							<td>
+								30
 							</td>
 						</tr>
 					</table>
