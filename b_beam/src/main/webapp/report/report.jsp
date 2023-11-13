@@ -51,14 +51,15 @@ $(document).ready(function(){
 		
 			    <thead>
 			        <tr>
-			        	<th id="delCheck"></th>
+			        	<th id="delCheck"><button class="delCheck">전체선택</button></th>
 			            <th id="reportNum">신고번호</th>
 			            <th id="reportCnt">누적신고</th>
 			            <th id="sort">분류</th>
 			            <th id="breed">유형</th>
 			            <th id="useName">닉네임</th>
 			            <th id="ctn">내용</th>
-			            <th id="clearYn">처리여부</th>
+			            <th id="pntYn">패널티여부</th>
+			            <th id="clearYn">글삭제여부</th>
 			        </tr>
 			    </thead>
 			    <tbody>
@@ -92,6 +93,7 @@ $(document).ready(function(){
 			            
 			            </td>
 			            <td>너 아빠없지?</td>
+			            <td>처리중</td>
 			             <td>처리중</td>
 			        </tr>
 			      	
@@ -105,6 +107,7 @@ $(document).ready(function(){
 			            <button class="userId">맥그리거</button>
 			            </td>
 			            <td>너 T야?</td>
+			            <td>처리중</td>
 			             <td>처리중</td>
 			        </tr>
 			        
@@ -117,8 +120,9 @@ $(document).ready(function(){
 			            <td>
 			            <button class="userId">호랑이한호열</button>
 			            </td>
-			            <td>@@@사다리///토토////해외사이트$$$</td>
-			             <td>처리완료</td>
+			            <td>@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$</td>
+			            <td>처리중</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -131,7 +135,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(7일)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -144,7 +149,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(영구)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -157,7 +163,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(영구)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -170,7 +177,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(30일)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -183,7 +191,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(영구)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -196,7 +205,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(7일)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			        <tr>
@@ -209,7 +219,8 @@ $(document).ready(function(){
 			            <button class="userId">사용자</button>
 			            </td>
 			            <td></td>
-			             <td>처리완료</td>
+			            <td>이용정지(30일)</td>
+			             <td>삭제완료</td>
 			        </tr>
 			        
 			

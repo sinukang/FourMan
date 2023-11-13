@@ -107,9 +107,9 @@
  }
  
 #delbutton{
-	position: relative;
-	left: 700px;
-	margin: 20px;
+	position: absolute;
+	bottom: 700px;
+	margin: 10px;
 }	
 
 .deleteBtn{
@@ -122,10 +122,11 @@
  
 /* 기본 테이블 스타일 */
 .report-table {
-    width: 80%;
+	position: relative;
+    width: 100%;
     border-collapse: collapse;
     border: none;
-    margin: 0 auto;
+    margin: 100px auto;
     box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); 
 }
 
@@ -161,12 +162,23 @@
 	width: 150px;
 }
 #ctn { 
-	width: 900px;
+	width: 600px;
  }
 #clearYn {
-	width: 50px;
+	width: 100px;
  }
  
+#pntYn{
+	width: 100px;
+}
+ 
+#delCheck{
+	width: 100px;
+ }
+.delCheck{
+	border: none;
+	background-color: rgba(0,0,0,0.1);
+}
 
  
 .modal {

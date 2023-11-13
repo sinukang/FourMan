@@ -148,10 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			                </div>
 						</th>
 								        		
-			            <th id="report" type="button" class="reportbtn">
-			                <button type="button" onclick="">&#x1F6A8;</button>
-			            </th>
-			            <th rowspan="2">...</th>
+			            
+			            <th> <button type="button" id="optBtn" onclick="">...</button></th>
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.06</th>
 		        		
@@ -181,9 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			                </div>
 						</th>
 								        		
-			            <th id="report" type="button" class="reportbtn">
-			                <button type="button" onclick="">&#x1F6A8;</button>
-			            </th>
+			            <th> <button type="button" id="optBtn" onclick="">...</button></th>
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.03</th>
 		        		
@@ -201,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		        		
 		        		<th id="star">★★★★</th>
 		        		
-		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
 		        		
 		        		<th rowspan="2">
 						    <div class="imageContainer">
@@ -210,9 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			                </div>
 						</th>
 								        		
-			            <th id="report" type="button" class="reportbtn">
-			                <button type="button" onclick="">&#x1F6A8;</button>
-			            </th>
+			            <th> <button type="button" id="optBtn" onclick="">...</button></th>
 		        	<tr>
 		        		<th id="day" colspan="2">2024.11.06</th>
 		        		
