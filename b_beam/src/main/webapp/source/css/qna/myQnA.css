@@ -1,16 +1,9 @@
 @charset "UTF-8";
 
-/*.page-inner{	
-	width: 80%;
-	margin: 50px auto;
-}*/
-.page-side{
-	width: 100%;
-	margin: 0 auto;	
+body *{
+	box-sizing: border-box;
 }
-.page-title{
-	font-size: 30px;
-}
+
 .contents-area{
 	margin-top: 20px;
 	width: 100%;
@@ -31,15 +24,19 @@
 	border-radius: 8px;
 	box-shadow: 5px 5px 15px -5px #333;
 }
-.btn1:hover{
+/*.btn1:hover{
 	transform: scale(1.05);
-}
+}*/
 .clicked{
 	color: #fff;
 	background-color: #5486C9;
 }
 .list-area{
+	display: grid;
+	grid-auto-rows: minmax(50px, auto);
+	margin: 30px 0;
 	width: 100%;
+	background-color: transparent;
 }
 .QnA-item{
 	background-color: #fff;
@@ -54,9 +51,12 @@
 .QnA-item:hover{
 	cursor: pointer;
 }
-.QnA-item.active{
-	border: 1px solid #4b55dd;
-	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+.answered{
+	border: 1px solid #219888;
+}
+.answered.active{
+	border: 3px solid #219888;
+	/*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
 }
 /*.QnA-item::before, .QnA-item::after{
 	content: '\f075';
@@ -77,10 +77,12 @@
 }*/
 .QnA-title{
 	margin: 0 35px 0 0;
+	padding: 5px 0 0 5px;
 }
 .QnA-Answer{
 	display: none;
-	margin: 30px 0 0;
+	margin: 30px 0;
+	padding: 5px 0 0 5px;
 }
 .QnA-item.active .QnA-Answer{
 	display: block;
@@ -117,9 +119,53 @@
 .QnA-item.active .QnA-toggle .fa-chevron-down{
 	display: none;
 }
-/*.QnA-item.active .QnA-toggle{
-	background-color: #9fa4a8;
-}*/
+.answer-area{
+	display: none;
+	width: 100%;
+	background-color: #eee;
+}
+.active .answer-area{
+	display: block;
+}
+.answer-writer{
+	padding: 5px;
+}
+.answer-content{
+	padding: 5px;
+}
+.unAnswered-btn-area{
+	display: none;
+	margin-bottom: 20px;
+	width: 100%;
+	height: 50px;
+	justify-content: center;
+	align-items: start;
+}
+.active + .unAnswered-btn-area{
+	display: flex;
+}
+.active.unAnswered-btn-area{
+	display: none;
+}
+.btn-Delete{
+	color: #fff;
+	background-color: #bbb;
+}
+.btn-Modify{
+	margin-left: 3%;
+	color: #fff;
+	background-color: #219888;	
+}
+.btn{
+	margin-left: 3%;
+	width: 20%;
+	height: 100%;
+	font-size: 1.1em;
+	font-weight: bold;
+	border: 0;
+	border-radius: 8px;
+	box-shadow: 5px 5px 15px -5px #333;
+}
 .write-area{
 	margin-top: 50px;
 	width: 100%;
@@ -203,7 +249,7 @@
 	display: none;
 }
 .btn-area2{
-	margin-top: 50px;
+	margin: 50px 0;
 	width: 100%;
 	display: flex;
 	justify-content: center;

@@ -19,50 +19,76 @@
 	
 	<!-- page start -->
 	<div class="container">
-		<div class="page-inner">
-			<div class="page-side">
-				<h2 class="page-title">마이페이지</h2>
+		<div class="container-title">
+			<h1>마이페이지</h1>
+		</div>
+			
+		<!-- top menu tap -->
+		<jsp:include page="../source/include/mypageNavi.jsp"/>
+		
+		<div class="contents-area">
+			<div class="btn-area">
+				<button type="button" class="btn-QnAList btn1 clicked">문의 내역</button>
+				<button type="button" class="btn-QnA btn1">문의하기</button>
 			</div>
-			
-			<!-- top menu tap -->
-			<jsp:include page="../source/include/mypageNavi.jsp"/>
-			
-			<div class="contents-area">
-				<div class="btn-area">
-					<button type="button" class="btn-QnAList btn1 clicked">문의 내역</button>
-					<button type="button" class="btn-QnA btn1">문의하기</button>
-				</div>
-				<div class="list-area">
-					<c:set var="j" value="6"></c:set>
-					<c:forEach var="i" begin="1" end="6" step="1">
-						<div class="QnA-item">
-							<h3 class="QnA-title">문의제목. 이거 어떻게 해요?${j}</h3>
-							<c:if test="${i ne 3}">
-								<p class="QnA-Answer">문의내용. 해줘${j}</p>
+			<div class="list-area">
+				<c:set var="j" value="6"></c:set>
+				<c:forEach var="i" begin="1" end="6" step="1">
+					<c:choose>
+						<c:when test="${i eq 2 || i eq 5}">	<!-- 미 답변 -->
+							<div class="QnA-item">
+								<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
+								<p class="QnA-Answer">
+									해줘${j}<br>해줘${j}<br>해줘${j}<br>해줘${j}<br>해줘${j}<br>
+								</p>
 								<!-- <i class="fa-solid fa-chevron-down"></i> -->
 								<button type="button" class="QnA-toggle">
 									<i class="fas fa-chevron-down"></i>
 									<i class="fas fa-chevron-up"></i>
 								</button>						
-							</c:if>
-						</div>
-						<c:set var="j" value="${j-1}"></c:set>
-					</c:forEach>
-				</div>
-				<div class="write-area dp-none">
-					<div class="write-content">
-						<form id="form" class="form">
-							<div class="QnA-sub">
-								<input type="text" id="title" name="bdtitle" class="input-sup" placeholder="제목을 입력해주세요">
 							</div>
-							<div class="QnA-content">
-								<textarea id="content" name="bdcont" class="textarea-content"  placeholder="내용을 입력해주세요"></textarea>
-							</div>
-						</form>
-						<div class="btn-area2">
-							<button type="button" id="write" class="btn-write btn2">등록</button>
-							<button type="button" id="cancel" class="btn-cancel btn2">취소</button>
+							<div class="unAnswered-btn-area test${j}">
+								<button class="btn-Delete btn" onclick="deleteAnswer(${j})">문의 삭제</button>
+								<button class="btn-Modify btn" onclick="modifyAnswer(${j})">문의 수정</button>
+							</div>						
+						</c:when>					
+						<c:otherwise>
+							<div class="QnA-item answered">
+								<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
+								<p class="QnA-Answer">
+									해줘${j}<br>해줘${j}<br>해줘${j}<br>해줘${j}<br>해줘${j}<br>
+								</p>
+								<!-- <i class="fa-solid fa-chevron-down"></i> -->
+								<button type="button" class="QnA-toggle">
+									<i class="fas fa-chevron-down"></i>
+									<i class="fas fa-chevron-up"></i>
+								</button>
+								<div class="answer-area">
+									<h3 class="answer-writer">운영자${j}</h3>
+									<p class="answer-content">
+										몰?루${j}<br>몰?루${j}<br>몰?루${j}<br>몰?루${j}<br>
+										몰?루${j}<br>몰?루${j}<br>몰?루${j}<br>몰?루${j}<br>
+									</p>
+								</div>
+							</div>							
+						</c:otherwise>
+					</c:choose>
+					<c:set var="j" value="${j-1}"></c:set>
+				</c:forEach>
+			</div>
+			<div class="write-area dp-none">
+				<div class="write-content">
+					<form id="form" class="form">
+						<div class="QnA-sub">
+							<input type="text" id="title" name="bdtitle" class="input-sup" placeholder="제목을 입력해주세요">
 						</div>
+						<div class="QnA-content">
+							<textarea id="content" name="bdcont" class="textarea-content"  placeholder="내용을 입력해주세요"></textarea>
+						</div>
+					</form>
+					<div class="btn-area2">
+						<button type="button" id="write" class="btn-write btn2">등록</button>
+						<button type="button" id="cancel" class="btn-cancel btn2">취소</button>
 					</div>
 				</div>
 			</div>
@@ -100,6 +126,21 @@
 			toggle.classList.toggle("active");
 		})
 	});
+	
+	function deleteAnswer(idx){
+		
+		if(confirm("정말 삭제하시겠습니까?")){
+			alert(idx + " 삭제되었습니다.");
+		}
+	}
+	
+	function modifyAnswer(idx){
+		document.querySelector(".list-area").classList.add("dp-none");
+		document.querySelector(".write-area").classList.remove("dp-none");
+		
+		document.querySelector("#title").value = "수정 시 가져올 제목" + idx;
+		document.querySelector("#content").value = "수정 시 가져올 내용" + idx;
+	}
 	
 	$(document).ready(function(){
 		

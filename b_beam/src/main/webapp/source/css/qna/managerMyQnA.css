@@ -137,9 +137,7 @@ body *{
 .answer-writer{
 	
 }
-.answer-title{
-	
-}
+
 .answer-content{
 	
 }
@@ -153,7 +151,7 @@ body *{
 }
 .btn-Delete{
 	color: #fff;
-	background-color: red;
+	background-color: #bbb;
 }
 .btn-Modify{
 	margin-left: 3%;
@@ -206,8 +204,6 @@ body *{
 	font-size: 1.1em;
 	font-weight: bold;
 	border: 0;
-	border-right: 5px;
-	border-bottom: 5px;
 	border-radius: 8px;
 	box-shadow: 5px 5px 15px -5px #333;
 }

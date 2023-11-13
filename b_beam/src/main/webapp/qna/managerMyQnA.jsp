@@ -39,11 +39,7 @@
 									<h3 class="QnA-writer">유저${j}</h3>
 									<h3 class="QnA-title">Q. 이거 어떻게 해요?${j}</h3>
 									<p class="QnA-Answer">
-										<br>해줘${j}
-										<br>해줘${j}
-										<br>해줘${j}
-										<br>해줘${j}
-										<br>해줘${j}
+										<br>해줘${j}<br>해줘${j}<br>해줘${j}<br>해줘${j}<br>해줘${j}
 									</p>
 									<!-- <i class="fa-solid fa-chevron-down"></i> -->
 									<button type="button" class="QnA-toggle">
@@ -57,7 +53,7 @@
 											나도 몰?루${j}<br>나도 몰?루${j}<br>나도 몰?루${j}<br>
 											나도 몰?루${j}<br>나도 몰?루${j}<br>나도 몰?루${j}<br>
 										</p>
-									</div>									
+									</div>
 								</div>
 							</div>
 							<div class="Answered-btn-area test${j}">
