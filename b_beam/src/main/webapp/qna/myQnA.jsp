@@ -130,7 +130,7 @@
 	function deleteAnswer(idx){
 		
 		if(confirm("정말 삭제하시겠습니까?")){
-			alert(idx + " 삭제되었습니다.");
+			alert("qano : " + idx + " 번 삭제되었습니다.");
 		}
 	}
 	
@@ -138,8 +138,8 @@
 		document.querySelector(".list-area").classList.add("dp-none");
 		document.querySelector(".write-area").classList.remove("dp-none");
 		
-		document.querySelector("#title").value = "수정 시 가져올 제목" + idx;
-		document.querySelector("#content").value = "수정 시 가져올 내용" + idx;
+		document.querySelector("#title").value = "수정 시 가져올 제목 " + idx;
+		document.querySelector("#content").value = "수정 시 가져올 내용 " + idx;
 	}
 	
 	$(document).ready(function(){

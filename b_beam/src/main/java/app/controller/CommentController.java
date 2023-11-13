@@ -36,7 +36,24 @@ public class CommentController extends HttpServlet {
 			String path ="/comment/comment.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
+		}else if(location.equals("commentList.do")) {
+			
+			
+			
+		}else if(location.equals("commentWrite.do")) {
+			
+			
+			
+		}else if(location.equals("commentModify.do")) {
+			
+			
+			
+		}else if(location.equals("commentDelete.do")) {
+			
+			
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
