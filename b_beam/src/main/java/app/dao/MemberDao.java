@@ -21,7 +21,7 @@ public class MemberDao {
 		int exec = 0;
 		
 		 String sql = "INSERT INTO member(mbid, mbpwd, mbname, mbemail, mbaddr)"
-	                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	                + "VALUES (?, ?, ?, ?, ?)";
 		
 		
 		try{

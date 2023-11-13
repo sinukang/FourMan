@@ -54,11 +54,11 @@ public class MemberController extends HttpServlet {
 			//데이터를 넘겨주면 요청 객체는 그 값을 받아서 넘어온 매개변수에
 			//담긴 값을 꺼내서 새로운 변수에 담는다
 			MemberVo mv = new MemberVo();
-			mv.setMbid("mbid");
-			mv.setMbpwd("mbpwd");
-			mv.setMbname("mbname");
-			mv.setMbemail("mbemail");
-			mv.setMbaddr("mbaddr");
+			mv.setMbid(request.getParameter("memberId"));
+			mv.setMbpwd(request.getParameter("memberPwd"));
+			mv.setMbname(request.getParameter("memberName"));
+			mv.setMbemail(request.getParameter("memberId") + "@" + request.getParameter("selectEmail"));
+			mv.setMbaddr(request.getParameter("postcode")+"/"+request.getParameter("addr")+"/"+request.getParameter("detail_addr"));
 			//DB에 입력한다
 			MemberDao md = new MemberDao();
 			int exec = md.memberInsert(mv);
@@ -78,11 +78,6 @@ public class MemberController extends HttpServlet {
 				out.println("<script>history.back();</script>");	
 			}
 		
-		}else if (location.equals("memberJoinOk.do")) {
-			//멤버 join 확인
-			String path ="/member/memberLogin.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
 		}else if (location.equals("memberLogin.do")) {
 			
 			String path ="/member/memberLogin.jsp";
