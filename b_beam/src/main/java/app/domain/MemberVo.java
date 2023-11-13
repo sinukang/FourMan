@@ -10,8 +10,8 @@ public class MemberVo {
 	private String mbdatem;
 	private String exsite;
 	private String mbdelyn;
-	private int manager;
-	private int mbaddr;
+	private String manager;
+	private String mbaddr;
 	
 	
 	public int getMbno() {
@@ -68,16 +68,16 @@ public class MemberVo {
 	public void setMbdelyn(String mbdelyn) {
 		this.mbdelyn = mbdelyn;
 	}
-	public int getManager() {
+	public String getManager() {
 		return manager;
 	}
-	public void setManager(int manager) {
+	public void setManager(String manager) {
 		this.manager = manager;
 	}
-	public int getMbaddr() {
+	public String getMbaddr() {
 		return mbaddr;
 	}
-	public void setMbaddr(int mbaddr) {
+	public void setMbaddr(String mbaddr) {
 		this.mbaddr = mbaddr;
 	}
 

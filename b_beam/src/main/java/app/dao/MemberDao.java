@@ -17,29 +17,26 @@ public class MemberDao {
 		this.conn = dbconn.getConnection();
 	}
 	
-	public int memberInsert(String mbid,String mbpwd,String mbname,
-			String mbemail,String exsite,String mbdelyn,String manager,String mbaddr){
+	public int memberInsert(MemberVo mv){
 		int exec = 0;
 		
-		 String sql = "INSERT INTO member(mbid, mbpwd, mbname, mbemail, exsite, mbdelyn, manager, mbaddr)"
+		 String sql = "INSERT INTO member(mbid, mbpwd, mbname, mbemail, mbaddr)"
 	                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		
 		try{
 			 pstmt = conn.prepareStatement(sql);
-		        pstmt.setString(1, mbid);
-		        pstmt.setString(2, mbpwd);
-		        pstmt.setString(3, mbname);
-		        pstmt.setString(4, mbemail);
-		        pstmt.setString(5, exsite);
-		        pstmt.setString(6, mbdelyn);
-		        pstmt.setString(7, manager);
-		        pstmt.setString(8, mbaddr);
+		        pstmt.setString(1, mv.getMbid());
+		        pstmt.setString(2, mv.getMbpwd());
+		        pstmt.setString(3, mv.getMbname());
+		        pstmt.setString(4, mv.getMbemail());
+		        pstmt.setString(5, mv.getMbaddr());
 			exec = pstmt.executeUpdate();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			return exec;
+		
+		return exec;
 	}
 	
 	public int memberIdCheck(String mbid){
@@ -83,7 +80,7 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				value =	rs.getInt("mbname");
+				value =	rs.getInt("cnt");
 				//value가 0이면 일치하지않는다
 				//1 일치한다
 			}
@@ -115,7 +112,7 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				value =	rs.getInt("mbemail");
+				value =	rs.getInt("cnt");
 				//value가 0이면 일치하지않는다
 				//1 일치한다
 			}
@@ -134,6 +131,40 @@ public class MemberDao {
 		
 		return value;
 	}
+	
+	public int memberLoginCheck(String mbid, String mbpwd){
+		int value=0;
+		
+		String sql="select mbno from member where mbid=? and mbpwd=?";
+		ResultSet rs = null;
+		
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mbid);
+			pstmt.setString(2, mbpwd);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()){
+				value =	rs.getInt("mbno");
+				//value가 0이면 일치하지않는다
+				//1 일치한다
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				pstmt.close();
+				conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
+	}
+	
 	
 	}
 

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import app.dao.MemberDao;
+import app.domain.MemberVo;
 
 /**
  * Servlet implementation class ContentsController
@@ -51,18 +53,15 @@ public class MemberController extends HttpServlet {
 			
 			//데이터를 넘겨주면 요청 객체는 그 값을 받아서 넘어온 매개변수에
 			//담긴 값을 꺼내서 새로운 변수에 담는다
-			String mbid = request.getParameter("mbid");
-			String mbpwd = request.getParameter("mbpwd");
-			String mbname= request.getParameter("mbname");
-			String mbemail = request.getParameter("mbemail");
-			String exsite = request.getParameter("exsite");
-			String mbdelyn = request.getParameter("mbdelyn");
-			String manager = request.getParameter("manager");
-			String mbaddr = request.getParameter("mbaddr");
-
+			MemberVo mv = new MemberVo();
+			mv.setMbid("mbid");
+			mv.setMbpwd("mbpwd");
+			mv.setMbname("mbname");
+			mv.setMbemail("mbemail");
+			mv.setMbaddr("mbaddr");
 			//DB에 입력한다
 			MemberDao md = new MemberDao();
-			int exec = md.memberInsert(mbid, mbpwd, mbname, mbemail, exsite, mbdelyn, manager, mbaddr);
+			int exec = md.memberInsert(mv);
 			
 			PrintWriter out = response.getWriter();
 			
@@ -89,6 +88,28 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberLogin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if(location.equals("memberLoginAction.do")) {
+			
+			String mbid = request.getParameter("mbid");
+			String mbpwd = request.getParameter("mbpwd");
+						
+			MemberDao md = new MemberDao();
+			int midx = 0;
+			midx = md.memberLoginCheck(mbid,mbpwd);
+
+			//Action처리하는 용도는 send방식으로 보낸다
+			
+			if (midx != 0) {  //일치하면
+				//세션에 회원아이디를 담는다 
+				HttpSession session =  request.getSession();
+				session.setAttribute("mbid", mbid);
+				session.setAttribute("mbpwd", mbpwd);
+				response.sendRedirect(request.getContextPath()+"/");
+			}else{
+				response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
+			}
+		
+			
 		}else if (location.equals("memberIdFind.do")) {
 			
 			String path ="/member/memberIdFind.jsp";
