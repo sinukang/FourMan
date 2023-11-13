@@ -15,61 +15,59 @@
 
 	<!-- header -->
 	<jsp:include page="../source/include/header.jsp"/>
-<div class="wrap">
+<div class="container">
 	<div class="container-title">
-		<h2>고객지원</h2>
+		<h1>고객지원</h1>
 	</div>
-	<div class="container">
-		<div class="page-inner">
-			<div class="contents-area">
-				<div class="btn-area2">
-					<button type="button" class="btn-Notice" onclick="location.href='${pageContext.request.contextPath}/board/noticeList.do'">공지사항</button>
-					<button type="button" class="btn-FAQ">자주 묻는 질문</button>
-				</div>
-				<div class="qna-contents">
-					<div class="list-area">
-						<c:set var="j" value="6"></c:set>
-						<c:forEach var="i" begin="1" end="6" step="1">
-							<div class="QnA-item">
-								<h3 class="QnA-title">Q.어떻게 하나요?${j}</h3>
-								<div class="QnA-Answer">
-									<p>ㄴ몰?루${j}</p>
-								</div>
-								<!-- <i class="fa-solid fa-chevron-down"></i> -->
-								<button type="button" class="QnA-toggle">
-									<i class="fas fa-chevron-down"></i>
-									<i class="fas fa-chevron-up"></i>
-								</button>	
-							</div>
-							<c:set var="j" value="${j-1}"></c:set>
-						</c:forEach>
-					</div>	
-				</div>
-				<div class="btn-area2">
-					<button id="btn-write" class="btn-write">자주 묻는 질문 등록</button>
-				</div>			
-				<div class="pagination-area">
-					<div class="paging-number-area">
-						<a href="#" class="a-arrow">
-							<i class="first-arrow-icon"></i><i class="first-arrow-icon"></i>
-						</a>
-						<a href="#" class="a-arrow">
-							<i class="prev-arrow-icon"></i>
-						</a>
-						<c:forEach var="i" begin="1" end="10" step="1">
-							<a href="#" class="page-number">${i}</a>
-						</c:forEach>
-						<a href="#" class="a-arrow">
-							<i class="next-arrow-icon"></i>
-						</a>
-						<a href="#" class="a-arrow">
-							<i class="last-arrow-icon"></i><i class="last-arrow-icon"></i>
-						</a>
+	<div class="page-inner">
+	<div class="contents-area">
+		<div class="btn-area2">
+			<button type="button" class="btn-Notice" onclick="location.href='${pageContext.request.contextPath}/board/noticeList.do'">공지사항</button>
+			<button type="button" class="btn-FAQ">자주 묻는 질문</button>
+		</div>
+		<div class="qna-contents">
+			<div class="list-area">
+				<c:set var="j" value="6"></c:set>
+				<c:forEach var="i" begin="1" end="6" step="1">
+					<div class="QnA-item">
+						<h3 class="QnA-title">Q.어떻게 하나요?${j}</h3>
+						<div class="QnA-Answer">
+							<p>ㄴ몰?루${j}</p>
+						</div>
+						<!-- <i class="fa-solid fa-chevron-down"></i> -->
+						<button type="button" class="QnA-toggle">
+							<i class="fas fa-chevron-down"></i>
+							<i class="fas fa-chevron-up"></i>
+						</button>	
 					</div>
-				</div>
+					<c:set var="j" value="${j-1}"></c:set>
+				</c:forEach>
+			</div>	
+		</div>
+		<div class="btn-area2">
+			<button id="btn-write" class="btn-write">자주 묻는 질문 등록</button>
+		</div>			
+		<div class="pagination-area">
+			<div class="paging-number-area">
+				<a href="#" class="a-arrow">
+					<i class="first-arrow-icon"></i><i class="first-arrow-icon"></i>
+				</a>
+				<a href="#" class="a-arrow">
+					<i class="prev-arrow-icon"></i>
+				</a>
+				<c:forEach var="i" begin="1" end="10" step="1">
+					<a href="#" class="page-number">${i}</a>
+				</c:forEach>
+				<a href="#" class="a-arrow">
+					<i class="next-arrow-icon"></i>
+				</a>
+				<a href="#" class="a-arrow">
+					<i class="last-arrow-icon"></i><i class="last-arrow-icon"></i>
+				</a>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp"/>

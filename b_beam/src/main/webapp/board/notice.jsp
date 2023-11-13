@@ -15,37 +15,35 @@
 
 	
 	<jsp:include page="../source/include/header.jsp"/>
-<div class="wrap">
+<div class="container">
 	<div class="container-title">
-		<h2>고객지원</h2>
+		<h1>고객지원</h1>
 	</div>
-	<div class="container">
-		<div class="page-inner">
-			<div class="content">
-				<div class="notice-area">
-					<header class=notice-head>
-						<h2><span class="notice-title">시스템임시점검안내</span></h2>
-						<div class="notice-date">2023-11-07 10:00</div>
-					</header>
-					<div class="notice-data">
-						<div class="notice-view">
-							<p>안녕하십니까 b-beam 운영자입니다.</p>
-							
-							<p>금일 b-beam의 시스템 임시점검이 23시 30분에 진행될 예정입니다.</p>
-							
-							<p>점검진행중에는 사이트 이용이 제한되오니 참고바랍니다.</p>
-							
-							<p>감사합니다.</p>
+	<div class="page-inner">
+		<div class="content">
+			<div class="notice-area">
+				<header class=notice-head>
+					<h2><span class="notice-title">시스템임시점검안내</span></h2>
+					<div class="notice-date">2023-11-07 10:00</div>
+				</header>
+				<div class="notice-data">
+					<div class="notice-view">
+						<p>안녕하십니까 b-beam 운영자입니다.</p>
 						
-						</div>
+						<p>금일 b-beam의 시스템 임시점검이 23시 30분에 진행될 예정입니다.</p>
+						
+						<p>점검진행중에는 사이트 이용이 제한되오니 참고바랍니다.</p>
+						
+						<p>감사합니다.</p>
 					
 					</div>
-				</div>
-				<div class="btn-area2">
-					<button id="btn-write" class="btn-write">공지사항 목록</button>
-				</div>			
 				
+				</div>
 			</div>
+			<div class="btn-area2">
+				<button id="btn-write" class="btn-write">공지사항 목록</button>
+			</div>			
+			
 		</div>
 	</div>
 </div>

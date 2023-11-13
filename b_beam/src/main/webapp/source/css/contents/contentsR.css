@@ -145,6 +145,7 @@
 	.rankcontainer{
 	    width: 1190px;
 	    margin: 0 auto;
+	    padding-bottom:50px;
 	}
 	.contents-info.rank{
 		width: auto;

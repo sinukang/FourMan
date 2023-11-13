@@ -13,11 +13,11 @@
 
 	<!-- header -->
 	<jsp:include page="../source/include/header.jsp"/>
-	
+<div class="container">
+	<div class="container-title">
+		<h1>고객지원</h1>
+	</div>
 	<div class="page-inner">
-		<div class="page-side">
-			<h2 class="page-title">자주 묻는 질문 등록</h2>
-		</div>
 		<div class="content">
 			<div class="write-area">
 				<form id="form" class="form">
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 	</div>
-	
+</div>	
 	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp"/>
 	

@@ -261,7 +261,9 @@
     background-size: 20px 27px;
 }
 
-
+.container .tab li.is_on .btn{
+	color: white;
+}
 
 
 
