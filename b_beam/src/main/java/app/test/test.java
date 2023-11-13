@@ -9,6 +9,7 @@ public class test {
 		dbcon.memberInsert();
 		// ignore 실험
 		// ignore 실험2
+		// ignore 실험3
 	}
 
 }
