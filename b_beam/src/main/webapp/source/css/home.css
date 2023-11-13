@@ -258,25 +258,27 @@
 		margin: 0;
 		margin-bottom: 0;
 		height : 120px;
+		display : flex;
 	}
-	
-	.footer-message{
+	.footer-info{
+		width : 60%
+	}
+	.f-info{
 		font-weight: bold;
 		font-size: 0.9rem;
 		color: white;
 		margin: 0.6rem;
 	}
-	.footer-contact{
-		font-size: 0.9rem;
-		color: white;
+	.footer-icon{
+		display:flex;
+		margin : auto 0;
+	}
+	.f-icon{
 		margin: 0.6rem;
 	}
-	.footer-copyright{
-		font-size: 0.9rem;
-		color: white;
-		margin: 0.6rem;
+	.f-icon img{
+		height :30px
 	}
-	
 	.top-more {
 		display: flex;
 		justify-content: flex-end;
