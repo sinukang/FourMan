@@ -62,40 +62,33 @@ document.addEventListener('DOMContentLoaded', function() {
 			</div>
 			
 			<div class="small-images-section">
-			    <img class="smallImage" src="../source/images/duck4.jpg" style="width: 100px; height: 80px;" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck1.png" style="width: 100px; height: 80px;" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck3.jpg" style="width: 100px; height: 80px;" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck2.png" style="width: 100px; height: 80px;" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck5.jpg" style="width: 100px; height: 80px;" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck4.jpg" style="width: 100px; height: 80px;" alt="Small Image">
+			    <img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image">
+				<img class="smallImage" src="../source/images/duck1.png" alt="Small Image">
+				<img class="smallImage" src="../source/images/duck3.jpg" alt="Small Image">
+				<img class="smallImage" src="../source/images/duck2.png" alt="Small Image">
+				<img class="smallImage" src="../source/images/duck5.jpg" alt="Small Image">
+				<img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image">
 			</div>
 			
 		
 			
 			<div class="tabBox">
 				<ul class="tab">
-					<li class="is_on">
-		    			<a href="#tab1" class="btn" onclick="swapTab('#tab1')">기본정보</a>
+					<li>
+		    			<a href="#tab1" class="btn" >기본정보</a>
 					</li>
 					  <li>
-						<a href="#tab2" class="btn" onclick="swapTab('#tab2')">이용안내</a>
+						<a href="#tab2" class="btn" >이용안내</a>
 					</li>
 					  <li>
-					   <a href="#tab3" class="btn" onclick="swapTab('#tab3')">위치 및 상세정보</a>
+					   <a href="#tab3" class="btn" >위치 및 상세정보</a>
 					</li>
 				</ul>
 			
-				<div class="tab-content" id="tab1">
-		            이곳에 해당 게시물의 기본정보가 출력됩니다
+				<div class="tab-content">
+		            이곳에 해당 게시물의 정보가 출력됩니다
 		        </div>
-		            
-		       	<div class="tab-content" id="tab2" style="display: none;">
-		            이곳에 이용안내에 대한 부분이 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 이용안내에 대한 부분이 출력됩 출력됩니다 
-		        </div>
-		            
-		        <div class="tab-content" id="tab3" style="display: none;">
-		            이곳에 위치안내 및 상세정보에 대한 부분이 출력됩니다 
-		        </div>
+		       
 		        
 			</div>
 		</div>
@@ -112,8 +105,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		        <option value="5">★★★★★</option>
 		    </select>
 		    <textarea id="commentInput" placeholder="후기를 남겨주세요" oninput="updateCharacterCount()"></textarea>
+		   
+		  
+		    <div class="commentCnt">글자수 제한 <span>100</span>/100자</div>
 		    <button class="commentBtn" onclick="">완료</button>
-		    <div class="charCount">글자수 제한 <span>0</span>/100자</div>
+		 
 		    
 			    <label for="imageUpload" class="custom-image-upload-button">
 			        <i class="fas fa-camera"></i> 
@@ -234,54 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<jsp:include page="../source/include/footer.jsp"/>
 	
-<script type="text/javascript">
-// 페이지가 로드될 때 'tab1'을 보여주기 위해 해당 탭 콘텐츠 호출--------------------------
-// 탭 전환을 처리하는 함수
-function swapTab(tabId) {
-    // 모든 탭 콘텐츠를 숨김
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => {
-        content.style.display = 'none';
-    });
-
-    // 선택한 탭 콘텐츠를 화면에 표시
-    const selectedTab = document.querySelector(tabId);
-    if (selectedTab) {
-        selectedTab.style.display = 'block';
-    }
-
-    // 모든 탭에서 'is_on' 클래스 제거
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => {
-        tab.classList.remove('is_on');
-    });
-
-    // 클릭한 탭에 'is_on' 클래스 추가
-    const clickedTab = document.querySelector(`a[href='${tabId}']`);
-    if (clickedTab) {
-        clickedTab.parentNode.classList.add('is_on');
-    }
-}
-
-//모든 탭 버튼에 클릭 이벤트 추가---------------------------------------
-document.querySelectorAll('.btn').forEach(tab => {
-    tab.addEventListener('click', function(event) {
-        event.preventDefault();
-        const tabId = tab.getAttribute('href');
-        swapTab(tabId);
-
-        // 모든 탭에서 'is_on' 클래스 제거
-        const tabs = document.querySelectorAll('.tab li');
-        tabs.forEach(tab => {
-            tab.classList.remove('is_on');
-        });
-
-        // 클릭한 탭에 'is_on' 클래스 추가
-        tab.parentElement.classList.add('is_on');
-    });
-});
-
-</script>
 
 
 <script>
@@ -290,21 +238,7 @@ document.querySelectorAll('.btn').forEach(tab => {
 </script>
 
 
-<script>
-//글자수 제한 카운트 증가 및 제한 스크립트---------------------------------------------- 
-function updateCharacterCount() {
-    const commentInput = document.getElementById('commentInput');
-    const charCount = document.querySelector('.charCount span');
-    const maxChar = 100; // 최대 글자 수
 
-    charCount.textContent = commentInput.value.length;
-
-    if (commentInput.value.length > maxChar) {
-        commentInput.value = commentInput.value.slice(0, maxChar);
-        charCount.textContent = maxChar;
-    }
-}
-</script>
 
 <script>
 //이미지 업로드 파일 선택 + 선택된 파일 이미지를 미리보기할수있는 기능 -----------------------
