@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import app.dao.MemberDao;
 
 /**
  * Servlet implementation class ContentsController
@@ -41,6 +44,41 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberJoin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if(location.equals("memberJoinAction.do")) {
+			
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=UTF-8");
+			
+			//데이터를 넘겨주면 요청 객체는 그 값을 받아서 넘어온 매개변수에
+			//담긴 값을 꺼내서 새로운 변수에 담는다
+			String mbid = request.getParameter("mbid");
+			String mbpwd = request.getParameter("mbpwd");
+			String mbname= request.getParameter("mbname");
+			String mbemail = request.getParameter("mbemail");
+			String exsite = request.getParameter("exsite");
+			String mbdelyn = request.getParameter("mbdelyn");
+			String manager = request.getParameter("manager");
+			String mbaddr = request.getParameter("mbaddr");
+
+			//DB에 입력한다
+			MemberDao md = new MemberDao();
+			int exec = md.memberInsert(mbid, mbpwd, mbname, mbemail, exsite, mbdelyn, manager, mbaddr);
+			
+			PrintWriter out = response.getWriter();
+			
+
+			
+			
+			
+			if (exec == 1) {
+				//자동이동메소드
+				//response.sendRedirect(request.getContextPath()+"/member/memberList.html");	
+				out.println("<script>alert('회원가입 되었습니다.');"
+				+	"document.location.href='"+request.getContextPath()+"/member/memberJoinOk.do'</script>");
+			}else{
+				out.println("<script>history.back();</script>");	
+			}
+		
 		}else if (location.equals("memberJoinOk.do")) {
 			//멤버 join 확인
 			String path ="/member/memberLogin.jsp";

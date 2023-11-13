@@ -12,6 +12,8 @@ public class MemberVo {
 	private String mbdelyn;
 	private int manager;
 	private int mbaddr;
+	
+	
 	public int getMbno() {
 		return mbno;
 	}
