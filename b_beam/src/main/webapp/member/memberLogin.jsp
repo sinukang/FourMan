@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,13 +25,15 @@
 			<div class="login-body">
 				<form name="frm" id="login-form">
 					<div class="body-id">
-						<input type="text" name="memberId" placeholder=" ID">
+						<input type="text" name="memberId" id="memberId" placeholder=" ID">
 					</div>
 					<div class="body-pwd">
-						<input type="password" name="memberPwd" placeholder=" PASSWORD">
+						<input type="password" name="memberPwd" id="memberPwd" placeholder=" PASSWORD">
 					</div>
+					<div class="error_text item_style" id="checkmsg" style="display:none;">입력되지 않은 부분이 있습니다. 확인해주세요</div>
+					<div class="error_text item_style" id="checkmsg2" style="display:none;">아이디 또는 비밀번호가 일치하지 않습니다. 확인해주세요</div>
 					<div class="login-btn">
-						<input type="submit" name="btn" value="Login" onclick="check();">
+						<input type="button" name="btn" value="Login" onclick="check();">
 					</div>
 					<div class="login-btn">
 							<input type="submit" name="btn" value="네이버로그인" onclick="check();" style="width:49%; background: #059905;">
@@ -58,6 +61,40 @@
 	
 	
 	<script type="text/javascript">
+	function check(){
+		$("#checkmsg").css("display","none");
+		$("#checkmsg2").css("display","none");
+		if($("#memberId").val()==""){
+			$("#checkmsg").css("display","");
+			$("#memberId").focus();
+			return;
+		}else if($("#memberPwd").val()==""){
+			$("#checkmsg").css("display","");
+			$("#memberPwd").focus();
+			return;
+		}else{
+			login();
+			
+		}
+	}
+	function login(){
+		var id = $("#memberId").val();
+		var pwd = $("#memberPwd").val();
+		$.ajax({
+			type : "post",
+			url: "${pageContext.request.contextPath}/member/memberLoginAction.do",
+			data :{"memberId":id,"memberPwd":pwd},
+			dataType: "json",
+			success : function(data) {
+				if(data.value == 0){
+					$("#checkmsg2").css("display","");
+					$("#memberPwd").focus();
+				}else{
+					location.href='${pageContext.request.contextPath}/';					
+				}
+			}
+		});  
+	}
 	  	var naver_id_login = new naver_id_login("GBMgKClIDVZzjMHwAaNw", "http://localhost:8080/teamProject_main/Home.jsp");
 	  	var state = naver_id_login.getUniqState();
 	  	naver_id_login.setButton("white", 3,40);

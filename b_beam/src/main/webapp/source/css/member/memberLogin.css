@@ -104,3 +104,10 @@ input[name="btn"]:hover {
 .info-btn input {
 	margin-right: 5px;
 }
+
+.error_text {
+    margin: 3px;
+    font-size: 13px;
+    color: #ff3f3f;
+	
+}

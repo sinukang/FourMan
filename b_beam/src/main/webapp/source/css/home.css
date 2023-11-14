@@ -85,6 +85,25 @@
 	    background-position: 50% 50% !important;
 	    border-radius: 100%;
 	}
+	.login{
+		color : white;
+		font-size : 15px;
+		text-align : center;
+	}
+	.logout{
+		color : white;
+		font-size : 15px;
+		text-align : center;
+	}
+	.logoutbutton{
+		display: inline-block;
+	    padding: 50px;
+		background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: 50% 50% !important;
+	    border-radius: 100%;
+		
+	}
 	
 	/* 슬라이드 */
     .swiper {
@@ -318,4 +337,3 @@
 		box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
 		transition: 0.3s;
 	}
-	

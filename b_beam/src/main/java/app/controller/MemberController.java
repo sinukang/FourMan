@@ -57,7 +57,7 @@ public class MemberController extends HttpServlet {
 			mv.setMbid(request.getParameter("memberId"));
 			mv.setMbpwd(request.getParameter("memberPwd"));
 			mv.setMbname(request.getParameter("memberName"));
-			mv.setMbemail(request.getParameter("memberId") + "@" + request.getParameter("selectEmail"));
+			mv.setMbemail(request.getParameter("memberEmail"));
 			mv.setMbaddr(request.getParameter("postcode")+"/"+request.getParameter("addr")+"/"+request.getParameter("detail_addr"));
 			//DB에 입력한다
 			MemberDao md = new MemberDao();
@@ -85,26 +85,25 @@ public class MemberController extends HttpServlet {
 			rd.forward(request, response);
 		}else if(location.equals("memberLoginAction.do")) {
 			
-			MemberVo mv = new MemberVo();
-			mv.setMbid(request.getParameter("mbid"));
-			mv.setMbpwd(request.getParameter("mbpwd"));
+			MemberVo mv1 = new MemberVo();
+			mv1.setMbid(request.getParameter("memberId"));
+			mv1.setMbpwd(request.getParameter("memberPwd"));
 			
 			
 			MemberDao md = new MemberDao();
 			int mbno = 0;
-			mbno = md.memberLoginCheck(mv);
-
+			MemberVo mv2 = md.memberLoginCheck(mv1);
+			mbno = mv2.getMbno();
 			//Action처리하는 용도는 send방식으로 보낸다
-			
+			System.out.println(mbno);
+			PrintWriter out = response.getWriter();
 			if (mbno != 0) {  //일치하면
 				//세션에 회원아이디를 담는다 
 				HttpSession session =  request.getSession();
-				session.setAttribute("mbid", mv.getMbid());
+				session.setAttribute("mbname", mv2.getMbname());
 				session.setAttribute("mbno", mbno);
-				response.sendRedirect(request.getContextPath()+"/");
-			}else{
-				response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
 			}
+			out.print("{\"value\":\""+mbno+"\"}");
 		}else if(location.equals("memberLogout.do")) {
 			
 			HttpSession session= request.getSession();

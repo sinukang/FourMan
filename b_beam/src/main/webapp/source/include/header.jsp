@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <link href="../source/css/home.css" type="text/css" rel="stylesheet">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="header">
 	<div class="header-logo">
 		<h1 class="logo">
@@ -30,9 +31,22 @@
 			</li>
 		</ul>
 	</div>
-	<span class="login">
-		<a class="loginbutton" href="${pageContext.request.contextPath}/member/memberLogin.do">
-		<img src="${pageContext.request.contextPath}/source/images/login.png">
-		</a>
-	</span>
+	<c:choose>
+		<c:when test="${not empty mbno}">
+			<div class="logout">
+				<a class="logoutbutton" href="${pageContext.request.contextPath}/member/memberLogout.do">
+					<img src="${pageContext.request.contextPath}/source/images/logout.png">
+					<br>로그아웃
+				</a>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="login">
+				<a class="loginbutton" href="${pageContext.request.contextPath}/member/memberLogin.do">
+					<img src="${pageContext.request.contextPath}/source/images/login.png">
+					<br>로그인/회원가입
+				</a>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </header>
