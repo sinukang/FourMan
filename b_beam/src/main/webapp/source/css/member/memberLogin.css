@@ -111,3 +111,14 @@ input[name="btn"]:hover {
     color: #ff3f3f;
 	
 }
+.pass_text {
+    margin: 3px;
+    font-size: 13px;
+    color: #4e71d3;
+	
+}
+.pass_text.findid{
+	margin:5px 5px 15px 5px;
+	font-size: 15px;
+	text-align: center;
+}
