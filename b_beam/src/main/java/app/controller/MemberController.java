@@ -197,7 +197,7 @@ public class MemberController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		} else if (location.equals("memberIdFindAction.do")) {
-		    String email = request.getParameter("email");
+		    String email = request.getParameter("memberEmail"); // 변경: email 파라미터로 받음
 
 		    MemberDao md = new MemberDao();
 		    String memberId = md.memberIdFind(email);
@@ -212,8 +212,16 @@ public class MemberController extends HttpServlet {
 		        request.setAttribute("message", "입력하신 이메일로 가입된 계정이 없습니다.");
 		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFind.jsp");
 		        rd.forward(request, response);
-		    }   
-		  
+		    }
+		    // memberIdFindAction.do에서의 아이디 일부 가리기
+		    if (memberId != null) {
+		        String star = "";
+		        for (int i = 0; i < (memberId.length() - 4); i++) {
+		            star += "*";
+		        }
+		        memberId = memberId.substring(0, 2) + star + memberId.substring(memberId.length() - 2);
+		        request.setAttribute("foundMemberId", memberId);
+		    }
 		}else if (location.equals("memberPwdFind.do")) {
 			
 			String path ="/member/memberPwdFind.jsp";

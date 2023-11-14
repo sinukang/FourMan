@@ -166,10 +166,10 @@ public class MemberDao {
 	}
 
 	 public String memberIdFind(String mbemail) {
-	    String memberId = null;
-	    
-	    String sql = "SELECT mbid FROM member WHERE mbemail=?";
-	    ResultSet rs = null;
+	        String memberId = null;
+	        
+	        String sql = "SELECT mbid FROM member WHERE mbemail=?";
+	        ResultSet rs = null;
 
 	        try {
 	            pstmt = conn.prepareStatement(sql);
