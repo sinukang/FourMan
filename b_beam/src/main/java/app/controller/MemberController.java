@@ -80,7 +80,7 @@ public class MemberController extends HttpServlet {
 			}else{
 				out.println("<script>history.back();</script>");	
 			}
-		   } else if (location.equals("getAuthNumber.do")) {
+		   } else if (location.equals("getsign.do")) {
 			   
 		        HttpSession session = request.getSession(); // 변경된 부분
 		        String authNumber = (String) session.getAttribute("MAIL_NUMBER");
@@ -108,7 +108,7 @@ public class MemberController extends HttpServlet {
 				    PrintWriter out = response.getWriter();
 				    out.print(jsonResponse.toJSONString());
 				    
-				} else if (location.equals("membernickcheck.do")) {
+				} else if (location.equals("memberNickCheck.do")) {
 				    String nick = request.getParameter("memberName");
 
 				    MemberDao md = new MemberDao();
