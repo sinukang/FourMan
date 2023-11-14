@@ -31,6 +31,7 @@
 		overflow-y: scroll;
 		border-radius: 0 5px 5px 0;
 		border-spacing: 0px;
+		width: 63%;
 	}
 	#ffffffd6
 	
@@ -131,7 +132,7 @@
 	}
 	
 	.comment-id {
-		width: 12%;
+		width: 10%;
 	}
 	
 	.comment-cont {
@@ -139,7 +140,7 @@
 	}
 	
 	.comment-date {
-		width: 14%;
+		width: 8%;
 	}
 	
 	.bottom-btn {

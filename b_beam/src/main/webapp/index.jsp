@@ -111,7 +111,6 @@
 	 <!-- Swiper JS -->
 	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-	Initialize Swiper
 	<script>
 		var swiper = new Swiper(".mySwiper", {
 			spaceBetween: 30,

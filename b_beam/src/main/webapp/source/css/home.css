@@ -113,9 +113,21 @@
     
     .slide-text {
     	position: absolute;
-    	margin: 400px 1000px 0 0;
     	color: white;
+    	font-size: 20px;
     	text-align: right;
+    	opacity: 0;
+    	transition : 0.5s;
+    	top: 55%;
+    	left: 15%;
+    }
+    
+    .swiper-slide-active .slide-text {
+    	opacity: 1;
+    	transition : 1s;
+    	top: 45%;
+    	left: 15%;
+    	z-index: 1;
     }
     
     /* 슬라이드 */

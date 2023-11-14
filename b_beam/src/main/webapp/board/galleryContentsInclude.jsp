@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
+<link href="../source/css/gallery/
+galleryContents.css" type="text/css" rel="stylesheet">
 <link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
 <link href="../source/css/home.css" type="text/css" rel="stylesheet">
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <div class="wrap">
 	<div class="container">
@@ -69,6 +70,8 @@
 									</div>
 								</td>
 							</tr>
+							
+							<!-- 댓글 영역 -->
 							<tr>
 								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 									<div class="comment-id">
@@ -81,266 +84,17 @@
 										2023.11.06
 									</div>
 									<div>
+										<button type="button" style="color: black" onclick="">수정</button>
+										<button type="button" style="color: black" onclick="">삭제</button>
 										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								<td class="comment-area" colspan="2" style="border-bottom:0;"> 
-									<div class="comment-id">
-										<span>닉네임</span>
-									</div>
-									<div class="comment-cont">
-										댓글을 작성하였습니다.
-									</div>
-									<div class="comment-date">
-										2023.11.06
-									</div>
-									<div>
-										<button type="button" style="margin-top: -4px	;" onclick="">&#x1F6A8;</button>
-									</div>
-								</td>
-								
 							</tr>
+							<!-- 댓글 영역 -->
+							
 							<tr>
 								<td colspan=3 class="bottom-btn">
-									<button type="button" onclick="">수정</button>
+									<button type="button" id="modi" onclick="">수정</button>
 									<button type="button" onclick="">삭제</button>
 									<button type="button" onclick="">&#x1F6A8;</button>
 								</td>
@@ -352,22 +106,3 @@
 		</table>
 	</div>
 </div>
-
- <!-- Swiper JS -->
-<!--	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
-	Initialize Swiper
-	<script>
-		var swiper = new Swiper(".mySwiper", {
-			spaceBetween: 30,
-			centeredSlides: true,
-			pagination: {
-				el: ".swiper-pagination",
-				clickable: true,
-			},
-			navigation: {
-				nextEl: ".swiper-button-next",
-				prevEl: ".swiper-button-prev",
-			},
-		});
-	</script> -->

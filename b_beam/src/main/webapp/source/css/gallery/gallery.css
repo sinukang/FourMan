@@ -119,5 +119,11 @@
 		color: white;
 		font-size:40px;
 		cursor: pointer;
+		position: absolute;
+		margin: 5% 0 0 80%;
+	}
+	
+	.swiper-wrapper {
+		width: 500px !important;
 	}
 	

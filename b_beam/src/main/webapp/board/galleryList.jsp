@@ -8,7 +8,7 @@
 	<title>Insert title here</title>
 	<link href="../source/css/home.css" type="text/css" rel="stylesheet">
 	<link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
-	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 	
 </head>
 <body>
@@ -19,7 +19,11 @@
 		</div>
 		<div class="inner-container">
 			<table class="wrap-table">
-				<tr>
+				<!-- <tr> -->
+				<c:forEach var="list" begin="1" end="10" step="1">
+					<c:if test="${list%4 == 1}">
+						<tr>
+					</c:if>
 					<td>
 					<div class="inner-table">
 						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
@@ -32,14 +36,22 @@
 									
 								</tr>
 								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
+									<td style="border-bottom:0; padding-left: 10px;">
+										전주 한옥마을 야경
+									</td>
+									<td class="like" style="border-bottom:0; padding-right: 10px;">
+									♥
+									</td>
 								</tr>
 							</table>
 						</button>
 					</div>
 					</td>
-					<td>
+					<c:if test="${list == 1 && list%4 == 0}">
+						</tr>
+					</c:if>					
+				</c:forEach>
+					<%-- <td>
 					<div class="inner-table">
 						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
 							<table class="table-cont" style=" cursor: pointer;">
@@ -95,82 +107,9 @@
 							</table>
 						</button>
 					</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">클릭시 모달 팝업창</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td>
-					<td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td>
-					<td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td>
-					<td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>									
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td>
-				</tr>
+					</td> --%>
+				<!-- </tr> -->
+				
 				<tr>
 					<td colspan="4" class="write-btn">
 						<div style="margin-top: 28px;">
@@ -212,10 +151,11 @@
 	
 	<jsp:include page="../source/include/footer.jsp"/>
 	
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 	
-	<!-- 모달 팝업 스크립트 -->
 	<script type="text/javascript">
 
+		/* 모달 팝업 스크립트 */
 		const popup = document.querySelectorAll('.popupBtn');
 		const modal = document.getElementById('modalWrap');
 		const closeBtn = document.getElementById('closeBtn');
@@ -239,8 +179,26 @@
 				modal.style.display = "none";
 			}
 		}
+		
+		/* 슬라이드 */	
+	
+		var swiper = new Swiper(".mySwiper", {
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoHeight : true,
+			slidesPerView: 1,
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});
+	
+		
 	</script>
-	<!-- 모달 팝업 스크립트 -->
 	
 </body>
 </html>
