@@ -13,7 +13,7 @@
 		value = 1;
 		memberId = "kangsinu";
 		for(int i=0; i < (memberId.length() - 6);i++){
-			star += "*";	
+			star += "*";
 		}
 	}
 	

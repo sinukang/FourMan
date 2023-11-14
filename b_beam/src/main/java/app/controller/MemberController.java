@@ -82,7 +82,7 @@ public class MemberController extends HttpServlet {
 			}
 		   } else if (location.equals("getsign.do")) {
 			   
-		        HttpSession session = request.getSession(); // 변경된 부분
+		        HttpSession session = request.getSession();
 		        String authNumber = (String) session.getAttribute("MAIL_NUMBER");
 
 		        if (authNumber == null) authNumber = "";
@@ -174,7 +174,6 @@ public class MemberController extends HttpServlet {
 			MemberVo mv2 = md.memberLoginCheck(mv1);
 			mbno = mv2.getMbno();
 			//Action처리하는 용도는 send방식으로 보낸다
-			System.out.println(mbno);
 			PrintWriter out = response.getWriter();
 			if (mbno != 0) {  //일치하면
 				//세션에 회원아이디를 담는다 
@@ -182,7 +181,7 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("mbname", mv2.getMbname());
 				session.setAttribute("mbno", mbno);
 			}
-			out.print("{\":value\"\""+mbno+"\"}");    
+			out.print("{\":value\":\""+mbno+"\"}");    
 		}else if(location.equals("memberLogout.do")) {
 			
 			HttpSession session= request.getSession();
@@ -197,6 +196,24 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberIdFind.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		} else if (location.equals("memberIdFindAction.do")) {
+		    String email = request.getParameter("email");
+
+		    MemberDao md = new MemberDao();
+		    String memberId = md.memberIdFind(email);
+
+		    if (memberId != null) {
+		        // 아이디를 찾았을 때의 처리
+		        request.setAttribute("foundMemberId", memberId);
+		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFindResult.jsp");
+		        rd.forward(request, response);
+		    } else {
+		        // 아이디를 찾지 못했을 때의 처리
+		        request.setAttribute("message", "입력하신 이메일로 가입된 계정이 없습니다.");
+		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFind.jsp");
+		        rd.forward(request, response);
+		    }   
+		  
 		}else if (location.equals("memberPwdFind.do")) {
 			
 			String path ="/member/memberPwdFind.jsp";
