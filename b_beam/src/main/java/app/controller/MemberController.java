@@ -201,27 +201,23 @@ public class MemberController extends HttpServlet {
 
 		    MemberDao md = new MemberDao();
 		    String memberId = md.memberIdFind(email);
-
+		    int value = 0;
+			PrintWriter out = response.getWriter();
+			JSONObject jsonResponse = new JSONObject();
 		    if (memberId != null) {
 		        // 아이디를 찾았을 때의 처리
-		        request.setAttribute("foundMemberId", memberId);
-		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFindResult.jsp");
-		        rd.forward(request, response);
-		    } else {
-		        // 아이디를 찾지 못했을 때의 처리
-		        request.setAttribute("message", "입력하신 이메일로 가입된 계정이 없습니다.");
-		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFind.jsp");
-		        rd.forward(request, response);
-		    }
-		    // memberIdFindAction.do에서의 아이디 일부 가리기
-		    if (memberId != null) {
+		    	value = 1;
 		        String star = "";
 		        for (int i = 0; i < (memberId.length() - 4); i++) {
 		            star += "*";
 		        }
 		        memberId = memberId.substring(0, 2) + star + memberId.substring(memberId.length() - 2);
-		        request.setAttribute("foundMemberId", memberId);
+			    // memberIdFindAction.do에서의 아이디 일부 가리기
+			    jsonResponse.put("memberId", memberId);
 		    }
+
+		    jsonResponse.put("value", value);
+			out.print(jsonResponse.toJSONString());
 		}else if (location.equals("memberPwdFind.do")) {
 			
 			String path ="/member/memberPwdFind.jsp";
