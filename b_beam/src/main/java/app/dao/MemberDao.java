@@ -132,23 +132,23 @@ public class MemberDao {
 		return value;
 	}
 	
-	public int memberLoginCheck(MemberVo mv){
-		int value=0;
-		
-		String sql="select mbno from member where mbid=? and mbpwd=?";
-		ResultSet rs = null;
-		
-		try{
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mv.getMbid());
-			pstmt.setString(2, mv.getMbpwd());
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()){
-				value =	rs.getInt("mbno");
-				//value가 0이면 일치하지않는다
-				//1 일치한다
-			}
+	public MemberVo memberLoginCheck(MemberVo mv) {
+	    
+	    String sql = "SELECT mbno, mbname FROM member WHERE mbid=? AND mbpwd=?";
+	    ResultSet rs = null;
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, mv.getMbid());
+	        pstmt.setString(2, mv.getMbpwd());
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	           mv = new MemberVo();
+	           mv.setMbno(rs.getInt("mbno"));
+	           mv.setMbname(rs.getString("mbname"));
+	            
+	        }
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -162,7 +162,7 @@ public class MemberDao {
 			}
 		}
 		
-		return value;
+		return mv;
 	}
 	
 	
