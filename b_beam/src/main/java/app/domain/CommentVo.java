@@ -1,6 +1,6 @@
 package app.domain;
 
-public class CommentVo {
+public class CommentVo extends MemberVo{
 	private int cmno;
 	private int mbno;
 	private int bdno;
