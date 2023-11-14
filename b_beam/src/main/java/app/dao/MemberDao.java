@@ -132,7 +132,7 @@ public class MemberDao {
 		return value;
 	}
 	
-	public int memberLoginCheck(String mbid, String mbpwd){
+	public int memberLoginCheck(MemberVo mv){
 		int value=0;
 		
 		String sql="select mbno from member where mbid=? and mbpwd=?";
@@ -140,8 +140,8 @@ public class MemberDao {
 		
 		try{
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mbid);
-			pstmt.setString(2, mbpwd);
+			pstmt.setString(1, mv.getMbid());
+			pstmt.setString(2, mv.getMbpwd());
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()){

@@ -85,25 +85,34 @@ public class MemberController extends HttpServlet {
 			rd.forward(request, response);
 		}else if(location.equals("memberLoginAction.do")) {
 			
-			String mbid = request.getParameter("mbid");
-			String mbpwd = request.getParameter("mbpwd");
-						
+			MemberVo mv = new MemberVo();
+			mv.setMbid(request.getParameter("mbid"));
+			mv.setMbpwd(request.getParameter("mbpwd"));
+			
+			
 			MemberDao md = new MemberDao();
-			int midx = 0;
-			midx = md.memberLoginCheck(mbid,mbpwd);
+			int mbno = 0;
+			mbno = md.memberLoginCheck(mv);
 
 			//Action처리하는 용도는 send방식으로 보낸다
 			
-			if (midx != 0) {  //일치하면
+			if (mbno != 0) {  //일치하면
 				//세션에 회원아이디를 담는다 
 				HttpSession session =  request.getSession();
-				session.setAttribute("mbid", mbid);
-				session.setAttribute("mbpwd", mbpwd);
+				session.setAttribute("mbid", mv.getMbid());
+				session.setAttribute("mbno", mbno);
 				response.sendRedirect(request.getContextPath()+"/");
 			}else{
 				response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
 			}
-		
+		}else if(location.equals("memberLogout.do")) {
+			
+			HttpSession session= request.getSession();
+			session.removeAttribute("mbid");
+			session.removeAttribute("mbno");
+			session.invalidate();
+			
+			response.sendRedirect(request.getContextPath()+"/");
 			
 		}else if (location.equals("memberIdFind.do")) {
 			
@@ -137,6 +146,7 @@ public class MemberController extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
