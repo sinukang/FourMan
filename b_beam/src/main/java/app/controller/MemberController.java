@@ -3,9 +3,11 @@ package app.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.json.simple.parser.ParseException;
 
 import app.dao.MemberDao;
 import app.domain.MemberVo;
+import app.util.MailSender;
 
 /**
  * Servlet implementation class ContentsController
@@ -77,7 +80,83 @@ public class MemberController extends HttpServlet {
 			}else{
 				out.println("<script>history.back();</script>");	
 			}
-		
+		   } else if (location.equals("getsign.do")) {
+			   
+		        HttpSession session = request.getSession();
+		        String authNumber = (String) session.getAttribute("MAIL_NUMBER");
+
+		        if (authNumber == null) authNumber = "";
+
+		        response.setContentType("application/json");
+		        response.setCharacterEncoding("UTF-8");
+
+		        PrintWriter out = response.getWriter();
+		        out.print("{\"authNumber\":\"" + authNumber + "\"}");
+		   }else if (location.equals("memberIdCheck.do")) {
+				    String memberId = request.getParameter("memberId");
+
+				    MemberDao md = new MemberDao();
+				    int value = md.memberIdCheck(memberId);
+
+				    // JSON 응답을 생성
+				    JSONObject jsonResponse = new JSONObject();
+				    jsonResponse.put("value", value);
+
+				    response.setContentType("application/json");
+				    response.setCharacterEncoding("UTF-8");
+
+				    PrintWriter out = response.getWriter();
+				    out.print(jsonResponse.toJSONString());
+				    
+				} else if (location.equals("memberNickCheck.do")) {
+				    String nick = request.getParameter("memberName");
+
+				    MemberDao md = new MemberDao();
+				    int value = md.memberNicknameCheck(nick);
+
+				    // JSON 응답을 생성
+				    JSONObject jsonResponse = new JSONObject();
+				    jsonResponse.put("value", value);
+
+				    response.setContentType("application/json");
+				    response.setCharacterEncoding("UTF-8");
+
+				    PrintWriter out = response.getWriter();
+				    out.print(jsonResponse.toJSONString());
+				    
+				} else if (location.equals("memberEmailCheck.do")) {
+				    String email = request.getParameter("memberEmail");
+				    MemberDao md = new MemberDao();
+				    int value = 0;
+				    Random random = new Random();
+				    String authNumber = "";
+
+				    for(int i=0; i < 6; i++) {
+				        authNumber += random.nextInt(10);			
+				    }
+				    MailSender mail = new MailSender();
+
+				    value = md.memberEmailCheck(email);
+				    String str = "{\"value\":\"" + value + "\"}";
+
+				    if (value == 0) {
+				        String title = "회원가입 인증 메일입니다.";
+				        String body = "인증번호 : " + authNumber;
+
+				        if (mail.MailSend(email, title, body)) {
+				            HttpSession session = request.getSession();
+				            session.removeAttribute("MAIL_NUMBER");
+				            session.setAttribute("MAIL_NUMBER", authNumber);
+				            System.out.println("send mail ok");
+				        }
+				    }
+
+				    response.setContentType("application/json");
+				    response.setCharacterEncoding("UTF-8");
+
+				    PrintWriter out = response.getWriter();
+				    out.print(str);
+				
 		}else if (location.equals("memberLogin.do")) {
 			
 			String path ="/member/memberLogin.jsp";
@@ -95,7 +174,6 @@ public class MemberController extends HttpServlet {
 			MemberVo mv2 = md.memberLoginCheck(mv1);
 			mbno = mv2.getMbno();
 			//Action처리하는 용도는 send방식으로 보낸다
-			System.out.println(mbno);
 			PrintWriter out = response.getWriter();
 			if (mbno != 0) {  //일치하면
 				//세션에 회원아이디를 담는다 
@@ -103,7 +181,7 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("mbname", mv2.getMbname());
 				session.setAttribute("mbno", mbno);
 			}
-			out.print("{\"value\":\""+mbno+"\"}");
+			out.print("{\":value\":\""+mbno+"\"}");    
 		}else if(location.equals("memberLogout.do")) {
 			
 			HttpSession session= request.getSession();
@@ -118,6 +196,24 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberIdFind.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		} else if (location.equals("memberIdFindAction.do")) {
+		    String email = request.getParameter("email");
+
+		    MemberDao md = new MemberDao();
+		    String memberId = md.memberIdFind(email);
+
+		    if (memberId != null) {
+		        // 아이디를 찾았을 때의 처리
+		        request.setAttribute("foundMemberId", memberId);
+		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFindResult.jsp");
+		        rd.forward(request, response);
+		    } else {
+		        // 아이디를 찾지 못했을 때의 처리
+		        request.setAttribute("message", "입력하신 이메일로 가입된 계정이 없습니다.");
+		        RequestDispatcher rd = request.getRequestDispatcher("/member/memberIdFind.jsp");
+		        rd.forward(request, response);
+		    }   
+		  
 		}else if (location.equals("memberPwdFind.do")) {
 			
 			String path ="/member/memberPwdFind.jsp";

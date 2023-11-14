@@ -2,7 +2,7 @@ package app.domain;
 
 import java.util.ArrayList;
 
-public class BoardVo {
+public class BoardVo extends MemberVo{
 	private int bdno;
 	private int mbno;
 	private String bdcate;

@@ -164,7 +164,36 @@ public class MemberDao {
 		
 		return mv;
 	}
-	
+
+	 public String memberIdFind(String mbemail) {
+	    String memberId = null;
+	    
+	    String sql = "SELECT mbid FROM member WHERE mbemail=?";
+	    ResultSet rs = null;
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, mbemail);
+	            rs = pstmt.executeQuery();
+
+	            if (rs.next()) {
+	                memberId = rs.getString("mbid");
+	            }
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                rs.close();
+	                pstmt.close();
+	                conn.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        return memberId;
+	    }
 	
 	}
 
