@@ -73,7 +73,7 @@ public class MemberController extends HttpServlet {
 				//자동이동메소드
 				//response.sendRedirect(request.getContextPath()+"/member/memberList.html");	
 				out.println("<script>alert('회원가입 되었습니다.');"
-				+	"document.location.href='"+request.getContextPath()+"/member/memberJoinOk.do'</script>");
+				+	"document.location.href='"+request.getContextPath()+"/member/memberLogin.do'</script>");
 			}else{
 				out.println("<script>history.back();</script>");	
 			}
