@@ -124,16 +124,9 @@ input[type="button"]:hover {
 	display: flex;
 }
 
-.join-email select {
-	width: 300px;
-	height: 45px;
+.join-email input[type="button"] {
+	width: 150px;
 	margin-left: 10px;
-	border-radius: 5px;
-	border: 2px solid #9eafdd;
-}
-
-select:focus {
-	outline: #9eafdd solid 2px;
 }
 
 .email-certi {
@@ -157,4 +150,17 @@ select:focus {
 #address-btn {
 	width: 150px;
 	margin-left: 10px;
+}
+
+.error_text {
+    margin: 3px;
+    font-size: 13px;
+    color: #ff3f3f;
+	
+}
+.pass_text {
+    margin: 3px;
+    font-size: 13px;
+    color: #4e71d3;
+	
 }

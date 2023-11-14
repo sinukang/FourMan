@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import app.dao.BoardDao;
+import app.domain.BoardVo;
+
 /**
  * Servlet implementation class ContentsController
  */
@@ -18,11 +21,11 @@ public class BoardController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-    private String location;
-    
-    public BoardController(String location) {
+	private String location;
+	
+	public BoardController(String location) {
 		this.location = location;
-    }
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -31,46 +34,67 @@ public class BoardController extends HttpServlet {
 			String path ="/board/board.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("galleryList.do")) {
+			
+			BoardDao bd = new BoardDao();
+			
+			ArrayList<BoardVo> alist = bd.galleryList();
+			request.setAttribute("alist", alist);
 			
 			String path ="/board/galleryList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("galleryContents.do")) {
+			
+			int bdno = (int)request.getAttribute("bdno");
+			
+			BoardDao bd = new BoardDao();
+			ArrayList<BoardVo> alist = new ArrayList<BoardVo>();
+			
+			request.setAttribute("alist", alist);
 			
 			String path ="/board/galleryContents.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("galleryWrite.do")) {
 			
 			String path ="/board/galleryWrite.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("noticeList.do")) {
 			
 			String path ="/board/noticeList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("noticeWrite.do")) {
 			
 			String path ="/board/noticeWrite.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("notice.do")) {
 			
 			String path ="/board/notice.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("FAQ.do")) {
 			
 			String path ="/board/FAQ.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}else if (location.equals("FAQWrite.do")) {
 			
 			String path ="/board/FAQWrite.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}
 	}
 
