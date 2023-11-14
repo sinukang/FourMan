@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:if test="${sessionScope.mbno == null }">
+	<script>alert('로그인 하세요.');location.href='${pageContext.request.contextPath}/member/memberLogin.do'</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +13,7 @@
 	<title>Insert title here</title>
 	<link href="../source/css/home.css" type="text/css" rel="stylesheet">
 	<link href="../source/css/gallery/galleryWrite.css" type="text/css" rel="stylesheet">
+	
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
@@ -18,48 +24,50 @@
 		<div class="container">
 			<div class="inner-table">
 				<div>
-					<label id="back-btn" for="input-write">뒤로가기</label>
-					<input type="button" id="input-write" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryList.do';">
+					<label id="back-btn" for="input-back">뒤로가기</label>
+					<input type="button" id="input-back" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryList.do';">
 				</div>
-				<table class="table-cont" style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL);">
-					<tr style="height:20px;">
-						<td>
-							<!-- 사진파일 업로드 -->
-							<div class="upload-box">
-								<div id="drop-file" class="drag-file">
-									<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-									<p class="message">Drag files to upload</p>
-									<img src="" alt="미리보기 이미지" class="preview">
+				<form name="frm">
+					<table class="table-cont">
+						<tr style="height:20px;">
+							<td>
+								<!-- 사진파일 업로드 -->
+								<div class="upload-box">
+									<div id="drop-file" class="drag-file">
+										<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+										<p class="message">Drag files to upload</p>
+										<img src="" alt="미리보기 이미지" class="preview">
+									</div>
 								</div>
-							</div>
-							<div class="upload-btn">
-								<label class="file-label" for="chooseFile">사진 선택</label>
-								<input class="file" id="chooseFile"
-									type="file" 
-									onchange="dropFile.handleFiles(this.files)"
-									accept="image/png, image/jpeg, image/gif">
-							</div>
-						</td>
-					</tr>
-					<tr style="height:30px;">
-						<td >
-							<input type="text" id="input-sub" name="subject" placeholder=" 제목을 입력하세요.">
-						</td>
-					</tr>
-					<tr style="height:200px;">
-						<td>
-							<textarea id="input-cont" name="contents" placeholder="내용을 입력해주세요."></textarea>
-						</td>
-					</tr>
-					<tr style="height:20px;">
-						<td class="write-btn">
-							<div class="write-btn">
-								<label id="write-label" for="input-write">글쓰기</label>
-								<input type="button" id="input-write" name="btn" style="display:none;" onclick="check();">
-							</div>
-						</td>
-					</tr>
-				</table>
+								<div class="upload-btn">
+									<label class="file-label" for="chooseFile">사진 선택</label>
+									<input class="file" id="chooseFile" name="filename"
+										type="file" 
+										onchange="dropFile.handleFiles(this.files)"
+										accept="image/png, image/jpeg, image/gif">
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px;">
+							<td >
+								<input type="text" id="input-sub" name="subject" placeholder=" 제목을 입력하세요.">
+							</td>
+						</tr>
+						<tr style="height:200px;">
+							<td>
+								<textarea id="input-cont" name="contents" placeholder="내용을 입력해주세요."></textarea>
+							</td>
+						</tr>
+						<tr style="height:20px;">
+							<td class="write-btn">
+								<div class="write-btn">
+									<label id="write-label" for="input-write">글쓰기</label>
+									<input type="button" id="input-write" name="btn" style="display:none;" onclick="check();">
+								</div>
+							</td>
+						</tr>
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -139,5 +147,38 @@
 
 	
 	</script>
+	
+	<script>
+	
+		function check()
+		{
+			var fm = document.frm;	
+
+			if(fm.subject.value=="")
+			{
+				alert("제목을 입력하세요");
+				fm.subject.focuse();
+				return;
+			}else if(fm.contents.value=="")
+			{
+				alert("내용을 입력하세요");
+				fm.contents.focus();
+				return;
+			}else if(fm.filename.value=="")
+			{
+				alert("사진을 첨부해주세요");
+				fm.contents.focus();
+				return;
+			}
+			
+			
+			fm.action = "${pageContext.request.contextPath}/board/galleryWriteAction.do";	
+			fm.method = "post";					
+			//fm.enctype="multipart/form-data";
+			fm.submit();						
+			return;
+		}
+	</script>
+	
 </body>
 </html>

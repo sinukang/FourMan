@@ -179,7 +179,6 @@
 				modal.style.display = "none";
 			}
 		}
-		
 		/* 슬라이드 */	
 	
 		var swiper = new Swiper(".mySwiper", {
@@ -196,8 +195,17 @@
 				prevEl: ".swiper-button-prev",
 			},
 		});
-	
 		
+		$("#del-btn").on("click",function() {
+			var isConfirmed = confirm('정말 삭제하시겠습니까?');
+			
+			if (isConfirmed) {
+				alert('삭제되었습니다.'); 
+			} else {
+				alert('삭제가 취소되었습니다.'); 
+			}
+		});
+	
 	</script>
 	
 </body>
