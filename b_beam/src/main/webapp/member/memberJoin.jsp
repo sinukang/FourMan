@@ -150,7 +150,7 @@
 		}
 		$.ajax({
 			type : "post",
-			url : "./memberIdCheck.jsp",
+			url : "${pageContext.request.contextPath}/member/memberIdCheck.do",
 			data : {"memberId" : id},
 			dataType : "json",
 			success : function(data){
@@ -186,7 +186,7 @@
 		}
 		$.ajax({
 			type : "post",
-			url : "./memberNickCheck.jsp",
+			url : "${pageContext.request.contextPath}/member/memberNickCheck.do",
 			data : {"memberName" : nick},
 			dataType : "json",
 			success : function(data){
@@ -221,7 +221,7 @@
 		}
 		$.ajax({
 			type : "post",
-			url : "./memberEmailCheck.jsp",
+			url : "${pageContext.request.contextPath}/member/memberEmailCheck.do",
 			data : {"memberEmail" : email},
 			dataType : "json",
 			success : function(data){
@@ -342,7 +342,7 @@
 		//Ajax로 이메일 중복검사
 		$.ajax({
 			type : "get",
-			url: "getsign.jsp",
+			url: "${pageContext.request.contextPath}/member/getsign.do",
 			dataType: "json",
 			success : function(data) {
 				if($("#authentication").val() == data.value){
