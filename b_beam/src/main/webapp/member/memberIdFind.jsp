@@ -68,7 +68,7 @@
 			success : function(data) {
 				if(data.value == 0){
 					$("#checkmsg2").css("display","");
-					$("#memberPwd").focus();
+					$("#memberEmail").focus();
 				}else{
 					$("#memberIdView").css("display","");
 					$("#memberId").empty();
