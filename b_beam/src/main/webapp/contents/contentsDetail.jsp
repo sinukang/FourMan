@@ -279,8 +279,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+<script>
+  // 글자 수 제한 및 카운트 업데이트 함수
+  function updateCharacterCount() {
+    const textarea = document.getElementById('commentInput');
+    const characterCount = document.querySelector('.commentCnt span');
+    const maxLength = 100; // 원하는 글자 수 제한을 여기에 설정하세요
 
+    const currentLength = textarea.value.length;
+    characterCount.textContent = currentLength;
 
+    if (currentLength > maxLength) {
+      textarea.value = textarea.value.substring(0, maxLength); // 초과된 글자 제한
+    }
+  }
+
+  // 텍스트 영역에 입력이 발생할 때 이벤트 리스너 추가
+  document.getElementById('commentInput').addEventListener('input', updateCharacterCount);
+</script>
 
 
 

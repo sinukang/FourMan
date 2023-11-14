@@ -157,6 +157,10 @@
 	left: 500px;
 	width: 65%;
 }
+.tab{
+	padding: 0 10px;
+}
+
 .tab-content{
 	position: absolute;
 	left: 100px;
@@ -187,6 +191,7 @@
     margin-bottom: 10px;
 }
 
+
 #ratingSelect {
 	position: absolute;
 	bottom: 100px;
@@ -212,6 +217,7 @@
 	left: 1050px;
 	top: 80px;
 	background-color:rgb(88, 140, 237);
+	color: white;
 	border: none;
 	padding: 10px;
 	border-radius: 5px;
@@ -221,10 +227,8 @@
 	width: 140px;
 	left: 905px;
 	top: 95px;
-}
-
-.commentCnt p{
-	font-size: 5px;
+	color: rgb(192, 192, 192);
+	font-size: 14px;
 }
 
 
