@@ -44,8 +44,13 @@ galleryContents.css" type="text/css" rel="stylesheet">
 						</table>
 						<table class="conttable2-cont">
 							<tr style="font-weight: bold;">
-								<td style="border-bottom:0; padding: 5px 0 3px 15px;">전주 한옥마을 야경</td>
-								<td class="like">♥</td>
+								<td style="border-bottom:0; padding: 5px 0 3px 15px;">
+									전주 한옥마을 야경
+								</td>
+								<td class="like">
+									<label class="like-button" for="input-like">♡</label>
+									<input type="button" id="input-like" name="btn" style="display:none;">
+								</td>
 							</tr>
 							<tr>
 								<td style="padding: 10px">
