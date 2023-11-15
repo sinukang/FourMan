@@ -3,6 +3,7 @@ package app.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import app.dbconn.DbConn;
 import app.domain.MemberVo;
@@ -245,6 +246,42 @@ public class MemberDao {
 	 
 	
 
+	 
+	 public MemberVo memberInfo(int mbno) {
+		 MemberVo mv = new MemberVo();
+		 String sql = "SELECT * FROM member WHERE mbno=? AND delyn='N'";
+		 ResultSet rs = null;
+		 
+		 try {
+			 pstmt = conn.prepareStatement(sql);
+			 pstmt.setInt(1, mbno);
+			 rs = pstmt.executeQuery();
+			 
+			 if (rs.next()) {
+				 mv.setMbno(rs.getInt("mbno"));
+				 mv.setMbid(rs.getString("mbid"));
+				 mv.setMbemail(rs.getString("mbemail"));
+				 mv.setMbname(rs.getString("mbname"));
+				 
+			 }
+			 
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 } finally {
+			 try {
+				 if (rs != null) {
+					 rs.close();
+				 }
+				 pstmt.close();
+				 
+			 } catch (Exception e) {
+				 e.printStackTrace();
+			 }
+		 }
+		 
+		 return mv;
+		 
+	 }
 	 public int memberInfoModify(MemberVo mv) {
 		    int rowsUpdated = 0;
 
@@ -252,11 +289,11 @@ public class MemberDao {
 		        String sql = "UPDATE member SET mbpwd=?, mbname=? WHERE mbno=?";
 
 		        pstmt = conn.prepareStatement(sql);
-		        
-		        pstmt.setString(1, mv.getMbpwd()); 
-		        pstmt.setString(2, mv.getMbname()); 
-		        pstmt.setInt(3, mv.getMbno());      
-		        
+
+		        pstmt.setString(1, mv.getMbpwd());
+		        pstmt.setString(2, mv.getMbname());
+		        pstmt.setInt(3, mv.getMbno());
+
 		        rowsUpdated = pstmt.executeUpdate();
 
 		        if (rowsUpdated > 0) {
@@ -269,7 +306,6 @@ public class MemberDao {
 		        e.printStackTrace();
 		    } finally {
 		        try {
-		            
 		            pstmt.close();
 		            conn.close();
 		        } catch (Exception e) {
@@ -279,9 +315,6 @@ public class MemberDao {
 
 		    return rowsUpdated;
 		}
-	 
-	 
-	 
 	 
 	 
 	 

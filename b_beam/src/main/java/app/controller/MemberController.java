@@ -45,12 +45,12 @@ public class MemberController extends HttpServlet {
 			String path ="/member/member.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		}else if (location.equals("memberJoin.do")) {
+	}else if (location.equals("memberJoin.do")) {
 			
 			String path ="/member/memberJoin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		}else if(location.equals("memberJoinAction.do")) {
+	}else if(location.equals("memberJoinAction.do")) {
 			
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
@@ -81,7 +81,7 @@ public class MemberController extends HttpServlet {
 			}else{
 				out.println("<script>history.back();</script>");	
 			}
-		   } else if (location.equals("getsign.do")) {
+	} else if (location.equals("getsign.do")) {
 			   
 		        HttpSession session = request.getSession();
 		        String authNumber = (String) session.getAttribute("MAIL_NUMBER");
@@ -93,7 +93,7 @@ public class MemberController extends HttpServlet {
 
 		        PrintWriter out = response.getWriter();
 		        out.print("{\"authNumber\":\"" + authNumber + "\"}");
-		   }else if (location.equals("memberIdCheck.do")) {
+	}else if (location.equals("memberIdCheck.do")) {
 				    String memberId = request.getParameter("memberId");
 
 				    MemberDao md = new MemberDao();
@@ -109,7 +109,7 @@ public class MemberController extends HttpServlet {
 				    PrintWriter out = response.getWriter();
 				    out.print(jsonResponse.toJSONString());
 				    
-				} else if (location.equals("memberNickCheck.do")) {
+	} else if (location.equals("memberNickCheck.do")) {
 				    String nick = request.getParameter("memberName");
 
 				    MemberDao md = new MemberDao();
@@ -125,7 +125,7 @@ public class MemberController extends HttpServlet {
 				    PrintWriter out = response.getWriter();
 				    out.print(jsonResponse.toJSONString());
 				    
-				} else if (location.equals("memberEmailCheck.do")) {
+	} else if (location.equals("memberEmailCheck.do")) {
 				    String email = request.getParameter("memberEmail");
 				    MemberDao md = new MemberDao();
 				    int value = 0;
@@ -158,12 +158,12 @@ public class MemberController extends HttpServlet {
 				    PrintWriter out = response.getWriter();
 				    out.print(str);
 				
-		}else if (location.equals("memberLogin.do")) {
+	}else if (location.equals("memberLogin.do")) {
 			
 			String path ="/member/memberLogin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		}else if(location.equals("memberLoginAction.do")) {
+	}else if(location.equals("memberLoginAction.do")) {
 			
 			MemberVo mv1 = new MemberVo();
 			mv1.setMbid(request.getParameter("memberId"));
@@ -183,7 +183,7 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("mbno", mbno);
 			}
 			out.print("{\":value\":\""+mbno+"\"}");    
-		}else if(location.equals("memberLogout.do")) {
+	}else if(location.equals("memberLogout.do")) {
 			
 			HttpSession session= request.getSession();
 			session.removeAttribute("mbid");
@@ -192,12 +192,12 @@ public class MemberController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath()+"/");
 			
-		}else if (location.equals("memberIdFind.do")) {
+	}else if (location.equals("memberIdFind.do")) {
 			
 			String path ="/member/memberIdFind.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		} else if (location.equals("memberIdFindAction.do")) {
+	} else if (location.equals("memberIdFindAction.do")) {
 		    String email = request.getParameter("memberEmail"); // 변경: email 파라미터로 받음
 
 		    MemberDao md = new MemberDao();
@@ -221,14 +221,14 @@ public class MemberController extends HttpServlet {
 			out.print(jsonResponse.toJSONString());
 			
 			
-		}else if (location.equals("memberPwdFind.do")) {
+	}else if (location.equals("memberPwdFind.do")) {
 			
 			String path ="/member/memberPwdFind.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
 			
-		} else if (location.equals("memberPwdFindAction.do")) {
+	} else if (location.equals("memberPwdFindAction.do")) {
 		    // 사용자가 입력한 아이디와 이메일
 		    String memberId = request.getParameter("memberId");
 		    String email = request.getParameter("memberEmail");
@@ -257,21 +257,61 @@ public class MemberController extends HttpServlet {
 		        out.println("<script>alert('입력하신 정보와 일치하는 회원이 없거나 비밀번호 변경에 실패했습니다.');</script>");
 		    }
 					
-		}else if (location.equals("myQnA.do")) {
+	}else if (location.equals("myQnA.do")) {
 			
 			String path ="/member/myQnA.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
 			
-		}else if (location.equals("memberInfo.do")) {
+	} else if (location.equals("memberInfo.do")) {
+		    HttpSession session = request.getSession();
+		    int loginMbno = (int) session.getAttribute("mbno"); 
+		    // 세션에서 가져온 회원 번호 저장
+		    
+		    MemberDao md = new MemberDao();
+		    MemberVo mv = md.memberInfo(loginMbno);
+
+		    request.setAttribute("mv", mv);
+
+		    String path = "/member/memberInfo.jsp";
+
+		    RequestDispatcher rd = request.getRequestDispatcher(path);
+		    rd.forward(request, response);
+		    
+		    
+	} else if (location.equals("memberInfoModifyAction.do")) {
+
+		    String newPassword = request.getParameter("newPassword");
+		    String newName = request.getParameter("newName");
+
+		    // 세션에서 회원 ID 가져오기
+		    HttpSession session = request.getSession();
+		    int mbno = (int) session.getAttribute("mbno");
+
+		    // 새로운 비밀번호와 이름을 가지고 있는 MemberVo 객체 생성
+		    MemberVo mv = new MemberVo();
+		    mv.setMbpwd(newPassword);
+		    mv.setMbname(newName);
+		    mv.setMbno(mbno);
+
+		    // 데이터베이스에서 회원 정보 업데이트
+		    MemberDao md = new MemberDao();
+		    int rowsUpdated = md.memberInfoModify(mv);
+
+		    PrintWriter out = response.getWriter();
+
+		    if (rowsUpdated > 0) {
+		        // 업데이트 성공
+		        out.println("<script>alert('회원 정보가 성공적으로 수정되었습니다.');"
+		                + "document.location.href='" + request.getContextPath() + "/member/memberInfo.do'</script>");
+		    } else {
+		        // 업데이트 실패
+		        out.println("<script>alert('회원 정보 수정에 실패했습니다. 다시 시도해주세요.');history.back();</script>");
+		    }
+		
 			
-			String path ="/member/memberInfo.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-	
-			
-		}else if (location.equals("memberResign.do")) {
+	}else if (location.equals("memberResign.do")) {
 			
 			String path ="/member/memberResign.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
