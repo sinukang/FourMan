@@ -42,15 +42,10 @@ public class BoardController extends HttpServlet {
 			
 			HttpSession session = request.getSession(false);
 			
-			if(session != null) {
-				System.out.println("session 주소 값 : " + session);
-			}
-			
 			int mbno = 0;
-			
-//			if(session != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
-//				mbno = (int)session.getAttribute("mbno");
-//			}
+			if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+				mbno = (int)session.getAttribute("mbno");
+			}
 			
 			BoardDao bd = new BoardDao();
 			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno);
