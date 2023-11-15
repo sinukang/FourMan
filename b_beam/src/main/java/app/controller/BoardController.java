@@ -41,14 +41,20 @@ public class BoardController extends HttpServlet {
 		}else if (location.equals("galleryList.do")) {
 			
 			HttpSession session = request.getSession(false);
-			int mbno = 0;
+			
 			if(session != null) {
-				mbno = (int)session.getAttribute("mbno");
+				System.out.println("session 주소 값 : " + session);
 			}
 			
-			BoardDao bd = new BoardDao();
+			int mbno = 0;
 			
+//			if(session != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+//				mbno = (int)session.getAttribute("mbno");
+//			}
+			
+			BoardDao bd = new BoardDao();
 			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno);
+			
 			request.setAttribute("bv_alist", bv_alist);
 			
 			String path ="/board/galleryList.jsp";

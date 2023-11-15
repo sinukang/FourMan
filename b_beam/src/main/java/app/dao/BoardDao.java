@@ -33,13 +33,13 @@ public class BoardDao {
 		}
 		
 		String sql = "SELECT b.*"
-					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS likeCnt"
+					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS bdLikeCnt"
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
-					+ " ORDER by b.bdno DESC;"
+					+ " ORDER by b.bdno DESC"
 					+ " LIMIT 24";
 		
-		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
+		String sql2 = "SELECT bdglno, bdno, bdglname, bdgldelyn FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -63,19 +63,29 @@ public class BoardDao {
 				bv.setBddate(rs.getString("bddate"));
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
-				
+				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
 				
 				//ArrayList<String> bdFilename에 
 				//bdno가 일치하는 bdgallery의 값들을 담는다
 				try {
 					pstmt2 = conn.prepareStatement(sql2);
+					System.out.println("sql2 실행됨");
 					pstmt2.setInt(1, bdno);
-					
+					System.out.println("bdno : " + bdno);
 					rs2 = pstmt2.executeQuery();
+					System.out.println("rs2 실행됨");
+					
 					ArrayList<String> bdFilename = new ArrayList<String>();
+					int testNum = 0;
 					
 					while(rs2.next()) {
+						System.out.println("bdglno 가져오기 전");
+						testNum = rs.getInt("bdglno");
+						System.out.println("bdglno 가져오기 후");
+						System.out.println("--------");
+						System.out.println("bdglname 가져오기 전");
 						bdFilename.add(rs.getString("bdglname"));
+						System.out.println("bdglname 가져오기 후");
 					}
 					
 					bv.setBdFilename(bdFilename);
@@ -83,7 +93,6 @@ public class BoardDao {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
-				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
 				
 				bv_alist.add(bv);
 			}
