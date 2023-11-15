@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="app.domain.MemberVo" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,15 +38,15 @@
 								아이디
 							</td>
 							<td>
-								test
+								${mv.mbid}
 							</td>
 						</tr>
 						<tr>
 							<td>
-								비밀번호
+								닉네임
 							</td>
 							<td>
-								qwer1234
+								${mv.mbname}
 							</td>
 						</tr>
 						<tr>
@@ -53,7 +54,7 @@
 								이메일
 							</td>
 							<td>
-								asdf@naver.com
+								${mv.mbemail}
 							</td>
 						</tr>
 						<tr>
@@ -69,7 +70,7 @@
 								Lv
 							</td>
 							<td>
-								30
+								${mv.mbno}
 							</td>
 						</tr>
 					</table>

@@ -59,7 +59,7 @@ input:focus {
 	outline: #9eafdd solid 2px;
 }
 
-input[name="btn"] { 
+.infobtn{ 
 	cursor: pointer;
 	font-weight: 550;
 	color : #fff;
@@ -71,7 +71,7 @@ input[name="btn"] {
 	margin-top: 10px;
 }
 
-input[name="btn"]:hover { 
+.infobtn:hover{ 
 	background: #1d3477;
 	box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
 	transition: 0.3s;
@@ -158,4 +158,17 @@ input[name="btn"]:hover {
 
 h3 {
 	font-size: 25px;
+}
+
+.error_text {
+    margin: 3px;
+    font-size: 13px;
+    color: #ff3f3f;
+	
+}
+.pass_text {
+    margin: 3px;
+    font-size: 13px;
+    color: #4e71d3;
+	
 }

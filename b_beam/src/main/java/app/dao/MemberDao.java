@@ -133,6 +133,38 @@ public class MemberDao {
 		
 		return value;
 	}
+	 public int memberPwdCheck(MemberVo mv) {
+		 int value=0;
+			
+			String sql = "select count(*) as cnt from member where mbno=? and mbpwd=?";
+			ResultSet rs = null;
+			
+			try{
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, mv.getMbno());
+				pstmt.setString(2, mv.getMbpwd());
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()){
+					value =	rs.getInt("cnt");
+					//value가 0이면 일치하지않는다
+					//1 일치한다
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try{
+					rs.close();
+					pstmt.close();
+					conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			
+			return value;
+	 }
 	
 	public MemberVo memberLoginCheck(MemberVo mv) {
 	    
@@ -249,7 +281,7 @@ public class MemberDao {
 	 
 	 public MemberVo memberInfo(int mbno) {
 		 MemberVo mv = new MemberVo();
-		 String sql = "SELECT * FROM member WHERE mbno=? AND delyn='N'";
+		 String sql = "SELECT * FROM member WHERE mbno=? AND mbdelyn='N'";
 		 ResultSet rs = null;
 		 
 		 try {

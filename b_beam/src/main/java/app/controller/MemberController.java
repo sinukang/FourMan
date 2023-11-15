@@ -174,6 +174,7 @@ public class MemberController extends HttpServlet {
 			int mbno = 0;
 			MemberVo mv2 = md.memberLoginCheck(mv1);
 			mbno = mv2.getMbno();
+			System.out.println(mbno);
 			//Action처리하는 용도는 send방식으로 보낸다
 			PrintWriter out = response.getWriter();
 			if (mbno != 0) {  //일치하면
@@ -182,7 +183,9 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("mbname", mv2.getMbname());
 				session.setAttribute("mbno", mbno);
 			}
-			out.print("{\":value\":\""+mbno+"\"}");    
+			JSONObject jsonResponse = new JSONObject();
+			jsonResponse.put("value", mbno);
+			out.print(jsonResponse.toJSONString());
 	}else if(location.equals("memberLogout.do")) {
 			
 			HttpSession session= request.getSession();
@@ -266,7 +269,15 @@ public class MemberController extends HttpServlet {
 			
 	} else if (location.equals("memberInfo.do")) {
 		    HttpSession session = request.getSession();
-		    int loginMbno = (int) session.getAttribute("mbno"); 
+		    int loginMbno = 0;
+		    if(session.getAttribute("mbno") != null) {
+		    	loginMbno = (int) session.getAttribute("mbno");
+		    	System.out.println(loginMbno);
+		    }else {
+	    		PrintWriter out = response.getWriter();
+	    		out.println("<script>alert('회원 전용 기능입니다. 로그인을 해주세요.');"
+			                + "document.location.href='" + request.getContextPath() + "/member/memberLogin.do'</script>");
+		    }
 		    // 세션에서 가져온 회원 번호 저장
 		    
 		    MemberDao md = new MemberDao();
@@ -280,10 +291,33 @@ public class MemberController extends HttpServlet {
 		    rd.forward(request, response);
 		    
 		    
+	}else if(location.equals("memberInfoModify.do")){
+		
+		String path ="/member/memberInfoModify.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+		
+	}else if(location.equals("Pwdcheck.do")){
+
+		String CPwd = request.getParameter("currentPwd");	
+		int Mbno = Integer.parseInt(request.getParameter("mbno"));
+		System.out.println(CPwd);
+		System.out.println(Mbno);
+		int value = 0;
+		MemberVo mv = new MemberVo();
+		mv.setMbpwd(CPwd);
+		mv.setMbno(Mbno);
+		MemberDao md = new MemberDao();
+		value=md.memberPwdCheck(mv);
+        PrintWriter out = response.getWriter();
+		JSONObject jsonResponse = new JSONObject();
+		jsonResponse.put("value", value);
+		out.print(jsonResponse.toJSONString());
+		
 	} else if (location.equals("memberInfoModifyAction.do")) {
 
-		    String newPassword = request.getParameter("newPassword");
-		    String newName = request.getParameter("newName");
+		    String newPassword = request.getParameter("memberPwd");
+		    String newName = request.getParameter("memberName");
 
 		    // 세션에서 회원 ID 가져오기
 		    HttpSession session = request.getSession();

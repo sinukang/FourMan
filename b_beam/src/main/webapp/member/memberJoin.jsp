@@ -435,7 +435,7 @@
 			fm.memberEmail.focus();
 			return;	
 		}
-		fm.action = "<%=request.getContextPath()%>/member/memberJoinAction.do";
+		fm.action = "${pageContext.request.contextPath}/member/memberJoinAction.do";
 		fm.method = "post";
 		fm.submit();
 		return;

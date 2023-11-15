@@ -64,8 +64,8 @@
 		var email = $("#memberEmail").val();
 		$.ajax({
 			type : "post",
-// 			url: "${pageContext.request.contextPath}/member/memberPwdFindIdEmailCheck.do",
-			url: "./memberPwdFindIdEmailCheck.jsp",
+			url: "${pageContext.request.contextPath}/member/memberPwdFindAction.do",
+// 			url: "./memberPwdFindIdEmailCheck.jsp",
 			data :{"memberId":id,"memberEmail":email},
 			dataType: "json",
 			success : function(data) {
