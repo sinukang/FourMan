@@ -29,7 +29,7 @@ public class BoardDao {
 		String str = "";
 		
 		if(mbno != 0) {	//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = ? AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
 		}
 		
 		String sql = "SELECT b.*"
@@ -43,6 +43,10 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			if(mbno != 0) {
+				pstmt.setInt(1, mbno);
+			}
 			
 			rs = pstmt.executeQuery();
 			
