@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import app.dbconn.DbConn;
 import app.domain.BoardVo;
@@ -39,7 +40,7 @@ public class BoardDao {
 					+ " ORDER by b.bdno DESC"
 					+ " LIMIT 24";
 		
-		String sql2 = "SELECT bdglno, bdno, bdglname, bdgldelyn FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
+		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -65,29 +66,20 @@ public class BoardDao {
 				bv.setBddelyn(rs.getString("bddelyn"));
 				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
 				
-				//ArrayList<String> bdFilename에 
-				//bdno가 일치하는 bdgallery의 값들을 담는다
+				//ArrayList<String> bdFilename에
+				//bdno가 일치하는 bdgallery의 값들을 담는다.
+				
 				try {
 					pstmt2 = conn.prepareStatement(sql2);
-					System.out.println("sql2 실행됨");
 					pstmt2.setInt(1, bdno);
-					System.out.println("bdno : " + bdno);
+					
 					rs2 = pstmt2.executeQuery();
-					System.out.println("rs2 실행됨");
 					
 					ArrayList<String> bdFilename = new ArrayList<String>();
-					int testNum = 0;
 					
 					while(rs2.next()) {
-						System.out.println("bdglno 가져오기 전");
-						testNum = rs.getInt("bdglno");
-						System.out.println("bdglno 가져오기 후");
-						System.out.println("--------");
-						System.out.println("bdglname 가져오기 전");
-						bdFilename.add(rs.getString("bdglname"));
-						System.out.println("bdglname 가져오기 후");
+						bdFilename.add(rs2.getString("bdglname"));
 					}
-					
 					bv.setBdFilename(bdFilename);
 					
 				}catch (Exception e) {
