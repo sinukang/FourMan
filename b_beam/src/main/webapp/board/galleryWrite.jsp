@@ -31,7 +31,7 @@
 					<table class="table-cont">
 						<tr style="height:20px;">
 							<td>
-								<!-- 사진파일 업로드 -->
+								<!-- 사진파일 업로드 미리보기 -->
 								<div class="upload-box">
 									<div id="drop-file" class="drag-file">
 										<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
@@ -39,6 +39,7 @@
 										<img src="" alt="미리보기 이미지" class="preview">
 									</div>
 								</div>
+								<!-- 사진 업로드 -->
 								<div class="upload-btn">
 									<label class="file-label" for="chooseFile">사진 선택</label>
 									<input class="file" id="chooseFile" name="bdFilename"

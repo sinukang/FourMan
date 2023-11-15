@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import app.dao.BoardDao;
+import app.dao.BoardDao2;
 import app.dao.CommentDao;
+import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
 import app.domain.CommentVo;
 
@@ -122,6 +124,38 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
+		}else if (location.equals("galleryWriteAction.do")) {
+			
+			
+			int mbno = 0;
+			HttpSession session = request.getSession();
+			mbno = (int)session.getAttribute("mbno");
+			
+			
+			String bdtitle = request.getParameter("bdtitle");
+			String bdcont = request.getParameter("bdcont");
+			
+			BoardVo bv = new BoardVo();
+			bv.setMbno(mbno);
+			bv.setBdtitle(bdtitle);
+			bv.setBdcont(bdcont);
+			
+			BdgalleryVo bgv = new BdgalleryVo();
+			
+			
+			BoardDao2 bd2 = new BoardDao2();
+			int value = bd2.boardInsert(bv, bgv);
+			
+			System.out.println("Value: " + value);
+			
+			if(value ==0) {	
+				String path = request.getContextPath()+"/board/galleryWrite.do";
+				response.sendRedirect(path);
+				
+			}else {
+				String path = request.getContextPath()+"/board/galleryList.do";
+				response.sendRedirect(path);
+			}
 		}
 	}
 

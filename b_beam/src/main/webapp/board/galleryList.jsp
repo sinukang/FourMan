@@ -20,7 +20,7 @@
 		<div class="inner-container">
 			<table class="wrap-table">
 				<!-- <tr> -->
-				<c:forEach var="list" begin="1" end="10" step="1">
+				<c:forEach var="list" begin="1" end="4" step="1">
 					<c:if test="${list%4 == 1}">
 						<tr>
 					</c:if>
@@ -40,14 +40,14 @@
 										전주 한옥마을 야경
 									</td>
 									<td class="like" style="border-bottom:0; padding-right: 10px;">
-									♥
+										♥
 									</td>
 								</tr>
 							</table>
 						</button>
 					</div>
 					</td>
-					<c:if test="${list == 1 && list%4 == 0}">
+					<c:if test="${list%4 == 0}">
 						</tr>
 					</c:if>					
 				</c:forEach>
@@ -198,15 +198,34 @@
 		});
 		
 		$(".del-btn").on("click",function() {
-			var isConfirmed = confirm('정말 삭제하시겠습니까?');
-			
-			if (isConfirmed) {
-				alert('삭제되었습니다.'); 
-			} else {
-				alert('삭제가 취소되었습니다.'); 
-			}
+		    var password = prompt("비밀번호를 입력하세요:");
+
+		    if (password === "1111") {
+		        var isConfirmed = confirm('정말 삭제하시겠습니까?');
+
+		        if (isConfirmed) {
+		            alert('삭제되었습니다.');
+		        } else {
+		            alert('삭제가 취소되었습니다.');
+		        }
+		    } else {
+		        alert('비밀번호가 올바르지 않습니다.');
+		    }
 			
 		});
+		
+		$(".like-button").on("click",function() {
+			
+			var currentlike = $(this).text();
+
+	        if (currentlike === "♡") {
+	            $(this).text("♥");
+	        } else {
+	            $(this).text("♡");
+	        }
+		});
+		
+		
 		
 	</script>
 	
