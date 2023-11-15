@@ -84,8 +84,7 @@ galleryContents.css" type="text/css" rel="stylesheet">
 										2023.11.06
 									</div>
 									<div>
-										<button type="button" style="color: black" onclick="check();">수정</button>
-										<button type="button" style="color: black" id="del-btn">삭제</button>
+										<button type="button" style="color: black" class="del-btn" >삭제</button>
 										<button type="button" style="margin-top: -4px;" onclick="">&#x1F6A8;</button>
 									</div>
 								</td>
@@ -94,8 +93,8 @@ galleryContents.css" type="text/css" rel="stylesheet">
 							
 							<tr>
 								<td colspan=3 class="bottom-btn">
-									<button type="button" id="modi" onclick="">수정</button>
-									<button type="button" id="del-btn">삭제</button>
+									<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do';" >수정</button>
+									<button type="button" class="del-btn" >삭제</button>
 									<button type="button" onclick="">&#x1F6A8;</button>
 								</td>
 							</tr>

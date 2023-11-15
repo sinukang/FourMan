@@ -35,7 +35,7 @@
 		transition: all 0.2s linear;
 	}
 	
-	#input-sub {
+	#input-bdtitle {
 		width: 99%;
 		height: 30px;
 		border: 0;
@@ -43,7 +43,7 @@
 		font-size: 15px;
 	}
 
-	#input-cont {
+	#input-bdcont {
 		width: 99%;
 		height: 100%;
 		border: 0;
@@ -52,11 +52,11 @@
 		font-size: 15px;
 	}
 	
-	#input-sub:focus {
+	#input-bdtitle:focus {
 		outline: none;
 	}
 	
-	#input-cont:focus {
+	#input-bdcont:focus {
 		outline: none;
 	}
 	

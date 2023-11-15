@@ -50,12 +50,12 @@
 						</tr>
 						<tr style="height:30px;">
 							<td >
-								<input type="text" id="input-bdtitle" name="bdtitle" placeholder=" 제목을 입력하세요.">
+								<input type="text" id="input-bdtitle" name="bdtitle" value="${bv.bdtitle }" placeholder=" 제목을 입력하세요.">
 							</td>
 						</tr>
 						<tr style="height:200px;">
 							<td>
-								<textarea id="input-bdcont" name="bdcont" placeholder="내용을 입력해주세요."></textarea>
+								<textarea id="input-bdcont" name="bdcont" ${bv.bdcont } placeholder="내용을 입력해주세요."></textarea>
 							</td>
 						</tr>
 						<tr style="height:20px;">
@@ -172,7 +172,7 @@
 			}
 			
 			
-			fm.action = "${pageContext.request.contextPath}/board/galleryWriteAction.do";	
+			fm.action = "${pageContext.request.contextPath}/board/galleryModifyAction.do";	
 			fm.method = "post";					
 			//fm.enctype="multipart/form-data";
 			fm.submit();						
