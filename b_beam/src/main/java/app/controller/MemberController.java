@@ -2,6 +2,7 @@ package app.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -212,32 +213,64 @@ public class MemberController extends HttpServlet {
 		            star += "*";
 		        }
 		        memberId = memberId.substring(0, 2) + star + memberId.substring(memberId.length() - 2);
-			    // memberIdFindAction.do에서의 아이디 일부 가리기
+			    //아이디 일부 가리기
 			    jsonResponse.put("memberId", memberId);
 		    }
 
 		    jsonResponse.put("value", value);
 			out.print(jsonResponse.toJSONString());
+			
+			
 		}else if (location.equals("memberPwdFind.do")) {
 			
 			String path ="/member/memberPwdFind.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
+			
+		} else if (location.equals("memberPwdFindAction.do")) {
+		    // 사용자가 입력한 아이디와 이메일
+		    String memberId = request.getParameter("memberId");
+		    String email = request.getParameter("memberEmail");
+
+		    // DAO를 통해 임시 비밀번호 생성 및 업데이트
+		    MemberDao md = new MemberDao();
+		    String newTempPassword = md.memberPwdFind(memberId, email);
+
+		    if (newTempPassword != null) {
+		        // 임시 비밀번호를 사용자 이메일로 전송
+		        MailSender mail = new MailSender();
+		        String title = "임시 비밀번호 안내";
+		        String body = "임시 비밀번호: " + newTempPassword + "\n\n임시 비밀번호로 로그인 후 반드시 비밀번호를 변경해주세요.";
+		        if (mail.MailSend(email, title, body)) {
+		            // 이메일 전송 성공 시 표시
+		            PrintWriter out = response.getWriter();
+		            out.println("<script>alert('임시 비밀번호가 이메일로 전송되었습니다.');</script>");
+		        } else {
+		            // 이메일 전송 실패 시 표시
+		            PrintWriter out = response.getWriter();
+		            out.println("<script>alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');</script>");
+		        }
+		    } else {
+		        // 해당 회원이 존재하지 않거나 변경이 실패한 경우 메시지 표시
+		        PrintWriter out = response.getWriter();
+		        out.println("<script>alert('입력하신 정보와 일치하는 회원이 없거나 비밀번호 변경에 실패했습니다.');</script>");
+		    }
+					
 		}else if (location.equals("myQnA.do")) {
 			
 			String path ="/member/myQnA.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
+			
 		}else if (location.equals("memberInfo.do")) {
 			
 			String path ="/member/memberInfo.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		}else if (location.equals("memberInfoModify.do")) {
+	
 			
-			String path ="/member/memberInfoModify.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
 		}else if (location.equals("memberResign.do")) {
 			
 			String path ="/member/memberResign.jsp";
