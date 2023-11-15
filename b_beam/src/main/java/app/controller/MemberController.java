@@ -186,6 +186,7 @@ public class MemberController extends HttpServlet {
 			JSONObject jsonResponse = new JSONObject();
 			jsonResponse.put("value", mbno);
 			out.print(jsonResponse.toJSONString());
+			
 	}else if(location.equals("memberLogout.do")) {
 			
 			HttpSession session= request.getSession();
