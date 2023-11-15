@@ -29,13 +29,14 @@ public class BoardDao {
 		String str = "";
 		
 		if(mbno != 0) {	//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l JOIN board b ON l.bdno = b.bdno"
-					+ " WHERE l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
 		}
 		
-		String sql = "SELECT b.*, (SELECT COUNT(l.lkno) FROM like_ l JOIN board b ON l.bdno = b.bdno AND l.lkdelyn = 'N') AS likeCnt"
+		String sql = "SELECT b.*"
+					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS likeCnt"
 					+ str
-					+ " FROM board b WHERE bddelyn = 'N' ORDER BY bdno DESC"
+					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
+					+ " ORDER by b.bdno DESC;"
 					+ " LIMIT 24";
 		
 		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
@@ -112,20 +113,26 @@ public class BoardDao {
 		
 		String str = "";
 		if(mbno != 0) {
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l JOIN board b ON l.bdno = b.bdno"
-					+ " WHERE l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = ? AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
 		}
 		
-		String sql = "SELECT b.*, (SELECT COUNT(l.lkno) FROM like_ l JOIN board b ON l.bdno = b.bdno AND l.lkdelyn = 'N') AS likeCnt"
+		String sql = "SELECT b.*"
+					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS likeCnt"
 					+ str
-					+ " FROM board b WHERE b.bdno = ? AND b.bddelyn = 'N'";
+					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
+					+ " WHERE b.bdno = ?";
 		
 		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bdno);
+			if(mbno != 0) {
+				pstmt.setInt(1, mbno);
+				pstmt.setInt(2, bdno);
+			}else {
+				pstmt.setInt(1, bdno);
+			}
 			
 			rs = pstmt.executeQuery();
 			
