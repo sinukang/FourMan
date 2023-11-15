@@ -1,15 +1,12 @@
 package app.dao;
 
-import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 import app.dbconn.DbConn;
-import app.domain.BoardVo;
 import app.domain.MemberVo;
+import app.util.TempPwd;
 
 public class MemberDao {
 
@@ -213,12 +210,13 @@ public class MemberDao {
 
 		        if (rs.next()) {
 		            // 해당 회원이 존재하면 비밀번호를 임시비밀번호로 변경
-		            String newPassword = tempPwd(); // 새로운 임시 비밀번호 생성
+		            TempPwd tp = new TempPwd(); 
+		            String newTempPassword = tp.getTempPassword(); // 임시 비밀번호 생성
 
 		            // 비밀번호 변경 SQL
-		            sql = "UPDATE member SET mbpwd=? WHERE mbid=?";
+		            sql = "UPDATE member SET mbpwd=? WHERE mbid=? and mbemail=?";
 		            pstmt = conn.prepareStatement(sql);
-		            pstmt.setString(1, newPassword);
+		            pstmt.setString(1, newTempPassword); // 임시 비밀번호로 변경
 		            pstmt.setString(2, mbid);
 		            pstmt.setString(3, mbemail);
 
@@ -226,7 +224,7 @@ public class MemberDao {
 
 		            if (rowsUpdated > 0) {
 		                // 변경된 비밀번호를 반환
-		                return newPassword;
+		                return newTempPassword;
 		            }
 		        }
 
@@ -242,53 +240,45 @@ public class MemberDao {
 		        }
 		    }
 
-		    return null; // 해당 회원이 존재하지 않거나 변경이 실패하면 null 반환
+		    return null; 
 		}
-	 public String tempPwd() {
-		    // 비밀번호에 사용할 문자셋 정의: 알파벳, 그리고 숫자 0부터 9까지
-		    String pwdChar = "abcdefghijklmnopqrstuvwxyz0123456789";
-		    
-		    StringBuilder newPassword = new StringBuilder();
-		    
-		    
-		    for (int i = 0; i < 8; i++) {
-		        int num = (int) (Math.random() * pwdChar.length());
-		        newPassword.append(pwdChar.charAt(num));
+	 
+	
+
+	 public int memberInfoModify(MemberVo mv) {
+		    int rowsUpdated = 0;
+
+		    try {
+		        String sql = "UPDATE member SET mbpwd=?, mbname=? WHERE mbno=?";
+
+		        pstmt = conn.prepareStatement(sql);
+		        
+		        pstmt.setString(1, mv.getMbpwd()); 
+		        pstmt.setString(2, mv.getMbname()); 
+		        pstmt.setInt(3, mv.getMbno());      
+		        
+		        rowsUpdated = pstmt.executeUpdate();
+
+		        if (rowsUpdated > 0) {
+		            System.out.println("회원 정보가 성공적으로 업데이트되었습니다.");
+		        } else {
+		            System.out.println("회원 정보 업데이트에 실패했습니다.");
+		        }
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            
+		            pstmt.close();
+		            conn.close();
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 		    }
-		    return newPassword.toString();
+
+		    return rowsUpdated;
 		}
-	 
-	 
-
-	    public void memberInfoModify(MemberVo mv) {
-	        try {
-	            String sql = "UPDATE member SET mbpwd=?, mbname=? WHERE mbno=?";
-
-	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(1, mv.getMbpwd());
-	            pstmt.setString(2, mv.getMbname());
-	            pstmt.setInt(3, mv.getMbno());
-
-	            int rowsUpdated = pstmt.executeUpdate();
-
-	            if (rowsUpdated > 0) {
-	                System.out.println("Member information updated successfully.");
-	            } else {
-	                System.out.println("Failed to update member information.");
-	            }
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        } finally {
-	            try {
-	                pstmt.close();
-	                conn.close();
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }
-
 	 
 	 
 	 
