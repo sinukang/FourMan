@@ -30,7 +30,7 @@ public class BoardDao {
 		String str = "";
 		
 		if(mbno != 0) {	//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = ? AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'Y', 'N') AS bdLikeYN";
 		}
 		
 		String sql = "SELECT b.*"
@@ -42,13 +42,11 @@ public class BoardDao {
 		
 		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
+		System.out.println("mbno : " + mbno);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			if(mbno != 0) {
-				pstmt.setInt(1, mbno);
-			}
-			
+						
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -65,6 +63,9 @@ public class BoardDao {
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
 				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
+				if(mbno != 0) {
+					bv.setBdLikeYN(rs.getString("bdLikeYN"));
+				}
 				
 				//ArrayList<String> bdFilename에
 				//bdno가 일치하는 bdgallery의 값들을 담는다.
@@ -118,7 +119,7 @@ public class BoardDao {
 		
 		String str = "";
 		if(mbno != 0) {
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = ? AND l.lkdelyn = 'N') = 1, 'T', 'F') AS likeTF";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = ? AND l.lkdelyn = 'N') = 1, 'T', 'F') AS bdLikeYN";
 		}
 		
 		String sql = "SELECT b.*"
