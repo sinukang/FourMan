@@ -381,7 +381,40 @@ public class MemberDao {
 		    return rowsUpdated;
 		}
 	 
-	 
+	 public ArrayList<MemberVo>  memberSelectAll(){
+			//무한배열클래스 객체생성해서 데이터를 담을 준비를 한다
+			ArrayList<MemberVo> alist =new ArrayList<MemberVo>();
+			ResultSet rs = null;
+			
+			String sql="select * from member where delyn='N' order by mbno desc";
+			try{
+				pstmt = conn.prepareStatement(sql);
+				//DB에 있는 값을 담아오는 전용객체
+				rs = pstmt.executeQuery();
+				//rs.next()는 다음값이 있는지 확인하는 메소드 있으면true
+				while(rs.next()){
+					MemberVo mv = new MemberVo();
+					mv.setMbno(rs.getInt("mbno")); 
+					mv.setMbid( rs.getString("mbid") );
+					mv.setMbname( rs.getString("mbname"));
+					mv.setMbdate(rs.getString("mbdate"));
+					alist.add(mv);
+				}		
+				
+			}catch(Exception e){
+				e.printStackTrace();		
+			}finally{
+				try{
+					rs.close();
+					pstmt.close();
+					conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			
+			return alist;
+		} 
 	 
 	 
 	 

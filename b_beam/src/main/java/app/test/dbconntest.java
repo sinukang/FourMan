@@ -15,18 +15,12 @@ public class dbconntest {
 		DbConn dbconn = new DbConn();
 		this.conn = dbconn.getConnection();
 	}
-	public int memberInsert(
-			){
-		int exec = 0;
+
+	public void memberInsert() {
 		
-		String sql = "insert into member(mbid,mbpwd,mbname,mbemail,mbaddr)"
-		        +" values('test','1111','테스트','test@test.test','전주')";
-		try{
-		pstmt = conn.prepareStatement(sql);	
-		exec = pstmt.executeUpdate();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return exec;	
+		
 	}
+
+
+	
 }

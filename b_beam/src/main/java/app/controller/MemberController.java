@@ -376,6 +376,17 @@ public class MemberController extends HttpServlet {
 		        // 업데이트 실패
 		        out.println("<script>alert('회원탈퇴에 실패했습니다. 다시 시도해주세요.');history.back();</script>");
 		    }
+		} else if (location.equals("memberList.do")) {
+				
+				MemberDao md =new MemberDao();
+				ArrayList<MemberVo> list =  md.memberSelectAll();
+				
+				request.setAttribute("list", list);
+				
+			String path ="/member/memberList.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+			
 		}
 	}
 
