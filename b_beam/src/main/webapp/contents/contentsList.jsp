@@ -11,15 +11,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("button1").addEventListener("click", function () {
-        // 버튼 1을 클릭했을 때 실행할 코드
-        var link = "<%=request.getContextPath() %>/contents/contentsDetail.do";
-        window.location.href = link;
-    });
-});
-</script>
 
 </head>
 </head>
@@ -61,15 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	
 		<div class="search">
-		    <input type="text" placeholder="search" name="keyword" maxlength="20">
-		    <button type="submit" name="sbt" >
-		        <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
-		    </button>
+		        <input type="text" placeholder="검색" name="keyword" maxlength="20">
+		        <button type="button" name="sbt">
+		            <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
+		        </button>
 		</div>
-	
+			
 		<div class="contentsbox">
 		  
-		    <button type="button" class="listbutton" id="button1">
+		    <button type="button" class="listbutton" id="126508">
 			    <div class="content-info">
 			            <img src="../source/images/duck4.jpg" alt="12">
 			        <div class="contents-title">
@@ -80,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button2">
+			<button type="button" class="listbutton" id="158458">
 			    <div class="content-info">
 			            <img src="../source/images/duck3.jpg" alt="14">
 			        <div class="contents-title">
@@ -91,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button3">
+			<button type="button" class="listbutton" id="215484">
 			    <div class="content-info">
 			            <img src="../source/images/duck2.png" alt="32">
 			        <div class="contents-title">
@@ -102,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button4">
+			<button type="button" class="listbutton" id="151542">
 			    <div class="content-info">
 			            <img src="../source/images/duck1.png" alt="32">
 			        <div class="contents-title">
@@ -113,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button5">
+			<button type="button" class="listbutton" id="121548">
 			    <div class="content-info">
 			            <img src="../source/images/duck5.jpg" alt="12">
 			        <div class="contents-title">
@@ -124,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button6">
+			<button type="button" class="listbutton" id="953215">
 			    <div class="content-info">
 			            <img src="../source/images/duck4.jpg" alt="14">
 			        <div class="contents-title">
@@ -135,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button7">
+			<button type="button" class="listbutton" id="127548">
 			    <div class="content-info">
 			            <img src="../source/images/duck4.jpg" alt="39">
 			        <div class="contents-title">
@@ -146,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button8">
+			<button type="button" class="listbutton" id="261541">
 			    <div class="content-info">
 			            <img src="../source/images/duck4.jpg" alt="39">
 			        <div class="contents-title">
@@ -157,7 +148,51 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button9">
+			<button type="button" class="listbutton" id="451242">
+			    <div class="content-info">
+			            <img src="../source/images/duck4.jpg" alt="15">
+			        <div class="contents-title">
+			        	<p class="title">불꽃놀이</p>
+			        	<p class="cmtCnt">(5454)</p>
+			        </div>
+			        <div class="likeStar">★</div>
+			    </div>
+			</button>
+			
+			<button type="button" class="listbutton" id="127574">
+			    <div class="content-info">
+			            <img src="../source/images/duck4.jpg" alt="39">
+			        <div class="contents-title">
+			        	<p class="title">비빔밥</p>
+			        	<p class="cmtCnt">(5454)</p>
+			        </div>
+			        <div class="likeStar">★</div>
+			    </div>
+			</button>
+			
+			<button type="button" class="listbutton" id="154824">
+			    <div class="content-info">
+			            <img src="../source/images/duck4.jpg" alt="15">
+			        <div class="contents-title">
+			        	<p class="title">불꽃놀이</p>
+			        	<p class="cmtCnt">(5454)</p>
+			        </div>
+			        <div class="likeStar">★</div>
+			    </div>
+			</button>
+			
+			<button type="button" class="listbutton" id="482154">
+			    <div class="content-info">
+			            <img src="../source/images/duck4.jpg" alt="39">
+			        <div class="contents-title">
+			        	<p class="title">비빔밥</p>
+			        	<p class="cmtCnt">(5454)</p>
+			        </div>
+			        <div class="likeStar">★</div>
+			    </div>
+			</button>
+			
+			<button type="button" class="listbutton" id="215482">
 			    <div class="content-info">
 			            <img src="../source/images/duck4.jpg" alt="15">
 			        <div class="contents-title">
@@ -179,51 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			    </div>
 			</button>
 			
-			<button type="button" class="listbutton" id="button9">
-			    <div class="content-info">
-			            <img src="../source/images/duck4.jpg" alt="15">
-			        <div class="contents-title">
-			        	<p class="title">불꽃놀이</p>
-			        	<p class="cmtCnt">(5454)</p>
-			        </div>
-			        <div class="likeStar">★</div>
-			    </div>
-			</button>
-			
-			<button type="button" class="listbutton" id="button8">
-			    <div class="content-info">
-			            <img src="../source/images/duck4.jpg" alt="39">
-			        <div class="contents-title">
-			        	<p class="title">비빔밥</p>
-			        	<p class="cmtCnt">(5454)</p>
-			        </div>
-			        <div class="likeStar">★</div>
-			    </div>
-			</button>
-			
-			<button type="button" class="listbutton" id="button9">
-			    <div class="content-info">
-			            <img src="../source/images/duck4.jpg" alt="15">
-			        <div class="contents-title">
-			        	<p class="title">불꽃놀이</p>
-			        	<p class="cmtCnt">(5454)</p>
-			        </div>
-			        <div class="likeStar">★</div>
-			    </div>
-			</button>
-			
-			<button type="button" class="listbutton" id="button8">
-			    <div class="content-info">
-			            <img src="../source/images/duck4.jpg" alt="39">
-			        <div class="contents-title">
-			        	<p class="title">비빔밥</p>
-			        	<p class="cmtCnt">(5454)</p>
-			        </div>
-			        <div class="likeStar">★</div>
-			    </div>
-			</button>
-			
-			<button type="button" class="listbutton" id="button9">
+			<button type="button" class="listbutton" id="215721">
 			    <div class="content-info">
 			            <img src="../source/images/duck4.jpg" alt="15">
 			        <div class="contents-title">
@@ -245,51 +236,70 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>	
 
 
-
 	
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    function showContents(contentType) {
-        // 모든 컨텐츠를 숨김
-        var allContents = document.querySelectorAll(".listbutton");
-        allContents.forEach(function (content) {
-            content.style.display = "none";
-        });
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		function showContents(contentType) {
+		// 모든 컨텐츠를 숨김
+		var allContents = document.querySelectorAll(".listbutton");
+		allContents.forEach(function (content) {
+		content.style.display = "none";
+		});
 
-        // 해당 컨텐츠 유형만 보이도록 함
-        var contentsToShow = document.querySelectorAll(".listbutton img[alt='" + contentType + "']");
-        contentsToShow.forEach(function (content) {
-            content.closest(".listbutton").style.display = "block";
-        });
-    }
+		// 해당 컨텐츠 유형만 보이도록 함
+		var contentsToShow = document.querySelectorAll(".listbutton img[alt='" + contentType + "']");
+		contentsToShow.forEach(function (content) {
+		content.closest(".listbutton").style.display = "block";
+		});
+		}
 
-    // "관광지" 버튼 클릭 시
-    document.querySelector("#contentTypeId12").addEventListener("click", function () {
-        showContents("12");
-    });
+		// "관광지" 버튼 클릭 시
+		document.querySelector("#contentTypeId12").addEventListener("click", function () {
+		showContents("12");
+		});
 
-    // "문화시설" 버튼 클릭 시
-    document.querySelector("#contentTypeId14").addEventListener("click", function () {
-        showContents("14");
-    });
+		// "문화시설" 버튼 클릭 시
+		document.querySelector("#contentTypeId14").addEventListener("click", function () {
+		showContents("14");
+		});
 
-    // "음식점" 버튼 클릭 시
-    document.querySelector("#contentTypeId39").addEventListener("click", function () {
-        showContents("39");
-    });
+		// "음식점" 버튼 클릭 시
+		document.querySelector("#contentTypeId39").addEventListener("click", function () {
+		showContents("39");
+		});
 
-    // "숙박" 버튼 클릭 시
-    document.querySelector("#contentTypeId32").addEventListener("click", function () {
-        showContents("32");
-    });
+		// "숙박" 버튼 클릭 시
+		document.querySelector("#contentTypeId32").addEventListener("click", function () {
+		showContents("32");
+		});
 
-    // "축제공연" 버튼 클릭 시
-    document.querySelector("#contentTypeId15").addEventListener("click", function () {
-        showContents("15");
-    });
+		// "축제공연" 버튼 클릭 시
+		document.querySelector("#contentTypeId15").addEventListener("click", function () {
+		showContents("15");
+		});
+
+		// 검색어가 2자 이상인 경우에만 검색 수행
+		document.querySelector("button[name='sbt']").addEventListener("click", function () {
+		var keyword = document.querySelector("input[name='keyword']").value.trim().toLowerCase();
+		if (keyword.length >= 2) {
+		// 검색어가 2자 이상인 경우 검색 수행
+		var allContents = document.querySelectorAll(".listbutton");
+		allContents.forEach(function (content) {
+		var title = content.querySelector(".title").innerText.toLowerCase();
+		if (title.includes(keyword)) {
+		content.style.display = "block";
+		} else {
+		content.style.display = "none";
+		}
+		});
+		} else {
+		// 2자 미만인 경우에는 알림창 띄우기
+		alert("검색어는 2자 이상 입력하셔야 합니다.");
+		}
+	});
 });
-</script>	
-	
+		
+</script>
 
 	
 	
