@@ -349,3 +349,36 @@
 		box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
 		transition: 0.3s;
 	}
+	
+	.page {
+	    margin-top: 40px;
+	    text-align: center;
+	}
+	.page button{
+	    display: inline-block;
+	    color: #939393;
+	    margin-right: 5px;
+	    vertical-align: middle;
+	    border: 1px solid #c7c7c7;
+	    width: 30px;
+	    box-sizing: border-box;
+	    height: 30px;
+	    line-height: 26px;
+	    cursor: pointer;
+	    background-color: transparent;
+	
+	}
+	.paging a.on, .paging button.on {
+	    color: #fff;
+	    background-color: #5077bd;
+	}
+	.page-num {
+		display: flex;
+		justify-content: center;
+	
+	}
+	
+	
+	.page-num td a {
+		color: black;
+	}

@@ -9,7 +9,7 @@ public class SearchCriteria extends Criteria{
 	public String getSearchTypeId()		{	return SearchTypeId;	}
 	public String getKeyword()			{	return keyword;			}
 
-	public void setContentsTypeId(String contentsTypeId)	{	this.SearchTypeId = contentsTypeId;	}
+	public void setContentsTypeId(String contentsTypeId)	{	this.contentsTypeId = contentsTypeId;	}
 	public void setSearchTypeId(String SearchTypeId)		{	this.SearchTypeId = SearchTypeId;	}
 	public void setKeyword(String keyword)					{	this.keyword = keyword;				}
 

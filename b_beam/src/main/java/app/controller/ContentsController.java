@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import app.dao.ContentsDao;
+import app.domain.ContentsVo;
+import app.domain.PageMaker;
+import app.domain.SearchCriteria;
 
 /**
  * Servlet implementation class ContentsController
@@ -32,6 +35,54 @@ public class ContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (location.equals("contentsList.do")) {
+			String contenttypeid="";
+			String keyword="";
+			String page="1";
+			if(request.getParameter("contenttypeid")!=null)	{
+				contenttypeid=request.getParameter("contenttypeid");
+			}
+			if(request.getParameter("keyword")!=null) {
+				keyword=request.getParameter("keyword");
+			}
+			if(request.getParameter("page")!=null){
+				page=request.getParameter("page");
+			}
+
+			
+			PageMaker pm = new PageMaker();
+			SearchCriteria sc = new SearchCriteria();
+			sc.setContentsTypeId(contenttypeid);
+			sc.setKeyword(keyword);
+			sc.setPage(Integer.parseInt(page));
+			
+			pm.setScri(sc);
+			ContentsDao cd = new ContentsDao();
+			
+
+			ArrayList<ContentsVo> aryList = new ArrayList<ContentsVo>();
+			JSONObject body = cd.ContentsList(pm);
+			JSONObject items = (JSONObject)body.get("items");
+			int totalCount = Integer.parseInt(body.get("totalCount").toString());
+			JSONArray item = (JSONArray)items.get("item");
+			System.out.println(totalCount);
+			pm.setTotalCount(totalCount);
+			for(int i = 0; i < item.size(); i++) {
+				ContentsVo cv = new ContentsVo();
+				JSONObject contents = (JSONObject)item.get(i);
+				cv.setContentid(contents.get("contentid").toString());
+				cv.setContenttypeid(contents.get("contenttypeid").toString());
+				cv.setContentdate(contents.get("createdtime").toString());
+				cv.setFirstimage(contents.get("firstimage").toString());
+				cv.setFirstimage2(contents.get("firstimage2").toString());
+				cv.setTitle(contents.get("title").toString());
+				cv.setMapx(contents.get("mapx").toString());
+				cv.setMapy(contents.get("mapy").toString());
+				aryList.add(cv);
+			}
+			request.setAttribute("aryList", aryList);
+			request.setAttribute("pm", pm);
+			
+			
 			
 			String path ="/contents/contentsList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);

@@ -22,15 +22,17 @@ public class ContentsDao {
 	
 	public ContentsDao() {
 		this.key = "qlp8EQg1WmON%2Bq8mTCBOz6N6tqUVBW16y1jVWyBiMGsYplEooRtbId0RBawLiFfSIU1HnD4pxdFv3svkl1GHqA%3D%3D";	//인증키	
-		this.uri = "https://apis.data.go.kr/B551011/EngService1/";	//parameter 제외한 부분
+		this.uri = "https://apis.data.go.kr/B551011/KorService1/";	//parameter 제외한 부분
 		this.area = "37";	//전북 코드
 		this.sigungu = "12";	//전주시 코드
 	}
 	
-	public static JSONArray GetItem(String apiURL) throws Exception {
+	public static JSONObject GetItem(String apiURL) throws Exception {
 		URL url = new URL(apiURL);
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
 		con.setRequestMethod("GET");
+		con.setRequestProperty("Content-Type", "application/json; utf-8");
+		con.setRequestProperty("Accept", "application/json");
 		int responseCode = con.getResponseCode();
 		BufferedReader br;
 		
@@ -41,26 +43,23 @@ public class ContentsDao {
 		}
 		String result = br.readLine();
 		JSONParser jsonParser = new JSONParser();
-//		System.out.println(result);
+		System.out.println(result);
 		JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
 		JSONObject jsonResponse = (JSONObject)jsonObject.get("response");
-		JSONObject body = (JSONObject)jsonResponse.get("body");
-		JSONObject items = (JSONObject)body.get("items");
-		JSONArray item = (JSONArray)items.get("item");
-		return item;
+		return jsonResponse;
 	}
 	
-	public ArrayList<ContentsVo> ContentsList(PageMaker pm){
+	public JSONObject ContentsList(PageMaker pm){
 		
 		ArrayList<ContentsVo> alist = new ArrayList<ContentsVo>();
 		String uriType = "areaBasedList1";
 		String page = Integer.toString(pm.getScri().getPage());
 		String numOfRows = Integer.toString(pm.getScri().getNumOfRows());
-		String contentTypeId = pm.getScri().getContentsTypeId();
+		String contentTypeId = "";
 		String keyword = "";
-
-		if(!pm.getScri().getSearchTypeId().equals(null) && !pm.getScri().getSearchTypeId().equals("")) {
-			contentTypeId = pm.getScri().getSearchTypeId();
+		
+		if(pm.getScri().getContentsTypeId()!=null && !pm.getScri().getContentsTypeId().equals("")) {
+			contentTypeId = pm.getScri().getContentsTypeId();
 		}
 		
 		String query = "?serviceKey=";
@@ -77,21 +76,25 @@ public class ContentsDao {
 		String apiURL = uri
 		+ uriType
 		+ query;
-		
+		System.out.println(apiURL);
+		JSONObject body = new JSONObject();
 		try{
-			JSONArray item = GetItem(apiURL);
-			for(int i = 0; i < item.size(); i++) {
-				ContentsVo cv = new ContentsVo();
-				JSONObject contents = (JSONObject)item.get(i);
-				cv.setContentid(contents.get("contentid").toString());
-				cv.setContenttypeid(contents.get("contenttypeid").toString());
-				cv.setContentdate(contents.get("createdtime").toString());
-				cv.setTitle(contents.get("title").toString());
-				cv.setMapx(contents.get("mapx").toString());
-				cv.setMapy(contents.get("mapy").toString());
-				alist.add(cv);
-			}
-			
+			JSONObject jsonResponse = GetItem(apiURL);
+			body = (JSONObject)jsonResponse.get("body");
+//			for(int i = 0; i < item.size(); i++) {
+//				ContentsVo cv = new ContentsVo();
+//				JSONObject contents = (JSONObject)item.get(i);
+//				cv.setContentid(contents.get("contentid").toString());
+//				cv.setContenttypeid(contents.get("contenttypeid").toString());
+//				cv.setContentdate(contents.get("createdtime").toString());
+//				cv.setFirstimage(contents.get("firstimage").toString());
+//				cv.setFirstimage2(contents.get("firstimage2").toString());
+//				cv.setTitle(contents.get("title").toString());
+//				cv.setMapx(contents.get("mapx").toString());
+//				cv.setMapy(contents.get("mapy").toString());
+//				alist.add(cv);
+//			}
+//			
 //			for(int i = 0; i < alist.size(); i++) {
 //				ContentsVo cv = alist.get(i);
 //				System.out.println("리스트 번호 : " + (i + 1));
@@ -107,9 +110,8 @@ public class ContentsDao {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return alist;	
+		return body;	
 	}
-
 	public ContentsVo ContentsViewDetail(int contentid) {
 		ContentsVo cv = new ContentsVo();
 		String contentId = Integer.toString(contentid);
@@ -125,7 +127,10 @@ public class ContentsDao {
 		System.out.println(apiURL);
 		
 		try {
-			JSONArray item = GetItem(apiURL);
+			JSONObject jsonResponse = GetItem(apiURL);
+			JSONObject body = (JSONObject)jsonResponse.get("body");
+			JSONObject items = (JSONObject)body.get("items");
+			JSONArray item = (JSONArray)items.get(items);
 			JSONObject contents = (JSONObject)item.get(0);
 			cv.setAddr1(contents.get("addr1").toString());
 			cv.setContentid(contents.get("contentid").toString());
@@ -161,7 +166,10 @@ public class ContentsDao {
 		System.out.println(apiURL);
 		
 		try {
-			JSONArray item = GetItem(apiURL);
+			JSONObject jsonResponse = GetItem(apiURL);
+			JSONObject body = (JSONObject)jsonResponse.get("body");
+			JSONObject items = (JSONObject)body.get("items");
+			JSONArray item = (JSONArray)items.get("item");
 			contents = (JSONObject)item.get(0);
 			
 		}catch(Exception e) {
