@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -7,9 +6,8 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="../source/css/home.css" type="text/css" rel="stylesheet">
-	<link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
+	<link href="../source/css/gallery/galleryList.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-	
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
@@ -20,95 +18,49 @@
 		<div class="inner-container">
 			<table class="wrap-table">
 				<!-- <tr> -->
-				<c:forEach var="list" begin="1" end="4" step="1">
-					<c:if test="${list%4 == 1}">
+				<c:forEach var="bv" items="${bv_alist}" varStatus="status">
+				<%-- <c:out value="${status.index}"/> --%>
+					<c:if test="${status.index % 4 == 0}">
 						<tr>
 					</c:if>
 					<td>
 					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
+						<form id="modal-form${bv.bdno}" name="modal-form${bv.bdno}" class="modal-form" style="display: none;">
+							<input type="hidden" name="bdno" value="${bv.bdno}">
+						</form>
+						<button type="button" class="popupBtn" id="popupBtn" onclick="modalPopUp(${bv.bdno})"> <!-- 모달팝업 버튼 -->
 							<table class="table-cont" style=" cursor: pointer;">
 								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
+									<td colspan="2" style="padding-left: 10px;">${bv.mbname}</td>
 								</tr>
 								<tr>
-									<td colspan="2"><img src="../source/images/test2.jpg"></td>
-									
+									<td colspan="2">
+										<img src="${pageContext.request.contextPath}/source/galleryImages/${bv.bdFilename[0]}"/>
+									</td>
 								</tr>
 								<tr>
 									<td style="border-bottom:0; padding-left: 10px;">
-										전주 한옥마을 야경
+										${bv.bdtitle}
 									</td>
 									<td class="like" style="border-bottom:0; padding-right: 10px;">
-										♥
+										<c:choose>
+											<c:when test="${bv.bdLikeYN == 'Y'}">
+												<span class="bdLikeY">♥</span>
+											</c:when>
+											<c:otherwise>
+												<span class="bdLikeN">♡</span>
+											</c:otherwise>
+										</c:choose>
 									</td>
 								</tr>
 							</table>
 						</button>
 					</div>
 					</td>
-					<c:if test="${list%4 == 0}">
+					<c:if test="${status.index % 4 == 3}">
 						</tr>
 					</c:if>					
 				</c:forEach>
-					<%-- <td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>
-									
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td>
-					<td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/test3.jpg"></td>
-									
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td>
-					<td>
-					<div class="inner-table">
-						<button type="button" class="popupBtn" id="popupBtn"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">닉네임</td>
-								</tr>
-								<tr>
-									<td colspan="2"><img src="../source/images/testimg.png"></td>
-									
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">전주 한옥마을 야경</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">♥</td>
-								</tr>
-							</table>
-						</button>
-					</div>
-					</td> --%>
-				<!-- </tr> -->
 				
 				<tr>
 					<td colspan="4" class="write-btn">
@@ -135,19 +87,16 @@
 		</div>
 	</div>
 	
-	
 	<!-- 모달 팝업 영역 -->
-
 	<div id="modalWrap">
 		<div id="modalBody">
 			<span id="closeBtn">&times;</span>
 			<div id="modal-include">
-			<jsp:include page="../board/galleryContentsInclude.jsp"/>
+				<jsp:include page="../board/galleryContentsInclude.jsp"/>
 			</div>
 		</div>
 	</div>
-	<!-- 모달 팝업 영역 -->
-	
+	<iframe name="testIframe" style="display: none;"></iframe>
 	
 	<jsp:include page="../source/include/footer.jsp"/>
 	
@@ -160,10 +109,26 @@
 		const modal = document.getElementById('modalWrap');
 		const closeBtn = document.getElementById('closeBtn');
 		
-		for(var i = 0; i < popup.length; i++) {
+		/* for(var i = 0; i < popup.length; i++) {
 			popup[i].onclick = function() {
+				
+				var form = document.querySelector("form-modal${bv.bdno}");
+				
 				modal.style.display='block';
 			}
+		} */
+		
+		function modalPopUp(idx){
+			
+			var mdform = document.querySelector("#modal-form"+idx);
+			
+			mdform.action = "${pageContext.request.contextPath}/board/galleryContentsInclude.do";
+			mdform.method = "post";
+			mdform.target = "testIframe";
+			
+			mdform.submit();
+			
+			modal.style.display = "block";
 		}
 	
 		closeBtn.onclick = function() {

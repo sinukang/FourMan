@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 	<title>Insert title here</title>
 	<link href="../source/css/home.css" type="text/css" rel="stylesheet">
 	<link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
-	<link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
+	<link href="../source/css/gallery/galleryList.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
@@ -24,7 +24,6 @@
 								</tr>
 								<tr>
 									<td colspan="2"><img src="../source/images/testimg.png" id="cont-img"></td>
-									
 								</tr>
 								</table>
 								<table>
