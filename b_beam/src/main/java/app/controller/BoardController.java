@@ -156,6 +156,26 @@ public class BoardController extends HttpServlet {
 				String path = request.getContextPath()+"/board/galleryList.do";
 				response.sendRedirect(path);
 			}
+		}else if (location.equals("testjsp.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+				mbno = (int)session.getAttribute("mbno");
+			}
+			
+			System.out.println(mbno);
+			
+			BoardDao bd = new BoardDao();
+			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno);
+			
+			request.setAttribute("bv_alist", bv_alist);
+			
+			String path ="/board/testjsp.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+			
 		}
 	}
 
