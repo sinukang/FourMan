@@ -36,17 +36,20 @@
 									<div id="drop-file" class="drag-file">
 										<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
 										<p class="message">Drag files to upload</p>
-										<img src="" alt="미리보기 이미지" class="preview">
+										<!-- <img src="" alt="미리보기 이미지" class="preview"> -->
+										<div id="previews" class="previews"></div>
 									</div>
 								</div>
-								<!-- 사진 업로드 -->
+								<!-- 사진 업로드 버튼 -->
 								<div class="upload-btn">
 									<label class="file-label" for="chooseFile">사진 선택</label>
-									<input class="file" id="chooseFile" name="bdFilename"
+									<input class="file" id="chooseFile" name="bdglname"
 										type="file" 
 										onchange="dropFile.handleFiles(this.files)"
 										accept="image/png, image/jpeg, image/gif">
 								</div>
+								<!-- 파일 목록을 나타낼 영역 -->
+								<!-- <div id="files" class="file-list"></div>  -->
 							</td>
 						</tr>
 						<tr style="height:30px;">
@@ -119,7 +122,7 @@
 			files.forEach(previewFile);
 		}
 
-		  function previewFile(file) {
+		function previewFile(file) {
 			console.log(file);
 			renderFile(file);
 		}
@@ -128,9 +131,28 @@
 			let reader = new FileReader();
 			reader.readAsDataURL(file);
 			reader.onloadend = function () {
-				let img = dropArea.getElementsByClassName("preview")[0];
+				// 미리보기 이미지를 담을 영역 선택
+				let previews = document.getElementById('previews');
+	
+				// 새로운 이미지 생성
+				let img = document.createElement('img');
 				img.src = reader.result;
 				img.style.display = "block";
+				previews.appendChild(img);
+					
+				// 미리보기 이미지가 추가되면 다른 요소들을 숨김
+				let dropFile = document.getElementById('drop-file');
+				let message = dropFile.querySelector('.message');
+				let fileIcon = dropFile.querySelector('.image');
+	
+				dropFile.classList.add('image-added');
+				message.style.display = "none";
+				fileIcon.style.display = "none"; // 이미지를 숨김
+				
+				/* // 미리보기된 파일 목록을 fileList에 추가
+				let fileListItem = document.createElement('div');
+				fileListItem.textContent = file.name;
+				fileList.appendChild(fileListItem); */
 			};
 		}
 
@@ -165,17 +187,17 @@
 				alert("내용을 입력하세요");
 				fm.bdcont.focus();
 				return;
-			}else if(fm.bdFilename.value=="")
+			}else if(fm.bdglname.value=="")
 			{
 				alert("사진을 첨부해주세요");
-				fm.bdFilename.focus();
+				fm.bdglname.focus();
 				return;
 			}
 			
 			
 			fm.action = "${pageContext.request.contextPath}/board/galleryWriteAction.do";	
 			fm.method = "post";					
-			//fm.enctype="multipart/form-data";
+			fm.enctype="multipart/form-data";
 			fm.submit();						
 			return;
 		}

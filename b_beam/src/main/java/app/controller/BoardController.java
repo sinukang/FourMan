@@ -2,6 +2,8 @@ package app.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import app.dao.BoardDao;
 import app.dao.BoardDao2;
@@ -126,14 +131,36 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			
+			String savePath="D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";
+			int sizeLimit = 15*1024*1024;
+			String dataTy = "UTF-8";
+			
+			//파일이름 중복
+			DefaultFileRenamePolicy drp = null;
+			drp = new DefaultFileRenamePolicy();
+			
+			//파일과 데이터 넘겨받는 통신요청 객체
+			MultipartRequest multi = null;
+			multi = new MultipartRequest(request,savePath,sizeLimit,dataTy,drp);
+			
+			String bdtitle = multi.getParameter("bdtitle");
+			String bdcont = multi.getParameter("bdcont");
+			
+			//열거자에 파일이름 담는다
+			Enumeration files = multi.getFileNames();
+			
+			//파일객체 꺼냄
+			String file = (String)files.nextElement();
+			
+			//파일 이름 추출
+			String fileName = multi.getFilesystemName(file);
+			
+			//원래 파일 이름 추출
+			String originFileName = multi.getOriginalFileName(file);
 			
 			int mbno = 0;
 			HttpSession session = request.getSession();
 			mbno = (int)session.getAttribute("mbno");
-			
-			
-			String bdtitle = request.getParameter("bdtitle");
-			String bdcont = request.getParameter("bdcont");
 			
 			BoardVo bv = new BoardVo();
 			bv.setMbno(mbno);
@@ -141,7 +168,13 @@ public class BoardController extends HttpServlet {
 			bv.setBdcont(bdcont);
 			
 			BdgalleryVo bgv = new BdgalleryVo();
+			bgv.setBdglname(fileName);
 			
+			System.out.println("File Info:");
+			System.out.println("bdtitle: " + bdtitle);
+			System.out.println("bdcont: " + bdcont);
+			System.out.println("fileName: " + fileName);
+			System.out.println("originFileName: " + originFileName);
 			
 			BoardDao2 bd2 = new BoardDao2();
 			int value = bd2.boardInsert(bv, bgv);

@@ -63,6 +63,7 @@ public class BoardDao {
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
 				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
+				bv.setMbname(rs.getString("mbname"));
 				if(mbno != 0) {
 					bv.setBdLikeYN(rs.getString("bdLikeYN"));
 				}
@@ -153,6 +154,8 @@ public class BoardDao {
 				bv.setBddate(rs.getString("bddate"));
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
+				bv.setBdLikeYN(rs.getString("bdLikeYN"));
+				bv.setMbname(rs.getString("mbname"));
 				
 				//ArrayList<String> bdFilename에 
 				//bdno가 일치하는 bdgallery의 값들을 담는다
