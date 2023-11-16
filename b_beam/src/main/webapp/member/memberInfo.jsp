@@ -76,8 +76,8 @@
 					</table>
 				</div>
 				<div class="info-btn">
-					<input type="submit" name="btn" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';">
-					<input type="submit" name="btn" value="탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/memberResign.do';">
+					<input type="button" class="btn" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';">
+					<input type="button" class="btn" value="탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/memberResign.do';">
 				</div>
 			</div>
 		</div>

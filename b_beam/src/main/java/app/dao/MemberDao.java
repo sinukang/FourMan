@@ -348,7 +348,38 @@ public class MemberDao {
 		    return rowsUpdated;
 		}
 	 
-	 
+	 public int memberDelete(int mbno, String pwd) {
+		 int rowsUpdated = 0;
+
+		    try {
+		        String sql = "UPDATE member SET mbdelyn='Y' WHERE mbno=? and mbpwd=?";
+
+		        pstmt = conn.prepareStatement(sql);
+
+		        pstmt.setInt(1, mbno);
+		        pstmt.setString(2, pwd);
+
+		        rowsUpdated = pstmt.executeUpdate();
+
+		        if (rowsUpdated > 0) {
+		            System.out.println("회원 정보가 성공적으로 업데이트되었습니다.");
+		        } else {
+		            System.out.println("회원 정보 업데이트에 실패했습니다.");
+		        }
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            pstmt.close();
+		            conn.close();
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return rowsUpdated;
+		}
 	 
 	 
 	 

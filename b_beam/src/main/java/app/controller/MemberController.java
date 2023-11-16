@@ -261,23 +261,16 @@ public class MemberController extends HttpServlet {
 		        out.println("<script>alert('입력하신 정보와 일치하는 회원이 없거나 비밀번호 변경에 실패했습니다.');</script>");
 		    }
 					
-		}else if (location.equals("myQnA.do")) {
-			
-			String path ="/member/myQnA.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-			
-			
 		} else if (location.equals("memberInfo.do")) {
 		    HttpSession session = request.getSession();
 		    int loginMbno = 0;
-		    if(session.getAttribute("mbno") != null) {
-		    	loginMbno = (int) session.getAttribute("mbno");
-		    	System.out.println(loginMbno);
-		    }else {
+		    if(session.getAttribute("mbno") == null) {
 	    		PrintWriter out = response.getWriter();
 	    		out.println("<script>alert('회원 전용 기능입니다. 로그인을 해주세요.');"
 			                + "document.location.href='" + request.getContextPath() + "/member/memberLogin.do'</script>");
+		    }else {
+		    	loginMbno = (int) session.getAttribute("mbno");
+		    	System.out.println(loginMbno);
 		    }
 		    // 세션에서 가져온 회원 번호 저장
 		    
@@ -351,6 +344,38 @@ public class MemberController extends HttpServlet {
 			String path ="/member/memberResign.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+		}else if (location.equals("memberResignAction.do")) {
+			// 세션에서 가져온 회원 번호 저장
+			HttpSession session = request.getSession();
+		    int loginMbno = 0;
+		    if(session.getAttribute("mbno") == null) {
+	    		PrintWriter out = response.getWriter();
+	    		out.println("<script>alert('회원 전용 기능입니다. 로그인을 해주세요.');"
+			                + "document.location.href='" + request.getContextPath() + "/member/memberLogin.do'</script>");
+		    }else {
+		    	loginMbno = (int) session.getAttribute("mbno");
+		    	System.out.println(loginMbno);
+		    }
+		    // password
+		    String memberPwd = request.getParameter("memberPwd");
+		    
+		    MemberDao md = new MemberDao();
+		    int rowsUpdated = md.memberDelete(loginMbno,memberPwd);
+
+		    PrintWriter out = response.getWriter();
+
+		    if (rowsUpdated > 0) {
+		        // 삭제 성공
+		        out.println("<script>alert('회원탈퇴에 성공했습니다.');"
+		                + "document.location.href='" + request.getContextPath() + "/'</script>");
+
+				session.removeAttribute("mbid");
+				session.removeAttribute("mbno");
+				session.invalidate();
+		    } else {
+		        // 업데이트 실패
+		        out.println("<script>alert('회원탈퇴에 실패했습니다. 다시 시도해주세요.');history.back();</script>");
+		    }
 		}
 	}
 
