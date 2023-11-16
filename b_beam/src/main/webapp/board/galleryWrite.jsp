@@ -42,7 +42,7 @@
 								<!-- 사진 업로드 -->
 								<div class="upload-btn">
 									<label class="file-label" for="chooseFile">사진 선택</label>
-									<input class="file" id="chooseFile" name="bdFilename"
+									<input class="file" id="chooseFile" name="bdglname"
 										type="file" 
 										onchange="dropFile.handleFiles(this.files)"
 										accept="image/png, image/jpeg, image/gif">
@@ -165,17 +165,17 @@
 				alert("내용을 입력하세요");
 				fm.bdcont.focus();
 				return;
-			}else if(fm.bdFilename.value=="")
+			}else if(fm.bdglname.value=="")
 			{
 				alert("사진을 첨부해주세요");
-				fm.bdFilename.focus();
+				fm.bdglname.focus();
 				return;
 			}
 			
 			
 			fm.action = "${pageContext.request.contextPath}/board/galleryWriteAction.do";	
 			fm.method = "post";					
-			//fm.enctype="multipart/form-data";
+			fm.enctype="multipart/form-data";
 			fm.submit();						
 			return;
 		}
