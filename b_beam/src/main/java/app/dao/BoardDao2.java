@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.util.List;
 
 import app.dbconn.DbConn;
-import app.domain.BoardVo;
 import app.domain.BdgalleryVo;
+import app.domain.BoardVo;
 
 public class BoardDao2 {
 
@@ -62,19 +62,19 @@ public class BoardDao2 {
 		int exec1 = insertBoard(bv);
 		
 		if (exec1 > 0) {
-	        // board 테이블에 레코드가 성공적으로 삽입되었을 때
-	        // 해당 bdno를 가져와서 bdgallery 테이블에 삽입
-	        int bdno = bv.getBdno();
-	        bgv.setBdno(bdno);
-	        int exec2 = insertBdgallery(bgv);
+			// board 테이블에 레코드가 성공적으로 삽입되었을 때
+			// 해당 bdno를 가져와서 bdgallery 테이블에 삽입
+			int bdno = bv.getBdno();
 
-	        // 두 메서드의 실행 결과를 합산하여 반환
-	        return exec1 + exec2;
-	    } else {
-	        // board 테이블에 레코드 삽입이 실패했을 경우
-	        return exec1;
-	    }
+				bgv.setBdno(bdno);
+				int exec2 = insertBdgallery(bgv);
+
+				// board 및 bdgallery 삽입 결과의 총합 반환
+				return exec1 + exec2;
+		} else {
+			// board 테이블에 레코드 삽입이 실패했을 경우
+			return exec1;
+		}
+
 	}
-
-	
 }
