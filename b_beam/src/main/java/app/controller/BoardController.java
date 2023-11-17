@@ -1,8 +1,8 @@
 package app.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import app.dao.BoardDao;
 import app.dao.BoardDao2;
@@ -163,68 +166,73 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			
-			String savePath="D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";
-			int sizeLimit = 15*1024*1024;
-			String dataTy = "UTF-8";
-			
-			//파일이름 중복
-			DefaultFileRenamePolicy drp = null;
-			drp = new DefaultFileRenamePolicy();
-			
-			//파일과 데이터 넘겨받는 통신요청 객체
-			MultipartRequest multi = null;
-			multi = new MultipartRequest(request,savePath,sizeLimit,dataTy,drp);
-			
-			String bdtitle = multi.getParameter("bdtitle");
-			String bdcont = multi.getParameter("bdcont");
-			
-			//열거자에 파일이름 담는다
-			Enumeration files = multi.getFileNames();
-			
-			List<String> bdglnameList = new ArrayList<>();
-			
-			while (files.hasMoreElements()) {
-			    // 파일 객체 꺼냄
-			    String file = (String) files.nextElement();
+			String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";
 
-			    // 파일 이름 추출
-			    String fileName = multi.getFilesystemName(file);
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(factory);
 
-			    // 원래 파일 이름 추출
-			    String originFileName = multi.getOriginalFileName(file);
-			    
-			    bdglnameList.add(fileName);
+			List<FileItem> items;
 
-			    System.out.println("Uploaded file: " + file);
-			    System.out.println("Server file name: " + fileName);
-			    System.out.println("Original file name: " + originFileName);
+			try {
+				items = upload.parseRequest(new ServletRequestContext(request));
 
-			}
-			
-			int mbno = 0;
-			HttpSession session = request.getSession();
-			mbno = (int)session.getAttribute("mbno");
-			
-			BoardVo bv = new BoardVo();
-			bv.setMbno(mbno);
-			bv.setBdtitle(bdtitle);
-			bv.setBdcont(bdcont);
-			
-			BdgalleryVo bgv = new BdgalleryVo();
-			bgv.setBdglnameList(bdglnameList);
-			
-			BoardDao2 bd2 = new BoardDao2();
-			int value = bd2.boardInsert(bv, bgv);
-			
-			System.out.println("Value: " + value);
-			
-			if(value ==0) {	
-				String path = request.getContextPath()+"/board/galleryWrite.do";
-				response.sendRedirect(path);
+				List<String> bdglnameList = new ArrayList<>();
 				
-			}else {
-				String path = request.getContextPath()+"/board/galleryList.do";
-				response.sendRedirect(path);
+				// 제목, 내용 변수 미리 선언
+				String bdtitle = null;
+				String bdcont = null;
+			
+				for (FileItem item : items) {
+					if (item.isFormField()) {
+						
+						// 제목과 내용을 받아옴
+						if ("bdtitle".equals(item.getFieldName())) {
+							bdtitle = item.getString("UTF-8");
+						} else if ("bdcont".equals(item.getFieldName())) {
+							bdcont = item.getString("UTF-8");
+						}
+					} else {
+						// 다중파일 리스트처리
+						try {
+							String fileName = item.getName();
+							File destFile = new File(savePath, fileName);
+							item.write(destFile);
+				
+							//bdglnameList에 filename을 추가
+							bdglnameList.add(fileName);
+							System.out.println("Uploaded file: " + fileName);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				int mbno = 0;
+				HttpSession session = request.getSession();
+				mbno = (int) session.getAttribute("mbno");
+	
+				BoardVo bv = new BoardVo();
+				bv.setMbno(mbno);
+				bv.setBdtitle(bdtitle);
+				bv.setBdcont(bdcont);
+	
+				BdgalleryVo bgv = new BdgalleryVo();
+				bgv.setBdglnameList(bdglnameList);
+	
+				BoardDao2 bd2 = new BoardDao2();
+				int value = bd2.boardInsert(bv, bgv);
+	
+				System.out.println("Value: " + value);
+	
+				if (value == 0) {
+					String path = request.getContextPath() + "/board/galleryWrite.do";
+					response.sendRedirect(path);
+				} else {
+					String path = request.getContextPath() + "/board/galleryList.do";
+					response.sendRedirect(path);
+				}
+	
+			} catch (FileUploadException e) {
+				e.printStackTrace();
 			}
 		}else if (location.equals("testjsp.do")) {
 			
