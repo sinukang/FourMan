@@ -50,8 +50,10 @@ public class BoardController extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			
 			int mbno = 0;
-			if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
-				mbno = (int)session.getAttribute("mbno");
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
 			}
 			
 			BoardDao bd = new BoardDao();
@@ -65,10 +67,40 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryContents.do")) {
 			
+//			HttpSession session = request.getSession(false);
+//			int mbno = 0;
+//			if(session != null) {
+//				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+//					mbno = (int)session.getAttribute("mbno");
+//				}
+//			}
+//			int bdno = (int)request.getAttribute("bdno");
+//			
+//			BoardDao bd = new BoardDao();
+//			BoardVo bv = new BoardVo();
+//			bv = bd.boardSelectOne(mbno, bdno);
+//			
+//			CommentDao cd = new CommentDao();
+//			ArrayList<CommentVo> cv_alist = new ArrayList<CommentVo>();
+//			cv_alist = cd.commentList(bdno);
+//			
+//			request.setAttribute("bv", bv);
+//			request.setAttribute("cv_alist", cv_alist);
+			
+			String path ="/board/galleryContents.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+			
+		}else if (location.equals("galleryContentsInclude.do")) {
+			
 			HttpSession session = request.getSession(false);
+			
 			int mbno = 0;
+			
 			if(session != null) {
-				mbno = (int)session.getAttribute("mbno");
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
 			}
 			int bdno = (int)request.getAttribute("bdno");
 			
