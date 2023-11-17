@@ -184,14 +184,17 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			
-			String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";
+			String contextPath = request.getContextPath();
 			
+			String savePath = contextPath+"/source/galleryImages";
+			
+			String str = "D:\\\\dev0803\\\\git_e\\\\b_beam\\\\b_beam\\\\src\\\\main\\\\webapp\\\\source\\\\galleryImages";
 			// Apache Commons FileUpload라이브러리를 사용해서 다중파일업로드 구현
 			DiskFileItemFactory factory = new DiskFileItemFactory();	// 업로드된 파일을 디스크에 저장하는데 사용되는 팩토리 객체
 			ServletFileUpload upload = new ServletFileUpload(factory);	// 실제 파일 업로드를 처리하는데 사용되는 객체
 
 			List<FileItem> items;
-
+			
 			try {
 				items = upload.parseRequest(new ServletRequestContext(request));	//파일 및 폼필드의 데이터 파싱
 				
