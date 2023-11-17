@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.net.URLDecoder"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +58,8 @@
 	
 		<div class="search">
 				<c:choose>
-				<c:when test="${not empty keyword}">
-		        	<input type="text" placeholder="검색" name="keyword" maxlength="20" value="${keyword}">
+				<c:when test="${not empty param.keyword}">
+		        	<input type="text" placeholder="검색" name="keyword" maxlength="20" value="<%=URLDecoder.decode(request.getParameter("keyword"),"UTF-8")%>">
 		        </c:when>
 		        <c:otherwise>
 		       		<input type="text" placeholder="검색" name="keyword" maxlength="20">
@@ -67,10 +69,12 @@
 		            <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
 		        </button>
 		</div>
-			
+   		<c:if test="${not empty mbno}">
+		<div><button onclick="getLike(${mbno});">라이크버튼</button></div>
+		</c:if>
 		<div class="contentsbox">
 			<c:forEach var="cv" items="${aryList}">
-			    <button type="button" class="listbutton" id="${cv.contentid}">
+			    <button type="button" class="listbutton" value="${cv.contentid}" id="${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
 				    <div class="content-info">
 				    
 				    	<c:choose>
@@ -85,9 +89,20 @@
 				        	<p class="title">${cv.title}</p>
 				        	<p class="cmtCnt">(0)</p>
 				        </div>
-				        <div class="likeStar">★</div>
+				        <c:choose>
+				    		<c:when test="${cv.contentLikeYN eq 'Y'}">
+								<div class="likeStar">★</div>
+				            </c:when>
+				            <c:otherwise>
+				       			<div class="likeStar">☆</div>
+				            </c:otherwise>
+				        </c:choose>
 				    </div>
 				</button>
+				
+		   		<c:if test="${not empty mbno}">
+				<div><button onclick="getLike(${cv.contentid});">라이크버튼${cv.contentid}</button></div>
+				</c:if>
 			</c:forEach>
 <!-- 			<button type="button" class="listbutton" id="158458"> -->
 <!-- 			    <div class="content-info"> -->
@@ -250,8 +265,8 @@
 			</div>
 			<div class="page">
 				<c:if test="${pm.prev}">
-				<button type="button" class="page-prev">|◀</button>
-				<button type="button" class="page-back">◀"</button>
+				<button type="button" class="page-prev" onclick="page(1);">|◀</button>
+				<button type="button" class="page-back" onclick="page(${pm.startPage - 1});">◀</button>
 				</c:if>
 							<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
 								<c:choose>
@@ -264,8 +279,8 @@
 								</c:choose>
 							</c:forEach>
 							<c:if test="${pm.next&&pm.endPage>0}">
-				<button type="button" class="page-forward">▶</button>
-				<button type="button" class="page-forward">▶|</button>
+				<button type="button" class="page-forward" onclick="page(${pm.endPage + 1});">▶</button>
+				<button type="button" class="page-forward" onclick="page(${pm.totalEndPage});">▶|</button>
 							</c:if>
 				
 				
@@ -397,8 +412,33 @@
 			// 해당 컨텐츠리스트로 이동
 			location.href="${pageContext.request.contextPath}/contents/contentsList.do?"+urlParams;
 		}
+		function ContentsDetail(e){
+			// 해당 컨텐츠리스트로 이동
+			location.href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid="+e;
+		}
+		
 </script>
-
+<script>
+	function getLike(e){
+		var contentid = e;
+// 		$(".listbutton").each(function(index,item){
+// 			contentid.push($(this).val());
+// 		});
+			console.log(contentid);
+		$.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath}/contents/getLike.do",
+			data:{"contentidList":contentid,"mbno":${mbno}},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+			},
+			error:function(){
+				console.log("error");
+			}
+		});
+	}
+</script>
 	
 	
 	

@@ -8,6 +8,7 @@ public class PageMaker {
 	private int startPage;	// 목록의 시작 번호 변수
 	private int endPage;	// 목록의 끝 번호 변수
 	private int totalCount;	// 총 게시물 수 담는 변수
+	private int totalEndPage;	// 마지막 페이지 번호 담는 변수
 
 	private boolean prev;	// 이전 버튼 존재 여부
 	private boolean next;	// 다음 버튼 존재 여부
@@ -18,6 +19,7 @@ public class PageMaker {
 	public int getStartPage()		{return startPage;		}
 	public int getEndPage()			{return endPage;		}
 	public int getTotalCount()		{return totalCount;		}
+	public int getTotalEndPage()	{return totalEndPage;	}
 	public boolean isPrev()			{return prev;			}
 	public boolean isNext()			{return next;			}
 	public SearchCriteria getScri()	{return scri;			}
@@ -42,16 +44,16 @@ public class PageMaker {
 		startPage = (endPage - displayPageNum) + 1;
 		
 		// 3. 실제 페이지 값을 뽑겠다
-		int tempEndPage = (int)Math.ceil(totalCount/(double)scri.getNumOfRows());
+		totalEndPage = (int)Math.ceil(totalCount/(double)scri.getNumOfRows());
 		
 		// 4. 설정endPage와 실제endPage 비교
-		if (endPage > tempEndPage) {
-			endPage = tempEndPage;
+		if (endPage > totalEndPage) {
+			endPage = totalEndPage;
 		}
 		
 		// 5. 이전 다음버튼 유무
 		prev = (startPage == 1 ? false : true);
-		next = (endPage == tempEndPage ? false : true);
+		next = (endPage == totalEndPage ? false : true);
 	}
 	
 }

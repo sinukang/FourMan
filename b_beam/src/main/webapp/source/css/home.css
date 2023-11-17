@@ -373,6 +373,9 @@
 	    background-color: #5077bd;
 		
 	}
+	.page .page-prev{
+		font-size:12px;
+	}
 	.paging a.on, .paging button.on {
 	    color: #fff;
 	    background-color: #5077bd;

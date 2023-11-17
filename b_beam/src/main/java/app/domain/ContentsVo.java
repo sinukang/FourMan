@@ -14,6 +14,20 @@ public class ContentsVo {
 	private String contentdate;
 	private String contentdatem;
 	private String contentDelyn;
+	private String contentLikeCnt;
+	private String contentLikeYN;
+	public String getContentLikeCnt() {
+		return contentLikeCnt;
+	}
+	public void setContentLikeCnt(String contentLikeCnt) {
+		this.contentLikeCnt = contentLikeCnt;
+	}
+	public String getContentLikeYN() {
+		return contentLikeYN;
+	}
+	public void setContentLikeYN(String contentLikeYN) {
+		this.contentLikeYN = contentLikeYN;
+	}
 	public String getFirstimage2() {
 		return firstimage2;
 	}
