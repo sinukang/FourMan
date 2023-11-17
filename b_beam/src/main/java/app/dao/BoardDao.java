@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import app.dbconn.DbConn;
 import app.domain.BoardVo;
+import app.domain.SearchCriteria;
 
 public class BoardDao {
 	
@@ -19,7 +19,7 @@ public class BoardDao {
 		this.conn = dbconn.getConnection();
 	}
 	
-	public ArrayList<BoardVo> galleryList(int mbno){
+	public ArrayList<BoardVo> galleryList(int mbno, SearchCriteria scri){
 		
 		ArrayList<BoardVo> bv_alist = new ArrayList<BoardVo>();
 		ResultSet rs = null;
@@ -28,9 +28,15 @@ public class BoardDao {
 		ResultSet rs2 = null;
 		
 		String str = "";
+		String str2 = "";
 		
 		if(mbno != 0) {	//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
 			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'Y', 'N') AS bdLikeYN";
+		}
+		
+		
+		if(!scri.getKeyword().equals("")) {
+			str2 = " AND b.mbname LIKE '%" +scri.getKeyword()+ "%' OR b.bdtitle LIKE '%" +scri.getKeyword()+ "%'";
 		}
 		
 		String sql = "SELECT b.*"
@@ -38,14 +44,16 @@ public class BoardDao {
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
 					+ " ORDER by b.bdno DESC"
-					+ " LIMIT 24";
+					+ " LIMIT ?, ?";
 		
 		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
-		System.out.println("mbno : " + mbno);
+		int perPageNum = 12;	//페이지에 표시할 글 개수
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (scri.getPage() - 1) * perPageNum);
+			pstmt.setInt(2, perPageNum);
 						
 			rs = pstmt.executeQuery();
 			
@@ -120,7 +128,7 @@ public class BoardDao {
 		
 		String str = "";
 		if(mbno != 0) {
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = ? AND l.lkdelyn = 'N') = 1, 'T', 'F') AS bdLikeYN";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'T', 'F') AS bdLikeYN";
 		}
 		
 		String sql = "SELECT b.*"
@@ -134,12 +142,7 @@ public class BoardDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			if(mbno != 0) {
-				pstmt.setInt(1, mbno);
-				pstmt.setInt(2, bdno);
-			}else {
-				pstmt.setInt(1, bdno);
-			}
+			pstmt.setInt(1, bdno);
 			
 			rs = pstmt.executeQuery();
 			
@@ -167,7 +170,7 @@ public class BoardDao {
 					ArrayList<String> bdFilename = new ArrayList<String>();
 					
 					while(rs2.next()) {
-						bdFilename.add(rs.getString("bdglname"));
+						bdFilename.add(rs2.getString("bdglname"));
 					}
 					
 					bv.setBdFilename(bdFilename);
@@ -240,6 +243,42 @@ public class BoardDao {
 			try {
 				pstmt.close();
 				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
+	}
+	
+	public int boardTotalCount(SearchCriteria scri) {
+		
+		int value = 0;
+		
+		ResultSet rs = null;
+		
+		String str = "";
+		if(!scri.getKeyword().equals("")) {
+			str = " AND " +scri.getSearchType() +" LIKE '"+scri.getKeyword()+"'";
+		}
+		
+		String sql = "SELECT COUNT(bdno) AS cnt FROM board WHERE bddelyn = 'N'" + str;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				value = rs.getInt("cnt");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

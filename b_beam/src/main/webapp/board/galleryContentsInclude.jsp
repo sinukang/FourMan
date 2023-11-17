@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<link href="../source/css/gallery/
-galleryContents.css" type="text/css" rel="stylesheet">
-<link href="../source/css/gallery/gallery.css" type="text/css" rel="stylesheet">
+
+<link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
+<link href="../source/css/gallery/galleryList.css" type="text/css" rel="stylesheet">
 <link href="../source/css/home.css" type="text/css" rel="stylesheet">
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
@@ -30,15 +29,6 @@ galleryContents.css" type="text/css" rel="stylesheet">
 													<img src="${pageContext.request.contextPath}/source/galleryImages/${images}" id="cont-img">
 												</div>
 											</c:forEach>
-											<!-- <div class="swiper-slide">
-												<img src="../source/images/testimg.png" id="cont-img">
-											</div>
-											<div class="swiper-slide">
-												<img src="../source/images/test2.jpg" id="cont-img">
-											</div>
-											<div class="swiper-slide">
-												<img src="../source/images/test3.jpg" id="cont-img">
-											</div> -->
 										</div>
 										<div class="swiper-button-next" style="color: white;"></div>
 										<div class="swiper-button-prev" style="color: white;"></div>
@@ -50,7 +40,7 @@ galleryContents.css" type="text/css" rel="stylesheet">
 						<table class="conttable2-cont">
 							<tr style="font-weight: bold;">
 								<td style="border-bottom:0; padding: 5px 0 3px 15px;">
-									${bv.title} 전주 한옥마을 야경
+									${bv.bdtitle} 전주 한옥마을 야경
 								</td>
 								<td class="like">
 									<c:choose>
@@ -67,12 +57,12 @@ galleryContents.css" type="text/css" rel="stylesheet">
 							</tr>
 							<tr>
 								<td style="padding: 10px">
-									${bv.cont} 내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.
+									${bv.bdcont} 내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.내용을 작성하였습니다.
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" style="border: 0; color:#567ff2; padding-left: 25px; font-weight: bold;">
-									ㅁ${bv.tag}ㅁ #전주 #한옥마을 #야경
+									ㅁ${bv.bdtag}ㅁ #전주 #한옥마을 #야경
 								</td>
 							</tr>
 							<tr>
@@ -109,8 +99,7 @@ galleryContents.css" type="text/css" rel="stylesheet">
 									</td>
 								</tr>								
 							</c:forEach>
-
-							<!-- 댓글 영역 -->
+							<!-- /댓글 영역 -->
 							
 							<tr>
 								<td colspan=3 class="bottom-btn">

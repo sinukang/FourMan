@@ -25,6 +25,8 @@ import app.dao.CommentDao;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
 import app.domain.CommentVo;
+import app.domain.PageMaker;
+import app.domain.SearchCriteria;
 
 /**
  * Servlet implementation class ContentsController
@@ -58,10 +60,26 @@ public class BoardController extends HttpServlet {
 					mbno = (int)session.getAttribute("mbno");
 				}
 			}
+			SearchCriteria scri = new SearchCriteria();
+			
+			String searchType = request.getParameter("searchType");
+			if(searchType == null){ searchType = "subject";}
+			String keyword = request.getParameter("keyword");
+			if(keyword==null) { keyword = "";}
+			String page = request.getParameter("page");
+			if (page == null) { page = "1";}
+			
+			scri.setPage(Integer.parseInt(page));
+			scri.setKeyword(keyword);
+			scri.setSearchType(searchType);
+			
+			PageMaker pm = new PageMaker();
+			pm.setScri(scri);
 			
 			BoardDao bd = new BoardDao();
-			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno);
+			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno, scri);
 			
+			request.setAttribute("pm", pm);
 			request.setAttribute("bv_alist", bv_alist);
 			
 			String path ="/board/galleryList.jsp";
@@ -236,27 +254,9 @@ public class BoardController extends HttpServlet {
 			} catch (FileUploadException e) {
 				e.printStackTrace();
 			}
-		}else if (location.equals("testjsp.do")) {
-			
-			HttpSession session = request.getSession(false);
-			
-			int mbno = 0;
-			if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
-				mbno = (int)session.getAttribute("mbno");
-			}
-			
-			System.out.println(mbno);
-			
-			BoardDao bd = new BoardDao();
-			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno);
-			
-			request.setAttribute("bv_alist", bv_alist);
-			
-			String path ="/board/testjsp.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-			
 		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
