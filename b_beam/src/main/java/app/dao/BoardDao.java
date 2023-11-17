@@ -30,30 +30,33 @@ public class BoardDao {
 		String str = "";
 		String str2 = "";
 		
-		if(mbno != 0) {	//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
+		//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
+		if(mbno != 0) {	
 			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'Y', 'N') AS bdLikeYN";
 		}
-		
-		
+		//태그 클릭 시 해당 태그와 일치하는 태그를 가진 글들을 부르는 조건문 쿼리에 추가
 		if(!scri.getKeyword().equals("")) {
-			str2 = " AND b.mbname LIKE '%" +scri.getKeyword()+ "%' OR b.bdtitle LIKE '%" +scri.getKeyword()+ "%'";
+			str2 = " AND b.bdtag LIKE '%" +scri.getKeyword()+ "%' OR b.bdcontag LIKE '%" +scri.getKeyword()+ "%'";
 		}
 		
 		String sql = "SELECT b.*"
 					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS bdLikeCnt"
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
+					+ str2
 					+ " ORDER by b.bdno DESC"
 					+ " LIMIT ?, ?";
 		
 		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
-		int perPageNum = 12;	//페이지에 표시할 글 개수
+		//scri.getNumOfRows() : 페이지에 표시할 글 개수 (Criteria.java에 기본값 20으로 할당되어있음)
+		int perPageNum = 12;	//갤러리 페이지에 표시할 글 개수를 설정함
+		scri.setNumOfRows(perPageNum);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (scri.getPage() - 1) * perPageNum);
-			pstmt.setInt(2, perPageNum);
+			pstmt.setInt(1, (scri.getPage() - 1) * scri.getNumOfRows());
+			pstmt.setInt(2, scri.getNumOfRows());
 						
 			rs = pstmt.executeQuery();
 			
@@ -107,7 +110,8 @@ public class BoardDao {
 			try {
 				rs.close();
 				rs2.close();
-				pstmt.close();
+				//pstmt.close();
+				//pstmt 닫아버리면 컨트롤러에서 메서드 호출 후 바로밑에 bd.boardTotalCount에서 pstmt를 못씀
 				pstmt2.close();
 				//conn.close();
 			} catch (Exception e) {
@@ -157,7 +161,9 @@ public class BoardDao {
 				bv.setBddate(rs.getString("bddate"));
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
-				bv.setBdLikeYN(rs.getString("bdLikeYN"));
+				if(mbno != 0) {
+					bv.setBdLikeYN(rs.getString("bdLikeYN"));
+				}
 				bv.setMbname(rs.getString("mbname"));
 				
 				//ArrayList<String> bdFilename에 
@@ -259,7 +265,7 @@ public class BoardDao {
 		
 		String str = "";
 		if(!scri.getKeyword().equals("")) {
-			str = " AND " +scri.getSearchType() +" LIKE '"+scri.getKeyword()+"'";
+			str = " AND bdtag LIKE '%"+scri.getKeyword()+"%' OR bdcontag LIKE '%"+scri.getKeyword()+"%'";
 		}
 		
 		String sql = "SELECT COUNT(bdno) AS cnt FROM board WHERE bddelyn = 'N'" + str;
@@ -278,7 +284,7 @@ public class BoardDao {
 		}finally {
 			try {
 				rs.close();
-				
+				pstmt.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

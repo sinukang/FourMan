@@ -40,19 +40,29 @@
 	.like {
 		text-align: right;
 	}
-	
-	.page-num {
+	.pagination-area{
+		
+	}
+	.page-table {
 		display: flex;
 		justify-content: center;
-	
 	}
-	
-	.page-num td {
+	.page-table td {
 		padding: 20px;
 	}
-	
-	.page-num td a {
+	.page-num {
 		color: black;
+		font-size: 16px;
+		text-decoration: none;
+	}
+	.page-num:visited{
+		color: black;
+		text-decoration: none;
+	}
+	.currentPageNum{
+		transform: scale(1.25);
+		font-weight: bold;
+		text-decoration: underline;
 	}
 	
 	.write-btn {
@@ -75,9 +85,7 @@
 		transition: 0.3s;
 	}
 	
-	.page {
-		margin-top: -42px;
-	}
+
 	
 	/*모달팝업 */
 	#btnWrap {
@@ -126,4 +134,3 @@
 	.swiper-wrapper {
 		width: 500px !important;
 	}
-	

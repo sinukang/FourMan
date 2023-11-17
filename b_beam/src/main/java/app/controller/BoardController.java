@@ -62,8 +62,6 @@ public class BoardController extends HttpServlet {
 			}
 			SearchCriteria scri = new SearchCriteria();
 			
-			String searchType = request.getParameter("searchType");
-			if(searchType == null){ searchType = "subject";}
 			String keyword = request.getParameter("keyword");
 			if(keyword==null) { keyword = "";}
 			String page = request.getParameter("page");
@@ -71,13 +69,13 @@ public class BoardController extends HttpServlet {
 			
 			scri.setPage(Integer.parseInt(page));
 			scri.setKeyword(keyword);
-			scri.setSearchType(searchType);
 			
 			PageMaker pm = new PageMaker();
 			pm.setScri(scri);
 			
 			BoardDao bd = new BoardDao();
 			ArrayList<BoardVo> bv_alist = bd.galleryList(mbno, scri);
+			pm.setTotalCount(bd.boardTotalCount(scri));
 			
 			request.setAttribute("pm", pm);
 			request.setAttribute("bv_alist", bv_alist);
@@ -117,14 +115,12 @@ public class BoardController extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			
 			int mbno = 0;
-			
 			if(session != null) {
 				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
 					mbno = (int)session.getAttribute("mbno");
 				}
 			}
-			int bdno = (int)request.getAttribute("bdno");
-			
+			int bdno = Integer.parseInt(request.getParameter("bdno"));
 			BoardDao bd = new BoardDao();
 			BoardVo bv = new BoardVo();
 			bv = bd.boardSelectOne(mbno, bdno);

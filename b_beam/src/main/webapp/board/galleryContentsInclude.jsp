@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link href="../source/css/gallery/galleryContents.css" type="text/css" rel="stylesheet">
-<link href="../source/css/gallery/galleryList.css" type="text/css" rel="stylesheet">
-<link href="../source/css/home.css" type="text/css" rel="stylesheet">
+<link href="../source/css/gallery/galleryContentsInclude.css" type="text/css" rel="stylesheet">
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
@@ -30,9 +28,9 @@
 												</div>
 											</c:forEach>
 										</div>
-										<div class="swiper-button-next" style="color: white;"></div>
+										<!-- <div class="swiper-button-next" style="color: white;"></div>
 										<div class="swiper-button-prev" style="color: white;"></div>
-										<div class="swiper-pagination"></div>
+										<div class="swiper-pagination"></div> -->
 									</div>
 								</td>
 							</tr>

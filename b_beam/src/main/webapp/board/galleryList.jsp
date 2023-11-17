@@ -71,16 +71,34 @@
 				</tr>
 			</table>
 		</div>
-		<div class="page">
-			<table class="page-num">
+		<c:set var="keyword" value="&keyword=${pm.scri.keyword}"/>
+		<div class="pagination-area">
+			<table class="page-table">
 				<tr>
-					<td><a href="">◀</a></td>
-					<td><a href="">1</a></td>
-					<td><a href="">2</a></td>
-					<td><a href="">3</a></td>
-					<td><a href="">4</a></td>
-					<td><a href="">5</a></td>
-					<td><a href="">▶</a></td>
+					<c:if test="${pm.prev}">
+						<td>
+							<a class="page-num" href="${pageContext.request.contextPath}/board/galleryList.do?page=${pm.startPage - 1}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">◀</a>
+						</td>	
+					</c:if>
+					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+						<c:choose>
+							<c:when test="${pm.scri.page  == i}">			
+								<td>
+									<a class="page-num currentPageNum" href="${pageContext.request.contextPath}/board/galleryList.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a class="page-num" href="${pageContext.request.contextPath}/board/galleryList.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pm.next && pm.endPage > 0}">
+						<td>
+							<a href="${pageContext.request.contextPath}/board/galleryList.do?page=${pm.endPage + 1}${keyword}">▶</a>
+						</td>
+					</c:if>
 				</tr>
 			</table>
 		</div>
@@ -91,11 +109,9 @@
 		<div id="modalBody">
 			<span id="closeBtn">&times;</span>
 			<div id="modal-include">
-				
 			</div>
 		</div>
 	</div>
-	<iframe name="testIframe" style="display: none;"></iframe>
 	
 	<jsp:include page="../source/include/footer.jsp"/>
 	
