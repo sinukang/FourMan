@@ -181,14 +181,25 @@ public class BoardController extends HttpServlet {
 			//열거자에 파일이름 담는다
 			Enumeration files = multi.getFileNames();
 			
-			//파일객체 꺼냄
-			String file = (String)files.nextElement();
+			List<String> bdglnameList = new ArrayList<>();
 			
-			//파일 이름 추출
-			String fileName = multi.getFilesystemName(file);
-			
-			//원래 파일 이름 추출
-			String originFileName = multi.getOriginalFileName(file);
+			while (files.hasMoreElements()) {
+			    // 파일 객체 꺼냄
+			    String file = (String) files.nextElement();
+
+			    // 파일 이름 추출
+			    String fileName = multi.getFilesystemName(file);
+
+			    // 원래 파일 이름 추출
+			    String originFileName = multi.getOriginalFileName(file);
+			    
+			    bdglnameList.add(fileName);
+
+			    System.out.println("Uploaded file: " + file);
+			    System.out.println("Server file name: " + fileName);
+			    System.out.println("Original file name: " + originFileName);
+
+			}
 			
 			int mbno = 0;
 			HttpSession session = request.getSession();
@@ -200,13 +211,7 @@ public class BoardController extends HttpServlet {
 			bv.setBdcont(bdcont);
 			
 			BdgalleryVo bgv = new BdgalleryVo();
-			bgv.setBdglname(fileName);
-			
-			System.out.println("File Info:");
-			System.out.println("bdtitle: " + bdtitle);
-			System.out.println("bdcont: " + bdcont);
-			System.out.println("fileName: " + fileName);
-			System.out.println("originFileName: " + originFileName);
+			bgv.setBdglnameList(bdglnameList);
 			
 			BoardDao2 bd2 = new BoardDao2();
 			int value = bd2.boardInsert(bv, bgv);

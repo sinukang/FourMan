@@ -43,13 +43,13 @@
 								<!-- 사진 업로드 버튼 -->
 								<div class="upload-btn">
 									<label class="file-label" for="chooseFile">사진 선택</label>
-									<input class="file" id="chooseFile" name="bdglname"
+									<input class="file" id="chooseFile" name="bdglname" multiple
 										type="file" 
 										onchange="dropFile.handleFiles(this.files)"
 										accept="image/png, image/jpeg, image/gif">
 								</div>
 								<!-- 파일 목록을 나타낼 영역 -->
-								<!-- <div id="files" class="file-list"></div>  -->
+								<div id="files" class="file-list"></div>
 							</td>
 						</tr>
 						<tr style="height:30px;">
@@ -149,10 +149,10 @@
 				message.style.display = "none";
 				fileIcon.style.display = "none"; // 이미지를 숨김
 				
-				/* // 미리보기된 파일 목록을 fileList에 추가
+				// 미리보기된 파일 목록을 fileList에 추가
 				let fileListItem = document.createElement('div');
 				fileListItem.textContent = file.name;
-				fileList.appendChild(fileListItem); */
+				fileList.appendChild(fileListItem);
 			};
 		}
 
@@ -187,11 +187,12 @@
 				alert("내용을 입력하세요");
 				fm.bdcont.focus();
 				return;
-			}else if(fm.bdglname.value=="")
-			{
-				alert("사진을 첨부해주세요");
-				fm.bdglname.focus();
-				return;
+			}else {
+				var files = document.getElementById("chooseFile").files;
+				if (files.length === 0) {
+					alert("사진을 첨부해주세요");
+					return;
+				}
 			}
 			
 			

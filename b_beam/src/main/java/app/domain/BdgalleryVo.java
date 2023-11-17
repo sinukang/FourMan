@@ -1,10 +1,20 @@
 package app.domain;
 
+import java.util.List;
+
 public class BdgalleryVo extends BoardVo {
 	private int bdno;
 	private int bdglno;
 	private String bdglname;
 	private String bdgldelyn;
+	private List<String> bdglnameList;
+	
+	public List<String> getBdglnameList() {
+		return bdglnameList;
+	}
+	public void setBdglnameList(List<String> bdglnameList) {
+		this.bdglnameList = bdglnameList;
+	}
 	public int getBdno() {
 		return bdno;
 	}

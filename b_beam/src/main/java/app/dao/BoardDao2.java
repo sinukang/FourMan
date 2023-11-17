@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.dbconn.DbConn;
@@ -31,11 +32,11 @@ public class BoardDao2 {
 			exec = pstmt.executeUpdate();
 			
 			// 생성된 bdno 가져오기
-	        try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	                bv.setBdno(generatedKeys.getInt(1));
-	            }
-	        }
+			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					bv.setBdno(generatedKeys.getInt(1));
+				}
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,11 +47,17 @@ public class BoardDao2 {
 		int exec = 0;
 
 		String sql = "INSERT INTO bdgallery(bdno, bdglname) VALUES(?,?)";
-
+		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, bgv.getBdno());
-			pstmt.setString(2, bgv.getBdglname());
-			exec = pstmt.executeUpdate();
+
+			List<String> bdglnameList = bgv.getBdglnameList();
+
+			for (String bdglname : bdglnameList) {
+				pstmt.setInt(1, bgv.getBdno());
+				pstmt.setString(2, bdglname);
+				exec += pstmt.executeUpdate();
+			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -77,4 +84,5 @@ public class BoardDao2 {
 		}
 
 	}
+	
 }
