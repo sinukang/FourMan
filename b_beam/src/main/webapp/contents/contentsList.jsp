@@ -55,7 +55,14 @@
 	
 	
 		<div class="search">
-		        <input type="text" placeholder="검색" name="keyword" maxlength="20">
+				<c:choose>
+				<c:when test="${not empty keyword}">
+		        	<input type="text" placeholder="검색" name="keyword" maxlength="20" value="${keyword}">
+		        </c:when>
+		        <c:otherwise>
+		       		<input type="text" placeholder="검색" name="keyword" maxlength="20">
+		        </c:otherwise>
+		        </c:choose>
 		        <button type="button" name="sbt">
 		            <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
 		        </button>
@@ -243,22 +250,22 @@
 			</div>
 			<div class="page">
 				<c:if test="${pm.prev}">
-				<button type="button" class="page-prev">◀◀</button>
+				<button type="button" class="page-prev">|◀</button>
 				<button type="button" class="page-back">◀"</button>
 				</c:if>
 							<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
 								<c:choose>
 								<c:when test="${pm.scri.page==i}">
-				<button type="button" class="page-back" value="${i}">${i}</button>
+				<button type="button" class="page-current" onclick="page(${i});">${i}</button>
 							  	</c:when>
 							    <c:otherwise>
-				<button type="button" class="page-back" value="${i}">${i}</button>
+				<button type="button" onclick="page(${i});">${i}</button>
 					    	    </c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<c:if test="${pm.next&&pm.endPage>0}">
 				<button type="button" class="page-forward">▶</button>
-				<button type="button" class="page-forward">▶▶</button>
+				<button type="button" class="page-forward">▶|</button>
 							</c:if>
 				
 				
@@ -380,7 +387,16 @@
 		}
 	});
 });
-		
+		function page(e){
+			// 파라미터값을 가져옴
+			var url = new URL(window.location.href)
+			var urlParams = url.searchParams;
+			// 파라미터 서치값 추출
+			// 파라미터 서치값중 컨텐츠타입값을 클릭한 값으로 변경, 페이지는 1페이지로 변경, 키워드는 변경 x
+			urlParams.set("page",e);
+			// 해당 컨텐츠리스트로 이동
+			location.href="${pageContext.request.contextPath}/contents/contentsList.do?"+urlParams;
+		}
 </script>
 
 	

@@ -368,6 +368,11 @@
 	    background-color: transparent;
 	
 	}
+	.page .page-current{
+	    color: #fff;
+	    background-color: #5077bd;
+		
+	}
 	.paging a.on, .paging button.on {
 	    color: #fff;
 	    background-color: #5077bd;
