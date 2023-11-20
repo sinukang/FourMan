@@ -234,7 +234,7 @@ public class BoardDao {
 		int value = 0;
 		
 		String sql = "UPDATE like_ SET lkdelyn = 'Y', lkdatem = NOW()"
-					+ " WHERE mbno = ? AND bdno = ?";
+					+ " WHERE mbno = ? AND bdno = ? AND lkdelyn = 'N'";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

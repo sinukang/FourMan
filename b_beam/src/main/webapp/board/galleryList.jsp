@@ -36,7 +36,7 @@
 									<tr>
 										<td class="td-img">
 											<div class="div-img">
-												<img src="${pageContext.request.contextPath}/source/galleryImages/${bv.bdFilename[0]}" alt="이미지 없음"/>
+												<img src="${pageContext.request.contextPath}/source/galleryImages/${bv.bdFilename[0]}" alt="대체 이미지 없음"/>
 											</div>
 										</td>
 									</tr>
@@ -228,15 +228,20 @@
 					
 					$.ajax({
 						type : "post",
-						url : "${pageConetxt.request.contextPath}/board/boardLikeCntUpdate.do,
+						url : "${pageContext.request.contextPath}/board/boardLikeCntUpdate.do",
 						data : {"bdno" : bdno},
 						dataType : "json",
 						cache : false,
-						success : function(){
-							currentLike.text("♥");
+						success : function(data){
+							if(data.value == 1){
+								currentLike.text("♥");
+							}else{
+								alert(data.value + "좋아요 추가 에러");
+							}
+							
 						},
-						error : function(){
-							alert("좋아요 설정 에러");
+						error : function(data){
+							alert("설정 에러");
 						}
 					});
 					
@@ -244,15 +249,19 @@
 					
 					$.ajax({
 						type : "post",
-						url : "${pageConetxt.request.contextPath}/board/boardLikeCntUpdateCancel.do,
+						url : "${pageContext.request.contextPath}/board/boardLikeCntUpdateCancel.do",
 						data : {"bdno" : bdno},
 						dataType : "json",
 						cache : false,
-						success : function(){
-							currentLike.text("♡");
+						success : function(data){
+							if(data.value == 1){
+								currentLike.text("♡");
+							}else{
+								alert(data.value + "좋아요 취소 에러");
+							}							
 						},
 						error : function(){
-							alert("좋아요 설정 에러");
+							alert("취소 에러");
 						}
 					});					
 				}

@@ -44,11 +44,11 @@
 									<c:choose>
 										<c:when test="${bv.bdLikeYN == 'Y'}">
 											<label class="like-button" for="input-like">♥</label>
-											<input type="button" id="input-like" name="btn" style="display:none;">
+											<input type="button" id="input-like" name="btn" value="${bv.bdno}" style="display:none;">
 										</c:when>
 										<c:otherwise>
 											<label class="like-button" for="input-like">♡</label>
-											<input type="button" id="input-like" name="btn" style="display:none;">
+											<input type="button" id="input-like" name="btn" value="${bv.bdno}" style="display:none;">
 										</c:otherwise>
 									</c:choose>
 								</td>
@@ -113,3 +113,15 @@
 		</table>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		
+		$(".like").on("click", function(){
+			
+			let bdno = $(this).children('input').val();
+			alert("bdno : " + bdno);
+			
+		});
+		
+	});
+</script>

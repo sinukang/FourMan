@@ -85,31 +85,63 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
-		}else if (location.equals("galleryContents.do")) {
+		}else if (location.equals("boardLikeCntUpdate.do")) {
 			
-//			HttpSession session = request.getSession(false);
-//			int mbno = 0;
-//			if(session != null) {
-//				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
-//					mbno = (int)session.getAttribute("mbno");
-//				}
-//			}
-//			int bdno = (int)request.getAttribute("bdno");
-//			
-//			BoardDao bd = new BoardDao();
-//			BoardVo bv = new BoardVo();
-//			bv = bd.boardSelectOne(mbno, bdno);
-//			
-//			CommentDao cd = new CommentDao();
-//			ArrayList<CommentVo> cv_alist = new ArrayList<CommentVo>();
-//			cv_alist = cd.commentList(bdno);
-//			
-//			request.setAttribute("bv", bv);
-//			request.setAttribute("cv_alist", cv_alist);
+			HttpSession session = request.getSession(false);
 			
-			String path ="/board/galleryContents.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
+			int bdno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("bdno") != null) {
+				bdno = Integer.parseInt(request.getParameter("bdno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			PrintWriter pw = response.getWriter();
+			
+			BoardDao bd = new BoardDao();
+			
+			int value = 0;
+			value = bd.boardLikeCntUpdate(bdno, mbno);
+			
+			if(value == 1) {
+				pw.println("{\"value\" : \""+value+"\"}");
+			}else {
+				
+			}
+			
+		}else if (location.equals("boardLikeCntUpdateCancel.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int bdno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("bdno") != null) {
+				bdno = Integer.parseInt(request.getParameter("bdno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			PrintWriter pw = response.getWriter();
+			
+			BoardDao bd = new BoardDao();
+			
+			int value = 0;
+			value = bd.boardLikeCntUpdateCancel(bdno, mbno);
+			
+			if(value == 1) {
+				pw.println("{\"value\" : \""+value+"\"}");
+			}else {
+				
+			}
 			
 		}else if (location.equals("galleryContentsInclude.do")) {
 			
