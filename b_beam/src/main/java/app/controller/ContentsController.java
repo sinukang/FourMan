@@ -84,6 +84,7 @@ public class ContentsController extends HttpServlet {
 				cv.setTitle(contents.get("title").toString());
 				cv.setMapx(contents.get("mapx").toString());
 				cv.setMapy(contents.get("mapy").toString());
+				cv.setContentReviewCnt(cd.getReviewcnt(cv.getContentid()));
 				cv.setContentLikeYN("N");
 				aryList.add(cv);
 			}
@@ -112,10 +113,12 @@ public class ContentsController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}else if (location.equals("getLike.do")) {
-			String contentid = request.getParameter("contentidList");
-			System.out.println("contentList : " + request.getParameterValues("contentidList"));
+			String contentid = request.getParameter("contentid");
+			int mbno = Integer.parseInt(request.getParameter("mbno"));
+			BookmarkDao bd = new BookmarkDao();
+			int value = bd.getLike(mbno, contentid); 
 			PrintWriter out = response.getWriter();
-			out.print("{\"value\":\"통신성공\"}");
+			out.print("{\"value\":\""+value+"\"}");
 		}else if (location.equals("contentsRanking.do")) {
 			
 			String path ="/contents/contentsRanking.jsp";

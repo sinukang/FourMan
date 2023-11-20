@@ -14,12 +14,14 @@ public class ContentsVo {
 	private String contentdate;
 	private String contentdatem;
 	private String contentDelyn;
-	private String contentLikeCnt;
+	private int contentLikeCnt;
+	private int contentReviewCnt;
 	private String contentLikeYN;
-	public String getContentLikeCnt() {
+	
+	public int getContentLikeCnt() {
 		return contentLikeCnt;
 	}
-	public void setContentLikeCnt(String contentLikeCnt) {
+	public void setContentLikeCnt(int contentLikeCnt) {
 		this.contentLikeCnt = contentLikeCnt;
 	}
 	public String getContentLikeYN() {
@@ -141,6 +143,12 @@ public class ContentsVo {
 	}
 	public void setBookMarkCnt(int bookMarkCnt) {
 		this.bookMarkCnt = bookMarkCnt;
+	}
+	public int getContentReviewCnt() {
+		return contentReviewCnt;
+	}
+	public void setContentReviewCnt(int contentReviewCnt) {
+		this.contentReviewCnt = contentReviewCnt;
 	}
 
 	

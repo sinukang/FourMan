@@ -25,299 +25,108 @@
 	
 		
 <div class="container">
-
 	<div class="container-title">
-			<h1>CONTENTS</h1>
-		</div>
-	
-		
-		<div class="buttonBox">
-		
-			<button type="submit" class="contentsbutton" id="contentTypeId">
-				<img src="../source/images/contents1.png">전체
+		<h1>CONTENTS</h1>
+	</div>
+	<div class="buttonBox">
+		<button type="submit" class="contentsbutton" id="contentTypeId">
+			<img src="../source/images/contents1.png">전체
+		</button>
+		<button type="submit" class="contentsbutton" id="contentTypeId12">
+			<img src="../source/images/contents1.png">관광지
+		</button>
+		<button type="submit" class="contentsbutton" id="contentTypeId14">
+			<img src="../source/images/contents2.png">문화시설
+		</button>
+		<button type="submit" class="contentsbutton" id="contentTypeId39">
+			<img src="../source/images/contents3.png">음식점
+		</button>
+		<button type="submit" class="contentsbutton" id="contentTypeId32">
+			<img src="../source/images/contents4.png">숙박
+		</button>
+		<button type="submit" class="contentsbutton" id="contentTypeId15">
+			<img src="../source/images/contents5.png">축제공연
+		</button>	
+	</div>
+	<div class="search">
+		<c:choose>
+		<c:when test="${not empty param.keyword}">
+        	<input type="text" placeholder="검색" name="keyword" maxlength="20" value="<%=URLDecoder.decode(request.getParameter("keyword"),"UTF-8")%>">
+        </c:when>
+        <c:otherwise>
+       		<input type="text" placeholder="검색" name="keyword" maxlength="20">
+        </c:otherwise>
+        </c:choose>
+        <button type="button" name="sbt">
+            <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
+        </button>
+        <button type="button" class="Init" onclick="location.href='./contentsList.do'">초기화</button>
+	</div>
+<%--    	<c:if test="${not empty mbno}"> --%>
+<%-- 		<div><button onclick="getLike(${mbno});">라이크버튼</button></div> --%>
+<%-- 		</c:if> --%>
+	<div class="contentsbox">
+		<c:forEach var="cv" items="${aryList}">
+		    <button type="button" class="listbutton" value="${cv.contentid}" id="${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
+			    <div class="content-info">
+			    
+			    	<c:choose>
+			    		<c:when test="${not empty cv.firstimage}">
+			            	<img src="${cv.firstimage}">
+			            </c:when>
+			            <c:otherwise>
+			            	<img src="../source/images/commentbtn.png">
+			            </c:otherwise>
+			        </c:choose>
+			        <div class="contents-title">
+			        	<p class="title">${cv.title}</p>
+			        	<p class="cmtCnt">(${cv.contentReviewCnt})</p>
+			        </div>
+			        <c:choose>
+			    		<c:when test="${cv.contentLikeYN eq 'Y'}">
+							<div class="likeStar">★</div>
+			            </c:when>
+			            <c:otherwise>
+			       			<div class="likeStar">☆</div>
+			            </c:otherwise>
+			        </c:choose>
+			    </div>
 			</button>
-			<button type="submit" class="contentsbutton" id="contentTypeId12">
-				<img src="../source/images/contents1.png">관광지
-			</button>
-			<button type="submit" class="contentsbutton" id="contentTypeId14">
-				<img src="../source/images/contents2.png">문화시설
-			</button>
-			<button type="submit" class="contentsbutton" id="contentTypeId39">
-				<img src="../source/images/contents3.png">음식점
-			</button>
-			<button type="submit" class="contentsbutton" id="contentTypeId32">
-				<img src="../source/images/contents4.png">숙박
-			</button>
-			<button type="submit" class="contentsbutton" id="contentTypeId15">
-				<img src="../source/images/contents5.png">축제공연
-			</button>	
-	
-		</div>
-	
-	
-	
-		<div class="search">
-				<c:choose>
-				<c:when test="${not empty param.keyword}">
-		        	<input type="text" placeholder="검색" name="keyword" maxlength="20" value="<%=URLDecoder.decode(request.getParameter("keyword"),"UTF-8")%>">
-		        </c:when>
-		        <c:otherwise>
-		       		<input type="text" placeholder="검색" name="keyword" maxlength="20">
-		        </c:otherwise>
-		        </c:choose>
-		        <button type="button" name="sbt">
-		            <i class="fas fa-search"></i> <!-- 돋보기 아이콘 -->
-		        </button>
-		</div>
-   		<c:if test="${not empty mbno}">
-		<div><button onclick="getLike(${mbno});">라이크버튼</button></div>
+		</c:forEach>
+	</div>
+	<div class="page">
+		<c:if test="${pm.prev}">
+			<button type="button" class="page-prev" onclick="page(1);">|◀</button>
+			<button type="button" class="page-back" onclick="page(${pm.startPage - 1});">◀</button>
 		</c:if>
-		<div class="contentsbox">
-			<c:forEach var="cv" items="${aryList}">
-			    <button type="button" class="listbutton" value="${cv.contentid}" id="${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
-				    <div class="content-info">
-				    
-				    	<c:choose>
-				    		<c:when test="${not empty cv.firstimage}">
-				            	<img src="${cv.firstimage}">
-				            </c:when>
-				            <c:otherwise>
-				            	<img src="../source/images/commentbtn.png">
-				            </c:otherwise>
-				        </c:choose>
-				        <div class="contents-title">
-				        	<p class="title">${cv.title}</p>
-				        	<p class="cmtCnt">(0)</p>
-				        </div>
-				        <c:choose>
-				    		<c:when test="${cv.contentLikeYN eq 'Y'}">
-								<div class="likeStar">★</div>
-				            </c:when>
-				            <c:otherwise>
-				       			<div class="likeStar">☆</div>
-				            </c:otherwise>
-				        </c:choose>
-				    </div>
-				</button>
-				
-		   		<c:if test="${not empty mbno}">
-				<div><button onclick="getLike(${cv.contentid});">라이크버튼${cv.contentid}</button></div>
-				</c:if>
-			</c:forEach>
-<!-- 			<button type="button" class="listbutton" id="158458"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck3.jpg" alt="14"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">전주동물원</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="215484"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck2.png" alt="32"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">한옥마을</p> -->
-<!-- 			        	<p class="cmtCnt"></p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="151542"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck1.png" alt="32"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">한옥마을</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="121548"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck5.jpg" alt="12"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">한옥마을</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="953215"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="14"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">전주박물관</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="127548"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="39"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">전주맛집</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="261541"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="39"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">비빔밥</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="451242"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="15"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">불꽃놀이</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="127574"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="39"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">비빔밥</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="154824"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="15"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">불꽃놀이</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="482154"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="39"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">비빔밥</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="215482"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="15"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">불꽃놀이</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="button8"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="39"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">비빔밥</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-<!-- 			<button type="button" class="listbutton" id="215721"> -->
-<!-- 			    <div class="content-info"> -->
-<!-- 			            <img src="../source/images/duck4.jpg" alt="15"> -->
-<!-- 			        <div class="contents-title"> -->
-<!-- 			        	<p class="title">불꽃놀이</p> -->
-<!-- 			        	<p class="cmtCnt">(5454)</p> -->
-<!-- 			        </div> -->
-<!-- 			        <div class="likeStar">★</div> -->
-<!-- 			    </div> -->
-<!-- 			</button> -->
-			
-		
-		   
-		    
-		  
-			</div>
-			<div class="page">
-				<c:if test="${pm.prev}">
-				<button type="button" class="page-prev" onclick="page(1);">|◀</button>
-				<button type="button" class="page-back" onclick="page(${pm.startPage - 1});">◀</button>
-				</c:if>
-							<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
-								<c:choose>
-								<c:when test="${pm.scri.page==i}">
-				<button type="button" class="page-current" onclick="page(${i});">${i}</button>
-							  	</c:when>
-							    <c:otherwise>
-				<button type="button" onclick="page(${i});">${i}</button>
-					    	    </c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<c:if test="${pm.next&&pm.endPage>0}">
-				<button type="button" class="page-forward" onclick="page(${pm.endPage + 1});">▶</button>
-				<button type="button" class="page-forward" onclick="page(${pm.totalEndPage});">▶|</button>
-							</c:if>
-				
-				
-<!-- 				<table class="page-num"> -->
-						<td class="prev_btn">
-<!-- 					<tr> -->
-<!-- 						</td> -->
-<!-- 						<td class="page_btn"> -->
-<%-- 							<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1"> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${pm.scri.page==i}"> --%>
-<%-- 								    	<a class="page_num" href="${pageContext.request.contextPath}/contents/contentsList.do?page=${i}${parm}" style="font-weight:bold">${i}</a> &nbsp; --%>
-<%-- 								    </c:when> --%>
-<%-- 								    <c:otherwise> --%>
-<%-- 								    	<a class="page_num" href="${pageContext.request.contextPath}/contents/contentsList.do?page=${i}${parm}">${i}</a> &nbsp; --%>
-<%-- 								    </c:otherwise> --%>
-<%-- 								</c:choose> --%>
-								
-<%-- 							</c:forEach> --%>
-<!-- 						</td> -->
-<!-- 						<td class="next_btn"> -->
-<%-- 								<a href="${pageContext.request.contextPath}/contents/contentsList.do?page=${pm.endPage+1}${parm}">▶</a> --%>
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<!-- 				</table> -->
-			</div>
-	
-
+		<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+			<c:choose>
+				<c:when test="${pm.scri.page==i}">
+					<button type="button" class="page-current" onclick="page(${i});">${i}</button>
+			  	</c:when>
+				<c:otherwise>
+					<button type="button" onclick="page(${i});">${i}</button>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${pm.next&&pm.endPage>0}">
+			<button type="button" class="page-forward" onclick="page(${pm.endPage + 1});">▶</button>
+			<button type="button" class="page-forward" onclick="page(${pm.totalEndPage});">▶|</button>
+		</c:if>
+	</div>
 </div>	
 
 
 	
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
+<script>
+contentTypeSelected();
+function contentTypeSelected(){
+	$("#contentTypeId${param.contenttypeid}").addClass("selected");
+}
+	document.addEventListener("DOMContentLoaded", function () {
 		function showContents(contentType) {
 			// 파라미터값을 가져옴
-			var url = new URL(window.location.href)
+			var url = new URL(window.location.href);
 			var urlParams = url.searchParams;
 			// 파라미터 서치값 추출
 			var contenttypeid = urlParams.get("contenttypeid");
@@ -342,31 +151,31 @@
 		}
 		// 전체 클릭시
 		document.querySelector("#contentTypeId").addEventListener("click", function () {
-		showContents("");
+			showContents("");
 		});
 		// "관광지" 버튼 클릭 시
 		document.querySelector("#contentTypeId12").addEventListener("click", function () {
-		showContents("12");
+			showContents("12");
 		});
 
 		// "문화시설" 버튼 클릭 시
 		document.querySelector("#contentTypeId14").addEventListener("click", function () {
-		showContents("14");
+			showContents("14");
 		});
 
 		// "음식점" 버튼 클릭 시
 		document.querySelector("#contentTypeId39").addEventListener("click", function () {
-		showContents("39");
+			showContents("39");
 		});
 
 		// "숙박" 버튼 클릭 시
 		document.querySelector("#contentTypeId32").addEventListener("click", function () {
-		showContents("32");
+			showContents("32");
 		});
 
 		// "축제공연" 버튼 클릭 시
 		document.querySelector("#contentTypeId15").addEventListener("click", function () {
-		showContents("15");
+			showContents("15");
 		});
 
 		// 검색어가 2자 이상인 경우에만 검색 수행
@@ -399,9 +208,9 @@
 			} else {
 			// 2자 미만인 경우에는 알림창 띄우기
 				alert("검색어는 2자 이상 입력하셔야 합니다.");
-		}
+			}
+		});
 	});
-});
 		function page(e){
 			// 파라미터값을 가져옴
 			var url = new URL(window.location.href)
@@ -428,7 +237,7 @@
 		$.ajax({
 			type:"post",
 			url:"${pageContext.request.contextPath}/contents/getLike.do",
-			data:{"contentidList":contentid,"mbno":${mbno}},
+			data:{"contentid":contentid,"mbno":${mbno}},
 			dataType:"json",
 			success:function(data){
 				console.log(data);
@@ -438,6 +247,7 @@
 			}
 		});
 	}
+	
 </script>
 	
 	

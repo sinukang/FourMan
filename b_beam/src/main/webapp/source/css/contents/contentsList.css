@@ -121,6 +121,11 @@
     overflow: hidden;
     transition: background-position 0.5s;
 }
+.contentsbutton.selected{
+    background: linear-gradient(200deg, rgb(253, 99, 47) 0%, rgba(88, 140, 237, 1) 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+}
 .contentsbutton img {
     width: 140px; /* 원하는 너비 설정 */
     height: 150px; /* 원하는 높이 설정 */
@@ -165,6 +170,17 @@
 .search button i {
     color: rgb(255, 255, 255); /* 아이콘 색상을 파란색으로 변경 */
     font-size: 24px; /* 아이콘 크기를 24px로 변경 */
+}
+.search .Init{
+	margin-left:15px;
+	width: 80px;
+	height: 40px;
+	font-size:15px;
+	font-weight:bold;
+	color:white;
+ 	border: none;
+ 	border-radius: 10px 10px 10px 10px;
+	
 }
 
 
