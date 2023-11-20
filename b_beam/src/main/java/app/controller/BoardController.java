@@ -2,6 +2,7 @@ package app.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,10 +145,106 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryModify.do")) {
 			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			int bdno = Integer.parseInt(request.getParameter("bdno"));
+			BoardDao bd = new BoardDao();
+			BoardVo bv = new BoardVo();
+			bv = bd.boardSelectOne(mbno, bdno);
+			
+			
+			System.out.println("mbno : " + mbno);
+			System.out.println("bdno : " + bdno);
+
+			request.setAttribute("bv", bv);
+			
 			String path ="/board/galleryModify.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
+		}else if(location.equals("galleryModifyAction.do")) { 
+			String savePath = request.getServletContext().getRealPath("/source/galleryImages");
+
+			//String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";  //절대경로
+			
+			// Apache Commons FileUpload라이브러리를 사용해서 다중파일업로드 구현
+			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(); // 업로드된 파일을 디스크에 저장하는데 사용되는 팩토리 객체
+			ServletFileUpload upload = new ServletFileUpload(fileItemFactory); // 실제 파일 업로드를 처리하는데 사용되는 객체
+
+
+			try {
+				List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));	// 업로드 요청을 파싱해서 FileItem 객체의 리스트로 반환
+				
+				
+				// 변수 리스트 초기화
+				List<String> bdglnameList = new ArrayList<>();
+				
+				String bdtitle = null;
+				String bdcont = null;
+				String bdno = request.getParameter("bdno");
+				int bdno_int = (bdno != null && !bdno.isEmpty()) ? Integer.parseInt(bdno) : 0;
+				for (FileItem item : items) {
+					if (item.isFormField()) {	//파일이 아닌경우
+						
+						// 제목과 내용을 받아옴
+						if ("bdtitle".equals(item.getFieldName())) {
+							bdtitle = item.getString("UTF-8");
+						} else if ("bdcont".equals(item.getFieldName())) {
+							bdcont = item.getString("UTF-8");
+						}
+					} else {		// 파일인 경우
+						// 다중파일 리스트처리
+						try {
+							String fileName = item.getName();		// FileItem에서 업로드된 파일 이름을 가져옴
+							File destFile = new File(savePath, fileName);	// 저장할 경로와 파일명을 지정하는 객체생성
+							item.write(destFile);
+							
+							//bdglnameList에 filename을 추가
+							bdglnameList.add(fileName);
+							
+							System.out.println("Uploaded file: " + fileName);
+							System.out.println("destFile: " + destFile);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				int mbno = 0;
+				HttpSession session = request.getSession();
+				mbno = (int) session.getAttribute("mbno");
+	
+				BoardVo bv = new BoardVo();
+				bv.setBdno(bdno_int);
+				bv.setMbno(mbno);
+				bv.setBdtitle(bdtitle);
+				bv.setBdcont(bdcont);
+	
+				BdgalleryVo bgv = new BdgalleryVo();
+				bgv.setBdglnameList(bdglnameList);
+	
+				BoardDao2 bd2 = new BoardDao2();
+				int value = bd2.boardModify(bv, bgv);
+	
+				System.out.println("Value: " + value);
+	
+				if (value == 0) {
+					
+					String path = request.getContextPath() + "/board/galleryWrite.do";
+					response.sendRedirect(path);
+				} else {
+					String path = request.getContextPath() + "/board/galleryList.do";
+					response.sendRedirect(path);
+				}
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			}
+		
 		}else if (location.equals("noticeList.do")) {
 			
 			String path ="/board/noticeList.jsp";
@@ -180,15 +277,8 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			
-			// 서블릿이 실행되는 웹 어플리케이션의 루트 디렉토리
-			String appPath = request.getServletContext().getRealPath("/");
+			String savePath = request.getServletContext().getRealPath("/source/galleryImages");
 
-			// 상대 경로
-			String relativePath = "/source/galleryImages";
-
-			// 최종적인 저장 경로
-			String savePath = appPath + relativePath;
-			
 			//String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";  //절대경로
 			
 			// Apache Commons FileUpload라이브러리를 사용해서 다중파일업로드 구현
