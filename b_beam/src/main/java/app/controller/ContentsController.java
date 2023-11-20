@@ -112,11 +112,36 @@ public class ContentsController extends HttpServlet {
 			String path ="/contents/contentsList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-		}else if (location.equals("getLike.do")) {
+		}else if (location.equals("contentsDetail.do")) {
+
+	        HttpSession session = request.getSession();
+	        
+			String path ="/contents/contentsDetail.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}else if (location.equals("getBookmark.do")) {
+	        HttpSession session = request.getSession();
+			String contentid = request.getParameter("contentid");
+			int value = 0;
+			if(session.getAttribute("mbno")!=null&&!session.getAttribute("mbno").equals("")) {
+				BookmarkDao bmd= new BookmarkDao();
+				ArrayList<String> contentidList = new ArrayList<String>();
+				contentidList.set(0, contentid);
+				String[] myBm=bmd.getContentsListBookmark((int)session.getAttribute("mbno"), contentidList);
+////				request.setAttribute("myBmList", myBmList);
+				if(myBm.length>0) {
+					value=1;
+				}
+			}else {
+				value=2;
+			}
+			PrintWriter out = response.getWriter();
+			out.print("{\"value\":"+value+"}");
+		}else if (location.equals("doBookmark.do")) {
 			String contentid = request.getParameter("contentid");
 			int mbno = Integer.parseInt(request.getParameter("mbno"));
 			BookmarkDao bd = new BookmarkDao();
-			int value = bd.getLike(mbno, contentid); 
+			int value = bd.doBookmark(mbno, contentid); 
 			PrintWriter out = response.getWriter();
 			out.print("{\"value\":\""+value+"\"}");
 		}else if (location.equals("contentsRanking.do")) {
@@ -127,11 +152,6 @@ public class ContentsController extends HttpServlet {
 		}else if (location.equals("bookmarkedContents.do")) {
 			
 			String path ="/contents/bookmarkedContents.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-		}else if (location.equals("contentsDetail.do")) {
-			
-			String path ="/contents/contentsDetail.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}

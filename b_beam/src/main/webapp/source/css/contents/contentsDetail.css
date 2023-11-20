@@ -102,26 +102,34 @@
 /* 타이틀, 즐겨찾기, 대표 이미지 및 작은 이미지 섹션 스타일 ------------------------*/
 .contentsdetail {
 	position: relative;
-    max-width: 80%;
+    width: 1200px;
     height: 600px;
     margin: 100px auto;
-    padding: 20px;
+    padding: 30px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.contents-visual{
+	width : 500px;
+	position : absolute;
+	top : -20px;
+}
 .title-section {
-	position: absolute;
-	bottom: 550px;
     font-size: 30px;
     margin-bottom: 10px;
+    display: flex;
 }
 
 .favorite {
-	position: absolute;
-	top: 25px;
-	left: 550px;
-	bottom: 560px;
+	cursor:pointer; 
+    margin: auto 20px auto auto;
+}
+.favorite-icon.on{
+	color: rgb(255, 255, 0);
+	font-size: 25px;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+	
 }
 .favorite-icon {
 	color: rgb(120, 120, 120);
@@ -130,20 +138,17 @@
 }
 /* 사진 영역  */
 .main-image-section {
-    position: absolute;
-    bottom: 120px;
+/* 	background-color : #eee; */
 }
 .main-image-section img {
-	width: 550px;
+	width: 500px;
 	height: 450px;
 }
 .small-images-section {
-	position: absolute;
-	bottom: 1px;
     display: flex; /* 가로 방향으로 이미지를 정렬합니다. */
-    max-width: 550px; /* 최대 너비 설정 */
-  overflow-x: auto; /* 가로 스크롤바가 필요한 경우 스크롤을 생성합니다. */
-  margin-bottom: 20px; /* 하단 여백 설정 */
+    max-width: 500px; /* 최대 너비 설정 */
+	overflow-x: auto; /* 가로 스크롤바가 필요한 경우 스크롤을 생성합니다. */
+	margin-bottom: 20px; /* 하단 여백 설정 */
 }
 .small-images-section img {
 	width: 80px;
@@ -154,18 +159,23 @@
 /* 탭 li 및 api 노출 영역 ------------------------*/
 .tabBox{
 	position: absolute;
-	left: 500px;
-	width: 65%;
+	left: 550px;
+	width: calc( 100% - 580px);
 }
-.tab{
+.info-tab{
+    position: relative;
+    display: flex;
+    text-align: center;
+    background: #567ff2;
+    border-radius: 7px;
+    box-shadow: 1px 2px 7px 1px rgb(48 50 51 / 54%);
+	margin:0;
 	padding: 0 10px;
 }
 
 .tab-content{
-	position: absolute;
-	left: 100px;
-	width: 75%;
-	height: 450px;
+	height: 500px;
+	width : 100%;
 	background-color: rgb(242, 242, 242);
 	justify-content: center;
 	text-align: center;

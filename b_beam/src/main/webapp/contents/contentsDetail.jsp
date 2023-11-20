@@ -44,23 +44,25 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="container">
 
 	<div class="container-title">
-				<h1>DETAIL CONTENTS</h1>
-			</div>
-		
-
-	
-	  <div class="contentsdetail">
-	       	 <div class="title-section">
-	        	<p>title</p>
-	    	</div>
-	    	<div class="favorite" id="favorite" onclick="toggleFavorite()">
-	       		 <span class="favorite-icon">&#9734;</span>
-	   		 </div>
-	
-	    	<div class="main-image-section">
+		<h1>DETAIL CONTENTS</h1>
+	</div>
+	<div class="contentsdetail">
+		<div class="contents-visual">
+			<div class="title-section">
+		       	<p>title</p>
+	      		 <div id="favorite" class="favorite"></div>
+		   	</div>
+		<%-- 		    	<c:choose> --%>
+		<%-- 		    		<c:when test="${cv.contentLikeYN eq 'Y'}"> --%>
+		<!-- 			       		 <span class="favorite-icon on">★</span> -->
+		<%-- 			    	</c:when> --%>
+		<%-- 			    	<c:otherwise> --%>
+		<!-- 			       		 <span class="favorite-icon">☆</span> -->
+		<%-- 			    	</c:otherwise> --%>
+		<%-- 			    </c:choose> --%>
+		   	<div class="main-image-section">
 			    <img id="bigImage" src="../source/images/duck4.jpg" alt="Main Image">
 			</div>
-			
 			<div class="small-images-section">
 			    <img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image">
 				<img class="smallImage" src="../source/images/duck1.png" alt="Small Image">
@@ -69,29 +71,29 @@ document.addEventListener('DOMContentLoaded', function() {
 				<img class="smallImage" src="../source/images/duck5.jpg" alt="Small Image">
 				<img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image">
 			</div>
-			
+		</div>
 		
 			
-			<div class="tabBox">
-				<ul class="tab">
-					<li>
-		    			<a href="#tab1" class="btn" >기본정보</a>
-					</li>
-					  <li>
-						<a href="#tab2" class="btn" >이용안내</a>
-					</li>
-					  <li>
-					   <a href="#tab3" class="btn" >위치 및 상세정보</a>
-					</li>
-				</ul>
-			
-				<div class="tab-content">
-		            이곳에 해당 게시물의 정보가 출력됩니다
-		        </div>
-		       
-		        
-			</div>
+		<div class="tabBox">
+			<ul class="info-tab">
+				<li>
+	    			<a href="#tab1" class="btn" >기본정보</a>
+				</li>
+				  <li>
+					<a href="#tab2" class="btn" >이용안내</a>
+				</li>
+				  <li>
+				   <a href="#tab3" class="btn" >위치 및 상세정보</a>
+				</li>
+			</ul>
+		
+			<div class="tab-content">
+	            이곳에 해당 게시물의 정보가 출력됩니다
+	        </div>
+	       
+	        
 		</div>
+	</div>
 			
 	
 		<div class="commentArea">
@@ -227,6 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <script>
+
 //좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수--------------
  function like(button) { button.classList.toggle('liked');}
 </script>
@@ -296,8 +299,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 텍스트 영역에 입력이 발생할 때 이벤트 리스너 추가
   document.getElementById('commentInput').addEventListener('input', updateCharacterCount);
-</script>
 
+	
+</script>
+<script>
+// 페이지 로딩시 즐겨찾기여부와 리뷰를 불러오기
+getBookmark();
+//getReviewList();
+	function getBookmark(){
+		// 해당 컨텐츠가 사용자가 bookmark를 한 컨텐츠인지 구분해서 보여주는 함수
+		
+		$.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath}/contents/getBookmark.do",
+			data:{"contentid":${param.contentid}},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				if(data.value==1){// 북마크를 한 컨텐츠
+					$('#favorite').html('<span class="favorite-icon on">★</span>')	
+				}else if(data.value==0||data.value==2){// 북마크 하지 않은 컨텐츠 / 로그인을 하지 않았을 경우
+					$('#favorite').html('<span class="favorite-icon">☆</span>')	
+				}
+			},
+			error:function(){
+				console.log("error");
+			}
+		});
+	}
+	function doBookmark(e){
+		// bookmark를 하는 함수
+		
+		// 로그인 상태가 아니라면 로그인 페이지로 이동을 유도하는 
+		if ("${empty mbno}"){
+			var login = confirm("로그인을 해주세요");
+			if(login){
+				location.href="${pageContext.request.contextPath}/member/memberLogin.do"
+			}
+		}
+		$.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath}/contents/getBookmark.do",
+			data:{"contentid":${param.contentid}},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+			},
+			error:function(){
+				console.log("error");
+			}
+		});
+	}
+</script>
 
 
 

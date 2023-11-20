@@ -46,7 +46,7 @@ public class BookmarkDao {
 		myBmList = bmIdList.toArray(myBmList);
 		return myBmList;
 	}
-	public int getLike(int mbno, String contentid) {
+	public int doBookmark(int mbno, String contentid) {
 		int value = 0;
 		PreparedStatement pstmt2=null;
 		
