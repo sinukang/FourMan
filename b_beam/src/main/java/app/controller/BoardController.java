@@ -180,19 +180,24 @@ public class BoardController extends HttpServlet {
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			
-			String contextPath = request.getContextPath();
-			
-			String savePath = contextPath+"/source/galleryImages";
-			
-			String str = "D:\\\\dev0803\\\\git_e\\\\b_beam\\\\b_beam\\\\src\\\\main\\\\webapp\\\\source\\\\galleryImages";
-			// Apache Commons FileUpload라이브러리를 사용해서 다중파일업로드 구현
-			DiskFileItemFactory factory = new DiskFileItemFactory();	// 업로드된 파일을 디스크에 저장하는데 사용되는 팩토리 객체
-			ServletFileUpload upload = new ServletFileUpload(factory);	// 실제 파일 업로드를 처리하는데 사용되는 객체
+			// 서블릿이 실행되는 웹 어플리케이션의 루트 디렉토리
+			String appPath = request.getServletContext().getRealPath("/");
 
-			List<FileItem> items;
+			// 상대 경로
+			String relativePath = "/source/galleryImages";
+
+			// 최종적인 저장 경로
+			String savePath = appPath + relativePath;
 			
+			//String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";  //절대경로
+			
+			// Apache Commons FileUpload라이브러리를 사용해서 다중파일업로드 구현
+			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(); // 업로드된 파일을 디스크에 저장하는데 사용되는 팩토리 객체
+			ServletFileUpload upload = new ServletFileUpload(fileItemFactory); // 실제 파일 업로드를 처리하는데 사용되는 객체
+
+
 			try {
-				items = upload.parseRequest(new ServletRequestContext(request));	//파일 및 폼필드의 데이터 파싱
+				List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));	// 업로드 요청을 파싱해서 FileItem 객체의 리스트로 반환
 				
 				
 				// 변수 리스트 초기화
@@ -202,7 +207,7 @@ public class BoardController extends HttpServlet {
 				String bdcont = null;
 			
 				for (FileItem item : items) {
-					if (item.isFormField()) {
+					if (item.isFormField()) {	//파일이 아닌경우
 						
 						// 제목과 내용을 받아옴
 						if ("bdtitle".equals(item.getFieldName())) {
@@ -210,16 +215,18 @@ public class BoardController extends HttpServlet {
 						} else if ("bdcont".equals(item.getFieldName())) {
 							bdcont = item.getString("UTF-8");
 						}
-					} else {
+					} else {		// 파일인 경우
 						// 다중파일 리스트처리
 						try {
-							String fileName = item.getName();
-							File destFile = new File(savePath, fileName);
+							String fileName = item.getName();		// FileItem에서 업로드된 파일 이름을 가져옴
+							File destFile = new File(savePath, fileName);	// 저장할 경로와 파일명을 지정하는 객체생성
 							item.write(destFile);
-				
+							
 							//bdglnameList에 filename을 추가
 							bdglnameList.add(fileName);
+							
 							System.out.println("Uploaded file: " + fileName);
+							System.out.println("destFile: " + destFile);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
