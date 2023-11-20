@@ -82,13 +82,13 @@
 								<tr>
 									<td class="comment-area" colspan="2" style="border-bottom:0;"> 
 										<div class="comment-id">
-											<span>${cv.mbname}</span>
+											<span>닉네임 : ${cv.mbname}</span>
 										</div>
 										<div class="comment-cont">
-											${cv.cmcont} 댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.댓글을 작성하였습니다.
+											내용 : ${cv.cmcont}
 										</div>
 										<div class="comment-date">
-											${cv.cmdate} 2023.11.06
+											날짜 : ${cv.cmdate}
 										</div>
 										<div>
 											<button type="button" style="color: black" class="del-btn" >삭제</button>

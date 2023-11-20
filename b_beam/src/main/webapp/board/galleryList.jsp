@@ -12,7 +12,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+
 	<jsp:include page="../source/include/header.jsp"/>
+	
 	<div class="container">
 		<div class="container-title">
 			<h1>GALLERY</h1>
@@ -21,40 +23,42 @@
 			<table class="wrap-table">
 				<!-- <tr> -->
 				<c:forEach var="bv" items="${bv_alist}" varStatus="status">
-				<%-- <c:out value="${status.index}"/> --%>
 					<c:if test="${status.index % 4 == 0}">
 						<tr>
 					</c:if>
-					<td>
-					<div class="inner-table">
-						<button type="button" id="popupBtn" class="popupBtn" value="${bv.bdno}"> <!-- 모달팝업 버튼 -->
-							<table class="table-cont" style=" cursor: pointer;">
-								<tr>
-									<td colspan="2" style="padding-left: 10px;">${bv.mbname}</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<img src="${pageContext.request.contextPath}/source/galleryImages/${bv.bdFilename[0]}"/>
-									</td>
-								</tr>
-								<tr>
-									<td style="border-bottom:0; padding-left: 10px;">
-										${bv.bdtitle}
-									</td>
-									<td class="like" style="border-bottom:0; padding-right: 10px;">
-										<c:choose>
-											<c:when test="${bv.bdLikeYN == 'Y'}">
-												<span class="bdLikeY">♥</span>
-											</c:when>
-											<c:otherwise>
-												<span class="bdLikeN">♡</span>
-											</c:otherwise>
-										</c:choose>
-									</td>
-								</tr>
-							</table>
-						</button>
-					</div>
+					<td class="td-inner">
+						<div class="inner-table">
+							<button type="button" id="popupBtn" class="popupBtn" value="${bv.bdno}"> <!-- 모달팝업 버튼 -->
+								<table class="table-cont">
+									<tr>
+										<td class="td-nickname">${bv.mbname}</td>
+									</tr>
+									<tr>
+										<td class="td-img">
+											<div class="div-img">
+												<img src="${pageContext.request.contextPath}/source/galleryImages/${bv.bdFilename[0]}" alt="이미지 없음"/>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</button>
+							<div class="info-area">
+								<div class="title-area">
+									<span class="span-nickname">${bv.bdtitle}</span>
+								</div>
+								<div class="like-area">
+									<input type="hidden" value="${bv.bdno}">
+									<c:choose>
+										<c:when test="${bv.bdLikeYN == 'Y'}">
+											<span class="span-bdLikeY">♥</span>
+										</c:when>
+										<c:otherwise>
+											<span class="span-bdLikeN">♡</span>
+										</c:otherwise>
+									</c:choose>							
+								</div>
+							</div>
+						</div>
 					</td>
 					<c:if test="${status.index % 4 == 3}">
 						</tr>
@@ -124,7 +128,7 @@
 	const modal = document.getElementById('modalWrap');
 	const closeBtn = document.getElementById('closeBtn');
 		
-// 	//모달 영역 밖 클릭 시 모달 닫음
+	//모달 영역 밖 클릭 시 모달 닫음
 // 	window.onclick = function(e){
 // 		if(e.target.className != "modalWrap"){
 // 			document.querySelector("#modalWrap").style.display = "none";
@@ -132,11 +136,11 @@
 // 	}
 
 	//모달 영역 밖 클릭 시 모달 닫음
-	window.onclick = function(event) {
-		if (event.target != modal) {
-			modal.style.display = "none";
-		}
-	}
+// 	window.onclick = function(event) {
+// 		if (event.target != modal) {
+// 			modal.style.display = "none";
+// 		}
+// 	}
 	
 	//X버튼 클릭 시 모달 닫음
 	closeBtn.onclick = function() {
@@ -204,15 +208,56 @@
 		});
 		
 		//띄운 모달 안의 글 좋아요 버튼
-		$(".like-button").on("click",function() {
+		$(".like-area").on("click",function() {
 			
-			var currentlike = $(this).text();
+			let mbno = "${mbno}";
 			
-			if(currentlike === "♡") {
-				$(this).text("♥");
+			if(!mbno){
+				
+				if(confirm("로그인이 필요한 기능입니다.\n\n로그인 하시겠습니까?")){
+					location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
+				}else{
+					return;
+				}
+				
 			}else{
-				$(this).text("♡");
+				let currentLike = $(this).children('span');
+				let bdno = $(this).children('input').val();
+				
+				if(currentLike.text() === "♡") {
+					
+					$.ajax({
+						type : "post",
+						url : "${pageConetxt.request.contextPath}/board/boardLikeCntUpdate.do,
+						data : {"bdno" : bdno},
+						dataType : "json",
+						cache : false,
+						success : function(){
+							currentLike.text("♥");
+						},
+						error : function(){
+							alert("좋아요 설정 에러");
+						}
+					});
+					
+				}else{
+					
+					$.ajax({
+						type : "post",
+						url : "${pageConetxt.request.contextPath}/board/boardLikeCntUpdateCancel.do,
+						data : {"bdno" : bdno},
+						dataType : "json",
+						cache : false,
+						success : function(){
+							currentLike.text("♡");
+						},
+						error : function(){
+							alert("좋아요 설정 에러");
+						}
+					});					
+				}
 			}
+			
 			
 		});	
 		
