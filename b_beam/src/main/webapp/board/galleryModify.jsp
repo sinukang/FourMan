@@ -41,7 +41,7 @@
 								</div>
 								<div class="upload-btn">
 									<label class="file-label" for="chooseFile">사진 선택</label>
-									<input class="file" id="chooseFile" name="bdFilename"
+									<input class="file" id="chooseFile" name="bdglname" multiple
 										type="file" 
 										onchange="dropFile.handleFiles(this.files)"
 										accept="image/png, image/jpeg, image/gif">
@@ -55,7 +55,7 @@
 						</tr>
 						<tr style="height:200px;">
 							<td>
-								<textarea id="input-bdcont" name="bdcont" ${bv.bdcont } placeholder="내용을 입력해주세요."></textarea>
+								<textarea id="input-bdcont" name="bdcont" placeholder="내용을 입력해주세요.">${bv.bdcont }</textarea>
 							</td>
 						</tr>
 						<tr style="height:20px;">
@@ -157,24 +157,24 @@
 			if(fm.bdtitle.value=="")
 			{
 				alert("제목을 입력하세요");
-				fm.bdtitle.focuse();
+				fm.bdtitle.focus();
 				return;
 			}else if(fm.bdcont.value=="")
 			{
 				alert("내용을 입력하세요");
 				fm.bdcont.focus();
 				return;
-			}else if(fm.bdFilename.value=="")
+			}else if(fm.bdglname.value=="")
 			{
 				alert("사진을 첨부해주세요");
-				fm.bdFilename.focus();
+				fm.bdglname.focus();
 				return;
 			}
 			
 			
 			fm.action = "${pageContext.request.contextPath}/board/galleryModifyAction.do";	
 			fm.method = "post";					
-			//fm.enctype="multipart/form-data";
+			fm.enctype="multipart/form-data";
 			fm.submit();						
 			return;
 		}

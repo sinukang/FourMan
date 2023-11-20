@@ -3,6 +3,7 @@ package app.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,71 @@ public class BoardDao2 {
 			return exec1;
 		}
 
+	}
+	
+	public int boardDelete(int bdno, String mbpwd) {
+		int exec1 = 0;
+		int exec2 = 0;
+		String sql = "update board set bddelyn = 'Y', bddatem = now() where bdno = ? and mbpwd = ? ";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bdno);
+			pstmt.setString(2, mbpwd);
+			exec1 = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (exec1 > 0) {
+			
+			// board 테이블 삭제 성공하면 bdgallery 테이블 삭제 
+			String sql2 = "update bdgallery set bdgldelyn = 'Y' where bdno = ? ";
+			
+			try (PreparedStatement pstmt2 = conn.prepareStatement(sql2);) {
+				pstmt2.setInt(1, bdno);
+				exec2 = pstmt2.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return exec1 + exec2;
+	}
+	
+	public int boardModify(BoardVo bv, BdgalleryVo bgv) {
+		int exec1 = 0;
+		int exec2 = 0;
+		String sql = "update board set bdtitle = ?, bdcont = ?, bddatem = now() where bdno = ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, bv.getBdtitle());
+			pstmt.setString(2, bv.getBdcont());
+			pstmt.setInt(3, bv.getBdno());
+			exec1 = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (exec1 > 0) {
+			//board 테이블 수정 성공했을 경우 bdgallery 테이블 수정
+			String sql2 = "update bdgallery set bdglname = ? where bdno = ?";
+			
+			
+			List<String> bdglnameList = bgv.getBdglnameList();
+			
+			for (String bdglname : bdglnameList) {
+				try {
+					PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+					pstmt2.setString(1, bdglname);
+					pstmt2.setInt(2, bv.getBdno());
+					exec2 += pstmt2.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return exec1 + exec2;
 	}
 	
 }
