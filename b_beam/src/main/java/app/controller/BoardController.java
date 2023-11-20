@@ -132,7 +132,7 @@ public class BoardController extends HttpServlet {
 			request.setAttribute("bv", bv);
 			request.setAttribute("cv_alist", cv_alist);
 			
-			String path ="/board/galleryContents.jsp";
+			String path ="/board/galleryContentsInclude.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
