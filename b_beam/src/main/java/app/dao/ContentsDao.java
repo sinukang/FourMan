@@ -173,6 +173,35 @@ public class ContentsDao {
 		
 		return cv;
 	}
+	public JSONObject ContentsViewDetailImage(String contentid, String contenttypeid) {
+		// 컨텐츠 상세보기 페이지 정보 불러오는 메소드
+		JSONObject contentsImage = new JSONObject();
+		String uriType = "detailImage1";
+		String query = "?serviceKey=";
+		query += key;
+		query += "&MobileApp=AppTest&MobileOS=ETC&_type=json&subImageYN=Y";
+		if(contenttypeid.equals("39")) {
+			query += "&imageYN=N";
+		}else {
+			query += "&imageYN=Y";
+		}
+
+		String apiURL = uri
+		+ uriType
+		+ query;
+		System.out.println(apiURL);
+		try {
+			// 컨텐츠를 json형식으로 불러와 기본 정보를 담음
+			JSONObject jsonResponse = GetItem(apiURL);
+			JSONObject body = (JSONObject)jsonResponse.get("body");
+			JSONObject items = (JSONObject)body.get("items");
+			JSONArray item = (JSONArray)items.get("item");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return contentsImage;
+	}
 	public JSONObject ContentsViewIntro(String contentid, String contenttypeid) {
 		JSONObject contents = new JSONObject();
 		String uriType = "detailIntro1";
@@ -233,8 +262,8 @@ public class ContentsDao {
 			if(cnt>0) {
 				//정보가 있음
 				if(!rs.getString("contentdatem").equals("(null)")&&rs.getString("contentdatem").equals(cv.getContentdatem())) {
-					// 컨텐츠 수정일이 api에서 가져온 정보와 같을 경우 상태만 Y로 바꿔준다
-					sql = "update tempcontents SET contentdelyn = 'Y' where and contentid=?";
+					// 컨텐츠 수정일이 api에서 가져온 정보와 같을 경우 상태만 N으로 바꿔준다
+					sql = "update tempcontents SET contentdelyn = 'N' where and contentid=?";
 					try {
 						pstmt2 = conn.prepareStatement(sql);
 						pstmt2.setString(1, contentid);
@@ -245,7 +274,7 @@ public class ContentsDao {
 					}	
 				}else {
 					// 컨텐츠 수정일과 api에서 가저온 정보가 다를경우 정보를 최신화한다.
-					sql = "update tempcontents SET title = ?,contenttypeid = ?,mapx = ?,mapy = ?,contentdate = ?,contentdatem = ?,firstimage = ?,contentdelyn = 'Y' where contentid = ?";
+					sql = "update tempcontents SET title = ?,contenttypeid = ?,mapx = ?,mapy = ?,contentdate = ?,contentdatem = ?,firstimage = ?,contentdelyn = 'N' where contentid = ?";
 					try {
 						pstmt2 = conn.prepareStatement(sql);
 						pstmt2.setString(1, cv.getTitle());
@@ -303,14 +332,6 @@ public class ContentsDao {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally{
-			try{
-				rs.close();
-				pstmt.close();
-				conn.close();
-			}catch(Exception e){
-				e.printStackTrace();
-			}
 		}
 		return value;
 	}
