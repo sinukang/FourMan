@@ -193,12 +193,18 @@ public class BoardController extends HttpServlet {
 			
 			//System.out.println("mbno : " + mbno);
 			//System.out.println("bdno : " + bdno);
-
-			request.setAttribute("bv", bv);
 			
-			String path ="/board/galleryModify.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
+			PrintWriter out = response.getWriter();
+			// 로그인한 사용자와 게시글 작성자가 같은지 확인
+			if(bv.getMbno() != mbno) {
+				 out.println("<script>alert('게시물을 수정할 권한이 없습니다.');location.href='"+request.getContextPath()+"/board/galleryList.do'</script>");
+			}else {
+				request.setAttribute("bv", bv);
+				
+				String path ="/board/galleryModify.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+			}
 			
 		}else if(location.equals("galleryModifyAction.do")) { 
 			String savePath = request.getServletContext().getRealPath("/source/galleryImages");
