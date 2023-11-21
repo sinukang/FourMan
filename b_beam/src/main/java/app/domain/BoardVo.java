@@ -15,6 +15,7 @@ public class BoardVo extends MemberVo{
 	private String bddelyn;
 	private ArrayList<String> bdFilename;
 	private int bdLikeCnt;
+	private int bdCommentCnt;
 	private String bdLikeYN = "N";
 	
 	public int getBdno() {
@@ -94,6 +95,12 @@ public class BoardVo extends MemberVo{
 	}
 	public void setBdLikeYN(String bdLikeYN) {
 		this.bdLikeYN = bdLikeYN;
+	}
+	public int getBdCommentCnt() {
+		return bdCommentCnt;
+	}
+	public void setBdCommentCnt(int bdCommentCnt) {
+		this.bdCommentCnt = bdCommentCnt;
 	}
 
 	

@@ -5,7 +5,6 @@
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <div class="wrap">
@@ -28,9 +27,9 @@
 												</div>
 											</c:forEach>
 										</div>
-										<!-- <div class="swiper-button-next" style="color: white;"></div>
+										<div class="swiper-button-next" style="color: white;"></div>
 										<div class="swiper-button-prev" style="color: white;"></div>
-										<div class="swiper-pagination"></div> -->
+										<div class="swiper-pagination"></div>
 									</div>
 								</td>
 							</tr>
@@ -113,15 +112,87 @@
 		</table>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
+	var swiper = new Swiper(".mySwiper", {
+		spaceBetween: 30,
+		centeredSlides: true,
+		autoHeight : true,
+		slidesPerView: 1,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+	});	
+
 	$(document).ready(function(){
 		
 		$(".like").on("click", function(){
 			
+			let mbno = "${mbno}";
 			let bdno = $(this).children('input').val();
-			alert("bdno : " + bdno);
 			
+			event.preventDefault();
+			
+			if(!mbno){
+				if(confirm("로그인이 필요한 기능입니다.\n\n로그인 하시겠습니까?")){
+					location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
+				}else{
+					return;
+				}
+				
+			}else{
+					let currentLike = $(this).children('label');
+					
+					if(currentLike.text() === "♡") {
+					
+						$.ajax({
+							type : "post",
+							url : "${pageContext.request.contextPath}/board/boardLikeCntUpdate.do",
+							data : {"bdno" : bdno},
+							dataType : "json",
+							cache : false,
+							success : function(data){
+								if(data.value == 1){
+									currentLike.text("♥");
+									$("#like-num"+bdno).siblings().text("♥");
+								}else{
+									alert(data.value + "좋아요 추가 에러");
+								}
+							},
+							error : function(data){
+								alert("추가 에러");
+							}
+						});
+					
+					}else{
+					
+						$.ajax({
+							type : "post",
+							url : "${pageContext.request.contextPath}/board/boardLikeCntUpdateCancel.do",
+							data : {"bdno" : bdno},
+							dataType : "json",
+							cache : false,
+							success : function(data){
+								if(data.value == 1){
+									currentLike.text("♡");
+									$("#like-num"+bdno).siblings().text("♡");
+								}else{
+									alert(data.value + "좋아요 취소 에러");
+								}							
+							},
+							error : function(){
+								alert("취소 에러");
+							}
+						});					
+					}
+				}
 		});
 		
 	});
+
 </script>

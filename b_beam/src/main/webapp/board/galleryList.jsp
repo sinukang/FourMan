@@ -8,7 +8,6 @@
 <title>갤러리</title>
 <link href="../source/css/home.css" type="text/css" rel="stylesheet">
 <link href="../source/css/gallery/galleryList.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
@@ -45,9 +44,19 @@
 							<div class="info-area">
 								<div class="title-area">
 									<span class="span-nickname">${bv.bdtitle}</span>
+									<%-- <span> 
+										<c:choose>
+											<c:when test="${bv.bdCommentCnt != 0}">
+												( ${bv.bdCommentCnt} )
+											</c:when>
+											<c:otherwise>
+												( 0 )
+											</c:otherwise>
+										</c:choose>
+									</span> --%>
 								</div>
 								<div class="like-area">
-									<input type="hidden" value="${bv.bdno}">
+									<input type="hidden" id="like-num${bv.bdno}" value="${bv.bdno}">
 									<c:choose>
 										<c:when test="${bv.bdLikeYN == 'Y'}">
 											<span class="span-bdLikeY">♥</span>
@@ -148,20 +157,20 @@
 	}
 	
 	/* 슬라이드 */	
-	var swiper = new Swiper(".mySwiper", {
-		spaceBetween: 30,
-		centeredSlides: true,
-		autoHeight : true,
-		slidesPerView: 1,
-		pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
-		},
-		navigation: {
-			nextEl: ".swiper-button-next",
-			prevEl: ".swiper-button-prev",
-		},
-	});
+// 	var swiper = new Swiper(".mySwiper", {
+// 		spaceBetween: 30,
+// 		centeredSlides: true,
+// 		autoHeight : true,
+// 		slidesPerView: 1,
+// 		pagination: {
+// 			el: ".swiper-pagination",
+// 			clickable: true,
+// 		},
+// 		navigation: {
+// 			nextEl: ".swiper-button-next",
+// 			prevEl: ".swiper-button-prev",
+// 		},
+// 	});
 	
 	//제이쿼리 영역
 	$(document).ready(function(){
@@ -266,9 +275,8 @@
 					});					
 				}
 			}
-			
-			
-		});	
+		});
+		
 		
 	});
 	//제이쿼리 영역 끝

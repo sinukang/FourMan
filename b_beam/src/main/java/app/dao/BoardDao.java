@@ -41,6 +41,7 @@ public class BoardDao {
 		
 		String sql = "SELECT b.*"
 					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS bdLikeCnt"
+					+ ", (SELECT COUNT(c.bdno) FROM comment c WHERE c.bdno = b.bdno) AS bdCommentCnt"
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
 					+ str2
@@ -50,8 +51,8 @@ public class BoardDao {
 		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
 		//scri.getNumOfRows() : 페이지에 표시할 글 개수 (Criteria.java에 기본값 20으로 할당되어있음)
-		int perPageNum = 12;	//갤러리 페이지에 표시할 글 개수를 설정함
-		scri.setNumOfRows(perPageNum);
+		int perPageNum = 12;			//페이지 당 표시할 글 개수 -> 12개
+		scri.setNumOfRows(perPageNum);	//갤러리 페이지에 표시할 글 개수를 설정함
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -74,6 +75,7 @@ public class BoardDao {
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
 				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
+				bv.setBdCommentCnt(rs.getInt("bdCommentCnt"));
 				bv.setMbname(rs.getString("mbname"));
 				if(mbno != 0) {
 					bv.setBdLikeYN(rs.getString("bdLikeYN"));
@@ -132,7 +134,7 @@ public class BoardDao {
 		
 		String str = "";
 		if(mbno != 0) {
-			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'T', 'F') AS bdLikeYN";
+			str = ", IF((SELECT COUNT(l.lkno) FROM like_ l WHERE l.bdno = b.bdno AND l.mbno = "+mbno+" AND l.lkdelyn = 'N') = 1, 'Y', 'N') AS bdLikeYN";
 		}
 		
 		String sql = "SELECT b.*"
