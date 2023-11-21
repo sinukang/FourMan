@@ -28,15 +28,18 @@
 					<input type="button" id="input-back" name="btn" style="display:none;" onclick="location.href='${pageContext.request.contextPath}/board/galleryList.do';">
 				</div>
 				<form name="frm">
+					<input type="hidden"  name="bdno" value="${bv.bdno}">
 					<table class="table-cont">
 						<tr style="height:20px;">
 							<td>
 								<!-- 사진파일 업로드 -->
 								<div class="upload-box">
 									<div id="drop-file" class="drag-file">
-										<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-										<p class="message">Drag files to upload</p>
-										<img src="" alt="미리보기 이미지" class="preview">
+										<div id="previews" class="previews">
+											<c:forEach var="images" items="${bv.bdFilename}">
+												<img src="${pageContext.request.contextPath}/source/galleryImages/${images}" class="modi-image">
+											</c:forEach>
+										</div>
 									</div>
 								</div>
 								<div class="upload-btn">
@@ -127,9 +130,24 @@
 			let reader = new FileReader();
 			reader.readAsDataURL(file);
 			reader.onloadend = function () {
-				let img = dropArea.getElementsByClassName("preview")[0];
+				// 미리보기 이미지를 담을 영역 선택
+				let previews = document.getElementById('previews');
+	
+				// 새로운 이미지 생성
+				let img = document.createElement('img');
 				img.src = reader.result;
 				img.style.display = "block";
+				previews.appendChild(img);
+					
+				// 미리보기 이미지가 추가되면 다른 요소들을 숨김
+				let dropFile = document.getElementById('drop-file');
+				let message = dropFile.querySelector('.message');
+				let fileIcon = dropFile.querySelector('.image');
+	
+				dropFile.classList.add('image-added');
+				message.style.display = "none";
+				fileIcon.style.display = "none"; // 이미지를 숨김
+				
 			};
 		}
 
@@ -170,7 +188,6 @@
 				fm.bdglname.focus();
 				return;
 			}
-			
 			
 			fm.action = "${pageContext.request.contextPath}/board/galleryModifyAction.do";	
 			fm.method = "post";					

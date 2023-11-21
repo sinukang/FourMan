@@ -191,8 +191,8 @@ public class BoardController extends HttpServlet {
 			bv = bd.boardSelectOne(mbno, bdno);
 			
 			
-			System.out.println("mbno : " + mbno);
-			System.out.println("bdno : " + bdno);
+			//System.out.println("mbno : " + mbno);
+			//System.out.println("bdno : " + bdno);
 
 			request.setAttribute("bv", bv);
 			
@@ -219,8 +219,8 @@ public class BoardController extends HttpServlet {
 				
 				String bdtitle = null;
 				String bdcont = null;
-				String bdno = request.getParameter("bdno");
-				int bdno_int = (bdno != null && !bdno.isEmpty()) ? Integer.parseInt(bdno) : 0;
+				String bdno = null;
+				
 				for (FileItem item : items) {
 					if (item.isFormField()) {	//파일이 아닌경우
 						
@@ -229,6 +229,8 @@ public class BoardController extends HttpServlet {
 							bdtitle = item.getString("UTF-8");
 						} else if ("bdcont".equals(item.getFieldName())) {
 							bdcont = item.getString("UTF-8");
+						}else {
+							bdno = item.getString("UTF-8");
 						}
 					} else {		// 파일인 경우
 						// 다중파일 리스트처리
@@ -240,8 +242,8 @@ public class BoardController extends HttpServlet {
 							//bdglnameList에 filename을 추가
 							bdglnameList.add(fileName);
 							
-							System.out.println("Uploaded file: " + fileName);
-							System.out.println("destFile: " + destFile);
+							//System.out.println("Uploaded file: " + fileName);
+							//System.out.println("destFile: " + destFile);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -250,20 +252,27 @@ public class BoardController extends HttpServlet {
 				int mbno = 0;
 				HttpSession session = request.getSession();
 				mbno = (int) session.getAttribute("mbno");
-	
+				
+				int bdno_int = Integer.parseInt(bdno);
+				
 				BoardVo bv = new BoardVo();
 				bv.setBdno(bdno_int);
 				bv.setMbno(mbno);
 				bv.setBdtitle(bdtitle);
 				bv.setBdcont(bdcont);
-	
+				
+				//System.out.println("mbno : " + mbno);
+				//System.out.println("bdno_int : " + bdno_int);
+				//System.out.println("bdtitle : " + bdtitle);
+				//System.out.println("bdcont : " + bdcont);
+				
 				BdgalleryVo bgv = new BdgalleryVo();
 				bgv.setBdglnameList(bdglnameList);
 	
 				BoardDao2 bd2 = new BoardDao2();
 				int value = bd2.boardModify(bv, bgv);
 	
-				System.out.println("Value: " + value);
+				//System.out.println("Value: " + value);
 	
 				if (value == 0) {
 					
@@ -347,8 +356,8 @@ public class BoardController extends HttpServlet {
 							//bdglnameList에 filename을 추가
 							bdglnameList.add(fileName);
 							
-							System.out.println("Uploaded file: " + fileName);
-							System.out.println("destFile: " + destFile);
+							//System.out.println("Uploaded file: " + fileName);
+							//System.out.println("destFile: " + destFile);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -369,7 +378,7 @@ public class BoardController extends HttpServlet {
 				BoardDao2 bd2 = new BoardDao2();
 				int value = bd2.boardInsert(bv, bgv);
 	
-				System.out.println("Value: " + value);
+				//System.out.println("Value: " + value);
 	
 				if (value == 0) {
 					String path = request.getContextPath() + "/board/galleryWrite.do";

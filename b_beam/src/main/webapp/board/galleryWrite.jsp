@@ -49,7 +49,7 @@
 										accept="image/png, image/jpeg, image/gif">
 								</div>
 								<!-- 파일 목록을 나타낼 영역 -->
-								<div id="files" class="file-list"></div>
+								<!-- <div id="files" class="file-list"></div> -->
 							</td>
 						</tr>
 						<tr style="height:30px;">
@@ -150,9 +150,9 @@
 				fileIcon.style.display = "none"; // 이미지를 숨김
 				
 				// 미리보기된 파일 목록을 fileList에 추가
-				let fileListItem = document.createElement('div');
-				fileListItem.textContent = file.name;
-				fileList.appendChild(fileListItem);
+// 				let fileListItem = document.createElement('div');
+// 				fileListItem.textContent = file.name;
+// 				fileList.appendChild(fileListItem);
 			};
 		}
 

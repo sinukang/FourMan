@@ -119,6 +119,8 @@ public class BoardDao2 {
 	public int boardModify(BoardVo bv, BdgalleryVo bgv) {
 		int exec1 = 0;
 		int exec2 = 0;
+		int exec3 = 0;
+		
 		String sql = "update board set bdtitle = ?, bdcont = ?, bddatem = now() where bdno = ?";
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -126,29 +128,36 @@ public class BoardDao2 {
 			pstmt.setString(2, bv.getBdcont());
 			pstmt.setInt(3, bv.getBdno());
 			exec1 = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
-		if (exec1 > 0) {
-			//board 테이블 수정 성공했을 경우 bdgallery 테이블 수정
-			String sql2 = "update bdgallery set bdglname = ? where bdno = ?";
-			
-			
-			List<String> bdglnameList = bgv.getBdglnameList();
-			
-			for (String bdglname : bdglnameList) {
-				try {
-					PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-					pstmt2.setString(1, bdglname);
-					pstmt2.setInt(2, bv.getBdno());
-					exec2 += pstmt2.executeUpdate();
+			if (exec1 > 0) {
+				//board 테이블 수정 성공했을 경우 bdgallery 테이블 수정
+				String sql2 = "update bdgallery set bdgldelyn = 'Y', bdgldatem = now() where bdno = ?";
+				
+				try (PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
+					pstmt2.setInt(1, bv.getBdno());
+					exec2 = pstmt2.executeUpdate();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				
+				String sql3 = "INSERT INTO bdgallery(bdno, bdglname, bdgldatem) VALUES(?,?, now())";
+				
+				List<String> bdglnameList = bgv.getBdglnameList();
+				
+				for (String bdglname : bdglnameList) {
+					try (PreparedStatement pstmt3 = conn.prepareStatement(sql3)) {
+						pstmt3.setInt(1, bv.getBdno());
+						pstmt3.setString(2, bdglname);
+						exec3 += pstmt3.executeUpdate();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return exec1 + exec2;
+		return exec1 + exec2 + exec3;
 	}
 	
 }
