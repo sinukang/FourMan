@@ -100,8 +100,16 @@
 							
 							<tr>
 								<td colspan=3 class="bottom-btn">
-									<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do?bdno=${bv.bdno}';" >수정</button>
-									<button type="button" class="del-btn" >삭제</button>
+								
+									<c:choose>
+										<c:when test="${bv.mbno == sessionScope.mbno}">
+											<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do?bdno=${bv.bdno}';" >수정</button>
+											<button type="button" class="del-btn" >삭제</button>
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose>
+									
 									<button type="button" onclick="">&#x1F6A8;</button>
 								</td>
 							</tr>
