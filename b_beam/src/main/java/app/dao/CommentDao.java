@@ -51,7 +51,7 @@ public class CommentDao {
 	}
 	
 	//댓글 작성 시 해당 bdno를 매개변수로 받아서 foreign key로 사용
-	public int commentInsert(int bdno) {
+	public int commentInsert(int bdno, int mbno) {
 		
 		int value = 0;
 		

@@ -139,38 +139,15 @@
 		
 	//모달 영역 밖 클릭 시 모달 닫음
 	window.onclick = function(e){
-		if(e.target.className != "modalBody"){
+		if(e.target.classList.contains("modalWrap")){
 			document.querySelector("#modalWrap").style.display = "none";
 		}
 	}
-
-	//모달 영역 밖 클릭 시 모달 닫음
-// 	window.onclick = function(event) {
-// 		if (event.target != modal) {
-// 			modal.style.display = "none";
-// 		}
-// 	}
 	
 	//X버튼 클릭 시 모달 닫음
 	closeBtn.onclick = function() {
 		modal.style.display = 'none';
 	}
-	
-	/* 슬라이드 */	
-// 	var swiper = new Swiper(".mySwiper", {
-// 		spaceBetween: 30,
-// 		centeredSlides: true,
-// 		autoHeight : true,
-// 		slidesPerView: 1,
-// 		pagination: {
-// 			el: ".swiper-pagination",
-// 			clickable: true,
-// 		},
-// 		navigation: {
-// 			nextEl: ".swiper-button-next",
-// 			prevEl: ".swiper-button-prev",
-// 		},
-// 	});
 	
 	//제이쿼리 영역
 	$(document).ready(function(){

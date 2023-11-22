@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import app.dao.CommentDao;
+import app.domain.CommentVo;
 
 /**
  * Servlet implementation class ContentsController
@@ -39,9 +40,51 @@ public class CommentController extends HttpServlet {
 			
 		}else if(location.equals("commentList.do")) {
 			
+			ArrayList<CommentVo> alist = new ArrayList<CommentVo>();
+			int bdno = 0;
+			int cmno = 0;
+			int mbno = 0;
+			String cmcont = "";
+			String cmdate = "";
+			String cmdatem = "";
+			String mbname = "";
+			String str = "";
+			
+			if(!request.getParameter("bdno").equals(null)) {
+				bdno = Integer.parseInt(request.getParameter("bdno"));
+			}
+			
+			CommentDao cd = new CommentDao();
+			alist = cd.commentList(bdno);
+			
+			for(int i = 0; i < alist.size(); i++) {
+				cmno = alist.get(i).getCmno();
+				mbno = alist.get(i).getMbno();
+				cmcont = alist.get(i).getCmcont();
+				cmdate = alist.get(i).getCmdate();
+				cmdatem = alist.get(i).getCmdatem();
+				mbname = alist.get(i).getMbname();
+				
+				str += "{\"cmno\" : \""+cmno+"\","
+					+  "\"mbno\" : \""+mbno+"\","
+					+ "\"cmcont\" : \""+cmcont+"\","
+					+ "\"cmdate\" : \""+cmdate+"\","
+					+ "\"cmdatem\" : \""+cmdatem+"\","
+					+ "\"mbname\" : \""+mbname+"\"},";
+			}
+			if(!str.equals("")) {
+				str = str.substring(0, str.length()-1);
+			}
+			
+			PrintWriter pw = response.getWriter();
+			
+			pw.println("[" + str +"]");
 			
 			
 		}else if(location.equals("commentWrite.do")) {
+			
+			
+			
 			
 			
 			
