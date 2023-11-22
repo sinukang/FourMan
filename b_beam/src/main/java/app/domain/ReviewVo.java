@@ -1,5 +1,8 @@
 package app.domain;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 public class ReviewVo {
 	private int rvno;
 	private int mbno;
@@ -9,7 +12,12 @@ public class ReviewVo {
 	private String rvrate;
 	private String rvdate;
 	private int rvLikeCnt;
+	private ArrayList<String> rvglname;
+	private String rvLikeYN;
+
 	
+
+
 	public int getRvno() {
 		return rvno;
 	}
@@ -58,5 +66,19 @@ public class ReviewVo {
 	public void setRvLikeCnt(int rvLikeCnt) {
 		this.rvLikeCnt = rvLikeCnt;
 	}
-	
+	public ArrayList<String> getRvglname() {
+		return rvglname;
+	}
+	public void setRvglname(ArrayList<String> rvglname) {
+		this.rvglname = rvglname;
+	}
+	public String getRvLikeYN() {
+		return rvLikeYN;
+	}
+	public void setRvLikeYN(String rvLikeYN) {
+		this.rvLikeYN = rvLikeYN;
+	}
+
+
+
 }
