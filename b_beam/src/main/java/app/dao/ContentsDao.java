@@ -56,9 +56,12 @@ public class ContentsDao {
 		}
 		// 반환된 정보를 String으로 저장
 		String result = br.readLine();
+//		System.out.println("result:" + result);
+		// String으로 저장된 정보중 html을 변경하는 코드 필터링
+//		result = result.replaceAll(System.getProperty("line.separator"), " ");
+//		System.out.println("result:" + result);
 		// String으로 저장된 정보를 json형식으로 파싱
 		JSONParser jsonParser = new JSONParser();
-//		System.out.println(result);
 		JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
 		// Response키값의 밸류를 가져옴
 		JSONObject jsonResponse = (JSONObject)jsonObject.get("response");
@@ -132,9 +135,9 @@ public class ContentsDao {
 		}
 		return body;	
 	}
-	public ContentsVo ContentsViewDetail(String contentid) {
+	public JSONObject ContentsViewDetail(String contentid) {
 		// 컨텐츠 상세보기 페이지 정보 불러오는 메소드
-		ContentsVo cv = new ContentsVo();
+		JSONObject contents = new JSONObject();
 		String uriType = "detailCommon1";
 		String query = "?serviceKey=";
 		query += key;
@@ -154,49 +157,64 @@ public class ContentsDao {
 			System.out.println("items : " + items.toString());
 			JSONArray item = (JSONArray)items.get("item");
 			System.out.println("item : " + item.toString());
-			JSONObject contents = (JSONObject)item.get(0);
-			cv.setAddr1(contents.get("addr1").toString());
-			cv.setContentid(contents.get("contentid").toString());
-			cv.setContenttypeid(contents.get("contenttypeid").toString());
-			cv.setContentdate(contents.get("createdtime").toString());
-			cv.setTitle(contents.get("title").toString());
-			cv.setTel(contents.get("tel").toString());
-			cv.setZipcode(contents.get("zipcode").toString());
-			cv.setFirstimage(contents.get("firstimage").toString());
-			cv.setFirstimage2(contents.get("firstimage2").toString());
-			cv.setMapx(contents.get("mapx").toString());
-			cv.setMapy(contents.get("mapy").toString());
-			
+			contents = (JSONObject)item.get(0);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		return cv;
+		return contents;
 	}
-	public JSONObject ContentsViewDetailImage(String contentid, String contenttypeid) {
+	public JSONArray ContentsViewDetailImage(String contentid) {
 		// 컨텐츠 상세보기 페이지 정보 불러오는 메소드
-		JSONObject contentsImage = new JSONObject();
+		JSONArray contentsImage = new JSONArray();
 		String uriType = "detailImage1";
 		String query = "?serviceKey=";
 		query += key;
 		query += "&MobileApp=AppTest&MobileOS=ETC&_type=json&subImageYN=Y";
-		if(contenttypeid.equals("39")) {
-			query += "&imageYN=N";
-		}else {
-			query += "&imageYN=Y";
-		}
+		query += "&contentId=" + contentid;
+		query += "&imageYN=Y";
 
 		String apiURL = uri
-		+ uriType
-		+ query;
+				+ uriType
+				+ query;
 		System.out.println(apiURL);
 		try {
 			// 컨텐츠를 json형식으로 불러와 기본 정보를 담음
 			JSONObject jsonResponse = GetItem(apiURL);
 			JSONObject body = (JSONObject)jsonResponse.get("body");
-			JSONObject items = (JSONObject)body.get("items");
-			JSONArray item = (JSONArray)items.get("item");
-			
+			if(!body.get("totalCount").toString().equals("0"))
+			{
+				JSONObject items = (JSONObject)body.get("items");				
+				contentsImage = (JSONArray)items.get("item");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return contentsImage;
+	}
+	public JSONArray ContentsViewMenuImage(String contentid) {
+		// 컨텐츠 상세보기 페이지 정보 불러오는 메소드
+		JSONArray contentsImage = new JSONArray();
+		String uriType = "detailImage1";
+		String query = "?serviceKey=";
+		query += key;
+		query += "&MobileApp=AppTest&MobileOS=ETC&_type=json&subImageYN=Y";
+		query += "&contentId=" + contentid;
+		query += "&imageYN=N";
+
+		String apiURL = uri
+				+ uriType
+				+ query;
+		System.out.println(apiURL);
+		try {
+			// 컨텐츠를 json형식으로 불러와 기본 정보를 담음
+			JSONObject jsonResponse = GetItem(apiURL);
+			JSONObject body = (JSONObject)jsonResponse.get("body");
+			if(!body.get("totalCount").toString().equals("0"))
+			{
+				JSONObject items = (JSONObject)body.get("items");				
+				contentsImage = (JSONArray)items.get("item");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -244,14 +262,11 @@ public class ContentsDao {
 	public int setTempContents(String contentid) {
 		int value = 0;
 		PreparedStatement pstmt2=null;
-		PreparedStatement pstmt3=null;
-		PreparedStatement pstmt4=null;
-		PreparedStatement pstmt5=null;
 		// 현재 temp컨텐츠에 해당 값이 있는지 검색
 		String sql = "select *, count(*) as cnt from tempcontents"
 				+ " where contentid=?";
 		// 컨텐츠 정보를 담거나 바뀐것을 확인하기 위한 정보
-		ContentsVo cv = this.ContentsViewDetail(contentid);
+		JSONObject contents = this.ContentsViewDetail(contentid);
 		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -261,7 +276,7 @@ public class ContentsDao {
 			if(rs.next()) {cnt=rs.getInt("cnt");}
 			if(cnt>0) {
 				//정보가 있음
-				if(!rs.getString("contentdatem").equals("(null)")&&rs.getString("contentdatem").equals(cv.getContentdatem())) {
+				if(!rs.getString("contentdatem").equals("(null)")&&rs.getString("contentdatem").equals(contents.get("contentdatem"))) {
 					// 컨텐츠 수정일이 api에서 가져온 정보와 같을 경우 상태만 N으로 바꿔준다
 					sql = "update tempcontents SET contentdelyn = 'N' where and contentid=?";
 					try {
@@ -277,13 +292,20 @@ public class ContentsDao {
 					sql = "update tempcontents SET title = ?,contenttypeid = ?,mapx = ?,mapy = ?,contentdate = ?,contentdatem = ?,firstimage = ?,contentdelyn = 'N' where contentid = ?";
 					try {
 						pstmt2 = conn.prepareStatement(sql);
-						pstmt2.setString(1, cv.getTitle());
-						pstmt2.setString(2, cv.getContenttypeid());
-						pstmt2.setString(3, cv.getMapx());
-						pstmt2.setString(4, cv.getMapy());
-						pstmt2.setString(5, cv.getContentdate());
-						pstmt2.setString(6, cv.getContentdatem());
-						pstmt2.setString(7, cv.getFirstimage());
+						pstmt2.setString(1, contents.get("title").toString());
+						pstmt2.setString(2, contents.get("contenttypeid").toString());
+						pstmt2.setString(3, contents.get("mapx").toString());
+						pstmt2.setString(4, contents.get("mapy").toString());
+						pstmt2.setString(5, contents.get("createdtime").toString());
+						pstmt2.setString(6, contents.get("modifiedtime").toString());
+						pstmt2.setString(7, contents.get("firstimage").toString());
+//						pstmt2.setString(1, cv.getTitle());
+//						pstmt2.setString(2, cv.getContenttypeid());
+//						pstmt2.setString(3, cv.getMapx());
+//						pstmt2.setString(4, cv.getMapy());
+//						pstmt2.setString(5, cv.getContentdate());
+//						pstmt2.setString(6, cv.getContentdatem());
+//						pstmt2.setString(7, cv.getFirstimage());
 						pstmt2.setString(8, contentid);
 						System.out.println(sql);
 						value = pstmt2.executeUpdate();
@@ -297,13 +319,20 @@ public class ContentsDao {
 				try {
 					pstmt2 = conn.prepareStatement(sql);
 					pstmt2.setString(1, contentid);
-					pstmt2.setString(2, cv.getTitle());
-					pstmt2.setString(3, cv.getContenttypeid());
-					pstmt2.setString(4, cv.getMapx());
-					pstmt2.setString(5, cv.getMapy());
-					pstmt2.setString(6, cv.getFirstimage());
-					pstmt2.setString(7, cv.getContentdate());
-					pstmt2.setString(8, cv.getContentdatem());
+					pstmt2.setString(2, contents.get("title").toString());
+					pstmt2.setString(3, contents.get("contenttypeid").toString());
+					pstmt2.setString(4, contents.get("mapx").toString());
+					pstmt2.setString(5, contents.get("mapy").toString());
+					pstmt2.setString(6, contents.get("firstimage").toString());
+					pstmt2.setString(7, contents.get("createdtime").toString());
+					pstmt2.setString(8, contents.get("modifiedtime").toString());
+//					pstmt2.setString(2, cv.getTitle());
+//					pstmt2.setString(3, cv.getContenttypeid());
+//					pstmt2.setString(4, cv.getMapx());
+//					pstmt2.setString(5, cv.getMapy());
+//					pstmt2.setString(6, cv.getFirstimage());
+//					pstmt2.setString(7, cv.getContentdate());
+//					pstmt2.setString(8, cv.getContentdatem());
 		
 					value = pstmt2.executeUpdate();
 				} catch (Exception e) {

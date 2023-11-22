@@ -103,7 +103,6 @@ public class ContentsController extends HttpServlet {
 					
 				}
 			}
-			
 			request.setAttribute("aryList", aryList);
 			request.setAttribute("pm", pm);
 			
@@ -117,8 +116,31 @@ public class ContentsController extends HttpServlet {
 	        HttpSession session = request.getSession();
 	        String contentid = request.getParameter("contentid");
 	        ContentsDao cd = new ContentsDao();
-	        ContentsVo cv = cd.ContentsViewDetail(contentid);
+	        JSONObject contents = cd.ContentsViewDetail(contentid);
+	        ContentsVo cv = new ContentsVo();
+			cv.setAddr1(contents.get("addr1").toString());
+			cv.setContentid(contents.get("contentid").toString());
+			cv.setContenttypeid(contents.get("contenttypeid").toString());
+			cv.setContentdate(contents.get("createdtime").toString());
+			cv.setTitle(contents.get("title").toString());
+			cv.setTel(contents.get("tel").toString());
+			cv.setZipcode(contents.get("zipcode").toString());
+			cv.setFirstimage(contents.get("firstimage").toString());
+			cv.setFirstimage2(contents.get("firstimage2").toString());
+			cv.setMapx(contents.get("mapx").toString());
+			cv.setMapy(contents.get("mapy").toString());
+			JSONObject intro = cd.ContentsViewIntro(contentid,cv.getContenttypeid());
+			JSONArray img = cd.ContentsViewDetailImage(contentid);
+			JSONArray menuimg = new JSONArray();
+	        if(cv.getContenttypeid().equals("39")) {
+		        menuimg = cd.ContentsViewMenuImage(contentid);
+	        }
+	        request.setAttribute("menuImage", menuimg);
+
+	        request.setAttribute("contentsImage", img);
 	        request.setAttribute("cv", cv);
+	        request.setAttribute("contents", contents);
+	        request.setAttribute("contentIntro", intro);
 			String path ="/contents/contentsDetail.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);

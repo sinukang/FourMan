@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
 
+pageContext.setAttribute("DT", "'"); 
+
+pageContext.setAttribute("LF", "\n"); 
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -61,15 +68,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		<%-- 			    	</c:otherwise> --%>
 		<%-- 			    </c:choose> --%>
 		   	<div class="main-image-section">
-			    <img id="bigImage" src="../source/images/duck4.jpg" alt="Main Image">
+			    <img id="bigImage" src="${cv.firstimage}" alt="Main Image">
 			</div>
 			<div class="small-images-section">
-			    <img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck1.png" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck3.jpg" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck2.png" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck5.jpg" alt="Small Image">
-				<img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image">
+			<img class="smallImage" src="${cv.firstimage}" alt="대표이미지">
+<!-- 			    <img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image"> -->
+<!-- 				<img class="smallImage" src="../source/images/duck1.png" alt="Small Image"> -->
+<!-- 				<img class="smallImage" src="../source/images/duck3.jpg" alt="Small Image"> -->
+<!-- 				<img class="smallImage" src="../source/images/duck2.png" alt="Small Image"> -->
+<!-- 				<img class="smallImage" src="../source/images/duck5.jpg" alt="Small Image"> -->
+<!-- 				<img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image"> -->
 			</div>
 		</div>
 		
@@ -87,8 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				</li>
 			</ul>
 		
-			<div class="tab-content">
-	            이곳에 해당 게시물의 정보가 출력됩니다
+			<div class="tab-content" id="tab1-Detail">
+	           
+	        </div>
+			<div class="tab-content" id="tab2-Intro">
+				<table id="tab2-table">
+				</table>
 	        </div>
 	       
 	        
@@ -305,6 +317,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 // 페이지 로딩시 즐겨찾기여부와 리뷰를 불러오기
 getBookmark();
+getImage();
+getDetail();
+getIntro();
 //getReviewList();
 	function getBookmark(){
 		// 해당 컨텐츠가 사용자가 bookmark를 한 컨텐츠인지 구분해서 보여주는 함수
@@ -368,11 +383,95 @@ getBookmark();
 			}
 		});
 	}
+	function getImage(){
+		var contentsImage = ${contentsImage};
+		$.each(contentsImage,function(key,value){
+// 			console.log(value.originimgurl);
+// 			console.log(value.imgname);
+
+			$('.small-images-section').append('<img class="smallImage" src="'+value.originimgurl+'" alt="'+value.imgname+'">')
+		});
+		if('${cv.contenttypeid}'=='39'){
+			var menuImage = ${menuImage};
+			$.each(menuImage,function(key,value){
+				$('.small-images-section').append('<img class="smallImage" src="'+value.originimgurl+'" alt="'+value.imgname+'">')
+			});
+		}
+	}
+	function getDetail(){
+		var ary = ['홈페이지','전화번호','주소','우편번호','개요'];
+		var ary2 = ['${fn:replace(fn:replace(contents.homepage, LF, ''), DT, '')}','${contents.tel}','${contents.addr1}','${contents.zipcode}','${fn:replace(fn:replace(contents.overview, LF, ''), DT, '')}'];
+		var ary3 = ['${not empty contents.homepage}','${not empty contents.tel}','${not empty contents.addr1}','${not empty contents.zipcode}','${not empty contents.overview}'];
+		var table = '<table>';
+		for(let i = 0; i < ary3.length; i++){
+			if(ary3[i]=='false'){
+				continue;
+				console.log('거짓');
+				
+			}
+			if(i==4){
+				table  += '</table><br><h1>개요</h1><p>'+ary2[i]+'</p>';
+				console.log('끝');
+			}else{
+				table  += '<tr><td>'+ary[i]+'</td><td>'+ary2[i]+'</td></tr>';
+				console.log('i : ' + i);
+			}
+		}
+		$('#tab1-Detail').html(table);
+	}
+	function getIntro(){
+		var contentIntro = ${fn:replace(fn:replace(contentIntro, LF, ''), DT, '')};
+		
+// 		var ConversoinIntro = [];
+		$.ajax({
+			url : "${pageContext.request.contextPath}/source/json/ConversoinIntro.json",
+			type : "get",
+			datatype:"json",
+			success : function(ConversoinIntro){
+				console.log('접근성공');
+// 				console.log(contentIntro);
+// 				console.log(ConversoinIntro);
+				var json = ConversoinIntro;
+				$.each(contentIntro,function(key,value){
+// 					console.log("key:"+key);
+// 					console.log("키값이름:"+json[key]);
+// 					console.log("밸류값:"+value);
+					$('#tab2-table').append('<tr><td>'+json[key]+'</td><td>'+value+'</td></tr>');
+
+				});
+			},
+			error:function(){
+				alert('접근실패')
+			}
+		});
+// 		fetch("${pageContext.request.contextPath}/source/json/ConversoinIntro.json")
+// 		.then(function(response){
+// 			return response.json();
+// 		})
+// 		.then(function(myJson){
+// 			ConversoinIntro = JSON.stringify(myJson);
+// // 			console.log(JSON.stringify(myJson));
+// 		});
+		
+//		var table = '<table>';
+//		for(let i = 0; i < ary3.length; i++){
+//			if(ary3[i]=='false'){
+//				continue;
+//				console.log('거짓');
+			
+//			}
+//			if(i==4){
+//				table  += '</table><br><h1>개요</h1><p>'+ary2[i]+'</p>';
+//				console.log('끝');
+//			}else{
+//				table  += '<tr><td>'+ary[i]+'</td><td>'+ary2[i]+'</td></tr>';
+//				console.log('i : ' + i);
+//			}
+//		}
+//		$('#tab1-Detail').html(table);
+}
+
 </script>
-
-
-
-
 
 
 

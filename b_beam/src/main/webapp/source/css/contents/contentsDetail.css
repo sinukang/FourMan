@@ -380,3 +380,29 @@ input[type="file"] {
 #cutLine{
 	width: 80%;
 }
+.tab-content table {
+    float: none;
+    width: 100%;
+    margin-top: 10px;
+}
+.tab-content tr {
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+}
+.tab-content td {
+    font-weight: bold;
+    vertical-align: middle;
+    font-size: 16px!important;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    height: 20px;
+}
+.tab-content h1 {
+    text-align: left;
+    margin-left: 20px;
+}
+.tab-content p {
+    text-align: left;
+    font-size: 15px;
+    margin: 10px;
+}
