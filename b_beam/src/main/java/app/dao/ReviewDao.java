@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.dbconn.DbConn;
+import app.domain.BdgalleryVo;
 import app.domain.ReviewVo;
 
 public class ReviewDao {
@@ -32,7 +35,6 @@ public class ReviewDao {
 		
 		String str = "";
 		
-		//mbno != 0 : 로그인했다면 galleryList 페이지로 넘어왔을 시 좋아요(하트 아이콘) 색 표시 여부
 		if(mbno != 0) {	
 			str = ", if((SELECT COUNT(b.lkno) FROM like_ b WHERE a.rvno = b.rvno AND b.mbno = "+mbno+" AND b.lkdelyn = 'N') = 1, 'Y', 'N') AS rvLikeYN\r\n";
 		}
@@ -104,25 +106,19 @@ public class ReviewDao {
 			public int reviewInsert(ReviewVo rv){
 				
 				int exec = 0;			
-				String sql = "insert into review (rvno,mbno,contentid,rvcont,rvrate) \r\n"
-						+ "values(?,?,?,?,?);";
+				String sql = "insert into review (mbno,rvrate,rvcont,contentid) \r\n"
+						+ "values(?,?,?,?);";
+			
 				
 				try{
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, rv.getRvno());
-				pstmt.setInt(2, rv.getMbno());
-				pstmt.setString(3, rv.getContentid());
-				pstmt.setString(4, rv.getRvcont());
-				pstmt.setString(5, rv.getRvrate());
-				
-				
-				
+				pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				pstmt.setInt(1, rv.getMbno());
+				pstmt.setString(2, rv.getRvrate());
+				pstmt.setString(3, rv.getRvcont());
+				pstmt.setString(4, rv.getContentid());
 				exec = pstmt.executeUpdate();   //실행이되면 1값 안되면 0값
 				
-				
-				
-				
-				
+				System.out.println(sql);
 				}catch(Exception e){
 					e.printStackTrace();
 				}finally {				
@@ -136,6 +132,112 @@ public class ReviewDao {
 				
 				return exec;	
 			}
+			
+			public int insertrvgallery(int rvno, String[] glname) {
+				int exec = 0;
+
+				String sql = "INSERT INTO rvgallery(rvno, rvglname) VALUES(?,?)";
+				
+				try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+					for (String glone : glname) {
+						pstmt.setInt(1,rvno);
+						pstmt.setString(2,glone);
+						exec += pstmt.executeUpdate();
+					}
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				return exec;
+			}
+			public int rvglInsert(ReviewVo rv, String[] glname){
+				
+				int exec1 = this.reviewInsert(rv);		
+				if (exec1 > 0) {
+					// review 테이블에 레코드가 성공적으로 삽입되었을 때
+					// 해당 rvno를 가져와서 rvgallery 테이블에 삽입
+					
+					int exec2 = insertrvgallery(rv.getRvno(),glname);
+
+						// review 및 rvgallery 삽입 결과의 총합 반환
+						return exec1 + exec2;
+				} else {
+					// review 테이블에 레코드 삽입이 실패했을 경우
+					return exec1;
+				}
+
+			}
+//			public int insertReviewWithGallery(ReviewVo rv) {
+//			    int exec = 0;
+//
+//			    String sql = "INSERT INTO review (mbno, rvrate, rvcont, contentid) VALUES (?, ?, ?, ?)";
+//			    String sql2 = "INSERT INTO rvgallery (rvno, rvglname) VALUES (?, ?)";
+//
+//			    try {
+//			        conn.setAutoCommit(false); // 트랜잭션 시작
+//
+//			        // Review 테이블에 삽입
+//			        try (PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
+//			            pstmt.setInt(1, rv.getMbno());
+//			            pstmt.setString(2, rv.getRvrate());
+//			            pstmt.setString(3, rv.getRvcont());
+//			            pstmt.setString(4, rv.getContentid());
+//
+//			            exec = pstmt.executeUpdate();
+//
+//			            // 삽입된 review의 rvno 가져오기
+//			            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+//			            if (generatedKeys.next()) {
+//			                rv.setRvno(generatedKeys.getInt(1));
+//			            }
+//			        }
+//
+//			        // Gallery 테이블에 삽입
+//			        try (PreparedStatement galleryStmt = conn.prepareStatement(sql2)) {
+//			            ArrayList<String> rvglname = rv.getRvglname();
+//
+//			            for (String glname : rvglname) {
+//			                galleryStmt.setInt(1, rv.getRvno());
+//			                galleryStmt.setString(2, glname);
+//			                exec += galleryStmt.executeUpdate();
+//			            }
+//			        }
+//
+//			        conn.commit(); // 트랜잭션 커밋
+//			    } catch (SQLException e) {
+//			        try {
+//			            conn.rollback(); // 예외 발생 시 롤백
+//			        } catch (SQLException rollbackException) {
+//			            rollbackException.printStackTrace();
+//			        }
+//			        e.printStackTrace();
+//			    } finally {
+//			        try {
+//			            conn.setAutoCommit(true); // 트랜잭션 종료 후 자동 커밋으로 복원
+//			        } catch (SQLException e) {
+//			            e.printStackTrace();
+//			        }
+//			    }
+//
+//			    return exec;
+//			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
