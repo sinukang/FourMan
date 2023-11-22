@@ -21,7 +21,7 @@ public class BookmarkDao {
 		ArrayList<String> bmIdList = new ArrayList<String>();
 		
 		String sql = "select contentid from bookmark where "
-                + "mbno = ? and contentid in (";
+                + "bmdelyn = 'N' and mbno = ? and contentid in (";
 		for(int i = 0; i < aryList.size();i++) {
 			if(i != 0) {
 				sql += ",";
@@ -30,6 +30,7 @@ public class BookmarkDao {
 		}
 		sql += ")";
 		try{
+			System.out.println(sql);
 			 pstmt = conn.prepareStatement(sql);
 		        pstmt.setInt(1, mbno);
 		        for(int i = 0; i < aryList.size(); i++) {
@@ -50,20 +51,18 @@ public class BookmarkDao {
 		int value = 0;
 		PreparedStatement pstmt2=null;
 		
-		String sql = "select count(*) as cnt from Bookmark"
+		String sql = "select * from Bookmark"
 					+ " where mbno=? and contentid=?";
-		
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mbno);
 			pstmt.setString(2, contentid);
 			ResultSet rs = pstmt.executeQuery();
-			int cnt=0;
-			if(rs.next()) {cnt=rs.getInt("cnt");}
-			if(cnt>0) {
-				sql = "update bookmark SET bmdelyn = 'Y',bmdatem = now() where mbno=? and contentid=?";
+			if(rs.next()) {
+				sql = "update bookmark SET bmdelyn = 'N',bmdatem = now() where mbno=? and contentid=?";
 			}else {
-				sql = "insert into bookmark(mbno,contentid,bmdelyn) VALUES(?,?,'Y');";
+				sql = "insert into bookmark(mbno,contentid,bmdelyn) VALUES(?,?,'N');";
 				ContentsDao cd = new ContentsDao();
 				cd.setTempContents(contentid);
 			}
@@ -78,6 +77,22 @@ public class BookmarkDao {
 			}
 		} catch (Exception e2) {
 			e2.printStackTrace();
+		}
+		
+		return value;
+	}
+	public int undoBookmark(int mbno, String contentid) {
+		int value = 0;
+		
+		String sql = "update bookmark SET bmdelyn = 'Y',bmdatem = now() where mbno=? and contentid=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mbno);
+			pstmt.setString(2, contentid);
+			value = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return value;

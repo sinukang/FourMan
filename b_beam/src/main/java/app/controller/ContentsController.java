@@ -115,7 +115,10 @@ public class ContentsController extends HttpServlet {
 		}else if (location.equals("contentsDetail.do")) {
 
 	        HttpSession session = request.getSession();
-	        
+	        String contentid = request.getParameter("contentid");
+	        ContentsDao cd = new ContentsDao();
+	        ContentsVo cv = cd.ContentsViewDetail(contentid);
+	        request.setAttribute("cv", cv);
 			String path ="/contents/contentsDetail.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
@@ -126,7 +129,7 @@ public class ContentsController extends HttpServlet {
 			if(session.getAttribute("mbno")!=null&&!session.getAttribute("mbno").equals("")) {
 				BookmarkDao bmd= new BookmarkDao();
 				ArrayList<String> contentidList = new ArrayList<String>();
-				contentidList.set(0, contentid);
+				contentidList.add(contentid);
 				String[] myBm=bmd.getContentsListBookmark((int)session.getAttribute("mbno"), contentidList);
 ////				request.setAttribute("myBmList", myBmList);
 				if(myBm.length>0) {
@@ -138,12 +141,21 @@ public class ContentsController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print("{\"value\":"+value+"}");
 		}else if (location.equals("doBookmark.do")) {
+	        HttpSession session = request.getSession();
 			String contentid = request.getParameter("contentid");
-			int mbno = Integer.parseInt(request.getParameter("mbno"));
+			int mbno = (int)session.getAttribute("mbno");
 			BookmarkDao bd = new BookmarkDao();
 			int value = bd.doBookmark(mbno, contentid); 
 			PrintWriter out = response.getWriter();
-			out.print("{\"value\":\""+value+"\"}");
+			out.print("{\"value\":"+value+"}");
+		}else if (location.equals("undoBookmark.do")) {
+	        HttpSession session = request.getSession();
+			String contentid = request.getParameter("contentid");
+			int mbno = (int)session.getAttribute("mbno");
+			BookmarkDao bd = new BookmarkDao();
+			int value = bd.undoBookmark(mbno, contentid); 
+			PrintWriter out = response.getWriter();
+			out.print("{\"value\":"+value+"}");
 		}else if (location.equals("contentsRanking.do")) {
 			
 			String path ="/contents/contentsRanking.jsp";

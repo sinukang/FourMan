@@ -119,7 +119,7 @@
 	
 	<!-- 모달 팝업 영역 -->
 	<div id="modalWrap" class="modalWrap">
-		<div id="modalBody">
+		<div id="modalBody" class="modalBody">
 			<span id="closeBtn">&times;</span>
 			<div id="modal-include">
 				
@@ -138,11 +138,11 @@
 	const closeBtn = document.getElementById('closeBtn');
 		
 	//모달 영역 밖 클릭 시 모달 닫음
-// 	window.onclick = function(e){
-// 		if(e.target.className != "modalWrap"){
-// 			document.querySelector("#modalWrap").style.display = "none";
-// 		}
-// 	}
+	window.onclick = function(e){
+		if(e.target.className != "modalBody"){
+			document.querySelector("#modalWrap").style.display = "none";
+		}
+	}
 
 	//모달 영역 밖 클릭 시 모달 닫음
 // 	window.onclick = function(event) {
@@ -188,7 +188,7 @@
 				cachce : false,
 				success : function(data){
 					$("#modal-include").html(data);
-					$("#modalWrap").show();
+					$("#modalWrap").css('display', 'flex');
 					
 				},
 				error : function(){

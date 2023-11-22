@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="contentsdetail">
 		<div class="contents-visual">
 			<div class="title-section">
-		       	<p>title</p>
+		       	<p>${cv.title}</p>
 	      		 <div id="favorite" class="favorite"></div>
 		   	</div>
 		<%-- 		    	<c:choose> --%>
@@ -317,9 +317,9 @@ getBookmark();
 			success:function(data){
 				console.log(data);
 				if(data.value==1){// 북마크를 한 컨텐츠
-					$('#favorite').html('<span class="favorite-icon on">★</span>')	
+					$('#favorite').html('<span class="favorite-icon on" onclick="undoBookmark();">★</span>')	
 				}else if(data.value==0||data.value==2){// 북마크 하지 않은 컨텐츠 / 로그인을 하지 않았을 경우
-					$('#favorite').html('<span class="favorite-icon">☆</span>')	
+					$('#favorite').html('<span class="favorite-icon" onclick="doBookmark();">☆</span>')	
 				}
 			},
 			error:function(){
@@ -327,11 +327,11 @@ getBookmark();
 			}
 		});
 	}
-	function doBookmark(e){
+	function doBookmark(){
 		// bookmark를 하는 함수
 		
 		// 로그인 상태가 아니라면 로그인 페이지로 이동을 유도하는 
-		if ("${empty mbno}"){
+		if (${empty mbno}){
 			var login = confirm("로그인을 해주세요");
 			if(login){
 				location.href="${pageContext.request.contextPath}/member/memberLogin.do"
@@ -339,11 +339,29 @@ getBookmark();
 		}
 		$.ajax({
 			type:"post",
-			url:"${pageContext.request.contextPath}/contents/getBookmark.do",
+			url:"${pageContext.request.contextPath}/contents/doBookmark.do",
 			data:{"contentid":${param.contentid}},
 			dataType:"json",
 			success:function(data){
 				console.log(data);
+				getBookmark();
+			},
+			error:function(){
+				console.log("error");
+			}
+		});
+	}
+	function undoBookmark(){
+		// bookmark를 하는 함수
+		
+		$.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath}/contents/undoBookmark.do",
+			data:{"contentid":${param.contentid}},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				getBookmark();
 			},
 			error:function(){
 				console.log("error");

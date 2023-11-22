@@ -102,7 +102,7 @@ public class BoardDao2 {
 		if (exec1 > 0) {
 			
 			// board 테이블 삭제 성공하면 bdgallery 테이블 삭제 
-			String sql2 = "update bdgallery set bdgldelyn = 'Y' where bdno = ? ";
+			String sql2 = "update bdgallery set bdgldelyn = 'Y', bdgldatem = now() where bdno = ? ";
 			
 			try (PreparedStatement pstmt2 = conn.prepareStatement(sql2);) {
 				pstmt2.setInt(1, bdno);
