@@ -186,7 +186,7 @@
 .reviewArea {
 	position: relative;
 	bottom: 50px;
-	height: 200px;
+	height: auto;
 	max-width: 75%;
    	margin: 20px auto;
     padding: 15px;
@@ -227,7 +227,7 @@
 .commentCnt{
 	position: absolute;
 	width: 140px;
-	left: 905px;
+	left: 76%;
 	top: 95px;
 	color: rgb(192, 192, 192);
 	font-size: 14px;
@@ -258,19 +258,13 @@ input[type="file"] {
 }
 /* 이미지 미리보기 컨테이너 스타일 */
 .image-preview {
-  position: absolute;
-  top: 130px;
-  left: 80px;
-  justify-content: space-between; 
+	margin-top: 20px;
   display: flex;
   gap: 10px;
 }
 
 /* 닫기 ('X') 버튼 스타일 */
 .remove-image-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
   background: rgba(255, 255, 255, 0.5);
   border: none;
   border-radius: 50%;

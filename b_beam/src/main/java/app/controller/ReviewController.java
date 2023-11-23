@@ -48,6 +48,8 @@ public class ReviewController extends HttpServlet {
 	        	JSONObject jo = new JSONObject();
 	        	jo.put("name", rv.getMbname());
 	        	jo.put("score", rv.getRvrate());
+	        	jo.put("cont", rv.getRvcont());
+	        	jo.put("img", rv.getRvglname());
 	        	jo.put("date", rv.getRvdate());
 	        	jo.put("likeYN", rv.getRvLikeYN());
 	        	jo.put("likeCnt", rv.getRvLikeCnt());

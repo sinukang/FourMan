@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="contentsdetail">
 		<div class="contents-visual">
 			<div class="title-section">
-		       	<p>${cv.title}</p>
+		       	<p>${cv.title}${mbno}</p>
 	      		 <div id="favorite" class="favorite"></div>
 		   	</div>
 		<%-- 		    	<c:choose> --%>
@@ -113,7 +113,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="reviewArea">
 		    <p>방문자 후기 및 평가</p>
 		    <div class="commentArea">
+		    <c:choose>
+		    	<c:when test="${empty mbno}">
+		    <select id="ratingSelect" onclick='lgcheck();'>
+		        <option value="0" disabled selected>별점을 선택하세요</option>
+		    </select>
+		    	</c:when>
+		    	<c:otherwise>
 		    <select id="ratingSelect">
+		    
 		        <option value="0" disabled selected>별점을 선택하세요</option>
 		        <option value="1">★</option>
 		        <option value="2">★★</option>
@@ -121,10 +129,26 @@ document.addEventListener('DOMContentLoaded', function() {
 		        <option value="4">★★★★</option>
 		        <option value="5">★★★★★</option>
 		    </select>
-		    <textarea id="commentInput" placeholder="후기를 남겨주세요 (글자수 100자제한)" oninput="updateCharacterCount()"></textarea>
-		   
-		  
-		    <button class="commentBtn" onclick="">완료</button>
+		    	</c:otherwise>
+		    </c:choose>
+		    <c:choose>
+		    	<c:when test="${empty mbno}">
+<textarea id="commentInput" placeholder="후기를 남겨주세요 (글자수 100자제한)" oninput="updateCharacterCount()" onclick="lgcheck();"></textarea>
+		    	</c:when>
+		    	<c:otherwise>
+		    	   <textarea id="commentInput" placeholder="후기를 남겨주세요 (글자수 100자제한)" oninput="updateCharacterCount()"></textarea>
+				    <div class="commentCnt">글자수 제한 <span>100</span>/100자</div>
+		    	
+		    	</c:otherwise>
+		    </c:choose>
+		   <c:choose>
+		    	<c:when test="${empty mbno}">
+		    <button class="commentBtn" onclick="lgcheck();">작성</button>
+		    	</c:when>
+		    	<c:otherwise>
+		    <button class="commentBtn" onclick="reviewInsert()">작성</button>
+		    	</c:otherwise>
+		    </c:choose>
 		    </div>
 		 
 		    
@@ -209,33 +233,33 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- 		            </th> -->
 <!-- 	        	</tr> -->
 <!-- 	    	</table> -->
-	    	<table id="commentTable">
-	        	<tr>
-	        		<th id="userId">+12수수깡</th>
+<!-- 	    	<table id="commentTable"> -->
+<!-- 	        	<tr> -->
+<!-- 	        		<th id="userId">+12수수깡</th> -->
 	        		
-	        		<th id="star">★★★★</th>
+<!-- 	        		<th id="star">★★★★</th> -->
 	        		
-	        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+<!-- 	        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th> -->
 	        		
-	        		<th rowspan="2">
-					    <div class="imageContainer">
-		                    <img src="../source/images/duck4.jpg" class="commentImage">
+<!-- 	        		<th rowspan="2"> -->
+<!-- 					    <div class="imageContainer"> -->
+<!-- 		                    <img src="../source/images/duck4.jpg" class="commentImage"> -->
 		                   
-		                </div>
-					</th>
+<!-- 		                </div> -->
+<!-- 					</th> -->
 							        		
-		            <th> <button type="button" id="optBtn" onclick="">...</button></th>
-	        	<tr>
-	        		<th id="day" colspan="2">2024.11.06</th>
+<!-- 		            <th> <button type="button" id="optBtn" onclick="">...</button></th> -->
+<!-- 	        	<tr> -->
+<!-- 	        		<th id="day" colspan="2">2024.11.06</th> -->
 	        		
-	        		 <th id="up" type="button" class="likebtn">
-		                 <button class="like-button" onclick="like(this)">
-						    <i class="fas fa-heart"></i>
-						  </button>
-		                 <span id="likeCount">21</span>
-		            </th>
-	        	</tr>
-	    	</table>
+<!-- 	        		 <th id="up" type="button" class="likebtn"> -->
+<!-- 		                 <button class="like-button" onclick="like(this)"> -->
+<!-- 						    <i class="fas fa-heart"></i> -->
+<!-- 						  </button> -->
+<!-- 		                 <span id="likeCount">21</span> -->
+<!-- 		            </th> -->
+<!-- 	        	</tr> -->
+<!-- 	    	</table> -->
 		</div>
 	</div>
 </div>	
@@ -387,6 +411,7 @@ function tabSwitch(e){
 </script>
 <script>
 //이미지 업로드 파일 선택 + 선택된 파일 이미지를 미리보기할수있는 기능 -----------------------
+// 이미지 하나 삭제하는부분까지 완료!!!! 그뒤에는 부탁합니다!!_--------------------
 document.addEventListener('DOMContentLoaded', function() {
     const imageUpload = document.getElementById('imageUpload');
     const imagePreview = document.querySelector('.image-preview');
@@ -411,8 +436,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 const closeButton = document.createElement('button');
                 closeButton.classList.add('remove-image-button');
                 closeButton.innerHTML = 'X';
+//                 closeButton.id = 'rmbt'+i;
+//                 closeButton.onclick = 'rmbt('+i+');';
                 closeButton.onclick = function() {
+                	const dataTransfer = new DataTransfer();
+                	let files = $('#imageUpload')[0].files;
+                	fileArray = Array.from(files);
+                	fileArray.splice(i,1);
+                	fileArray.forEach(file => {dataTransfer.items.add(file);});
+                	$('#imageUpload')[0].files = dataTransfer.files;
                     imageDiv.remove(); // 클릭하여 이미지 미리보기 제거
+                    console.log(i);
                 };
 
                 imageDiv.appendChild(closeButton);
@@ -423,7 +457,9 @@ document.addEventListener('DOMContentLoaded', function() {
             reader.readAsDataURL(file);
         }
 
-        imageUpload.value = ''; // 파일 선택창 비우기
+		console.log($('#imageUpload')[0].files);
+//         imageUpload.value = ''; // 파일 선택창 비우기
+// 		console.log($('#imageUpload')[0].files);
     });
 });
 </script>
@@ -623,12 +659,8 @@ function getReview(){
 		datatype:"json",
 		success : function(data){
 // 			console.log('접근성공');
-// 			console.log(data)
-			var ary = data
-			console.log('ary : ' + ary)
-			var json = Object.assign({},ary);
-			console.log('json : ' + json);
-			setReview(json);
+// 			console.log(data);
+			setReview(data); 
 		},
 		error:function(){
 			console.log('접근실패');
@@ -638,35 +670,101 @@ function getReview(){
 function setReview(data){
 	var str='';
 	var mbno='${mbno}';
-	$.each(data,function(idx,value){
+	var json = JSON.parse(data);
+// 	console.log(json.length);
+	$.each(json,function(index,value){
 		str+='<table id="commentTable">';
-		$.each(value,function(key,value){
-			str+='<tr><th id="userId">'+data.name+'</th>';
-			str+='<th id="star">';
-			for(let i = 0; i < data.score;i++){
-				str+='★'
-			}
-			str+='</th>';
-			str+='<th id="text" rowspan="2">'+data.cont+'</th>';
-			str+='<th rowspan="2"><div class="imageContainer">';
-			if(data.img != null){
-				str+='<img src="../source/images/duck4.jpg" class="commentImage">';
-			}
-			str+='</div></th>';
-			str+='<th><button type="button" id="optBtn" onclick="">신고</button></th>';
-			str+='<th id="day" colspan="2">'+data.date+'</th>';
-			str+='<th id="up" type="button" class="likebtn">';
-			if(data.likeYN=='N'){
-				str+='<button class="like-button liked" onclick="unlike(this)">';
-			}else{
-				str+='<button class="like-button" onclick="like(this)">';
-			}
-			str+='<i class="fas fa-heart"></i></button><span id="likeCount">'+data.likeCnt+'</span></th></tr>';
-		});
+		str+='<tr><th id="userId">'+value.name+'</th>';
+		str+='<th id="star">';
+		for(let i = 0; i < value.score;i++){
+			str+='★'
+		}
+		str+='</th>';
+		str+='<th id="text" rowspan="2">'+value.cont+'</th>';
+		str+='<th rowspan="2"><div class="imageContainer">';
+		if(value.img != null){
+			str+='<img src="../source/images/duck4.jpg" class="commentImage">';
+		}
+		str+='</div></th>';
+		str+='<th><button type="button" id="optBtn" onclick="">신고</button></th>';
+		str+='<th id="day" colspan="2">'+value.date+'</th>';
+		str+='<th id="up" type="button" class="likebtn">';
+		if(value.likeYN==null||value.likeYN=='N'){
+			str+='<button class="like-button liked" onclick="unlike(this)">';
+		}else{
+			str+='<button class="like-button" onclick="like(this)">';
+		}
+		str+='<i class="fas fa-heart"></i></button><span id="likeCount">'+value.likeCnt+'</span></th></tr>';
 		str+='</table>';
 	});
-	console.log(str);
+// 	console.log(str);
 	$('.commentReply').html(str);
+	$('#cmtCnt').html(json.length);
+}
+function lgcheck(){
+	if(confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")){
+		location.href="${pageContext.request.contextPath}/member/memberLogin.do"
+	}else{
+		return;
+	}
+}
+function reviewInsert(){
+	if(${empty mbno}){
+		if(confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")){
+			location.href="${pageContext.request.contextPath}/member/memberLogin.do"
+		}else{
+			return;
+		}
+	}else{
+		if($('#ratingSelect').val()==null||$('#ratingSelect').val()=='0'){
+			alert('리뷰작성시 별점은 필수입니다. 별점을 선택해주세요');
+			return;
+		}else{
+			var review = {"contentid":${param.contentid},"rating":$('#ratingSelect').val()};
+			if($('#commentInput').val()!=''){
+				review.cont = $('#commentInput').val();
+			}
+// 			console.log(review);
+// 			console.log($('#imageUpload')[0].files);
+			console.log(files.length);
+			$.ajax({
+				url : "${pageContext.request.contextPath}/review/reviewInsert.do",
+				type : "get",
+				data : review,
+				datatype:"json",
+				success : function(data){
+		 			console.log('접근성공');
+//		 			console.log(data);
+					setReview(data); 
+				},
+				error:function(){
+					console.log('접근실패');
+				}
+			});
+		}
+	
+	}
+}
+function ImageInsert(e){
+	let files = $('#imageUpload')[0].files;
+	if(files.length = 0){
+		return;
+	}else{
+		$.ajax({
+			url : "${pageContext.request.contextPath}/review/ImageInsert.do",
+			type : "get",
+			data : {'rvno':e},
+			datatype:"json",
+			success : function(data){
+	 			console.log('접근성공');
+//	 			console.log(data);
+// 				setReview(data); 
+			},
+			error:function(){
+				console.log('접근실패');
+			}
+		});
+	}
 }
 </script>
 
