@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class ReviewVo {
 	private int rvno;
 	private int mbno;
+	private String mbname;
 	private String contentid;
 	private String rvcont;
 	private String rvpic;
@@ -18,6 +19,12 @@ public class ReviewVo {
 	
 
 
+	public String getMbname() {
+		return mbname;
+	}
+	public void setMbname(String mbname) {
+		this.mbname = mbname;
+	}
 	public int getRvno() {
 		return rvno;
 	}
