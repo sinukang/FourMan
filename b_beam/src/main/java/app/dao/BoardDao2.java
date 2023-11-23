@@ -11,6 +11,7 @@ import java.util.List;
 import app.dbconn.DbConn;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
+import app.domain.SearchCriteria;
 
 public class BoardDao2 {
 
@@ -158,5 +159,219 @@ public class BoardDao2 {
 		}
 		return exec1 + exec2 + exec3;
 	}
+	
+	public int insertBoardN(BoardVo bv) {
+		int exec = 0;
+		
+		String sql = "INSERT INTO board(mbno, bdtitle, bdcont, bdcate) VALUES(?,?,?,'N')";
+		
+		try (PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bv.getMbno());
+			pstmt.setString(2, bv.getBdtitle());
+			pstmt.setString(3, bv.getBdcont());
+			
+			exec = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exec;
+	}
+	
+	public ArrayList<BoardVo> noticeList(int mbno, SearchCriteria scri) {
+		
+		ArrayList<BoardVo> alist = new ArrayList<BoardVo>();
+		ResultSet rs = null;
+		
+		String sql = "SELECT b.bdno, b.bdcate, b.bdtitle, b.bdcont, b.bddate, m.mbno, m.mbname "
+				+ " FROM board b JOIN member m ON b.mbno = m.mbno WHERE b.bddelyn = 'N' AND b.bdcate = 'N' "
+				+ " ORDER BY b.bdno DESC"
+				+ " LIMIT ?, ?";
+			int perPageNum = 10;			//페이지 당 표시할 글 개수 -> 10개
+			scri.setNumOfRows(perPageNum);	//갤러리 페이지에 표시할 글 개수를 설정함		
+				
+		
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, (scri.getPage() - 1) * scri.getNumOfRows());
+				pstmt.setInt(2, scri.getNumOfRows());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					BoardVo bv = new BoardVo();
+					bv.setMbno(rs.getInt("m.mbno"));
+					bv.setMbname(rs.getString("m.mbname"));
+					bv.setBdno(rs.getInt("b.bdno"));
+					bv.setBdcate(rs.getString("b.bdcate"));
+					bv.setBdtitle(rs.getString("b.bdtitle"));
+					bv.setBdcont(rs.getString("b.bdcont"));
+					bv.setBddate(rs.getString("b.bddate"));
+					alist.add(bv);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+		return alist;
+	}
+	
+	public int noticeTotalCount(SearchCriteria scri) {
+		
+		int value = 0;
+		ResultSet rs = null;
+		
+		String sql = "SELECT COUNT(bdno) as cnt FROM board WHERE  bddelyn = 'N' and bdcate = 'N'";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				value = rs.getInt("cnt");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return value;
+	}
+	
+	public int insertBoardO(BoardVo bv) {
+		int exec = 0;
+		
+		String sql = "INSERT INTO board(mbno, bdtitle, bdcont, bdcate) VALUES(?,?,?,'O')";
+		
+		try (PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bv.getMbno());
+			pstmt.setString(2, bv.getBdtitle());
+			pstmt.setString(3, bv.getBdcont());
+			
+			exec = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exec;
+	}
+	
+	public BoardVo noticeSelectOne(int mbno, int bdno) {
+		BoardVo bv = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM board where bdno = ? and bdcate='N'";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bdno);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				bv = new BoardVo();
+				bv.setBdtitle(rs.getString("bdtitle"));
+				bv.setBdcont(rs.getString("bdcont"));
+				bv.setBddate(rs.getString("bddate"));
+				bv.setBdno(rs.getInt("bdno"));
+				bv.setMbno(rs.getInt("mbno"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			try{
+				rs.close();
+				conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}	
+		
+		return bv;
+	}
+	
+	public ArrayList<BoardVo> FAQList(int mbno, SearchCriteria scri) {
+		
+		ArrayList<BoardVo> alist = new ArrayList<BoardVo>();
+		ResultSet rs = null;
+		
+		String sql = "SELECT b.bdno, b.bdcate, b.bdtitle, b.bdcont, b.bddate, m.mbno, m.mbname "
+				+ " FROM board b JOIN member m ON b.mbno = m.mbno WHERE b.bddelyn = 'N' AND b.bdcate = 'O' "
+				+ " ORDER BY b.bdno DESC"
+				+ " LIMIT ?, ?";
+			int perPageNum = 10;			//페이지 당 표시할 글 개수 -> 10개
+			scri.setNumOfRows(perPageNum);	//갤러리 페이지에 표시할 글 개수를 설정함		
+				
+		
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, (scri.getPage() - 1) * scri.getNumOfRows());
+				pstmt.setInt(2, scri.getNumOfRows());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					BoardVo bv = new BoardVo();
+					bv.setMbno(rs.getInt("m.mbno"));
+					bv.setMbname(rs.getString("m.mbname"));
+					bv.setBdno(rs.getInt("b.bdno"));
+					bv.setBdcate(rs.getString("b.bdcate"));
+					bv.setBdtitle(rs.getString("b.bdtitle"));
+					bv.setBdcont(rs.getString("b.bdcont"));
+					bv.setBddate(rs.getString("b.bddate"));
+					alist.add(bv);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+		return alist;
+	}
+	
+	public int FAQTotalCount(SearchCriteria scri) {
+		
+		int value = 0;
+		ResultSet rs = null;
+		
+		String sql = "SELECT COUNT(bdno) as cnt FROM board WHERE  bddelyn = 'N' and bdcate = 'O'";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				value = rs.getInt("cnt");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return value;
+	}
+	
+	
 	
 }

@@ -20,12 +20,12 @@
 	<div class="page-inner">
 		<div class="content">
 			<div class="write-area">
-				<form id="form" class="form">
+				<form id="form" class="form" name="frm">
 					<div class="div-sub">
-						<input type="text" class="input-sub" placeholder="제목(질문제목)">
+						<input type="text" class="input-sub" name="bdtitle" placeholder="제목(질문제목)">
 					</div>
 					<div class="div-content">
-						<textarea class="textarea-content" placeholder="내용(답변내용)"></textarea>
+						<textarea class="textarea-content" name="bdcont" placeholder="내용(답변내용)"></textarea>
 					</div>
 <!-- 					<div class="div-file"> -->
 <!-- 						<label for="input-file" class="label-file"> -->
@@ -49,7 +49,23 @@
 	$(document).ready(function(){
 		
 		$("#btn-write").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/board/FAQ.do";
+			var fm = document.frm;	
+
+			if(fm.bdtitle.value=="") {
+				alert("제목을 입력하세요");
+				fm.bdtitle.focuse();
+				return;
+			} else if(fm.bdcont.value=="") {
+				alert("내용을 입력하세요");
+				fm.bdcont.focus();
+				return;
+			}
+			
+			fm.action = "${pageContext.request.contextPath}/board/FAQWriteAction.do";	
+			fm.method = "post";					
+			//fm.enctype="multipart/form-data";
+			fm.submit();						
+			return;
 		});
 		
 		$("#btn-cancel").on("click", function(){

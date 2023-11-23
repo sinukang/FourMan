@@ -23,19 +23,12 @@
 		<div class="content">
 			<div class="notice-area">
 				<header class=notice-head>
-					<h2><span class="notice-title">시스템임시점검안내</span></h2>
-					<div class="notice-date">2023-11-07 10:00</div>
+					<h2><span class="notice-title">${bv.bdtitle }</span></h2>
+					<div class="notice-date">${bv.bddate }</div>
 				</header>
 				<div class="notice-data">
 					<div class="notice-view">
-						<p>안녕하십니까 b-beam 운영자입니다.</p>
-						
-						<p>금일 b-beam의 시스템 임시점검이 23시 30분에 진행될 예정입니다.</p>
-						
-						<p>점검진행중에는 사이트 이용이 제한되오니 참고바랍니다.</p>
-						
-						<p>감사합니다.</p>
-					
+						<p>${bv.bdcont }</p>
 					</div>
 				
 				</div>

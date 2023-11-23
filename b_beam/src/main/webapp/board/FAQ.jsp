@@ -27,12 +27,11 @@
 		</div>
 		<div class="qna-contents">
 			<div class="list-area">
-				<c:set var="j" value="6"></c:set>
-				<c:forEach var="i" begin="1" end="6" step="1">
+				<c:forEach var="bv" items="${alist}" varStatus="status">
 					<div class="QnA-item">
-						<h3 class="QnA-title">Q.어떻게 하나요?${j}</h3>
+						<h3 class="QnA-title">Q.${bv.bdtitle }</h3>
 						<div class="QnA-Answer">
-							<p>ㄴ몰?루${j}</p>
+							<p>${bv.bdcont }</p>
 						</div>
 						<!-- <i class="fa-solid fa-chevron-down"></i> -->
 						<button type="button" class="QnA-toggle">
@@ -40,7 +39,6 @@
 							<i class="fas fa-chevron-up"></i>
 						</button>	
 					</div>
-					<c:set var="j" value="${j-1}"></c:set>
 				</c:forEach>
 			</div>	
 		</div>
@@ -48,23 +46,34 @@
 			<button id="btn-write" class="btn-write">자주 묻는 질문 등록</button>
 		</div>			
 		<div class="pagination-area">
-			<div class="paging-number-area">
-				<a href="#" class="a-arrow">
-					<i class="first-arrow-icon"></i><i class="first-arrow-icon"></i>
-				</a>
-				<a href="#" class="a-arrow">
-					<i class="prev-arrow-icon"></i>
-				</a>
-				<c:forEach var="i" begin="1" end="10" step="1">
-					<a href="#" class="page-number">${i}</a>
-				</c:forEach>
-				<a href="#" class="a-arrow">
-					<i class="next-arrow-icon"></i>
-				</a>
-				<a href="#" class="a-arrow">
-					<i class="last-arrow-icon"></i><i class="last-arrow-icon"></i>
-				</a>
-			</div>
+			<table class="page-table">
+				<tr>
+					<c:if test="${pm.prev}">
+						<td>
+							<a class="page-num" href="${pageContext.request.contextPath}/board/FAQ.do?page=${pm.startPage - 1}">◀</a>
+						</td>	
+					</c:if>
+					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+						<c:choose>
+							<c:when test="${pm.scri.page  == i}">			
+								<td>
+									<a class="page-num currentPageNum" href="${pageContext.request.contextPath}/board/FAQ.do?page=${i}">${i}</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a class="page-num" href="${pageContext.request.contextPath}/board/FAQ.do?page=${i}">${i}</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pm.next && pm.endPage > 0}">
+						<td>
+							<a href="${pageContext.request.contextPath}/board/FAQ.do?page=${pm.endPage + 1}">▶</a>
+						</td>
+					</c:if>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>

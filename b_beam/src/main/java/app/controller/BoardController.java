@@ -329,6 +329,31 @@ public class BoardController extends HttpServlet {
 				
 		}else if (location.equals("noticeList.do")) {
 			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			SearchCriteria scri = new SearchCriteria();
+			
+			String page = request.getParameter("page");
+			if (page == null) { page = "1";}
+			
+			scri.setPage(Integer.parseInt(page));
+			
+			PageMaker pm = new PageMaker();
+			pm.setScri(scri);
+			
+			BoardDao2 bd2 = new BoardDao2();
+			ArrayList<BoardVo> alist = bd2.noticeList(mbno, scri);
+			pm.setTotalCount(bd2.noticeTotalCount(scri));
+			
+			request.setAttribute("pm", pm);
+			request.setAttribute("alist", alist);
+			
 			String path ="/board/noticeList.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
@@ -339,13 +364,95 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
+		}else if (location.equals("noticeWriteAction.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			String bdtitle = request.getParameter("bdtitle");
+			String bdcont = request.getParameter("bdcont");
+			
+			BoardVo bv = new BoardVo();
+			
+			bv.setBdtitle(bdtitle);
+			bv.setBdcont(bdcont);
+			bv.setMbno(mbno);
+			
+			//System.out.println("bdtitle : " + bdtitle);
+			//System.out.println("bdcont : " + bdcont);
+			//System.out.println("mbno : " + mbno);
+			
+			BoardDao2 bd2 = new BoardDao2();
+			
+			int value = bd2.insertBoardN(bv);
+			
+			//System.out.println("value : " + value);
+			
+			if (value == 0) {
+				String path = request.getContextPath()+"/board/noticeWrite.do";
+				response.sendRedirect(path);
+			} else {
+				String path = request.getContextPath()+"/board/noticeList.do";
+				response.sendRedirect(path);
+			}
+			
 		}else if (location.equals("notice.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			int bdno = Integer.parseInt(request.getParameter("bdno"));
+			
+			System.out.println("bdno : " + bdno);
+			
+			BoardDao2 bd2 = new BoardDao2();
+			BoardVo bv = new BoardVo();
+			bv = bd2.noticeSelectOne(mbno, bdno);
+			
+			request.setAttribute("bv", bv);
 			
 			String path ="/board/notice.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
 		}else if (location.equals("FAQ.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			SearchCriteria scri = new SearchCriteria();
+			
+			String page = request.getParameter("page");
+			if (page == null) { page = "1";}
+			
+			scri.setPage(Integer.parseInt(page));
+			
+			PageMaker pm = new PageMaker();
+			pm.setScri(scri);
+			
+			BoardDao2 bd2 = new BoardDao2();
+			ArrayList<BoardVo> alist = bd2.FAQList(mbno, scri);
+			pm.setTotalCount(bd2.FAQTotalCount(scri));
+			
+			request.setAttribute("pm", pm);
+			request.setAttribute("alist", alist);
 			
 			String path ="/board/FAQ.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -356,6 +463,44 @@ public class BoardController extends HttpServlet {
 			String path ="/board/FAQWrite.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
+		}else if (location.equals("FAQWriteAction.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			String bdtitle = request.getParameter("bdtitle");
+			String bdcont = request.getParameter("bdcont");
+			
+			BoardVo bv = new BoardVo();
+			
+			bv.setBdtitle(bdtitle);
+			bv.setBdcont(bdcont);
+			bv.setMbno(mbno);
+			
+			//System.out.println("bdtitle : " + bdtitle);
+			//System.out.println("bdcont : " + bdcont);
+			//System.out.println("mbno : " + mbno);
+			
+			BoardDao2 bd2 = new BoardDao2();
+			
+			int value = bd2.insertBoardO(bv);
+			
+			//System.out.println("value : " + value);
+			
+			if (value == 0) {
+				String path = request.getContextPath()+"/board/FAQWrite.do";
+				response.sendRedirect(path);
+			} else {
+				String path = request.getContextPath()+"/board/FAQ.do";
+				response.sendRedirect(path);
+			}
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			

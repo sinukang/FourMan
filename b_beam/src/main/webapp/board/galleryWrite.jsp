@@ -57,6 +57,11 @@
 								<input type="text" id="input-bdtitle" name="bdtitle" placeholder=" 제목을 입력하세요.">
 							</td>
 						</tr>
+						<tr style="height:30px;">
+							<td >
+								<input type="text" id="input-bdtitle" name="bdtag" placeholder=" 태그를 입력하세요.">
+							</td>
+						</tr>
 						<tr style="height:200px;">
 							<td>
 								<textarea id="input-bdcont" name="bdcont" placeholder="내용을 입력해주세요."></textarea>

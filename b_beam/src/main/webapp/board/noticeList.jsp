@@ -33,31 +33,16 @@
 						<td class="td-head td-sub">글 제목</td>
 						<td class="td-head td-writer">작성자</td>
 						<td class="td-head td-wdate">작성일</td>
-						<td class="td-head td-cnt">조회수</td>
 					</tr>
-					<tr class="tr-body">
-						<td class="td-body td-no">1</td>
-						<td class="td-body td-cate">공지</td>
-						<td class="td-body td-sub">
-							<a href="${pageContext.request.contextPath}/board/notice.do">
-							안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 
-							안녕하세요 안녕하세요 안녕하세요 안녕하세요 
-							</a>
-						</td>
-						<td class="td-body td-writer">bbeam</td>
-						<td class="td-body td-wdate">2023-11-01</td>
-						<td class="td-body td-cnt">1</td>
-					</tr>						
-					<c:forEach var="i" begin="2" end="9" step="1">
+					<c:forEach var="bv" items="${alist}" varStatus="status">
 						<tr class="tr-body">
-							<td class="td-body td-no">${i}</td>
-							<td class="td-body td-cate">공지${i}</td>
+							<td class="td-body td-no">${bv.bdno}</td>
+							<td class="td-body td-cate">${bv.bdcate}</td>
 							<td class="td-body td-sub">
-							<a href="${pageContext.request.contextPath}/board/notice.do">안녕하세요${i}</a>
+							<a href="${pageContext.request.contextPath}/board/notice.do?bdno=${bv.bdno}">${bv.bdtitle}</a>
 							</td>
-							<td class="td-body td-writer">bbeam${i}</td>
-							<td class="td-body td-wdate">2023-11-0${i}</td>
-							<td class="td-body td-cnt">1${i}</td>
+							<td class="td-body td-writer">${bv.mbname}</td>
+							<td class="td-body td-wdate">${bv.bddate}</td>
 						</tr>							
 					</c:forEach>
 				</table>
@@ -66,24 +51,35 @@
 				<button id="btn-write" class="btn-write">공지사항 등록</button>
 			</div>			
 			<div class="pagination-area">
-				<div class="paging-number-area">
-					<a href="#" class="a-arrow">
-						<i class="first-arrow-icon"></i><i class="first-arrow-icon"></i>
-					</a>
-					<a href="#" class="a-arrow">
-						<i class="prev-arrow-icon"></i>
-					</a>
-					<c:forEach var="i" begin="1" end="10" step="1">
-						<a href="#" class="page-number">${i}</a>
+			<table class="page-table">
+				<tr>
+					<c:if test="${pm.prev}">
+						<td>
+							<a class="page-num" href="${pageContext.request.contextPath}/board/noticeListt.do?page=${pm.startPage - 1}">◀</a>
+						</td>	
+					</c:if>
+					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+						<c:choose>
+							<c:when test="${pm.scri.page  == i}">			
+								<td>
+									<a class="page-num currentPageNum" href="${pageContext.request.contextPath}/board/noticeList.do?page=${i}">${i}</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a class="page-num" href="${pageContext.request.contextPath}/board/noticeList.do?page=${i}">${i}</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
-					<a href="#" class="a-arrow">
-						<i class="next-arrow-icon"></i>
-					</a>
-					<a href="#" class="a-arrow">
-						<i class="last-arrow-icon"></i><i class="last-arrow-icon"></i>
-					</a>
-				</div>
-			</div>
+					<c:if test="${pm.next && pm.endPage > 0}">
+						<td>
+							<a href="${pageContext.request.contextPath}/board/noticeList.do?page=${pm.endPage + 1}">▶</a>
+						</td>
+					</c:if>
+				</tr>
+			</table>
+		</div>
 		</div>
 	</div>
 </div>
