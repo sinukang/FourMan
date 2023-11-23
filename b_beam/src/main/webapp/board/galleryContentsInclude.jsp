@@ -76,7 +76,7 @@
 		<div class="div-bottom">
 			<c:if test="${mbno eq bv.mbno}">
 				<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do?bdno=${bv.bdno}';" >수정</button>
-				<button type="button" class="del-btn" >삭제</button>
+				<button type="button" class="del-btn" onclick="" >삭제</button>
 			</c:if>
 			<button type="button" onclick="">&#x1F6A8;</button>
 		</div>
@@ -100,6 +100,37 @@
 			prevEl: ".swiper-button-prev",
 		},
 	});	
+	
+	//띄운 모달 안의 글 삭제 버튼
+	$(".del-btn").on("click", function() {
+		var isConfirmed = confirm('정말 삭제하시겠습니까?');
+		
+		if (isConfirmed) {
+			var bdno = "${bv.bdno}";
+		
+			$.ajax({
+				type: "POST",
+				url: "${pageContext.request.contextPath}/board/galleryDeleteAction.do",
+				data: { "bdno": bdno },
+				dataType: "json",
+				success: function(response) {
+					if (response.success) {
+						alert('삭제되었습니다.');
+						// console.log(response);
+						//debugger;
+						location.href = "${pageContext.request.contextPath}/board/galleryList.do";
+					} else {
+						alert('삭제에 실패했습니다.');
+					}
+				},
+				error: function(request, status, error) {
+					alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
+				}
+			});
+		} else {
+			alert('삭제가 취소되었습니다.');
+		}
+	});
 	
 	$(document).ready(function(){
 		

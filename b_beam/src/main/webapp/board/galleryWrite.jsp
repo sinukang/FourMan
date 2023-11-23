@@ -81,14 +81,28 @@
 	
 	<!-- 사진파일 업로드 -->
 	<script type="text/javascript">
+	
+	function checkFileCount(input) {
 		
+		var maxFileCount = 5; // 허용할 최대 파일 갯수
+
+		// 선택된 파일 수 확인
+		var selectedFileCount = input.files.length;
+		
+		// 최대 허용 파일 갯수를 초과하는 경우
+		if (selectedFileCount > maxFileCount) {
+			alert("최대 " + maxFileCount + "개의 파일만 업로드할 수 있습니다.");
+			console.log(input.files);
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 	function DropFile(dropAreaId, fileListId) {
 		let dropArea = document.getElementById(dropAreaId);
 		let fileList = document.getElementById(fileListId);
-		
-		const dropFile = new DropFile("drop-file", "files");
-		
+		let files = [];
 		/* 기본 이벤트 막기 */
 		function preventDefaults(e) {
 			e.preventDefault();
@@ -117,23 +131,31 @@
 				fileList.scrollTo({ top: fileList.scrollHeight });
 			}
 		}
-
-		function handleFiles(files) {
-			files = [...files];
+		
+		function handleFiles(selectedFiles) {
 			
-			 // 최대 허용 파일 갯수 확인
-		    var maxFileCount = 5;
-		    
-		    // 현재 이미 미리보기된 파일 갯수 확인
-		    var previewedFileCount = document.getElementById('previews').childElementCount;
-		    
-		    // 미리보기 이미지를 담을 영역 선택
-		    let previews = document.getElementById('previews');
-		    
-		    // 추가될 파일 수 확인
-		    var remainingFiles = maxFileCount - previewedFileCount;
+			console.log(files);
 
-		    files.slice(0, remainingFiles).forEach(previewFile);
+			// 최대 허용 파일 갯수 확인
+			var maxFileCount = 5;
+			
+			// 현재 이미 미리보기된 파일 갯수 확인
+			var previewedFileCount = document.getElementById('previews').childElementCount;
+			
+			// 미리보기 이미지를 담을 영역 선택
+			let previews = document.getElementById('previews');
+		
+			// 추가될 파일 수 확인
+			var remainingFiles = maxFileCount - previewedFileCount;
+			
+			// 여러 번 파일을 선택할 때 기존 배열에 추가
+			if (files.length < maxFileCount) {
+			files.push(...selectedFiles);
+			}else {
+				alert("최대 " + maxFileCount + "개의 파일만 업로드할 수 있습니다.");
+			}
+
+			files.slice(0, remainingFiles).forEach(previewFile);
 		}
 
 		function previewFile(file) {
@@ -147,7 +169,7 @@
 			reader.onloadend = function () {
 				// 미리보기 이미지를 담을 영역 선택
 				let previews = document.getElementById('previews');
-	
+				
 				// 새로운 이미지 생성
 				let img = document.createElement('img');
 				img.src = reader.result;
@@ -173,38 +195,19 @@
 		dropArea.addEventListener("dragenter", highlight, false);
 		dropArea.addEventListener("dragover", highlight, false);
 		dropArea.addEventListener("dragleave", unhighlight, false);
-		dropArea.addEventListener("drop", function (e) {
-		    handleDrop(e);
-		    handleFiles(e.dataTransfer.files);
-		}, false);
+		dropArea.addEventListener("drop", handleDrop, false);
+		
 		return {
-			handleFiles
+			handleFiles,
+			files
 		};
 	}
-
+	
+	const dropFile = new DropFile("drop-file", "files");
+	
 	</script>
 	
 	<script>
-		function checkFileCount(input) {
-			var maxFileCount = 5; // 허용할 최대 파일 갯수
-	
-			// 선택된 파일 수 확인
-			var selectedFileCount = input.files.length;
-			
-			//현재 선택된 파일 갯수
-			var previewedFileCount = document.getElementById('previews').childElementCount;
-			
-			// 추가될 파일 수 확인
-			var remainingFiles = maxFileCount - previewedFileCount;
-			
-			// 최대 허용 파일 갯수를 초과하는 경우
-			if (selectedFileCount > remainingFiles) {
-				alert("최대 " + maxFileCount + "개의 파일만 업로드할 수 있습니다.");
-				
-				return false;
-			}
-			return true;
-		}
 	
 		function check()
 		{
@@ -222,6 +225,9 @@
 				return;
 			}else {
 				var files = document.getElementById("chooseFile").files;
+				
+				console.log(files);
+				debugger;
 				if (files.length === 0) {
 					alert("사진을 첨부해주세요");
 					return;

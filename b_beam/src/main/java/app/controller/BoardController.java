@@ -292,6 +292,41 @@ public class BoardController extends HttpServlet {
 				e.printStackTrace();
 			}
 		
+		}else if (location.equals("galleryDeleteAction.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int bdno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("bdno") != null) {
+				bdno = Integer.parseInt(request.getParameter("bdno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			System.out.println("bdno : " + bdno);
+			System.out.println("mbno : " + mbno);
+			
+			//처리하는 메소드를 만들어야 한다
+			int value=0;
+			
+			BoardDao2 bd2 = new BoardDao2();
+			value = bd2.boardDelete(bdno);			
+			
+			System.out.println("value : " + value);
+			
+			// JSON 형식으로 응답을 생성		//unexpected json input 오류 해결
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print("{\"success\": " + (value > 0) + "}");	// value가 0보다 크면 true 아니면 false
+			out.flush();
+			out.close();
+				
 		}else if (location.equals("noticeList.do")) {
 			
 			String path ="/board/noticeList.jsp";
