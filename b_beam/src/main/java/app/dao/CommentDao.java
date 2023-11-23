@@ -22,7 +22,7 @@ public class CommentDao {
 	public ArrayList<CommentVo> commentList(int bdno){
 		
 		ArrayList<CommentVo> cv_alist = new ArrayList<CommentVo>();
-		CommentVo cv = new CommentVo();
+		
 		ResultSet rs = null;
 		
 		String sql = "SELECT c.*, m.mbname FROM comment c JOIN member m ON c.mbno = m.mbno WHERE c.bdno = ? AND c.cmdelyn = 'N'";
@@ -33,6 +33,7 @@ public class CommentDao {
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
+				CommentVo cv = new CommentVo();
 				cv.setCmno(rs.getInt("cmno"));
 				cv.setMbno(rs.getInt("mbno"));
 				cv.setBdno(rs.getInt("bdno"));
