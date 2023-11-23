@@ -624,7 +624,10 @@ function getReview(){
 		success : function(data){
 // 			console.log('접근성공');
 // 			console.log(data)
-			var json = data;
+			var ary = data
+			console.log('ary : ' + ary)
+			var json = Object.assign({},ary);
+			console.log('json : ' + json);
 			setReview(json);
 		},
 		error:function(){
@@ -637,7 +640,7 @@ function setReview(data){
 	var mbno='${mbno}';
 	$.each(data,function(idx,value){
 		str+='<table id="commentTable">';
-		$.each(value,function(){
+		$.each(value,function(key,value){
 			str+='<tr><th id="userId">'+data.name+'</th>';
 			str+='<th id="star">';
 			for(let i = 0; i < data.score;i++){
