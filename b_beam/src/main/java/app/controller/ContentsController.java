@@ -29,7 +29,7 @@ public class ContentsController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-    private String location;
+    private String location; 
     
     public ContentsController(String location) {
 		this.location = location;
@@ -38,7 +38,7 @@ public class ContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (location.equals("contentsList.do")) {
-
+  
 	        HttpSession session = request.getSession();
 			String contenttypeid="";
 			String keyword="";
