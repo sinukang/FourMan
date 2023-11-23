@@ -45,7 +45,7 @@
 									<label class="file-label" for="chooseFile">사진 선택</label>
 									<input class="file" id="chooseFile" name="bdglname" multiple
 										type="file" 
-										onchange="dropFile.handleFiles(this.files)"
+										onchange="if(checkFileCount(this)) { dropFile.handleFiles(this.files); }"
 										accept="image/png, image/jpeg, image/gif">
 								</div>
 								<!-- 파일 목록을 나타낼 영역 -->
@@ -87,6 +87,8 @@
 		let dropArea = document.getElementById(dropAreaId);
 		let fileList = document.getElementById(fileListId);
 		
+		const dropFile = new DropFile("drop-file", "files");
+		
 		/* 기본 이벤트 막기 */
 		function preventDefaults(e) {
 			e.preventDefault();
@@ -105,10 +107,10 @@
 
 		function handleDrop(e) {
 			unhighlight(e);
-			let dt = e.dataTransfer;
+			let dt = e.dataTransfer;	// drop된 파일 목록 가져옴
 			let files = dt.files;
 
-			handleFiles(files);
+			handleFiles(files);			// handleFiles 함수 호출하여 드롭된 파일 목록 처리
 
 			const fileList = document.getElementById(fileListId);
 			if (fileList) {
@@ -118,8 +120,20 @@
 
 		function handleFiles(files) {
 			files = [...files];
-			// files.forEach(uploadFile);
-			files.forEach(previewFile);
+			
+			 // 최대 허용 파일 갯수 확인
+		    var maxFileCount = 5;
+		    
+		    // 현재 이미 미리보기된 파일 갯수 확인
+		    var previewedFileCount = document.getElementById('previews').childElementCount;
+		    
+		    // 미리보기 이미지를 담을 영역 선택
+		    let previews = document.getElementById('previews');
+		    
+		    // 추가될 파일 수 확인
+		    var remainingFiles = maxFileCount - previewedFileCount;
+
+		    files.slice(0, remainingFiles).forEach(previewFile);
 		}
 
 		function previewFile(file) {
@@ -159,19 +173,38 @@
 		dropArea.addEventListener("dragenter", highlight, false);
 		dropArea.addEventListener("dragover", highlight, false);
 		dropArea.addEventListener("dragleave", unhighlight, false);
-		dropArea.addEventListener("drop", handleDrop, false);
-
+		dropArea.addEventListener("drop", function (e) {
+		    handleDrop(e);
+		    handleFiles(e.dataTransfer.files);
+		}, false);
 		return {
 			handleFiles
 		};
 	}
 
-	const dropFile = new DropFile("drop-file", "files");
-
-	
 	</script>
 	
 	<script>
+		function checkFileCount(input) {
+			var maxFileCount = 5; // 허용할 최대 파일 갯수
+	
+			// 선택된 파일 수 확인
+			var selectedFileCount = input.files.length;
+			
+			//현재 선택된 파일 갯수
+			var previewedFileCount = document.getElementById('previews').childElementCount;
+			
+			// 추가될 파일 수 확인
+			var remainingFiles = maxFileCount - previewedFileCount;
+			
+			// 최대 허용 파일 갯수를 초과하는 경우
+			if (selectedFileCount > remainingFiles) {
+				alert("최대 " + maxFileCount + "개의 파일만 업로드할 수 있습니다.");
+				
+				return false;
+			}
+			return true;
+		}
 	
 		function check()
 		{

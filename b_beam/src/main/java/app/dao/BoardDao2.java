@@ -86,14 +86,13 @@ public class BoardDao2 {
 
 	}
 	
-	public int boardDelete(int bdno, String mbpwd) {
+	public int boardDelete(int bdno) {
 		int exec1 = 0;
 		int exec2 = 0;
-		String sql = "update board set bddelyn = 'Y', bddatem = now() where bdno = ? and mbpwd = ? ";
+		String sql = "update board set bddelyn = 'Y', bddatem = now() where bdno = ?";
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, bdno);
-			pstmt.setString(2, mbpwd);
 			exec1 = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
