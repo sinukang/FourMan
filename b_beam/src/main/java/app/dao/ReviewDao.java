@@ -10,6 +10,7 @@ import java.util.List;
 
 import app.dbconn.DbConn;
 import app.domain.BdgalleryVo;
+import app.domain.BoardVo;
 import app.domain.ReviewVo;
 
 public class ReviewDao {
@@ -25,7 +26,7 @@ public class ReviewDao {
 	}	
 			
 			
-	public ArrayList<ReviewVo>  reviewList(int mbno){
+	public ArrayList<ReviewVo>  reviewList(int mbno,String contentid){
 		//무한배열클래스 객체생성해서 데이터를 담을 준비를 한다
 		ArrayList<ReviewVo> alist =new ArrayList<ReviewVo>();
 		ResultSet rs = null;
@@ -44,6 +45,7 @@ public class ReviewDao {
 				+ str
 				+ "FROM review a\r\n"
 				+ "WHERE a.rvdelyn = 'N'\r\n"
+				+ "and a.contentid = ?\r\n"
 				+ "ORDER BY a.rvno DESC;";
 				
 				
@@ -52,6 +54,7 @@ public class ReviewDao {
 			
 			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentid);
 			rs = pstmt.executeQuery();
 			//rs.next()는 다음값이 있는지 확인하는 메소드 있으면true
 			while(rs.next()){
@@ -61,6 +64,7 @@ public class ReviewDao {
 				rv.setMbno(rs.getInt("Mbno"));
 				rv.setContentid(rs.getString("contentid"));
 				rv.setRvrate(rs.getString("rvrate"));
+				rv.setRvdate(rs.getString("rvdate"));
 				rv.setRvcont(rs.getString("rvcont"));
 				rv.setRvLikeCnt(rs.getInt("rvLikeCnt"));
 				
@@ -103,7 +107,7 @@ public class ReviewDao {
 	
 	
 		
-			public int reviewInsert(ReviewVo rv){
+		public int reviewInsert(ReviewVo rv){
 				
 				int exec = 0;			
 				String sql = "insert into review (mbno,rvrate,rvcont,contentid) \r\n"
@@ -117,33 +121,39 @@ public class ReviewDao {
 				pstmt.setString(3, rv.getRvcont());
 				pstmt.setString(4, rv.getContentid());
 				exec = pstmt.executeUpdate();   //실행이되면 1값 안되면 0값
-				
+
+				// 생성된 rvno 가져오기
+				try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						rv.setRvno(generatedKeys.getInt(1));
+					}
+				}
 				System.out.println(sql);
 				}catch(Exception e){
 					e.printStackTrace();
-				}finally {				
-					try {
-						pstmt.close();
-						conn.close();
-					} catch (SQLException e) {					
-						e.printStackTrace();
-					}
-				}			
+				}
+//				finally {				
+//					try {
+//						pstmt.close();
+//						conn.close();
+//					} catch (SQLException e) {					
+//						e.printStackTrace();
+//					}
+//				}			
 				
 				return exec;	
 			}
 			
-			public int insertrvgallery(int rvno, String[] glname) {
+		public int insertrvgallery(int rvno, ArrayList<String> glname) {
 				int exec = 0;
 
 				String sql = "INSERT INTO rvgallery(rvno, rvglname) VALUES(?,?)";
-				
-				try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+				System.out.println(sql);
+				try (PreparedStatement pstmt1 = conn.prepareStatement(sql)){
 					for (String glone : glname) {
-						pstmt.setInt(1,rvno);
-						pstmt.setString(2,glone);
-						exec += pstmt.executeUpdate();
+						pstmt1.setInt(1,rvno);
+						pstmt1.setString(2,glone);
+						exec += pstmt1.executeUpdate();
 					}
 					
 				}catch (Exception e) {
@@ -151,77 +161,53 @@ public class ReviewDao {
 				}
 				return exec;
 			}
-			public int rvglInsert(ReviewVo rv, String[] glname){
+
+		public int reviewModify(ReviewVo rv){
+				int exec = 0;		
+			
+				String sql ="UPDATE review  SET rvrate =?, rvcont = ? \r\n"
+						+ "WHERE rvno = ? and mbno =?";
 				
-				int exec1 = this.reviewInsert(rv);		
-				if (exec1 > 0) {
-					// review 테이블에 레코드가 성공적으로 삽입되었을 때
-					// 해당 rvno를 가져와서 rvgallery 테이블에 삽입
-					
-					int exec2 = insertrvgallery(rv.getRvno(),glname);
-
-						// review 및 rvgallery 삽입 결과의 총합 반환
-						return exec1 + exec2;
-				} else {
-					// review 테이블에 레코드 삽입이 실패했을 경우
-					return exec1;
+				try{		
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, rv.getRvrate());
+				pstmt.setString(2, rv.getRvcont());
+				pstmt.setInt(3, rv.getRvno());
+				pstmt.setInt(4, rv.getMbno());
+				
+				
+				exec = pstmt.executeUpdate();	
+				//수정이 되면 1이 리턴된다.
+				}catch(Exception e){			
+					e.printStackTrace();
 				}
-
+				return exec;	
 			}
-//			public int insertReviewWithGallery(ReviewVo rv) {
-//			    int exec = 0;
-//
-//			    String sql = "INSERT INTO review (mbno, rvrate, rvcont, contentid) VALUES (?, ?, ?, ?)";
-//			    String sql2 = "INSERT INTO rvgallery (rvno, rvglname) VALUES (?, ?)";
-//
-//			    try {
-//			        conn.setAutoCommit(false); // 트랜잭션 시작
-//
-//			        // Review 테이블에 삽입
-//			        try (PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
-//			            pstmt.setInt(1, rv.getMbno());
-//			            pstmt.setString(2, rv.getRvrate());
-//			            pstmt.setString(3, rv.getRvcont());
-//			            pstmt.setString(4, rv.getContentid());
-//
-//			            exec = pstmt.executeUpdate();
-//
-//			            // 삽입된 review의 rvno 가져오기
-//			            ResultSet generatedKeys = pstmt.getGeneratedKeys();
-//			            if (generatedKeys.next()) {
-//			                rv.setRvno(generatedKeys.getInt(1));
-//			            }
-//			        }
-//
-//			        // Gallery 테이블에 삽입
-//			        try (PreparedStatement galleryStmt = conn.prepareStatement(sql2)) {
-//			            ArrayList<String> rvglname = rv.getRvglname();
-//
-//			            for (String glname : rvglname) {
-//			                galleryStmt.setInt(1, rv.getRvno());
-//			                galleryStmt.setString(2, glname);
-//			                exec += galleryStmt.executeUpdate();
-//			            }
-//			        }
-//
-//			        conn.commit(); // 트랜잭션 커밋
-//			    } catch (SQLException e) {
-//			        try {
-//			            conn.rollback(); // 예외 발생 시 롤백
-//			        } catch (SQLException rollbackException) {
-//			            rollbackException.printStackTrace();
-//			        }
-//			        e.printStackTrace();
-//			    } finally {
-//			        try {
-//			            conn.setAutoCommit(true); // 트랜잭션 종료 후 자동 커밋으로 복원
-//			        } catch (SQLException e) {
-//			            e.printStackTrace();
-//			        }
-//			    }
-//
-//			    return exec;
-//			}
+			
+			
+		public int reviewglModify(ReviewVo rv){
+				int exec = 0;		
+			
+				String sql ="UPDATE rvgallery a \r\n"
+						+ "join review b on a.rvno = b.rvno \r\n"
+						+ "SET  a.rvglname =? \r\n"
+						+ "WHERE b.rvno = ? and b.mbno = ?";
+				
+				try{		
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rv.getRvno());
+				pstmt.setInt(2, rv.getMbno());
+				pstmt.setInt(3, rv.getRvglname());
+				
+
+				
+				exec = pstmt.executeUpdate();	
+				//수정이 되면 1이 리턴된다.
+				}catch(Exception e){			
+					e.printStackTrace();
+				}
+				return exec;	
+			}
 			
 			
 			
@@ -233,6 +219,56 @@ public class ReviewDao {
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			public int reviewDelete(int rvno, int mbno) {
+			    int exec = 0;
+
+				String sql = "UPDATE review SET rvdelyn = 'Y' WHERE rvno = ? and mbno = ?";
+				String sql2 = "UPDATE rvgallery a join review b on a.rvno = b.rvno\r\n"
+							+ " SET rvgldelyn = 'Y' WHERE b.rvno = ? and b.mbno=?";
+	
+				try {//삭제할때 사진이없는경우 
+						conn.setAutoCommit(false);
+	
+					try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+						pstmt.setInt(1, rvno);
+						pstmt.setInt(2, mbno);
+						
+					exec += pstmt.executeUpdate();
+					}
+					//글에 사진이 포함된경우 
+					try (PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
+						pstmt2.setInt(1, rvno);
+						pstmt2.setInt(2, mbno);
+					exec += pstmt2.executeUpdate();
+					}
+	
+					conn.commit();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					return exec;
+					}
+	
+					return exec;
+					
+			}	
+				
+				
+				
 			
 			
 			
