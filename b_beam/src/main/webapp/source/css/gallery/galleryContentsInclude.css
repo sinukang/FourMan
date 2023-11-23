@@ -25,7 +25,7 @@ body *{
 	align-items: center;
 	width: 100%;
 	height: 7%;
-	background-color: #ffffffd6;
+	background-color: #fff;
 	border-radius: 8px 0 0 0;
 }
 .photo-area{
@@ -61,16 +61,26 @@ body *{
 	width: 100%;
 	height: 7%;
 	font-weight: bold;
+	color: #000;
 	background-color: #fff;
 	border-left: 1px solid #eee;
 	border-radius: 0 8px 0 0;
 }
 .md-title-area{
 	width: 90%;
+	height: 100%;
 	padding: 5px 10px;
 }
 .md-title-area, .md-like-area{
 	display: inline-block;
+}
+.md-title-span{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	white-space: pre-wrap;
+	text-overflow: ellipsis;
 }
 .md-like-area{
 	padding: 5px;
@@ -87,8 +97,21 @@ body *{
 }
 .div-content{
 	width: 100%;
-	max-height: 38%;
-	min-height: 10%;
+	height: 38%;
+	/*min-height: 10%;
+	max-height: 38%;*/
+	overflow: auto;
+	/*overflow-y: scroll;*/
+	background-color: rgba(255, 255, 255, 0.7);
+}
+.div-content::-webkit-scrollbar{
+	width: 8px;
+}
+.div-content::-webkit-scrollbar-thumb{
+	background: #666;
+}
+.div-content::-webkit-scrollbar-track{
+	background: #ddd;
 }
 .content-area{
 	padding: 10px;
@@ -121,20 +144,36 @@ body *{
 	padding: 3px 5px;
 	width: 100%;
 	height: 100%;
-	background: #f1f1f1;
+	background-color: rgba(255, 255, 255, 0.7);
 	font-size: 1rem;
 	border: 1px solid #567ff2;
 	border-radius: 5px;
+	resize: none;
+	overflow: auto;
+	/*overflow-y: scroll;*/
 }
 .input-comment:focus{
 	outline: none;
 	border: 2px solid #567ff2;
 }
+.input-comment::-webkit-scrollbar{
+	width: 5px;
+}
+.input-comment::-webkit-scrollbar-thumb{
+	background: #567ff2;
+	min-height: 5px;
+}
+.input-comment::-webkit-scrollbar-thumb:hover{
+	cursor: pointer;
+}
+.input-comment::-webkit-scrollbar-track{
+	background: #fff;
+}
 .comment-write-btn-area{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 7%;
+	width: 9%;
 	height: 100%;
 }
 .btn-img{
@@ -154,10 +193,23 @@ body *{
 }
 
 .div-commentList{
+/*	position: absolute;
+	left: 0;
+	bottom: 5%;*/
 	width: 100%;
-	max-height: 68%;
-	min-height: 40%;
-	overflow-y: scroll;
+	height: max-content;
+	max-height: 40%;
+	overflow: auto;
+	/*overflow-y: scroll;*/
+}
+.div-commentList::-webkit-scrollbar{
+	width: 8px;
+}
+.div-commentList::-webkit-scrollbar-thumb{
+	background: #666;
+}
+.div-commentList::-webkit-scrollbar-track{
+	background: #ddd;
 }
 .comment-area {
 	display: flex;
@@ -181,23 +233,33 @@ body *{
 	
 }
 .comment-cont {
-	width: 60%;
+	width: 55%;
 }
 .span-cont{
-	
+	padding-left: 5px;
 }
 .comment-date {
-	width: 10%;
+	width: 15%;
 	font-size: 0.75em;
 }
 .span-date{
 	
 }
 .comment-btn{
+	padding: 0 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 20%;
+}
+.comment-btn button{
+	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 10%;
+	color: #000;
+	font-size: 0.75em;
+	white-space: nowrap;
 }
 .btn-report{
 	

@@ -83,10 +83,25 @@ public class CommentController extends HttpServlet {
 			
 		}else if(location.equals("commentWrite.do")) {
 			
+			CommentVo cv = new CommentVo();
+			CommentDao cd = new CommentDao();
 			
+			if(request.getParameter("mbno") != null) {
+				cv.setMbno(Integer.parseInt(request.getParameter("mbno")));
+			}
+			if(request.getParameter("bdno") != null) {
+				cv.setBdno(Integer.parseInt(request.getParameter("bdno")));
+			}
+			if(request.getParameter("cmcont") != null) {
+				cv.setCmcont(request.getParameter("cmcont"));
+			}
 			
+			int value = 0;
+			value = cd.commentInsert(cv);
 			
-			
+			PrintWriter pw = response.getWriter();
+			String responseStr = "{\"value\" : \""+value+"\"}";
+			pw.println(responseStr);			
 			
 		}else if(location.equals("commentModify.do")) {
 			
@@ -94,6 +109,18 @@ public class CommentController extends HttpServlet {
 			
 		}else if(location.equals("commentDelete.do")) {
 			
+			int cmno = 0;
+			int value = 0;
+			CommentDao cd = new CommentDao();
+			
+			if(request.getParameter("cmno") != null) {
+				cmno = Integer.parseInt(request.getParameter("cmno"));
+			}
+			value = cd.commentDelete(cmno);
+			
+			PrintWriter pw = response.getWriter();
+			String responseStr = "{\"value\" : \""+value+"\"}";
+			pw.println(responseStr);
 			
 		}
 		

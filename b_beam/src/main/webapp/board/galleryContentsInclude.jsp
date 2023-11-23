@@ -30,7 +30,7 @@
 	<div class="div-contents">
 		<div class="div-title">
 			<div class="md-title-area">
-				<span>${bv.bdtitle} 전주 한옥마을 야경</span>
+				<span class="md-title-span">${bv.bdtitle}</span>
 			</div>
 			<div class="md-like-area">
 				<c:choose>
@@ -47,19 +47,18 @@
 		</div>
 		<div class="div-content">
 			<div class="content-area">
-				${bv.bdcont} 내용을 작성하였습니다. 내용을 작성하였습니다. 내용을 작성하였습니다.<br>
-				내용을 작성하였습니다. 내용을 작성하였습니다. 내용을 작성하였습니다.<br>
-				내용을 작성하였습니다. 내용을 작성하였습니다. 내용을 작성하였습니다.<br>	
+				${bv.bdcont}
 			</div>
 			<div class="tag-area">
-				${bv.bdtag} #전주 #한옥마을 #야경
+				${bv.bdtag}
 			</div>
 		</div>
 		
 		<!-- 댓글 작성 영역 시작-->
 		<div class="div-comment-write">
 			<div class="comment-write-area">
-				<input type="text" id="input-comment" name="cmcont" class="input-comment" placeholder="댓글을 작성해주세요.">
+				<textarea id="input-comment" name="cmcont" class="input-comment" placeholder="댓글을 작성해주세요."></textarea>
+				<!-- <input type="text" id="input-comment" name="cmcont" class="input-comment" placeholder="댓글을 작성해주세요."> -->
 			</div>
 			<div class="comment-write-btn-area">
 				<button class="btn-img"></button>
@@ -67,16 +66,16 @@
 		</div>
 		<!-- 댓글 작성 영역 끝 -->
 		
-		<!-- 댓글 리스트 영역 -->
+		<!-- 댓글 리스트 영역 시작-->
 		<div class="div-commentList">
-		
+			
 		</div>
-		<!-- /댓글 리스트 영역 -->
+		<!-- 댓글 리스트 영역 끝-->
 		
 		<div class="div-bottom">
 			<c:if test="${mbno eq bv.mbno}">
 				<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do?bdno=${bv.bdno}';" >수정</button>
-				<button type="button" class="del-btn" onclick="" >삭제</button>
+				<button type="button" class="del-btn" onclick="">삭제</button>
 			</c:if>
 			<button type="button" onclick="">&#x1F6A8;</button>
 		</div>
@@ -174,6 +173,7 @@
 			
 			let mbno = "${mbno}";
 			let bdno = "${bv.bdno}";
+			let cmcont = inputComment.val();
 			
 			if(mbno == null || mbno == ""){
 				if(confirm("로그인이 필요한 기능입니다.\n\n로그인 하시겠습니까?")){
@@ -189,7 +189,7 @@
 				$.ajax({
 					type : "post",
 					url : "${pageContext.request.contextPath}/comment/commentWrite.do",
-					data : {"mbno" : mbno, "bdno" : bdno},
+					data : {"mbno" : mbno, "bdno" : bdno, "cmcont" : cmcont},
 					dataType : "json",
 					cache : false,
 					success : function(data){
@@ -256,6 +256,8 @@
 	
 	function commentListLoad(){
 		
+		event.preventDefault();
+		
 		let bdno = "${bv.bdno}";
 		
 		$.ajax({
@@ -298,7 +300,7 @@
 					+		"</div>"
 					+		"<div class='comment-btn'>"
 					+			"<button type='button' class='btn-modify' onclick=''>수정</button>"
-					+			"<button type='button' class='btn-delete' onclick=''>삭제</button>"
+					+			"<button type='button' class='btn-delete' onclick='commentDelete("+this.cmno+")'>삭제</button>"
 					+			"<button type='button' class='btn-report' onclick=''>&#x1F6A8;</button>"	
 					+		"</div>"
 					+	"</div>";			
@@ -323,7 +325,36 @@
 			
 			return;
 		});
-	}		
+	}
+	
+	function commentDelete(idx){
+		
+		event.preventDefault();
+		
+		let cmno = idx;
+		
+		if(confirm("해당 댓글을 삭제하시겠습니까?")){
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/comment/commentDelete.do",
+				data : {"cmno" : cmno},
+				cache : false,
+				success : function(data){
+					alert("data.value : " + data.value)
+					if(data.value == 1){
+						alert("해당 댓글이 삭제되었습니다.");
+						commentListLoad();
+					}
+				},
+				error : function(){
+					alert("삭제 에러");
+					return;
+				}
+			});
+		}else{
+			return;
+		}
+	}
 
 	
 </script>

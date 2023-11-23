@@ -43,7 +43,7 @@ public class BoardDao {
 					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS bdLikeCnt"
 					+ ", (SELECT COUNT(c.bdno) FROM comment c WHERE c.bdno = b.bdno) AS bdCommentCnt"
 					+ str
-					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
+					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bdcate = 'G' AND b.bddelyn = 'N') b"
 					+ str2
 					+ " ORDER by b.bdno DESC"
 					+ " LIMIT ?, ?";

@@ -52,19 +52,34 @@ public class CommentDao {
 	}
 	
 	//댓글 작성 시 해당 bdno를 매개변수로 받아서 foreign key로 사용
-	public int commentInsert(int bdno, int mbno) {
+	public int commentInsert(CommentVo cv) {
 		
 		int value = 0;
+		
+		String sql = "INSERT INTO comment(mbno, bdno, cmcont) VALUES(?, ?, ?)";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cv.getMbno());
+			pstmt.setInt(2, cv.getBdno());
+			pstmt.setString(3, cv.getCmcont());
+			
+			value = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 		
 		return value;
 	}
 	
 	//댓글 수정 시 해당 댓글의 index를 매개변수로 받아서 일치하는 cmno의 댓글 내용을 수정
-	public int commentModify(int cmno) {
+	public int commentModify(CommentVo cv) {
 		
 		int value = 0;
 		
-		return value;		
+		return value;	
 	}
 	
 	//댓글 삭제(업데이트 => cmdelyn = 'Y') 시 해당 댓글의 index를 매개변수로 받아서 
@@ -72,6 +87,18 @@ public class CommentDao {
 	public int commentDelete(int cmno) {
 		
 		int value = 0;
+		
+		String sql = "UPDATE comment SET cmdelyn = 'Y' WHERE cmno = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cmno);
+			
+			value = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return value;	
 	}
