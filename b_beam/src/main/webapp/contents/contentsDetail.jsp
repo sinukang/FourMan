@@ -19,7 +19,7 @@ pageContext.setAttribute("LF", "\n");
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.css">
 <link rel="stylesheet" type="text/css" href="../source/css/contents/contentsDetail.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68d11d2bbd147dba922022847c11c1f1"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
@@ -85,31 +85,34 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="tabBox">
 			<ul class="info-tab">
 				<li>
-	    			<a href="#tab1" class="btn" >기본정보</a>
+	    			<a onclick="tabSwitch(1)" class="btn" >기본정보</a>
 				</li>
 				  <li>
-					<a href="#tab2" class="btn" >이용안내</a>
+					<a onclick="tabSwitch(2)" class="btn" >이용안내</a>
 				</li>
 				  <li>
-				   <a href="#tab3" class="btn" >위치 및 상세정보</a>
+				   <a onclick="tabSwitch(3)" class="btn" >위치정보</a>
 				</li>
 			</ul>
 		
 			<div class="tab-content" id="tab1-Detail">
 	           
 	        </div>
-			<div class="tab-content" id="tab2-Intro">
+			<div class="tab-content" id="tab2-Intro" style="display:none;">
 				<table id="tab2-table">
 				</table>
 	        </div>
-	       
 	        
+			<div class="tab-content" id="tab3-Map" style="display:none;">
+				<div id="map" style="width:100%; height:500px;"></div>
+	       	</div>
 		</div>
 	</div>
 			
-	
-		<div class="commentArea">
+	<div>
+		<div class="reviewArea">
 		    <p>방문자 후기 및 평가</p>
+		    <div class="commentArea">
 		    <select id="ratingSelect">
 		        <option value="0" disabled selected>별점을 선택하세요</option>
 		        <option value="1">★</option>
@@ -118,11 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		        <option value="4">★★★★</option>
 		        <option value="5">★★★★★</option>
 		    </select>
-		    <textarea id="commentInput" placeholder="후기를 남겨주세요" oninput="updateCharacterCount()"></textarea>
+		    <textarea id="commentInput" placeholder="후기를 남겨주세요 (글자수 100자제한)" oninput="updateCharacterCount()"></textarea>
 		   
 		  
-		    <div class="commentCnt">글자수 제한 <span>100</span>/100자</div>
 		    <button class="commentBtn" onclick="">완료</button>
+		    </div>
 		 
 		    
 			    <label for="imageUpload" class="custom-image-upload-button">
@@ -131,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			    <input type="file" id="imageUpload" accept="image/*" multiple>
 			    
 			    <div class="image-preview">
+
 			        <img id="uploadedImage" alt="Uploaded Image" style="display: none;">
 			        <button class="remove-image-button" style="display: none;" onclick="removeImagePreview()">X</button>
 			    </div>
@@ -147,93 +151,93 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 			
 		<div class="commentReply">
-				<table id="commentTable">
-		        	<tr>
-		        		<th id="userId">피묻은각도기</th>
-		        		
-		        		<th id="star">★★★★★</th>
-		        		
-		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
-		        		
-		        		<th rowspan="2">
-						    <div class="imageContainer">
-			                    <img src="../source/images/duck4.jpg" class="commentImage">
-			                   
-			                </div>
-						</th>
-								        		
-			            
-			            <th> <button type="button" id="optBtn" onclick="">...</button></th>
-		        	<tr>
-		        		<th id="day" colspan="2">2024.11.06</th>
-		        		
-		        		 <th id="up" type="button" class="likebtn">
-			                 <button class="like-button" onclick="like(this)">
-							    <i class="fas fa-heart"></i>
-							  </button>
-			                 <span id="likeCount">1104</span>
-			            </th>
-			            
-		        	</tr>
-		        	
-		    	</table>
-		    	
-		    	<table id="commentTable">
-		        	<tr>
-		        		<th id="userId">단단한점토</th>
-		        		
-		        		<th id="star">★★★</th>
-		        		
-		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
-		        		
-		        		<th rowspan="2">
-						    <div class="imageContainer">
-			                    <img src="../source/images/duck4.jpg" class="commentImage">
-			                   
-			                </div>
-						</th>
-								        		
-			            <th> <button type="button" id="optBtn" onclick="">...</button></th>
-		        	<tr>
-		        		<th id="day" colspan="2">2024.11.03</th>
-		        		
-		        		 <th id="up" type="button" class="likebtn">
-			                 <button class="like-button" onclick="like(this)">
-							    <i class="fas fa-heart"></i>
-							  </button>
-			                 <span id="likeCount">410</span>
-			            </th>
-		        	</tr>
-		    	</table>
-		    	<table id="commentTable">
-		        	<tr>
-		        		<th id="userId">+12수수깡</th>
-		        		
-		        		<th id="star">★★★★</th>
-		        		
-		        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
-		        		
-		        		<th rowspan="2">
-						    <div class="imageContainer">
-			                    <img src="../source/images/duck4.jpg" class="commentImage">
-			                   
-			                </div>
-						</th>
-								        		
-			            <th> <button type="button" id="optBtn" onclick="">...</button></th>
-		        	<tr>
-		        		<th id="day" colspan="2">2024.11.06</th>
-		        		
-		        		 <th id="up" type="button" class="likebtn">
-			                 <button class="like-button" onclick="like(this)">
-							    <i class="fas fa-heart"></i>
-							  </button>
-			                 <span id="likeCount">21</span>
-			            </th>
-		        	</tr>
-		    	</table>
-
+<!-- 			<table id="commentTable"> -->
+<!-- 	        	<tr> -->
+<!-- 	        		<th id="userId">피묻은각도기</th> -->
+	        		
+<!-- 	        		<th id="star">★★★★★</th> -->
+	        		
+<!-- 	        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th> -->
+	        		
+<!-- 	        		<th rowspan="2"> -->
+<!-- 					    <div class="imageContainer"> -->
+<!-- 		                    <img src="../source/images/duck4.jpg" class="commentImage"> -->
+		                   
+<!-- 		                </div> -->
+<!-- 					</th> -->
+							        		
+		            
+<!-- 		            <th> <button type="button" id="optBtn" onclick="">...</button></th> -->
+<!-- 	        	<tr> -->
+<!-- 	        		<th id="day" colspan="2">2024.11.06</th> -->
+	        		
+<!-- 	        		 <th id="up" type="button" class="likebtn"> -->
+<!-- 		                 <button class="like-button" onclick="like(this)"> -->
+<!-- 						    <i class="fas fa-heart"></i> -->
+<!-- 						  </button> -->
+<!-- 		                 <span id="likeCount">1104</span> -->
+<!-- 		            </th> -->
+		            
+<!-- 	        	</tr> -->
+	        	
+<!-- 	    	</table> -->
+	    	
+<!-- 	    	<table id="commentTable"> -->
+<!-- 	        	<tr> -->
+<!-- 	        		<th id="userId">단단한점토</th> -->
+	        		
+<!-- 	        		<th id="star">★★★</th> -->
+	        		
+<!-- 	        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th> -->
+	        		
+<!-- 	        		<th rowspan="2"> -->
+<!-- 					    <div class="imageContainer"> -->
+<!-- 		                    <img src="../source/images/duck4.jpg" class="commentImage"> -->
+		                   
+<!-- 		                </div> -->
+<!-- 					</th> -->
+							        		
+<!-- 		            <th> <button type="button" id="optBtn" onclick="">...</button></th> -->
+<!-- 	        	<tr> -->
+<!-- 	        		<th id="day" colspan="2">2024.11.03</th> -->
+	        		
+<!-- 	        		 <th id="up" type="button" class="likebtn"> -->
+<!-- 		                 <button class="like-button" onclick="like(this)"> -->
+<!-- 						    <i class="fas fa-heart"></i> -->
+<!-- 						  </button> -->
+<!-- 		                 <span id="likeCount">410</span> -->
+<!-- 		            </th> -->
+<!-- 	        	</tr> -->
+<!-- 	    	</table> -->
+	    	<table id="commentTable">
+	        	<tr>
+	        		<th id="userId">+12수수깡</th>
+	        		
+	        		<th id="star">★★★★</th>
+	        		
+	        		<th id="text" rowspan="2">글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다글내용이 출력됩니다 우측사진을 클릭하면 팝업창이 뜨게되고  사진이 여러장일때 화살표로 넘기면서 모두 확인가능합니다</th>
+	        		
+	        		<th rowspan="2">
+					    <div class="imageContainer">
+		                    <img src="../source/images/duck4.jpg" class="commentImage">
+		                   
+		                </div>
+					</th>
+							        		
+		            <th> <button type="button" id="optBtn" onclick="">...</button></th>
+	        	<tr>
+	        		<th id="day" colspan="2">2024.11.06</th>
+	        		
+	        		 <th id="up" type="button" class="likebtn">
+		                 <button class="like-button" onclick="like(this)">
+						    <i class="fas fa-heart"></i>
+						  </button>
+		                 <span id="likeCount">21</span>
+		            </th>
+	        	</tr>
+	    	</table>
 		</div>
+	</div>
 </div>	
 
 	<jsp:include page="../source/include/footer.jsp"/>
@@ -245,10 +249,142 @@ document.addEventListener('DOMContentLoaded', function() {
 //좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수--------------
  function like(button) { button.classList.toggle('liked');}
 </script>
+<script>
 
+	var mapContainer = document.getElementById('map'), 						//지도를 담을 영역의 DOM 레퍼런스
+		mapOption = { 														//지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx}), 			//지도의 중심좌표.
+			//draggable: false,												//드래그로 다른 위치로 변경하는 기능 비활성화
+			level: 6 														//지도의 레벨(확대, 축소 정도)
+		};
+	
+	var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
+	var positions = [
+		{title: '${cv.title}',	//${cv.title}
+//			 content: 	"<div style='padding: 5px;'>"
+//			 		  +		"<button type='button' onclick='closeOverlay()'>닫기</button>"
+//					  +		"<a href='https://map.kakao.com/link/map/Hello World!,${cv.mapy}, ${cv.mapx}' class='a1' target='_blank'>큰 지도보기</a>"
+//					  + 	"<a href='https://map.kakao.com/link/to/Hello World!,${cv.mapy}, ${cv.mapx}' class='a2' target='_blank'>길찾기</a>"
+//					  + "</div>",
+		 latlng: new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx})	//${cv.mapy}, ${cv.mapx}
+		}
+	];
+// 	var jsonlist = [];
+// 	var jsonsize = Object.keys(${arylist}).length;
+// 	for(let i = 0; i < jsonsize; i++){
+// 		jsonlist.push(${arylist}[i]);
+// 	}
+	var bounds = new kakao.maps.LatLngBounds();
+	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
+	
+	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
+		var data = positions[i];
+		displayMarker(data);
+	}
+	
+	function displayMarker(data){
+		
+		var marker = new kakao.maps.Marker({	//좌표값을 지정해 마커 생성
+			map : map,
+			position : data.latlng,
+			title : data.title,
+			clickable : true
+		});		
+		
+		var overlay = new kakao.maps.CustomOverlay({	//마커를 클릭하면 띄워줄 오버레이
+			yAnchor: 3,
+			position: marker.getPosition()
+		});
+	  	
+	  	var content = '<div class="mapwrap">' + 
+			          '    <div class="info">' + 
+			          '        <div class="title">' + 
+			          '            '+data.title+'' + 
+			          '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+			          '        </div>' + 
+			          '        <div class="body">' + 
+			          '            <div class="img">' +
+			          '                <img src="${cv.firstimage2}" width="73" height="70">' +
+			          '           </div>' + 
+			          '            <div class="desc">' + 
+			          '                <div class="ellipsis">${cv.addr1}</div>' + 
+			          '                <div class="jibun ellipsis">${cv.zipcode}</div>' + 
+			          '                <div><a href="https://map.kakao.com/link/to/Hello World!,${cv.mapy},${cv.mapx}" class="a2" target="_blank">길찾기</a></div>' + 
+			          '            </div>' + 
+			          '        </div>' + 
+			          '    </div>' +    
+			          '</div>';
+	    
+	    overlay.setContent(content);	//만든 컨텐츠들을 overlay에 할당해줌
 
-
-
+	    kakao.maps.event.addListener(marker, 'click', function() {	//클릭 시 오버레이 띄움
+	    	closeOverlay();
+	        overlay.setMap(map);
+	    });		
+		
+		bounds.extend(data.latlng);
+		overlayArray.push(overlay);
+	}
+	function setBounds() {
+	    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+	    map.setBounds(bounds);
+	}
+	
+	function closeOverlay(){	//다른 마커 클릭 시 열려있는 다른 오버레이 닫아줌
+		for (let i = 0; i < overlayArray.length; i++) {
+			overlayArray[i].setMap(null);
+		}
+	}
+	function makeOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
+	}
+	
+	function setDraggable(draggable){
+		map.setDraggable(draggable);
+	}
+	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	
+	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	function relayout() {    
+	    
+	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+	    map.relayout();
+	}
+	function resizeMap() {
+	    var mapContainer = document.getElementById('map');            
+	    // 이동할 위도 경도 위치를 생성합니다 
+	    var moveLatLon = new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx});
+	    
+	    // 지도 중심을 이동 시킵니다
+	    map.setCenter(moveLatLon);
+	}
+</script>
+<script>
+function tabSwitch(e){
+	if(e==1){
+		$('#tab1-Detail').css('display','');
+		$('#tab2-Intro').css('display','none');
+		$('#tab3-Map').css('display','none');
+	}else if(e==2){
+		$('#tab1-Detail').css('display','none');
+		$('#tab2-Intro').css('display','');
+		$('#tab3-Map').css('display','none');
+	}else if(e==3){
+		$('#tab1-Detail').css('display','none');
+		$('#tab2-Intro').css('display','none');
+		$('#tab3-Map').css('display','');
+		relayout();
+		resizeMap();
+	}
+}
+</script>
 <script>
 //이미지 업로드 파일 선택 + 선택된 파일 이미지를 미리보기할수있는 기능 -----------------------
 document.addEventListener('DOMContentLoaded', function() {
@@ -330,7 +466,7 @@ getIntro();
 			data:{"contentid":${param.contentid}},
 			dataType:"json",
 			success:function(data){
-				console.log(data);
+// 				console.log(data);
 				if(data.value==1){// 북마크를 한 컨텐츠
 					$('#favorite').html('<span class="favorite-icon on" onclick="undoBookmark();">★</span>')	
 				}else if(data.value==0||data.value==2){// 북마크 하지 않은 컨텐츠 / 로그인을 하지 않았을 경우
@@ -338,7 +474,7 @@ getIntro();
 				}
 			},
 			error:function(){
-				console.log("error");
+// 				console.log("error");
 			}
 		});
 	}
@@ -358,11 +494,11 @@ getIntro();
 			data:{"contentid":${param.contentid}},
 			dataType:"json",
 			success:function(data){
-				console.log(data);
+// 				console.log(data);
 				getBookmark();
 			},
 			error:function(){
-				console.log("error");
+// 				console.log("error");
 			}
 		});
 	}
@@ -375,11 +511,11 @@ getIntro();
 			data:{"contentid":${param.contentid}},
 			dataType:"json",
 			success:function(data){
-				console.log(data);
+// 				console.log(data);
 				getBookmark();
 			},
 			error:function(){
-				console.log("error");
+// 				console.log("error");
 			}
 		});
 	}
@@ -406,15 +542,15 @@ getIntro();
 		for(let i = 0; i < ary3.length; i++){
 			if(ary3[i]=='false'){
 				continue;
-				console.log('거짓');
+// 				console.log('거짓');
 				
 			}
 			if(i==4){
 				table  += '</table><br><h1>개요</h1><p>'+ary2[i]+'</p>';
-				console.log('끝');
+// 				console.log('끝');
 			}else{
 				table  += '<tr><td>'+ary[i]+'</td><td>'+ary2[i]+'</td></tr>';
-				console.log('i : ' + i);
+// 				console.log('i : ' + i);
 			}
 		}
 		$('#tab1-Detail').html(table);
@@ -428,7 +564,7 @@ getIntro();
 			type : "get",
 			datatype:"json",
 			success : function(ConversoinIntro){
-				console.log('접근성공');
+// 				console.log('접근성공');
 // 				console.log(contentIntro);
 // 				console.log(ConversoinIntro);
 				var json = ConversoinIntro;
@@ -436,6 +572,9 @@ getIntro();
 // 					console.log("key:"+key);
 // 					console.log("키값이름:"+json[key]);
 // 					console.log("밸류값:"+value);
+					if(value==""||value==0||json[key]==undefined){
+						return;
+					}
 					$('#tab2-table').append('<tr><td>'+json[key]+'</td><td>'+value+'</td></tr>');
 
 				});
@@ -472,7 +611,61 @@ getIntro();
 }
 
 </script>
-
+<script>
+// 리뷰
+getReview();
+// 리뷰 리스트를 부르는 함수
+function getReview(){
+	$.ajax({
+		url : "${pageContext.request.contextPath}/review/reviewList.do",
+		type : "get",
+		data : {"contentid":${param.contentid}},
+		datatype:"json",
+		success : function(data){
+// 			console.log('접근성공');
+// 			console.log(data)
+			var json = data;
+			setReview(json);
+		},
+		error:function(){
+			console.log('접근실패');
+		}
+	});
+}
+function setReview(data){
+	var str='';
+	var mbno='${mbno}';
+	$.each(data,function(idx,value){
+		str+='<table id="commentTable">';
+		$.each(value,function(){
+			str+='<tr><th id="userId">'+data.name+'</th>';
+			str+='<th id="star">';
+			for(let i = 0; i < data.score;i++){
+				str+='★'
+			}
+			str+='</th>';
+			str+='<th id="text" rowspan="2">'+data.cont+'</th>';
+			str+='<th rowspan="2"><div class="imageContainer">';
+			if(data.img != null){
+				str+='<img src="../source/images/duck4.jpg" class="commentImage">';
+			}
+			str+='</div></th>';
+			str+='<th><button type="button" id="optBtn" onclick="">신고</button></th>';
+			str+='<th id="day" colspan="2">'+data.date+'</th>';
+			str+='<th id="up" type="button" class="likebtn">';
+			if(data.likeYN=='N'){
+				str+='<button class="like-button liked" onclick="unlike(this)">';
+			}else{
+				str+='<button class="like-button" onclick="like(this)">';
+			}
+			str+='<i class="fas fa-heart"></i></button><span id="likeCount">'+data.likeCnt+'</span></th></tr>';
+		});
+		str+='</table>';
+	});
+	console.log(str);
+	$('.commentReply').html(str);
+}
+</script>
 
 
 </body>
