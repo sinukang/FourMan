@@ -81,23 +81,7 @@
 	
 	<!-- 사진파일 업로드 -->
 	<script type="text/javascript">
-	
-	function checkFileCount(input) {
 		
-		var maxFileCount = 5; // 허용할 최대 파일 갯수
-
-		// 선택된 파일 수 확인
-		var selectedFileCount = input.files.length;
-		
-		// 최대 허용 파일 갯수를 초과하는 경우
-		if (selectedFileCount > maxFileCount) {
-			alert("최대 " + maxFileCount + "개의 파일만 업로드할 수 있습니다.");
-			console.log(input.files);
-			return false;
-		}else{
-			return true;
-		}
-	}
 
 	function DropFile(dropAreaId, fileListId) {
 		let dropArea = document.getElementById(dropAreaId);
@@ -121,20 +105,18 @@
 
 		function handleDrop(e) {
 			unhighlight(e);
-			let dt = e.dataTransfer;	// drop된 파일 목록 가져옴
+			let dt = e.dataTransfer;
 			let files = dt.files;
-
-			handleFiles(files);			// handleFiles 함수 호출하여 드롭된 파일 목록 처리
+			console.log(files);
+			handleFiles(files);
 
 			const fileList = document.getElementById(fileListId);
 			if (fileList) {
 				fileList.scrollTo({ top: fileList.scrollHeight });
 			}
 		}
-		
+
 		function handleFiles(selectedFiles) {
-			
-			console.log(files);
 
 			// 최대 허용 파일 갯수 확인
 			var maxFileCount = 5;
@@ -169,7 +151,7 @@
 			reader.onloadend = function () {
 				// 미리보기 이미지를 담을 영역 선택
 				let previews = document.getElementById('previews');
-				
+	
 				// 새로운 이미지 생성
 				let img = document.createElement('img');
 				img.src = reader.result;
@@ -186,9 +168,9 @@
 				fileIcon.style.display = "none"; // 이미지를 숨김
 				
 				// 미리보기된 파일 목록을 fileList에 추가
-// 				let fileListItem = document.createElement('div');
-// 				fileListItem.textContent = file.name;
-// 				fileList.appendChild(fileListItem);
+				//let fileListItem = document.createElement('div');
+				//fileListItem.textContent = file.name;
+				//fileList.appendChild(fileListItem);
 			};
 		}
 
@@ -196,18 +178,47 @@
 		dropArea.addEventListener("dragover", highlight, false);
 		dropArea.addEventListener("dragleave", unhighlight, false);
 		dropArea.addEventListener("drop", handleDrop, false);
-		
+
 		return {
-			handleFiles,
-			files
+			handleFiles
 		};
 	}
-	
+
 	const dropFile = new DropFile("drop-file", "files");
+
 	
 	</script>
 	
 	<script>
+		function checkFileCount(input) {
+			// 허용할 최대 파일 갯수
+			var maxFileCount = 5; 
+			//기존 추가된 파일 갯수
+			var attFileCount = document.querySelectorAll('#chooseFile').length;
+			
+			// 추가로 첨부 가능한 파일 갯수
+			var remainFileCount = maxFileCount - attFileCount;
+			
+			// 현재 선택된 파일 수 확인
+			var selectedFileCount = input.files.length;
+			
+			console.log(attFileCount);
+			console.log(remainFileCount);
+			console.log(selectedFileCount);
+			// 최대 허용 파일 갯수를 초과하는 경우
+			if (selectedFileCount > maxFileCount) {
+				alert("최대 " + maxFileCount + "개의 파일만 업로드할 수 있습니다.");
+				console.log(input.files);
+				
+				 // 파일 input의 값을 초기화
+				input.value = ""; 
+				
+				return false;
+			}else{
+				console.log(input.files);
+				return true;
+			}
+		}
 	
 		function check()
 		{
@@ -227,7 +238,7 @@
 				var files = document.getElementById("chooseFile").files;
 				
 				console.log(files);
-				debugger;
+				//debugger;
 				if (files.length === 0) {
 					alert("사진을 첨부해주세요");
 					return;
