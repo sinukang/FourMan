@@ -26,6 +26,7 @@ import app.dao.CommentDao;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
 import app.domain.CommentVo;
+import app.domain.MemberVo;
 import app.domain.PageMaker;
 import app.domain.SearchCriteria;
 
@@ -563,8 +564,11 @@ public class BoardController extends HttpServlet {
 	
 				BoardDao2 bd2 = new BoardDao2();
 				int value = bd2.boardInsert(bv, bgv);
-	
-				//System.out.println("Value: " + value);
+				
+				int value2 = bd2.pointInsert(bv);
+				
+				//System.out.println("value2 : " + value2);
+				//System.out.println("value: " + value);
 	
 				if (value == 0) {
 					String path = request.getContextPath() + "/board/galleryWrite.do";
