@@ -102,7 +102,7 @@
 	
 		
 	
-	$(document).ready(function(){
+// 	$(document).ready(function(){
 		
 		$(".md-like-area").on("click", function(){
 			
@@ -165,7 +165,7 @@
 		});
 		
 		//글쓰기 버튼 시 댓글 등록 후 댓글목록 다시 불러옴
-		$(".btn-img").on("click", function(){
+		$(".btn-img").on("click", function(event){
 			
 			event.preventDefault();
 			
@@ -206,7 +206,7 @@
 			}
 		});
 		
-		$("#input-comment").on("click", function(){
+		$("#input-comment").on("click", function(event){
 			
 			event.preventDefault();
 			
@@ -252,11 +252,10 @@
 			}
 		});
 		
-	});		
+		
+// 	});
 	
 	function commentListLoad(){
-		
-		event.preventDefault();
 		
 		let bdno = "${bv.bdno}";
 		
@@ -280,11 +279,15 @@
 	
 	//화면 로드 시 bdno들고가서 bdno에 맞는 commentList 불러와서 화면에 그림
 	function createCommentList(data){
-		
+		event.preventDefault();
 		let str = "";
 		let mbno = "${mbno}";
 		
-		$(data).each(function(){
+		if(data.length == 0){
+			$(".div-commentList").html(str);
+			return;
+		}
+		$(data).each(function(index){
 			
 			if(mbno == this.mbno){
 				
@@ -299,11 +302,10 @@
 					+			"<span class='span-date'>"+this.cmdate+"</span>"
 					+		"</div>"
 					+		"<div class='comment-btn'>"
-					+			"<button type='button' class='btn-modify' onclick=''>수정</button>"
 					+			"<button type='button' class='btn-delete' onclick='commentDelete("+this.cmno+")'>삭제</button>"
 					+			"<button type='button' class='btn-report' onclick=''>&#x1F6A8;</button>"	
 					+		"</div>"
-					+	"</div>";			
+					+	"</div>";			//onclick='commentDelete("+this.cmno+")'
 			}else{
 				str += "<div class='comment-area' id='comment-area"+this.cmno+"'>"
 					+		"<div class='comment-id'>"
@@ -320,7 +322,7 @@
 					+		"</div>"
 					+	"</div>";
 			}
-			
+			//+			"<button type='button' class='btn-modify' onclick=''>수정</button>"
 			$(".div-commentList").html(str);
 			
 			return;
@@ -330,17 +332,18 @@
 	function commentDelete(idx){
 		
 		event.preventDefault();
+		event.stopPropagation()
 		
 		let cmno = idx;
 		
-		if(confirm("해당 댓글을 삭제하시겠습니까?")){
+ 		if(confirm("해당 댓글을 삭제하시겠습니까?")){
 			$.ajax({
 				type : "post",
 				url : "${pageContext.request.contextPath}/comment/commentDelete.do",
 				data : {"cmno" : cmno},
+				dataType : "json",
 				cache : false,
 				success : function(data){
-					alert("data.value : " + data.value)
 					if(data.value == 1){
 						alert("해당 댓글이 삭제되었습니다.");
 						commentListLoad();
@@ -355,6 +358,8 @@
 			return;
 		}
 	}
+	
+	
 
 	
 </script>

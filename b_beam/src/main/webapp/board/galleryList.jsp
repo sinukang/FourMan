@@ -154,7 +154,7 @@
 		
 		//글 클릭 시 상세보기 페이지 모달로 띄워주는 함수
 		$(".popupBtn").on("click", function(){
-			
+			event.preventDefault();
 			let bdno = $(this).val();
 			
 			$.ajax({
