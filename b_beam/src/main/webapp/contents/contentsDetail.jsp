@@ -20,6 +20,8 @@ pageContext.setAttribute("LF", "\n");
 <link rel="stylesheet" type="text/css" href="../source/css/contents/contentsDetail.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
@@ -266,10 +268,24 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>	
 
 	<jsp:include page="../source/include/footer.jsp"/>
-	
-
-
+<div id="modalWrap" class="modalWrap">
+	<div id="modalBody">
+		<span id="closeBtn">&times;</span>
+		<div class="review-photo">
+			<div class="swiper mySwiper" style="height: 100%;">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+					</div>
+				</div>
+				<div class="swiper-button-next" style="color: white;"></div>
+				<div class="swiper-button-prev" style="color: white;"></div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
+
 
 //좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수--------------
  function like(button) { button.classList.toggle('liked');}
@@ -674,6 +690,7 @@ function setReview(data){
 	var json = JSON.parse(data);
 // 	console.log(json.length);
 	$.each(json,function(index,value){
+// 		console.log(value.img);
 		str+='<table id="commentTable">';
 		str+='<tr><th id="userId">'+value.name+'</th>';
 		str+='<th id="star">';
@@ -683,17 +700,22 @@ function setReview(data){
 		str+='</th>';
 		str+='<th id="text" rowspan="2">'+value.cont+'</th>';
 		str+='<th rowspan="2"><div class="imageContainer">';
-		if(value.img != null){
-			str+='<img src="../source/images/duck4.jpg" class="commentImage">';
+		if(value.img.length != 0){
+			str+='<button type="button" id="popupBtn" class="popupBtn" value="'+value.no+'">';
+			$.each(value.img, function(imgIndex, imgValue){
+				str+='<input type="hidden" class="rv'+value.no+'" value="'+imgValue+'">'
+			});
+			str+='<img src="../source/reviewImages/'+value.img[0]+'" class="commentImage">';
+			str+='</button>';
 		}
 		str+='</div></th>';
 		str+='<th><button type="button" id="optBtn" onclick="">신고</button></th>';
 		str+='<th id="day" colspan="2">'+value.date+'</th>';
 		str+='<th id="up" type="button" class="likebtn">';
 		if(value.likeYN==null||value.likeYN=='N'){
-			str+='<button class="like-button liked" onclick="unlike(this)">';
-		}else{
 			str+='<button class="like-button" onclick="like(this)">';
+		}else{
+			str+='<button class="like-button liked" onclick="unlike(this)">';
 		}
 		str+='<i class="fas fa-heart"></i></button><span id="likeCount">'+value.likeCnt+'</span></th></tr>';
 		str+='</table>';
@@ -735,7 +757,7 @@ function reviewInsert(){
 				success : function(data){
 // 		 			console.log('접근성공');
 // 		 			console.log(data.value);
-		 			ImageInsert(JSON.parse(data).value)
+		 			ImageInsert(JSON.parse(data).value);
 					getReview(); 
 				},
 				error:function(){
@@ -777,7 +799,60 @@ function ImageInsert(e){
 	}
 }
 </script>
+<script>
+
+/* 모달 팝업 스크립트 */
+const popup = document.querySelectorAll('.popupBtn');
+const modal = document.getElementById('modalWrap');
+const closeBtn = document.getElementById('closeBtn');
+
+//모달 영역 밖 클릭 시 모달 닫음
+window.onclick = function(e){
+	if(e.target.classList.contains("modalWrap")){
+		document.querySelector("#modalWrap").style.display = "none";
+	}
+}
+
+//X버튼 클릭 시 모달 닫음
+closeBtn.onclick = function() {
+	modal.style.display = 'none';
+}
+$(document).ready(function(){
+	
+	$(document).on("click",".popupBtn", function(){
+// 		alert('클릭');
+		let rvno = $(this).val();
+		$('.swiper-slide').html('');
+		var img = $('.rv'+rvno);
+		var str = '';
+		$.each(img,function(){
+			console.log(this.value);
+			str += '<img class="cont-img" src="${pageContext.request.contextPath}/source/reviewImages/'+this.value+'">';	
+		});
+		$('.swiper-slide').html(str);
+		$("#modalWrap").css('display', 'flex');
+		var swiper = new Swiper(".mySwiper", {
+			spaceBetween: 30,
+// 			centeredSlides: true,
+// 			autoHeight : true,
+			slidesPerView: 1,
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});	
+	});
+});
 
 
+</script>
+
+<script>
+
+</script>
 </body>
 </html>

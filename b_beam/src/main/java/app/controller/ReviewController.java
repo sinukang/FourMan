@@ -56,6 +56,7 @@ public class ReviewController extends HttpServlet {
 	        ArrayList<ReviewVo> alist = rd.reviewList(mbno,contentid);
 	        for(ReviewVo rv : alist) {
 	        	JSONObject jo = new JSONObject();
+	        	jo.put("no", rv.getRvno());
 	        	jo.put("name", rv.getMbname());
 	        	jo.put("score", rv.getRvrate());
 	        	jo.put("cont", rv.getRvcont());
@@ -95,17 +96,24 @@ public class ReviewController extends HttpServlet {
 	        PrintWriter out = response.getWriter();
 			out.print(json.toJSONString());
 		}else if (location.equals("ImageInsert.do")) {
+	        HttpSession session = request.getSession();
+	        int mbno = 0;
+	        if(session.getAttribute("mbno") != null) {
+	        	mbno = (int) session.getAttribute("mbno");
+	        }
+			ReviewDao rd = new ReviewDao();
+			int value = 0;
+			
 			String savePath = request.getServletContext().getRealPath("/source/reviewImages");
 			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(); // 업로드된 파일을 디스크에 저장하는데 사용되는 팩토리 객체
 			ServletFileUpload upload = new ServletFileUpload(fileItemFactory); // 실제 파일 업로드를 처리하는데 사용되는 객체
-
+//			System.out.println(savePath);
 
 			try {
 				List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));	// 업로드 요청을 파싱해서 FileItem 객체의 리스트로 반환
 				
-				
 				// 변수 리스트 초기화
-				List<String> rvglnameList = new ArrayList<>();
+				ArrayList<String> rvglnameList = new ArrayList<>();
 								
 				for (FileItem item : items) {
 					// 다중파일 리스트처리
@@ -117,17 +125,21 @@ public class ReviewController extends HttpServlet {
 						//bdglnameList에 filename을 추가
 						rvglnameList.add(fileName);
 						
-						//System.out.println("Uploaded file: " + fileName);
-						//System.out.println("destFile: " + destFile);
+//						System.out.println("Uploaded file: " + fileName);
+//						System.out.println("destFile: " + destFile);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-					
-				System.out.println(rvglnameList.get(0)); 
+				value = rd.insertrvgallery(mbno, rvglnameList);
+				
 			} catch (FileUploadException e) {
 				e.printStackTrace();
 			}
+        	JSONObject json = new JSONObject();
+        	json.put("value",value);
+	        PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
 		}
 
 	}

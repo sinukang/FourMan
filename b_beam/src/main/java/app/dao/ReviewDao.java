@@ -145,16 +145,28 @@ public class ReviewDao {
 			return exec;	
 		}
 		
-	public int insertrvgallery(int rvno, ArrayList<String> glname) {
+	public int insertrvgallery(int mbno, ArrayList<String> glname) {
 			int exec = 0;
-
-			String sql = "INSERT INTO rvgallery(rvno, rvglname) VALUES(?,?)";
+			int rvno = 0;
+			String sql = "select rvno from review where mbno="+mbno+" order by 1 desc limit 1";
 			System.out.println(sql);
 			try (PreparedStatement pstmt1 = conn.prepareStatement(sql)){
+		
+				ResultSet rs = pstmt1.executeQuery();
+				if(rs.next()) {
+					rvno = rs.getInt("rvno");
+					System.out.println("rvno : " + rvno);
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			String sql2 = "INSERT INTO rvgallery(rvno, rvglname) VALUES(?,?)";
+//			System.out.println(sql);
+			try (PreparedStatement pstmt2 = conn.prepareStatement(sql2)){
 				for (String glone : glname) {
-					pstmt1.setInt(1,rvno);
-					pstmt1.setString(2,glone);
-					exec += pstmt1.executeUpdate();
+					pstmt2.setInt(1,rvno);
+					pstmt2.setString(2,glone);
+					exec += pstmt2.executeUpdate();
 				}
 				
 			}catch (Exception e) {
@@ -187,8 +199,7 @@ public class ReviewDao {
 		
 		
 	public int reviewglModify(ReviewVo rv){
-		int exec = 0;		
-			
+		int exec = 0;
 	
 		ArrayList<String> rvglName = rv.getRvglname();
 		
