@@ -55,7 +55,7 @@
 				<tr>
 					<c:if test="${pm.prev}">
 						<td>
-							<a class="page-num" href="${pageContext.request.contextPath}/board/noticeListt.do?page=${pm.startPage - 1}">◀</a>
+							<a class="page-num" href="${pageContext.request.contextPath}/board/noticeList.do?page=${pm.startPage - 1}">◀</a>
 						</td>	
 					</c:if>
 					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
