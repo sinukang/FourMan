@@ -125,7 +125,8 @@ public class ReviewDao {
 			// 생성된 rvno 가져오기
 			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
-					rv.setRvno(generatedKeys.getInt(1));
+//					rv.setRvno(generatedKeys.getInt(1));
+					exec=generatedKeys.getInt(1);
 				}
 			}
 			System.out.println(sql);

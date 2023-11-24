@@ -151,11 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		    </c:choose>
 		    </div>
 		 
-		    
-			    <label for="imageUpload" class="custom-image-upload-button">
-			        <i class="fas fa-camera"></i> 
-			    </label>
-			    <input type="file" id="imageUpload" accept="image/*" multiple>
+<!-- 		    	<form id='Uploadfrm' method='post'> -->
+				    <label for="imageUpload" class="custom-image-upload-button">
+				        <i class="fas fa-camera"></i> 
+				    </label>			    
+				    <input type="file" id="imageUpload" accept="image/*" multiple>
+<!-- 		    	</form> -->
 			    
 			    <div class="image-preview">
 
@@ -726,16 +727,16 @@ function reviewInsert(){
 			}
 // 			console.log(review);
 // 			console.log($('#imageUpload')[0].files);
-			console.log(files.length);
 			$.ajax({
 				url : "${pageContext.request.contextPath}/review/reviewInsert.do",
 				type : "get",
 				data : review,
 				datatype:"json",
 				success : function(data){
-		 			console.log('접근성공');
-//		 			console.log(data);
-					setReview(data); 
+// 		 			console.log('접근성공');
+// 		 			console.log(data.value);
+		 			ImageInsert(JSON.parse(data).value)
+					getReview(); 
 				},
 				error:function(){
 					console.log('접근실패');
@@ -746,15 +747,24 @@ function reviewInsert(){
 	}
 }
 function ImageInsert(e){
+	// 폼 데이터를 보내기위한 가상 폼 생성
+	var formData = new FormData();
+	// 파일데이터
 	let files = $('#imageUpload')[0].files;
+	// 가상 폼에 파일데이터를 담음
+	for(let i = 0; i < files.length; i++){
+		formData.append("uploadFile",files[i]);
+	}
+// 	console.log(e);
 	if(files.length = 0){
 		return;
 	}else{
 		$.ajax({
 			url : "${pageContext.request.contextPath}/review/ImageInsert.do",
-			type : "get",
-			data : {'rvno':e},
-			datatype:"json",
+			type : "POST",
+			processData : false,
+			contentType : false,
+			data : formData,
 			success : function(data){
 	 			console.log('접근성공');
 //	 			console.log(data);
