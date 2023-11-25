@@ -206,12 +206,37 @@ public class BoardDao {
 	public int boardLikeCntUpdate(int bdno, int mbno) {
 		
 		int value = 0;
+		ResultSet rs = null;
 		
-		String sql = "INSERT INTO like_(mbno, bdno, lkdate, lkdelyn)"
+		String sql_likeCheck = "SELECT COUNT(cmno) AS cnt FROM comment WHERE bdno = "+bdno+" AND mbno = "+mbno+"";
+		
+		String sql_likeInsert = "INSERT INTO like_(mbno, bdno, lkdate, lkdelyn)"
 					+ " VALUES(?, ?, NOW(), 'N')";
 		
+		String sql_likeUpdateYN = "UPDATE like_ SET lkdelyn = 'Y', lkdatem = NOW()"
+				+ " WHERE mbno = ? AND bdno = ? AND lkdelyn = 'N'";
+		
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql_likeCheck);
+			
+			rs= pstmt.executeQuery();
+			while (rs.next()) {
+				value += 1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value == 0) {
+			
+		}else {
+			
+		}
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql_likeInsert);
 			pstmt.setInt(1, mbno);
 			pstmt.setInt(2, bdno);
 			
