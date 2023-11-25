@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="contentsdetail">
 		<div class="contents-visual">
 			<div class="title-section">
-		       	<p>${cv.title}${mbno}</p>
+		       	<p>${cv.title}</p>
 	      		 <div id="favorite" class="favorite"></div>
 		   	</div>
 		<%-- 		    	<c:choose> --%>
@@ -271,25 +271,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="modalWrap" class="modalWrap">
 	<div id="modalBody">
 		<span id="closeBtn">&times;</span>
-		<div class="review-photo">
-			<div class="swiper mySwiper" style="height: 100%;">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
+		<div class="contents-area">
+			<div class="review-photo">
+				<div class="swiper mySwiper" style="height: 100%;">
+					<div class="swiper-wrapper">
+						
 					</div>
+					<div class="swiper-button-next" style="color: white;"></div>
+					<div class="swiper-button-prev" style="color: white;"></div>
+					<div class="swiper-pagination"></div>
 				</div>
-				<div class="swiper-button-next" style="color: white;"></div>
-				<div class="swiper-button-prev" style="color: white;"></div>
-				<div class="swiper-pagination"></div>
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-
-
-//좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수--------------
- function like(button) { button.classList.toggle('liked');}
-</script>
 <script>
 
 	var mapContainer = document.getElementById('map'), 						//지도를 담을 영역의 DOM 레퍼런스
@@ -712,12 +707,19 @@ function setReview(data){
 		str+='<th><button type="button" id="optBtn" onclick="">신고</button></th>';
 		str+='<th id="day" colspan="2">'+value.date+'</th>';
 		str+='<th id="up" type="button" class="likebtn">';
-		if(value.likeYN==null||value.likeYN=='N'){
-			str+='<button class="like-button" onclick="like(this)">';
+		if(value.likeYN==null){
+			str+='<button class="like-button" onclick="lgcheck();">';
+		}else if(value.likeYN=='N'){
+			str+='<button class="like-button" id="like'+value.no+'" onclick="like('+value.no+')">';
 		}else{
-			str+='<button class="like-button liked" onclick="unlike(this)">';
+			str+='<button class="like-button liked" id="like'+value.no+'" onclick="unlike('+value.no+')">';
 		}
-		str+='<i class="fas fa-heart"></i></button><span id="likeCount">'+value.likeCnt+'</span></th></tr>';
+		str+='<i class="fas fa-heart"></i></button><span id="likeCount'+value.no+'">'+value.likeCnt+'</span>';
+		if(mbno==value.mbno){
+			str+='<button class="delete-button" onclick="reviewDelete('+value.no+')">삭제</button></th>';
+			
+		}
+		str+='</tr>';
 		str+='</table>';
 	});
 // 	console.log(str);
@@ -788,15 +790,111 @@ function ImageInsert(e){
 			contentType : false,
 			data : formData,
 			success : function(data){
-	 			console.log('접근성공');
+// 	 			console.log('접근성공');
 //	 			console.log(data);
 // 				setReview(data); 
+				location.replace(location.href);
 			},
 			error:function(){
 				console.log('접근실패');
 			}
 		});
 	}
+}
+
+function reviewDelete(e){
+	if(${empty mbno}){
+		if(confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")){
+			location.href="${pageContext.request.contextPath}/member/memberLogin.do"
+		}else{
+			return;
+		}
+	}else{
+		if(confirm("한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?")){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/review/reviewDelete.do",
+				type : "get",
+				data : {"rvno":e},
+				datatype:"json",
+				success : function(data){
+					alert('삭제되었습니다.');
+					getReview();
+				},
+				error:function(){
+					console.log('접근실패');
+				}
+			});
+		}else{
+			return;
+		}
+	}
+}
+//좋아요(👍) 버튼 클릭 시 색상을 변경하고 원래 상태로 전환하는 JavaScript 함수--------------
+function like(e) {
+
+	var lkCnt = parseInt($('#likeCount'+e).html());
+	if(${empty mbno}){
+		if(confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")){
+			location.href="${pageContext.request.contextPath}/member/memberLogin.do"
+		}else{
+			return;
+		}
+	}else{
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/review/dolike.do",
+			data:{"rvno":e},
+			dataType:"json",
+			success:function(data){
+//				console.log(data.value);
+				if(data.value == 0){
+					alert('오류');
+				}else{
+					$('#like'+e).toggleClass('liked');
+					$('#like'+e).removeAttr('onclick');
+					$('#like'+e).attr('onclick','unlike('+e+')');
+					$('#likeCount'+e).html(lkCnt + 1);
+				}
+			},
+			error:function(){
+//				console.log("error");
+			}
+		});
+	}
+	
+}
+function unlike(e) {
+
+	var lkCnt = $('#likeCount'+e).html();
+	if(${empty mbno}){
+		if(confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")){
+			location.href="${pageContext.request.contextPath}/member/memberLogin.do"
+		}else{
+			return;
+		}
+	}else{
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/review/undolike.do",
+			data:{"rvno":e},
+			dataType:"json",
+			success:function(data){
+//				console.log(data.value);
+				if(data.value == 0){
+					alert('오류');
+				}else{
+					$('#like'+e).toggleClass('liked');
+					$('#like'+e).removeAttr('onclick');
+					$('#like'+e).attr('onclick','like('+e+')');
+					$('#likeCount'+e).html(lkCnt - 1);
+				}
+			},
+			error:function(){
+//				console.log("error");
+			}
+		});
+	}
+	
 }
 </script>
 <script>
@@ -822,31 +920,35 @@ $(document).ready(function(){
 	$(document).on("click",".popupBtn", function(){
 // 		alert('클릭');
 		let rvno = $(this).val();
-		$('.swiper-slide').html('');
+		$('.swiper-wrapper').html('');
 		var img = $('.rv'+rvno);
 		var str = '';
 		$.each(img,function(){
 			console.log(this.value);
-			str += '<img class="cont-img" src="${pageContext.request.contextPath}/source/reviewImages/'+this.value+'">';	
+			str += '<div class="swiper-slide">';
+			str += '<img class="cont-img" src="${pageContext.request.contextPath}/source/reviewImages/'+this.value+'">';
+			str += '</div>';
 		});
-		$('.swiper-slide').html(str);
+		$('.swiper-wrapper').html(str);
 		$("#modalWrap").css('display', 'flex');
-		var swiper = new Swiper(".mySwiper", {
-			spaceBetween: 30,
-// 			centeredSlides: true,
-// 			autoHeight : true,
-			slidesPerView: 1,
-			pagination: {
-				el: ".swiper-pagination",
-				clickable: true,
-			},
-			navigation: {
-				nextEl: ".swiper-button-next",
-				prevEl: ".swiper-button-prev",
-			},
-		});	
+		
 	});
+	var swiper = new Swiper(".mySwiper", {
+		spaceBetween: 30,
+		centeredSlides: true,
+		autoHeight : true,
+		slidesPerView: 1,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+	});	
 });
+
 
 
 </script>

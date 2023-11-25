@@ -1,7 +1,6 @@
 package app.dao;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -136,7 +135,7 @@ public class ContentsDao {
 		return body;	
 	}
 	public JSONObject ContentsViewDetail(String contentid) {
-		// 컨텐츠 상세보기 페이지 정보 불러오는 메소드
+		// tempContents에 정보가 없다면 정보를 api로부터 불러오고 임시컨텐츠 테이블에 정보를 담는 메소드
 		JSONObject contents = new JSONObject();
 		String uriType = "detailCommon1";
 		String query = "?serviceKey=";
@@ -247,85 +246,108 @@ public class ContentsDao {
 		
 		return contents;
 	}
-	public ContentsVo ContentsViewDetailInfo(String contentid, String contenttypeid) {
+//	public ContentsVo ContentsViewDetailInfo(String contentid, String contenttypeid) {
+//		ContentsVo cv = new ContentsVo();
+//		return cv;
+//	}
+//	public ContentsVo ContentsViewDetailInfoCourse(String contentid, String contenttypeid) {
+//		ContentsVo cv = new ContentsVo();
+//		return cv;
+//	}
+//	public ContentsVo ContentsViewDetailInfoRoom(String contentid, String contenttypeid) {
+//		ContentsVo cv = new ContentsVo();
+//		return cv;
+//	}
+	public ContentsVo setTempContents(String contentid) {
 		ContentsVo cv = new ContentsVo();
-		return cv;
-	}
-	public ContentsVo ContentsViewDetailInfoCourse(String contentid, String contenttypeid) {
-		ContentsVo cv = new ContentsVo();
-		return cv;
-	}
-	public ContentsVo ContentsViewDetailInfoRoom(String contentid, String contenttypeid) {
-		ContentsVo cv = new ContentsVo();
-		return cv;
-	}
-	public int setTempContents(String contentid) {
-		int value = 0;
+		cv.setContentid(contentid);
 		PreparedStatement pstmt2=null;
-		// 현재 temp컨텐츠에 해당 값이 있는지 검색
 		String sql = "select *, count(*) as cnt from tempcontents"
 				+ " where contentid=?";
-		// 컨텐츠 정보를 담거나 바뀐것을 확인하기 위한 정보
-		JSONObject contents = this.ContentsViewDetail(contentid);
-		System.out.println(sql);
+//		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, contentid);
 			ResultSet rs = pstmt.executeQuery();
 			int cnt=0;
 			if(rs.next()) {cnt=rs.getInt("cnt");}
+			//정보가 있음
+			// 컨텐츠 정보를 담기 위한 정보
+			JSONObject contents 		= this.ContentsViewDetail(contentid);
+			JSONArray contentsImg 		= this.ContentsViewDetailImage(contentid);
+			JSONArray contentsMenuImg	= new JSONArray();
+			if(contents.get("contenttypeid").toString().equals("39")) {
+				contentsMenuImg = this.ContentsViewMenuImage(contentid);
+			}
+			JSONObject contentsIntro 	= this.ContentsViewIntro(contentid,contents.get("contenttypeid").toString());
+
+			cv.setTitle(contents.get("title").toString());
+			cv.setContenttypeid(contents.get("contenttypeid").toString());
+			cv.setMapx(contents.get("mapx").toString());
+			cv.setMapy(contents.get("mapy").toString());
+			cv.setFirstimage(contents.get("firstimage").toString());
+			cv.setContentdate(contents.get("createdtime").toString());
+			cv.setContentdatem(contents.get("modifiedtime").toString());
+			cv.setDetailCommon1(contents.toString());
+			cv.setDetailImage1(contentsImg.toString());
+			cv.setMenuImage1(contentsMenuImg.toString());
+			cv.setDetailIntro1(contentsIntro.toString());
+			
 			if(cnt>0) {
-				//정보가 있음
 				if(!rs.getString("contentdatem").equals("(null)")&&rs.getString("contentdatem").equals(contents.get("contentdatem"))) {
 					// 컨텐츠 수정일이 api에서 가져온 정보와 같을 경우 상태만 N으로 바꿔준다
 					sql = "update tempcontents SET contentdelyn = 'N' where and contentid=?";
 					try {
 						pstmt2 = conn.prepareStatement(sql);
 						pstmt2.setString(1, contentid);
-			
-						value = pstmt2.executeUpdate();
+						pstmt2.executeUpdate();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}	
-				}else {
-					// 컨텐츠 수정일과 api에서 가저온 정보가 다를경우 정보를 최신화한다.
-					sql = "update tempcontents SET title = ?,contenttypeid = ?,mapx = ?,mapy = ?,contentdate = ?,contentdatem = ?,firstimage = ?,contentdelyn = 'N' where contentid = ?";
+				}else {// 컨텐츠 수정일과 api에서 가저온 정보가 다를경우 정보를 최신화한다.
+					sql	 = "update tempcontents ";
+					sql += "SET title = ?,contenttypeid = ?,mapx = ?,mapy = ?,firstimage = ?,contentdate = ?,contentdatem = ?,contentdelyn = 'N', ";
+					sql += "detailCommon1 = ?,detailImage1 = ?,menuImage1 = ?,detailIntro1 = ? where contentid = ?";
 					try {
 						pstmt2 = conn.prepareStatement(sql);
-						pstmt2.setString(1, contents.get("title").toString());
-						pstmt2.setString(2, contents.get("contenttypeid").toString());
-						pstmt2.setString(3, contents.get("mapx").toString());
-						pstmt2.setString(4, contents.get("mapy").toString());
-						pstmt2.setString(5, contents.get("createdtime").toString());
-						pstmt2.setString(6, contents.get("modifiedtime").toString());
-						pstmt2.setString(7, contents.get("firstimage").toString());
-//						pstmt2.setString(1, cv.getTitle());
-//						pstmt2.setString(2, cv.getContenttypeid());
-//						pstmt2.setString(3, cv.getMapx());
-//						pstmt2.setString(4, cv.getMapy());
-//						pstmt2.setString(5, cv.getContentdate());
-//						pstmt2.setString(6, cv.getContentdatem());
-//						pstmt2.setString(7, cv.getFirstimage());
+						pstmt2.setString(1, cv.getTitle());
+						pstmt2.setString(2, cv.getContenttypeid());
+						pstmt2.setString(3, cv.getMapx());
+						pstmt2.setString(4, cv.getMapy());
+						pstmt2.setString(5, cv.getFirstimage());
+						pstmt2.setString(6, cv.getContentdate());
+						pstmt2.setString(7, cv.getContentdatem());
+						pstmt2.setString(8, cv.getDetailCommon1());
+						pstmt2.setString(9, cv.getDetailImage1());
+						pstmt2.setString(10, cv.getMenuImage1());
+						pstmt2.setString(11, cv.getDetailIntro1());
+						
 						pstmt2.setString(8, contentid);
 						System.out.println(sql);
-						value = pstmt2.executeUpdate();
+						pstmt2.executeUpdate();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}	
 				}
 			}else {
 				// 정보가 없음
-				sql = "insert into tempcontents(contentid,title,contenttypeid,mapx,mapy,firstimage,contentdate,contentdatem,contentdelyn) VALUES(?,?,?,?,?,?,?,?,'Y')";
+				sql = "insert into ";
+				sql +="tempcontents(contentid,title,contenttypeid,mapx,mapy,firstimage,contentdate,contentdatem,detailCommon1,detailImage1,menuImage1,detailIntro1,contentdelyn) ";
+				sql +="VALUES(?,?,?,?,?,?,?,?,?,?,?,?,'Y')";
 				try {
 					pstmt2 = conn.prepareStatement(sql);
 					pstmt2.setString(1, contentid);
-					pstmt2.setString(2, contents.get("title").toString());
-					pstmt2.setString(3, contents.get("contenttypeid").toString());
-					pstmt2.setString(4, contents.get("mapx").toString());
-					pstmt2.setString(5, contents.get("mapy").toString());
-					pstmt2.setString(6, contents.get("firstimage").toString());
-					pstmt2.setString(7, contents.get("createdtime").toString());
-					pstmt2.setString(8, contents.get("modifiedtime").toString());
+					pstmt2.setString(2, cv.getTitle());
+					pstmt2.setString(3, cv.getContenttypeid());
+					pstmt2.setString(4, cv.getMapx());
+					pstmt2.setString(5, cv.getMapy());
+					pstmt2.setString(6, cv.getFirstimage());
+					pstmt2.setString(7, cv.getContentdate());
+					pstmt2.setString(8, cv.getContentdatem());
+					pstmt2.setString(9, cv.getDetailCommon1());
+					pstmt2.setString(10, cv.getDetailImage1());
+					pstmt2.setString(11, cv.getMenuImage1());
+					pstmt2.setString(12, cv.getDetailIntro1());
 //					pstmt2.setString(2, cv.getTitle());
 //					pstmt2.setString(3, cv.getContenttypeid());
 //					pstmt2.setString(4, cv.getMapx());
@@ -334,7 +356,7 @@ public class ContentsDao {
 //					pstmt2.setString(7, cv.getContentdate());
 //					pstmt2.setString(8, cv.getContentdatem());
 		
-					value = pstmt2.executeUpdate();
+					pstmt2.executeUpdate();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -344,11 +366,42 @@ public class ContentsDao {
 			e2.printStackTrace();
 		}
 		
-		return value;
+		return cv;
 	}
+	public ContentsVo getTempContents(String contentid) {
+		ContentsVo cv = new ContentsVo();
+		cv.setContentid(contentid);
+		PreparedStatement pstmt2=null;
+		String sql = "select * from tempcontents"
+				+ " where contentid=? and contentdelyn='N'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentid);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cv.setTitle(rs.getString("title"));
+				cv.setContenttypeid(rs.getString("contenttypeid"));
+				cv.setMapx(rs.getString("mapx"));
+				cv.setMapy(rs.getString("mapy"));
+				cv.setFirstimage(rs.getString("firstimage"));
+				cv.setContentdate(rs.getString("contentdate"));
+				cv.setContentdatem(rs.getString("contentdatem"));
+				cv.setDetailCommon1(rs.getString("detailCommon1"));
+				cv.setDetailImage1(rs.getString("detailImage1"));
+				cv.setMenuImage1(rs.getString("menuImage1"));
+				cv.setDetailIntro1(rs.getString("detailIntro1"));
+			}else {
+				cv = this.setTempContents(contentid);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return cv;
+	}
+	
 	public int getReviewcnt(String contentid) {
 		int value = 0;
-		String sql="select count(*) as cnt from review where contentid=?";
+		String sql="select count(*) as cnt from review where contentid=? and rvdelyn='N'";
 		ResultSet rs = null;
 		try{
 			pstmt = conn.prepareStatement(sql);

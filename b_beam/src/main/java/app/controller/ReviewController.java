@@ -21,7 +21,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import app.dao.BoardDao;
 import app.dao.BoardDao2;
+import app.dao.BookmarkDao;
 import app.dao.ReviewDao;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
@@ -58,6 +60,7 @@ public class ReviewController extends HttpServlet {
 	        	JSONObject jo = new JSONObject();
 	        	jo.put("no", rv.getRvno());
 	        	jo.put("name", rv.getMbname());
+	        	jo.put("mbno", rv.getMbno());
 	        	jo.put("score", rv.getRvrate());
 	        	jo.put("cont", rv.getRvcont());
 	        	jo.put("img", rv.getRvglname());
@@ -136,6 +139,86 @@ public class ReviewController extends HttpServlet {
 			} catch (FileUploadException e) {
 				e.printStackTrace();
 			}
+        	JSONObject json = new JSONObject();
+        	json.put("value",value);
+	        PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
+		}else if (location.equals("reviewDelete.do")) {
+
+			HttpSession session = request.getSession(false);
+			
+			int rvno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("rvno") != null) {
+				rvno = Integer.parseInt(request.getParameter("rvno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			
+			ReviewDao rd = new ReviewDao();
+			
+			int value = 0;
+			value = rd.reviewDelete(rvno, mbno);
+
+        	JSONObject json = new JSONObject();
+        	json.put("value",value);
+	        PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
+			
+		}else if (location.equals("dolike.do")) {
+
+			HttpSession session = request.getSession(false);
+			
+			int rvno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("rvno") != null) {
+				rvno = Integer.parseInt(request.getParameter("rvno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			
+			ReviewDao rd = new ReviewDao();
+			
+			int value = 0;
+			value = rd.reviewLikeCntUpdate(rvno, mbno);
+
+        	JSONObject json = new JSONObject();
+        	json.put("value",value);
+	        PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
+			
+		}else if (location.equals("undolike.do")) {
+
+			HttpSession session = request.getSession(false);
+			
+			int rvno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("rvno") != null) {
+				rvno = Integer.parseInt(request.getParameter("rvno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			
+			
+			ReviewDao rd = new ReviewDao();
+			
+			int value = 0;
+			value = rd.reviewLikeCntUpdateCancel(rvno, mbno);
+
         	JSONObject json = new JSONObject();
         	json.put("value",value);
 	        PrintWriter out = response.getWriter();
