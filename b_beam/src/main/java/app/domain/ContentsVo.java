@@ -13,11 +13,39 @@ public class ContentsVo {
 	private String cat3;
 	private String contentdate;
 	private String contentdatem;
+	private String detailCommon1;
+	private String detailImage1;
+	private String menuImage1;
+	private String detailIntro1;
 	private String contentDelyn;
 	private int contentLikeCnt;
 	private int contentReviewCnt;
 	private String contentLikeYN;
 	
+	public String getDetailCommon1() {
+		return detailCommon1;
+	}
+	public void setDetailCommon1(String detailCommon1) {
+		this.detailCommon1 = detailCommon1.replaceAll("(\r\n|\r|\n|\n\r)", "");
+	}
+	public String getDetailImage1() {
+		return detailImage1;
+	}
+	public void setDetailImage1(String detailImage1) {
+		this.detailImage1 = detailImage1;
+	}
+	public String getMenuImage1() {
+		return menuImage1;
+	}
+	public void setMenuImage1(String menuImage1) {
+		this.menuImage1 = menuImage1;
+	}
+	public String getDetailIntro1() {
+		return detailIntro1;
+	}
+	public void setDetailIntro1(String detailIntro1) {
+		this.detailIntro1 = detailIntro1.replaceAll("(\r\n|\r|\n|\n\r)", "");
+	}
 	public int getContentLikeCnt() {
 		return contentLikeCnt;
 	}

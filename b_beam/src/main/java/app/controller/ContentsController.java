@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import app.dao.BoardDao;
 import app.dao.BookmarkDao;
 import app.dao.ContentsDao;
 import app.domain.ContentsVo;

@@ -61,7 +61,7 @@ public class ReviewDao {
 				ReviewVo rv = new ReviewVo();
 				//rs에서 midx값 꺼내서 mv에 옮겨담는다
 				rv.setRvno(rs.getInt("rvno"));
-				rv.setMbno(rs.getInt("Mbno"));
+				rv.setMbno(rs.getInt("mbno"));
 				rv.setContentid(rs.getString("contentid"));
 				rv.setRvrate(rs.getString("rvrate"));
 				rv.setRvdate(rs.getString("rvdate"));
@@ -174,56 +174,56 @@ public class ReviewDao {
 			}
 			return exec;
 		}
-
-	public int reviewModify(ReviewVo rv){
-		int exec = 0;		
-		
-		String sql ="UPDATE review  SET rvrate =?, rvcont = ? \r\n"
-					+ "WHERE rvno = ? and mbno =?";
-			
-		try{		
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, rv.getRvrate());
-			pstmt.setString(2, rv.getRvcont());
-			pstmt.setInt(3, rv.getRvno());
-			pstmt.setInt(4, rv.getMbno());
-			
-			
-			exec = pstmt.executeUpdate();	
-			//수정이 되면 1이 리턴된다.
-		}catch(Exception e){			
-				e.printStackTrace();
-		}
-		return exec;	
-	}
-		
-		
-	public int reviewglModify(ReviewVo rv){
-		int exec = 0;
-	
-		ArrayList<String> rvglName = rv.getRvglname();
-		
-				String sql ="UPDATE rvgallery a \r\n"
-						+ "join review b on a.rvno = b.rvno \r\n"
-						+ "SET  a.rvglname =? \r\n"
-						+ "WHERE b.rvno = ? and b.mbno = ?";
-				
-		try{		
-			for(String rvglName1 : rvglName) {
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, rvglName1);
-				pstmt.setInt(2, rv.getRvno());
-				pstmt.setInt(3, rv.getMbno());
-	
-				exec += pstmt.executeUpdate();
-			}
-				
-				//수정이 되면 1이 리턴된다.
-				}catch(Exception e){			
-					e.printStackTrace();
-				}
-				return exec;	
-	}
+//
+//	public int reviewModify(ReviewVo rv){
+//		int exec = 0;		
+//		
+//		String sql ="UPDATE review  SET rvrate =?, rvcont = ? \r\n"
+//					+ "WHERE rvno = ? and mbno =?";
+//			
+//		try{		
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, rv.getRvrate());
+//			pstmt.setString(2, rv.getRvcont());
+//			pstmt.setInt(3, rv.getRvno());
+//			pstmt.setInt(4, rv.getMbno());
+//			
+//			
+//			exec = pstmt.executeUpdate();	
+//			//수정이 되면 1이 리턴된다.
+//		}catch(Exception e){			
+//				e.printStackTrace();
+//		}
+//		return exec;	
+//	}
+//		
+//		
+//	public int reviewglModify(ReviewVo rv){
+//		int exec = 0;
+//	
+//		ArrayList<String> rvglName = rv.getRvglname();
+//		
+//				String sql ="UPDATE rvgallery a \r\n"
+//						+ "join review b on a.rvno = b.rvno \r\n"
+//						+ "SET  a.rvglname =? \r\n"
+//						+ "WHERE b.rvno = ? and b.mbno = ?";
+//				
+//		try{		
+//			for(String rvglName1 : rvglName) {
+//				PreparedStatement pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, rvglName1);
+//				pstmt.setInt(2, rv.getRvno());
+//				pstmt.setInt(3, rv.getMbno());
+//	
+//				exec += pstmt.executeUpdate();
+//			}
+//				
+//				//수정이 되면 1이 리턴된다.
+//				}catch(Exception e){			
+//					e.printStackTrace();
+//				}
+//				return exec;	
+//	}
 		
 		
 
@@ -233,7 +233,7 @@ public class ReviewDao {
 		String sql = "UPDATE review SET rvdelyn = 'Y' WHERE rvno = ? and mbno = ?";
 		String sql2 = "UPDATE rvgallery a join review b on a.rvno = b.rvno\r\n"
 					+ " SET rvgldelyn = 'Y' WHERE b.rvno = ? and b.mbno=?";
-
+		String sql3 = "update like_ SET lkdelyn = 'Y',lkdatem=now() where rvno=? and lkdelyn='N'";
 		try {//삭제할때 사진이없는경우 
 				conn.setAutoCommit(false);
 
@@ -249,6 +249,11 @@ public class ReviewDao {
 				pstmt2.setInt(2, mbno);
 			exec += pstmt2.executeUpdate();
 			}
+			//리뷰에 달린 좋아요를 전부 수정
+			try (PreparedStatement pstmt3 = conn.prepareStatement(sql3)) {
+				pstmt3.setInt(1, rvno);
+			exec += pstmt3.executeUpdate();
+			}
 
 			conn.commit();
 			} catch (SQLException e) {
@@ -260,6 +265,61 @@ public class ReviewDao {
 			
 	}	
 				
+	public int reviewLikeCntUpdate(int rvno, int mbno) {
+		
+		int value = 0;
+		
+		String sql = "INSERT INTO like_(mbno, rvno, lkdate, lkdelyn)"
+					+ " VALUES(?, ?, NOW(), 'N')";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mbno);
+			pstmt.setInt(2, rvno);
+			
+			value = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return value;
+	}
+	
+	public int reviewLikeCntUpdateCancel(int rvno, int mbno) {
+		
+		int value = 0;
+		
+		String sql = "UPDATE like_ SET lkdelyn = 'Y', lkdatem = NOW()"
+					+ " WHERE mbno = ? AND rvno = ? AND lkdelyn = 'N'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mbno);
+			pstmt.setInt(2, rvno);
+			
+			value = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
+	}
 				
 				
 			
