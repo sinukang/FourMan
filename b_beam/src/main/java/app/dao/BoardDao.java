@@ -207,7 +207,7 @@ public class BoardDao {
 		
 		int value = 0;
 		ResultSet rs = null;
-		
+		String sql = "";
 		String sql_likeCheck = "SELECT COUNT(cmno) AS cnt FROM comment WHERE bdno = "+bdno+" AND mbno = "+mbno+"";
 		
 		String sql_likeInsert = "INSERT INTO like_(mbno, bdno, lkdate, lkdelyn)"
@@ -229,14 +229,13 @@ public class BoardDao {
 		}
 		
 		if(value == 0) {
-			
+			sql = sql_likeCheck;
 		}else {
-			
+			sql = sql_likeUpdateYN;
 		}
 		
-		
 		try {
-			pstmt = conn.prepareStatement(sql_likeInsert);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mbno);
 			pstmt.setInt(2, bdno);
 			
