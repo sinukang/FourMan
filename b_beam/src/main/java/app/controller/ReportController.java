@@ -34,7 +34,7 @@ public class ReportController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("report.do")) {
+		if (location.equals("reportTest.do")) {
 			
 			SearchCriteria scri = new SearchCriteria();
 			
@@ -53,7 +53,7 @@ public class ReportController extends HttpServlet {
 			request.setAttribute("pm", pm);
 			request.setAttribute("alist", alist);
 			
-			String path ="/report/report.jsp";
+			String path ="/report/reportTest.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		} else if (location.equals("reportAction.do")) {

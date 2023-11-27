@@ -31,7 +31,7 @@ public class ReportDao {
 					+ " JOIN member m on r.mbno2 = m.mbno"
 					+ " LEFT JOIN board b on r.bdno = b.bdno"
 					+ " LEFT JOIN review rv on r.rvno = rv.rvno"
-					+ " LEFT JOIN comment c on r.cmno = c.cmno;"
+					+ " LEFT JOIN comment c on r.cmno = c.cmno"
 					+ " ORDER by r.rpno DESC"
 					+ " LIMIT ?, ?";
 			
@@ -45,7 +45,7 @@ public class ReportDao {
 				rs = pstmt.executeQuery();
 				
 				while (rs.next()) {
-					ReportVo rpv = new ReportVo();
+					ReportVo rpv= new ReportVo();
 					ReviewVo rv = new ReviewVo();
 					CommentVo cv = new CommentVo();
 					
