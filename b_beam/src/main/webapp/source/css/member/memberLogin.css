@@ -62,7 +62,7 @@ input:focus {
 	font-weight: 600;
 }
 
-input[name="btn"] { 
+input[type=button] { 
 	cursor: pointer;
 	color : #fff;
 	font-size : 20px;
@@ -72,7 +72,7 @@ input[name="btn"] {
 	box-shadow: 2px 1px 2px 0px rgba(27, 13, 75, 0.62);
 }
 
-input[name="btn"]:hover { 
+input[type=button]:hover { 
 	background: #1d3477;
 	box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
 	transition: 0.3s;

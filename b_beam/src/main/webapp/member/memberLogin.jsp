@@ -25,7 +25,7 @@
 			<div class="login-body">
 				<form name="frm" id="login-form">
 					<div class="body-id">
-						<input type="text" name="memberId" id="memberId" placeholder=" ID">
+						<input type="text" name="memberId" id="memberId" autofocus="autofocus" placeholder=" ID">
 					</div>
 					<div class="body-pwd">
 						<input type="password" name="memberPwd" id="memberPwd" placeholder=" PASSWORD">
@@ -33,11 +33,11 @@
 					<div class="error_text item_style" id="checkmsg" style="display:none;">입력되지 않은 부분이 있습니다. 확인해주세요</div>
 					<div class="error_text item_style" id="checkmsg2" style="display:none;">아이디 또는 비밀번호가 일치하지 않습니다. 확인해주세요</div>
 					<div class="login-btn">
-						<input type="submit" id="login-btn" name="btn" value="Login" onclick="check();">
+						<input type="button" id="login-btn" value="Login" onclick="check();">
 					</div>
 					<div class="login-btn">
-							<input type="button" name="btn" value="네이버로그인" onclick="check();" style="width:49%; background: #059905;">
-							<input type="button" name="btn" value="카카오로그인" onclick="check();" style="width:49%; background: #dbdb08;">
+							<input type="button" value="네이버로그인" onclick="check();" style="width:49%; background: #059905;">
+							<input type="button" value="카카오로그인" onclick="check();" style="width:49%; background: #dbdb08;">
 							
 							<!-- 네이버 로그인 버튼 노출 영역 -->
 							<div id="naver_id_login"></div>
@@ -103,14 +103,14 @@
 	  	naver_id_login.setPopup();
 	  	naver_id_login.init_naver_id_login();
 	  	
-// 	  	$(document).ready(function(){
+	  	$(document).ready(function(){
 	  		
-// 	  		$("#memberId, #memberPwd").on("onkeydown", function(e){
-// 	  			if(e.keycode == 13){
-// 	  				check();
-// 	  			}
-// 	  		});	  		
-// 	  	});
+	  		$("#memberId, #memberPwd").on("keyup", function(e){
+	  			if(e.keyCode == 13){
+	  				check();
+	  			}
+	  		});	  		
+	  	});
 
 	  	
 	</script>
