@@ -180,7 +180,7 @@ foreign key(mbno) references member(mbno) on update cascade
 
 select * from member;
 select * from board;
-select * from gallery;
+select * from bdgallery;
 select * from comment;
 select * from tempcontents;
 select * from qna;
@@ -189,7 +189,7 @@ select * from bookmark;
 select * from point;
 select * from like_;
 select * from report;
-select * from panalty;
+select * from penalty;
 
 
 

@@ -86,7 +86,7 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 			
-		}else if (location.equals("boardLikeCntUpdate.do")) {
+		}else if (location.equals("boardLikeUpdate.do")) {
 			
 			HttpSession session = request.getSession(false);
 			
@@ -107,36 +107,7 @@ public class BoardController extends HttpServlet {
 			BoardDao bd = new BoardDao();
 			
 			int value = 0;
-			value = bd.boardLikeCntUpdate(bdno, mbno);
-			
-			if(value == 1) {
-				pw.println("{\"value\" : \""+value+"\"}");
-			}else {
-				
-			}
-			
-		}else if (location.equals("boardLikeCntUpdateCancel.do")) {
-			
-			HttpSession session = request.getSession(false);
-			
-			int bdno = 0;
-			int mbno = 0;
-			
-			if(request.getParameter("bdno") != null) {
-				bdno = Integer.parseInt(request.getParameter("bdno"));
-			}
-			if(session != null) {
-				if(session.getAttribute("mbno") != null) {
-					mbno = (int)session.getAttribute("mbno");
-				}
-			}
-			
-			PrintWriter pw = response.getWriter();
-			
-			BoardDao bd = new BoardDao();
-			
-			int value = 0;
-			value = bd.boardLikeCntUpdateCancel(bdno, mbno);
+			value = bd.boardLikeUpdate(mbno, bdno);
 			
 			if(value == 1) {
 				pw.println("{\"value\" : \""+value+"\"}");

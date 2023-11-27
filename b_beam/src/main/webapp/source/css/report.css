@@ -6,15 +6,31 @@
 	font-weight: 400;
 	font-style: normal;
 }
-body {
+html, body{
+	box-sizing: border-box;
 	background: #eee;
 	font-family: Helvetica Neue,"Pretendard-Regular", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	font-weight: 600;
 	color: #000;
 	margin: 0;
-	padding: 0;
+	padding: 0;	
 }
+.container-title {
+	margin: 30px 0 0 60px;
+	font-size: 25px;
+	border-bottom: 4px solid;
+}
+.container-title h1{
+	margin-bottom: 0;
+}
+.container {
+	width: 100%;
+	margin: 0;
+}
+
+
+/*네이게이션 바*/
 .m-navi{
 	margin-top: 50px;
 	height: 75px;
@@ -48,78 +64,67 @@ body {
 	/*transform: scale(1.05);*/
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);	
 }
-.container-title {
-	margin: 30px 0 0 60px;
-	font-size: 25px;
-	border-bottom: 4px solid;
-}
-.container-title h1{
-	margin-bottom: 0;
-}
-.container {
-	width: 100%;
-	margin: 0;
-}
+/*네비게이션 바*/
+
+
 .tabContent{
+	margin: 50px auto 100px ;
 	width: 100%;
-	height: 700px;
-	margin: 0 auto;
+	/*height: 700px;*/
 	text-align: center;
 }
  
 /* 기본 테이블 스타일 */
 .report-table {
 	width: 100%;
+	height: 100%;
 	border-collapse: collapse;
 	border: 0;
-	margin: 100px auto;
 	box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); 
 }
-.report-table td, .report-table td {
-	padding: 12px;
+.report-table td{
+	padding: 10px;
 	text-align: center;
 }
-.report-table tr:first-child {
+.report-table td:not(.td-cate){
+	border-bottom: 1px solid #999;
+} 
+.td-cate {
 	color: #fff;
 	background-color: #666;
 	font-weight: bold;
+	white-space: nowrap;
 }
-.report-table tr:nth-child(even) {
-	background-color: #f9f9f9;
-}
-.report-table tr:hover {
-	background-color: #e0e0e0;
-}
-#reportNum { 
-	width: 50px;
-}
-#sort {
-	width: 50px;
-}
-#breed {
-	width: 50px;
-}
-#useName {  
-	width: 150px;
-}
-#ctn { 
-	width: 600px;
-}
-#clearYn {
-	width: 100px;
-}
-#pntYn{
-	width: 100px;
-}
-#delCheck{
-	width: 100px;
-	
+.report-table tr:last-of-type td{
+	border-bottom: none;
 }
 .delCheck{
-	color: #fff;
-	background-color: rgba(0,0,0,0.1);
-	border: none;
+	width: 50px;
 }
+.reportNum { 
+	width: 50px;
+}
+.sort {
+	width: 50px;
+}
+.type {
+	width: 50px;
+}
+.userName {  
+	width: 150px;
+}
+.content { 
+	width: 600px;
+}
+.clearYN {
+	width: 100px;
+}
+.pntYN{
+	width: 100px;
+}
+
+
+/*모달 CSS*/
 .modal {
 	display: none;
 	position: fixed;
@@ -139,3 +144,5 @@ body {
 	width: 60%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+/*모달 CSS*/
+

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${manager eq null || manager eq '' || manager ne 'M'}">
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "${pageContext.request.contextPath}/";
+	</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +17,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
+
 	<jsp:include page="../source/include/header.jsp"/>
 			
 	<div class="container">
@@ -25,110 +33,108 @@
 			<div class="FAQ-tap tap" onclick="mNavi(3)">자주하는 질문</div>
 		</div>
 		
-		<div id="tab1" class="tabContent">
+		<div class="tabContent">
 			<table class="report-table">
 				<tr>
-					<td id="delCheck">
-						<button class="delCheck">전체선택</button>
-					</td>
-					<td id="reportNum">신고번호</td>
-					<td id="reportCnt">누적신고</td>
-					<td id="sort">분류</td>
-					<td id="reportedBdno">원글 번호</td>
-					<td id="breed">유형</td>
-					<td id="useName">닉네임</td>
-					<td id="ctn">내용</td>
-					<td id="pntYn">패널티여부</td>
-					<td id="clearYn">글삭제여부</td>
+					<td class="td-cate delCheck">전체선택</td>
+					<td class="td-cate reportNum">신고번호</td>
+					<td class="td-cate reportCnt">누적신고</td>
+					<td class="td-cate sort">분류</td>
+					<td class="td-cate reportedBdno">원글 번호</td>
+					<td class="td-cate type">유형</td>
+					<td class="td-cate userName">닉네임</td>
+					<td class="td-cate content">내용</td>
+					<td class="td-cate pntYN">패널티여부</td>
+					<td class="td-cate clearYN">글삭제여부</td>
 				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" class="deleteBox">
-					</td>
-					<td>1123</td>
-					<td>3422</td>
-					<td>리뷰</td>
-					<td>욕설</td>
-					<td>
-						<button class="userId">아놀드슈왈츠제네거</button>
-						<div id="myModal" class="modal" style="display: none;">
-							<div class="modalContent">
-								<h2>사용자 정보</h2>
-								<p>ID: <span id="userId">아놀드슈왈츠제네거</span></p>
-								<p>Email: <span id="userEmail">bbeamproject@gmail.com</span></p>
-								<h2>패널티 선택</h2>
-								<select class="penaltySelect">
-									<option value="none">패널티 없음</option>
-									<option value="7days">이용정지(7일)</option>
-									<option value="30days">이용정지(30일)</option>
-									<option value="permanent">이용정지(영구)</option>
-								</select>
-								<button class="penaltyBtn">완료</button>
-								<button class="cancelBtn">취소</button>
-							</div>
-						</div>
-					</td>
-					<td>너 아빠없지?</td>
-					<td>처리중</td>
-					<td>처리중</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" class="deleteBox">
-					</td>
-					<td>1343</td>
-					<td>122</td>
-					<td>갤러리</td>
-					<td>욕설</td>
-					<td>
-						<button class="userId">맥그리거</button>
-					</td>
-					<td>너 T야?</td>
-					<td>처리중</td>
-					<td>처리중</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" class="deleteBox">
-					</td>
-					<td>43</td>
-					<td>32</td>
-					<td>갤러리</td>
-					<td>광고</td>
-					<td>
-						<button class="userId">호랑이한호열</button>
-					</td>
-					<td>
-						@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@
-						@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@
-						@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@
-						@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@
-						@@@사다리///토토////해외사이트$$$@@@사다리///토토////해외사이트$$$@@@
-					</td>
-					<td>처리중</td>
-					<td>삭제완료</td>
-				</tr>				
-				<c:forEach var="i" begin="1" end="5" step="1" varStatus="idx">
+				<c:forEach var="rp" items="${alist}" varStatus="idx">
 					<tr>
-						<td>
+						<td class="td-cate delCheck">
 							<input type="checkbox" class="deleteBox">
 						</td>
-						<td>134${i}</td>
-						<td>12${i}</td>
-						<td>갤러리${i}</td>
-						<td>욕설${i}</td>
-						<td>
-							<button class="userId">사용자${i}</button>
+						<td class="reportNum">${rp.rpno}</td>
+						<td class="reportCnt"></td>
+						<td class="sort">
+							<c:choose>
+								<c:when test="${rp.rvno ne null}">
+									리뷰
+								</c:when>
+								<c:when test="${rp.bdno ne null}">
+									갤러리
+								</c:when>
+								<c:when test="${rp.cmno ne null}">
+									댓글
+								</c:when>
+							</c:choose>
 						</td>
-						<td></td>
-						<td>이용정지(7일)</td>
-						<td>삭제완료</td>
-					</tr>	
+						<td class="reportedBdno">
+							<c:choose>
+								<c:when test="${rp.rvno ne null}">
+									${rp.rvno}
+								</c:when>
+								<c:when test="${rp.bdno ne null}">
+									${rp.bdno}
+								</c:when>
+								<c:when test="${rp.cmno ne null}">
+									${rp.cmno}
+								</c:when>
+							</c:choose>						
+						</td>
+						<td class="type">
+							<c:choose>
+								<c:when test="${rp.rpcate eq 'F' || rp.rpcate eq 'V'}">
+									폭언 / 욕설
+								</c:when>
+								<c:when test="${rp.rpcate eq 'A'}">
+									광고
+								</c:when>
+								<c:when test="${rp.rpcate eq 'P'}">
+									음란물
+								</c:when>
+							</c:choose>						
+						</td>
+						<td class="userName">
+							<button class="userId">${rp.mbname}</button>
+						</td>
+						<td class="content">${rp.bdcont}</td>
+						<td class="pntYN">
+							<c:choose>
+								<c:when test="${rp.rpcate eq 'F'}">
+									ㄱㄱㄱ
+								</c:when>
+								<c:when test="${rp.rpcate eq 'A'}">
+									ㅁㅁㅁ
+								</c:when>
+								<c:when test="${rp.rpcate eq 'P'}">
+									ㄴㄴㄴ
+								</c:when>
+								<c:when test="${rp.rpcate eq 'V'}">
+									ㅇㅇㅇ
+								</c:when>
+							</c:choose>						
+						</td>
+						<td class="clearYN">${rp.rpdelyn}</td>
+					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
-	
+	<div id="myModal" class="modal" style="display: none;">
+		<div class="modalContent">
+			<h2>사용자 정보</h2>
+			<p>ID: <span id="userId">아놀드슈왈츠제네거</span></p>
+			<p>Email: <span id="userEmail">bbeamproject@gmail.com</span></p>
+			<h2>패널티 선택</h2>
+			<select class="penaltySelect">
+				<option value="none">패널티 없음</option>
+				<option value="7days">이용정지(7일)</option>
+				<option value="30days">이용정지(30일)</option>
+				<option value="permanent">이용정지(영구)</option>
+			</select>
+			<button class="penaltyBtn">완료</button>
+			<button class="cancelBtn">취소</button>
+		</div>
+	</div>
 	<jsp:include page="../source/include/footer.jsp"/>
 	
 <script>

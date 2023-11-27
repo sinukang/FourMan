@@ -175,6 +175,7 @@ public class MemberController extends HttpServlet {
 			MemberVo mv2 = md.memberLoginCheck(mv1);
 			mbno = mv2.getMbno();
 			System.out.println(mbno);
+			System.out.println(mv2.getManager());
 			//Action처리하는 용도는 send방식으로 보낸다
 			PrintWriter out = response.getWriter();
 			if (mbno != 0) {  //일치하면
@@ -182,6 +183,7 @@ public class MemberController extends HttpServlet {
 				HttpSession session =  request.getSession();
 				session.setAttribute("mbname", mv2.getMbname());
 				session.setAttribute("mbno", mbno);
+				session.setAttribute("manager", mv2.getManager());
 			}
 			JSONObject jsonResponse = new JSONObject();
 			jsonResponse.put("value", mbno);

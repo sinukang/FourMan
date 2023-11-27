@@ -168,7 +168,7 @@ public class MemberDao {
 	
 	public MemberVo memberLoginCheck(MemberVo mv) {
 	    
-	    String sql = "SELECT mbno, mbname FROM member WHERE mbid=? AND mbpwd=?";
+	    String sql = "SELECT mbno, mbname, manager FROM member WHERE mbid=? AND mbpwd=?";
 	    ResultSet rs = null;
 	    
 	    try {
@@ -181,6 +181,7 @@ public class MemberDao {
 	           mv = new MemberVo();
 	           mv.setMbno(rs.getInt("mbno"));
 	           mv.setMbname(rs.getString("mbname"));
+	           mv.setManager(rs.getString("manager"));
 	            
 	        }
 			

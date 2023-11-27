@@ -203,25 +203,28 @@ public class BoardDao {
 		return bv;
 	}
 	
-	public int boardLikeCntUpdate(int bdno, int mbno) {
+	//galleryList 글 likeYN
+	public int boardLikeUpdate(int mbno, int bdno) {
 		
 		int value = 0;
 		ResultSet rs = null;
 		String sql = "";
-		String sql_likeCheck = "SELECT COUNT(cmno) AS cnt FROM comment WHERE bdno = "+bdno+" AND mbno = "+mbno+"";
+		String sql_likeCheck = "SELECT COUNT(lkno) AS cnt FROM like_ WHERE bdno = "+bdno+" AND mbno = "+mbno+"";
 		
 		String sql_likeInsert = "INSERT INTO like_(mbno, bdno, lkdate, lkdelyn)"
 					+ " VALUES(?, ?, NOW(), 'N')";
 		
-		String sql_likeUpdateYN = "UPDATE like_ SET lkdelyn = 'Y', lkdatem = NOW()"
-				+ " WHERE mbno = ? AND bdno = ? AND lkdelyn = 'N'";
+		//lkdelyn 컬럼 값이 Y면 N으로 아니면 Y로 
+		String sql_likeUpdateYN = "UPDATE like_ SET lkdelyn = IF(lkdelyn = 'Y', 'N', 'Y')"
+								+ ", lkdatem = NOW() WHERE mbno = ? AND bdno = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql_likeCheck);
-			
+
 			rs= pstmt.executeQuery();
+			
 			while (rs.next()) {
-				value += 1;
+				value = rs.getInt("cnt");
 			}
 			
 		} catch (Exception e) {
@@ -229,7 +232,7 @@ public class BoardDao {
 		}
 		
 		if(value == 0) {
-			sql = sql_likeCheck;
+			sql = sql_likeInsert;
 		}else {
 			sql = sql_likeUpdateYN;
 		}
@@ -254,35 +257,8 @@ public class BoardDao {
 		
 		return value;
 	}
-	
-	public int boardLikeCntUpdateCancel(int bdno, int mbno) {
-		
-		int value = 0;
-		
-		String sql = "UPDATE like_ SET lkdelyn = 'Y', lkdatem = NOW()"
-					+ " WHERE mbno = ? AND bdno = ? AND lkdelyn = 'N'";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, mbno);
-			pstmt.setInt(2, bdno);
-			
-			value = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				pstmt.close();
-				conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return value;
-	}
-	
+
+	//galleryList 글 총 개수
 	public int boardTotalCount(SearchCriteria scri) {
 		
 		int value = 0;
@@ -294,7 +270,7 @@ public class BoardDao {
 			str = " AND bdtag LIKE '%"+scri.getKeyword()+"%' OR bdcontag LIKE '%"+scri.getKeyword()+"%'";
 		}
 		
-		String sql = "SELECT COUNT(bdno) AS cnt FROM board WHERE bddelyn = 'N'" + str;
+		String sql = "SELECT COUNT(bdno) AS cnt FROM board WHERE bdcate = 'G' AND bddelyn = 'N'" + str;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

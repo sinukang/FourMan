@@ -39,45 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	function mNavi(e){
 		switch(e){
-		case 0 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
-		case 1 : location.href="${pageContext.request.contextPath}/qna/managerMyQnA.do"; break;
-		case 2 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
-		case 3 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
-		
+			case 0 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+			case 1 : location.href="${pageContext.request.contextPath}/qna/managerMyQnA.do"; break;
+			case 2 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+			case 3 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
 		}
 	}
-</script>    
-    
-    
-<!-- <div class="managerNavi"> -->
-<!-- 	<ul class="tab navi"> -->
-<!-- 		<li class="is_on"> -->
-<!-- 			<a href="#tab1" class="btn" id="btn1" onclick="swapTab('#tab1')">신고내역</a> -->
-<!-- 		</li> -->
-<!-- 		 <li> -->
-<!-- 			<a href="#tab2" class="btn" id="btn2" onclick="swapTab('#tab2')">1:1문의</a> -->
-<!-- 		</li> -->
-<!-- 		 <li> -->
-<!-- 		   <a href="#tab3" class="btn" id="btn3" onclick="swapTab('#tab3')">공지사항</a> -->
-<!-- 		</li> -->
-<!-- 		<li> -->
-<!-- 		   <a href="#tab4" class="btn" id="btn4" onclick="swapTab('#tab4')">자주하는질문</a> -->
-<!-- 		</li> -->
-<!-- 	</ul> -->
-<!-- </div> -->
-
-<!-- <style> -->
-<!-- /* .managerNavi { */ -->
-<!-- /* 	width: 80%; /* 가로 폭 설정 */ */ -->
-<!-- /* 	margin: 50px auto; /* 화면 중앙으로 옮김 */ */ -->
-<!-- /* 	text-align: center; /* 내부 요소 수평 가운데 정렬 */ */ -->
-<!-- /* } */ -->
-<!-- /* .tab.navi { */ -->
-<!-- /* 	list-style: none; */ -->
-<!-- /* 	padding: 0; */ -->
-<!-- /* 	display: flex; */ -->
-<!-- /* 	border-radius: 5px; */ -->
-<!-- /* 	background-color: #567ff2; */ -->
-<!-- /* 	justify-content: center; /* 내부의 li 요소들을 수평 가운데 정렬 */ */ -->
-<!-- /* } */ -->
-<!-- </style> -->
+</script>

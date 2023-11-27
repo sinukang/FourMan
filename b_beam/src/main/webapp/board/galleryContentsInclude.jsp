@@ -104,10 +104,11 @@
 	
 // 	$(document).ready(function(){
 		
-		$(".md-like-area").on("click", function(){
+		//좋아요 기능
+		$(".like-button").on("click", function(){
 			
 			let mbno = "${mbno}";
-			let bdno = $(this).children('input').val();
+			let bdno = $(this).siblings('input').val();
 			
 			event.preventDefault();
 			
@@ -118,13 +119,13 @@
 					return;
 				}
 			}else{
-				let currentLike = $(this).children('label');
+				let currentLike = $(this);
 					
 				if(currentLike.text() === "♡") {
 				
 					$.ajax({
 						type : "post",
-						url : "${pageContext.request.contextPath}/board/boardLikeCntUpdate.do",
+						url : "${pageContext.request.contextPath}/board/boardLikeUpdate.do",
 						data : {"bdno" : bdno},
 						dataType : "json",
 						cache : false,
@@ -144,7 +145,7 @@
 				}else{
 					$.ajax({
 						type : "post",
-						url : "${pageContext.request.contextPath}/board/boardLikeCntUpdateCancel.do",
+						url : "${pageContext.request.contextPath}/board/boardLikeUpdate.do",
 						data : {"bdno" : bdno},
 						dataType : "json",
 						cache : false,
@@ -206,6 +207,7 @@
 			}
 		});
 		
+		//로그인 없이 댓글 입력칸 클릭 시
 		$("#input-comment").on("click", function(event){
 			
 			event.preventDefault();
@@ -223,32 +225,31 @@
 		
 		//띄운 모달 안의 글 삭제 버튼
 		$(".del-btn").on("click", function() {
-			var isConfirmed = confirm('정말 삭제하시겠습니까?');
 			
-			if (isConfirmed) {
-				var bdno = "${bv.bdno}";
+			if (confirm('정말 삭제하시겠습니까?')) {
+				
+				let bdno = "${bv.bdno}";
 			
 				$.ajax({
 					type: "POST",
 					url: "${pageContext.request.contextPath}/board/galleryDeleteAction.do",
-					data: { "bdno": bdno },
+					data: {"bdno" : bdno},
 					dataType: "json",
 					success: function(response) {
 						if (response.success) {
-							alert('삭제되었습니다.');
-							// console.log(response);
+							console.log(response);
+							alert("삭제되었습니다.");
 							//debugger;
 							location.href = "${pageContext.request.contextPath}/board/galleryList.do";
-						} else {
-							alert('삭제에 실패했습니다.');
 						}
 					},
 					error: function(request, status, error) {
 						alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
 					}
 				});
-			} else {
-				alert('삭제가 취소되었습니다.');
+				
+			}else{
+				return;
 			}
 		});
 		

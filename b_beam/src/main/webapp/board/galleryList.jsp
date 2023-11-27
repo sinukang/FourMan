@@ -174,26 +174,7 @@
 			});
 		});
 		
-		//띄운 모달 안의 글 삭제 버튼
-		$(".del-btn").on("click",function() {
-			
-			var password = prompt("비밀번호를 입력하세요:");
-			var isConfirmed = confirm('정말 삭제하시겠습니까?');
-			
-			if(password === "1111"){
-				
-				if(isConfirmed){
-					alert('삭제되었습니다.');
-				}else{
-					alert('삭제가 취소되었습니다.');
-				}
-			}else{
-				alert('비밀번호가 올바르지 않습니다.');
-			}
-			
-		});
-		
-		//띄운 모달 안의 글 좋아요 버튼
+		//글 좋아요 버튼
 		$(".like-area").on("click",function() {
 			
 			let mbno = "${mbno}";
@@ -214,20 +195,19 @@
 					
 					$.ajax({
 						type : "post",
-						url : "${pageContext.request.contextPath}/board/boardLikeCntUpdate.do",
+						url : "${pageContext.request.contextPath}/board/boardLikeUpdate.do",
 						data : {"bdno" : bdno},
 						dataType : "json",
 						cache : false,
 						success : function(data){
 							if(data.value == 1){
 								currentLike.text("♥");
-							}else{
-								alert(data.value + "좋아요 추가 에러");
+							}else if(data.value == 0){
+								alert("value : " + data.value);
 							}
-							
 						},
 						error : function(data){
-							alert("설정 에러");
+							alert("추가 에러");
 						}
 					});
 					
@@ -235,7 +215,7 @@
 					
 					$.ajax({
 						type : "post",
-						url : "${pageContext.request.contextPath}/board/boardLikeCntUpdateCancel.do",
+						url : "${pageContext.request.contextPath}/board/boardLikeUpdate.do",
 						data : {"bdno" : bdno},
 						dataType : "json",
 						cache : false,
