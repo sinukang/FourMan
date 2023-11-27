@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="contentsdetail">
 		<div class="contents-visual">
 			<div class="title-section">
-		       	<p>${cv.title}</p>
+		       	<p>${cv.title} </p>
+		       	<span class="view">조회수 : <span id="viewcnt">${cv.contentsView}</span> <br> 즐겨찾기수 : <span id="bmcnt">${cv.contentLikeCnt}</span></span>
 	      		 <div id="favorite" class="favorite"></div>
 		   	</div>
 		<%-- 		    	<c:choose> --%>
@@ -70,10 +71,24 @@ document.addEventListener('DOMContentLoaded', function() {
 		<%-- 			    	</c:otherwise> --%>
 		<%-- 			    </c:choose> --%>
 		   	<div class="main-image-section">
-			    <img id="bigImage" src="${cv.firstimage}" alt="Main Image">
+		   		<c:choose>
+		    		<c:when test="${not empty cv.firstimage}">
+		            	<img id="bigImage" src="${cv.firstimage}" alt="Main Image">
+		            </c:when>
+		            <c:otherwise>
+		            	<img id="bigImage" src="../source/images/notFound.png" alt="Main Image">
+		            </c:otherwise>
+		        </c:choose>
 			</div>
 			<div class="small-images-section">
-			<img class="smallImage" src="${cv.firstimage}" alt="대표이미지">
+			<c:choose>
+		    		<c:when test="${not empty cv.firstimage}">
+		            	<img id="smallImage" src="${cv.firstimage}" alt="대표이미지">
+		            </c:when>
+		            <c:otherwise>
+		            	<img id="smallImage" src="../source/images/notFound.png" alt="대표이미지">
+		            </c:otherwise>
+		        </c:choose>
 <!-- 			    <img class="smallImage" src="../source/images/duck4.jpg" alt="Small Image"> -->
 <!-- 				<img class="smallImage" src="../source/images/duck1.png" alt="Small Image"> -->
 <!-- 				<img class="smallImage" src="../source/images/duck3.jpg" alt="Small Image"> -->
@@ -286,7 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	</div>
 </div>
 <script>
-
 	var mapContainer = document.getElementById('map'), 						//지도를 담을 영역의 DOM 레퍼런스
 		mapOption = { 														//지도를 생성할 때 필요한 기본 옵션
 			center: new kakao.maps.LatLng(${cv.mapy}, ${cv.mapx}), 			//지도의 중심좌표.
@@ -340,11 +354,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			          '        </div>' + 
 			          '        <div class="body">' + 
 			          '            <div class="img">' +
-			          '                <img src="${cv.firstimage2}" width="73" height="70">' +
+			          '                <img src="${contents.firstimage2}" width="73" height="70">' +
 			          '           </div>' + 
 			          '            <div class="desc">' + 
-			          '                <div class="ellipsis">${cv.addr1}</div>' + 
-			          '                <div class="jibun ellipsis">${cv.zipcode}</div>' + 
+			          '                <div class="ellipsis">${contents.addr1}</div>' + 
+			          '                <div class="jibun ellipsis">${contents.zipcode}</div>' + 
 			          '                <div><a href="https://map.kakao.com/link/to/Hello World!,${cv.mapy},${cv.mapx}" class="a2" target="_blank">길찾기</a></div>' + 
 			          '            </div>' + 
 			          '        </div>' + 
@@ -529,6 +543,8 @@ getIntro();
 	function doBookmark(){
 		// bookmark를 하는 함수
 		
+		// 즐겨찾기 갯수 선언
+		var bmcnt = parseInt($("#bmcnt").html());
 		// 로그인 상태가 아니라면 로그인 페이지로 이동을 유도하는 
 		if (${empty mbno}){
 			var login = confirm("로그인을 해주세요");
@@ -543,7 +559,8 @@ getIntro();
 			dataType:"json",
 			success:function(data){
 // 				console.log(data);
-				getBookmark();
+					$('#favorite').html('<span class="favorite-icon on" onclick="undoBookmark();">★</span>');
+					$("#bmcnt").html(bmcnt+1);
 			},
 			error:function(){
 // 				console.log("error");
@@ -553,6 +570,9 @@ getIntro();
 	function undoBookmark(){
 		// bookmark를 하는 함수
 		
+		// 즐겨찾기 갯수 선언
+		var bmcnt = parseInt($("#bmcnt").html());
+		
 		$.ajax({
 			type:"post",
 			url:"${pageContext.request.contextPath}/contents/undoBookmark.do",
@@ -560,7 +580,8 @@ getIntro();
 			dataType:"json",
 			success:function(data){
 // 				console.log(data);
-				getBookmark();
+					$('#favorite').html('<span class="favorite-icon" onclick="doBookmark();">☆</span>');
+					$("#bmcnt").html(bmcnt-1);
 			},
 			error:function(){
 // 				console.log("error");
@@ -662,6 +683,7 @@ getIntro();
 <script>
 // 리뷰
 getReview();
+
 // 리뷰 리스트를 부르는 함수
 function getReview(){
 	$.ajax({
@@ -678,6 +700,16 @@ function getReview(){
 			console.log('접근실패');
 		}
 	});
+	if(${not empty param.reviewNo}){
+// 		var rvlocation = $('#commentTable'+'${param.reviewNo}').offsetTop;
+// 		console.log(rvlocation);
+// 		window.scrollTo({top:rvlocation,behavior:'smooth'});
+		document.getElementById('#commentTable'+'${param.reviewNo}').scrollIntoView({
+			behavior:"smooth",
+			block:"end",
+			inline:"nearest"
+		});
+	}
 }
 function setReview(data){
 	var str='';
@@ -686,17 +718,17 @@ function setReview(data){
 // 	console.log(json.length);
 	$.each(json,function(index,value){
 // 		console.log(value.img);
-		str+='<table id="commentTable">';
-		str+='<tr><th id="userId">'+value.name+'</th>';
-		str+='<th id="star">';
+		str+='<table id="commentTable'+value.no+'" class="commentTable">';
+		str+='<tr><th id="userId'+value.no+'" class="userId">'+value.name+'</th>';
+		str+='<th id="sta'+value.no+'r" class="star">';
 		for(let i = 0; i < value.score;i++){
 			str+='★'
 		}
 		str+='</th>';
-		str+='<th id="text" rowspan="2">'+value.cont+'</th>';
+		str+='<th id="text'+value.no+'" class="text" rowspan="2">'+value.cont+'</th>';
 		str+='<th rowspan="2"><div class="imageContainer">';
 		if(value.img.length != 0){
-			str+='<button type="button" id="popupBtn" class="popupBtn" value="'+value.no+'">';
+			str+='<button type="button" id="popupBtn'+value.no+'" class="popupBtn" value="'+value.no+'">';
 			$.each(value.img, function(imgIndex, imgValue){
 				str+='<input type="hidden" class="rv'+value.no+'" value="'+imgValue+'">'
 			});
@@ -704,9 +736,9 @@ function setReview(data){
 			str+='</button>';
 		}
 		str+='</div></th>';
-		str+='<th><button type="button" id="optBtn" onclick="">신고</button></th>';
-		str+='<th id="day" colspan="2">'+value.date+'</th>';
-		str+='<th id="up" type="button" class="likebtn">';
+		str+='<th><button type="button" id="optBtn'+value.no+'" onclick="">신고</button></th>';
+		str+='<th id="day'+value.no+'" class="day" colspan="2">'+value.date+'</th>';
+		str+='<th id="up'+value.no+'" class="up" type="button" class="likebtn">';
 		if(value.likeYN==null){
 			str+='<button class="like-button" onclick="lgcheck();">';
 		}else if(value.likeYN=='N'){

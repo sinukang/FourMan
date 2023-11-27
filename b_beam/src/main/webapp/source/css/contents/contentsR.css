@@ -162,7 +162,18 @@
         color: rgb(0, 0, 0); /* 글자 색상 */
         padding: 10px; /* 내용과 외곽선 간격 조절 */
     }
-
+.cvrk{
+	color: rgb(255, 128, 64);
+	font-weight : bold;
+}
+.rcrk{
+	color: darkgray;
+	font-weight : bold;
+}
+.bcrk{
+	color: #bf9000;
+	font-weight : bold;
+}
 
 
 

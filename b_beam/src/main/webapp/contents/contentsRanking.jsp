@@ -24,24 +24,99 @@
 	</div>
 	<div class="rankcontainer">
 		<div class="rankingbox">
-			<c:forEach var="i" begin="1" end="4" step="1">
-				<div class="contentsbox rank">
-					<h3 class="ranktitle">
-						XX Top10
-					</h3>
-					<c:forEach var="i" begin="1" end="10" step="1">
-					    <button type="button" class="listbutton rank" id="button1">
-					        <div class="contents-info rank">
-					            <img src="../source/images/duck4.jpg">
-					            <div class="contents-title rank">전주덕진공원</div>
-					        </div>
-					    </button>
-				    </c:forEach>
-				</div>	
-		    </c:forEach>
+			<div class="contentsbox rank">
+				<h3 class="ranktitle">
+					조회수 Top10
+				</h3>
+				<c:forEach var="cv" items="${vcList}">
+				    <button type="button" class="listbutton rank" id="vcButton${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
+				        <div class="contents-info rank">
+					        <c:choose>
+					    		<c:when test="${not empty cv.firstimage}">
+					            	<img src="${cv.firstimage}">
+					            </c:when>
+					            <c:otherwise>
+					            	<img src="../source/images/notFound.png">
+					            </c:otherwise>
+					        </c:choose>
+				            <div class="contents-title rank">${cv.title}<span class="cvrk">(${cv.contentsView})</span></div>
+				        </div>
+				    </button>
+			    </c:forEach>
+			</div>	
+			<div class="contentsbox rank">
+				<h3 class="ranktitle">
+					리뷰수 Top10
+				</h3>
+				<c:forEach var="cv" items="${rcList}">
+				    <button type="button" class="listbutton rank" id="rcButton${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
+				        <div class="contents-info rank">
+				            <c:choose>
+					    		<c:when test="${not empty cv.firstimage}">
+					            	<img src="${cv.firstimage}">
+					            </c:when>
+					            <c:otherwise>
+					            	<img src="../source/images/notFound.png">
+					            </c:otherwise>
+					        </c:choose>
+				            <div class="contents-title rank">${cv.title}<span class="rcrk">(${cv.contentReviewCnt})</span></div>
+				        </div>
+				    </button>
+			    </c:forEach>
+			</div>	
+			<div class="contentsbox rank">
+				<h3 class="ranktitle">
+					즐겨찾기수 Top10
+				</h3>
+				<c:forEach var="cv" items="${bcList}">
+				    <button type="button" class="listbutton rank" id="bcButton${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
+				        <div class="contents-info rank">
+				            <c:choose>
+					    		<c:when test="${not empty cv.firstimage}">
+					            	<img src="${cv.firstimage}">
+					            </c:when>
+					            <c:otherwise>
+					            	<img src="../source/images/notFound.png">
+					            </c:otherwise>
+					        </c:choose>
+				            <div class="contents-title rank">${cv.title}<span class="bcrk">(${cv.contentLikeCnt})</span></div>
+				        </div>
+				    </button>
+			    </c:forEach>
+			</div>	
+			<div class="contentsbox rank">
+				<h3 class="ranktitle">
+					리뷰 Top10
+				</h3>
+				<c:forEach var="rv" items="${rvList}">
+				    <button type="button" class="listbutton rank" id="rvButton${rv.rvno}" onclick="ContentsDetailReview(${rv.contentid},${rv.rvno})">
+				        <div class="contents-info rank">
+				        	<c:choose>
+					    		<c:when test="${not empty rv.rvglname[0]}">
+					            	<img src="../source/reviewImages/${rv.rvglname[0]}">
+					            </c:when>
+					            <c:otherwise>
+					            	<img src="../source/images/notFound.png">
+					            </c:otherwise>
+					        </c:choose>
+				            <div class="contents-title rank">전주덕진공원</div>
+				        </div>
+				    </button>
+			    </c:forEach>
+			</div>	
 		</div>
 	</div>
 </div>
 <jsp:include page="../source/include/footer.jsp"/>
+<script>
+function ContentsDetail(e){
+	// 해당 컨텐츠리스트로 이동
+	location.href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid="+e;
+}
+function ContentsDetailReview(e,r){
+	// 해당 컨텐츠리스트로 이동
+	location.href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid="+e+"&reviewNo="+r;
+}
+</script>
 </body>
 </html>

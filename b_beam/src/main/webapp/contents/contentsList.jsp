@@ -75,7 +75,7 @@
 			            	<img src="${cv.firstimage}">
 			            </c:when>
 			            <c:otherwise>
-			            	<img src="../source/images/commentbtn.png">
+			            	<img src="../source/images/notFound.png">
 			            </c:otherwise>
 			        </c:choose>
 			        <div class="contents-title">

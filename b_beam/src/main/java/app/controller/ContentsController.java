@@ -14,12 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import app.dao.BoardDao;
 import app.dao.BookmarkDao;
 import app.dao.ContentsDao;
+import app.dao.ReviewDao;
 import app.domain.ContentsVo;
 import app.domain.PageMaker;
+import app.domain.ReviewVo;
 import app.domain.SearchCriteria;
 
 /**
@@ -116,32 +119,40 @@ public class ContentsController extends HttpServlet {
 
 	        HttpSession session = request.getSession();
 	        String contentid = request.getParameter("contentid");
+	        JSONParser parser = new JSONParser(); 
 	        ContentsDao cd = new ContentsDao();
-	        JSONObject contents = cd.ContentsViewDetail(contentid);
-	        ContentsVo cv = new ContentsVo();
-			cv.setAddr1(contents.get("addr1").toString());
-			cv.setContentid(contents.get("contentid").toString());
-			cv.setContenttypeid(contents.get("contenttypeid").toString());
-			cv.setContentdate(contents.get("createdtime").toString());
-			cv.setTitle(contents.get("title").toString());
-			cv.setTel(contents.get("tel").toString());
-			cv.setZipcode(contents.get("zipcode").toString());
-			cv.setFirstimage(contents.get("firstimage").toString());
-			cv.setFirstimage2(contents.get("firstimage2").toString());
-			cv.setMapx(contents.get("mapx").toString());
-			cv.setMapy(contents.get("mapy").toString());
-			JSONObject intro = cd.ContentsViewIntro(contentid,cv.getContenttypeid());
-			JSONArray img = cd.ContentsViewDetailImage(contentid);
-			JSONArray menuimg = new JSONArray();
-	        if(cv.getContenttypeid().equals("39")) {
-		        menuimg = cd.ContentsViewMenuImage(contentid);
-	        }
-	        request.setAttribute("menuImage", menuimg);
-
-	        request.setAttribute("contentsImage", img);
-	        request.setAttribute("cv", cv);
-	        request.setAttribute("contents", contents);
-	        request.setAttribute("contentIntro", intro);
+//	        JSONObject contents = cd.ContentsViewDetail(contentid);
+//	        ContentsVo cv = new ContentsVo();
+	        ContentsVo cv = cd.getTempContents(contentid);
+	        JSONObject contents;
+			try {
+				contents = (JSONObject)parser.parse(cv.getDetailCommon1());
+		        JSONArray img =(JSONArray)parser.parse(cv.getDetailImage1());
+		        JSONArray menuimg = (JSONArray)parser.parse(cv.getMenuImage1());
+		        JSONObject intro = (JSONObject)parser.parse(cv.getDetailIntro1());
+		        request.setAttribute("menuImage", menuimg);
+		        request.setAttribute("contentsImage", img);
+		        request.setAttribute("cv", cv);
+		        request.setAttribute("contents", contents);
+		        request.setAttribute("contentIntro", intro);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			cv.setAddr1(contents.get("addr1").toString());
+//			cv.setContentid(contents.get("contentid").toString());
+//			cv.setContenttypeid(contents.get("contenttypeid").toString());
+//			cv.setContentdate(contents.get("createdtime").toString());
+//			cv.setTitle(contents.get("title").toString());
+//			cv.setTel(contents.get("tel").toString());
+//			cv.setZipcode(contents.get("zipcode").toString());
+//			cv.setFirstimage(contents.get("firstimage").toString());
+//			cv.setFirstimage2(contents.get("firstimage2").toString());
+//			cv.setMapx(contents.get("mapx").toString());
+//			cv.setMapy(contents.get("mapy").toString());
+//			JSONObject intro = cd.ContentsViewIntro(contentid,cv.getContenttypeid());
+//			JSONArray img = cd.ContentsViewDetailImage(contentid);
+//			JSONArray menuimg = new JSONArray();
 			String path ="/contents/contentsDetail.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
@@ -180,6 +191,17 @@ public class ContentsController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print("{\"value\":"+value+"}");
 		}else if (location.equals("contentsRanking.do")) {
+			ContentsDao cd = new ContentsDao();
+			ReviewDao rvd  = new ReviewDao();
+			ArrayList<ContentsVo> viewContents = cd.getViewRanking();
+			ArrayList<ContentsVo> reviewContents = cd.getReviewRanking();
+			ArrayList<ContentsVo> bookmarkContents = cd.getBookmarkRanking(); 
+			ArrayList<ReviewVo> review = rvd.getRankedReview(); 
+
+			request.setAttribute("vcList", viewContents);
+			request.setAttribute("rcList", reviewContents);
+			request.setAttribute("bcList", bookmarkContents);
+			request.setAttribute("rvList", review);
 			
 			String path ="/contents/contentsRanking.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);

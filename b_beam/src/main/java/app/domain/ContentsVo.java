@@ -18,10 +18,17 @@ public class ContentsVo {
 	private String menuImage1;
 	private String detailIntro1;
 	private String contentDelyn;
+	private int contentsView;
 	private int contentLikeCnt;
 	private int contentReviewCnt;
 	private String contentLikeYN;
 	
+	public int getContentsView() {
+		return contentsView;
+	}
+	public void setContentsView(int contentsView) {
+		this.contentsView = contentsView;
+	}
 	public String getDetailCommon1() {
 		return detailCommon1;
 	}

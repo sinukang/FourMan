@@ -11,6 +11,7 @@ import java.util.List;
 import app.dbconn.DbConn;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
+import app.domain.ContentsVo;
 import app.domain.ReviewVo;
 
 public class ReviewDao {
@@ -320,7 +321,40 @@ public class ReviewDao {
 		
 		return value;
 	}
+	public ArrayList<ReviewVo> getRankedReview() {
+		ArrayList<ReviewVo> alist = new ArrayList<>();
+		String sql="select a.*, mbname, lkcnt, rvglname\r\n"
+				+ "from review a\r\n"
+				+ "JOIN (select rvno,count(*) as lkcnt from like_ where lkdelyn = 'N' and rvno is not null group by 1) b ON a.rvno = b.rvno\r\n"
+				+ "JOIN (select mbno,mbname from member where mbdelyn = 'N') c ON a.mbno = c.mbno\r\n"
+				+ "left JOIN (select distinct rvno,rvglname from rvgallery where rvglno in (select min(rvglno) from rvgallery group by rvno) and rvgldelyn = 'N') d on a.rvno = d.rvno\r\n"
+				+ "order by lkcnt desc limit 10";
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				ReviewVo rv = new ReviewVo();
+				ArrayList<String> rvglname = new ArrayList<>();
+				rvglname.add(rs.getString("rvglname"));
+				rv.setRvno(rs.getInt("rvno"));
+				rv.setRvLikeCnt(rs.getInt("lkcnt"));
+				rv.setMbname(rs.getString("mbname"));
+				rv.setRvcont(rs.getString("rvcont"));
+				rv.setRvrate(rs.getString("rvrate"));
+				rv.setRvdate(rs.getString("rvdate"));
+				rv.setContentid(rs.getString("contentid"));
+				rv.setRvglname(rvglname);
+				alist.add(rv);
 				
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return alist;
+	}	
 				
 			
 			

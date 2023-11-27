@@ -63,8 +63,6 @@ public class BookmarkDao {
 				sql = "update bookmark SET bmdelyn = 'N',bmdatem = now() where mbno=? and contentid=?";
 			}else {
 				sql = "insert into bookmark(mbno,contentid,bmdelyn) VALUES(?,?,'N');";
-				ContentsDao cd = new ContentsDao();
-				cd.setTempContents(contentid);
 			}
 			try {
 				pstmt2 = conn.prepareStatement(sql);
@@ -96,5 +94,21 @@ public class BookmarkDao {
 		}
 		
 		return value;
+	}
+	public int getContentsBookmarkedCnt(String contentid) {
+		int cnt = 0;
+		String sql="select count(*) as cnt from bookmark where contentid=? and bmdelyn='N'";
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 }
