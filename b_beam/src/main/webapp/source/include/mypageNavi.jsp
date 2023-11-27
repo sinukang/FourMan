@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
         
  <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("btn3").addEventListener("click", function () {
-        // 버튼 1을 클릭했을 때 실행할 코드
-        var link = "<%=request.getContextPath() %>/board/noticeList.do";
-        window.location.href = link;
-    });
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     document.getElementById("btn3").addEventListener("click", function () {
+//         // 버튼 1을 클릭했을 때 실행할 코드
+<%--         var link = "<%=request.getContextPath() %>/board/noticeList.do"; --%>
+//         window.location.href = link;
+//     });
+// });
 </script>   
     
     

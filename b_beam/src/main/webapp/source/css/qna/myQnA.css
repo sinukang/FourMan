@@ -284,6 +284,9 @@ body *{
 .dp-none{
 	display: none;
 }
-
+.modify-area {
+    margin-top: 50px;
+    width: 100%;
+}
 
 
