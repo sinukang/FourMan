@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import app.dbconn.DbConn;
 import app.domain.CommentVo;
+import app.domain.PenaltyVo;
 import app.domain.ReportVo;
 import app.domain.ReviewVo;
 import app.domain.SearchCriteria;
@@ -26,12 +27,13 @@ public class ReportDao {
 			ArrayList<ReportVo> alist = new ArrayList<ReportVo>();
 			ResultSet rs = null;
 			
-			String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, c.cmcont"
+			String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, c.cmcont, p.pndelyn"
 					+ " FROM report r "
 					+ " JOIN member m on r.mbno2 = m.mbno"
 					+ " LEFT JOIN board b on r.bdno = b.bdno"
 					+ " LEFT JOIN review rv on r.rvno = rv.rvno"
 					+ " LEFT JOIN comment c on r.cmno = c.cmno"
+					+ " LEFT JOIN penalty p on r.rpno = p.rpno"
 					+ " ORDER by r.rpno DESC"
 					+ " LIMIT ?, ?";
 			
@@ -48,6 +50,7 @@ public class ReportDao {
 					ReportVo rpv= new ReportVo();
 					ReviewVo rv = new ReviewVo();
 					CommentVo cv = new CommentVo();
+					PenaltyVo pv = new PenaltyVo();
 					
 					rpv.setRpno(rs.getInt("rpno"));
 					rpv.setMbno2(rs.getInt("mbno2"));
@@ -65,6 +68,9 @@ public class ReportDao {
 					
 					cv.setCmcont(rs.getString("cmcont"));
 					rpv.setCommnetVo(cv);
+					
+					pv.setPndelyn(rs.getString("pndelyn"));
+					rpv.setPenaltyVo(pv);
 					
 					alist.add(rpv);
 					

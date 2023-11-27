@@ -12,6 +12,7 @@ public class ReportVo extends BoardVo {
 	
 	private ReviewVo reviewVo;
 	private CommentVo commnetVo;
+	private PenaltyVo penaltyVo;
 	
 	public int getRpno() {
 		return rpno;
@@ -72,6 +73,12 @@ public class ReportVo extends BoardVo {
 	}
 	public void setRpdelyn(String rpdelyn) {
 		this.rpdelyn = rpdelyn;
+	}
+	public PenaltyVo getPenaltyVo() {
+		return penaltyVo;
+	}
+	public void setPenaltyVo(PenaltyVo penaltyVo) {
+		this.penaltyVo = penaltyVo;
 	}
 
 }

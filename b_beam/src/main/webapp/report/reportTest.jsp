@@ -53,7 +53,7 @@
 							<button class="userId">${rpv.mbname}</button>
 						</td>
 						<td>${rpv.bdcont }${rpv.reviewVo.rvcont }${rpv.commnetVo.cmcont }</td>
-						<td>이용정지(7일)</td>
+						<td>${rpv.penaltyVo.pndelyn}</td>
 						<td>${rpv.rpdelyn}</td>
 					</tr>	
 				</c:forEach>
