@@ -34,7 +34,7 @@ public class ReportController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("reportTest.do")) {
+		if (location.equals("report.do")) {
 			
 			SearchCriteria scri = new SearchCriteria();
 			
@@ -53,7 +53,7 @@ public class ReportController extends HttpServlet {
 			request.setAttribute("pm", pm);
 			request.setAttribute("alist", alist);
 			
-			String path ="/report/reportTest.jsp";
+			String path ="/report/report.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		} else if (location.equals("reportAction.do")) {
@@ -72,11 +72,14 @@ public class ReportController extends HttpServlet {
 			}
 			if(request.getParameter("bdno") != null) {
 				bdno = Integer.parseInt(request.getParameter("bdno"));
-			}else if(request.getParameter("mbno2") != null) {
+			}
+			if(request.getParameter("mbno2") != null) {
 				mbno2 = Integer.parseInt(request.getParameter("mbno2"));
-			}else if(request.getParameter("rvno") != null) {
+			}
+			if(request.getParameter("rvno") != null) {
 				rvno = Integer.parseInt(request.getParameter("rvno"));
-			}else if(request.getParameter("cmno") != null) {
+			}
+			if(request.getParameter("cmno") != null) {
 				cmno = Integer.parseInt(request.getParameter("cmno"));
 			}
 			
@@ -87,7 +90,7 @@ public class ReportController extends HttpServlet {
 			System.out.println("bdno : " + bdno);
 			System.out.println("rvno : " + rvno);
 			System.out.println("cmno : " + cmno);
-			System.out.println("rpcate : " + rpcate);
+			//System.out.println("rpcate : " + rpcate);
 			
 			ReportDao rpd = new ReportDao();
 			ReportVo rpv = new ReportVo();

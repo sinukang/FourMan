@@ -130,7 +130,7 @@ public class ReportDao {
 		public int reportInsert(ReportVo rpv, int rvno, int cmno) {
 			int exec = 0;
 			String sql = "INSERT INTO(mbno, mbno2, bdno, rvno, cmno, rpcate, rpdelyn) "
-					+ " VALUES(?, ?, ?, ?, ?, ?, 'N')";
+					+ " VALUES(?, ?, ?, ?, ?, 'F', 'N')";
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1, rpv.getMbno());
