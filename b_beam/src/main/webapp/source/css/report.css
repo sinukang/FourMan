@@ -67,14 +67,14 @@ html, body{
 /*네비게이션 바*/
 
 
+
+/* 테이블 */
 .tabContent{
 	margin: 50px auto 100px ;
 	width: 100%;
 	/*height: 700px;*/
-	text-align: center;
+	background-color: #fff;
 }
- 
-/* 기본 테이블 스타일 */
 .report-table {
 	width: 100%;
 	height: 100%;
@@ -82,7 +82,7 @@ html, body{
 	border: 0;
 	box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); 
 }
-.report-table td{
+.report-table td:not(.td-label){
 	padding: 10px;
 	text-align: center;
 }
@@ -93,56 +93,107 @@ html, body{
 	color: #fff;
 	background-color: #666;
 	font-weight: bold;
-	white-space: nowrap;
 }
 .report-table tr:last-of-type td{
 	border-bottom: none;
 }
+.report-table td:not(.content){
+	white-space: nowrap;
+}
 .delCheck{
 	width: 50px;
 }
+.td-label{
+	padding: 0;
+	text-align: center;
+}
+.label-selectAll{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+.selectAll{
+	cursor: pointer;
+}
 .reportNum { 
-	width: 50px;
+	
+}
+.reportCnt{
+	
 }
 .sort {
-	width: 50px;
+	
+}
+.reportedBdno{
+	
 }
 .type {
-	width: 50px;
+	
 }
 .userName {  
-	width: 150px;
+	
 }
 .content { 
-	width: 600px;
-}
-.clearYN {
-	width: 100px;
+	width: 70%;
 }
 .pntYN{
-	width: 100px;
+	
 }
+.clearYN {
+	
+}
+
+/* 테이블 */
+
 
 
 /*모달 CSS*/
-.modal {
+.dp-flex{
+	display: flex;
+}
+.dp-none{
 	display: none;
+}
+.modalFrame {
 	position: fixed;
-	z-index: 5;
 	left: 0;
 	top: 0;
+	justify-content: center;
+	padding-top: 120px;
 	width: 100%;
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0,0,0,0.4);
+	z-index: 5;
 }
-.modalContent {
+.modalBody {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10%;
 	background-color: #fefefe;
-	margin: 10% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 60%;
+	width: 70%;
+	height: 50%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.closeBtn{
+	position: absolute;
+	top: -40px;
+	right: -30px;
+	display: block;
+	font-weight: bold;
+	color: white;
+	font-size:40px;
+	cursor: pointer;	
+}
+.modalContents{
+	width: 100%;
+	height: 100%;
+	padding: 3%;
+	align-self: center;
 }
 /*모달 CSS*/
 
