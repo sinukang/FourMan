@@ -1,6 +1,6 @@
 package app.domain;
 
-public class ReportVo {
+public class ReportVo extends BoardVo {
 	private int rpno;
 	private int mbno;
 	private int mbno2;
@@ -10,8 +10,23 @@ public class ReportVo {
 	private String rpcate;
 	private String rpdelyn;
 	
+	private ReviewVo reviewVo;
+	private CommentVo commnetVo;
+	
 	public int getRpno() {
 		return rpno;
+	}
+	public ReviewVo getReviewVo() {
+		return reviewVo;
+	}
+	public void setReviewVo(ReviewVo reviewVo) {
+		this.reviewVo = reviewVo;
+	}
+	public CommentVo getCommnetVo() {
+		return commnetVo;
+	}
+	public void setCommnetVo(CommentVo commnetVo) {
+		this.commnetVo = commnetVo;
 	}
 	public void setRpno(int rpno) {
 		this.rpno = rpno;

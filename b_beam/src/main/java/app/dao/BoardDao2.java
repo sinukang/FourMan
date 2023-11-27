@@ -241,7 +241,7 @@ public class BoardDao2 {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 			} catch (Exception e) {
