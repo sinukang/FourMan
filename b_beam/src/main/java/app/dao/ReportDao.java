@@ -135,15 +135,41 @@ public class ReportDao {
 		
 		public int reportInsert(ReportVo rpv, int rvno, int cmno) {
 			int exec = 0;
-			String sql = "INSERT INTO(mbno, mbno2, bdno, rvno, cmno, rpcate, rpdelyn) "
-					+ " VALUES(?, ?, ?, ?, ?, 'F', 'N')";
+			String cate = "";  
+			String category="";
+			
+			// 신고된 게시글 종류 확인
+			if (rpv.getBdno() != 0) {
+					cate = "bd";
+			} else if (rvno != 0) {
+				cate = "rv";
+			} else if (cmno != 0) {
+				cate = "cm";
+			}
+			
+			if (cate.equals("bd")) {
+				category = "bdno";
+			}
+			if (cate.equals("rv")) {
+				category = "rvno";
+			} 
+			if (cate.equals("cm")) {
+				category = "cmno";
+			}
+			String sql = "INSERT INTO report(mbno, mbno2, "+category+", rpcate, rpdelyn) "
+					+ " VALUES(?, ?, ?, 'F', 'N')";
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				
 				pstmt.setInt(1, rpv.getMbno());
 				pstmt.setInt(2, rpv.getMbno2());
-				pstmt.setInt(3, rpv.getBdno());
-				pstmt.setInt(4, rvno);
-				pstmt.setInt(4, cmno);
+				if ("bdno".equals(category)) {
+					pstmt.setInt(3, rpv.getBdno());
+				} else if ("rvno".equals(category)) {
+					pstmt.setInt(3, rvno);
+				} else if ("cmno".equals(category)) {
+					pstmt.setInt(3, cmno);
+				}
 				
 				exec = pstmt.executeUpdate();
 				
@@ -183,14 +209,15 @@ public class ReportDao {
 			return exec1 + exec2;
 		}
 		
-		public int penaltyInsert(int rpno, int mbno) {
+		public int penaltyInsert(PenaltyVo pv) {
 			int exec = 0;
 			String sql = "INSERT INTO(rpno, mbno, pndelyn) "
-					+ " VALUES(?, ?, 'N')";
+					+ " VALUES(?, ?, ?)";
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, rpno);
-				pstmt.setInt(2, mbno);
+				pstmt.setInt(1, pv.getRpno());
+				pstmt.setInt(2, pv.getMbno());
+				pstmt.setString(3, pv.getPndelyn());
 				
 				exec = pstmt.executeUpdate();
 			} catch (SQLException e ) {

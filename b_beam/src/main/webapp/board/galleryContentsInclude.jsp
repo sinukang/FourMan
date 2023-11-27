@@ -77,7 +77,7 @@
 				<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do?bdno=${bv.bdno}';" >수정</button>
 				<button type="button" class="del-btn" onclick="">삭제</button>
 			</c:if>
-			<button type="button" onclick="">&#x1F6A8;</button>
+			<button type="button" class="rpt-btn" onclick="">&#x1F6A8;</button>
 		</div>
 		
 	</div>
@@ -240,6 +240,34 @@
 							console.log(response);
 							alert("삭제되었습니다.");
 							//debugger;
+							location.href = "${pageContext.request.contextPath}/board/galleryList.do";
+						}
+					},
+					error: function(request, status, error) {
+						alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
+					}
+				});
+				
+			}else{
+				return;
+			}
+		});
+		
+		$(".rpt-btn").on("click", function() {
+			
+			if (confirm('정말 신고하시겠습니까?')) {
+				
+				let bdno = "${bv.bdno}";
+				let mbno2 = "${bv.mbno}";
+				
+				$.ajax({
+					type: "POST",
+					url: "${pageContext.request.contextPath}/report/reportAction.do",
+					data: {"bdno" : bdno, "mbno2" : mbno2},
+					dataType: "json",
+					success: function(response) {
+						if (response.success) {
+							alert("신고되었습니다.");
 							location.href = "${pageContext.request.contextPath}/board/galleryList.do";
 						}
 					},

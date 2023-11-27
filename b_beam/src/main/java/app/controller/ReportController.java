@@ -65,25 +65,30 @@ public class ReportController extends HttpServlet {
 			int rvno = 0;
 			int cmno = 0;
 			
-			if(session != null) {
-				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
-					mbno = (int)session.getAttribute("mbno");
+			if (session != null) {
+				if (session.getAttribute("mbno") != null) {
+					mbno = (int) session.getAttribute("mbno");
 				}
 			}
-			if(request.getParameter("bdno") != null) {
+			if (request.getParameter("bdno") != null) {
 				bdno = Integer.parseInt(request.getParameter("bdno"));
 			}
-			if(request.getParameter("mbno2") != null) {
+			if (request.getParameter("mbno2") != null ) {
 				mbno2 = Integer.parseInt(request.getParameter("mbno2"));
 			}
-			if(request.getParameter("rvno") != null) {
+			if (request.getParameter("rvno") != null ) {
 				rvno = Integer.parseInt(request.getParameter("rvno"));
 			}
-			if(request.getParameter("cmno") != null) {
+			if (request.getParameter("cmno") != null) {
 				cmno = Integer.parseInt(request.getParameter("cmno"));
 			}
+
+			ReportVo rpv = new ReportVo();
+			rpv.setMbno(mbno);
+			rpv.setMbno2(mbno2);
+			rpv.setBdno(bdno);
 			
-			String rpcate = request.getParameter("rpcate");
+			//String rpcate = request.getParameter("rpcate");
 			
 			System.out.println("mbno : " + mbno);
 			System.out.println("mbno2 : " + mbno2);
@@ -93,9 +98,11 @@ public class ReportController extends HttpServlet {
 			//System.out.println("rpcate : " + rpcate);
 			
 			ReportDao rpd = new ReportDao();
-			ReportVo rpv = new ReportVo();
 			int value = 0;
+			
 			value = rpd.reportInsert(rpv, rvno, cmno);
+			
+			System.out.println("value : " + value);
 			
 			// JSON 형식으로 응답을 생성	
 			response.setContentType("application/json");
