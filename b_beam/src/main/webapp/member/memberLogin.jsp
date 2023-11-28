@@ -90,7 +90,12 @@
 					$("#checkmsg2").css("display","block");
 					$("#memberPwd").focus();
 				}else{
-					location.href='${pageContext.request.contextPath}/index.jsp';					
+					if(${not empty prevURL}){
+						location.href='${prevURL}';
+					}else{
+						location.href='${pageContext.request.contextPath}/index.jsp';					
+						
+					}
 				}
 			}
 		});  

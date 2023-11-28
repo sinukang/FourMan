@@ -159,7 +159,14 @@ public class MemberController extends HttpServlet {
 				    out.print(str);
 				
 		}else if (location.equals("memberLogin.do")) {
+			String referer = "";
+			HttpSession session= request.getSession();
+			if(request.getHeader("REFERER")!=null) {
+				referer = (String)request.getHeader("REFERER");
+				session.setAttribute("prevURL", referer);
+			}
 			
+
 			String path ="/member/memberLogin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);

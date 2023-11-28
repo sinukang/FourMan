@@ -683,7 +683,7 @@ getIntro();
 <script>
 // 리뷰
 getReview();
-
+var locaBoolean = true;
 // 리뷰 리스트를 부르는 함수
 function getReview(){
 	$.ajax({
@@ -695,21 +695,24 @@ function getReview(){
 // 			console.log('접근성공');
 // 			console.log(data);
 			setReview(data); 
+			if(${not empty param.reviewNo}&&locaBoolean){
+				var rvlocation = $('#commentTable${param.reviewNo}').offset().top;
+				console.log(rvlocation);
+				$("html").animate({scrollTop: rvlocation},400);
+				locaBoolean = false;
+//		 		window.scrollTo({top:rvlocation,behavior:'smooth'});
+//		 		var commentTableid = document.getElementById('#commentTable${param.reviewNo}');
+//		 		document.getElementById('#commentTable${param.reviewNo}').scrollIntoView({
+//		 			behavior:"smooth",
+//		 			block:"end",
+//		 			inline:"nearest"
+//		 		});
+			}
 		},
 		error:function(){
 			console.log('접근실패');
 		}
 	});
-	if(${not empty param.reviewNo}){
-// 		var rvlocation = $('#commentTable'+'${param.reviewNo}').offsetTop;
-// 		console.log(rvlocation);
-// 		window.scrollTo({top:rvlocation,behavior:'smooth'});
-		document.getElementById('#commentTable'+'${param.reviewNo}').scrollIntoView({
-			behavior:"smooth",
-			block:"end",
-			inline:"nearest"
-		});
-	}
 }
 function setReview(data){
 	var str='';
