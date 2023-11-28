@@ -18,7 +18,7 @@ public class PointDao {
 		this.conn = dbconn.getConnection();
 	}
 	
-	public int pointInsert (BoardVo bv) {
+	public int getPointBoard (BoardVo bv) {
 		int exec = 0;
 		ResultSet rs = null;
 		

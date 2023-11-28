@@ -538,7 +538,7 @@ public class BoardController extends HttpServlet {
 				int value = bd2.boardInsert(bv, bgv);
 				
 				PointDao pd = new PointDao();
-				int value2 = pd.pointInsert(bv);
+				int value2 = pd.getPointBoard(bv);
 				
 				System.out.println("value2 : " + value2);
 				System.out.println("value: " + value);
