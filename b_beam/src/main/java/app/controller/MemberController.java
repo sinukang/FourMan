@@ -21,7 +21,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import app.dao.MemberDao;
+import app.dao.PointDao;
 import app.domain.MemberVo;
+import app.domain.PointVo;
 import app.util.MailSender;
 
 /**
@@ -287,8 +289,13 @@ public class MemberController extends HttpServlet {
 		    
 		    MemberDao md = new MemberDao();
 		    MemberVo mv = md.memberInfo(loginMbno);
-
+		    
 		    request.setAttribute("mv", mv);
+		    
+		    PointDao pd = new PointDao();
+		    PointVo pv = pd.pointInfo(loginMbno);
+		    
+		    request.setAttribute("pv", pv);
 
 		    String path = "/member/memberInfo.jsp";
 

@@ -8,7 +8,7 @@ public class PointVo {
 	private int ptpt;
 	private int acpt;
 	private int rmpt;
-	private int ptdate;
+	private String ptdate;
 	public int getPtno() {
 		return ptno;
 	}
@@ -51,10 +51,10 @@ public class PointVo {
 	public void setRmpt(int rmpt) {
 		this.rmpt = rmpt;
 	}
-	public int getPtdate() {
+	public String getPtdate() {
 		return ptdate;
 	}
-	public void setPtdate(int ptdate) {
+	public void setPtdate(String ptdate) {
 		this.ptdate = ptdate;
 	}
 	
