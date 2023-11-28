@@ -23,6 +23,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import app.dao.BoardDao;
 import app.dao.BoardDao2;
 import app.dao.CommentDao;
+import app.dao.PointDao;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
 import app.domain.CommentVo;
@@ -536,10 +537,11 @@ public class BoardController extends HttpServlet {
 				BoardDao2 bd2 = new BoardDao2();
 				int value = bd2.boardInsert(bv, bgv);
 				
-				int value2 = bd2.pointInsert(bv);
+				PointDao pd = new PointDao();
+				int value2 = pd.pointInsert(bv);
 				
-				//System.out.println("value2 : " + value2);
-				//System.out.println("value: " + value);
+				System.out.println("value2 : " + value2);
+				System.out.println("value: " + value);
 	
 				if (value == 0) {
 					String path = request.getContextPath() + "/board/galleryWrite.do";

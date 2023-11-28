@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import app.dao.CommentDao;
+import app.dao.PointDao;
 import app.domain.CommentVo;
 
 /**
@@ -98,6 +99,12 @@ public class CommentController extends HttpServlet {
 			
 			int value = 0;
 			value = cd.commentInsert(cv);
+			
+			PointDao pd = new PointDao();
+			int value2 = 0;
+			value2 = pd.getPointComment(cv);
+			
+			//System.out.println("value2 : " + value2);
 			
 			PrintWriter pw = response.getWriter();
 			String responseStr = "{\"value\" : \""+value+"\"}";

@@ -253,6 +253,7 @@
 			}
 		});
 		
+		//게시글 신고 버튼
 		$(".rpt-btn").on("click", function() {
 			
 			if (confirm('정말 신고하시겠습니까?')) {
@@ -332,7 +333,7 @@
 					+		"</div>"
 					+		"<div class='comment-btn'>"
 					+			"<button type='button' class='btn-delete' onclick='commentDelete("+this.cmno+")'>삭제</button>"
-					+			"<button type='button' class='btn-report' onclick=''>&#x1F6A8;</button>"	
+					+			"<button type='button' class='btn-report' onclick='commentReport("+this.cmno+")'>&#x1F6A8;</button>"	
 					+		"</div>"
 					+	"</div>";			//onclick='commentDelete("+this.cmno+")'
 			}else{
@@ -347,7 +348,7 @@
 					+			"<span class='span-date'>"+this.cmdate+"</span>"
 					+		"</div>"
 					+		"<div class='comment-btn'>"
-					+			"<button type='button' class='btn-report' onclick=''>&#x1F6A8;</button>"	
+					+			"<button type='button' class='btn-report' onclick='commentReport("+this.cmno+")'>&#x1F6A8;</button>"	
 					+		"</div>"
 					+	"</div>";
 			}
@@ -386,6 +387,38 @@
 		}else{
 			return;
 		}
+	}
+	
+	function commentReport(idx){
+		
+		event.preventDefault();
+		event.stopPropagation()
+		
+		let cmno = idx;
+		let mbno2 = "${bv.mbno}";
+		
+		if(confirm("신고 하시겠습니까?")){
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/report/reportAction.do",
+				data : {"cmno" : cmno, "mbno2" : mbno2},
+				dataType : "json",
+				cache : false,
+				success : function(data){
+					if(data.value == 1){
+						alert("신고되었습니다.");
+						commentListLoad();
+					}
+				},
+				error : function(){
+					alert("신고 에러");
+					return;
+				}
+			});
+		}else{
+			return;
+		}
+		
 	}
 	
 	
