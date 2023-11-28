@@ -251,7 +251,6 @@
 	}
 	
 	.container .cont_area .cont {
-		display:none;
 		color:black;
 		text-align:center;
 		width:100%;
@@ -390,3 +389,7 @@
 	.page-num td a {
 		color: black;
 	}
+	.top_list .top_title {
+    position: absolute;
+    bottom: -580px;
+}

@@ -451,8 +451,10 @@ public class ContentsDao {
 			e.printStackTrace();
 		}
 		BookmarkDao bm = new BookmarkDao();
+		ReviewDao rd = new ReviewDao();
 		cv.setContentLikeCnt(bm.getContentsBookmarkedCnt(contentid));
 		cv.setContentsView(this.getContentsView(contentid));
+		cv.setContentRating(rd.getReviewAverage(contentid));
 		return cv;
 	}
 	
@@ -501,13 +503,15 @@ public class ContentsDao {
 		}
 		return cnt;
 	}
-
-	public ArrayList<ContentsVo> getViewRanking() {
+	public ArrayList<ContentsVo> getViewRanking(int i) {
 		ArrayList<ContentsVo> alist = new ArrayList<>();
-		String sql="select * from tempcontents where contentdelyn = 'N' order by contentsView desc limit 10";
+		String sql="select a.*,rating from tempcontents a \r\n"
+				+ "JOIN (select contentid,AVG(rvrate) as rating from review group by 1) c on a.contentid = c.contentid \r\n"
+				+ "where contentdelyn = 'N' order by contentsView desc limit ?;";
 		ResultSet rs = null;
 		try{
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()){
@@ -529,15 +533,16 @@ public class ContentsDao {
 		}
 		return alist;
 	}
-	public ArrayList<ContentsVo> getReviewRanking() {
+	public ArrayList<ContentsVo> getReviewRanking(int i) {
 		ArrayList<ContentsVo> alist = new ArrayList<>();
-		String sql="select a.*, rvcnt \r\n"
-				+ "from tempcontents a \r\n"
-				+ "JOIN (select contentid,count(*) as rvcnt from review where rvdelyn = 'N' group by 1) b ON a.contentid = b.contentid \r\n"
-				+ "order by rvcnt desc limit 10;";
+		String sql="select a.*, rvcnt, rating\r\n"
+				+ "from tempcontents a\r\n"
+				+ "JOIN (select contentid,count(*) as rvcnt,avg(rvrate) as rating from review where rvdelyn = 'N' group by 1) b ON a.contentid = b.contentid\r\n"
+				+ "order by rvcnt desc limit ?;";
 		ResultSet rs = null;
 		try{
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()){
@@ -559,15 +564,17 @@ public class ContentsDao {
 		}
 		return alist;
 	}
-	public ArrayList<ContentsVo> getBookmarkRanking() {
+	public ArrayList<ContentsVo> getBookmarkRanking(int i) {
 		ArrayList<ContentsVo> alist = new ArrayList<>();
-		String sql="select a.*, bmcnt \r\n"
-				+ "from tempcontents a \r\n"
-				+ "JOIN (select contentid,count(*) as bmcnt from bookmark where bmdelyn = 'N' group by 1) b ON a.contentid = b.contentid \r\n"
-				+ "order by bmcnt desc limit 10;";
+		String sql="select a.*, bmcnt, rating \r\n"
+				+ "from tempcontents a\r\n"
+				+ "JOIN (select contentid,count(*) as bmcnt from bookmark where bmdelyn = 'N' group by 1) b ON a.contentid = b.contentid\r\n"
+				+ "JOIN (select contentid,AVG(rvrate) as rating from review group by 1) c on a.contentid = c.contentid \r\n"
+				+ "order by bmcnt desc limit ?;";
 		ResultSet rs = null;
 		try{
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()){
@@ -589,5 +596,72 @@ public class ContentsDao {
 		}
 		return alist;
 	}
-	
+	public ArrayList<ContentsVo> getIndexTodayRanking(int i) {
+		ArrayList<ContentsVo> alist = new ArrayList<>();
+		ReviewDao rd = new ReviewDao();
+		String sql="select a.*, bmcnt, rating \r\n"
+				+ "from tempcontents a\r\n"
+				+ "JOIN (select contentid,count(*) as bmcnt from bookmark where bmdelyn = 'N' and (DATE_FORMAT(bmdate,'%Y%m%d') = DATE_FORMAT(now(),'%Y%m%d') or DATE_FORMAT(bmdatem,'%Y%m%d') = DATE_FORMAT(now(),'%Y%m%d'))\r\n"
+				+ "group by 1) b ON a.contentid = b.contentid\r\n"
+				+ "JOIN (select contentid,AVG(rvrate) as rating from review group by 1) c on a.contentid = c.contentid \r\n"
+				+ "order by bmcnt desc limit ?;";
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				ContentsVo cv = new ContentsVo();
+				cv.setContentid(rs.getString("contentid"));
+				cv.setContentRating(rd.getReviewAverage(cv.getContentid()));
+				cv.setContenttypeid(rs.getString("contenttypeid"));
+				cv.setContentdate(rs.getString("contentdate"));
+				cv.setFirstimage(rs.getString("firstimage"));
+				cv.setTitle(rs.getString("title"));
+				cv.setMapx(rs.getString("mapx"));
+				cv.setMapy(rs.getString("mapy"));
+				cv.setContentLikeCnt(rs.getInt("bmcnt"));
+				alist.add(cv);
+				
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return alist;
+	}
+	public ArrayList<ContentsVo> getIndexRatingRanking(int i) {
+		ArrayList<ContentsVo> alist = new ArrayList<>();
+		ReviewDao rd = new ReviewDao();
+		String sql="select a.*, rvcnt, rating \r\n"
+				+ "from tempcontents a \r\n"
+				+ "JOIN (select contentid,count(*) as rvcnt,avg(rvrate) as rating from review where rvdelyn = 'N' group by 1) b ON a.contentid = b.contentid \r\n"
+				+ "order by rating desc limit ?";
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				ContentsVo cv = new ContentsVo();
+				cv.setContentid(rs.getString("contentid"));
+				cv.setContentRating(rd.getReviewAverage(cv.getContentid()));
+				cv.setContenttypeid(rs.getString("contenttypeid"));
+				cv.setContentdate(rs.getString("contentdate"));
+				cv.setFirstimage(rs.getString("firstimage"));
+				cv.setTitle(rs.getString("title"));
+				cv.setMapx(rs.getString("mapx"));
+				cv.setMapy(rs.getString("mapy"));
+				cv.setContentReviewCnt(rs.getInt("rvcnt"));
+				alist.add(cv);
+				
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return alist;
+	}
 }

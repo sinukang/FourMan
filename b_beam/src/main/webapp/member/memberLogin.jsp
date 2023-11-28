@@ -90,7 +90,9 @@
 					$("#checkmsg2").css("display","block");
 					$("#memberPwd").focus();
 				}else{
-					if(${not empty prevURL}){
+					if(${not empty manager}){
+						location.href='${pageContext.request.contextPath}/index.jsp';
+					}else if(${not empty prevURL}){
 						location.href='${prevURL}';
 					}else{
 						location.href='${pageContext.request.contextPath}/index.jsp';					

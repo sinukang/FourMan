@@ -21,8 +21,15 @@ public class ContentsVo {
 	private int contentsView;
 	private int contentLikeCnt;
 	private int contentReviewCnt;
+	private int contentRating;
 	private String contentLikeYN;
 	
+	public int getContentRating() {
+		return contentRating;
+	}
+	public void setContentRating(int contentRating) {
+		this.contentRating = contentRating;
+	}
 	public int getContentsView() {
 		return contentsView;
 	}

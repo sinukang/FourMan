@@ -66,6 +66,7 @@ public class ContentsController extends HttpServlet {
 			
 			pm.setScri(sc);
 			ContentsDao cd = new ContentsDao();
+			ReviewDao rvd = new ReviewDao();
 			
 
 			ArrayList<ContentsVo> aryList = new ArrayList<ContentsVo>();
@@ -88,6 +89,7 @@ public class ContentsController extends HttpServlet {
 				cv.setTitle(contents.get("title").toString());
 				cv.setMapx(contents.get("mapx").toString());
 				cv.setMapy(contents.get("mapy").toString());
+				cv.setContentRating(rvd.getReviewAverage(cv.getContentid()));
 				cv.setContentReviewCnt(cd.getReviewcnt(cv.getContentid()));
 				cv.setContentLikeYN("N");
 				aryList.add(cv);
@@ -193,9 +195,10 @@ public class ContentsController extends HttpServlet {
 		}else if (location.equals("contentsRanking.do")) {
 			ContentsDao cd = new ContentsDao();
 			ReviewDao rvd  = new ReviewDao();
-			ArrayList<ContentsVo> viewContents = cd.getViewRanking();
-			ArrayList<ContentsVo> reviewContents = cd.getReviewRanking();
-			ArrayList<ContentsVo> bookmarkContents = cd.getBookmarkRanking(); 
+			int rankcnt = 10;
+			ArrayList<ContentsVo> viewContents = cd.getViewRanking(rankcnt);
+			ArrayList<ContentsVo> reviewContents = cd.getReviewRanking(rankcnt);
+			ArrayList<ContentsVo> bookmarkContents = cd.getBookmarkRanking(rankcnt); 
 			ArrayList<ReviewVo> review = rvd.getRankedReview(); 
 
 			request.setAttribute("vcList", viewContents);

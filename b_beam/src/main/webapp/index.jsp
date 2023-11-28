@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="app.dao.ContentsDao" %>
+<%@ page import="app.domain.ContentsVo" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+ContentsDao cd = new ContentsDao();
+int i = 3;
+ArrayList<ContentsVo> todaylist = cd.getIndexTodayRanking(i);
+ArrayList<ContentsVo> ratinglist = cd.getIndexRatingRanking(i);
+ArrayList<ContentsVo> viewlist = cd.getViewRanking(i);
+pageContext.setAttribute("todaylist", todaylist);
+pageContext.setAttribute("ratinglist", ratinglist);
+pageContext.setAttribute("viewlist", viewlist);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +23,7 @@
 	<!-- Link Swiper's CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 	<link href="./source/css/home.css" type="text/css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 	<jsp:include page="source/include/header.jsp"/>
@@ -56,47 +70,119 @@
 	<div class="container">
 		<ul class="tab">
 			<li class="is_on">
-			<a href="#tab1" class="btn">오늘의 top3</a>
+			<a onclick="tabSwitch(1)" class="btn">오늘의 top3</a>
 			</li>
 			<li>
-			<a href="#tab2" class="btn">조회수 top3</a>
+			<a onclick="tabSwitch(2)" class="btn">조회수 top3</a>
 			</li>
 			<li>
-			<a href="#tab3" class="btn">별점 top3</a>
+			<a onclick="tabSwitch(3)" class="btn">별점 top3</a>`
 			</li>
 		</ul>
 		<div class="cont_area">
 			<div class="cont" id="tab1">
 				<div class="top_list">
-					<ul>
-						<li>
-							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg">
+				<%if(todaylist.size() == 0){ %>
+					<p>오늘의 top3가 없습니다!</p>
+					<%}else{ %>
+						<ul>
+						<%for(ContentsVo cv:todaylist){ %>
+						<li onclick="location.href='${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=<%=cv.getContentid()%>'">
+							<%if(cv.getFirstimage()!=null&&!cv.getFirstimage().equals("")){ %>					
+									<img src="<%=cv.getFirstimage()%>">
+							<%}else{ %>				
+									<img src="./source/images/notFound.png">
+								<%} %>
+							<div class="top_title"><h1><%=cv.getTitle()%> <span> <%=cv.getContentLikeCnt()%></span></h1></div>
 						</li>
-						<li style="padding: 0 10px;">
-							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg">
-						</li>
-						<li>
-							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg">
-						</li>
+						<%}if(todaylist.size()!=3){
+							for(int j = 0; j < (3 -todaylist.size());j++){%>
+							<li>
+									<img src="./source/images/notFound.png">
+							</li>
+						<%}
+						}%>
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li style="padding: 0 10px;"> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg"> -->
+<!-- 						</li> -->
 					</ul>
+					<%}%>
 				</div>
 			</div>
 			<div class="cont" id="tab2">
 				<div class="top_list">
-					<ul>
-						<li>조회수 top1</li>
-						<li>조회수 top2</li>
-						<li>조회수 top3</li>
+					<%if(viewlist.size() == 0){ %>
+					<p>오늘의 top3가 없습니다!</p>
+					<%}else{ %>
+						<ul>
+						<%for(ContentsVo cv:viewlist){ %>
+						<li onclick="location.href='${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=<%=cv.getContentid()%>'">
+							<%if(cv.getFirstimage()!=null&&!cv.getFirstimage().equals("")){ %>					
+									<img src="<%=cv.getFirstimage()%>">
+							<%}else{ %>				
+									<img src="./source/images/notFound.png">
+								<%} %>
+							<div class="top_title"><h1><%=cv.getTitle()%></h1> <span> <%=cv.getContentsView()%></span></div>
+						</li>
+						<%}if(viewlist.size()!=3){
+							for(int j = 0; j < (3 - viewlist.size());j++){%>
+							<li>
+									<img src="./source/images/notFound.png">
+							</li>
+						<%}
+						}%>
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li style="padding: 0 10px;"> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg"> -->
+<!-- 						</li> -->
 					</ul>
+					<%}%>
 				</div>
 			</div>
 			<div class="cont" id="tab3">
 				<div class="top_list">
-					<ul>
-						<li>별점 top1</li>
-						<li>별점 top2</li>
-						<li>별점 top3</li>
+					<%if(ratinglist.size() == 0){ %>
+					<p>오늘의 top3가 없습니다!</p>
+					<%}else{ %>
+						<ul>
+						<%for(ContentsVo cv:ratinglist){ %>
+						<li onclick="location.href='${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=<%=cv.getContentid()%>'">
+							<%if(cv.getFirstimage()!=null&&!cv.getFirstimage().equals("")){ %>					
+									<img src="<%=cv.getFirstimage()%>">
+							<%}else{ %>				
+									<img src="./source/images/notFound.png">
+								<%} %>
+							<div class="top_title"><h1><%=cv.getTitle()%></h1> <span> <%=cv.getContentRating()/100%></span></div>
+						</li>
+						<%}if(ratinglist.size()!=3){
+							for(int j = 0; j < (3 - ratinglist.size());j++){%>
+							<li>
+									<img src="./source/images/notFound.png">
+							</li>
+						<%}
+						}%>
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li style="padding: 0 10px;"> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg"> -->
+<!-- 						</li> -->
 					</ul>
+					<%}%>
 				</div>
 			</div>
 		</div>
@@ -112,6 +198,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
 	<script>
+	
 		var swiper = new Swiper(".mySwiper", {
 			spaceBetween: 30,
 			centeredSlides: true,
@@ -129,5 +216,25 @@
 			},
 		});
 	</script> 
+	<script>
+	window.onlaod=tabSwitch(1);
+	function tabSwitch(e){
+		if(e==1){
+			$('#tab1').css('display','');
+			$('#tab2').css('display','none');
+			$('#tab3').css('display','none');
+		}else if(e==2){
+			$('#tab1').css('display','none');
+			$('#tab2').css('display','');
+			$('#tab3').css('display','none');
+		}else if(e==3){
+			$('#tab1').css('display','none');
+			$('#tab2').css('display','none');
+			$('#tab3').css('display','');
+			relayout();
+			resizeMap();
+		}
+	}
+	</script>
 </body>
 </html>

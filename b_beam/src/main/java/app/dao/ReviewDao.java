@@ -355,7 +355,25 @@ public class ReviewDao {
 		}
 		return alist;
 	}	
-				
+
+	public int getReviewAverage(String contentid) {
+		int value = 0;
+		String sql="select a.contentid,AVG(a.rvrate) as rating \r\n"
+				+ "from review a \r\n"
+				+ "where a.contentid = ?";
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				value = (int)(rs.getDouble("rating")*100);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return value;
+	}		
 			
 			
 			
