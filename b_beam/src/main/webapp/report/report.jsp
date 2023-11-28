@@ -55,7 +55,7 @@
 				<c:forEach var="rp" items="${alist}" varStatus="idx">
 					<tr>
 						<td class="delCheck">
-							<input type="checkbox" class="deleteBox">
+							<input type="checkbox" class="deleteBox" value="${rp.rpno}">
 						</td>
 						<td class="reportNum">${rp.rpno}</td>
 						<td class="reportCnt">
@@ -111,7 +111,14 @@
 							</c:choose>						
 						</td>
 						<td class="userName">
-							<button class="userId">${rp.mbname}</button>
+							<c:choose>
+								<c:when test="">
+									<button class="userId" value="${rp.rpno}">${rp.mbname}</button>
+								</c:when>
+								<c:otherwise>
+									<button class="userId" value="${rp.rpno}">${rp.mbname}</button>
+								</c:otherwise>
+							</c:choose>
 						</td>
 						<td class="content">
 							<c:choose>
@@ -145,7 +152,16 @@
 								</c:otherwise>
 							</c:choose>						
 						</td>
-						<td class="clearYN">${rp.rpdelyn}</td>
+						<td class="clearYN">
+							<c:choose>
+								<c:when test="${rp.rpdelyn eq 'N'}">
+									<button class="boardDelete">글 삭제하기</button>
+								</c:when>
+								<c:otherwise>
+									<button class="boardDeleteCancel">글 삭제취소</button>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -158,18 +174,7 @@
 		<div class="modalBody">
 			<span class="closeBtn">&times;</span>
 			<div class="modalContents">
-				<h2>사용자 정보</h2>
-				<p>ID: <span id="userId">아놀드슈왈츠제네거</span></p>
-				<p>Email: <span id="userEmail">bbeamproject@gmail.com</span></p>
-				<h2>패널티 선택</h2>
-				<select class="penaltySelect">
-					<option value="N">패널티 없음</option>
-					<option value="W">이용정지(7일)</option>
-					<option value="M">이용정지(30일)</option>
-					<option value="S">이용정지(영구)</option>
-				</select>
-				<button class="penaltyBtn">완료</button>
-				<button class="cancelBtn">취소</button>
+			
 			</div>
 		</div>
 	</div>
@@ -257,15 +262,21 @@
 		// 사용자 ID 클릭 시 모달 표시----------------------------------------------
 		$(".userId").on("click", function() {
 			
-			var modal = $('#myModal');
-			if (modal.hasClass("dp-none")) {
-				modal.removeClass("dp-none");
-				modal.addClass("dp-flex");
-			} 
-			else {
-				modal.removeClass("dp-flex");
-				modal.addClass("dp-none");
-			}
+			let rpno = $(this).val();
+			
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/report/penaltyPage.do",
+				data : {"rpno" : rpno},
+				dataType : "json",
+				cache : false,
+				success : function(data){
+					penaltyPageMaker(data);
+				},
+				error : function(){
+					alert("에러");
+				}
+			});
 			
 		});
 		
@@ -277,6 +288,19 @@
 		});
 		
 		
+		$(".boardDelete").on("click", function(){
+			
+			let selectedBoard = $(".deleteBox:checked");
+				
+			if(selectedBoard == null){
+				alert("삭제할 글을 선택해주세요");
+			}else{
+				for (let i = 0; i < selectedBoard.length; i++) {
+					console.log(selectedBoard[i]);
+				}
+			}		
+		});		
+		
 	});
 	
 	//모달 영역 밖 클릭 시 모달 닫음
@@ -286,7 +310,51 @@
 			modal.removeClass("dp-flex");
 			modal.addClass("dp-none");
 		}
-	}	
+	}
+	
+	function penaltyPageMaker(data){
+		
+		let str = "";
+		$(data).each(function(){
+			str += "<h2>사용자 정보</h2>"
+				+  "<p>닉네임 : <span id='userId'>"+this.mbname+"</span></p>"
+				+  "<p>Email: <span id='userEmail'>"+this.mbemail+"</span></p>"
+				+  "<h2>패널티 선택</h2>"
+				+  "<select class='penaltySelect'>"
+				+  "	<option value='N'>패널티 없음</option>"
+				+  "	<option value='W'>이용정지(7일)</option>"
+				+  "	<option value='M'>이용정지(30일)</option>"
+				+  "	<option value='S'>이용정지(영구)</option>"
+				+  "</select>"
+				+  "<button class='penaltyBtn' onclick='penaltyInsert("+this.mbno+")'>완료</button>"
+				+  "<button class='cancelBtn'>취소</button>";
+		});
+		
+		$(".modalContents").html(str);
+		
+		var modal = $('#myModal');
+		if (modal.hasClass("dp-none")) {
+			modal.removeClass("dp-none");
+			modal.addClass("dp-flex");
+		} 
+		else {
+			modal.removeClass("dp-flex");
+			modal.addClass("dp-none");
+		}		
+	}
+	
+	function penaltyInsert(data){
+		
+		let mbno = data;
+		location.href= "${pageContext.request.contextPath}/report/penalty.do?mbno="+mbno;
+		
+	}
+	
+
+	
+	function boardDeleteCancel(){
+		
+	}
 	
 </script>
 </body>
