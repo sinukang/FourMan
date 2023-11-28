@@ -1,14 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-    
- <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("btn3").addEventListener("click", function () {
-        // 버튼 1을 클릭했을 때 실행할 코드
-        var link = "<%=request.getContextPath() %>/board/noticeList.do";
-        window.location.href = link;
-    });
-});
-</script>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${empty manager}">
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "${pageContext.request.contextPath}/";
+	</script>
+</c:if>
     
     
 

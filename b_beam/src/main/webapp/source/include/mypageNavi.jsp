@@ -1,16 +1,16 @@
 <%@ page language="java"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${empty mbno}">
+	<script>
+		if(confirm('로그인이 필요한 기능입니다. 로그인하시겠습니까?')){
+			location.href='${pageContext.request.contextPath}/member/memberLogin.do';
+		}else{
+			history.back();
+		}
+	</script>
+</c:if>
         
- <script>
-// document.addEventListener("DOMContentLoaded", function () {
-//     document.getElementById("btn3").addEventListener("click", function () {
-//         // 버튼 1을 클릭했을 때 실행할 코드
-<%--         var link = "<%=request.getContextPath() %>/board/noticeList.do"; --%>
-//         window.location.href = link;
-//     });
-// });
-</script>   
-    
     
 
 <link href="../source/css/mNavi.css" type="text/css" rel="stylesheet">

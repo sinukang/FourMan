@@ -24,7 +24,14 @@
 				<a href="${pageContext.request.contextPath}/board/galleryList.do">갤러리</a>
 			</li>
 			<li>
-				<a href="${pageContext.request.contextPath}/member/memberInfo.do">마이페이지</a>
+				<c:choose>
+					<c:when test="${not empty manager}">
+						<a href="${pageContext.request.contextPath}/report/report.do">관리자페이지</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/member/memberInfo.do">마이페이지</a>
+					</c:otherwise>
+				</c:choose>
 			</li>
 			<li>
 				<a href="${pageContext.request.contextPath}/board/noticeList.do">고객지원</a>

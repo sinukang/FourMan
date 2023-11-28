@@ -190,7 +190,9 @@ public class MemberController extends HttpServlet {
 				HttpSession session =  request.getSession();
 				session.setAttribute("mbname", mv2.getMbname());
 				session.setAttribute("mbno", mbno);
-				session.setAttribute("manager", mv2.getManager());
+				if(mv2.getManager().equals("M")) {
+					session.setAttribute("manager", mv2.getManager());
+				}
 			}
 			JSONObject jsonResponse = new JSONObject();
 			jsonResponse.put("value", mbno);
