@@ -27,13 +27,16 @@ public class ReportDao {
 			ArrayList<ReportVo> alist = new ArrayList<ReportVo>();
 			ResultSet rs = null;
 			
-			String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, c.cmcont, p.pndelyn"
+			String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, c.cmcont, p.pndelyn, bdno_count, rvno_count, cmno_count"
 					+ " FROM report r "
 					+ " JOIN member m on r.mbno2 = m.mbno"
 					+ " LEFT JOIN board b on r.bdno = b.bdno"
 					+ " LEFT JOIN review rv on r.rvno = rv.rvno"
 					+ " LEFT JOIN comment c on r.cmno = c.cmno"
 					+ " LEFT JOIN penalty p on r.rpno = p.rpno"
+					+ " LEFT JOIN (SELECT bdno, COUNT(*) AS bdno_count FROM report WHERE bdno IS NOT NULL GROUP BY bdno) AS report_count_bd ON r.bdno = report_count_bd.bdno"
+					+ " LEFT JOIN (SELECT rvno, COUNT(*) AS rvno_count FROM report WHERE rvno IS NOT NULL GROUP BY rvno) AS report_count_rv ON r.rvno = report_count_rv.rvno"
+					+ " LEFT JOIN (SELECT cmno, COUNT(*) AS cmno_count FROM report WHERE cmno IS NOT NULL GROUP BY cmno) AS report_count_cm ON r.cmno = report_count_cm.cmno"
 					+ " ORDER by r.rpno DESC"
 					+ " LIMIT ?, ?";
 			
@@ -62,6 +65,9 @@ public class ReportDao {
 					rpv.setRpdelyn(rs.getString("rpdelyn"));
 					rpv.setMbname(rs.getString("mbname"));
 					rpv.setBdcont(rs.getString("bdcont"));
+					rpv.setBdno_count(rs.getInt("bdno_count"));
+					rpv.setRvno_count(rs.getInt("rvno_count"));
+					rpv.setCmno_count(rs.getInt("cmno_count"));
 					
 					rv.setRvcont(rs.getString("rvcont"));
 					rpv.setReviewVo(rv);
@@ -140,7 +146,7 @@ public class ReportDao {
 			
 			// 신고된 게시글 종류 확인
 			if (rpv.getBdno() != 0) {
-					cate = "bd";
+				cate = "bd";
 			} else if (rvno != 0) {
 				cate = "rv";
 			} else if (cmno != 0) {
@@ -170,6 +176,7 @@ public class ReportDao {
 				} else if ("cmno".equals(category)) {
 					pstmt.setInt(3, cmno);
 				}
+				//pstmt.setString(4, rpv.getRpcate());
 				
 				exec = pstmt.executeUpdate();
 				

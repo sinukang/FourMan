@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import app.dao.ReportDao;
 import app.domain.PageMaker;
+import app.domain.PenaltyVo;
 import app.domain.ReportVo;
 import app.domain.SearchCriteria;
 
@@ -82,13 +83,17 @@ public class ReportController extends HttpServlet {
 			if (request.getParameter("cmno") != null) {
 				cmno = Integer.parseInt(request.getParameter("cmno"));
 			}
+			
+			//String rpcate = request.getParameter("rpcate");
 
 			ReportVo rpv = new ReportVo();
 			rpv.setMbno(mbno);
 			rpv.setMbno2(mbno2);
 			rpv.setBdno(bdno);
+			rpv.setRvno(rvno);
+			rpv.setCmno(cmno);
+			//rpv.setRpcate(rpcate);
 			
-			//String rpcate = request.getParameter("rpcate");
 			
 			System.out.println("mbno : " + mbno);
 			System.out.println("mbno2 : " + mbno2);
@@ -140,6 +145,43 @@ public class ReportController extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("{\"success\": " + (value > 0) + "}");	// value가 0보다 크면 true 아니면 false
+			out.flush();
+			out.close();
+		} else if (location.equals("penalty.do")) {
+			
+			int mbno = 0;
+			int rpno = 0;
+			String pndelyn = null;
+			
+			if(request.getParameter("mbno") != null) {
+				mbno = Integer.parseInt(request.getParameter("mbno"));
+			}
+			
+			if(request.getParameter("rpno") != null) {
+				rpno = Integer.parseInt(request.getParameter("rpno"));
+			}
+			
+			pndelyn = request.getParameter("pndelyn");
+			
+			PenaltyVo pv = new PenaltyVo();
+			pv.setMbno(mbno);
+			pv.setRpno(rpno);
+			pv.setPndelyn(pndelyn);
+			
+			System.out.println("mbno : " + mbno);
+			System.out.println("rpno : " + rpno);
+			System.out.println("pndelyn : " + pndelyn);
+			
+			ReportDao pd = new ReportDao();
+			int value = 0;
+			value = pd.penaltyInsert(pv);
+			
+			System.out.println("value : " + value);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print("{\"success\": " + (value > 0) + " }");
 			out.flush();
 			out.close();
 		}

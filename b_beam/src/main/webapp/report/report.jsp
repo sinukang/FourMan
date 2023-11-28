@@ -58,7 +58,19 @@
 							<input type="checkbox" class="deleteBox">
 						</td>
 						<td class="reportNum">${rp.rpno}</td>
-						<td class="reportCnt"></td>
+						<td class="reportCnt">
+							<c:choose>
+								<c:when test="${rp.rvno ne ''}">
+									${rp.rvno_count}
+								</c:when>
+								<c:when test="${rp.bdno ne ''}">
+									${rp.bdno_count}
+								</c:when>
+								<c:when test="${rp.cmno ne ''}">
+									${rp.cmno_count}
+								</c:when>
+							</c:choose>
+						</td>
 						<td class="sort">
 							<c:choose>
 								<c:when test="${rp.rvno ne ''}">
@@ -101,7 +113,19 @@
 						<td class="userName">
 							<button class="userId">${rp.mbname}</button>
 						</td>
-						<td class="content">${rp.bdcont}</td>
+						<td class="content">
+							<c:choose>
+								<c:when test="${rp.rvno ne ''}">
+									${rp.reviewVo.rvcont}
+								</c:when>
+								<c:when test="${rp.bdno ne ''}">
+									${rp.bdcont}
+								</c:when>
+								<c:when test="${rp.cmno ne ''}">
+									${rp.commnetVo.cmcont}
+								</c:when>
+							</c:choose>	
+						</td>
 						<td class="pntYN">
 							<c:choose>
 								<c:when test="${rp.penaltyVo.pndelyn eq 'N'}">

@@ -9,10 +9,32 @@ public class ReportVo extends BoardVo {
 	private int cmno;
 	private String rpcate;
 	private String rpdelyn;
+	private int bdno_count;
+	private int rvno_count;
+	private int cmno_count;
 	
 	private ReviewVo reviewVo;
 	private CommentVo commnetVo;
 	private PenaltyVo penaltyVo;
+	
+	public int getBdno_count() {
+		return bdno_count;
+	}
+	public void setBdno_count(int bdno_count) {
+		this.bdno_count = bdno_count;
+	}
+	public int getRvno_count() {
+		return rvno_count;
+	}
+	public void setRvno_count(int rvno_count) {
+		this.rvno_count = rvno_count;
+	}
+	public int getCmno_count() {
+		return cmno_count;
+	}
+	public void setCmno_count(int cmno_count) {
+		this.cmno_count = cmno_count;
+	}
 	
 	public int getRpno() {
 		return rpno;
