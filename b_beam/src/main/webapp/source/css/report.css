@@ -135,6 +135,15 @@ html, body{
 .userName {  
 	
 }
+.userId{
+	width: 100%;
+}
+.getPenalty{
+	width: 100%;
+	color: #fff;
+	background-color: #999;
+	border: 1px solid #fff;
+}
 .content { 
 	width: 70%;
 }

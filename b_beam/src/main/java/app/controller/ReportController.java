@@ -118,7 +118,7 @@ public class ReportController extends HttpServlet {
 			out.close();
 			
 		} else if (location.equals("reportDeleteAction.do")) {
-			
+			//신고 글 처리 후 원글 삭제
 			int rpno = 0;
 			int bdno = 0;
 			
@@ -147,60 +147,78 @@ public class ReportController extends HttpServlet {
 			out.print("{\"success\": " + (value > 0) + "}");	// value가 0보다 크면 true 아니면 false
 			out.flush();
 			out.close();
+			
 		} else if (location.equals("penalty.do")) {
-			
-			int mbno = 0;
+			//특정 유저에게 패널티를 부여함
 			int rpno = 0;
+			int mbno2 = 0;
 			String pndelyn = null;
-			
-			if(request.getParameter("mbno") != null) {
-				mbno = Integer.parseInt(request.getParameter("mbno"));
-			}
 			
 			if(request.getParameter("rpno") != null) {
 				rpno = Integer.parseInt(request.getParameter("rpno"));
 			}
+			if(request.getParameter("mbno2") != null) {
+				mbno2 = Integer.parseInt(request.getParameter("mbno2"));
+			}
+			if(request.getParameter("pndelyn") != null) {
+				pndelyn = (String)(request.getParameter("pndelyn"));
+			}
 			
-			pndelyn = request.getParameter("pndelyn");
-			
-			PenaltyVo pv = new PenaltyVo();
-			pv.setMbno(mbno);
-			pv.setRpno(rpno);
-			pv.setPndelyn(pndelyn);
-			
-			System.out.println("mbno : " + mbno);
 			System.out.println("rpno : " + rpno);
+			System.out.println("mbno2 : " + mbno2);
 			System.out.println("pndelyn : " + pndelyn);
 			
 			ReportDao pd = new ReportDao();
 			int value = 0;
-			value = pd.penaltyInsert(pv);
+			value = pd.penaltyInsert(rpno, mbno2, pndelyn);
 			
-			System.out.println("value : " + value);
 			
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print("{\"success\": " + (value > 0) + " }");
-			out.flush();
-			out.close();
-		} else if (location.equals("reportDoPenalty.do")) {
+			if (value == 0) {
+				PrintWriter pw = response.getWriter();
+				pw.println("<script>alert('패널티 부여 에러');history.back();</script>");
+			} else {
+				String path = request.getContextPath()+"/report/report.do";
+				response.sendRedirect(path);
+			}
+			
+			
+		} else if (location.equals("selectReportedUser.do")) {	
+			//패널티 부여할 유저 선택 시 해당 유저 정보 불러옴
+			
 			int rpno = 0;
-			
 			rpno = Integer.parseInt(request.getParameter("rpno"));
 			
 			ReportVo rpv = new ReportVo();
-			//ReportDao rpd = new ReportDao();
+			ReportDao rpd = new ReportDao();
 			
-			rpv.setRpno(rpno);
+			rpv = rpd.selectReportedUser(rpno);
+			String mbname = rpv.getMbname();
+			String mbemail= rpv.getMbemail();
+			int mbno2 = rpv.getMbno2();
 			
-			//rpv = rpd.reportSelectOne(rpno);
+			PrintWriter pw = response.getWriter();
+			String str = "{\"rpno\" : \""+rpno+"\", \"mbname\": \""+mbname+"\", \"mbemail\": \""+mbemail+"\", \"mbno2\": \""+mbno2+"\"}";
+			pw.println(str);
 			
-			//request.setAttribute("rpv", rpv);
+		} else if (location.equals("penaltyCancel.do")) {	
+			//패널티 부여를 취소함
 			
-			//String path ="/report/report.jsp";
-			//RequestDispatcher rd = request.getRequestDispatcher(path);
-			//rd.forward(request, response);
+			int rpno = 0;
+			rpno = Integer.parseInt(request.getParameter("rpno"));
+			
+			ReportDao rpd = new ReportDao();
+			
+			int value = 0;
+			value = rpd.penaltyCancel(rpno);
+			
+			if (value == 0) {
+				PrintWriter pw = response.getWriter();
+				pw.println("<script>alert('패널티 취소 에러');history.back();</script>");
+			} else {
+				String path = request.getContextPath()+"/report/report.do";
+				response.sendRedirect(path);
+			}
+			
 			
 		}
 	}

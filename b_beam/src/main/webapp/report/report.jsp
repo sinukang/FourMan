@@ -112,11 +112,11 @@
 						</td>
 						<td class="userName">
 							<c:choose>
-								<c:when test="">
-									<button class="userId" value="${rp.rpno}">${rp.mbname}</button>
+								<c:when test="${rp.penaltyVo.pndelyn eq 'N' || rp.penaltyVo.pndelyn eq null}">
+									<button class="userId" value="${rp.rpno}" onclick="penaltyCancel(${rp.rpno})">${rp.mbname}</button>
 								</c:when>
 								<c:otherwise>
-									<button class="userId" value="${rp.rpno}">${rp.mbname}</button>
+									<button class="getPenalty" value="${rp.rpno}">${rp.mbname}</button>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -155,10 +155,10 @@
 						<td class="clearYN">
 							<c:choose>
 								<c:when test="${rp.rpdelyn eq 'N'}">
-									<button class="boardDelete">글 삭제하기</button>
+									<button class="boardDelete" onclick="boardDelete">글 삭제하기</button>
 								</c:when>
 								<c:otherwise>
-									<button class="boardDeleteCancel">글 삭제취소</button>
+									<button class="boardDeleteCancel" onclick="boardDeleteCancel">글 삭제취소</button>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -259,19 +259,18 @@
 			}
 		});
 		
-		// 사용자 ID 클릭 시 모달 표시----------------------------------------------
-		$(".userId").on("click", function() {
+		// 사용자 ID 클릭 시 모달 표시
+		$(".userId, .getPenalty").on("click", function(event) {
 			
 			let rpno = $(this).val();
 			
 			$.ajax({
 				type : "post",
-				url : "${pageContext.request.contextPath}/report/reportDoPenalty.do",
+				url : "${pageContext.request.contextPath}/report/selectReportedUser.do",
 				data : {"rpno" : rpno},
-				dataType : "html",
+				dataType : "json",
 				cache : false,
 				success : function(data){
-					console.log(rpno);
 					penaltyPageMaker(data);
 				},
 				error : function(){
@@ -282,27 +281,56 @@
 		});
 		
 		// 완료, 취소 버튼 클릭 시 모달 닫기
-		$(".penaltyBtn, .cancelBtn, .closeBtn").on("click", function() {
+		$(document).on("click", ".penaltyBtn, .cancelBtn, .closeBtn", function() {
 			var modal = $('#myModal');
 			modal.removeClass("dp-flex");
 			modal.addClass("dp-none");
 		});
 		
-		
-		$(".boardDelete").on("click", function(){
-			
-			let selectedBoard = $(".deleteBox:checked");
-				
-			if(selectedBoard == null){
-				alert("삭제할 글을 선택해주세요");
-			}else{
-				for (let i = 0; i < selectedBoard.length; i++) {
-					console.log(selectedBoard[i]);
-				}
-			}		
-		});		
+// 		// 완료, 취소 버튼 클릭 시 모달 닫기
+// 		$(".penaltyBtn, .cancelBtn, .closeBtn").on("click", function() {
+// 			var modal = $('#myModal');
+// 			modal.removeClass("dp-flex");
+// 			modal.addClass("dp-none");
+// 		});
 		
 	});
+	
+	//신고 처리 후 글 삭제
+	function boardDelete(){
+		
+		let checkBoxes = $(".deleteBox:checked");
+		
+		if(checkBoxes.length == 0){
+			alert("삭제할 글을 선택해주세요");
+		}
+		let checkedBoxes = [];
+		
+		$(checkBoxes).each(function(){
+			
+			checkedBoxes.push($(this).val());
+		});
+		
+// 		$.ajax({
+// 			type : "post",
+// 			url : "${pageContext.request.contextPath}/report/reportDeleteAction.do"
+// 			data : {checkedBoxes : checkedBoxes},
+// 			dataType : "json",
+// 			cache : false,
+// 			success : function(data){
+// 				alert(data + "개의 글이 삭제되었습니다.")
+// 			},
+// 			error : function(){
+// 				alert("삭제 에러");
+// 			}
+// 		});
+		
+	}
+	
+	//신고 처리 후 글 삭제 취소
+	function boardDeleteCancel(){
+		
+	}
 	
 	//모달 영역 밖 클릭 시 모달 닫음
 	window.onclick = function(e){
@@ -316,19 +344,25 @@
 	function penaltyPageMaker(data){
 		
 		let str = "";
+		if(data.length == 0){
+			return;
+		}
 		$(data).each(function(){
 			str += "<h2>사용자 정보</h2>"
+				+  "<p>신고번호 : <span id='rpno'>"+this.rpno+"</span></p>"
 				+  "<p>닉네임 : <span id='userId'>"+this.mbname+"</span></p>"
 				+  "<p>Email: <span id='userEmail'>"+this.mbemail+"</span></p>"
 				+  "<h2>패널티 선택</h2>"
 				+  "<select class='penaltySelect'>"
-				+  "	<option value='N'>패널티 없음</option>"
+				+  "	<option value='N' selected>패널티 없음</option>"
 				+  "	<option value='W'>이용정지(7일)</option>"
 				+  "	<option value='M'>이용정지(30일)</option>"
 				+  "	<option value='S'>이용정지(영구)</option>"
 				+  "</select>"
-				+  "<button class='penaltyBtn' onclick='penaltyInsert("+this.mbno+")'>완료</button>"
-				+  "<button class='cancelBtn'>취소</button>";
+				+  "<div>"
+				+  "	<button class='penaltyBtn' onclick='penaltyInsert("+this.mbno2+")'>완료</button>"
+				+  "	<button class='cancelBtn'>취소</button>"
+				+  "</div>";
 		});
 		
 		$(".modalContents").html(str);
@@ -344,18 +378,23 @@
 		}		
 	}
 	
+	//모달창에서 특정 유저에게 패널티를 부여함
 	function penaltyInsert(data){
 		
-		let mbno = data;
-		location.href= "${pageContext.request.contextPath}/report/penalty.do?mbno="+mbno;
-		
+		let rpno = $("span#rpno").text();
+		let mbno2 = data;
+		let pndelyn = $(".penaltySelect option:selected").val();
+		location.href= "${pageContext.request.contextPath}/report/penalty.do?rpno="+rpno+"&mbno2="+mbno2+"&pndelyn="+pndelyn+"";
 	}
+	
+// 	function penaltyCancel(data){
+		
+// 		let rpno = data;
+		
+// 		location.href = "${pageContext.request.contextPath}/report/penaltyCancel.do?rpno="+rpno;
+// 	}
 	
 
-	
-	function boardDeleteCancel(){
-		
-	}
 	
 </script>
 </body>

@@ -122,11 +122,13 @@ public class ReportDao {
 		}
 		
 		
-		/*
-		public ReportVo reportSelectOne(int rpno) { 
+		
+		public ReportVo selectReportedUser(int rpno) { 
+			
 			ReportVo rpv = null;
 			ResultSet rs = null;
-			String sql = "SELECT * FROM report WHERE rpno = ?";
+			String sql = "SELECT rp.*, m.mbname, m.mbemail FROM report rp JOIN member m"
+						+ " ON rp.mbno2 = m.mbno WHERE rp.rpno = ?";
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1,rpno); 
@@ -135,12 +137,15 @@ public class ReportDao {
 			
 				if (rs.next()) {
 					rpv = new ReportVo();
-					rpv.setMbno(rs.getInt("mbno"));
 					rpv.setRpno(rs.getInt("rpno"));
-					rpv.setMbname(rs.getString("mbname"));
-					rpv.setBdno(rs.getInt("bdno"));
+					rpv.setMbno2(rs.getInt("mbno2"));
+					rpv.setMbno(rs.getInt("mbno"));
 					rpv.setRvno(rs.getInt("rvno"));
+					rpv.setBdno(rs.getInt("bdno"));
 					rpv.setCmno(rs.getInt("cmno"));
+					rpv.setRpcate(rs.getString("rpcate"));
+					rpv.setRpdelyn(rs.getString("rpdelyn"));
+					rpv.setMbname(rs.getString("mbname"));
 					rpv.setMbemail(rs.getString("mbemail"));
 				}
 			
@@ -148,7 +153,7 @@ public class ReportDao {
 			
 			return rpv; 
 		}
-		*/
+		
 		
 		public int reportInsert(ReportVo rpv, int rvno, int cmno) {
 			int exec = 0;
@@ -227,15 +232,15 @@ public class ReportDao {
 			return exec1 + exec2;
 		}
 		
-		public int penaltyInsert(PenaltyVo pv) {
+		public int penaltyInsert(int rpno, int mbno2, String pndelyn) {
 			int exec = 0;
-			String sql = "INSERT INTO(rpno, mbno, pndelyn) "
+			String sql = "INSERT INTO penalty(rpno, mbno, pndelyn) "
 					+ " VALUES(?, ?, ?)";
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, pv.getRpno());
-				pstmt.setInt(2, pv.getMbno());
-				pstmt.setString(3, pv.getPndelyn());
+				pstmt.setInt(1, rpno);
+				pstmt.setInt(2, mbno2);
+				pstmt.setString(3, pndelyn);
 				
 				exec = pstmt.executeUpdate();
 			} catch (SQLException e ) {
@@ -244,5 +249,20 @@ public class ReportDao {
 			
 			return exec;
 		}
+		
+		public int penaltyCancel(int rpno) {
+			
+			int exec = 0;
+			String sql = "UPDATE penalty SET pndelyn = null, pndatem = NOW()";
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				
+				exec = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return exec;
+		}		
 		
 }
