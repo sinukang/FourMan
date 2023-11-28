@@ -266,11 +266,12 @@
 			
 			$.ajax({
 				type : "post",
-				url : "${pageContext.request.contextPath}/report/penaltyPage.do",
+				url : "${pageContext.request.contextPath}/report/reportDoPenalty.do",
 				data : {"rpno" : rpno},
-				dataType : "json",
+				dataType : "html",
 				cache : false,
 				success : function(data){
+					console.log(rpno);
 					penaltyPageMaker(data);
 				},
 				error : function(){

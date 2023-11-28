@@ -184,6 +184,24 @@ public class ReportController extends HttpServlet {
 			out.print("{\"success\": " + (value > 0) + " }");
 			out.flush();
 			out.close();
+		} else if (location.equals("reportDoPenalty.do")) {
+			int rpno = 0;
+			
+			rpno = Integer.parseInt(request.getParameter("rpno"));
+			
+			ReportVo rpv = new ReportVo();
+			//ReportDao rpd = new ReportDao();
+			
+			rpv.setRpno(rpno);
+			
+			//rpv = rpd.reportSelectOne(rpno);
+			
+			//request.setAttribute("rpv", rpv);
+			
+			//String path ="/report/report.jsp";
+			//RequestDispatcher rd = request.getRequestDispatcher(path);
+			//rd.forward(request, response);
+			
 		}
 	}
 	

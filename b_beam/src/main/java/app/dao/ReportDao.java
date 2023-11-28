@@ -121,23 +121,34 @@ public class ReportDao {
 			return value;
 		}
 		
+		
 		/*
-		 * public ReportVo reportSelectOne(int mbno, int rpno) { ReportVo rpv = null;
-		 * ResultSet rs = null; String sql = "SELECT * FROM report WHERE rpno = ?";
-		 * 
-		 * try (PreparedStatement pstmt = conn.prepareStatement(sql)) { pstmt.setInt(1,
-		 * rpno); rs = pstmt.executeQuery();
-		 * 
-		 * if (rs.next()) { rpv = new ReportVo();
-		 * 
-		 * 
-		 * }
-		 * 
-		 * } catch (SQLException e) { e.printStackTrace(); }
-		 * 
-		 * 
-		 * return rpv; }
-		 */
+		public ReportVo reportSelectOne(int rpno) { 
+			ReportVo rpv = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM report WHERE rpno = ?";
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1,rpno); 
+				
+				rs = pstmt.executeQuery();
+			
+				if (rs.next()) {
+					rpv = new ReportVo();
+					rpv.setMbno(rs.getInt("mbno"));
+					rpv.setRpno(rs.getInt("rpno"));
+					rpv.setMbname(rs.getString("mbname"));
+					rpv.setBdno(rs.getInt("bdno"));
+					rpv.setRvno(rs.getInt("rvno"));
+					rpv.setCmno(rs.getInt("cmno"));
+					rpv.setMbemail(rs.getString("mbemail"));
+				}
+			
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			return rpv; 
+		}
+		*/
 		
 		public int reportInsert(ReportVo rpv, int rvno, int cmno) {
 			int exec = 0;
