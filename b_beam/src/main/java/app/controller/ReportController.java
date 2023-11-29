@@ -148,8 +148,27 @@ public class ReportController extends HttpServlet {
 			out.flush();
 			out.close();
 			
-		} else if (location.equals("penalty.do")) {
+		} else if (location.equals("selectReportedUser.do")) {	
+			//패널티 부여할 유저 선택 시 해당 유저 정보 불러옴
+			
+			int rpno = 0;
+			rpno = Integer.parseInt(request.getParameter("rpno"));
+			
+			ReportVo rpv = new ReportVo();
+			ReportDao rpd = new ReportDao();
+			
+			rpv = rpd.selectReportedUser(rpno);
+			String mbname = rpv.getMbname();
+			String mbemail= rpv.getMbemail();
+			int mbno2 = rpv.getMbno2();
+			
+			PrintWriter pw = response.getWriter();
+			String str = "{\"rpno\" : \""+rpno+"\", \"mbname\": \""+mbname+"\", \"mbemail\": \""+mbemail+"\", \"mbno2\": \""+mbno2+"\"}";
+			pw.println(str);
+			
+		} else if (location.equals("penaltyUpdate.do")) {
 			//특정 유저에게 패널티를 부여함
+			
 			int rpno = 0;
 			int mbno2 = 0;
 			String pndelyn = null;
@@ -170,8 +189,7 @@ public class ReportController extends HttpServlet {
 			
 			ReportDao pd = new ReportDao();
 			int value = 0;
-			value = pd.penaltyInsert(rpno, mbno2, pndelyn);
-			
+			value = pd.penaltyUpdate(rpno, mbno2, pndelyn);
 			
 			if (value == 0) {
 				PrintWriter pw = response.getWriter();
@@ -180,25 +198,6 @@ public class ReportController extends HttpServlet {
 				String path = request.getContextPath()+"/report/report.do";
 				response.sendRedirect(path);
 			}
-			
-			
-		} else if (location.equals("selectReportedUser.do")) {	
-			//패널티 부여할 유저 선택 시 해당 유저 정보 불러옴
-			
-			int rpno = 0;
-			rpno = Integer.parseInt(request.getParameter("rpno"));
-			
-			ReportVo rpv = new ReportVo();
-			ReportDao rpd = new ReportDao();
-			
-			rpv = rpd.selectReportedUser(rpno);
-			String mbname = rpv.getMbname();
-			String mbemail= rpv.getMbemail();
-			int mbno2 = rpv.getMbno2();
-			
-			PrintWriter pw = response.getWriter();
-			String str = "{\"rpno\" : \""+rpno+"\", \"mbname\": \""+mbname+"\", \"mbemail\": \""+mbemail+"\", \"mbno2\": \""+mbno2+"\"}";
-			pw.println(str);
 			
 		} else if (location.equals("penaltyCancel.do")) {	
 			//패널티 부여를 취소함

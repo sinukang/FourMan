@@ -384,7 +384,7 @@
 		let rpno = $("span#rpno").text();
 		let mbno2 = data;
 		let pndelyn = $(".penaltySelect option:selected").val();
-		location.href= "${pageContext.request.contextPath}/report/penalty.do?rpno="+rpno+"&mbno2="+mbno2+"&pndelyn="+pndelyn+"";
+		location.href= "${pageContext.request.contextPath}/report/penaltyUpdate.do?rpno="+rpno+"&mbno2="+mbno2+"&pndelyn="+pndelyn+"";
 	}
 	
 // 	function penaltyCancel(data){
