@@ -360,7 +360,7 @@ public class ReviewDao {
 		int value = 0;
 		String sql="select a.contentid,AVG(a.rvrate) as rating \r\n"
 				+ "from review a \r\n"
-				+ "where a.contentid = ?";
+				+ "where a.contentid = ? and rvdelyn='N'";
 		ResultSet rs = null;
 		try{
 			pstmt = conn.prepareStatement(sql);

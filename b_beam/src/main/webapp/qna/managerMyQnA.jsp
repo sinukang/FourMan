@@ -37,7 +37,7 @@
 				<c:forEach var="qv" items="${qna_alist}">
 					<c:choose>
 						<c:when test="${qv.ambno>0}">
-							<div class="QnA-wrapper test${j}">
+							<div class="QnA-wrapper test${qv.qano}">
 								<div class="answered-item">
 									<h3 class="QnA-writer">${qv.qmbname}</h3>
 									<h3 class="QnA-title">${qv.qtitle}</h3>
@@ -49,21 +49,22 @@
 									</button>
 									<div class="answer-area">
 										<h3 class="answer-writer">${qv.ambname}</h3>
-										<p class="answer-content">${qv.acont}</p>
+										<p id="acont${qv.qano}" class="answer-content">${qv.acont}</p>
 									</div>
 								</div>
 							</div>
-							<div class="Answered-btn-area test2${j}">
+							<div class="Answered-btn-area test${qv.qano}">
 								<button class="btn-Delete btn" onclick="deleteAnswer(${qv.qano})">답변삭제</button>
-								<button class="btn-Modify btn" onclick="modifyAnswer(${qv.qano},${j},${qv.ambno})">답변수정</button>
+								<button class="btn-Modify btn" onclick="modifyAnswer(${qv.qano})">답변수정</button>
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div class="QnA-wrapper test${j}">
+							<div class="QnA-wrapper test${qv.qano}">
 								<div class="unanswered-item">
 									<h3 class="QnA-writer">${qv.qmbname}</h3>
 									<h3 class="QnA-title">${qv.qtitle}</h3>
 									<p class="QnA-Answer">${qv.qcont}</p>
+									
 									<!-- <i class="fa-solid fa-chevron-down"></i> -->
 									<button type="button" class="QnA-toggle">
 										<i class="fas fa-chevron-down"></i> <i
@@ -71,12 +72,11 @@
 									</button>
 								</div>
 							</div>
-							<div class="unAnswered-btn-area test${j}">
-								<button class="btn-Answer btn" onclick="writeAnswer(${j},${qv.qano},${qv.ambno})">답변하기</button>
+							<div class="unAnswered-btn-area test${qv.qano}">
+								<button class="btn-Answer btn" onclick="writeAnswer(${qv.qano})">답변하기</button>
 							</div>
 						</c:otherwise>
 					</c:choose>
-					<c:set var="j" value="${j-1}"></c:set>
 				</c:forEach>
 			</div>
 			<!-- 글 작성 영역 -->
@@ -159,11 +159,11 @@
 	});
 
 	// 답변글 작성  ----------------------------------------------------
-	function writeAnswer(idx, qano, ambno) {
+	function writeAnswer(qano) {
 		let item = document.querySelectorAll(".QnA-wrapper");
-		document.querySelector(".unAnswered-btn-area.test" + idx).classList.add("active");
+		document.querySelector(".unAnswered-btn-area.test" + qano).classList.add("active");
 		for (let i = 0; i < item.length; i++) {
-			if (item[i].classList.contains("test" + idx)) {
+			if (item[i].classList.contains("test" + qano)) {
 				document.querySelector(".write-area").classList.remove("dp-none");
 				document.querySelector(".write-area").classList.add("dp-block");
 			} else {
@@ -172,7 +172,6 @@
 			}
 		}
 		window.currentQano = qano;
-		window.currentAmbno = ambno;
 	}
 
 	$("#write").on("click", function(){
@@ -185,7 +184,7 @@
 				url: '${pageContext.request.contextPath}/qna/mngWriteAction.do',
 				type: 'POST',
 				data: {
-					'ambno': window.currentAmbno,
+					'ambno': ${mbno},
 					'qano': window.currentQano,
 					'bdcont': content.val()
 				},
@@ -200,24 +199,37 @@
 		}
 	});
 	// 답변글 수정 ----------------------------------------------------
-	function modifyAnswer(qano, idx, ambno) {
-		let currentSection = document.querySelector(".QnA-wrapper.test" + idx);
+	function modifyAnswer(qano) {
+// 		let item = document.querySelectorAll(".QnA-wrapper");
+// 		document.querySelector(".Answered-btn-area.test" + qano).classList.add("active");
+// 		for (let i = 0; i < item.length; i++) {
+// 			if (item[i].classList.contains("test" + qano)) {
+// 				document.querySelector(".modify-area").classList.remove("dp-none");
+// 				document.querySelector(".modify-area").classList.add("dp-block");
+// 			} else {
+// 				item[i].classList.add("dp-none");
+// 				item[i].classList.remove("active");
+// 			}
+// 		}
+		let content = $("#modify-content");
+		content.val($('#acont'+qano).html());
+		let item = document.querySelectorAll(".QnA-wrapper");
+		let currentSection = document.querySelector(".QnA-wrapper.test" + qano);
 		currentSection.classList.toggle("active");
-		document.querySelectorAll(".QnA-wrapper").forEach((otherSection) => {
+		item.forEach((otherSection) => {
 			if (otherSection !== currentSection) {
 				otherSection.classList.remove("active");
 			}
 		});
-		document.querySelector(".Answered-btn-area.test2" + idx).classList.add("active");
-		document.querySelectorAll(".QnA-wrapper").forEach((otherSection) => {
-			if (!otherSection.classList.contains("test" + idx)) {
+		document.querySelector(".Answered-btn-area.test" + qano).classList.add("active");
+		item.forEach((otherSection) => {
+			if (!otherSection.classList.contains("test" + qano)) {
 				otherSection.classList.add("dp-none");
 			}
 		});
 		document.querySelector(".modify-area").classList.remove("dp-none");
 		document.querySelector(".modify-area").classList.add("dp-block");
 		window.currentQano = qano;
-		window.currentAmbno = ambno;
 	}
 
 	$("#modify-write").on("click", function() {
@@ -230,7 +242,7 @@
 				url: '${pageContext.request.contextPath}/qna/mngqnaModifyAction.do',
 				type: 'POST',
 				data: {
-					'ambno': window.currentAmbno,
+					'ambno': ${mbno},
 					'qano': window.currentQano,
 					'modify-content': content.val()
 				},

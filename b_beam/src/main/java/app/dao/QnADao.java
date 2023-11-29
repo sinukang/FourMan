@@ -88,7 +88,6 @@ public class QnADao {
 					qv.setQano(rs.getInt(1));
 				}
 			}
-			System.out.println(sql);
 			
 			}catch(Exception e){
 				e.printStackTrace();

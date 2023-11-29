@@ -79,7 +79,7 @@
 			            </c:otherwise>
 			        </c:choose>
 			        <div class="contents-title">
-			        	<p class="title">${cv.title}</p>
+			        	<p class="title">${cv.title}${cv.contentRating}</p>
 			        	<p class="cmtCnt">(${cv.contentReviewCnt})</p>
 			        </div>
 			        <c:choose>
