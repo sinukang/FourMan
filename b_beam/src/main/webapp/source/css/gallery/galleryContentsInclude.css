@@ -19,7 +19,7 @@ body *{
 	height: 100%;
 	border-radius: 8px 0 0 8px;
 }
-.div-nick{
+.md-div-name-area{
 	padding: 5px 5px 5px 10px;
 	display: flex;
 	align-items: center;
@@ -27,6 +27,22 @@ body *{
 	height: 7%;
 	background-color: #fff;
 	border-radius: 8px 0 0 0;
+}
+.md-div-nickname{
+	display: flex;
+	align-items: center;
+	height: 100%;	
+}
+.md-div-mark{
+	display: flex;
+	align-self: self-start;
+	margin-left: 5px;
+	width: 10%;
+	height: 85%;
+	background: url(../../images/logo4.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;	
 }
 .photo-area{
 	width: 100%;

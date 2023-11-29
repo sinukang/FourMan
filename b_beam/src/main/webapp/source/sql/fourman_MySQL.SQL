@@ -168,7 +168,7 @@ create table penalty(
 pnno int primary key auto_increment,
 rpno int not null,
 mbno int not null,
-pndelyn varchar(2) not null, -- 'N', 'W', 'M', 'S' : 없음, 일주일, 30일, 영구
+pndelyn varchar(2) null, -- '', 'N', 'W', 'M', 'S' : 미부여 상태, 허위신고, 일주일, 30일, 영구
 pndate datetime not null default now(),
 pndatem datetime null,
 foreign key(rpno) references report(rpno) on update cascade,

@@ -61,12 +61,39 @@ td{
 	cursor: pointer;
 }
 .td-nickname{
-	height: 7%;
 	padding-left: 3%;
+	width: 100%;
+	height: 7%;
 	font-size: 1rem;
 	background-color: #fff;
 	border-radius: 8px 8px 0 0;
 }
+.div-name-area{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+.div-nickname{
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+.div-mark{
+	display: flex;
+	align-self: self-start;
+	margin-left: 5px;
+	width: 10%;
+	height: 85%;
+	background: url(../../images/logo4.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+/*.mark-img{
+	object-fit: contain;
+}*/
 .td-img{
 	height: 93%;
 }
@@ -74,7 +101,7 @@ td{
 	width: 100%;
 	height: 100%;
 }
-.table-cont img {
+.table-cont .div-img img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -94,7 +121,7 @@ td{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-.span-nickname{
+.span-title{
 	display: inline-block;
 	width: 100%;
 	overflow: hidden;

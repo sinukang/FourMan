@@ -23,6 +23,7 @@ public class ReportDao {
 		this.conn = dbconn.getConnection();
 	}
 	
+	//신고게시판 신고목록
 	public ArrayList<ReportVo> reportList(SearchCriteria scri ) {
 		
 		ArrayList<ReportVo> alist = new ArrayList<ReportVo>();
@@ -95,6 +96,7 @@ public class ReportDao {
 		return alist;
 	}
 	
+	//신고글 총 개수
 	public int reportTotalCount(SearchCriteria scri) {
 		int value = 0;
 		ResultSet rs = null;
@@ -122,8 +124,7 @@ public class ReportDao {
 		return value;
 	}
 	
-	
-	
+	//신고된 유저 정보 조회
 	public ReportVo selectReportedUser(int rpno) { 
 		
 		ReportVo rpv = null;
@@ -155,7 +156,7 @@ public class ReportDao {
 		return rpv; 
 	}
 	
-	
+	//신고기능
 	public int reportInsert(ReportVo rpv, int rvno, int cmno) {
 		int exec = 0;
 		String cate = "";  
@@ -204,35 +205,66 @@ public class ReportDao {
 		return exec;
 	}
 	
-	public int reportDelete(int rpno, int bdno) {
-		int exec1 = 0;
-		int exec2 = 0;
+	//신고된 글들의 삭제 기능
+	public int reportedBoardDelete(int rpno, int reportedBoardNum) {
 		
-		String sql = "UPDATE report set rpdelyn = 'Y' where rpno = ?";
-		String sql2 = "UPDATE board set bddelyn = 'Y', bddatem = now() where bdno = ?";
+		ResultSet rs = null;
+		int value = 0;
+		String bdType = "";	//board 종류를 담을 변수 r, b, c : review(리뷰), board(갤러리), comment(댓글)
+		String sql = "";
 		
-		try (PreparedStatement pstmt1 =conn.prepareStatement(sql)) {
-			pstmt1.setInt(1, rpno);
+		String sql_boardTypeCheck = "SELECT IF(rvno IS NOT NULL, 'r', IF(bdno IS NOT NULL, 'b'"
+								  + ", IF(cmno IS NOT NULL, 'c', 'c'))) AS bdType FROM report"
+								  + " WHERE rpno = ?";
+		
+		String sql_reviewDelete = "UPDATE review SET rvdelyn = 'Y' WHERE rpno = ?";
+		String sql_boardDelete = "UPDATE board SET bddelyn = 'Y' WHERE bdno = ?";
+		String sql_commentDelete = "UPDATE comment SET cmdelyn = 'Y' WHERE cmno = ?";
+		
+		try{
+			pstmt = conn.prepareStatement(sql_boardTypeCheck);
+			pstmt.setInt(1, rpno);
 			
-			exec1 = pstmt1.executeUpdate();
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				bdType = rs.getString("bdType");
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		if (exec1 > 0) {
+		if (bdType.equals("r")) {
+			sql = sql_reviewDelete;
+		}else if(bdType.equals("b")) {
+			sql = sql_boardDelete;
+		}else {
+			sql = sql_commentDelete;
+		}
+		
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reportedBoardNum);
 			
-			try (PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
-				pstmt2.setInt(1, bdno);
-				
-				exec2 = pstmt2.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			value = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
 		
-		return exec1 + exec2;
+		return value;
 	}
 	
+	//패널티 부여 pndelyn에는 '', 'N', 'W', 'M', 'S' 값들 중 하나 넘어옴
+	//'', 'N', 'W', 'M', 'S' : 패널티 미부여 처리(패널티 부여 취소), 허위신고 처리, 일주일 정지, 한달 정지, 영구정지
 	public int penaltyUpdate(int rpno, int mbno2, String pndelyn) {
 		
 		ResultSet rs = null;
@@ -280,19 +312,5 @@ public class ReportDao {
 		return value;
 	}
 	
-	public int penaltyCancel(int rpno) {
-		
-		int exec = 0;
-		String sql = "UPDATE penalty SET pndelyn = null, pndatem = NOW()";
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			
-			exec = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return exec;
-	}		
 		
 }
