@@ -27,7 +27,12 @@ public class QnADao {
 		ArrayList<QnAVo> q_alist = new ArrayList<QnAVo>();
 		ResultSet rs = null;
 		
-		String sql = "SELECT * FROM qna WHERE qadelyn ='N' AND qmbno = ? order by qdate desc";
+		String sql = "SELECT a.*,\r\n"
+				+ " m.mbname AS ambname \r\n"
+				+ " FROM qna a \r\n"
+				+ "LEFT JOIN member m ON a.ambno = m.mbno AND m.manager = 'M'\r\n"
+				+ "WHERE a.qadelyn = 'N' \r\n"
+				+ "AND a.qmbno = ? ORDER BY a.qdate DESC";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mbno);
@@ -42,6 +47,8 @@ public class QnADao {
 				qv.setQdate(rs.getString("qdate"));
 				qv.setQtitle(rs.getString("qtitle"));
 				qv.setAcont(rs.getString("acont"));
+				qv.setAmbname(rs.getString("ambname"));
+				
 				q_alist.add(qv);
 			
 			
@@ -171,7 +178,14 @@ public class QnADao {
 		ArrayList<QnAVo> qna_alist = new ArrayList<>();
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM qna WHERE qadelyn ='N'";
+		String sql = "SELECT a.*,\r\n"
+				+ "	u.mbname AS qmbname,\r\n"
+				+ "    m.mbname AS ambname\r\n"
+				+ "FROM qna a \r\n"
+				+ "LEFT JOIN member u ON a.qmbno = u.mbno AND u.manager = 'U'\r\n"
+				+ "LEFT JOIN member m ON a.ambno = m.mbno AND m.manager = 'M'\r\n"
+				+ "WHERE a.qadelyn = 'N'\r\n"
+				+ "ORDER BY a.qdate DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -180,10 +194,17 @@ public class QnADao {
 			while (rs.next()) {
 				QnAVo qv = new QnAVo();
 				qv.setQano(rs.getInt("qano"));
+				qv.setAmbno(rs.getInt("ambno"));
 				qv.setQmbno(rs.getInt("qmbno"));
 				qv.setQcont(rs.getString("qcont"));
+				qv.setAcont(rs.getString("acont"));
 				qv.setQdate(rs.getString("qdate"));
+				qv.setAdate(rs.getString("adate"));
+				qv.setAdatem(rs.getString("adatem"));
 				qv.setQtitle(rs.getString("qtitle"));
+				qv.setQmbname(rs.getString("qmbname"));
+				qv.setAmbname(rs.getString("ambname"));
+				
 				qna_alist.add(qv);
 			}
 			
@@ -199,8 +220,7 @@ public class QnADao {
 	public int mngqnaInsert(QnAVo qv){
 		int exec = 0;
 		
-		String sql = "\r\n"
-				+ "UPDATE qna SET ambno = ?, acont=? , adate= NOW()  WHERE qano= ? and  qadelyn='N'";
+		String sql = "UPDATE qna SET ambno = ?, acont=? , adate= NOW()  WHERE qano= ? and  qadelyn='N'";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -226,9 +246,39 @@ public class QnADao {
 	}
 
 
+	public int mngqnaModify(QnAVo qv) {
+		int exec = 0;
+		String sql = "UPDATE qna SET acont=?, adatem=NOW() WHERE qano=? AND qadelyn='N'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, qv.getAcont());
+			pstmt.setInt(2, qv.getQano());
+			
+			exec = pstmt.executeUpdate();
+			
+
+			System.out.println(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return exec;
+	}
 	
-	
-	
+	public int mngqnaDelete(int qano) {
+		int exec = 0;
+		String sql = "UPDATE qna SET qadelyn='Y' WHERE qano=? ";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qano);
+
+			exec = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return exec;
+	}
 	
 	
 	

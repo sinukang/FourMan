@@ -46,7 +46,7 @@
 								</button>						
 							</div>
 							<div class="unAnswered-btn-area test">
-								<button class="btn-Delete btn" onclick="deleteAnswer()">문의 삭제</button>
+								<button class="btn-Delete btn" onclick="deleteAnswer(${qv.qano})">문의 삭제</button>
 								<button class="btn-Modify btn" onclick="qModify(${qv.qano})">문의 수정</button>
 							</div>						
 						</c:when>					
@@ -60,7 +60,7 @@
 									<i class="fas fa-chevron-up"></i>
 								</button>
 								<div class="answer-area">
-									<h3 class="answer-writer">운영자</h3>
+									<h3 class="answer-writer">${qv.ambname}</h3>
 									<p class="answer-content">${qv.acont}</p>
 								</div>
 							</div>							
@@ -168,13 +168,25 @@
 		})
 	});
 	
-	function deleteAnswer(idx){
+	function deleteAnswer(qano){
 		
-		if(confirm("정말 삭제하시겠습니까?")){
-			alert("qano : " + idx + " 번 삭제되었습니다.");
+		if (confirm("삭제된 글은 복구할수 없습니다.정말 삭제하시겠습니까?")) {
+			$.ajax({
+				url: '${pageContext.request.contextPath}/qna/qnaDeleteAction.do',
+				type: 'POST',
+				data: {
+					'qano': qano
+				},
+				success: function(response) {
+					alert('qano : ' + qano + ' 번 삭제되었습니다.');
+					location.reload(); 
+				},
+				error: function(xhr, status, error) {
+					alert('오류가 발생했습니다. 다시 시도해주세요.');
+					}
+			});
 		}
 	}
-	
 	
 	$(document).ready(function(){
 		

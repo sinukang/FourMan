@@ -1,6 +1,7 @@
 package app.domain;
 
 public class QnAVo {
+	
 	private int qano;
 	private int qmbno;
 	private int ambno;
@@ -10,8 +11,26 @@ public class QnAVo {
 	private String qdatem;
 	private String acont;
 	private String adatem;
+	private String adate;
 	private String qadelyn;
+	private String qmbname;
+	private String ambname;
 	
+	
+	
+	
+	public String getQmbname() {
+		return qmbname;
+	}
+	public void setQmbname(String qmbname) {
+		this.qmbname = qmbname;
+	}
+	public String getAmbname() {
+		return ambname;
+	}
+	public void setAmbname(String ambname) {
+		this.ambname = ambname;
+	}
 	public int getQano() {
 		return qano;
 	}
@@ -71,6 +90,12 @@ public class QnAVo {
 	}
 	public void setQadelyn(String qadelyn) {
 		this.qadelyn = qadelyn;
+	}
+	public String getAdate() {
+		return adate;
+	}
+	public void setAdate(String adate) {
+		this.adate = adate;
 	}
 
 }
