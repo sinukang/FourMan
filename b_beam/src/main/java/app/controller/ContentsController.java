@@ -210,7 +210,16 @@ public class ContentsController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}else if (location.equals("bookmarkedContents.do")) {
-			
+			ContentsDao cd = new ContentsDao();
+	        HttpSession session = request.getSession();
+	        int mbno = 0;
+	        if(session.getAttribute("mbno") != null) {
+	        	mbno = (int) session.getAttribute("mbno");
+	        }
+	        
+			ArrayList<ContentsVo> bmList = cd.getBookmarkedContents(mbno);
+
+			request.setAttribute("bmList", bmList);
 			String path ="/contents/bookmarkedContents.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
