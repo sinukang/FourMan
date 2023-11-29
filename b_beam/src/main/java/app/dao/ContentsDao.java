@@ -7,6 +7,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -257,9 +259,53 @@ public class ContentsDao {
 //		return cv;
 //	}
 //	public ContentsVo ContentsViewDetailInfoRoom(String contentid, String contenttypeid) {
-//		ContentsVo cv = new ContentsVo();
-//		return cv;
-//	}
+//	ContentsVo cv = new ContentsVo();
+//	return cv;
+//}
+	public ArrayList<ContentsVo> ContentsFestivalList() {
+		ArrayList<ContentsVo> aryList = new ArrayList<ContentsVo>();
+		LocalDate now = LocalDate.now();        
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
+		String thisMonth = now.format(formatter);
+		String thisMonthstart = thisMonth+"01";
+		String thisMonthend = thisMonth+"31";  
+		String uriType = "searchFestival1";
+		String query = "?serviceKey=";
+		query += key;
+		query += "&MobileApp=AppTest&MobileOS=ETC&_type=json";
+		query += "&eventStartDate=" + thisMonthstart;
+		query += "&eventEndDate=" + thisMonthend;
+		query += "&areaCode=" + area + "&sigunguCode=" + sigungu;
+		String apiURL = uri
+				+ uriType
+				+ query;
+		System.out.println(apiURL);
+		JSONObject body = new JSONObject();
+		try{
+			// uri로 데이터 불러옴
+			JSONObject jsonResponse = GetItem(apiURL);
+			body = (JSONObject)jsonResponse.get("body");
+			JSONObject items = (JSONObject)body.get("items");
+			JSONArray item = (JSONArray)items.get("item");
+			for(int i = 0; i < item.size(); i++) {
+				ContentsVo cv = new ContentsVo();
+				JSONObject contents = (JSONObject)item.get(i);
+				cv.setContentid(contents.get("contentid").toString());
+				cv.setContenttypeid(contents.get("contenttypeid").toString());
+				cv.setFirstimage(contents.get("firstimage").toString());
+				cv.setTitle(contents.get("title").toString());
+				// 임시로 contentdate를 시작일, contentdatem을 종료일로 담음
+				cv.setContentdate(contents.get("eventstartdate").toString());
+				cv.setContentdatem(contents.get("eventenddate").toString());
+				cv.setMapx(contents.get("mapx").toString());
+				cv.setMapy(contents.get("mapy").toString());
+				aryList.add(cv);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return aryList;
+	}
 	public ContentsVo setTempContents(String contentid) {
 		ContentsVo cv = new ContentsVo();
 		cv.setContentid(contentid);

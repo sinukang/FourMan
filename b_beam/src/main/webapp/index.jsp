@@ -10,9 +10,8 @@ int i = 3;
 ArrayList<ContentsVo> todaylist = cd.getIndexTodayRanking(i);
 ArrayList<ContentsVo> ratinglist = cd.getIndexRatingRanking(i);
 ArrayList<ContentsVo> viewlist = cd.getViewRanking(i);
-pageContext.setAttribute("todaylist", todaylist);
-pageContext.setAttribute("ratinglist", ratinglist);
-pageContext.setAttribute("viewlist", viewlist);
+
+ArrayList<ContentsVo> festalist = cd.ContentsFestivalList();
 %>
 <!DOCTYPE html>
 <html>
@@ -37,20 +36,29 @@ pageContext.setAttribute("viewlist", viewlist);
 					<p>천년 문화도시, 전주의 자부심을 만나다 </p>
 				</div>
 			</div>
-			<div class="swiper-slide">
+			<div class="swiper-slide" onclick="contentsDetail('147684');">
 				<img src="https://tour.jeonju.go.kr/upload_data/popup/banner/169563465074570.jpg">
 				<div class="slide-text">
 					<h1>가장 한국적인 도시 전주</h1>
 					<p>전주 향교</p>
 				</div>
 			</div>
-			<div class="swiper-slide">
+			<div class="swiper-slide" onclick="contentsDetail('264284');">
 				<img src="	https://tour.jeonju.go.kr/upload_data/popup/banner/169563475042182.jpg">
 				<div class="slide-text">
 					<h1>가장 한국적인 도시 전주</h1>
 					<p>전주 한옥마을</p>
 				</div>
 			</div>
+			<%for(int j = 0; j < festalist.size(); j++){%>
+			<div class="swiper-slide" onclick="contentsDetail('<%=festalist.get(j).getContentid()%>');">
+				<img src="<%=festalist.get(j).getFirstimage()%>">
+				<div class="slide-text">
+					<h1><%=festalist.get(j).getTitle()%></h1>
+					<p><%=festalist.get(j).getContentdate()%>~<%=festalist.get(j).getContentdatem()%></p>
+				</div>
+			</div>
+			<%} %>
 		</div>
 		<div class="swiper-button-next" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;"></div>
 		<div class="swiper-button-prev" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;"></div>
@@ -70,55 +78,20 @@ pageContext.setAttribute("viewlist", viewlist);
 	<div class="container">
 		<ul class="tab">
 			<li class="is_on">
-			<a onclick="tabSwitch(1)" class="btn">오늘의 top3</a>
+			<a onclick="tabSwitch(1)" class="btn">조회수 top3</a>
 			</li>
 			<li>
-			<a onclick="tabSwitch(2)" class="btn">조회수 top3</a>
+			<a onclick="tabSwitch(2)" class="btn">별점 top3</a>
 			</li>
 			<li>
-			<a onclick="tabSwitch(3)" class="btn">별점 top3</a>`
+			<a onclick="tabSwitch(3)" class="btn">오늘의 top3</a>`
 			</li>
 		</ul>
 		<div class="cont_area">
 			<div class="cont" id="tab1">
 				<div class="top_list">
-				<%if(todaylist.size() == 0){ %>
-					<p>오늘의 top3가 없습니다!</p>
-					<%}else{ %>
-						<ul>
-						<%for(ContentsVo cv:todaylist){ %>
-						<li onclick="location.href='${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=<%=cv.getContentid()%>'">
-							<%if(cv.getFirstimage()!=null&&!cv.getFirstimage().equals("")){ %>					
-									<img src="<%=cv.getFirstimage()%>">
-							<%}else{ %>				
-									<img src="./source/images/notFound.png">
-								<%} %>
-							<div class="top_title"><h1><%=cv.getTitle()%> <span> <%=cv.getContentLikeCnt()%></span></h1></div>
-						</li>
-						<%}if(todaylist.size()!=3){
-							for(int j = 0; j < (3 -todaylist.size());j++){%>
-							<li>
-									<img src="./source/images/notFound.png">
-							</li>
-						<%}
-						}%>
-<!-- 						<li> -->
-<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg"> -->
-<!-- 						</li> -->
-<!-- 						<li style="padding: 0 10px;"> -->
-<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg"> -->
-<!-- 						</li> -->
-<!-- 						<li> -->
-<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg"> -->
-<!-- 						</li> -->
-					</ul>
-					<%}%>
-				</div>
-			</div>
-			<div class="cont" id="tab2">
-				<div class="top_list">
-					<%if(viewlist.size() == 0){ %>
-					<p>오늘의 top3가 없습니다!</p>
+				<%if(viewlist.size() == 0){ %>
+					<p>조회수 top3가 없습니다!</p>
 					<%}else{ %>
 						<ul>
 						<%for(ContentsVo cv:viewlist){ %>
@@ -148,12 +121,14 @@ pageContext.setAttribute("viewlist", viewlist);
 <!-- 						</li> -->
 					</ul>
 					<%}%>
+				
 				</div>
 			</div>
-			<div class="cont" id="tab3">
+			<div class="cont" id="tab2">
 				<div class="top_list">
+				
 					<%if(ratinglist.size() == 0){ %>
-					<p>오늘의 top3가 없습니다!</p>
+					<p>별점 top3가 없습니다!</p>
 					<%}else{ %>
 						<ul>
 						<%for(ContentsVo cv:ratinglist){ %>
@@ -167,6 +142,42 @@ pageContext.setAttribute("viewlist", viewlist);
 						</li>
 						<%}if(ratinglist.size()!=3){
 							for(int j = 0; j < (3 - ratinglist.size());j++){%>
+							<li>
+									<img src="./source/images/notFound.png">
+							</li>
+						<%}
+						}%>
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000030/168422136222553.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li style="padding: 0 10px;"> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/jeonju/RE_0000370/169889322046365.jpg"> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<img src="https://tour.jeonju.go.kr/upload_data/board_data/BBS_0000003/169759351474895.jpg"> -->
+<!-- 						</li> -->
+					</ul>
+					<%}%>
+					
+				</div>
+			</div>
+			<div class="cont" id="tab3">
+				<div class="top_list">
+				<%if(todaylist.size() == 0){ %>
+					<p>오늘의 top3가 없습니다!</p>
+					<%}else{ %>
+						<ul>
+						<%for(ContentsVo cv:todaylist){ %>
+						<li onclick="location.href='${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=<%=cv.getContentid()%>'">
+							<%if(cv.getFirstimage()!=null&&!cv.getFirstimage().equals("")){ %>					
+									<img src="<%=cv.getFirstimage()%>">
+							<%}else{ %>				
+									<img src="./source/images/notFound.png">
+								<%} %>
+							<div class="top_title"><h1><%=cv.getTitle()%> <span> <%=cv.getContentLikeCnt()%></span></h1></div>
+						</li>
+						<%}if(todaylist.size()!=3){
+							for(int j = 0; j < (3 -todaylist.size());j++){%>
 							<li>
 									<img src="./source/images/notFound.png">
 							</li>
@@ -234,6 +245,9 @@ pageContext.setAttribute("viewlist", viewlist);
 			relayout();
 			resizeMap();
 		}
+	}
+	function contentsDetail(e){
+		location.href='${pageContext.request.contextPath}/contents/contentsDetail.do?contentid='+e;
 	}
 	</script>
 </body>
