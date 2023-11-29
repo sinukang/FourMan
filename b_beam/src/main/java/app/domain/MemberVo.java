@@ -12,8 +12,14 @@ public class MemberVo {
 	private String mbdelyn;
 	private String manager;
 	private String mbaddr;
+	private String localPeople;
 	
-	
+	public String getLocalPeople() {
+		return localPeople;
+	}
+	public void setLocalPeople(String localPeople) {
+		this.localPeople = localPeople;
+	}
 	public int getMbno() {
 		return mbno;
 	}
