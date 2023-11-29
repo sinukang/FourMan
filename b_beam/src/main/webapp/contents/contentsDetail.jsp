@@ -59,7 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="contents-visual">
 			<div class="title-section">
 		       	<p>${cv.title} </p>
-		       	<span class="view">조회수 : <span id="viewcnt">${cv.contentsView}</span> <br> 즐겨찾기수 : <span id="bmcnt">${cv.contentLikeCnt}</span></span>
+		       	<span class="view">
+		       	조회수 : <span id="viewcnt">${cv.contentsView}</span> 
+		       	<br> 즐겨찾기수 : <span id="bmcnt">${cv.contentLikeCnt}</span>
+		       	<div id="ratingContainer" style="display:flex;"></div>
+		       	</span>
 	      		 <div id="favorite" class="favorite"></div>
 		   	</div>
 		<%-- 		    	<c:choose> --%>
@@ -128,8 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 	<div>
 		<div class="reviewArea">
-		    <p>방문자 후기 및 평가</p>
-		    <div class="commentArea">
+		   <p>방문자 후기 및 평가</p>
+		   <div class="commentArea">
 		    <c:choose>
 		    	<c:when test="${empty mbno}">
 		    <select id="ratingSelect" onclick='lgcheck();'>
@@ -983,13 +987,34 @@ $(document).ready(function(){
 		},
 	});	
 });
-
-
-
 </script>
 
 <script>
+	// 평점 값
+	const ratingValue = parseFloat(${cv.contentRating}/ 100);
+	// 별점을 생성하는 함수
+	function createStars(rating) {
+	const maxStars = 5;
 
+		// 채워진 별과 빈 별을 조합한 문자열 생성
+		let starsString = '★'.repeat(Math.floor(rating));
+		starsString += '☆'.repeat(maxStars - Math.floor(rating));
+		
+		$('#ratingContainer').append(ratingValue + "/5")
+		// 별점을 담은 div 요소 생성
+		
+		const ratingDiv = document.createElement('div');
+		ratingDiv.textContent = starsString;
+
+		return ratingDiv;
+	}
+
+	// 별점을 생성하고 표시
+	const ratingContainer = document.getElementById('ratingContainer');
+	if (ratingContainer) {
+		ratingContainer.appendChild(createStars(ratingValue));
+	}
 </script>
+
 </body>
 </html>
