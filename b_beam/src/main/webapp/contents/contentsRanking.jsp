@@ -46,7 +46,7 @@
 			</div>	
 			<div class="contentsbox rank">
 				<h3 class="ranktitle">
-					리뷰수 Top10
+					리뷰 Top10
 				</h3>
 				<c:forEach var="cv" items="${rcList}">
 				    <button type="button" class="listbutton rank" id="rcButton${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
@@ -57,7 +57,7 @@
 					            </c:when>
 					            <c:otherwise>
 					            	<img src="../source/images/notFound.png">
-					            </c:otherwise>
+					           </c:otherwise>
 					        </c:choose>
 				            <div class="contents-title rank">${cv.title}<span class="rcrk">(${cv.contentReviewCnt})</span></div>
 				        </div>
@@ -66,7 +66,7 @@
 			</div>	
 			<div class="contentsbox rank">
 				<h3 class="ranktitle">
-					즐겨찾기수 Top10
+					즐겨찾기 Top10
 				</h3>
 				<c:forEach var="cv" items="${bcList}">
 				    <button type="button" class="listbutton rank" id="bcButton${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
@@ -86,20 +86,20 @@
 			</div>	
 			<div class="contentsbox rank">
 				<h3 class="ranktitle">
-					리뷰 Top10
+					평점 Top10
 				</h3>
-				<c:forEach var="rv" items="${rvList}">
-				    <button type="button" class="listbutton rank" id="rvButton${rv.rvno}" onclick="ContentsDetailReview(${rv.contentid},${rv.rvno})">
+				<c:forEach var="cv" items="${rtList}" varStatus="status">
+				    <button type="button" class="listbutton rank" id="rvButton${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
 				        <div class="contents-info rank">
 				        	<c:choose>
-					    		<c:when test="${not empty rv.rvglname[0]}">
-					            	<img src="../source/reviewImages/${rv.rvglname[0]}">
+					    		<c:when test="${not empty cv.firstimage}">
+					            	<img src="${cv.firstimage}">
 					            </c:when>
 					            <c:otherwise>
 					            	<img src="../source/images/notFound.png">
 					            </c:otherwise>
 					        </c:choose>
-				            <div class="contents-title rank">전주덕진공원</div>
+				            <div class="contents-title rank">${cv.title}<div class="ratingContainer" id="rc${status.index}"></div></div>
 				        </div>
 				    </button>
 			    </c:forEach>
@@ -117,6 +117,32 @@ function ContentsDetailReview(e,r){
 	// 해당 컨텐츠리스트로 이동
 	location.href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid="+e+"&reviewNo="+r;
 }
+const valueArray = [];
+<c:forEach var='cv' items='${rtList}'>
+	valueArray.push('${cv.contentRating}');
+</c:forEach>
+//	console.log(valueArray);
+// 별점을 생성하는 함수
+function createStars(rating) {
+const maxStars = 5;
+	var ratingDouble = (rating / 100);
+	// 채워진 별과 빈 별을 조합한 문자열 생성
+	let starsString = '★'.repeat(Math.floor(ratingDouble));
+	starsString += '☆'.repeat(maxStars - Math.floor(ratingDouble));
+	let ratingString = '  '+ratingDouble + '/5 '+ starsString;
+//		console.log(ratingString);
+	return ratingString;
+}
+
+// 별점을 생성하고 표시
+function setRating(data){
+	for(let i = 0; i < data.length; i++){
+		$('#rc'+i).append(createStars(data[i]));
+	}
+}
+
+setRating(valueArray);
+
 </script>
 </body>
 </html>

@@ -66,7 +66,7 @@
 <%-- 		<div><button onclick="getLike(${mbno});">라이크버튼</button></div> --%>
 <%-- 		</c:if> --%>
 	<div class="contentsbox">
-		<c:forEach var="cv" items="${aryList}">
+		<c:forEach var="cv" items="${aryList}" varStatus="status">
 		    <button type="button" class="listbutton" value="${cv.contentid}" id="${cv.contentid}" onclick="ContentsDetail(${cv.contentid})">
 			    <div class="content-info">
 			    
@@ -81,7 +81,7 @@
 			        <div class="contents-title">
 			        	<p class="title">${cv.title}</p>
 			        	<p class="cmtCnt">(${cv.contentReviewCnt})</p>
-			        	<p><div class=""></div></p>
+			        	<p><div class="ratingContainer" id="rc${status.index}"></div></p>
 			        </div>
 			        <c:choose>
 			    		<c:when test="${cv.contentLikeYN eq 'Y'}">
@@ -179,9 +179,7 @@ function contentTypeSelected(){
 			showContents("15");
 		});
 
-		
-		
-		
+		// 검색어가 2자 이상인 경우에만 검색 수행
 		// 검색어가 2자 이상인 경우에만 검색 수행
 		function searchByKeyword(){
 			var keyword = document.querySelector("input[name='keyword']").value.trim().toLowerCase();
@@ -214,7 +212,6 @@ function contentTypeSelected(){
 		    }
 		});
 	});
-		
 		function page(e){
 			// 파라미터값을 가져옴
 			var url = new URL(window.location.href)
@@ -230,53 +227,36 @@ function contentTypeSelected(){
 			location.href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid="+e;
 		}
 		
-</script>
-<script>
-	function getLike(e){
-		var contentid = e;
-// 		$(".listbutton").each(function(index,item){
-// 			contentid.push($(this).val());
-// 		});
-			console.log(contentid);
-		$.ajax({
-			type:"post",
-			url:"${pageContext.request.contextPath}/contents/getLike.do",
-			data:{"contentid":contentid,"mbno":${mbno}},
-			dataType:"json",
-			success:function(data){
-				console.log(data);
-			},
-			error:function(){
-				console.log("error");
-			}
-		});
-	}
 	// 평점 값
-	const ratingValue = parseFloat(${cv.contentRating}/ 100);
+	const valueArray = []
+	<c:forEach var='cv' items='${aryList}'>
+		valueArray.push('${cv.contentRating}');
+	</c:forEach>
+// 	console.log(valueArray);
 	// 별점을 생성하는 함수
 	function createStars(rating) {
 	const maxStars = 5;
-
+		var ratingDouble = (rating / 100);
 		// 채워진 별과 빈 별을 조합한 문자열 생성
-		let starsString = '★'.repeat(Math.floor(rating));
-		starsString += '☆'.repeat(maxStars - Math.floor(rating));
-		
-		$('#ratingContainer').append(ratingValue + "/5")
-		// 별점을 담은 div 요소 생성
-		
-		const ratingDiv = document.createElement('div');
-		ratingDiv.textContent = starsString;
-
-		return ratingDiv;
-	}
-
-	// 별점을 생성하고 표시
-	const ratingContainer = document.getElementById('ratingContainer');
-	if (ratingContainer) {
-		ratingContainer.appendChild(createStars(ratingValue));
+		let starsString = '★'.repeat(Math.floor(ratingDouble));
+		starsString += '☆'.repeat(maxStars - Math.floor(ratingDouble));
+		let ratingString = '  '+ratingDouble + '/5 '+ starsString;
+// 		console.log(ratingString);
+		return ratingString;
 	}
 	
+	// 별점을 생성하고 표시
+	function setRating(data){
+		for(let i = 0; i < data.length; i++){
+			$('#rc'+i).append(createStars(data[i]));
+		}
+	}
+
+	setRating(valueArray);
+	
 </script>
+	
+	
 	
 	
 	
