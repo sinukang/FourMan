@@ -722,7 +722,7 @@ function setReview(data){
 	var str='';
 	var mbno='${mbno}';
 	var json = JSON.parse(data);
-// 	console.log(json.length);
+// 	console.log(json);
 	$.each(json,function(index,value){
 // 		console.log(value.img);
 		str+='<table id="commentTable'+value.no+'" class="commentTable">';
@@ -743,7 +743,7 @@ function setReview(data){
 			str+='</button>';
 		}
 		str+='</div></th>';
-		str+='<th><button type="button" id="optBtn'+value.no+'" onclick="">신고</button></th>';
+		str+='<th><button type="button" class="rpt-btn" onclick="rpt('+value.no+','+value.mbno+')">&#x1F6A8;</button></th>';
 		str+='<th id="day'+value.no+'" class="day" colspan="2">'+value.date+'</th>';
 		str+='<th id="up'+value.no+'" class="up" type="button" class="likebtn">';
 		if(value.likeYN==null){
@@ -797,8 +797,12 @@ function reviewInsert(){
 				datatype:"json",
 				success : function(data){
 // 		 			console.log('접근성공');
-// 		 			console.log(data.value);
-		 			ImageInsert(JSON.parse(data).value);
+		 			console.log(data.value);
+		 			console.log(data.value2);
+		 			ImageInsert(data.value);
+		 			if(data.value2>0){
+		 				alert("포인트가 적립되었습니다.");
+		 			}
 					getReview(); 
 				},
 				error:function(){
@@ -934,6 +938,29 @@ function unlike(e) {
 		});
 	}
 	
+}
+function rpt(e,m){
+	if (confirm('정말 신고하시겠습니까?')) {
+		console.log(e);
+		
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/report/reportAction.do",
+			data: {"rvno" : e, "mbno2" : m},
+			dataType: "json",
+			success: function(response) {
+				if (response.success) {
+					alert("신고되었습니다.");
+				}
+			},
+			error: function(request, status, error) {
+				alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
+			}
+		});
+		
+	}else{
+		return;
+	}
 }
 </script>
 <script>
