@@ -301,6 +301,41 @@ public class BoardDao2 {
 		return bv;
 	}
 	
+	public int noticeDelete(int bdno) {
+		int exec = 0;
+		
+		String sql = "update board set bddelyn = 'Y', bddatem = now() where bdno = ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bdno);
+			exec = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exec;
+	}
+	
+	public int noitceModify(BoardVo bv) {
+		int exec = 0;
+		
+		String sql = "update board set bdtitle = ?, bdcont = ?, bddatem = now() where bdno = ?";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, bv.getBdtitle());
+			pstmt.setString(2, bv.getBdcont());
+			pstmt.setInt(3, bv.getBdno());
+			
+			exec = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exec;
+	}
+	
 	public ArrayList<BoardVo> FAQList(int mbno, SearchCriteria scri) {
 		
 		ArrayList<BoardVo> alist = new ArrayList<BoardVo>();

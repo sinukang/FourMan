@@ -332,6 +332,14 @@ public class BoardController extends HttpServlet {
 			rd.forward(request, response);
 			
 		}else if (location.equals("noticeWrite.do")) {
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
 			
 			String path ="/board/noticeWrite.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -399,6 +407,96 @@ public class BoardController extends HttpServlet {
 			String path ="/board/notice.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
+		}else if (location.equals("noticeDelete.do")) {
+			HttpSession session = request.getSession(false);
+			
+			int bdno = 0;
+			int mbno = 0;
+			
+			if(request.getParameter("bdno") != null) {
+				bdno = Integer.parseInt(request.getParameter("bdno"));
+			}
+			if(session != null) {
+				if(session.getAttribute("manager").equals("U")) {
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			//System.out.println("bdno : " + bdno);
+			//System.out.println("mbno : " + mbno);
+			
+			//처리하는 메소드를 만들어야 한다
+			int value=0;
+			
+			BoardDao2 bd2 = new BoardDao2();
+			value = bd2.noticeDelete(bdno);			
+			
+			System.out.println("value : " + value);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print("{\"success\": " + (value > 0) + "}");
+			out.flush();
+			out.close();
+			
+		}else if (location.equals("noticeModify.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			int bdno = Integer.parseInt(request.getParameter("bdno"));
+			BoardDao2 bd2 = new BoardDao2();
+			BoardVo bv = new BoardVo();
+			bv = bd2.noticeSelectOne(mbno, bdno);
+			
+			
+			//System.out.println("mbno : " + mbno);
+			//System.out.println("bdno : " + bdno);
+			
+			request.setAttribute("bv", bv);
+			
+			String path ="/board/noticeModify.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+			
+		}else if (location.equals("noticeModifyAction.do")) {
+			
+			String bdno = request.getParameter("bdno");
+			String bdtitle = request.getParameter("bdtitle");
+			String bdcont = request.getParameter("bdcont");
+			
+			System.out.println("bdno : " + bdno);
+			System.out.println("bdtitle : " + bdtitle);
+			System.out.println("bdcont : " + bdcont);
+			
+			BoardVo bv = new BoardVo();
+			bv.setBdno(Integer.parseInt(bdno));
+			bv.setBdcont(bdcont);
+			bv.setBdtitle(bdtitle);
+			
+			BoardDao2 bd2 = new BoardDao2();
+			int value = bd2.noitceModify(bv);
+			
+			System.out.println("value : " + value);
+			
+			PrintWriter out = response.getWriter();
+			
+			if (value > 0) {
+				out.println("<script>alert('tnwjd되었습니다.');location.href='"+request.getContextPath()+"/board/notice.do?bdno='"+bdno+"</script>");
+				/*String path = request.getContextPath()+"/board/notice.do?bdno="+bdno;
+				response.sendRedirect(path);*/
+			} else {
+				String path = request.getContextPath() + "/board/noticeList.do";
+				response.sendRedirect(path);
+			}
+			
+			
 			
 		}else if (location.equals("FAQ.do")) {
 			

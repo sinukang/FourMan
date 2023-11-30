@@ -42,11 +42,9 @@
 				</c:forEach>
 			</div>	
 		</div>
-		<c:if test="${mv.manager eq 'M' }">
 		<div class="btn-area2">
 			<button id="btn-write" class="btn-write">자주 묻는 질문 등록</button>
 		</div>
-		</c:if>			
 		<div class="pagination-area">
 			<table class="page-table">
 				<tr>

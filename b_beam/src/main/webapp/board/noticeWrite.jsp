@@ -27,11 +27,11 @@
 					<div class="div-content">
 						<textarea class="textarea-content" name="bdcont" placeholder="내용"></textarea>
 					</div>
-					<div class="div-file">
+					<!-- <div class="div-file">
 						<label for="input-file" class="label-file">
 							파일 선택<input type="file" id="input-file" class="input-file" multiple="multiple">	
 						</label>
-					</div>
+					</div> -->
 				</form>
 			</div>
 			<div class="btn-area">

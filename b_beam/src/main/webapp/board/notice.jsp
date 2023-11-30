@@ -34,6 +34,14 @@
 				</div>
 			</div>
 			<div class="btn-area2">
+				<c:choose>
+					<c:when test="${not empty manager}">
+						<button id="btn-modify" class="btn-modify">수정</button>
+						<button id="btn-delete" class="btn-delete">삭제</button>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
 				<button id="btn-write" class="btn-write">공지사항 목록</button>
 			</div>			
 			
@@ -48,6 +56,39 @@
 		
 		$("#btn-write").on("click", function(){
 			location.href = "${pageContext.request.contextPath}/board/noticeList.do";
+		});
+		
+		$("#btn-modify").on("click", function(){
+			location.href = "${pageContext.request.contextPath}/board/noticeModify.do?bdno="+${bv.bdno};
+		});		
+		
+		$("#btn-delete").on("click", function() {
+			
+			if (confirm('정말 삭제하시겠습니까?')) {
+				
+				let bdno = "${bv.bdno}";
+			
+				$.ajax({
+					type: "POST",
+					url: "${pageContext.request.contextPath}/board/noticeDelete.do",
+					data: {"bdno" : bdno},
+					dataType: "json",
+					success: function(response) {
+						if (response.success) {
+							console.log(response);
+							alert("삭제되었습니다.");
+							//debugger;
+							location.href = "${pageContext.request.contextPath}/board/noticeList.do";
+						}
+					},
+					error: function(request, status, error) {
+						alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
+					}
+				});
+				
+			}else{
+				return;
+			}
 		});
 		
 	});

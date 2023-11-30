@@ -29,7 +29,7 @@ public class ReportDao {
 		ArrayList<ReportVo> alist = new ArrayList<ReportVo>();
 		ResultSet rs = null;
 		
-		String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, c.cmcont, p.pndelyn, bdno_count, rvno_count, cmno_count"
+		String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, rv.contentid, c.cmcont, c.bdno, p.pndelyn, bdno_count, rvno_count, cmno_count"
 				+ " FROM report r "
 				+ " JOIN member m on r.mbno2 = m.mbno"
 				+ " LEFT JOIN board b on r.bdno = b.bdno"
@@ -73,8 +73,10 @@ public class ReportDao {
 				
 				rv.setRvcont(rs.getString("rvcont"));
 				rpv.setReviewVo(rv);
+				rv.setContentid(rs.getString("contentid"));
 				
 				cv.setCmcont(rs.getString("cmcont"));
+				cv.setBdno(rs.getInt("c.bdno"));
 				rpv.setCommnetVo(cv);
 				
 				pv.setPndelyn(rs.getString("pndelyn"));

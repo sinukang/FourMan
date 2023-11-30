@@ -48,7 +48,13 @@
 				</table>
 			</div>
 			<div class="btn-area2">
-				<button id="btn-write" class="btn-write">공지사항 등록</button>
+				<c:choose>
+					<c:when test="${not empty manager}">
+						<button id="btn-write" class="btn-write">공지사항 등록</button>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
 			</div>			
 			<div class="pagination-area">
 			<table class="page-table">
