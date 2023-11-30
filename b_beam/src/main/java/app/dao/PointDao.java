@@ -172,7 +172,7 @@ public class PointDao {
 		int exec = 0;
 		ResultSet rs = null;
 		
-		String sql = "select count(rvno) as cnt FROM comment where mbno = ? and date(rvdate) = CURDATE()";
+		String sql = "select count(rvno) as cnt FROM review where mbno = ? and date(rvdate) = CURDATE()";
 		
 		String sql2 = "INSERT INTO point (mbno, ptpm, ptrs, ptpt, acpt, rmpt)\r\n"
 				+  "SELECT ?, 'P', '리뷰작성', 1000, acpt + 1000, rmpt + 1000\r\n"
@@ -187,7 +187,6 @@ public class PointDao {
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
 				
 				pstmt.setInt(1, rv.getMbno());
-				
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {

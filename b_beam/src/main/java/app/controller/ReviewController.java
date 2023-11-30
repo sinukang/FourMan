@@ -24,6 +24,7 @@ import org.json.simple.JSONObject;
 import app.dao.BoardDao;
 import app.dao.BoardDao2;
 import app.dao.BookmarkDao;
+import app.dao.PointDao;
 import app.dao.ReviewDao;
 import app.domain.BdgalleryVo;
 import app.domain.BoardVo;
@@ -91,11 +92,20 @@ public class ReviewController extends HttpServlet {
 	        rv.setRvcont(cont);
 	        rv.setMbno(mbno);
 	        
-	        ReviewDao rd = new ReviewDao();
 	        
+	        ReviewDao rd = new ReviewDao();
 	        int value = rd.reviewInsert(rv);
+	        
+	        PointDao pd = new PointDao();
+			int value2 = pd.getPointReview(rv);
+	        
         	JSONObject json = new JSONObject();
         	json.put("value",value);
+        	json.put("value2", value2);
+        	System.out.println(json.toJSONString());
+        	response.setContentType("application/json");
+        	response.setCharacterEncoding("UTF-8");
+        	
 	        PrintWriter out = response.getWriter();
 			out.print(json.toJSONString());
 		}else if (location.equals("ImageInsert.do")) {
