@@ -214,8 +214,8 @@
 		switch(e){
 		case 0 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
 		case 1 : location.href="${pageContext.request.contextPath}/qna/managerMyQnA.do"; break;
-		case 2 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
-		case 3 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+		case 2 : location.href="${pageContext.request.contextPath}/board/noticeList.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/board/FAQ.do"; break;
 		
 		}
 	}
@@ -299,7 +299,7 @@
 		
 	});
 	
-	//신고목록에서 신고된 원본글 삭제
+	//신고목록에서 신고된 원본글 삭제 & 삭제취소
 	function reportedBoardDeleteUpdate(YN){
 		
 		let delYN = YN;
@@ -342,8 +342,6 @@
 							alert(data.value + " 개의 글이 삭제 취소 됐습니다.");
 							location.reload();
 						}
-						
-						
 					}else if(data.value == 0){
 						alert("삭제된 글이 없습니다.");
 					}

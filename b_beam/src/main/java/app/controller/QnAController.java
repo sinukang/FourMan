@@ -22,7 +22,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import app.dao.BoardDao;
-import app.dao.BoardDao2;
 import app.dao.MemberDao;
 import app.dao.QnADao;
 import app.dao.ReviewDao;

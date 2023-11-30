@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -21,16 +20,19 @@
 	<jsp:include page="../source/include/header.jsp" />
 
 	<!-- page start -->
-	<div class="page-inner">
-		<div class="page-side">
-			<h2 class="page-title">관리자 페이지</h2>
+	<div class="container">
+	
+		<div class="container-title">
+			<h1>ManagerMyQnA</h1>
 		</div>
-		<div class="manager-navi">
-			<div class="report-tap tap">신고내역</div>
-			<div class="notice-tap tap">공지사항</div>
-			<div class="QnA-tap tap clicked">1:1 문의내역</div>
-			<div class="FAQ-tap tap">자주하는 질문</div>
-		</div>
+		
+		<div class="m-navi">
+			<div class="report-tap tap" onclick="mNavi(0)">신고내역</div>
+			<div class="QnA-tap tap clicked" onclick="mNavi(1)">1:1 문의내역</div>
+			<div class="notice-tap tap" onclick="mNavi(2)">공지사항</div>
+			<div class="FAQ-tap tap" onclick="mNavi(3)">자주하는 질문</div>
+		</div>		
+		
 		<div class="contents-area">
 			<div class="list-area">
 				<c:set var="j" value="6"></c:set>
@@ -108,6 +110,8 @@
 			        </div>
 			    </div>
 			</div>
+		</div>
+		
 	</div>
 
 	<!-- footer -->
@@ -141,8 +145,18 @@
 			tap[i].addEventListener("click", handleClick1);
 		}
 	}
-
 	init1();
+	
+	//네비게이션 바 주소설정
+	function mNavi(e){
+		switch(e){
+		case 0 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+		case 1 : location.href="${pageContext.request.contextPath}/qna/managerMyQnA.do"; break;
+		case 2 : location.href="${pageContext.request.contextPath}/board/noticeList.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/board/FAQ.do"; break;
+		
+		}
+	}	
 
 	const toggles = document.querySelectorAll(".QnA-wrapper");
 

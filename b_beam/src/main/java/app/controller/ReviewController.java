@@ -22,7 +22,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import app.dao.BoardDao;
-import app.dao.BoardDao2;
 import app.dao.BookmarkDao;
 import app.dao.PointDao;
 import app.dao.ReviewDao;

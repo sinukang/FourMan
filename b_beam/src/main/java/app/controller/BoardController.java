@@ -21,7 +21,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import app.dao.BoardDao;
-import app.dao.BoardDao2;
+import app.dao.BoardDao;
 import app.dao.CommentDao;
 import app.dao.PointDao;
 import app.domain.BdgalleryVo;
@@ -248,8 +248,8 @@ public class BoardController extends HttpServlet {
 				BdgalleryVo bgv = new BdgalleryVo();
 				bgv.setBdglnameList(bdglnameList);
 	
-				BoardDao2 bd2 = new BoardDao2();
-				int value = bd2.boardModify(bv, bgv);
+				BoardDao bd = new BoardDao();
+				int value = bd.boardModify(bv, bgv);
 	
 				//System.out.println("Value: " + value);
 	
@@ -287,8 +287,8 @@ public class BoardController extends HttpServlet {
 			//처리하는 메소드를 만들어야 한다
 			int value=0;
 			
-			BoardDao2 bd2 = new BoardDao2();
-			value = bd2.boardDelete(bdno);			
+			BoardDao bd = new BoardDao();
+			value = bd.boardDelete(bdno);			
 			
 			System.out.println("value : " + value);
 			
@@ -320,9 +320,9 @@ public class BoardController extends HttpServlet {
 			PageMaker pm = new PageMaker();
 			pm.setScri(scri);
 			
-			BoardDao2 bd2 = new BoardDao2();
-			ArrayList<BoardVo> alist = bd2.noticeList(mbno, scri);
-			pm.setTotalCount(bd2.noticeTotalCount(scri));
+			BoardDao bd = new BoardDao();
+			ArrayList<BoardVo> alist = bd.noticeList(mbno, scri);
+			pm.setTotalCount(bd.noticeTotalCount(scri));
 			
 			request.setAttribute("pm", pm);
 			request.setAttribute("alist", alist);
@@ -369,9 +369,9 @@ public class BoardController extends HttpServlet {
 			//System.out.println("bdcont : " + bdcont);
 			//System.out.println("mbno : " + mbno);
 			
-			BoardDao2 bd2 = new BoardDao2();
+			BoardDao bd = new BoardDao();
 			
-			int value = bd2.insertBoardN(bv);
+			int value = bd.insertBoardN(bv);
 			
 			//System.out.println("value : " + value);
 			
@@ -398,9 +398,9 @@ public class BoardController extends HttpServlet {
 			
 			System.out.println("bdno : " + bdno);
 			
-			BoardDao2 bd2 = new BoardDao2();
+			BoardDao bd = new BoardDao();
 			BoardVo bv = new BoardVo();
-			bv = bd2.noticeSelectOne(mbno, bdno);
+			bv = bd.noticeSelectOne(mbno, bdno);
 			
 			request.setAttribute("bv", bv);
 			
@@ -428,8 +428,8 @@ public class BoardController extends HttpServlet {
 			//처리하는 메소드를 만들어야 한다
 			int value=0;
 			
-			BoardDao2 bd2 = new BoardDao2();
-			value = bd2.noticeDelete(bdno);			
+			BoardDao bd = new BoardDao();
+			value = bd.noticeDelete(bdno);			
 			
 			System.out.println("value : " + value);
 			
@@ -451,9 +451,9 @@ public class BoardController extends HttpServlet {
 				}
 			}
 			int bdno = Integer.parseInt(request.getParameter("bdno"));
-			BoardDao2 bd2 = new BoardDao2();
+			BoardDao bd = new BoardDao();
 			BoardVo bv = new BoardVo();
-			bv = bd2.noticeSelectOne(mbno, bdno);
+			bv = bd.noticeSelectOne(mbno, bdno);
 			
 			
 			//System.out.println("mbno : " + mbno);
@@ -480,8 +480,8 @@ public class BoardController extends HttpServlet {
 			bv.setBdcont(bdcont);
 			bv.setBdtitle(bdtitle);
 			
-			BoardDao2 bd2 = new BoardDao2();
-			int value = bd2.noitceModify(bv);
+			BoardDao bd = new BoardDao();
+			int value = bd.noitceModify(bv);
 			
 			System.out.println("value : " + value);
 			
@@ -518,9 +518,9 @@ public class BoardController extends HttpServlet {
 			PageMaker pm = new PageMaker();
 			pm.setScri(scri);
 			
-			BoardDao2 bd2 = new BoardDao2();
-			ArrayList<BoardVo> alist = bd2.FAQList(mbno, scri);
-			pm.setTotalCount(bd2.FAQTotalCount(scri));
+			BoardDao bd = new BoardDao();
+			ArrayList<BoardVo> alist = bd.FAQList(mbno, scri);
+			pm.setTotalCount(bd.FAQTotalCount(scri));
 			
 			request.setAttribute("pm", pm);
 			request.setAttribute("alist", alist);
@@ -559,9 +559,9 @@ public class BoardController extends HttpServlet {
 			//System.out.println("bdcont : " + bdcont);
 			//System.out.println("mbno : " + mbno);
 			
-			BoardDao2 bd2 = new BoardDao2();
+			BoardDao bd = new BoardDao();
 			
-			int value = bd2.insertBoardO(bv);
+			int value = bd.insertBoardO(bv);
 			
 			//System.out.println("value : " + value);
 			
@@ -632,8 +632,8 @@ public class BoardController extends HttpServlet {
 				BdgalleryVo bgv = new BdgalleryVo();
 				bgv.setBdglnameList(bdglnameList);
 	
-				BoardDao2 bd2 = new BoardDao2();
-				int value = bd2.boardInsert(bv, bgv);
+				BoardDao bd = new BoardDao();
+				int value = bd.boardInsert(bv, bgv);
 				
 				PointDao pd = new PointDao();
 				int value2 = pd.getPointBoard(bv);
