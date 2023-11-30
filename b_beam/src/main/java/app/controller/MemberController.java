@@ -98,15 +98,20 @@ public class MemberController extends HttpServlet {
 		} else if (location.equals("getsign.do")) {
 			   
 		        HttpSession session = request.getSession();
-		        String authNumber = (String) session.getAttribute("MAIL_NUMBER");
-
-		        if (authNumber == null) authNumber = "";
-
+		        String authNumber = (String)session.getAttribute("MAIL_NUMBER");
+		        String AuthCode = request.getParameter("AuthCode");
+		        int value = 0;
+		        if (authNumber == null) {
+		        	value = 0;
+		        }else if(AuthCode.equals(authNumber)) {
+		        	value = 1;
+		        }
+		        System.out.println("value: " + value);
 		        response.setContentType("application/json");
 		        response.setCharacterEncoding("UTF-8");
 
 		        PrintWriter out = response.getWriter();
-		        out.print("{\"authNumber\":\"" + authNumber + "\"}");
+		        out.print("{\"value\":\"" + value + "\"}");
 		}else if (location.equals("memberIdCheck.do")) {
 				    String memberId = request.getParameter("memberId");
 
@@ -162,6 +167,7 @@ public class MemberController extends HttpServlet {
 				            HttpSession session = request.getSession();
 				            session.removeAttribute("MAIL_NUMBER");
 				            session.setAttribute("MAIL_NUMBER", authNumber);
+				            System.out.println((String)session.getAttribute("MAIL_NUMBER"));
 				            System.out.println("send mail ok");
 				        }
 				    }

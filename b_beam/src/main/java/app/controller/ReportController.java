@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import app.dao.ReportDao;
 import app.domain.PageMaker;
-import app.domain.PenaltyVo;
 import app.domain.ReportVo;
 import app.domain.SearchCriteria;
 
@@ -56,7 +58,8 @@ public class ReportController extends HttpServlet {
 			
 			String path ="/report/report.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
+			rd.forward(request, response);				
+			
 		} else if (location.equals("reportAction.do")) {
 			HttpSession session = request.getSession(false);
 			
@@ -117,29 +120,40 @@ public class ReportController extends HttpServlet {
 			out.flush();
 			out.close();
 			
-		} else if (location.equals("reportedBoardDelete.do")) {
+		} else if (location.equals("reportedBoardDeleteUpdate.do")) {
 			//신고된 목록에서 원글 삭제
 			
-			ArrayList<Integer> testArrayList = new ArrayList<Integer>();
+			String delYN = request.getParameter("delYN"); //Y, N : 삭제 or 삭제취소 결정
+			String rpnoArr = request.getParameter("rpnoArr");
+			String reportedBoardNumArr = request.getParameter("reportedBoardNumArr");
 			
+			JSONParser jParser = new JSONParser(); 
+			JSONArray jArr = null;
+			JSONArray jArr2 = null;
+			try {
+				jArr = (JSONArray)jParser.parse(rpnoArr);
+				jArr2 = (JSONArray)jParser.parse(reportedBoardNumArr);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			for(int i = 0; i < jArr.size(); i++) {
+				System.out.println("jArr["+i+"] : " + jArr.get(i));
+				System.out.println("jArr2["+i+"] : " + jArr2.get(i));
+			}
+			
+			ReportDao rpd = new ReportDao();
+			int value = 0;
 			int rpno = 0;
 			int reportedBoardNum = 0;
-			int value = 0;
 			
-			if(request.getParameter("rpno") != null) {
-				rpno = Integer.parseInt(request.getParameter("rpno"));
+			for(int i = 0; i < jArr.size(); i++) {
+				rpno = Integer.parseInt(jArr.get(i).toString());
+				reportedBoardNum = Integer.parseInt(jArr2.get(i).toString());
+				rpd.reportedBoardDeleteUpdate(delYN, rpno, reportedBoardNum);
+				value += 1;
 			}
-			
-			if(request.getParameter("reportedBoardNum") != null) {
-				reportedBoardNum = Integer.parseInt(request.getParameter("reportedBoardNum"));
-			}
-			
-			System.out.println("rpno : " + rpno);
-			System.out.println("reportedBoardNum : " + reportedBoardNum);
-			
-			ReportDao rd = new ReportDao();
-			value = rd.reportedBoardDelete(rpno, reportedBoardNum);
-			
+			System.out.println("value : " + value);
 //			JSON 형식으로 응답을 생성	
 //			response.setContentType("application/json");
 			

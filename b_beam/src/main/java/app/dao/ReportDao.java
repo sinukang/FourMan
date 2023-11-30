@@ -208,7 +208,7 @@ public class ReportDao {
 	}
 	
 	//신고된 글들의 삭제 기능
-	public int reportedBoardDelete(int rpno, int reportedBoardNum) {
+	public int reportedBoardDeleteUpdate(String delYN, int rpno, int reportedBoardNum) {
 		
 		ResultSet rs = null;
 		int value = 0;
@@ -219,9 +219,9 @@ public class ReportDao {
 								  + ", IF(cmno IS NOT NULL, 'c', 'c'))) AS bdType FROM report"
 								  + " WHERE rpno = ?";
 		
-		String sql_reviewDelete = "UPDATE review SET rvdelyn = 'Y' WHERE rpno = ?";
-		String sql_boardDelete = "UPDATE board SET bddelyn = 'Y' WHERE bdno = ?";
-		String sql_commentDelete = "UPDATE comment SET cmdelyn = 'Y' WHERE cmno = ?";
+		String sql_reviewDelete = "UPDATE report rp, review rv SET rp.rpdelyn = '"+delYN+"', rv.rvdelyn = '"+delYN+"' WHERE rp.rpno = ? AND rv.rvno = ?";
+		String sql_boardDelete = "UPDATE report rp, board b SET rp.rpdelyn = '"+delYN+"', b.bddelyn = '"+delYN+"' WHERE rp.rpno = ? AND b.bdno = ?";
+		String sql_commentDelete = "UPDATE report rp, comment c SET rp.rpdelyn = '"+delYN+"', c.cmdelyn = '"+delYN+"' WHERE rp.rpno = ? AND c.cmno = ?";
 		
 		try{
 			pstmt = conn.prepareStatement(sql_boardTypeCheck);
@@ -247,7 +247,8 @@ public class ReportDao {
 		
 		try{
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reportedBoardNum);
+			pstmt.setInt(1, rpno);
+			pstmt.setInt(2, reportedBoardNum);
 			
 			value = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -255,8 +256,6 @@ public class ReportDao {
 		}finally {
 			try {
 				rs.close();
-				pstmt.close();
-				conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}

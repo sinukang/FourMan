@@ -70,7 +70,7 @@
 					<div id="timer" style="color:red;"></div>
 					<div id="checkemail"></div>
 					<div class="email-certi" id="email-certi" style="display:none;">
-						<input type="text" name="emailCertification" id="authentication placeholder=" 인증번호">
+						<input type="text" name="emailCertification" id="authentication" placeholder="인증번호">
 						<input type="button" name="btn3" id="btn3" value="인증하기" onclick="emailConfirm()">
 						<input type="hidden" name="emailck" id="emailck" value="">
 						<input type="hidden" id="emailYN" value="N">
@@ -331,6 +331,7 @@
    	//확인을 클릭하면 이메일 인증을 비교하는 함수
    	function emailConfirm()	{
    		Is_Mail_Duplicated = false;
+   		var AuthCode = $("#authentication").val();
    		if($("#authentication").val() == ""){
    			alert("인증번호를 입력하세요.");
    			return;
@@ -344,8 +345,9 @@
 			type : "get",
 			url: "${pageContext.request.contextPath}/member/getsign.do",
 			dataType: "json",
+			data:{"AuthCode":AuthCode},
 			success : function(data) {
-				if($("#authentication").val() == data.value){
+				if(data.value==1){
 					Is_Mail_Duplicated = true;
 					$("#checkemail").empty();
 					$("#checkemail").html("인증번호가 일치 합니다.");
@@ -360,6 +362,9 @@
 					$("#checkemail").css("color","red");
 					document.getElementById("emailYN").value = "N";
 				}
+			},
+			error : function(){
+				console.log('오류');
 			}
 		});   		
    		
