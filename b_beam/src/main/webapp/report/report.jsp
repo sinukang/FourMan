@@ -123,13 +123,19 @@
 						<td class="content">
 							<c:choose>
 								<c:when test="${rp.rvno ne ''}">
-									${rp.reviewVo.rvcont}
+									<a href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=${rp.reviewVo.contentid}&reviewNo=${rp.rvno}">
+										${rp.reviewVo.rvcont}
+									</a>
 								</c:when>
 								<c:when test="${rp.bdno ne ''}">
-									<a href="${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=${rp.bdno}">${rp.bdcont}</a>
+									<a href="${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=${rp.bdno}">
+										${rp.bdcont}
+									</a>
 								</c:when>
 								<c:when test="${rp.cmno ne ''}">
-									${rp.commnetVo.cmcont}
+									<a href="${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=${rp.commnetVo.bdno}">
+										${rp.commnetVo.cmcont}
+									</a>
 								</c:when>
 							</c:choose>	
 						</td>
