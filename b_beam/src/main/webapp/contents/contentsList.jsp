@@ -179,8 +179,11 @@ function contentTypeSelected(){
 			showContents("15");
 		});
 
+		
+		
+		
 		// 검색어가 2자 이상인 경우에만 검색 수행
-		document.querySelector("button[name='sbt']").addEventListener("click", function () {
+		function searchByKeyword(){
 			var keyword = document.querySelector("input[name='keyword']").value.trim().toLowerCase();
 			if (keyword.length >= 2) {
 				// 파라미터값을 가져옴
@@ -195,23 +198,23 @@ function contentTypeSelected(){
 				var newParams = encodeURI(urlParams);
 				// 해당 컨텐츠리스트로 이동
 				location.href="${pageContext.request.contextPath}/contents/contentsList.do?"+newParams;
-				
-				// 검색어가 2자 이상인 경우 검색 수행
-// 				var allContents = document.querySelectorAll(".listbutton");
-// 				allContents.forEach(function (content) {
-// 					var title = content.querySelector(".title").innerText.toLowerCase();
-// 					if (title.includes(keyword)) {
-// 						content.style.display = "block";
-// 					} else {
-// 						content.style.display = "none";
-// 					}
-// 				});
 			} else {
 			// 2자 미만인 경우에는 알림창 띄우기
 				alert("검색어는 2자 이상 입력하셔야 합니다.");
 			}
+		}
+		document.querySelector("button[name='sbt']").addEventListener("click", function () {
+			searchByKeyword();
+		});
+
+		document.querySelector("input[name='keyword']").addEventListener("keypress", function (event) {
+		    if (event.key === 'Enter') {
+		        event.preventDefault(); // 기본 엔터 동작 방지
+		        searchByKeyword();
+		    }
 		});
 	});
+		
 		function page(e){
 			// 파라미터값을 가져옴
 			var url = new URL(window.location.href)
@@ -274,8 +277,6 @@ function contentTypeSelected(){
 	}
 	
 </script>
-	
-	
 	
 	
 	

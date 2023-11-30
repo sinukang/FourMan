@@ -67,8 +67,8 @@ ArrayList<ContentsVo> festalist = cd.ContentsFestivalList();
   
 	<div class="main-search">
 		<div class="search-wrap">
-			<input type="text" id="title" placeholder="찾고싶은 '관광데이터'명을 입력하세요." title="찾고싶은 '관광데이터'명을 입력하세요.">
-			<button type="button">검색</button>
+			<input type="text" id="title" name="keyword" placeholder="찾고싶은 '관광데이터'명을 입력하세요." title="찾고싶은 '관광데이터'명을 입력하세요.">
+			<button type="button" name="sbt" onclick="goDetails()">검색</button>
 		</div>
 	</div>
   
@@ -207,6 +207,39 @@ ArrayList<ContentsVo> festalist = cd.ContentsFestivalList();
 	
 	 <!-- Swiper JS -->
 	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+	<script>
+	function goDetails() {
+		var keyword = document.querySelector("#title").value.trim().toLowerCase();
+		if (keyword.length >= 2) {
+			// 파라미터값을 가져옴
+			var url = new URL(window.location.href);
+			var urlParams = url.searchParams;
+			// 파라미터 서치값 추출
+			var contenttypeid = urlParams.get("contenttypeid");
+			var page = urlParams.get("page")
+			// 파라미터 서치값의 키워드값을 검색한 값으로 변경, 페이지는 1페이지로 변경, 컨텐츠타입는 변경 x
+			urlParams.set("keyword",keyword);
+			urlParams.set("page","1");
+			var newParams = encodeURI(urlParams);
+			// 해당 컨텐츠리스트로 이동
+			location.href="${pageContext.request.contextPath}/contents/contentsList.do?"+newParams;
+		} else {
+			alert("검색어는 2자 이상 입력하셔야 합니다.");
+		}
+	}
+	document.querySelector("button[name='sbt']").addEventListener("click", function () {
+		goDetails();
+	});
+
+	document.querySelector("input[name='keyword']").addEventListener("keypress", function (event) {
+	    if (event.key === 'Enter') {
+	        event.preventDefault(); // 기본 엔터 동작 방지
+	        goDetails();
+	    }
+	});
+
+	</script>
 
 	<script>
 	
