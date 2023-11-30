@@ -199,12 +199,12 @@ public class ContentsController extends HttpServlet {
 			ArrayList<ContentsVo> viewContents = cd.getViewRanking(rankcnt);
 			ArrayList<ContentsVo> reviewContents = cd.getReviewRanking(rankcnt);
 			ArrayList<ContentsVo> bookmarkContents = cd.getBookmarkRanking(rankcnt); 
-			ArrayList<ReviewVo> review = rvd.getRankedReview(); 
+			ArrayList<ContentsVo> ratingContents = cd.getIndexRatingRanking(rankcnt); 
 
 			request.setAttribute("vcList", viewContents);
 			request.setAttribute("rcList", reviewContents);
 			request.setAttribute("bcList", bookmarkContents);
-			request.setAttribute("rvList", review);
+			request.setAttribute("rtList", ratingContents);
 			
 			String path ="/contents/contentsRanking.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
