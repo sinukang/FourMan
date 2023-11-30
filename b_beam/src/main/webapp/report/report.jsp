@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${manager eq null || manager eq '' || manager ne 'M'}">
-	<script>
+<c:if test="${empty manager || manager eq null || manager eq '' || manager ne 'M'}">
+	<script type="text/javascript">
 		alert("접근 권한이 없습니다.");
-		location.href = "${pageContext.request.contextPath}/";
+		location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
 	</script>
 </c:if>
 
@@ -87,13 +87,13 @@
 						<td class="reportedBdno">
 							<c:choose>
 								<c:when test="${rp.rvno ne ''}">
-									<div>${rp.rvno}</div>
+									<input type="text" value="${rp.rvno}" class="rptNum" readonly>
 								</c:when>
 								<c:when test="${rp.bdno ne ''}">
-									<div>${rp.bdno}</div>
+									<input type="text" value="${rp.bdno}" class="rptNum" readonly>
 								</c:when>
 								<c:when test="${rp.cmno ne ''}">
-									<div>${rp.cmno}</div>
+									<input type="text" value="${rp.cmno}" class="rptNum" readonly>
 								</c:when>
 							</c:choose>						
 						</td>
@@ -155,17 +155,20 @@
 						<td class="clearYN">
 							<c:choose>
 								<c:when test="${rp.rpdelyn eq 'N'}">
-									<button class="reportedBoardDelete" onclick="reportedBoardDelete()">글 삭제하기</button>
+									<span class="span-N"></span>
 								</c:when>
 								<c:otherwise>
-									<button class="reportedBoardDeleteCancel" onclick="reportedBoardDeleteCancel()">글 삭제취소</button>
+									<span class="span-Y">삭제됨</span>
 								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
-			
+		</div>
+		<div class="div-Btn-area">
+			<button class="reportedBoardDelete btn" onclick="reportedBoardDeleteUpdate('Y')">글 삭제하기</button>
+			<button class="reportedBoardDeleteCancel btn" onclick="reportedBoardDeleteUpdate('N')">글 삭제취소</button>
 		</div>
 	</div>
 	
@@ -291,51 +294,61 @@
 	});
 	
 	//신고목록에서 신고된 원본글 삭제
-	function reportedBoardDelete(){
+	function reportedBoardDeleteUpdate(YN){
 		
-		let checkBoxes = $(".deleteBox:checked");
+		let delYN = YN;
+		
+		let rpno = $(".deleteBox:checked");
+		let rpnoArr = [];	//rpno들을 담는 배열
 		let reportedBoardNum = [];
-		reportedBoardNum = $(".deleteBox:checked").parent(".delCheck").siblings(".reportedBdno").children("div").text();
+		reportedBoardNum = $(".deleteBox:checked").parent(".delCheck").siblings(".reportedBdno").children(".rptNum");
+		let reportedBoardNumArr = [];	//신고된 글들의 번호를 담는 배열
 		
-		alert("reportedBoardNum.length : " + reportedBoardNum.length);
-		for (var i = 0; i < reportedBoardNum.length; i++) {
-			alert(reportedBoardNum[i]);
-		}
-		
-		if(checkBoxes.length == 0){
+		if(rpno.length == 0){
 			alert("삭제할 글을 선택해주세요");
 			return;
+		}else{
 			
+			$(rpno).each(function(){
+				rpnoArr.push($(this).val());
+			});
+			
+			for (var i = 0; i < reportedBoardNum.length; i++) {
+				reportedBoardNumArr.push(reportedBoardNum[i].value);
+				console.log(reportedBoardNumArr[i]);
+			}			
+			
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/report/reportedBoardDeleteUpdate.do",
+				traditional : true,
+				data : {"delYN" : delYN,
+						"rpnoArr" : JSON.stringify(rpnoArr),
+						"reportedBoardNumArr" : JSON.stringify(reportedBoardNumArr)},
+				dataType : "json",
+				cache : false,
+				success : function(data){
+					if(data.value != 0){
+						if(delYN == 'Y'){
+							alert(data.value + " 개의 글이 삭제 됐습니다.");
+							location.reload();
+						}else{
+							alert(data.value + " 개의 글이 삭제 취소 됐습니다.");
+							location.reload();
+						}
+						
+						
+					}else if(data.value == 0){
+						alert("삭제된 글이 없습니다.");
+					}
+				},
+				error : function(){
+					alert("삭제 에러");
+				}
+			});
 		}
-// 		else{
-			
-// 			let checkedBoxes = [];
-			
-// 			$(checkBoxes).each(function(){
-				
-// 				checkedBoxes.push($(this).val());
-// 			});
-			
-// 			$.ajax({
-// 				type : "post",
-// 				url : "${pageContext.request.contextPath}/report/reportedBoardDelete.do",
-// 				data : checkedBoxes,
-// 				dataType : "json",
-// 				cache : false,
-// 				success : function(data){
-// 					alert(data.value + " 개의 글이 삭제되었습니다.")
-// 				},
-// 				error : function(){
-// 					alert("삭제 에러");
-// 				}
-// 			});
-// 		}
 	}
 	
-	//신고목록에서 신고된 원본글 삭제 취소
-	function reportedBoardDeleteCancel(){
-		
-	}
 	
 	//모달 영역 밖 클릭 시 모달 닫음
 	window.onclick = function(e){
