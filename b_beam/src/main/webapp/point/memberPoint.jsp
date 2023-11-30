@@ -65,8 +65,13 @@
 			
 			// 넘길값 mbno 입력한 포인트값
 			let mbno = "${pv.mbno}";
-			var ptpt = $('#exc-point').val();
-			let rmpt = "${pv.rmpt}";
+			var ptpt = parseInt($('#exc-point').val());
+			let rmpt = parseInt("${pv.rmpt}");
+			
+			if (ptpt%10000 != 0) {
+				alert("10000p 단위로 교환 가능합니다.");
+				return;
+			}
 			
 			if (ptpt > rmpt) {
 				alert("입력한 포인트가 현재 남아있는 포인트보다 많습니다.");
@@ -75,6 +80,7 @@
 			
 			console.log("mbno :"  + mbno);
 			console.log("ptpt :" + ptpt);
+			console.log("rmpt :" + rmpt);
 			
 			$.ajax({
 				type: "POST",

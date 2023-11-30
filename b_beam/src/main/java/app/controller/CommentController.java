@@ -107,7 +107,7 @@ public class CommentController extends HttpServlet {
 			//System.out.println("value2 : " + value2);
 			
 			PrintWriter pw = response.getWriter();
-			String responseStr = "{\"value\" : \""+value+"\"}";
+			String responseStr = "{\"value\" : \""+value+"\", \"value2\" : \""+value2+"\"}";
 			pw.println(responseStr);			
 			
 		}else if(location.equals("commentModify.do")) {

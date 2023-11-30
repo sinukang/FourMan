@@ -22,6 +22,7 @@ import org.json.simple.parser.ParseException;
 
 import app.dao.MemberDao;
 import app.dao.PointDao;
+import app.domain.BoardVo;
 import app.domain.MemberVo;
 import app.domain.PointVo;
 import app.util.MailSender;
@@ -69,16 +70,27 @@ public class MemberController extends HttpServlet {
 			MemberDao md = new MemberDao();
 			int exec = md.memberInsert(mv);
 			
+			//System.out.println("exec : " + exec);
+			int mbno = mv.getMbno();
+			
+			//System.out.println("mbno : " + mbno);
+			
+			if(mbno > 0) {
+				BoardVo bv = new BoardVo();
+				bv.setMbno(mbno);
+				
+				PointDao pd = new PointDao();
+				int value = pd.getPointJoin(bv);
+				
+				//System.out.println("value : " + value);
+			}
+			
 			PrintWriter out = response.getWriter();
-			
-
-			
-			
 			
 			if (exec == 1) {
 				//자동이동메소드
 				//response.sendRedirect(request.getContextPath()+"/member/memberList.html");	
-				out.println("<script>alert('회원가입 되었습니다.');"
+				out.println("<script>alert('회원가입 되었습니다.'); alert('회원가입 축하 포인트가 적립되었습니다.');"
 				+	"document.location.href='"+request.getContextPath()+"/member/memberLogin.do'</script>");
 			}else{
 				out.println("<script>history.back();</script>");	

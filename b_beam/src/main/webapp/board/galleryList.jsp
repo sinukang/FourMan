@@ -159,14 +159,13 @@
 			
 			$.ajax({
 				type : "get",
-				url : "${pageContext.request.contextPath}/board/galleryContentsInclude.do",
+				url : "${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=" + bdno,
 				data : {"bdno" : bdno},
 				dataType : "html",
 				cachce : false,
 				success : function(data){
 					$("#modal-include").html(data);
 					$("#modalWrap").css('display', 'flex');
-					
 				},
 				error : function(){
 					alert("popupBtn 에러");

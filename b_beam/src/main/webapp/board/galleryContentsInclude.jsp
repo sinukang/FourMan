@@ -195,6 +195,9 @@
 					cache : false,
 					success : function(data){
 						if(data.value == 1){
+							if(data.value2 == 1) {
+								alert("포인트가 적립되었습니다.");
+							}
 							commentListLoad();
 							inputComment.val("");
 						}

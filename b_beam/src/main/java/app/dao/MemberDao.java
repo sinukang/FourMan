@@ -3,6 +3,7 @@ package app.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import app.dbconn.DbConn;
@@ -27,13 +28,20 @@ public class MemberDao {
 		
 		
 		try{
-			 pstmt = conn.prepareStatement(sql);
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		        pstmt.setString(1, mv.getMbid());
 		        pstmt.setString(2, mv.getMbpwd());
 		        pstmt.setString(3, mv.getMbname());
 		        pstmt.setString(4, mv.getMbemail());
 		        pstmt.setString(5, mv.getMbaddr());
-			exec = pstmt.executeUpdate();
+		        exec = pstmt.executeUpdate();
+			
+				// 생성된 mbno 가져오기
+				try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						mv.setMbno(generatedKeys.getInt(1));
+					}
+				}
 			}catch(Exception e){
 				e.printStackTrace();
 			}

@@ -539,18 +539,18 @@ public class BoardController extends HttpServlet {
 				
 				PointDao pd = new PointDao();
 				int value2 = pd.getPointBoard(bv);
-				
 				System.out.println("value2 : " + value2);
 				System.out.println("value: " + value);
-	
+				
+				PrintWriter out = response.getWriter();
 				if (value == 0) {
 					String path = request.getContextPath() + "/board/galleryWrite.do";
 					response.sendRedirect(path);
 				} else {
-					String path = request.getContextPath() + "/board/galleryList.do";
-					response.sendRedirect(path);
+					if (value2 > 0) {
+						out.println("<script>alert('포인트가 적립되었습니다.');location.href='"+request.getContextPath()+"/board/galleryList.do'</script>");
+					}		
 				}
-	
 			} catch (FileUploadException e) {
 				e.printStackTrace();
 			}

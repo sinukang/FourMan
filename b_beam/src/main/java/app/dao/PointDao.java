@@ -43,6 +43,7 @@ public class PointDao {
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
+					// count = 오늘 작성한 게시글 수
 					int count = rs.getInt("cnt");
 					
 					if (count >= 1) {
@@ -75,7 +76,7 @@ public class PointDao {
 		int exec = 0;
 		ResultSet rs = null;
 		
-		String sql = "select count(mbno) as cnt FROM memberd where mbno = ?";
+		String sql = "select count(mbno) as cnt FROM member where mbno = ?";
 		
 		String sql2 = "INSERT INTO point (mbno, ptpm, ptrs, ptpt, acpt, rmpt)"
 				+  " VALUES(?, 'P', '회원가입', 1000, ptpt, ptpt)";
@@ -140,6 +141,7 @@ public class PointDao {
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
+					// count = 오늘 작성한 댓글 수
 					int count = rs.getInt("cnt");
 					
 					if (count >= 1) {
@@ -191,6 +193,7 @@ public class PointDao {
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
+					// count = 오늘 작성한 리뷰 수
 					int count = rs.getInt("cnt");
 					
 					if (count >= 1) {

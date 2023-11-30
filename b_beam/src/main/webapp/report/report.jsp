@@ -126,7 +126,7 @@
 									${rp.reviewVo.rvcont}
 								</c:when>
 								<c:when test="${rp.bdno ne ''}">
-									${rp.bdcont}
+									<a href="${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=${rp.bdno}">${rp.bdcont}</a>
 								</c:when>
 								<c:when test="${rp.cmno ne ''}">
 									${rp.commnetVo.cmcont}

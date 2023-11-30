@@ -65,15 +65,13 @@
 								${pv.rmpt}p
 							</td>
 						</tr>
-						<tr>
-							<td>
-								Lv
-							</td>
-							<td>
-								${mv.mbno}
-							</td>
-						</tr>
 					</table>
+					<div style="color: #6d6b70;">
+						* 회원가입시 1000p 적립<br>
+						* 게시글 1개 작성시 1000p 적립<br>
+						* 리뷰 1개 작성시 1000p 적립<br>
+						* 댓글 1개 작성시 1000p 적립
+					</div>
 				</div>
 				<div class="info-btn">
 					<input type="button" class="btn" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';">
