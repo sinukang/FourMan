@@ -87,13 +87,13 @@
 						<td class="reportedBdno">
 							<c:choose>
 								<c:when test="${rp.rvno ne ''}">
-									${rp.rvno}
+									<div>${rp.rvno}</div>
 								</c:when>
 								<c:when test="${rp.bdno ne ''}">
-									${rp.bdno}
+									<div>${rp.bdno}</div>
 								</c:when>
 								<c:when test="${rp.cmno ne ''}">
-									${rp.cmno}
+									<div>${rp.cmno}</div>
 								</c:when>
 							</c:choose>						
 						</td>
@@ -112,7 +112,7 @@
 						</td>
 						<td class="userName">
 							<c:choose>
-								<c:when test="${rp.penaltyVo.pndelyn eq 'N' || rp.penaltyVo.pndelyn eq null}">
+								<c:when test="${rp.penaltyVo.pndelyn eq 'N' || rp.penaltyVo.pndelyn eq null || rp.penaltyVo.pndelyn eq ''}">
 									<button class="userId" value="${rp.rpno}" onclick="penaltyCancel(${rp.rpno})">${rp.mbname}</button>
 								</c:when>
 								<c:otherwise>
@@ -155,10 +155,10 @@
 						<td class="clearYN">
 							<c:choose>
 								<c:when test="${rp.rpdelyn eq 'N'}">
-									<button class="boardDelete" onclick="boardDelete">글 삭제하기</button>
+									<button class="reportedBoardDelete" onclick="reportedBoardDelete()">글 삭제하기</button>
 								</c:when>
 								<c:otherwise>
-									<button class="boardDeleteCancel" onclick="boardDeleteCancel">글 삭제취소</button>
+									<button class="reportedBoardDeleteCancel" onclick="reportedBoardDeleteCancel()">글 삭제취소</button>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -281,54 +281,59 @@
 		});
 		
 		// 완료, 취소 버튼 클릭 시 모달 닫기
-		$(document).on("click", ".penaltyBtn, .cancelBtn, .closeBtn", function() {
+		$(".closeBtn").on("click", function() {
 			var modal = $('#myModal');
 			modal.removeClass("dp-flex");
 			modal.addClass("dp-none");
 		});
 		
-// 		// 완료, 취소 버튼 클릭 시 모달 닫기
-// 		$(".penaltyBtn, .cancelBtn, .closeBtn").on("click", function() {
-// 			var modal = $('#myModal');
-// 			modal.removeClass("dp-flex");
-// 			modal.addClass("dp-none");
-// 		});
 		
 	});
 	
-	//신고 처리 후 글 삭제
-	function boardDelete(){
+	//신고목록에서 신고된 원본글 삭제
+	function reportedBoardDelete(){
 		
 		let checkBoxes = $(".deleteBox:checked");
+		let reportedBoardNum = [];
+		reportedBoardNum = $(".deleteBox:checked").parent(".delCheck").siblings(".reportedBdno").children("div").text();
+		
+		alert("reportedBoardNum.length : " + reportedBoardNum.length);
+		for (var i = 0; i < reportedBoardNum.length; i++) {
+			alert(reportedBoardNum[i]);
+		}
 		
 		if(checkBoxes.length == 0){
 			alert("삭제할 글을 선택해주세요");
-		}
-		let checkedBoxes = [];
-		
-		$(checkBoxes).each(function(){
+			return;
 			
-			checkedBoxes.push($(this).val());
-		});
-		
-// 		$.ajax({
-// 			type : "post",
-// 			url : "${pageContext.request.contextPath}/report/reportDeleteAction.do"
-// 			data : {checkedBoxes : checkedBoxes},
-// 			dataType : "json",
-// 			cache : false,
-// 			success : function(data){
-// 				alert(data + "개의 글이 삭제되었습니다.")
-// 			},
-// 			error : function(){
-// 				alert("삭제 에러");
-// 			}
-// 		});
-		
+		}
+// 		else{
+			
+// 			let checkedBoxes = [];
+			
+// 			$(checkBoxes).each(function(){
+				
+// 				checkedBoxes.push($(this).val());
+// 			});
+			
+// 			$.ajax({
+// 				type : "post",
+// 				url : "${pageContext.request.contextPath}/report/reportedBoardDelete.do",
+// 				data : checkedBoxes,
+// 				dataType : "json",
+// 				cache : false,
+// 				success : function(data){
+// 					alert(data.value + " 개의 글이 삭제되었습니다.")
+// 				},
+// 				error : function(){
+// 					alert("삭제 에러");
+// 				}
+// 			});
+// 		}
 	}
 	
-	//신고 처리 후 글 삭제 취소
-	function boardDeleteCancel(){
+	//신고목록에서 신고된 원본글 삭제 취소
+	function reportedBoardDeleteCancel(){
 		
 	}
 	
@@ -354,14 +359,15 @@
 				+  "<p>Email: <span id='userEmail'>"+this.mbemail+"</span></p>"
 				+  "<h2>패널티 선택</h2>"
 				+  "<select class='penaltySelect'>"
-				+  "	<option value='N' selected>패널티 없음</option>"
+				+  "	<option value='' selected>패널티 부여 취소</option>"
+				+  "	<option value='N'>허위신고 처리</option>"
 				+  "	<option value='W'>이용정지(7일)</option>"
 				+  "	<option value='M'>이용정지(30일)</option>"
 				+  "	<option value='S'>이용정지(영구)</option>"
 				+  "</select>"
 				+  "<div>"
-				+  "	<button class='penaltyBtn' onclick='penaltyInsert("+this.mbno2+")'>완료</button>"
-				+  "	<button class='cancelBtn'>취소</button>"
+				+  "	<button class='penaltyInsertBtn' onclick='penaltyInsert("+this.mbno2+")'>완료</button>"
+				+  "	<button class='cancelBtn' onclick='penaltyCancel()'>취소</button>"
 				+  "</div>";
 		});
 		
@@ -387,13 +393,12 @@
 		location.href= "${pageContext.request.contextPath}/report/penaltyUpdate.do?rpno="+rpno+"&mbno2="+mbno2+"&pndelyn="+pndelyn+"";
 	}
 	
-// 	function penaltyCancel(data){
+	function penaltyCancel(){
+		var modal = $('#myModal');
+		modal.removeClass("dp-flex");
+		modal.addClass("dp-none");
+	}
 		
-// 		let rpno = data;
-		
-// 		location.href = "${pageContext.request.contextPath}/report/penaltyCancel.do?rpno="+rpno;
-// 	}
-	
 
 	
 </script>

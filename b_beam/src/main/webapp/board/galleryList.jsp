@@ -30,7 +30,15 @@
 							<button type="button" id="popupBtn" class="popupBtn" value="${bv.bdno}"> <!-- 모달팝업 버튼 -->
 								<table class="table-cont">
 									<tr>
-										<td class="td-nickname">${bv.mbname}</td>
+										<td class="td-nickname">
+											<div class="div-name-area">
+												<div class="div-nickname">${bv.mbname}</div>
+												<c:if test="${bv.localPeople eq 'Y'}">
+													<div class="div-mark"></div>
+												</c:if>
+											</div>
+												
+										</td>
 									</tr>
 									<tr>
 										<td class="td-img">
@@ -43,7 +51,7 @@
 							</button>
 							<div class="info-area">
 								<div class="title-area">
-									<span class="span-nickname">${bv.bdtitle}</span>
+									<span class="span-title">${bv.bdtitle}</span>
 									<%-- <span> 
 										<c:choose>
 											<c:when test="${bv.bdCommentCnt != 0}">

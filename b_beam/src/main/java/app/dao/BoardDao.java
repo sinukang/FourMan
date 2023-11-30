@@ -42,6 +42,7 @@ public class BoardDao {
 		String sql = "SELECT b.*"
 					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS bdLikeCnt"
 					+ ", (SELECT COUNT(c.bdno) FROM comment c WHERE c.bdno = b.bdno) AS bdCommentCnt"
+					+ ", (SELECT IF(COUNT(mbaddr) = 1, 'Y', 'N') FROM member m WHERE m.mbno = b.mbno AND m.mbaddr LIKE '%전주%') AS localPeopleYN"
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bdcate = 'G' AND b.bddelyn = 'N') b"
 					+ str2
@@ -77,6 +78,7 @@ public class BoardDao {
 				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
 				bv.setBdCommentCnt(rs.getInt("bdCommentCnt"));
 				bv.setMbname(rs.getString("mbname"));
+				bv.setLocalPeople(rs.getString("localPeopleYN"));
 				if(mbno != 0) {
 					bv.setBdLikeYN(rs.getString("bdLikeYN"));
 				}
@@ -139,6 +141,7 @@ public class BoardDao {
 		
 		String sql = "SELECT b.*"
 					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS likeCnt"
+					+ ", (SELECT IF(COUNT(mbaddr) = 1, 'Y', 'N') FROM member m WHERE m.mbno = b.mbno AND m.mbaddr LIKE '%전주%') AS localPeopleYN"
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
 					+ " WHERE b.bdno = ?";
@@ -167,6 +170,7 @@ public class BoardDao {
 					bv.setBdLikeYN(rs.getString("bdLikeYN"));
 				}
 				bv.setMbname(rs.getString("mbname"));
+				bv.setLocalPeople(rs.getString("localPeopleYN"));
 				
 				//ArrayList<String> bdFilename에 
 				//bdno가 일치하는 bdgallery의 값들을 담는다

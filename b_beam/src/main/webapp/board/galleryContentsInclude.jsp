@@ -9,8 +9,11 @@
 
 <div class="contents-area">
 	<div class="div-photo">
-		<div class="div-nick">
-			<span>${bv.mbname}</span>
+		<div class="md-div-name-area">
+			<div class="md-div-nickname">${bv.mbname}</div>
+			<c:if test="${bv.localPeople eq 'Y'}">
+				<div class="md-div-mark"></div>
+			</c:if>
 		</div>
 		<div class="photo-area">
 			<div class="swiper mySwiper" style="height: 100%;">

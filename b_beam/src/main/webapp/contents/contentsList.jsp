@@ -79,8 +79,9 @@
 			            </c:otherwise>
 			        </c:choose>
 			        <div class="contents-title">
-			        	<p class="title">${cv.title}${cv.contentRating}</p>
+			        	<p class="title">${cv.title}</p>
 			        	<p class="cmtCnt">(${cv.contentReviewCnt})</p>
+			        	<p><div class=""></div></p>
 			        </div>
 			        <c:choose>
 			    		<c:when test="${cv.contentLikeYN eq 'Y'}">
@@ -246,6 +247,30 @@ function contentTypeSelected(){
 				console.log("error");
 			}
 		});
+	}
+	// 평점 값
+	const ratingValue = parseFloat(${cv.contentRating}/ 100);
+	// 별점을 생성하는 함수
+	function createStars(rating) {
+	const maxStars = 5;
+
+		// 채워진 별과 빈 별을 조합한 문자열 생성
+		let starsString = '★'.repeat(Math.floor(rating));
+		starsString += '☆'.repeat(maxStars - Math.floor(rating));
+		
+		$('#ratingContainer').append(ratingValue + "/5")
+		// 별점을 담은 div 요소 생성
+		
+		const ratingDiv = document.createElement('div');
+		ratingDiv.textContent = starsString;
+
+		return ratingDiv;
+	}
+
+	// 별점을 생성하고 표시
+	const ratingContainer = document.getElementById('ratingContainer');
+	if (ratingContainer) {
+		ratingContainer.appendChild(createStars(ratingValue));
 	}
 	
 </script>

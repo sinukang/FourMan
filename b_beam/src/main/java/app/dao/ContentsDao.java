@@ -710,4 +710,40 @@ public class ContentsDao {
 		}
 		return alist;
 	}
+	public ArrayList<ContentsVo> getBookmarkedContents(int mbno){
+		ArrayList<ContentsVo> alist = new ArrayList<>();
+		String sql="select a.*, c.rating \r\n"
+				+ "from tempcontents a \r\n"
+				+ "join bookmark b on a.contentid = b.contentid \r\n"
+				+ "left JOIN (select contentid,avg(rvrate) as rating from review where rvdelyn = 'N' group by 1) c ON a.contentid = c.contentid \r\n"
+				+ "where b.mbno = ? and b.bmdelyn='N' \r\n"
+				+ "order by b.bmno desc ";
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mbno);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				ContentsVo cv = new ContentsVo();
+				cv.setContentid(rs.getString("contentid"));
+				cv.setContenttypeid(rs.getString("contenttypeid"));
+				cv.setContentdate(rs.getString("contentdate"));
+				cv.setFirstimage(rs.getString("firstimage"));
+				cv.setTitle(rs.getString("title"));
+				cv.setMapx(rs.getString("mapx"));
+				cv.setMapy(rs.getString("mapy"));
+				cv.setContentRating((int)(rs.getDouble("rating")*100));
+				alist.add(cv);
+				
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		return alist;
+		
+	}
 }
