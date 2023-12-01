@@ -39,11 +39,27 @@
 							<i class="fas fa-chevron-up"></i>
 						</button>	
 					</div>
+					<div style="display: flex; justify-content: flex-end;">
+						<c:choose>
+						<c:when test="${not empty manager}">
+							<button id="btn-modify" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/board/FAQModify.do?bdno=${bv.bdno}'">수정</button>
+							<button id="btn-delete" class="btn-write" onclick="FAQDelete(${bv.bdno})" >삭제</button>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+						</c:choose>
+					</div>
 				</c:forEach>
 			</div>	
 		</div>
 		<div class="btn-area2">
-			<button id="btn-write" class="btn-write">자주 묻는 질문 등록</button>
+			<c:choose>
+				<c:when test="${not empty manager}">
+					<button id="btn-write" class="btn-write">자주 묻는 질문 등록</button>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="pagination-area">
 			<table class="page-table">
@@ -137,7 +153,37 @@
 			})
 		});
 		
+		function FAQDelete(idx) {
+			event.preventDefault();
+			event.stopPropagation()
+			
+			let bdno = idx;
+			
+			if(confirm("정말 삭제하시겠습니까?")){
+				$.ajax({
+					type : "post",
+					url : "${pageContext.request.contextPath}/board/FAQDelete.do",
+					data : {"bdno" : bdno},
+					dataType : "json",
+					cache : false,
+					success : function(data){
+						if(data.value == 1) {
+							alert("삭제되었습니다.");
+							location.href = "${pageContext.request.contextPath}/boardFAQ.do";
+						}
+					},
+					error : function() {
+						alert("에러");
+						return;
+					}
+				})
+				
+			}else {
+				return;
+			}
+			
+		}
 		
-
+		
 </script>
 </html>

@@ -691,5 +691,74 @@ public class BoardDao {
 		return value;
 	}
 	
+	public BoardVo FAQSelectOne(int mbno, int bdno) {
+		
+		BoardVo bv = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM board where bdno = ? and bdcate='O'";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bdno);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				bv = new BoardVo();
+				bv.setBdtitle(rs.getString("bdtitle"));
+				bv.setBdcont(rs.getString("bdcont"));
+				bv.setBddate(rs.getString("bddate"));
+				bv.setBdno(rs.getInt("bdno"));
+				bv.setMbno(rs.getInt("mbno"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			try{
+				rs.close();
+				conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}	
+		
+		return bv;
+	}
+	
+	public int FAQModify(BoardVo bv) {
+		int exec = 0;
+		
+		String sql = "update board set bdtitle = ?, bdcont = ?, bddatem = now() where bdno = ?";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, bv.getBdtitle());
+			pstmt.setString(2, bv.getBdcont());
+			pstmt.setInt(3, bv.getBdno());
+			
+			exec = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exec;
+	}
+	
+	public int FAQDelete(int bdno) {
+		int exec = 0;
+		
+		String sql = "update board set bddelyn='Y', bddatem = now() where bdno=?"; 
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, bdno);
+			
+			exec = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exec;
+	}
 
 }

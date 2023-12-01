@@ -1,3 +1,6 @@
+
+
+
 package app.controller;
 
 import java.io.File;
@@ -488,15 +491,13 @@ public class BoardController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			
 			if (value > 0) {
-				out.println("<script>alert('tnwjd되었습니다.');location.href='"+request.getContextPath()+"/board/notice.do?bdno='"+bdno+"</script>");
+				out.println("<script>alert('수정되었습니다.');location.href='"+request.getContextPath()+"/board/notice.do?bdno='"+bdno+"</script>");
 				/*String path = request.getContextPath()+"/board/notice.do?bdno="+bdno;
 				response.sendRedirect(path);*/
 			} else {
 				String path = request.getContextPath() + "/board/noticeList.do";
 				response.sendRedirect(path);
 			}
-			
-			
 			
 		}else if (location.equals("FAQ.do")) {
 			
@@ -572,6 +573,84 @@ public class BoardController extends HttpServlet {
 				String path = request.getContextPath()+"/board/FAQ.do";
 				response.sendRedirect(path);
 			}
+			
+		}else if (location.equals("FAQModify.do")) {
+			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0;
+			if(session != null) {
+				if(session.getAttribute("mbno") != null) {	//로그인 했으면 mbno에 세션의 mbno를 할당
+					mbno = (int)session.getAttribute("mbno");
+				}
+			}
+			int bdno = Integer.parseInt(request.getParameter("bdno"));
+			BoardDao bd = new BoardDao();
+			BoardVo bv = new BoardVo();
+			bv = bd.FAQSelectOne(mbno, bdno);
+			
+			
+			System.out.println("mbno : " + mbno);
+			System.out.println("bdno : " + bdno);
+			
+			request.setAttribute("bv", bv);
+			
+			String path ="/board/FAQModify.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+			
+		}else if (location.equals("FAQModifyAction.do")) {
+			
+			String bdno = request.getParameter("bdno");
+			String bdtitle = request.getParameter("bdtitle");
+			String bdcont = request.getParameter("bdcont");
+			
+			System.out.println("bdno : " + bdno);
+			System.out.println("bdtitle : " + bdtitle);
+			System.out.println("bdcont : " + bdcont);
+			
+			BoardVo bv = new BoardVo();
+			bv.setBdno(Integer.parseInt(bdno));
+			bv.setBdcont(bdcont);
+			bv.setBdtitle(bdtitle);
+			
+			BoardDao bd = new BoardDao();
+			int value = bd.noitceModify(bv);
+			
+			System.out.println("value : " + value);
+			
+			PrintWriter out = response.getWriter();
+			
+			if (value > 0) {
+				out.println("<script>alert('수정되었습니다.');location.href='"+request.getContextPath()+"/board/FAQ.do'</script>");
+				/*String path = request.getContextPath()+"/board/notice.do?bdno="+bdno;
+				response.sendRedirect(path);*/
+			} else {
+				String path = request.getContextPath() + "/board/FAQ.do";
+				response.sendRedirect(path);
+			}
+			
+		}else if (location.equals("FAQDelete.do")) {
+			
+			int bdno = 0;
+			
+			if(request.getParameter("bdno") != null) {
+				bdno = Integer.parseInt(request.getParameter("bdno"));
+			}
+			//System.out.println("bdno : " + bdno);
+			
+			//처리하는 메소드를 만들어야 한다
+			int value=0;
+			
+			BoardDao bd = new BoardDao();
+			value = bd.FAQDelete(bdno);			
+			
+			//System.out.println("value : " + value);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8"); PrintWriter out =
+			response.getWriter(); out.print("{\"success\": " + (value > 0) + "}");
+			out.flush(); out.close();
 			
 		}else if (location.equals("galleryWriteAction.do")) {
 			
