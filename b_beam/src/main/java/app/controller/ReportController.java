@@ -59,7 +59,36 @@ public class ReportController extends HttpServlet {
 			String path ="/report/report.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);				
+
+		}else if (location.equals("reportpopup.do")) {
 			
+			HttpSession session = request.getSession(false);
+			
+			int mbno = 0; //피신고자
+			int mbno2 =0; //신고자
+			int no =0; //컨텐츠번호
+			int rpcate = 0;//컨텐츠종류
+			
+			if (session != null) {
+				if (session.getAttribute("mbno") != null) {
+					mbno = (int) session.getAttribute("mbno");
+				}
+			}
+			if (request.getParameter("mbno2") != null ) {
+				mbno2 = Integer.parseInt(request.getParameter("mbno2"));
+			}
+			if (request.getParameter("no") != null ) {
+				no = Integer.parseInt(request.getParameter("no"));
+			}
+			if (request.getParameter("rpcate") != null) {
+				rpcate = Integer.parseInt(request.getParameter("rpcate"));
+			}
+			
+				
+			String path ="/report/reportpopup.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);		
+				
 		} else if (location.equals("reportAction.do")) {
 			HttpSession session = request.getSession(false);
 			
