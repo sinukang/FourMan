@@ -743,7 +743,13 @@ function setReview(data){
 			str+='</button>';
 		}
 		str+='</div></th>';
-		str+='<th><button type="button" class="rpt-btn" onclick="rpt('+value.no+','+value.mbno+')">&#x1F6A8;</button></th>';
+		str+='<th>';
+		str+='<form name="rpForm'+value.no+' value="openPop">';
+		str+='<input type="hidden" name="rvrptno'+value.no+'" value="'+value.no+'">';
+		str+='<input type="hidden" name="rvcate'+value.no+'" value="rv">';
+		str+='<button type="button" class="rpt-btn" onclick="rpt('+value.no+')">&#x1F6A8;</button>';
+		str+='</form>';
+		str+='</th>';
 		str+='<th id="day'+value.no+'" class="day" colspan="2">'+value.date+'</th>';
 		str+='<th id="up'+value.no+'" class="up" type="button" class="likebtn">';
 		if(value.likeYN==null){
@@ -939,28 +945,41 @@ function unlike(e) {
 	}
 	
 }
-function rpt(e,m){
-	if (confirm('정말 신고하시겠습니까?')) {
-		console.log(e);
+function rpt(e){
+	var formName='rpForm'+e;
+	var rpForm = $('form[name='+formName+']');
+	var url="${pageContext.request.contextPath}/report/reportPopup.do";
+
+	window.open(url,
+			formName,
+			'width=500 height=600');
+	rpForm.action = url;
+	rpForm.method="post";
+	rpForm.target=formName;
+	rpForm.submit();
+	
+	
+// 	if (confirm('정말 신고하시겠습니까?')) {
+// 		console.log(e);
 		
-		$.ajax({
-			type: "POST",
-			url: "${pageContext.request.contextPath}/report/reportAction.do",
-			data: {"rvno" : e, "mbno2" : m},
-			dataType: "json",
-			success: function(response) {
-				if (response.success) {
-					alert("신고되었습니다.");
-				}
-			},
-			error: function(request, status, error) {
-				alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
-			}
-		});
+// 		$.ajax({
+// 			type: "POST",
+// 			url: "${pageContext.request.contextPath}/report/reportAction.do",
+// 			data: {"rvno" : e, "mbno2" : m},
+// 			dataType: "json",
+// 			success: function(response) {
+// 				if (response.success) {
+// 					alert("신고되었습니다.");
+// 				}
+// 			},
+// 			error: function(request, status, error) {
+// 				alert("code : "+request.status+"\n"+"message : " +request.responseText+"\n"+"error : "+ error);
+// 			}
+// 		});
 		
-	}else{
-		return;
-	}
+// 	}else{
+// 		return;
+// 	}
 }
 </script>
 <script>
