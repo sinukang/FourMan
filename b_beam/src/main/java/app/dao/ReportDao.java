@@ -319,27 +319,28 @@ public class ReportDao {
 			
 		 	MemberVo mv = new MemberVo();
 			ResultSet rs = null;
-			String table = "";
+			String table1 = "";
 			switch(cate) {
 			case "bd" : 
-				table="board";
+				table1="board";
 				break;
 			case "rv" : 
-				table="review";
+				table1="review";
 				break;
 			case "cm" : 
-				table="comment";
+				table1="comment";
 				break;
 			}
 			String sql = "SELECT a.mbno, m.mbname "
-					+ "FROM "+ table + " a "
+					+ "FROM "+ table1 + " a "
 					+ "JOIN member m ON a.mbno = m.mbno "
 					+ "WHERE a."+cate+"no = ?";
 			System.out.println(sql);
+			System.out.println("table:" + table1);
+			
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1, no); 
-				pstmt.setString(2, cate);
 				
 				rs = pstmt.executeQuery();
 			
