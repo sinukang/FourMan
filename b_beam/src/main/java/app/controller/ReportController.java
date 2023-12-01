@@ -60,7 +60,7 @@ public class ReportController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);				
 
-		}else if (location.equals("reportpopup.do")) {
+		}else if (location.equals("reportPopup.do")) {
 			
 			HttpSession session = request.getSession(false);
 			
@@ -85,7 +85,7 @@ public class ReportController extends HttpServlet {
 			}
 			
 				
-			String path ="/report/reportpopup.jsp";
+			String path ="/report/reportPopup.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);		
 				
