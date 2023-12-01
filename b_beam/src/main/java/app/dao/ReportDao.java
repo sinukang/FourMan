@@ -341,6 +341,7 @@ public class ReportDao {
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1, no); 
+				pstmt.setString(2, cate); 
 				
 				rs = pstmt.executeQuery();
 			
