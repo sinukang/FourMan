@@ -204,9 +204,15 @@ public class MemberController extends HttpServlet {
 			
 			System.out.println(mbno);
 			System.out.println(mv2.getManager());
+			System.out.println("mv2.getLoginCheck() : " + mv2.getLoginCheck());
+			//mv2.getLoginCheck()가 null or "N"이면 정상상태 아니면 패널티로 인한 로그인 불가처리
+			
 			//Action처리하는 용도는 send방식으로 보낸다
 			PrintWriter out = response.getWriter();
-			if (mbno != 0) {  //일치하면
+			if(mv2.getLoginCheck() == null) {
+				mv2.setLoginCheck("N");
+			}
+			if (mbno != 0 && mv2.getLoginCheck().equals("N")) {  //일치하면
 				//세션에 회원아이디를 담는다 
 				HttpSession session =  request.getSession();
 				session.setAttribute("mbname", mv2.getMbname());
