@@ -214,10 +214,11 @@ public class ReportDao {
 		ResultSet rs = null;
 		int value = 0;
 		String bdType = "";	//board 종류를 담을 변수 r, b, c : review(리뷰), board(갤러리), comment(댓글)
+		int mbno2 = 0;
 		String sql = "";
 		
-		String sql_boardTypeCheck = "SELECT IF(rvno IS NOT NULL, 'r', IF(bdno IS NOT NULL, 'b'"
-								  + ", IF(cmno IS NOT NULL, 'c', 'c'))) AS bdType FROM report"
+		String sql_boardTypeCheck = "SELECT mbno2, IF(rvno IS NOT NULL, 'rvno', IF(bdno IS NOT NULL, 'bdno'"
+								  + ", IF(cmno IS NOT NULL, 'cmno', 'c'))) AS bdType FROM report"
 								  + " WHERE rpno = ?";
 		
 		String sql_reviewDelete = "UPDATE report rp, review rv SET rp.rpdelyn = '"+delYN+"', rv.rvdelyn = '"+delYN+"' WHERE rp.rpno = ? AND rv.rvno = ?";
@@ -232,15 +233,16 @@ public class ReportDao {
 			
 			while(rs.next()) {
 				bdType = rs.getString("bdType");
+				mbno2 = rs.getInt("mbno2");
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		if (bdType.equals("r")) {
+		if (bdType.equals("rvno")) {
 			sql = sql_reviewDelete;
-		}else if(bdType.equals("b")) {
+		}else if(bdType.equals("bdno")) {
 			sql = sql_boardDelete;
 		}else {
 			sql = sql_commentDelete;
@@ -253,6 +255,16 @@ public class ReportDao {
 			
 			value = pstmt.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		String sql_updateAll = "UPDATE report SET rpdelyn = '"+delYN+"' WHERE mbno2 = "+mbno2+" AND "+bdType+" = "+reportedBoardNum;
+		System.out.println("sql_updateAll : " + sql_updateAll);
+		
+		try {
+			pstmt = conn.prepareStatement(sql_updateAll);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			try {
