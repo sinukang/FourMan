@@ -169,7 +169,7 @@
 					success : function(data){
 						if(data.value == 1) {
 							alert("삭제되었습니다.");
-							location.href = "${pageContext.request.contextPath}/boardFAQ.do";
+							location.reload();
 						}
 					},
 					error : function() {

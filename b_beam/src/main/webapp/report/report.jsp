@@ -123,6 +123,9 @@
 						<td class="content">
 							<c:choose>
 								<c:when test="${rp.rvno ne ''}">
+								<c:if test="${empty rp.reviewVo.rvcont}">
+									<button onclick='location.href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=${rp.reviewVo.contentid}&reviewNo=${rp.rvno}"'>이동</button>
+								</c:if>
 									<a href="${pageContext.request.contextPath}/contents/contentsDetail.do?contentid=${rp.reviewVo.contentid}&reviewNo=${rp.rvno}">
 										${rp.reviewVo.rvcont}
 									</a>

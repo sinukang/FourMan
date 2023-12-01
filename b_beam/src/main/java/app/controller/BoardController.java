@@ -647,9 +647,12 @@ public class BoardController extends HttpServlet {
 			
 			//System.out.println("value : " + value);
 			
+			PrintWriter out = response.getWriter();
+			
 			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8"); PrintWriter out =
-			response.getWriter(); out.print("{\"success\": " + (value > 0) + "}");
+			response.setCharacterEncoding("UTF-8"); 
+			response.getWriter(); 
+			out.print("{\"value\": " + (value > 0) + "}");
 			out.flush(); out.close();
 			
 		}else if (location.equals("galleryWriteAction.do")) {

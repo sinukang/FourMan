@@ -80,7 +80,7 @@
 				<button type="button" class="modi-btn" onclick="location.href='${pageContext.request.contextPath}/board/galleryModify.do?bdno=${bv.bdno}';" >수정</button>
 				<button type="button" class="del-btn" onclick="">삭제</button>
 			</c:if>
-			<button type="button" class="rpt-btn" onclick="">&#x1F6A8;</button>
+			<button type="button" class="rpt-btn" onclick='boardReport(${bv.bdno})'>&#x1F6A8;</button>
 		</div>
 		
 	</div>
@@ -259,7 +259,7 @@
 			}
 		});
 		
-		//게시글 신고 버튼
+		/* //게시글 신고 버튼
 		$(".rpt-btn").on("click", function() {
 			
 			if (confirm('정말 신고하시겠습니까?')) {
@@ -286,7 +286,7 @@
 			}else{
 				return;
 			}
-		});
+		}); */
 		
 		
 // 	});
@@ -339,7 +339,7 @@
 					+		"</div>"
 					+		"<div class='comment-btn'>"
 					+			"<button type='button' class='btn-delete' onclick='commentDelete("+this.cmno+")'>삭제</button>"
-					+			"<button type='button' class='btn-report' onclick='commentReport("+this.cmno+")'>&#x1F6A8;</button>"	
+					+			"<button type='button' class='rpt-btn' onclick='commentReport("+this.cmno+")'>&#x1F6A8;</button>"	
 					+		"</div>"
 					+	"</div>";			//onclick='commentDelete("+this.cmno+")'
 			}else{
@@ -354,7 +354,7 @@
 					+			"<span class='span-date'>"+this.cmdate+"</span>"
 					+		"</div>"
 					+		"<div class='comment-btn'>"
-					+			"<button type='button' class='btn-report' onclick='commentReport("+this.cmno+")'>&#x1F6A8;</button>"	
+					+			"<button type='button' class='rpt-btn' onclick='commentReport("+this.cmno+")'>&#x1F6A8;</button>"	
 					+		"</div>"
 					+	"</div>";
 			}
@@ -395,7 +395,7 @@
 		}
 	}
 	
-	function commentReport(idx){
+	/* function commentReport(idx){
 		
 		event.preventDefault();
 		event.stopPropagation()
@@ -425,8 +425,21 @@
 			return;
 		}
 		
+	} */
+	
+	function boardReport(bdno){
+		
+		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+bdno+"&cate=bdno";
+
+		window.open(url,'_blank','width=500 height=600');
 	}
 	
+	function commentReport(cmno){
+		
+		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+cmno+"&cate=cmno";
+
+		window.open(url,'_blank','width=500 height=600');
+	}
 	
 
 	

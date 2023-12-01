@@ -16,15 +16,23 @@
 	<table>
 		<tr>
 			<td>피신고자</td>
-			<td>김아무개</td>
+			<td>${mv.mbname}</td>
 		</tr>
 		<tr>
-			<td>신고자</td>
-			<td>${mbno}</td>
-		</tr>
-		<tr>
-			<td>신고분류</td>
-			<td>${rpcate}</td>
+			<td>신고게시판 분류</td>
+			<td>
+				<c:choose>
+					<c:when test="${cate eq 'rvno'}">
+						리뷰
+					</c:when>
+					<c:when test="${cate eq 'bdno'}">
+						갤러리
+					</c:when>
+					<c:when test="${cate eq 'cmno'}">
+						댓글
+					</c:when>
+				</c:choose>	
+			</td>
 		</tr>
 		<tr>
 			<td>신고종류</td>
@@ -53,11 +61,12 @@ function rpt(){
 	}else{
 		if (confirm('정말 신고하시겠습니까?')) {
 			var rpcate = $('#rpcate').val();
-			var nocate = '${cate}' + 'no';
+			console.log(rpcate);
+			
 			$.ajax({
 				type: "POST",
 				url: "${pageContext.request.contextPath}/report/reportAction.do",
-				data: {nocate:e,'rpcate':rpcate,'mbno2':'${mbno2}'},
+				data: {'${cate}':${no},'rpcate':rpcate,'mbno2':${mv.mbno},'mbno':${mbno}},
 				dataType: "json",
 				success: function(response) {
 					if (response.success) {

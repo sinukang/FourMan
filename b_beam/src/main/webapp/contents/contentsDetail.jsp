@@ -744,11 +744,7 @@ function setReview(data){
 		}
 		str+='</div></th>';
 		str+='<th>';
-		str+='<form name="rpForm'+value.no+' value="openPop">';
-		str+='<input type="hidden" name="rvrptno'+value.no+'" value="'+value.no+'">';
-		str+='<input type="hidden" name="rvcate'+value.no+'" value="rv">';
-		str+='<button type="button" class="rpt-btn" onclick="rpt('+value.no+')">&#x1F6A8;</button>';
-		str+='</form>';
+		str+='<button type="button" class="rpt-btn" onclick="reviewReport('+value.no+')">&#x1F6A8;</button>';
 		str+='</th>';
 		str+='<th id="day'+value.no+'" class="day" colspan="2">'+value.date+'</th>';
 		str+='<th id="up'+value.no+'" class="up" type="button" class="likebtn">';
@@ -945,20 +941,17 @@ function unlike(e) {
 	}
 	
 }
-function rpt(e){
-	var formName='rpForm'+e;
-	var rpForm = $('form[name='+formName+']');
-	var url="${pageContext.request.contextPath}/report/reportPopup.do";
+function reviewReport(e){
+// 	var formName='rpForm'+e;
+// 	var rpForm = $('form[name='+formName+']');
+	var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+e+"&cate=rvno";
 
-	window.open(url,
-			formName,
-			'width=500 height=600');
-	rpForm.action = url;
-	rpForm.method="post";
-	rpForm.target=formName;
-	rpForm.submit();
-	
-	
+	window.open(url,'_blank','width=500 height=600');
+// 	rpForm.action = url;
+// 	rpForm.method="post";
+// 	rpForm.target="formName";
+// 	rpForm.submit();
+
 // 	if (confirm('정말 신고하시겠습니까?')) {
 // 		console.log(e);
 		

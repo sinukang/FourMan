@@ -184,7 +184,7 @@ public class ReportDao {
 			category = "cmno";
 		}
 		String sql = "INSERT INTO report(mbno, mbno2, "+category+", rpcate, rpdelyn) "
-				+ " VALUES(?, ?, ?, 'F', 'N')";
+				+ " VALUES(?, ?, ?, ?, 'N')";
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			
@@ -197,7 +197,7 @@ public class ReportDao {
 			} else if ("cmno".equals(category)) {
 				pstmt.setInt(3, cmno);
 			}
-			//pstmt.setString(4, rpv.getRpcate());
+			pstmt.setString(4, rpv.getRpcate());
 			
 			exec = pstmt.executeUpdate();
 			
@@ -321,27 +321,26 @@ public class ReportDao {
 			ResultSet rs = null;
 			String table1 = "";
 			switch(cate) {
-			case "bd" : 
+			case "bdno" : 
 				table1="board";
 				break;
-			case "rv" : 
+			case "rvno" : 
 				table1="review";
 				break;
-			case "cm" : 
+			case "cmno" : 
 				table1="comment";
 				break;
 			}
 			String sql = "SELECT a.mbno, m.mbname "
 					+ "FROM "+ table1 + " a "
 					+ "JOIN member m ON a.mbno = m.mbno "
-					+ "WHERE a."+cate+"no = ?";
+					+ "WHERE a."+cate+" = ?";
 			System.out.println(sql);
 			System.out.println("table:" + table1);
 			
 			
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1, no); 
-				pstmt.setString(2, cate); 
 				
 				rs = pstmt.executeQuery();
 			

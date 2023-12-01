@@ -65,8 +65,8 @@ public class ReportController extends HttpServlet {
 			
 			HttpSession session = request.getSession(false);
 			
-			int mbno = 0; //피신고자
-			int mbno2 =0; //신고자
+			int mbno = 0; //신고자
+			int mbno2 =0; //피신고자
 			int no =0; //컨텐츠번호
 			String cate = "";//컨텐츠종류
 			
@@ -86,6 +86,13 @@ public class ReportController extends HttpServlet {
 			}
 			ReportDao rpd = new ReportDao();
 			MemberVo mv = rpd.getContentsMv(no, cate);
+			
+			
+			System.out.println("mbno2 : " + mv.getMbno());
+			System.out.println("no : " + no);
+			System.out.println("cate : " + cate);
+
+			session.setAttribute("mbno", mbno);
 			session.setAttribute("mv", mv);
 			session.setAttribute("cate", cate);
 			session.setAttribute("no", no);
@@ -102,10 +109,8 @@ public class ReportController extends HttpServlet {
 			int rvno = 0;
 			int cmno = 0;
 			
-			if (session != null) {
-				if (session.getAttribute("mbno") != null) {
-					mbno = (int) session.getAttribute("mbno");
-				}
+			if (request.getParameter("mbno") != null) {
+				mbno = Integer.parseInt(request.getParameter("mbno"));
 			}
 			if (request.getParameter("bdno") != null) {
 				bdno = Integer.parseInt(request.getParameter("bdno"));
@@ -120,7 +125,7 @@ public class ReportController extends HttpServlet {
 				cmno = Integer.parseInt(request.getParameter("cmno"));
 			}
 			
-			//String rpcate = request.getParameter("rpcate");
+			String rpcate = request.getParameter("rpcate");
 
 			ReportVo rpv = new ReportVo();
 			rpv.setMbno(mbno);
@@ -128,7 +133,7 @@ public class ReportController extends HttpServlet {
 			rpv.setBdno(bdno);
 			rpv.setRvno(rvno);
 			rpv.setCmno(cmno);
-			//rpv.setRpcate(rpcate);
+			rpv.setRpcate(rpcate);
 			
 			
 			System.out.println("mbno : " + mbno);
@@ -136,7 +141,7 @@ public class ReportController extends HttpServlet {
 			System.out.println("bdno : " + bdno);
 			System.out.println("rvno : " + rvno);
 			System.out.println("cmno : " + cmno);
-			//System.out.println("rpcate : " + rpcate);
+			System.out.println("rpcate : " + rpcate);
 			
 			ReportDao rpd = new ReportDao();
 			int value = 0;
