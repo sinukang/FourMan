@@ -254,6 +254,7 @@ public class ReportDao {
 			pstmt.setInt(2, reportedBoardNum);
 			
 			value = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -310,6 +311,16 @@ public class ReportDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			value = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String sql_penaltyUpdateAll = "UPDATE penalty SET pndelyn = '"+pndelyn+"' WHERE mbno = "+mbno2;
+		
+		try {
+			pstmt = conn.prepareStatement(sql_penaltyUpdateAll);
+			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
