@@ -90,13 +90,17 @@
 					$("#checkmsg2").css("display","block");
 					$("#memberPwd").focus();
 				}else{
-					if(${not empty manager}){
-						location.href='${pageContext.request.contextPath}/index.jsp';
-					}else if(${not empty prevURL}){
-						location.href='${prevURL}';
+					if(data.loginCheck != 'N'){
+						alert(data.loginCheck);
+						return;
 					}else{
-						location.href='${pageContext.request.contextPath}/index.jsp';					
-						
+						if(${not empty manager}){
+							location.href='${pageContext.request.contextPath}/index.jsp';
+						}else if(${not empty prevURL}){
+							location.href='${prevURL}';
+						}else{
+							location.href='${pageContext.request.contextPath}/index.jsp';					
+						}
 					}
 				}
 			}

@@ -201,6 +201,7 @@ public class MemberController extends HttpServlet {
 			int mbno = 0;
 			MemberVo mv2 = md.memberLoginCheck(mv1);
 			mbno = mv2.getMbno();
+			
 			System.out.println(mbno);
 			System.out.println(mv2.getManager());
 			//Action처리하는 용도는 send방식으로 보낸다
@@ -216,6 +217,7 @@ public class MemberController extends HttpServlet {
 			}
 			JSONObject jsonResponse = new JSONObject();
 			jsonResponse.put("value", mbno);
+			jsonResponse.put("loginCheck", mv2.getLoginCheck());
 			out.print(jsonResponse.toJSONString());
 			
 		}else if(location.equals("memberLogout.do")) {

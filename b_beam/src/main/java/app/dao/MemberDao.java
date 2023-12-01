@@ -177,6 +177,18 @@ public class MemberDao {
 	public MemberVo memberLoginCheck(MemberVo mv) {
 	    
 	    String sql = "SELECT mbno, mbname, manager FROM member WHERE mbid=? AND mbpwd=?";
+	    String sql2 = "SELECT m.*"
+		    		+ ", CASE"
+		    		+ " WHEN p.pndelyn IN('', null, 'N') THEN 'N'"
+		    		+ " WHEN p.pndelyn = 'W' THEN IF(DATE_ADD(p.pndate, INTERVAL 1 WEEK) < NOW(), 'N'"
+		    		+ ", CONCAT('회원님의 계정은 ', DATE_FORMAT(DATE_ADD(p.pndate, INTERVAL 1 WEEK), '%Y-%m-%d %H:%i:%s'), ' 까지 이용하실 수 없습니다.'))"
+		    		+ " WHEN p.pndelyn = 'M' THEN IF(DATE_ADD(p.pndate, INTERVAL 1 MONTH) < NOW(), 'N'"
+		    		+ ", CONCAT('회원님의 계정은 ', DATE_FORMAT(DATE_ADD(p.pndate, INTERVAL 1 MONTH), '%Y-%m-%d %H:%i:%s'), ' 까지 이용하실 수 없습니다.'))"
+		    		+ " WHEN p.pndelyn = 'S' THEN '회원님의 계정은 영구정지 상태입니다.'"
+		    		+ " END AS loginCheck"
+		    		+ "FROM member m JOIN (SELECT * FROM penalty WHERE mbno = ? ORDER BY pnno DESC, pndate DESC LIMIT 1) p"
+		    		+ "ON m.mbno = p.mbno";
+	    
 	    ResultSet rs = null;
 	    
 	    try {
@@ -190,10 +202,22 @@ public class MemberDao {
 	           mv.setMbno(rs.getInt("mbno"));
 	           mv.setMbname(rs.getString("mbname"));
 	           mv.setManager(rs.getString("manager"));
-	            
 	        }
 			
 		}catch(Exception e){
+			e.printStackTrace();
+		}
+	    
+	    try {
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, mv.getMbno());
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				mv.setLoginCheck(rs.getString("loginCheck"));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			try{

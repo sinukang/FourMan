@@ -13,6 +13,7 @@ public class MemberVo {
 	private String manager;
 	private String mbaddr;
 	private String localPeople;
+	private String loginCheck;
 	
 	public String getLocalPeople() {
 		return localPeople;
@@ -85,6 +86,12 @@ public class MemberVo {
 	}
 	public void setMbaddr(String mbaddr) {
 		this.mbaddr = mbaddr;
+	}
+	public String getLoginCheck() {
+		return loginCheck;
+	}
+	public void setLoginCheck(String loginCheck) {
+		this.loginCheck = loginCheck;
 	}
 
 }
