@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import app.dbconn.DbConn;
 import app.domain.CommentVo;
+import app.domain.MemberVo;
 import app.domain.PenaltyVo;
 import app.domain.ReportVo;
 import app.domain.ReviewVo;
@@ -312,6 +313,45 @@ public class ReportDao {
 		
 		return value;
 	}
+	
+	//신고된 컨텐츠별 mbno 가져오기 
+	 public MemberVo getContentsMv(int no, String cate){
+			
+		 	MemberVo mv = new MemberVo();
+			ResultSet rs = null;
+			String table = "";
+			switch(cate) {
+			case "bd" : 
+				table="board";
+				break;
+			case "rv" : 
+				table="review";
+				break;
+			case "cm" : 
+				table="comment";
+				break;
+			}
+			String sql = "SELECT a.mbno, m.mbname "
+					+ "FROM "+ table + " a "
+					+ "JOIN member m ON a.mbno = m.mbno "
+					+ "WHERE a."+cate+"no = ?";
+			System.out.println(sql);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, no); 
+				pstmt.setString(2, cate);
+				
+				rs = pstmt.executeQuery();
+			
+				if (rs.next()) {
+					mv.setMbno(rs.getInt("mbno"));
+					mv.setMbname(rs.getString("mbname"));
+				}
+			
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			return mv; 
+		}
 	
 		
 }

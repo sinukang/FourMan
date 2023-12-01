@@ -17,6 +17,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import app.dao.ReportDao;
+import app.domain.MemberVo;
 import app.domain.PageMaker;
 import app.domain.ReportVo;
 import app.domain.SearchCriteria;
@@ -67,7 +68,7 @@ public class ReportController extends HttpServlet {
 			int mbno = 0; //피신고자
 			int mbno2 =0; //신고자
 			int no =0; //컨텐츠번호
-			int rpcate = 0;//컨텐츠종류
+			String cate = "";//컨텐츠종류
 			
 			if (session != null) {
 				if (session.getAttribute("mbno") != null) {
@@ -80,11 +81,14 @@ public class ReportController extends HttpServlet {
 			if (request.getParameter("no") != null ) {
 				no = Integer.parseInt(request.getParameter("no"));
 			}
-			if (request.getParameter("rpcate") != null) {
-				rpcate = Integer.parseInt(request.getParameter("rpcate"));
+			if (request.getParameter("cate") != null) {
+				cate = request.getParameter("cate");
 			}
-			
-				
+			ReportDao rpd = new ReportDao();
+			MemberVo mv = rpd.getContentsMv(no, cate);
+			session.setAttribute("mv", mv);
+			session.setAttribute("cate", cate);
+			session.setAttribute("no", no);
 			String path ="/report/reportPopup.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);		
