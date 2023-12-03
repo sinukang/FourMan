@@ -316,7 +316,7 @@ public class ReportDao {
 			e.printStackTrace();
 		}
 		
-		String sql_penaltyUpdateAll = "UPDATE penalty SET pndelyn = '"+pndelyn+"' WHERE mbno = "+mbno2;
+		String sql_penaltyUpdateAll = "UPDATE report SET pndelyn = '"+pndelyn+"' WHERE mbno2 = "+mbno2;
 		
 		try {
 			pstmt = conn.prepareStatement(sql_penaltyUpdateAll);

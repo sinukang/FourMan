@@ -19,11 +19,14 @@
 	<div class="container-title">
 		<h1>고객지원</h1>
 	</div>
-	<div class="page-inner">
 	<div class="contents-area">
-		<div class="btn-area2">
-			<button type="button" class="btn-Notice" onclick="location.href='${pageContext.request.contextPath}/board/noticeList.do'">공지사항</button>
-			<button type="button" class="btn-FAQ">자주 묻는 질문</button>
+		<div class="m-navi">
+			<c:if test="${manager eq 'M'}">
+				<div class="report-tap tap" onclick="mNavi(2)">신고내역</div>
+				<div class="QnA-tap tap" onclick="mNavi(3)">1:1 문의내역</div>
+			</c:if>
+			<div class="notice-tap tap" onclick="mNavi(0)">공지사항</div>
+			<div class="FAQ-tap tap clicked" onclick="mNavi(1)">자주하는 질문</div>
 		</div>
 		<div class="qna-contents">
 			<div class="list-area">
@@ -93,12 +96,41 @@
 		</div>
 	</div>
 </div>
-</div>
 	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp"/>
 	
 </body>
 <script type="text/javascript">
+	
+	//상단 메뉴 바 클릭 시 색상변화, 클릭 감지 이벤트 리스너 달아줌
+	var tap = document.querySelectorAll(".tap");
+	
+	function handleClick1(e){
+		for(let i = 0; i < tap.length; i++){
+			tap[i].classList.remove("clicked");
+		}
+		e.target.classList.add("clicked");
+	}
+	function init1(){
+		for(let i = 0; i < tap.length; i++){
+			tap[i].addEventListener("click", handleClick1);
+		}
+	}
+	init1();	
+	
+	//네비게이션 바 주소설정
+	function mNavi(e){
+		switch(e){
+		case 0 : location.href="${pageContext.request.contextPath}/board/noticeList.do"; break;
+		case 1 : location.href="${pageContext.request.contextPath}/board/FAQ.do"; break;
+		<c:if test="${manager eq 'M'}">
+		case 2 : location.href="${pageContext.request.contextPath}/report/report.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/qna/managerMyQnA.do"; break;
+		</c:if>
+		
+		}
+	}
+
 	$(document).ready(function(){
 		
 		$("#btn-write").on("click", function(){

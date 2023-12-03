@@ -179,6 +179,36 @@
 			<button class="reportedBoardDelete btn" onclick="reportedBoardDeleteUpdate('Y')">글 삭제하기</button>
 			<button class="reportedBoardDeleteCancel btn" onclick="reportedBoardDeleteUpdate('N')">글 삭제취소</button>
 		</div>
+		<div class="pagination-area">
+			<table class="page-table">
+				<tr>
+					<c:if test="${pm.prev}">
+						<td>
+							<a class="page-num" href="${pageContext.request.contextPath}/report/report.do?page=${pm.startPage - 1}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">◀</a>
+						</td>	
+					</c:if>
+					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+						<c:choose>
+							<c:when test="${pm.scri.page eq i}">			
+								<td>
+									<a class="page-num currentPageNum" href="${pageContext.request.contextPath}/report/report.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a class="page-num" href="${pageContext.request.contextPath}/report/report.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pm.next && pm.endPage > 0}">
+						<td>
+							<a href="${pageContext.request.contextPath}/report/report.do?page=${pm.endPage + 1}${keyword}">▶</a>
+						</td>
+					</c:if>
+				</tr>
+			</table>
+		</div>
 	</div>
 	
 	<!-- 모달 영역 -->

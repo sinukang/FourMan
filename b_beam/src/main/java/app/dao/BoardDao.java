@@ -117,7 +117,9 @@ public class BoardDao {
 		}finally {
 			try {
 				rs.close();
-				rs2.close();
+				if(rs2 != null) {
+					rs2.close();
+				}
 				//pstmt.close();
 				//pstmt 닫아버리면 컨트롤러에서 메서드 호출 후 바로밑에 bd.boardTotalCount에서 pstmt를 못씀
 				pstmt2.close();
