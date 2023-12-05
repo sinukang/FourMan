@@ -154,7 +154,7 @@ public class BoardDao {
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
 					+ " WHERE b.bdno = ?";
 		
-		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
+		String sql2 = "SELECT * FROM gallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
 		try {
 			
@@ -333,7 +333,7 @@ public class BoardDao {
 	public int insertBdgallery(BdgalleryVo bgv) {
 		int exec = 0;
 
-		String sql = "INSERT INTO bdgallery(bdno, bdglname) VALUES(?,?)";
+		String sql = "INSERT INTO gallery(bdno, bdglname) VALUES(?,?)";
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -387,7 +387,7 @@ public class BoardDao {
 		if (exec1 > 0) {
 			
 			// board 테이블 삭제 성공하면 bdgallery 테이블 삭제 
-			String sql2 = "update bdgallery set bdgldelyn = 'Y', bdgldatem = now() where bdno = ? ";
+			String sql2 = "update gallery set bdgldelyn = 'Y', bdgldatem = now() where bdno = ? ";
 			
 			try (PreparedStatement pstmt2 = conn.prepareStatement(sql2);) {
 				pstmt2.setInt(1, bdno);
@@ -416,7 +416,7 @@ public class BoardDao {
 		
 			if (exec1 > 0) {
 				//board 테이블 수정 성공했을 경우 bdgallery 테이블 수정
-				String sql2 = "update bdgallery set bdgldelyn = 'Y', bdgldatem = now() where bdno = ?";
+				String sql2 = "update gallery set bdgldelyn = 'Y', bdgldatem = now() where bdno = ?";
 				
 				try (PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
 					pstmt2.setInt(1, bv.getBdno());
@@ -425,7 +425,7 @@ public class BoardDao {
 					e.printStackTrace();
 				}
 				
-				String sql3 = "INSERT INTO bdgallery(bdno, bdglname, bdgldatem) VALUES(?,?, now())";
+				String sql3 = "INSERT INTO gallery(bdno, bdglname, bdgldatem) VALUES(?,?, now())";
 				
 				List<String> bdglnameList = bgv.getBdglnameList();
 				

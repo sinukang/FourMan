@@ -48,11 +48,12 @@
 	.depth1 {
 		width: 100%;
 		display: flex;
+		margin-top: 22px;
 	}
 	
 	.header li {
 		margin: 0 2%;
-		width: 150px;
+		width: 170px;
 		list-style: none;
 		font-size: 20px;
 		padding: 30px;

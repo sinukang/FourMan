@@ -1,7 +1,7 @@
 <%@ page language="java" 
     pageEncoding="UTF-8"%>
     
-<link href="../source/css/home.css" type="text/css" rel="stylesheet">
+<link href="../source/css/home.css?after" type="text/css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="header">
 	<div class="header-logo">
