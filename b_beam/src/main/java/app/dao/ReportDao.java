@@ -30,7 +30,9 @@ public class ReportDao {
 		ArrayList<ReportVo> alist = new ArrayList<ReportVo>();
 		ResultSet rs = null;
 		
-		String sql = "SELECT r.*, m.mbname, b.bdcont, rv.rvcont, rv.contentid, c.cmcont, c.bdno, p.pndelyn, bdno_count, rvno_count, cmno_count"
+		String sql = "SELECT r.*, m.mbname"
+				+ ", (SELECT p.pndelyn FROM member m JOIN penalty p ON m.mbno = p.mbno WHERE m.mbno = r.mbno2 ORDER BY p.pnno DESC, p.pndate DESC LIMIT 1) AS pndelyn"
+				+ ", b.bdcont, rv.rvcont, rv.contentid, c.cmcont, bdno_count, rvno_count, cmno_count"
 				+ " FROM report r "
 				+ " JOIN member m on r.mbno2 = m.mbno"
 				+ " LEFT JOIN board b on r.bdno = b.bdno"
@@ -77,7 +79,6 @@ public class ReportDao {
 				rv.setContentid(rs.getString("contentid"));
 				
 				cv.setCmcont(rs.getString("cmcont"));
-				cv.setBdno(rs.getInt("c.bdno"));
 				rpv.setCommnetVo(cv);
 				
 				pv.setPndelyn(rs.getString("pndelyn"));
@@ -284,43 +285,44 @@ public class ReportDao {
 		
 		ResultSet rs = null;
 		String sql = "";
+		int isPenaltingValue = 0;
 		int value = 0;
 		
-		String sql_penaltyCheck = "SELECT COUNT(mbno) AS cnt FROM penalty WHERE rpno = "+rpno+" AND mbno = "+mbno2;
+		String sql_penaltyCheck = "SELECT p.isPenalting FROM"
+								+ " (SELECT"
+								+ " (CASE"
+								+ " WHEN p.pndelyn IN('', NULL, 'N') THEN 1"
+								+ " WHEN p.pndelyn = 'W' THEN IF(DATE_ADD(p.pndate, INTERVAL 1 WEEK) < NOW(), 0, 1)"
+								+ " WHEN p.pndelyn = 'M' THEN IF(DATE_ADD(p.pndate, INTERVAL 1 MONTH) < NOW(), 0, 1)"
+								+ " WHEN p.pndelyn = 'S' THEN 1"
+								+ " end) AS isPenalting FROM penalty p WHERE mbno = "+mbno2+" ORDER BY pnno DESC, pndate DESC LIMIT 1) p";
+		
+		
 		String sql_penaltyInsert = "INSERT INTO penalty(rpno, mbno, pndelyn) VALUES("+rpno+", "+mbno2+", '"+pndelyn+"')";
-		String sql_penaltyUpdate = "UPDATE penalty SET pndelyn = '"+pndelyn+"' WHERE rpno = "+rpno+" AND mbno = "+mbno2;
+		String sql_penaltyUpdate = "UPDATE penalty SET pndelyn = '"+pndelyn+"', pndatem = NOW()"
+								 + " WHERE pnno = (SELECT p.max_pnno FROM (SELECT MAX(pnno) AS max_pnno FROM penalty) p) AND mbno = "+mbno2;
 		
 		try{
 			pstmt = conn.prepareStatement(sql_penaltyCheck);
 			rs = pstmt.executeQuery(sql_penaltyCheck);
 			
 			while(rs.next()) {
-				value = rs.getInt("cnt");
+				isPenaltingValue = rs.getInt("isPenalting");
 			}
 			
 		} catch (SQLException e ) {
 			e.printStackTrace();
 		}
 		
-		if(value == 0) {
+		if(isPenaltingValue == 0) {
 			sql = sql_penaltyInsert;
 		}else {
 			sql = sql_penaltyUpdate;
 		}
-		
+		System.out.println("sql : " + sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			value = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		String sql_penaltyUpdateAll = "UPDATE report SET pndelyn = '"+pndelyn+"' WHERE mbno2 = "+mbno2;
-		
-		try {
-			pstmt = conn.prepareStatement(sql_penaltyUpdateAll);
-			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -333,6 +335,23 @@ public class ReportDao {
 				e2.printStackTrace();
 			}
 		}
+//		
+//		String penaltyYN = "";
+//		if(pndelyn.equals("") || pndelyn.equals("N") || pndelyn == null) {
+//			penaltyYN = "N";
+//		}else {
+//			penaltyYN = "Y";
+//		}
+//		String sql_penaltyUpdateAll = "UPDATE report SET penaltyYN = '"+penaltyYN+"' WHERE mbno2 = "+mbno2;
+//		System.out.println("sql_penaltyUpdateAll : " + sql_penaltyUpdateAll);		
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql_penaltyUpdateAll);
+//			pstmt.executeUpdate();
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		return value;
 	}

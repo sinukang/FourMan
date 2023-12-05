@@ -25,7 +25,8 @@ mbdatem datetime null,
 exsite varchar(2) not null default 'N', -- 'Y', 'N' : 외부, 내부
 mbdelyn varchar(2) not null default 'N', -- 'Y', 'N' : 탈퇴, 탈퇴x
 manager varchar(2) not null default 'U', -- 'U', 'M' : 사용자, 관리자
-mbaddr varchar(100) not null
+mbaddr varchar(100) not null,
+loginCheck varchar(2) null -- '', 'N', 'W', 'M', 'S' : 패널티 미부여, 허위신고, 일주일 정지, 한달 정지, 영구정지
 );
 
 create table board(

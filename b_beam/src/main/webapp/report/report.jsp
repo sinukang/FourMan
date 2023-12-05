@@ -47,9 +47,10 @@
 					<td class="td-cate sort">분류</td>
 					<td class="td-cate reportedBdno">원글 번호</td>
 					<td class="td-cate type">유형</td>
+					<td class="td-cate reportedMbno">신고된 유저번호</td>
 					<td class="td-cate userName">닉네임</td>
 					<td class="td-cate content">내용</td>
-					<td class="td-cate pntYN">패널티 여부</td>
+					<td class="td-cate pntYN">패널티 상태</td>
 					<td class="td-cate clearYN">글삭제 여부</td>
 				</tr>
 				<c:forEach var="rp" items="${alist}" varStatus="idx">
@@ -110,9 +111,12 @@
 								</c:when>
 							</c:choose>						
 						</td>
+						<td class="reportedMbno">
+							${rp.mbno2}
+						</td>						
 						<td class="userName">
 							<c:choose>
-								<c:when test="${rp.penaltyVo.pndelyn eq 'N' || rp.penaltyVo.pndelyn eq null || rp.penaltyVo.pndelyn eq ''}">
+								<c:when test="${rp.penaltyVo.pndelyn eq 'N' || rp.penaltyVo.pndelyn eq '' || rp.penaltyVo.pndelyn eq null}">
 									<button class="userId" value="${rp.rpno}" onclick="penaltyCancel(${rp.rpno})">${rp.mbname}</button>
 								</c:when>
 								<c:otherwise>
@@ -157,7 +161,7 @@
 									영구 정지
 								</c:when>
 								<c:otherwise>
-									패널티 미부여 상태
+									패널티 없음
 								</c:otherwise>
 							</c:choose>						
 						</td>
