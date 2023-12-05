@@ -8,6 +8,7 @@
 <title>1:1 문의</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/qna/myQnA.css">
+<link href="../source/css/mNavi.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
 	integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
 	crossorigin="anonymous"/>
@@ -24,7 +25,12 @@
 		</div>
 			
 		<!-- top menu tap -->
-		<jsp:include page="../source/include/mypageNavi.jsp"/>
+		<div class="m-navi">
+			<div class="report-tap tap" onclick="mNavi(0)">회원정보관리</div>
+			<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
+			<div class="notice-tap tap" onclick="mNavi(2)">나의즐겨찾기</div>
+			<div class="FAQ-tap tap clicked" onclick="mNavi(3)">1:1문의</div>
+		</div>
 		
 		<div class="contents-area">
 			<div class="btn-area">
@@ -325,8 +331,18 @@ function check(){
 	return;
 }
 
-
 </script>
 
+<script>
+	function mNavi(e){
+		switch(e){
+		case 0 : location.href="${pageContext.request.contextPath}/member/memberInfo.do"; break;
+		case 1 : location.href="${pageContext.request.contextPath}/point/memberPoint.do"; break;
+		case 2 : location.href="${pageContext.request.contextPath}/contents/bookmarkedContents.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/qna/myQnA.do"; break;
+			
+		}
+	}
+</script>
 
 </html>

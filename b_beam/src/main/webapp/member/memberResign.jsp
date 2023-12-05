@@ -7,7 +7,8 @@
 	<meta charset="utf-8">
 	<title>Insert title here</title>
 	<link href="../source/css/member/memberInfoModify.css" type="text/css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<link href="../source/css/mNavi.css" type="text/css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 </head>
 <body>
@@ -18,7 +19,12 @@
 			<h1>MyPage</h1>
 		</div>
 		<div class="inner-container">
-			<jsp:include page="../source/include/mypageNavi.jsp"/>
+			<div class="m-navi">
+				<div class="report-tap tap clicked" onclick="mNavi(0)">회원정보관리</div>
+				<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
+				<div class="notice-tap tap" onclick="mNavi(2)">나의즐겨찾기</div>
+				<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
+			</div>
 			<div class="btn-area">
 				<button type="button" class="btn-QnAList btn1" onclick="location.href='${pageContext.request.contextPath}/member/memberInfo.do';">내 정보</button>
 				<button type="button" class="btn-QnA btn1"  onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';" >내 정보 수정</button>
@@ -105,6 +111,17 @@
 				return;
 			}
 		}
+	</script>
+	<script>
+	function mNavi(e){
+		switch(e){
+		case 0 : location.href="${pageContext.request.contextPath}/member/memberInfo.do"; break;
+		case 1 : location.href="${pageContext.request.contextPath}/point/memberPoint.do"; break;
+		case 2 : location.href="${pageContext.request.contextPath}/contents/bookmarkedContents.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/qna/myQnA.do"; break;
+			
+		}
+	}
 	</script>
 	<jsp:include page="../source/include/footer.jsp"/>
 </body>

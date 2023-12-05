@@ -10,6 +10,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.css">
 <link rel="stylesheet" type="text/css" href="../source/css/contents/bookmarkedContents.css">
+<link href="../source/css/mNavi.css" type="text/css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 </head>
@@ -21,7 +22,12 @@
 		<h1>MyPage</h1>
 	</div>
 	<div class="page-inner">
-		<jsp:include page="../source/include/mypageNavi.jsp"/>
+		<div class="m-navi">
+			<div class="report-tap tap" onclick="mNavi(0)">회원정보관리</div>
+			<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
+			<div class="notice-tap tap clicked" onclick="mNavi(2)">나의즐겨찾기</div>
+			<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
+		</div>
 		<div class="bookmarkedContents">
 			<div class="btn-area">
 				<button type="button" class="btn1 clicked">나의 즐겨찾기</button>
@@ -316,6 +322,18 @@
 <c:if test='${not empty bmList}'>
 viewOverlayDetails(0);
 </c:if>
+</script>
+
+<script>
+	function mNavi(e){
+		switch(e){
+		case 0 : location.href="${pageContext.request.contextPath}/member/memberInfo.do"; break;
+		case 1 : location.href="${pageContext.request.contextPath}/point/memberPoint.do"; break;
+		case 2 : location.href="${pageContext.request.contextPath}/contents/bookmarkedContents.do"; break;
+		case 3 : location.href="${pageContext.request.contextPath}/qna/myQnA.do"; break;
+			
+		}
+	}
 </script>
 </body>
 </html>

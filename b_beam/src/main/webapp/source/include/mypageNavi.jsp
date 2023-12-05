@@ -16,7 +16,7 @@
 <link href="../source/css/mNavi.css" type="text/css" rel="stylesheet">
 <div class="m-navi">
 	<div class="report-tap tap" onclick="mNavi(0)">회원정보관리</div>
-	<div class="QnA-tap tap clicked" onclick="mNavi(1)">포인트관리</div>
+	<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
 	<div class="notice-tap tap" onclick="mNavi(2)">나의즐겨찾기</div>
 	<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
 </div>
