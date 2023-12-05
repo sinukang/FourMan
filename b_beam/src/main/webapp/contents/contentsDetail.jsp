@@ -726,7 +726,11 @@ function setReview(data){
 	$.each(json,function(index,value){
 // 		console.log(value.img);
 		str+='<table id="commentTable'+value.no+'" class="commentTable">';
-		str+='<tr><th id="userId'+value.no+'" class="userId">'+value.name+'</th>';
+		str+='<tr><th id="userId'+value.no+'" class="userId">'+value.name;
+		if(value.LP=='Y'){
+			str+='<div class="div-mark"></div>';
+		}
+		str+='</th>';
 		str+='<th id="sta'+value.no+'r" class="star">';
 		for(let i = 0; i < value.score;i++){
 			str+='★'

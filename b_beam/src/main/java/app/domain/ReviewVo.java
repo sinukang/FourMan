@@ -3,10 +3,9 @@ package app.domain;
 import java.sql.Array;
 import java.util.ArrayList;
 
-public class ReviewVo {
+public class ReviewVo extends MemberVo{
 	private int rvno;
 	private int mbno;
-	private String mbname;
 	private String contentid;
 	private String rvcont;
 	private String rvpic;
@@ -19,12 +18,6 @@ public class ReviewVo {
 	
 
 
-	public String getMbname() {
-		return mbname;
-	}
-	public void setMbname(String mbname) {
-		this.mbname = mbname;
-	}
 	public int getRvno() {
 		return rvno;
 	}

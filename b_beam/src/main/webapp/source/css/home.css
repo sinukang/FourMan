@@ -391,3 +391,14 @@
     position: absolute;
     bottom: -580px;
 }
+.div-mark{
+	display: flex;
+	align-self: self-start;
+	margin-left: 5px;
+	width: 10%;
+	height: 85%;
+	background: url(../images/logo4.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}

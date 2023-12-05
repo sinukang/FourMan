@@ -43,6 +43,7 @@ public class ReviewDao {
 		
 		String sql="SELECT a.*,\r\n"
 				+ "(SELECT COUNT(c.lkno) FROM like_ c WHERE a.rvno = c.rvno AND c.lkdelyn = 'N') AS rvLikeCnt\r\n"
+				+ ", (SELECT IF(COUNT(mbaddr) = 1, 'Y', 'N') FROM member m WHERE m.mbno = a.mbno AND m.mbaddr LIKE '%전주%') AS localPeopleYN "
 				+ str
 				+ "FROM (select b.*, mbname from review b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.rvdelyn = 'N') a\r\n"
 				+ "WHERE a.rvdelyn = 'N'\r\n"
@@ -50,7 +51,7 @@ public class ReviewDao {
 				+ "ORDER BY a.rvno DESC;";
 				
 				
-		String sql2 ="SELECT * FROM rvgallery WHERE rvgldelyn = 'N' AND rvno=?";
+		String sql2 ="SELECT * FROM gallery WHERE bdgldelyn = 'N' AND rvno=?";
 		try{
 			
 			System.out.println(sql);
@@ -69,6 +70,7 @@ public class ReviewDao {
 				rv.setRvcont(rs.getString("rvcont"));
 				rv.setRvLikeCnt(rs.getInt("rvLikeCnt"));
 				rv.setMbname(rs.getString("mbname"));
+				rv.setLocalPeople(rs.getString("LocalPeopleYN"));
 				
 				if(mbno != 0) {
 					rv.setRvLikeYN(rs.getString("rvLikeYN"));
@@ -82,7 +84,7 @@ public class ReviewDao {
 					ArrayList<String> Rvglname = new ArrayList<String>();
 
 					while(rs2.next()) {
-						Rvglname.add(rs2.getString("rvglname"));
+						Rvglname.add(rs2.getString("bdglname"));
 					}
 					rv.setRvglname(Rvglname);
 					
@@ -161,7 +163,7 @@ public class ReviewDao {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			String sql2 = "INSERT INTO rvgallery(rvno, rvglname) VALUES(?,?)";
+			String sql2 = "INSERT INTO gallery(rvno, bdglname) VALUES(?,?)";
 //			System.out.println(sql);
 			try (PreparedStatement pstmt2 = conn.prepareStatement(sql2)){
 				for (String glone : glname) {
@@ -232,8 +234,8 @@ public class ReviewDao {
 		int exec = 0;
 
 		String sql = "UPDATE review SET rvdelyn = 'Y' WHERE rvno = ? and mbno = ?";
-		String sql2 = "UPDATE rvgallery a join review b on a.rvno = b.rvno\r\n"
-					+ " SET rvgldelyn = 'Y' WHERE b.rvno = ? and b.mbno=?";
+		String sql2 = "UPDATE gallery a join review b on a.rvno = b.rvno\r\n"
+					+ " SET bdgldelyn = 'Y' WHERE b.rvno = ? and b.mbno=?";
 		String sql3 = "update like_ SET lkdelyn = 'Y',lkdatem=now() where rvno=? and lkdelyn='N'";
 		try {//삭제할때 사진이없는경우 
 				conn.setAutoCommit(false);
@@ -323,11 +325,11 @@ public class ReviewDao {
 	}
 	public ArrayList<ReviewVo> getRankedReview() {
 		ArrayList<ReviewVo> alist = new ArrayList<>();
-		String sql="select a.*, mbname, lkcnt, rvglname\r\n"
+		String sql="select a.*, mbname, lkcnt, bdglname\r\n"
 				+ "from review a\r\n"
 				+ "JOIN (select rvno,count(*) as lkcnt from like_ where lkdelyn = 'N' and rvno is not null group by 1) b ON a.rvno = b.rvno\r\n"
 				+ "JOIN (select mbno,mbname from member where mbdelyn = 'N') c ON a.mbno = c.mbno\r\n"
-				+ "left JOIN (select distinct rvno,rvglname from rvgallery where rvglno in (select min(rvglno) from rvgallery group by rvno) and rvgldelyn = 'N') d on a.rvno = d.rvno\r\n"
+				+ "left JOIN (select distinct rvno,bdglname from gallery where bdglno in (select min(bdglno) from gallery group by rvno) and bdgldelyn = 'N') d on a.rvno = d.rvno\r\n"
 				+ "order by lkcnt desc limit 10";
 		ResultSet rs = null;
 		try{
@@ -337,7 +339,7 @@ public class ReviewDao {
 			while (rs.next()){
 				ReviewVo rv = new ReviewVo();
 				ArrayList<String> rvglname = new ArrayList<>();
-				rvglname.add(rs.getString("rvglname"));
+				rvglname.add(rs.getString("bdglname"));
 				rv.setRvno(rs.getInt("rvno"));
 				rv.setRvLikeCnt(rs.getInt("lkcnt"));
 				rv.setMbname(rs.getString("mbname"));

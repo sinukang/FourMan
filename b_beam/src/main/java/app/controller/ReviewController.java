@@ -67,6 +67,7 @@ public class ReviewController extends HttpServlet {
 	        	jo.put("date", rv.getRvdate());
 	        	jo.put("likeYN", rv.getRvLikeYN());
 	        	jo.put("likeCnt", rv.getRvLikeCnt());
+	        	jo.put("LP", rv.getLocalPeople());
 	        	result.add(jo);
 	        }
 
