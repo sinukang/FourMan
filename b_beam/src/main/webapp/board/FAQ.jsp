@@ -45,8 +45,12 @@
 					<div style="display: flex; justify-content: flex-end;">
 						<c:choose>
 						<c:when test="${not empty manager}">
-							<button id="btn-modify" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/board/FAQModify.do?bdno=${bv.bdno}'">수정</button>
-							<button id="btn-delete" class="btn-write" onclick="FAQDelete(${bv.bdno})" >삭제</button>
+							<div>
+								<button id="btn-modify" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/board/FAQModify.do?bdno=${bv.bdno}'">수정</button>
+							</div>
+							<div>
+								<button id="btn-delete" class="btn-write" onclick="FAQDelete(${bv.bdno})" >삭제</button>
+							</div>
 						</c:when>
 						<c:otherwise>
 						</c:otherwise>

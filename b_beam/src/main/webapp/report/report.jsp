@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지-신고내역</title>
-<link rel="stylesheet" type="text/css" href="../source/css/report.css">
+<link rel="stylesheet" type="text/css" href="../source/css/report.css?after">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
@@ -357,32 +357,36 @@
 				console.log(reportedBoardNumArr[i]);
 			}			
 			
-			$.ajax({
-				type : "post",
-				url : "${pageContext.request.contextPath}/report/reportedBoardDeleteUpdate.do",
-				traditional : true,
-				data : {"delYN" : delYN,
-						"rpnoArr" : JSON.stringify(rpnoArr),
-						"reportedBoardNumArr" : JSON.stringify(reportedBoardNumArr)},
-				dataType : "json",
-				cache : false,
-				success : function(data){
-					if(data.value != 0){
-						if(delYN == 'Y'){
-							alert(data.value + " 개의 글이 삭제 됐습니다.");
-							location.reload();
-						}else{
-							alert(data.value + " 개의 글이 삭제 취소 됐습니다.");
-							location.reload();
+			if (confirm('정말 삭제하시겠습니까?')) {
+				$.ajax({
+					type : "post",
+					url : "${pageContext.request.contextPath}/report/reportedBoardDeleteUpdate.do",
+					traditional : true,
+					data : {"delYN" : delYN,
+							"rpnoArr" : JSON.stringify(rpnoArr),
+							"reportedBoardNumArr" : JSON.stringify(reportedBoardNumArr)},
+					dataType : "json",
+					cache : false,
+					success : function(data){
+						if(data.value != 0){
+							if(delYN == 'Y'){
+								alert(data.value + " 개의 글이 삭제 됐습니다.");
+								location.reload();
+							}else{
+								alert(data.value + " 개의 글이 삭제 취소 됐습니다.");
+								location.reload();
+							}
+						}else if(data.value == 0){
+							alert("삭제된 글이 없습니다.");
 						}
-					}else if(data.value == 0){
-						alert("삭제된 글이 없습니다.");
+					},
+					error : function(){
+						alert("삭제 에러");
 					}
-				},
-				error : function(){
-					alert("삭제 에러");
-				}
-			});
+				});
+			}else {
+				return;
+			}
 		}
 	}
 	
@@ -415,7 +419,7 @@
 				+  "	<option value='M'>이용정지(30일)</option>"
 				+  "	<option value='S'>이용정지(영구)</option>"
 				+  "</select>"
-				+  "<div>"
+				+  "<div style='margin-top: 10px;'>"
 				+  "	<button class='penaltyInsertBtn' onclick='penaltyInsert("+this.mbno2+")'>완료</button>"
 				+  "	<button class='cancelBtn' onclick='penaltyCancel()'>취소</button>"
 				+  "</div>";

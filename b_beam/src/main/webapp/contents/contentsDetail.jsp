@@ -946,7 +946,12 @@ function reviewReport(e){
 // 	var rpForm = $('form[name='+formName+']');
 	var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+e+"&cate=rvno";
 
-	window.open(url,'_blank','width=500 height=600');
+	var width = 300;
+	var height = 280;
+	var left = (window.screen.width - width) / 2;
+	var top = (window.screen.height - height) / 2;
+
+	window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 // 	rpForm.action = url;
 // 	rpForm.method="post";
 // 	rpForm.target="formName";

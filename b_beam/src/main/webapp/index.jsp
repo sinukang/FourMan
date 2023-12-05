@@ -84,7 +84,7 @@ ArrayList<ContentsVo> festalist = cd.ContentsFestivalList();
 			<a onclick="tabSwitch(2)" class="btn">별점 top3</a>
 			</li>
 			<li>
-			<a onclick="tabSwitch(3)" class="btn">오늘의 top3</a>`
+			<a onclick="tabSwitch(3)" class="btn">오늘의 top3</a>
 			</li>
 		</ul>
 		<div class="cont_area">

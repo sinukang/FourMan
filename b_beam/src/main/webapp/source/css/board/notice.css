@@ -126,7 +126,8 @@
 	align-items: center;
 }
 .btn-write{
-	width: 13%;
+	width: 140px;
+	margin-left:10px;
 	height: 40px;
 	color: #fff;
 	background-color: #219888;

@@ -491,7 +491,7 @@ public class BoardController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			
 			if (value > 0) {
-				out.println("<script>alert('수정되었습니다.');location.href='"+request.getContextPath()+"/board/notice.do?bdno='"+bdno+"</script>");
+				out.println("<script>alert('수정되었습니다.');location.href='"+request.getContextPath()+"/board/notice.do?bdno="+bdno+"'</script>");
 				/*String path = request.getContextPath()+"/board/notice.do?bdno="+bdno;
 				response.sendRedirect(path);*/
 			} else {

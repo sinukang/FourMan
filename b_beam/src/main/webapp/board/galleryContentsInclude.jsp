@@ -430,15 +430,25 @@
 	function boardReport(bdno){
 		
 		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+bdno+"&cate=bdno";
+		
+		var width = 300;
+		var height = 280;
+		var left = (window.screen.width - width) / 2;
+		var top = (window.screen.height - height) / 2;
 
-		window.open(url,'_blank','width=500 height=600');
+		window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 	}
 	
 	function commentReport(cmno){
 		
 		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+cmno+"&cate=cmno";
 
-		window.open(url,'_blank','width=500 height=600');
+		var width = 300;
+		var height = 280;
+		var left = (window.screen.width - width) / 2;
+		var top = (window.screen.height - height) / 2;
+
+		window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 	}
 	
 

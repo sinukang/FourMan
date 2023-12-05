@@ -267,3 +267,7 @@
 .QnA-item.active .QnA-toggle .fa-chevron-down{
 	display: none;
 }
+.list-area button{
+	width:200px;
+	margin-left :10px;
+}

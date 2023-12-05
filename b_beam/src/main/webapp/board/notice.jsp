@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고객지원</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/board/notice.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/source/css/board/notice.css?after">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
@@ -36,8 +36,8 @@
 			<div class="btn-area2">
 				<c:choose>
 					<c:when test="${not empty manager}">
-						<button id="btn-modify" class="btn-modify">수정</button>
-						<button id="btn-delete" class="btn-delete">삭제</button>
+						<button id="btn-modify" class="btn-write">수정</button>
+						<button id="btn-delete" class="btn-write">삭제</button>
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>

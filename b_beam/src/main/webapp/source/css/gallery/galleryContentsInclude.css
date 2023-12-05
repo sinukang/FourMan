@@ -204,7 +204,6 @@ body *{
 	background-size: 100%;
 	background-repeat: no-repeat;
 	cursor: pointer;
-	box-shadow: 4px 2px 4px 0px rgba(27, 13, 75, 0.62);
 }
 .btn-img:active{
 	transform: scale(0.95);

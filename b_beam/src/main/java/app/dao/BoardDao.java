@@ -53,7 +53,7 @@ public class BoardDao {
 					+ " ORDER by b.bdno DESC"
 					+ " LIMIT ?, ?";
 		
-		String sql2 = "SELECT * FROM bdgallery WHERE bdno = ? AND bdgldelyn = 'N'";
+		String sql2 = "SELECT * FROM gallery WHERE bdno = ? AND bdgldelyn = 'N'";
 		
 		//scri.getNumOfRows() : 페이지에 표시할 글 개수 (Criteria.java에 기본값 20으로 할당되어있음)
 		int perPageNum = 12;			//페이지 당 표시할 글 개수 -> 12개
