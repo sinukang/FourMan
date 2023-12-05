@@ -64,15 +64,22 @@
 	}
 	
 	a:hover {
-		font-size: 120%;
-		font-weight: 120%;
+		cursor:pointer;
 	}
 	
 	a {
 		text-decoration-line: none;
 		color: white;
 	}
-	
+	.clicked {
+	    color: #fff;
+	    background-color: #219888;
+	    border: 0;
+	    border-radius: 8px;
+	    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	    transform: scale(1.05);
+	    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
 	.loginbutton {
 		display: inline-block;
 	    padding: 50px;
@@ -166,22 +173,32 @@
 	width: calc( 100% - 580px);
 }
 .info-tab{
-    position: relative;
-    display: flex;
-    text-align: center;
-    background: #567ff2;
-    border-radius: 7px;
-    box-shadow: 1px 2px 7px 1px rgb(48 50 51 / 54%);
-	margin:0;
-	padding: 0 10px;
+    height: 75px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    color: #fff;
+    background-color: #5486C9;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 5px 5px 15px -5px #333;
 }
-
+.inner-tap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
 .tab-content{
 	height: 500px;
 	width : 100%;
 	background-color: rgb(242, 242, 242);
 	justify-content: center;
 	text-align: center;
+    padding-top: 20px;
 }
 
 

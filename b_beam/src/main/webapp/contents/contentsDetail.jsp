@@ -104,17 +104,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 			
 		<div class="tabBox">
-			<ul class="info-tab">
-				<li>
+			<div class="info-tab">
+				<div id="tap1-D" class="inner-tap clicked">
 	    			<a onclick="tabSwitch(1)" class="btn" >기본정보</a>
-				</li>
-				  <li>
+				</div>
+				  <div id="tap2-I" class="inner-tap">
 					<a onclick="tabSwitch(2)" class="btn" >이용안내</a>
-				</li>
-				  <li>
+				</div>
+				  <div id="tap3-M" class="inner-tap">
 				   <a onclick="tabSwitch(3)" class="btn" >위치정보</a>
-				</li>
-			</ul>
+				</div>
+			</div>
 		
 			<div class="tab-content" id="tab1-Detail">
 	           
@@ -426,14 +426,21 @@ function tabSwitch(e){
 		$('#tab1-Detail').css('display','');
 		$('#tab2-Intro').css('display','none');
 		$('#tab3-Map').css('display','none');
+		$('.inner-tap').removeClass('clicked');
+		$('#tap1-D').toggleClass('clicked');
+		
 	}else if(e==2){
 		$('#tab1-Detail').css('display','none');
 		$('#tab2-Intro').css('display','');
 		$('#tab3-Map').css('display','none');
+		$('.inner-tap').removeClass('clicked');
+		$('#tap2-I').toggleClass('clicked');
 	}else if(e==3){
 		$('#tab1-Detail').css('display','none');
 		$('#tab2-Intro').css('display','none');
 		$('#tab3-Map').css('display','');
+		$('.inner-tap').removeClass('clicked');
+		$('#tap3-M').toggleClass('clicked');
 		relayout();
 		resizeMap();
 	}
