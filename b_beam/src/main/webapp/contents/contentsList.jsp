@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <title>컨텐츠 리스트 페이지</title>
-<link rel="stylesheet" type="text/css" href="../source/css/contents/contentsList.css">
+<link rel="stylesheet" type="text/css" href="../source/css/contents/contentsList.css?after">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	

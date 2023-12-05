@@ -17,7 +17,7 @@ pageContext.setAttribute("LF", "\n");
 <title>컨텐츠 상세보기 페이지</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.css">
-<link rel="stylesheet" type="text/css" href="../source/css/contents/contentsDetail.css">
+<link rel="stylesheet" type="text/css" href="../source/css/contents/contentsDetail.css?after">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
@@ -814,7 +814,7 @@ function reviewInsert(){
 		 			console.log(data.value2);
 		 			ImageInsert(data.value);
 		 			if(data.value2>0){
-		 				alert("포인트가 적립되었습니다.");
+		 				alert("1000포인트가 적립되었습니다.");
 		 			}
 					getReview(); 
 				},

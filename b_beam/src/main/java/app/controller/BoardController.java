@@ -728,7 +728,7 @@ public class BoardController extends HttpServlet {
 					response.sendRedirect(path);
 				} else {
 					if (value2 > 0) {
-						out.println("<script>alert('포인트가 적립되었습니다.');location.href='"+request.getContextPath()+"/board/galleryList.do'</script>");
+						out.println("<script>alert('1000포인트가 적립되었습니다.');location.href='"+request.getContextPath()+"/board/galleryList.do'</script>");
 					}else {
 						String path = request.getContextPath() + "/board/galleryList.do";
 						response.sendRedirect(path);

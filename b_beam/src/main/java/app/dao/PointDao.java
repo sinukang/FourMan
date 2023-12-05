@@ -46,7 +46,7 @@ public class PointDao {
 					// count = 오늘 작성한 게시글 수
 					int count = rs.getInt("cnt");
 					
-					if (count >= 1) {
+					if (count == 3) {
 						pstmt2.setInt(1, bv.getMbno());
 						pstmt2.setInt(2, bv.getMbno());
 						pstmt2.setInt(3, bv.getMbno());
@@ -144,7 +144,7 @@ public class PointDao {
 					// count = 오늘 작성한 댓글 수
 					int count = rs.getInt("cnt");
 					
-					if (count >= 1) {
+					if (count == 3) {
 						pstmt2.setInt(1, cv.getMbno());
 						pstmt2.setInt(2, cv.getMbno());
 						pstmt2.setInt(3, cv.getMbno());
@@ -195,7 +195,7 @@ public class PointDao {
 					// count = 오늘 작성한 리뷰 수
 					int count = rs.getInt("cnt");
 					
-					if (count >= 1) {
+					if (count == 3) {
 						pstmt2.setInt(1, rv.getMbno());
 						pstmt2.setInt(2, rv.getMbno());
 						pstmt2.setInt(3, rv.getMbno());

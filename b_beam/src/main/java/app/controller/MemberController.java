@@ -90,7 +90,7 @@ public class MemberController extends HttpServlet {
 			if (exec == 1) {
 				//자동이동메소드
 				//response.sendRedirect(request.getContextPath()+"/member/memberList.html");	
-				out.println("<script>alert('회원가입 되었습니다.'); alert('회원가입 축하 포인트가 적립되었습니다.');"
+				out.println("<script>alert('회원가입 되었습니다.'); alert('회원가입 축하 포인트 1000p가 적립되었습니다.');"
 				+	"document.location.href='"+request.getContextPath()+"/member/memberLogin.do'</script>");
 			}else{
 				out.println("<script>history.back();</script>");	
