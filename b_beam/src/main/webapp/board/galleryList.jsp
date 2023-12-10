@@ -64,6 +64,7 @@
 									</span> --%>
 								</div>
 								<div class="like-area">
+									${bv.bdLikeCnt}
 									<input type="hidden" id="like-num${bv.bdno}" value="${bv.bdno}">
 									<c:choose>
 										<c:when test="${bv.bdLikeYN == 'Y'}">
