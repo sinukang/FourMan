@@ -300,7 +300,7 @@ public class ReportDao {
 		
 		String sql_penaltyInsert = "INSERT INTO penalty(rpno, mbno, pndelyn) VALUES("+rpno+", "+mbno2+", '"+pndelyn+"')";
 		String sql_penaltyUpdate = "UPDATE penalty SET pndelyn = '"+pndelyn+"', pndatem = NOW()"
-								 + " WHERE pnno = (SELECT p.max_pnno FROM (SELECT MAX(pnno) AS max_pnno FROM penalty) p) AND mbno = "+mbno2;
+								 + " WHERE pnno = (SELECT p.max_pnno FROM (SELECT MAX(pnno) AS max_pnno FROM penalty WHERE mbno = "+mbno2+") p)";
 		
 		try{
 			pstmt = conn.prepareStatement(sql_penaltyCheck);
@@ -319,7 +319,7 @@ public class ReportDao {
 		}else {
 			sql = sql_penaltyUpdate;
 		}
-		System.out.println("sql : " + sql);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			value = pstmt.executeUpdate();
