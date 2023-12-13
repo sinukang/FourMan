@@ -101,9 +101,16 @@ body *{
 	text-overflow: ellipsis;
 }
 .md-like-area{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding: 5px;
 	width: 10%;
+	height: 100%;
 	text-align: center;
+}
+.md-span-likeCnt{
+	margin-right: 5px;
 }
 .like-button{
 	color:red;

@@ -148,7 +148,7 @@ public class BoardDao {
 		}
 		
 		String sql = "SELECT b.*"
-					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS likeCnt"
+					+ ", (SELECT COUNT(l.lkno) FROM like_ l where l.bdno = b.bdno and l.lkdelyn = 'N') AS bdLikeCnt"
 					+ ", (SELECT IF(COUNT(mbaddr) = 1, 'Y', 'N') FROM member m WHERE m.mbno = b.mbno AND m.mbaddr LIKE '%전주%') AS localPeopleYN"
 					+ str
 					+ " FROM (SELECT b.*, m.mbname FROM board b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.bddelyn = 'N') b"
@@ -173,6 +173,7 @@ public class BoardDao {
 				bv.setBdcontag(rs.getString("bdcontag"));
 				bv.setBddate(rs.getString("bddate"));
 				bv.setBddatem(rs.getString("bddatem"));
+				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
 				bv.setBddelyn(rs.getString("bddelyn"));
 				if(mbno != 0) {
 					bv.setBdLikeYN(rs.getString("bdLikeYN"));
