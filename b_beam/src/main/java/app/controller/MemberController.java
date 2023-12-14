@@ -279,26 +279,23 @@ public class MemberController extends HttpServlet {
 		    // DAO를 통해 임시 비밀번호 생성 및 업데이트
 		    MemberDao md = new MemberDao();
 		    String newTempPassword = md.memberPwdFind(memberId, email);
-
+            PrintWriter out = response.getWriter();
+			JSONObject jsonResponse = new JSONObject();
+			int value = 0;
 		    if (newTempPassword != null) {
 		        // 임시 비밀번호를 사용자 이메일로 전송
 		        MailSender mail = new MailSender();
 		        String title = "임시 비밀번호 안내";
 		        String body = "임시 비밀번호: " + newTempPassword + "\n\n임시 비밀번호로 로그인 후 반드시 비밀번호를 변경해주세요.";
 		        if (mail.MailSend(email, title, body)) {
-		            // 이메일 전송 성공 시 표시
-		            PrintWriter out = response.getWriter();
-		            out.println("<script>alert('임시 비밀번호가 이메일로 전송되었습니다.');</script>");
-		        } else {
-		            // 이메일 전송 실패 시 표시
-		            PrintWriter out = response.getWriter();
-		            out.println("<script>alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');</script>");
+		            // 이메일 전송 성공 시 표시1
+		        	value = 1;
 		        }
 		    } else {
 		        // 해당 회원이 존재하지 않거나 변경이 실패한 경우 메시지 표시
-		        PrintWriter out = response.getWriter();
-		        out.println("<script>alert('입력하신 정보와 일치하는 회원이 없거나 비밀번호 변경에 실패했습니다.');</script>");
 		    }
+		    jsonResponse.put("value", value);
+			out.print(jsonResponse.toJSONString());
 					
 		} else if (location.equals("memberInfo.do")) {
 		    HttpSession session = request.getSession();
