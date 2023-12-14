@@ -149,7 +149,7 @@
 						<td class="pntYN">
 							<c:choose>
 								<c:when test="${rp.penaltyVo.pndelyn eq 'N'}">
-									허위 신고(제재하지 않음)
+									허위 신고 처리
 								</c:when>
 								<c:when test="${rp.penaltyVo.pndelyn eq 'W'}">
 									일주일 정지

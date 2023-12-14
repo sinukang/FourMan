@@ -64,14 +64,14 @@
 									</span> --%>
 								</div>
 								<div class="like-area">
-									${bv.bdLikeCnt}
+									<span class="span-likeCnt">${bv.bdLikeCnt}</span>
 									<input type="hidden" id="like-num${bv.bdno}" value="${bv.bdno}">
 									<c:choose>
 										<c:when test="${bv.bdLikeYN == 'Y'}">
-											<span class="span-bdLikeY">♥</span>
+											<span class="span-like span-bdLikeY">♥</span>
 										</c:when>
 										<c:otherwise>
-											<span class="span-bdLikeN">♡</span>
+											<span class="span-like span-bdLikeN">♡</span>
 										</c:otherwise>
 									</c:choose>							
 								</div>
@@ -183,7 +183,7 @@
 		});
 		
 		//글 좋아요 버튼
-		$(".like-area").on("click",function() {
+		$(".like-area").on("click", function() {
 			
 			let mbno = "${mbno}";
 			
@@ -196,8 +196,10 @@
 				}
 				
 			}else{
-				let currentLike = $(this).children('span');
+				let currentLike = $(this).children('.span-like');
 				let bdno = $(this).children('input').val();
+				let likeCnt = $(this).children('.span-likeCnt');
+				let NumberlikeCnt = Number($(this).children('.span-likeCnt').html());
 				
 				if(currentLike.text() === "♡") {
 					
@@ -210,6 +212,7 @@
 						success : function(data){
 							if(data.value == 1){
 								currentLike.text("♥");
+								likeCnt.html(NumberlikeCnt+1);
 							}else if(data.value == 0){
 								alert("value : " + data.value);
 							}
@@ -230,6 +233,7 @@
 						success : function(data){
 							if(data.value == 1){
 								currentLike.text("♡");
+								likeCnt.html(NumberlikeCnt-1);
 							}else{
 								alert(data.value + "좋아요 취소 에러");
 							}							

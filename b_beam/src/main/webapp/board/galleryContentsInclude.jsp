@@ -36,6 +36,7 @@
 				<span class="md-title-span">${bv.bdtitle}</span>
 			</div>
 			<div class="md-like-area">
+				<span class="md-span-likeCnt">${bv.bdLikeCnt}</span>
 				<c:choose>
 					<c:when test="${bv.bdLikeYN == 'Y'}">
 						<label for="input-like" class="like-button">♥</label>
@@ -122,9 +123,17 @@
 					return;
 				}
 			}else{
-				let currentLike = $(this);
-					
-				if(currentLike.text() === "♡") {
+				//모달의 좋아요
+				let mdCurrentLike = $(this);
+				let mdLikeCnt = mdCurrentLike.siblings('.md-span-likeCnt');
+				let NumberMdLikeCnt = Number(mdLikeCnt.html());
+				
+				//모달 밖 리스트의 좋아요
+				let currentLike = $("#like-num"+bdno).siblings('.span-like');
+				let likeCnt = $("#like-num"+bdno).siblings('.span-likeCnt');
+				let NumberlikeCnt = Number($("#like-num"+bdno).siblings('.span-likeCnt').html());
+				
+				if(mdCurrentLike.text() === "♡") {
 				
 					$.ajax({
 						type : "post",
@@ -134,8 +143,10 @@
 						cache : false,
 						success : function(data){
 							if(data.value == 1){
+								mdCurrentLike.text("♥");
+								mdLikeCnt.html(NumberMdLikeCnt+1);
 								currentLike.text("♥");
-								$("#like-num"+bdno).siblings().text("♥");
+								likeCnt.html(NumberlikeCnt+1);
 							}else{
 								alert(data.value + "좋아요 추가 에러");
 							}
@@ -154,8 +165,10 @@
 						cache : false,
 						success : function(data){
 							if(data.value == 1){
+								mdCurrentLike.text("♡");
+								mdLikeCnt.html(NumberMdLikeCnt-1);
 								currentLike.text("♡");
-								$("#like-num"+bdno).siblings().text("♡");
+								likeCnt.html(NumberlikeCnt-1);
 							}else{
 								alert(data.value + "좋아요 취소 에러");
 							}							

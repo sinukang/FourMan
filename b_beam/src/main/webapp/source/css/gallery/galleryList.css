@@ -102,10 +102,14 @@ td{
 	align-items: center;
 	padding: 5px 3%;
 	width: 100%;
+	height: 100%;
 	font-size: 1rem;
 }
 .title-area{
+	display: flex;
+	align-items: center;
 	width: 90%;
+	height: 100%;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -118,13 +122,15 @@ td{
 	text-overflow: ellipsis;
 }
 .like-area{
-	width: 10%;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
+	min-width: 10%;
+	height: 100%;
 }
-.span-bdLikeY, .span-bdLikeN{
+.span-like{
 	width: 100%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
