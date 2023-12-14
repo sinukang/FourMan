@@ -176,7 +176,7 @@ public class MemberDao {
 	
 	public MemberVo memberLoginCheck(MemberVo mv) {
 	    
-	    String sql = "SELECT mbno, mbname, manager FROM member WHERE mbid=? AND mbpwd=?";
+	    String sql = "SELECT mbno, mbname, manager FROM member WHERE mbid=? AND mbpwd=? AND mbdelyn = 'N'";
 	    String sql2 = "SELECT m.*, p.pndelyn, p.pndate"
 		    		+ ", CASE"
 		    		+ " WHEN p.pndelyn IN('', null, 'N') THEN 'N'"
@@ -235,7 +235,7 @@ public class MemberDao {
 	 public String memberIdFind(String mbemail) {
 	        String memberId = null;
 	        
-	        String sql = "SELECT mbid FROM member WHERE mbemail=?";
+	        String sql = "SELECT mbid FROM member WHERE mbemail=? AND mbdelyn = 'N'";
 	        ResultSet rs = null;
 
 	        try {
@@ -265,7 +265,7 @@ public class MemberDao {
 	 
 
 	 public String memberPwdFind(String mbid, String mbemail) {
-		    String sql = "SELECT mbid FROM member WHERE mbid=? AND mbemail=?";
+		    String sql = "SELECT mbid FROM member WHERE mbid=? AND mbemail=? AND mbdelyn = 'N'";
 		    ResultSet rs = null;
 
 		    try {

@@ -45,7 +45,7 @@ public class ReviewDao {
 				+ "(SELECT COUNT(c.lkno) FROM like_ c WHERE a.rvno = c.rvno AND c.lkdelyn = 'N') AS rvLikeCnt\r\n"
 				+ ", (SELECT IF(COUNT(mbaddr) = 1, 'Y', 'N') FROM member m WHERE m.mbno = a.mbno AND m.mbaddr LIKE '%전주%') AS localPeopleYN "
 				+ str
-				+ "FROM (select b.*, mbname from review b JOIN member m ON b.mbno = m.mbno WHERE m.mbdelyn = 'N' AND b.rvdelyn = 'N') a\r\n"
+				+ "FROM (select b.*, mbname from review b JOIN member m ON b.mbno = m.mbno WHERE b.rvdelyn = 'N') a\r\n"
 				+ "WHERE a.rvdelyn = 'N'\r\n"
 				+ "and a.contentid = ?\r\n"
 				+ "ORDER BY a.rvno DESC;";
