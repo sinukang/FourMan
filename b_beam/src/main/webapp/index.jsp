@@ -12,6 +12,11 @@ ArrayList<ContentsVo> ratinglist = cd.getIndexRatingRanking(i);
 ArrayList<ContentsVo> viewlist = cd.getViewRanking(i);
 
 ArrayList<ContentsVo> festalist = cd.ContentsFestivalList();
+
+pageContext.setAttribute("todaylist", todaylist);
+pageContext.setAttribute("ratinglist", ratinglist);
+pageContext.setAttribute("viewlist", viewlist);
+pageContext.setAttribute("festalist", festalist);
 %>
 <!DOCTYPE html>
 <html>
@@ -50,15 +55,24 @@ ArrayList<ContentsVo> festalist = cd.ContentsFestivalList();
 					<p>전주 한옥마을</p>
 				</div>
 			</div>
-			<%for(int j = 0; j < festalist.size(); j++){%>
-			<div class="swiper-slide" onclick="contentsDetail('<%=festalist.get(j).getContentid()%>');">
-				<img src="<%=festalist.get(j).getFirstimage()%>">
+		<c:forEach var="cv" items="${festalist}">
+			<div class="swiper-slide" onclick="contentsDetail('${cv.contentid}');">
+				<img src="${cv.firstimage}">
 				<div class="slide-text">
-					<h1><%=festalist.get(j).getTitle()%></h1>
-					<p><%=festalist.get(j).getContentdate()%>~<%=festalist.get(j).getContentdatem()%></p>
+					<h1>${cv.title}</h1>
+					<p>${cv.contentdate}~${cv.contentdatem}</p>
 				</div>
 			</div>
-			<%} %>
+		</c:forEach>
+<%-- 			<%for(int j = 0; j < festalist.size(); j++){%> --%>
+<%-- 			<div class="swiper-slide" onclick="contentsDetail('<%=festalist.get(j).getContentid()%>');"> --%>
+<%-- 				<img src="<%=festalist.get(j).getFirstimage()%>"> --%>
+<!-- 				<div class="slide-text"> -->
+<%-- 					<h1><%=festalist.get(j).getTitle()%></h1> --%>
+<%-- 					<p><%=festalist.get(j).getContentdate()%>~<%=festalist.get(j).getContentdatem()%></p> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 			<%} %> --%>
 		</div>
 		<div class="swiper-button-next" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;"></div>
 		<div class="swiper-button-prev" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;"></div>

@@ -35,15 +35,15 @@
 					<div class="login-btn">
 						<input type="button" id="login-btn" value="Login" onclick="check();">
 					</div>
-					<div class="login-btn">
-							<input type="button" value="네이버로그인" onclick="check();" style="width:49%; background: #059905;">
-							<input type="button" value="카카오로그인" onclick="check();" style="width:49%; background: #dbdb08;">
+<!-- 					<div class="login-btn"> -->
+<!-- 							<input type="button" value="네이버로그인" onclick="check();" style="width:49%; background: #059905;"> -->
+<!-- 							<input type="button" value="카카오로그인" onclick="check();" style="width:49%; background: #dbdb08;"> -->
 							
-							<!-- 네이버 로그인 버튼 노출 영역 -->
-							<div id="naver_id_login"></div>
-							<!-- //네이버 로그인 버튼 노출 영역 -->
+<!-- 							네이버 로그인 버튼 노출 영역 -->
+<!-- 							<div id="naver_id_login"></div> -->
+<!-- 							//네이버 로그인 버튼 노출 영역 -->
 							
-					</div>
+<!-- 					</div> -->
 					<br>
 					<div class="text-join">
 						<a class="" href="${pageContext.request.contextPath}/member/memberIdFind.do">아이디 찾기</a> /
@@ -106,13 +106,13 @@
 			}
 		});  
 	}
-	  	var naver_id_login = new naver_id_login("GBMgKClIDVZzjMHwAaNw", "http://localhost:8080/teamProject_main/Home.jsp");
-	  	var state = naver_id_login.getUniqState();
-	  	naver_id_login.setButton("white", 3,40);
-	  	naver_id_login.setDomain("http://localhost:8080/teamProject_main/member/memberLogin.jsp");
-	  	naver_id_login.setState(state);
-	  	naver_id_login.setPopup();
-	  	naver_id_login.init_naver_id_login();
+// 	  	var naver_id_login = new naver_id_login("GBMgKClIDVZzjMHwAaNw", "http://localhost:8080/teamProject_main/Home.jsp");
+// 	  	var state = naver_id_login.getUniqState();
+// 	  	naver_id_login.setButton("white", 3,40);
+// 	  	naver_id_login.setDomain("http://localhost:8080/teamProject_main/member/memberLogin.jsp");
+// 	  	naver_id_login.setState(state);
+// 	  	naver_id_login.setPopup();
+// 	  	naver_id_login.init_naver_id_login();
 	  	
 	  	$(document).ready(function(){
 	  		
