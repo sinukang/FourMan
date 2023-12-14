@@ -72,45 +72,49 @@ public class ContentsController extends HttpServlet {
 			ArrayList<ContentsVo> aryList = new ArrayList<ContentsVo>();
 			ArrayList<String> contentidList = new ArrayList<String>();
 			JSONObject body = cd.ContentsList(pm);
-			JSONObject items = (JSONObject)body.get("items");
-			int totalCount = Integer.parseInt(body.get("totalCount").toString());
-			JSONArray item = (JSONArray)items.get("item");
-			System.out.println(totalCount);
-			pm.setTotalCount(totalCount);
-			for(int i = 0; i < item.size(); i++) {
-				ContentsVo cv = new ContentsVo();
-				JSONObject contents = (JSONObject)item.get(i);
-				contentidList.add(contents.get("contentid").toString());
-				cv.setContentid(contents.get("contentid").toString());
-				cv.setContenttypeid(contents.get("contenttypeid").toString());
-				cv.setContentdate(contents.get("createdtime").toString());
-				cv.setFirstimage(contents.get("firstimage").toString());
-				cv.setFirstimage2(contents.get("firstimage2").toString());
-				cv.setTitle(contents.get("title").toString());
-				cv.setMapx(contents.get("mapx").toString());
-				cv.setMapy(contents.get("mapy").toString());
-				cv.setContentRating(rvd.getReviewAverage(cv.getContentid()));
-				cv.setContentReviewCnt(cd.getReviewcnt(cv.getContentid()));
-				cv.setContentLikeYN("N");
-				aryList.add(cv);
-			}
-			if(session.getAttribute("mbno")!=null&&!session.getAttribute("mbno").equals("")) {
-				BookmarkDao bmd= new BookmarkDao();
-				String[] myBmList=bmd.getContentsListBookmark((int)session.getAttribute("mbno"), contentidList);
-////				request.setAttribute("myBmList", myBmList);
-				for(int i = 0; i < aryList.size(); i++) {
-					for(int j = 0; j < myBmList.length;j++) {
-						if(aryList.get(i).getContentid().equals(myBmList[j])) {
-							ContentsVo temCv = aryList.get(i);
-							temCv.setContentLikeYN("Y");
-							aryList.set(i, temCv);
-						}
-					}
-					
+			System.out.println("" + body.get("items"));
+			if(body.get("items") != null && body.get("items") != "") {
+				JSONObject items = (JSONObject)body.get("items");
+				int totalCount = Integer.parseInt(body.get("totalCount").toString());
+				JSONArray item = (JSONArray)items.get("item");
+				System.out.println(totalCount);
+				pm.setTotalCount(totalCount);
+				for(int i = 0; i < item.size(); i++) {
+					ContentsVo cv = new ContentsVo();
+					JSONObject contents = (JSONObject)item.get(i);
+					contentidList.add(contents.get("contentid").toString());
+					cv.setContentid(contents.get("contentid").toString());
+					cv.setContenttypeid(contents.get("contenttypeid").toString());
+					cv.setContentdate(contents.get("createdtime").toString());
+					cv.setFirstimage(contents.get("firstimage").toString());
+					cv.setFirstimage2(contents.get("firstimage2").toString());
+					cv.setTitle(contents.get("title").toString());
+					cv.setMapx(contents.get("mapx").toString());
+					cv.setMapy(contents.get("mapy").toString());
+					cv.setContentRating(rvd.getReviewAverage(cv.getContentid()));
+					cv.setContentReviewCnt(cd.getReviewcnt(cv.getContentid()));
+					cv.setContentLikeYN("N");
+					aryList.add(cv);
 				}
+				if(session.getAttribute("mbno")!=null&&!session.getAttribute("mbno").equals("")) {
+					BookmarkDao bmd= new BookmarkDao();
+					String[] myBmList=bmd.getContentsListBookmark((int)session.getAttribute("mbno"), contentidList);
+	////				request.setAttribute("myBmList", myBmList);
+					for(int i = 0; i < aryList.size(); i++) {
+						for(int j = 0; j < myBmList.length;j++) {
+							if(aryList.get(i).getContentid().equals(myBmList[j])) {
+								ContentsVo temCv = aryList.get(i);
+								temCv.setContentLikeYN("Y");
+								aryList.set(i, temCv);
+							}
+						}
+						
+					}
+				}
+				request.setAttribute("aryList", aryList);
+				request.setAttribute("pm", pm);
 			}
-			request.setAttribute("aryList", aryList);
-			request.setAttribute("pm", pm);
+				
 			
 			
 			

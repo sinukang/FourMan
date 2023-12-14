@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${empty manager || manager eq null || manager eq '' || manager ne 'M'}">
+	<script type="text/javascript">
+		alert("접근 권한이 없습니다.");
+		location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
+	</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +42,6 @@
 		
 		<div class="contents-area">
 			<div class="list-area">
-				<c:set var="j" value="6"></c:set>
 				<c:forEach var="qv" items="${qna_alist}">
 					<c:choose>
 						<c:when test="${qv.ambno>0}">
@@ -56,7 +62,7 @@
 								</div>
 							</div>
 							<div class="Answered-btn-area test${qv.qano}">
-								<button class="btn-Delete btn" onclick="deleteAnswer(${qv.qano})">답변삭제</button>
+								<button class="btn-Delete btn" onclick="deleteAnswer(${qv.qano})">문의삭제</button>
 								<button class="btn-Modify btn" onclick="modifyAnswer(${qv.qano})">답변수정</button>
 							</div>
 						</c:when>
@@ -91,7 +97,7 @@
 			        </form>
 			        <div class="btn-area2">
 			            <button type="button" id="write" class="btn-write btn2">등록</button>
-			            <button type="button" id="cancel" class="btn-cancel btn2">취소</button>
+			            <button type="button" id="cancel" class="btn-cancel btn2" onclick="cancel()">취소</button>
 			        </div>
 			    </div>
 			</div>
@@ -112,24 +118,45 @@
 			</div>
 		</div>
 		
+		<!-- 페이징 영역 -->
+		<div class="pagination-area">
+			<table class="page-table">
+				<tr>
+					<c:if test="${pm.prev}">
+						<td>
+							<a class="page-num" href="${pageContext.request.contextPath}/qna/managerMyQnA.do?page=${pm.startPage - 1}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">◀</a>
+						</td>	
+					</c:if>
+					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+						<c:choose>
+							<c:when test="${pm.scri.page eq i}">			
+								<td>
+									<a class="page-num currentPageNum" href="${pageContext.request.contextPath}/qna/managerMyQnA.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a class="page-num" href="${pageContext.request.contextPath}/qna/managerMyQnA.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pm.next && pm.endPage > 0}">
+						<td>
+							<a href="${pageContext.request.contextPath}/qna/managerMyQnA.do?page=${pm.endPage + 1}${keyword}">▶</a>
+						</td>
+					</c:if>
+				</tr>
+			</table>
+		</div>
+		<!-- 페이징 영역 -->
+		
 	</div>
 
 	<!-- footer -->
 	<jsp:include page="../source/include/footer.jsp" />
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$.ajax({
-			url: '${pageContext.request.contextPath}/qna/managerMyQnA.do',
-			type: 'POST',
-			dataType: 'json',
-			success: function(response) {
-				location.reload();
-			},
-			error: function(xhr, status, error) {
-			}
-		});
-	});
 
 	var tap = document.querySelectorAll(".tap");
 
@@ -172,9 +199,10 @@
 		});
 	});
 
-	// 답변글 작성  ----------------------------------------------------
+	// 답변글 작성
 	function writeAnswer(qano) {
 		let item = document.querySelectorAll(".QnA-wrapper");
+		document.querySelector(".pagination-area").classList.add("dp-none");
 		document.querySelector(".unAnswered-btn-area.test" + qano).classList.add("active");
 		for (let i = 0; i < item.length; i++) {
 			if (item[i].classList.contains("test" + qano)) {
@@ -212,19 +240,10 @@
 			});
 		}
 	});
-	// 답변글 수정 ----------------------------------------------------
+	
+	// 답변글 수정
 	function modifyAnswer(qano) {
-// 		let item = document.querySelectorAll(".QnA-wrapper");
-// 		document.querySelector(".Answered-btn-area.test" + qano).classList.add("active");
-// 		for (let i = 0; i < item.length; i++) {
-// 			if (item[i].classList.contains("test" + qano)) {
-// 				document.querySelector(".modify-area").classList.remove("dp-none");
-// 				document.querySelector(".modify-area").classList.add("dp-block");
-// 			} else {
-// 				item[i].classList.add("dp-none");
-// 				item[i].classList.remove("active");
-// 			}
-// 		}
+
 		let content = $("#modify-content");
 		content.val($('#acont'+qano).html());
 		let item = document.querySelectorAll(".QnA-wrapper");
@@ -244,6 +263,8 @@
 		document.querySelector(".modify-area").classList.remove("dp-none");
 		document.querySelector(".modify-area").classList.add("dp-block");
 		window.currentQano = qano;
+		
+		document.querySelector(".pagination-area").classList.add("dp-none");
 	}
 
 	$("#modify-write").on("click", function() {
@@ -289,7 +310,7 @@
 			return false;
 		}
 	}
-
+	
 	function cancel(){
 		let item = document.querySelectorAll(".QnA-wrapper");
 		let item2 = document.querySelectorAll(".Answered-btn-area");
@@ -308,14 +329,9 @@
 				btnAnswer[i].classList.remove("active");
 			}
 		}
+		document.querySelector(".pagination-area").classList.remove("dp-none");
 	}
+	
 </script>
-
-
-
-
-
-
-
 </body>
 </html>

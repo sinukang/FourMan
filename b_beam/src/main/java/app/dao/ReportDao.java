@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import app.dbconn.DbConn;
+import app.domain.BoardVo;
 import app.domain.CommentVo;
 import app.domain.MemberVo;
 import app.domain.PenaltyVo;
@@ -30,7 +31,7 @@ public class ReportDao {
 		ArrayList<ReportVo> alist = new ArrayList<ReportVo>();
 		ResultSet rs = null;
 		
-		String sql = "SELECT r.*, m.mbname"
+		String sql = "SELECT r.*, m.mbname, c.bdno AS cmbdno"
 				+ ", (SELECT p.pndelyn FROM member m JOIN penalty p ON m.mbno = p.mbno WHERE m.mbno = r.mbno2 ORDER BY p.pnno DESC, p.pndate DESC LIMIT 1) AS pndelyn"
 				+ ", b.bdcont, rv.rvcont, rv.contentid, c.cmcont, bdno_count, rvno_count, cmno_count"
 				+ " FROM report r "
@@ -79,7 +80,8 @@ public class ReportDao {
 				rv.setContentid(rs.getString("contentid"));
 				
 				cv.setCmcont(rs.getString("cmcont"));
-				rpv.setCommnetVo(cv);
+				cv.setBdno(rs.getInt("cmbdno"));
+				rpv.setCommentVo(cv);
 				
 				pv.setPndelyn(rs.getString("pndelyn"));
 				rpv.setPenaltyVo(pv);
@@ -357,44 +359,44 @@ public class ReportDao {
 	}
 	
 	//신고된 컨텐츠별 mbno 가져오기 
-	 public MemberVo getContentsMv(int no, String cate){
+	public MemberVo getContentsMv(int no, String cate){
 			
-		 	MemberVo mv = new MemberVo();
-			ResultSet rs = null;
-			String table1 = "";
-			switch(cate) {
-			case "bdno" : 
-				table1="board";
-				break;
-			case "rvno" : 
-				table1="review";
-				break;
-			case "cmno" : 
-				table1="comment";
-				break;
-			}
-			String sql = "SELECT a.mbno, m.mbname "
-					+ "FROM "+ table1 + " a "
-					+ "JOIN member m ON a.mbno = m.mbno "
-					+ "WHERE a."+cate+" = ?";
-			System.out.println(sql);
-			System.out.println("table:" + table1);
-			
-			
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, no); 
-				
-				rs = pstmt.executeQuery();
-			
-				if (rs.next()) {
-					mv.setMbno(rs.getInt("mbno"));
-					mv.setMbname(rs.getString("mbname"));
-				}
-			
-			} catch (SQLException e) { e.printStackTrace(); }
-			
-			return mv; 
+		MemberVo mv = new MemberVo();
+		ResultSet rs = null;
+		String table1 = "";
+		switch(cate) {
+		case "bdno" : 
+			table1="board";
+			break;
+		case "rvno" : 
+			table1="review";
+			break;
+		case "cmno" : 
+			table1="comment";
+			break;
 		}
+		String sql = "SELECT a.mbno, m.mbname "
+				+ "FROM "+ table1 + " a "
+				+ "JOIN member m ON a.mbno = m.mbno "
+				+ "WHERE a."+cate+" = ?";
+		System.out.println(sql);
+		System.out.println("table:" + table1);
+		
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no); 
+			
+			rs = pstmt.executeQuery();
+		
+			if (rs.next()) {
+				mv.setMbno(rs.getInt("mbno"));
+				mv.setMbname(rs.getString("mbname"));
+			}
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		return mv; 
+	}
 	
 		
 }

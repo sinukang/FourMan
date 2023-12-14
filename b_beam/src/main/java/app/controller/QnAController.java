@@ -27,8 +27,10 @@ import app.dao.QnADao;
 import app.dao.ReviewDao;
 import app.domain.BoardVo;
 import app.domain.MemberVo;
+import app.domain.PageMaker;
 import app.domain.QnAVo;
 import app.domain.ReviewVo;
+import app.domain.SearchCriteria;
 
 /**
  * Servlet implementation class ContentsController
@@ -46,24 +48,31 @@ public class QnAController extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (location.equals("qna.do")) {
+		if(location.equals("myQnA.do")) {
 			
-			String path ="/qna/qna.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
+			HttpSession session = request.getSession(false);
 			
-		}else if (location.equals("myQnA.do")) {
-			
-			HttpSession session = request.getSession();
-			QnADao qd = new QnADao();
 			int mbno = 0;
 			if(session.getAttribute("mbno") != null) {
 			 mbno = (int) session.getAttribute("mbno");
 			}
 			
-			ArrayList<QnAVo> q_alist = qd.qnaSelectAll(mbno);
-			request.setAttribute("q_alist", q_alist);
+			SearchCriteria scri = new SearchCriteria();
 			
+			String page = request.getParameter("page");
+			if (page == null) { page = "1";}
+			
+			scri.setPage(Integer.parseInt(page));
+			
+			PageMaker pm = new PageMaker();
+			pm.setScri(scri);	
+			
+			QnADao qd = new QnADao();
+			ArrayList<QnAVo> q_alist = qd.qnaSelectAll(mbno, scri);
+			pm.setTotalCount(qd.myQnATotalCount(mbno, scri));
+			
+			request.setAttribute("q_alist", q_alist);
+			request.setAttribute("pm", pm);
 			
 			String path ="/qna/myQnA.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -161,20 +170,22 @@ public class QnAController extends HttpServlet {
 			
 		}else if (location.equals("managerMyQnA.do")) {
 		
-			HttpSession session = request.getSession();
+			SearchCriteria scri = new SearchCriteria();
+			
+			String page = request.getParameter("page");
+			if (page == null) { page = "1";}
+			
+			scri.setPage(Integer.parseInt(page));
+			
+			PageMaker pm = new PageMaker();
+			pm.setScri(scri);
+			
 			QnADao qd = new QnADao();
+			ArrayList<QnAVo> qna_alist = qd.mngqnaSelectAll(scri);
+			pm.setTotalCount(qd.managerMyQnATotalCount(scri));
 			
-			int mbno = 0;
-			if(session.getAttribute("mbno") != null) {
-			 mbno = (int) session.getAttribute("mbno");
-			}
-			
-			ArrayList<QnAVo> qna_alist = qd.mngqnaSelectAll();
 			request.setAttribute("qna_alist", qna_alist);
-			
-//			for(QnAVo qav :qna_alist) {
-//				System.out.println( qav.getAmbno());
-//			}
+			request.setAttribute("pm", pm);
 			
 			String path ="/qna/managerMyQnA.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);

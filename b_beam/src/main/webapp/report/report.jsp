@@ -140,8 +140,8 @@
 									</a>
 								</c:when>
 								<c:when test="${rp.cmno ne ''}">
-									<a href="${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=${rp.commnetVo.bdno}">
-										${rp.commnetVo.cmcont}
+									<a href="${pageContext.request.contextPath}/board/galleryContentsInclude.do?bdno=${rp.commentVo.bdno}">
+										${rp.commentVo.cmcont}
 									</a>
 								</c:when>
 							</c:choose>	
@@ -361,7 +361,7 @@
 				console.log(reportedBoardNumArr[i]);
 			}			
 			
-			if (confirm('정말 삭제하시겠습니까?')) {
+			if (confirm('정말 변경 하시겠습니까?')) {
 				$.ajax({
 					type : "post",
 					url : "${pageContext.request.contextPath}/report/reportedBoardDeleteUpdate.do",

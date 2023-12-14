@@ -284,6 +284,7 @@ body *{
 }
 .write-area{
 	width: 100%;
+	margin-bottom: 50px;
 }
 .write-content{
 	width: 100%;
@@ -396,3 +397,33 @@ body *{
 .btn-write:hover, .btn-cancel:hover{
 	cursor: pointer;
 }
+
+
+/* 페이징 영역 */
+.pagination-area{
+	margin-bottom: 50px;
+}
+.page-table {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.page-table td {
+	padding: 20px;
+}
+.page-num {
+	color: black;
+	font-size: 16px;
+	text-decoration: none;
+}
+.page-num:visited{
+	color: black;
+	text-decoration: none;
+}
+.currentPageNum{
+	transform: scale(1.25);
+	font-weight: bold;
+	text-decoration: underline;
+}
+/* 페이징 영역 */
+

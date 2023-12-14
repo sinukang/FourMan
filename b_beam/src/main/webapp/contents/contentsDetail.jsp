@@ -955,14 +955,23 @@ function unlike(e) {
 function reviewReport(e){
 // 	var formName='rpForm'+e;
 // 	var rpForm = $('form[name='+formName+']');
-	var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+e+"&cate=rvno";
-
-	var width = 300;
-	var height = 280;
-	var left = (window.screen.width - width) / 2;
-	var top = (window.screen.height - height) / 2;
-
-	window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+	let mbno = "${mbno}";
+	if(!mbno){
+		if(confirm("로그인이 필요한 기능입니다.\n\n로그인 하시겠습니까?")){
+			location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
+		}else{
+			return;
+		}
+	}else{
+		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+e+"&cate=rvno";
+	
+		var width = 600;
+		var height = 600;
+		var left = (window.screen.width - width) / 2;
+		var top = (window.screen.height - height) / 2;
+	
+		window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+	}
 // 	rpForm.action = url;
 // 	rpForm.method="post";
 // 	rpForm.target="formName";

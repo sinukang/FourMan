@@ -14,7 +14,7 @@ public class ReportVo extends BoardVo {
 	private int cmno_count;
 	
 	private ReviewVo reviewVo;
-	private CommentVo commnetVo;
+	private CommentVo commentVo;
 	private PenaltyVo penaltyVo;
 	
 	public int getBdno_count() {
@@ -45,11 +45,11 @@ public class ReportVo extends BoardVo {
 	public void setReviewVo(ReviewVo reviewVo) {
 		this.reviewVo = reviewVo;
 	}
-	public CommentVo getCommnetVo() {
-		return commnetVo;
+	public CommentVo getCommentVo() {
+		return commentVo;
 	}
-	public void setCommnetVo(CommentVo commnetVo) {
-		this.commnetVo = commnetVo;
+	public void setCommentVo(CommentVo commentVo) {
+		this.commentVo = commentVo;
 	}
 	public void setRpno(int rpno) {
 		this.rpno = rpno;

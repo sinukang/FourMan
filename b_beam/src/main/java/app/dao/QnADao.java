@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import app.dbconn.DbConn;
-import app.domain.BoardVo;
 import app.domain.QnAVo;
 import app.domain.SearchCriteria;
 
@@ -22,20 +21,28 @@ public class QnADao {
 		this.conn = dbconn.getConnection();
 	}
 	
-	
-	public ArrayList<QnAVo> qnaSelectAll(int mbno){
+	//내 1:1 문의 글 리스트
+	public ArrayList<QnAVo> qnaSelectAll(int mbno, SearchCriteria scri){
 		ArrayList<QnAVo> q_alist = new ArrayList<QnAVo>();
 		ResultSet rs = null;
 		
-		String sql = "SELECT a.*,\r\n"
-				+ " m.mbname AS ambname \r\n"
-				+ " FROM qna a \r\n"
-				+ "LEFT JOIN member m ON a.ambno = m.mbno AND m.manager = 'M'\r\n"
-				+ "WHERE a.qadelyn = 'N' \r\n"
-				+ "AND a.qmbno = ? ORDER BY a.qdate DESC";
+		String sql = "SELECT a.*"
+					+ ", m.mbname AS ambname"
+					+ " FROM qna a"
+					+ " LEFT JOIN member m ON a.ambno = m.mbno AND m.manager = 'M'"
+					+ " WHERE a.qadelyn = 'N'"
+					+ " AND a.qmbno = ?"
+					+ " ORDER BY a.qdate DESC"
+					+ " LIMIT ?, ?";
+		
+		int perPageNum = 15;
+		scri.setNumOfRows(perPageNum);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mbno);
+			pstmt.setInt(2, (scri.getPage() - 1) * scri.getNumOfRows());
+			pstmt.setInt(3, scri.getNumOfRows());			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -50,8 +57,6 @@ public class QnADao {
 				qv.setAmbname(rs.getString("ambname"));
 				
 				q_alist.add(qv);
-			
-			
 			}
 			
 		}catch(Exception e){
@@ -59,8 +64,6 @@ public class QnADao {
 		}finally{
 			try{
 				rs.close();
-				pstmt.close();
-				conn.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -69,6 +72,37 @@ public class QnADao {
 		return q_alist;
 	} 
 	
+	//내 1:1 문의 글 총 개수
+	public int myQnATotalCount(int mbno, SearchCriteria scri) {
+		
+		int value = 0;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(qano) as cnt FROM qna WHERE qadelyn = 'N' AND qmbno = ?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mbno);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				value = rs.getInt("cnt");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return value;
+	}
 	
 	public int qnaInsert(QnAVo qv){
 		int exec = 0;
@@ -151,10 +185,6 @@ public class QnADao {
 		return exec;
 	}	
 
-
-	
-	
-	
 	public int qnaDelete(int qano) {
 		
 		int exec = 0;		
@@ -173,21 +203,28 @@ public class QnADao {
 		return exec;	
 	}
 	
-	public ArrayList<QnAVo> mngqnaSelectAll() {
+	//관리자가 보는 1:1 문의 글 리스트
+	public ArrayList<QnAVo> mngqnaSelectAll(SearchCriteria scri) {
 		ArrayList<QnAVo> qna_alist = new ArrayList<>();
 		ResultSet rs = null;
 
-		String sql = "SELECT a.*,\r\n"
-				+ "	u.mbname AS qmbname,\r\n"
-				+ "    m.mbname AS ambname\r\n"
-				+ "FROM qna a \r\n"
-				+ "LEFT JOIN member u ON a.qmbno = u.mbno AND u.manager = 'U'\r\n"
-				+ "LEFT JOIN member m ON a.ambno = m.mbno AND m.manager = 'M'\r\n"
-				+ "WHERE a.qadelyn = 'N'\r\n"
-				+ "ORDER BY a.qdate DESC";
+		String sql = "SELECT a.*"
+					+ ", u.mbname AS qmbname"
+					+ ", m.mbname AS ambname"
+					+ " FROM qna a"
+					+ " LEFT JOIN member u ON a.qmbno = u.mbno AND u.manager = 'U'"
+					+ " LEFT JOIN member m ON a.ambno = m.mbno AND m.manager = 'M'"
+					+ " WHERE a.qadelyn = 'N'"
+					+ " ORDER BY a.qdate DESC"
+					+ " LIMIT ?, ?";
 		
+		int perPageNum = 15;
+		scri.setNumOfRows(perPageNum);
+				
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (scri.getPage() - 1) * scri.getNumOfRows());
+			pstmt.setInt(2, scri.getNumOfRows());
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -210,9 +247,45 @@ public class QnADao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				rs.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 
 	    return qna_alist;
+	}
+	
+	//관리자 1:1 문의 글 총 개수
+	public int managerMyQnATotalCount(SearchCriteria scri) {
+		
+		int value = 0;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(qano) as cnt FROM qna WHERE qadelyn = 'N'";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				value = rs.getInt("cnt");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return value;
 	}
 	
 	

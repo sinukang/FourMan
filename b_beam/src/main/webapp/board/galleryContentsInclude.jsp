@@ -442,26 +442,47 @@
 	
 	function boardReport(bdno){
 		
-		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+bdno+"&cate=bdno";
-		
-		var width = 300;
-		var height = 280;
-		var left = (window.screen.width - width) / 2;
-		var top = (window.screen.height - height) / 2;
-
-		window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		let mbno = "${mbno}";
+		if(!mbno){
+			if(confirm("로그인이 필요한 기능입니다.\n\n로그인 하시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
+			}else{
+				return;
+			}
+		}else{
+			
+			var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+bdno+"&cate=bdno";
+			
+			var width = 600;
+			var height = 600;
+			var left = (window.screen.width - width) / 2;
+			var top = (window.screen.height - height) / 2;
+	
+			window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		}
 	}
 	
 	function commentReport(cmno){
 		
-		var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+cmno+"&cate=cmno";
-
-		var width = 300;
-		var height = 280;
-		var left = (window.screen.width - width) / 2;
-		var top = (window.screen.height - height) / 2;
-
-		window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		let mbno = "${mbno}";
+		if(!mbno){
+			if(confirm("로그인이 필요한 기능입니다.\n\n로그인 하시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/memberLogin.do";
+			}else{
+				return;
+			}
+			
+		}else{
+		
+			var url="${pageContext.request.contextPath}/report/reportPopup.do?no="+cmno+"&cate=cmno";
+	
+			var width = 600;
+			var height = 600;
+			var left = (window.screen.width - width) / 2;
+			var top = (window.screen.height - height) / 2;
+	
+			window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		}
 	}
 	
 

@@ -94,18 +94,48 @@
 				<div class="write-content">
 					<form id="modify-form" class="form">
 						<div class="QnA-sub">
-							<input type="text" id="modify-title" name="modify-title" class="input-sup" >
+							<input type="text" id="modify-title" name="modify-title" class="input-sup">
 						</div>
 						<div class="QnA-content">
 							<textarea id="modify-content" name="modify-content" class="textarea-content" ></textarea>
 						</div>
 					</form>
 					<div class="btn-area2">
-						<button type="button" id="modify-write" class="btn-write btn2" >등록</button>
+						<button type="button" id="modify-write" class="btn-write btn2" >수정</button>
 						<button type="button" id="modify-cancel" class="btn-cancel btn2">취소</button>
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="pagination-area">
+			<table class="page-table">
+				<tr>
+					<c:if test="${pm.prev}">
+						<td>
+							<a class="page-num" href="${pageContext.request.contextPath}/qna/myQnA.do?page=${pm.startPage - 1}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">◀</a>
+						</td>	
+					</c:if>
+					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
+						<c:choose>
+							<c:when test="${pm.scri.page eq i}">			
+								<td>
+									<a class="page-num currentPageNum" href="${pageContext.request.contextPath}/qna/myQnA.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a class="page-num" href="${pageContext.request.contextPath}/qna/myQnA.do?page=${i}<c:if test="${pm.scri.keyword ne ''}">${keyword}</c:if>">${i}</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pm.next && pm.endPage > 0}">
+						<td>
+							<a href="${pageContext.request.contextPath}/qna/myQnA.do?page=${pm.endPage + 1}${keyword}">▶</a>
+						</td>
+					</c:if>
+				</tr>
+			</table>
 		</div>
 	</div>
 	
@@ -114,40 +144,7 @@
 		
 </body>
 <script>
-	function qModify(qano) {
-		$(".list-area").addClass('dp-none');
-		$(".modify-area").removeClass('dp-none');
 
-		var qtitle = $('#title'+qano).html();
-		var qcont = $('#cont'+qano).html();
-		console.log(qtitle);
-		console.log(qcont);
-
-		$("#modify-title").val(qtitle);
-		$("#modify-content").val(qcont);
-		$("#modify-write").data("qano", qano);
-	}
-	 // 문의 수정 함수
-	  function modifyAnswer(qano) {
-			$.ajax({
-			url: '${pageContext.request.contextPath}/qna/qnaModifyAction.do',
-			type: 'POST',
-			data: {
-				'qano': qano,
-				'modify-title': $("#modify-title").val(),
-				'modify-content': $("#modify-content").val()
-				},
-			success: function(response) {
-
-				$(".list-area").addClass('dp-none');
-				$(".write-area").removeClass('dp-none');
-			},
-			error: function(xhr, status, error) {
-				alert('오류가 발생했습니다. 다시 시도해주세요.');
-			}
-		});
-	}
-	
 	//문의내역 & 문의하기 클릭 시 색상변화, 클릭 감지 이벤트 리스너 달아줌
 	var btn1 = document.querySelectorAll(".btn1");
 	
@@ -172,7 +169,42 @@
 		toggle.addEventListener("click", () => {
 			toggle.classList.toggle("active");
 		})
-	});
+	});	
+	
+	//문의 수정하기 클릭 시 글 내용 가져옴
+	function qModify(qano) {
+		
+		$(".list-area").addClass('dp-none');
+		$(".modify-area").removeClass('dp-none');
+		
+		var qtitle = $('#title'+qano).html();
+		var qcont = $('#cont'+qano).html();
+		
+		$("#modify-title").val(qtitle);
+		$("#modify-content").val(qcont);
+		$("#modify-write").data("qano", qano);
+	}
+	
+	// 문의 수정 함수
+	function modifyAnswer(qano) {
+			$.ajax({
+			url: '${pageContext.request.contextPath}/qna/qnaModifyAction.do',
+			type: 'POST',
+			data: {
+				'qano': qano,
+				'modify-title': $("#modify-title").val(),
+				'modify-content': $("#modify-content").val()
+				},
+			success: function(response) {
+
+				$(".list-area").addClass('dp-none');
+				$(".write-area").removeClass('dp-none');
+			},
+			error: function(xhr, status, error) {
+				alert('오류가 발생했습니다. 다시 시도해주세요.');
+			}
+		});
+	}
 	
 	function deleteAnswer(qano){
 		
@@ -184,7 +216,7 @@
 					'qano': qano
 				},
 				success: function(response) {
-					alert('qano : ' + qano + ' 번 삭제되었습니다.');
+					alert('해당 문의가 삭제되었습니다.');
 					location.reload(); 
 				},
 				error: function(xhr, status, error) {
@@ -238,44 +270,11 @@
 					},
 					error: function(xhr, status, error) {
 						alert('오류가 발생했습니다. 다시 시도해주세요.');
-						}
-				});
-			}
-			
-		});
-		
-		
-		
-		$("#modify-write").on("click", function(){
-			let modifyTitle = $("#modify-title").val();
-			let modifyContent = $("#modify-content").val();
-			let currentQano = $("#modify-write").data("qano");
-			
-			if(modifyTitle == null || modifyTitle == ""){
-			alert("제목을 입력해주세요");
-			$("#modify-title").focus();
-			} else if(modifyContent == null || modifyContent == ""){
-				alert("내용을 입력해주세요");
-				$("#modify-content").focus();
-			} else {
-				$.ajax({
-					url: '${pageContext.request.contextPath}/qna/qnaModifyAction.do',
-					type: 'POST',
-					data: {
-						'qano':currentQano,
-						'modify-title': modifyTitle,
-						'modify-content': modifyContent
-					},
-					success: function(response) {
-						alert('성공적으로 등록되었습니다.');
-						location.reload();
-					},
-					error: function(xhr, status, error) {
-						alert('오류 발생했습니다. 다시 시도해주세요.');
 					}
 				});
 			}
 		});
+		
 		//취소 버튼 클릭 시 작성된 내용이 있으면 한번 확인 후 문의내역 버튼 클릭
 		$("#cancel").on("click", function(){
 			
@@ -303,37 +302,74 @@
 				content.val("");
 				$(".btn-QnAList").trigger("click");
 			}
-
+		});		
+		
+		//문의 글 수정
+		$("#modify-write").on("click", function(){
+			let modifyTitle = $("#modify-title").val();
+			let modifyContent = $("#modify-content").val();
+			let currentQano = $("#modify-write").data("qano");
+			
+			if(modifyTitle == null || modifyTitle == ""){
+			alert("제목을 입력해주세요");
+			$("#modify-title").focus();
+			} else if(modifyContent == null || modifyContent == ""){
+				alert("내용을 입력해주세요");
+				$("#modify-content").focus();
+			} else {
+				$.ajax({
+					url: '${pageContext.request.contextPath}/qna/qnaModifyAction.do',
+					type: 'POST',
+					data: {
+						'qano':currentQano,
+						'modify-title': modifyTitle,
+						'modify-content': modifyContent
+					},
+					success: function(response) {
+						alert('성공적으로 수정되었습니다.');
+						location.reload();
+					},
+					error: function(xhr, status, error) {
+						alert('오류가 발생했습니다. 다시 시도해주세요.');
+					}
+				});
+			}
+		});
+		
+		//문의 글 수정 취소
+		$("#modify-cancel").on("click", function(){
+			
+			if(confirm("정말로 취소하시겠습니까?")){
+				$(".modify-area").addClass('dp-none');
+				$(".btn-QnAList").trigger("click");
+			}else{
+				return;
+			}
 		});
 		
 	});
-
-</script>
-<script>
-function check(){
-
-	var fm = document.form; //문서객체안의 폼객체이름
 	
-	if (fm.bdtitle.value == "") {
-	    alert("제목을 입력하세요");
-	    fm.bdtitle.focus();
-	    return;
-	} else if (fm.bdcont.value == "") {
-	    alert("내용을 입력하세요");
-	    fm.bdcont.focus();
-	    return;
-	}	
+	function check(){
 	
-	//처리하기위해 이동하는 주소
-	fm.action ="<%=request.getContextPath()%>/qna/qnaWriteAction.do";  
-	fm.method = "post";  //이동하는 방식  get 노출시킴 post 감추어서 전달
-	fm.submit(); //전송시킴
-	return;
-}
-
-</script>
-
-<script>
+		var fm = document.form; //문서객체안의 폼객체이름
+		
+		if (fm.bdtitle.value == "") {
+		    alert("제목을 입력하세요");
+		    fm.bdtitle.focus();
+		    return;
+		} else if (fm.bdcont.value == "") {
+		    alert("내용을 입력하세요");
+		    fm.bdcont.focus();
+		    return;
+		}	
+		
+		//처리하기위해 이동하는 주소
+		fm.action ="<%=request.getContextPath()%>/qna/qnaWriteAction.do";  
+		fm.method = "post";  //이동하는 방식  get 노출시킴 post 감추어서 전달
+		fm.submit(); //전송시킴
+		return;
+	}
+	
 	function mNavi(e){
 		switch(e){
 		case 0 : location.href="${pageContext.request.contextPath}/member/memberInfo.do"; break;
@@ -343,6 +379,6 @@ function check(){
 			
 		}
 	}
+	
 </script>
-
 </html>

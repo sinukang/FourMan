@@ -16,7 +16,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import app.dao.BoardDao;
+import app.dao.CommentDao;
 import app.dao.ReportDao;
+import app.domain.BoardVo;
+import app.domain.CommentVo;
 import app.domain.MemberVo;
 import app.domain.PageMaker;
 import app.domain.ReportVo;
