@@ -74,8 +74,6 @@ public class BoardDao {
 				bv.setBdcate(rs.getString("bdcate"));
 				bv.setBdtitle(rs.getString("bdtitle"));
 				bv.setBdcont(rs.getString("bdcont"));
-				bv.setBdtag(rs.getString("bdtag"));
-				bv.setBdcontag(rs.getString("bdcontag"));
 				bv.setBddate(rs.getString("bddate"));
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBddelyn(rs.getString("bddelyn"));
@@ -169,8 +167,6 @@ public class BoardDao {
 				bv.setBdcate(rs.getString("bdcate"));
 				bv.setBdtitle(rs.getString("bdtitle"));
 				bv.setBdcont(rs.getString("bdcont"));
-				bv.setBdtag(rs.getString("bdtag"));
-				bv.setBdcontag(rs.getString("bdcontag"));
 				bv.setBddate(rs.getString("bddate"));
 				bv.setBddatem(rs.getString("bddatem"));
 				bv.setBdLikeCnt(rs.getInt("bdLikeCnt"));
