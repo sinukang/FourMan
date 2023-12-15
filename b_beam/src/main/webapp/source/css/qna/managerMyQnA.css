@@ -200,9 +200,16 @@ body *{
 	display: none;
 	justify-content: center;
 	align-items: start;
+	margin-bottom: 20px;
+	width: 100%;
+	height: 50px;	
 }
+
 .active + .Answered-btn-area{
 	display: flex;
+}
+.active.Answered-btn-area{
+	display: none;
 }
 .btn-Delete{
 	color: #fff;
@@ -285,6 +292,10 @@ body *{
 .write-area{
 	width: 100%;
 	margin-bottom: 50px;
+}
+.modify-area{
+	width: 100%;
+	margin-bottom: 50px;	
 }
 .write-content{
 	width: 100%;

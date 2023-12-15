@@ -97,7 +97,7 @@
 			        </form>
 			        <div class="btn-area2">
 			            <button type="button" id="write" class="btn-write btn2">등록</button>
-			            <button type="button" id="cancel" class="btn-cancel btn2" onclick="cancel()">취소</button>
+			            <button type="button" id="cancel" class="btn-cancel btn2" onclick="writeCancel()">취소</button>
 			        </div>
 			    </div>
 			</div>
@@ -112,7 +112,7 @@
 			        </form>
 			        <div class="btn-area2">
 			            <button type="button" id="modify-write" class="btn-write btn2">수정완료</button>
-			            <button type="button" id="modify-cancel" class="btn-cancel btn2">취소</button>
+			            <button type="button" id="modify-cancel" class="btn-cancel btn2" onclick="modifyCancel()">취소</button>
 			        </div>
 			    </div>
 			</div>
@@ -198,12 +198,13 @@
 			currentToggle.classList.toggle("active");
 		});
 	});
-
-	// 답변글 작성
+	
+	//답변글 작성 시 화면 CSS 변경
 	function writeAnswer(qano) {
+		
+		window.currentQano = qano;
 		let item = document.querySelectorAll(".QnA-wrapper");
-		document.querySelector(".pagination-area").classList.add("dp-none");
-		document.querySelector(".unAnswered-btn-area.test" + qano).classList.add("active");
+		
 		for (let i = 0; i < item.length; i++) {
 			if (item[i].classList.contains("test" + qano)) {
 				document.querySelector(".write-area").classList.remove("dp-none");
@@ -213,9 +214,34 @@
 				item[i].classList.remove("active");
 			}
 		}
+		
+		document.querySelector(".unAnswered-btn-area.test" + qano).classList.add("active");
+		document.querySelector(".pagination-area").classList.add("dp-none");
+	}	
+	
+	//답변글 수정 시 화면 CSS 변경
+	function modifyAnswer(qano) {
+		
 		window.currentQano = qano;
+		let item = document.querySelectorAll(".QnA-wrapper");
+		let content = $("#modify-content");
+		content.val($('#acont'+qano).html());
+		
+		for (let i = 0; i < item.length; i++) {
+			if (item[i].classList.contains("test" + qano)) {
+				document.querySelector(".modify-area").classList.remove("dp-none");
+				document.querySelector(".modify-area").classList.add("dp-block");
+			} else {
+				item[i].classList.add("dp-none");
+				item[i].classList.remove("active");
+			}
+		}
+		
+		document.querySelector(".Answered-btn-area.test" + qano).classList.add("active");
+		document.querySelector(".pagination-area").classList.add("dp-none");
 	}
-
+	
+	//답변하기
 	$("#write").on("click", function(){
 		let content = $("#content");
 		if(content.val() == null || content.val() == ""){
@@ -241,32 +267,7 @@
 		}
 	});
 	
-	// 답변글 수정
-	function modifyAnswer(qano) {
-
-		let content = $("#modify-content");
-		content.val($('#acont'+qano).html());
-		let item = document.querySelectorAll(".QnA-wrapper");
-		let currentSection = document.querySelector(".QnA-wrapper.test" + qano);
-		currentSection.classList.toggle("active");
-		item.forEach((otherSection) => {
-			if (otherSection !== currentSection) {
-				otherSection.classList.remove("active");
-			}
-		});
-		document.querySelector(".Answered-btn-area.test" + qano).classList.add("active");
-		item.forEach((otherSection) => {
-			if (!otherSection.classList.contains("test" + qano)) {
-				otherSection.classList.add("dp-none");
-			}
-		});
-		document.querySelector(".modify-area").classList.remove("dp-none");
-		document.querySelector(".modify-area").classList.add("dp-block");
-		window.currentQano = qano;
-		
-		document.querySelector(".pagination-area").classList.add("dp-none");
-	}
-
+	//답변 수정
 	$("#modify-write").on("click", function() {
 		let content = $("#modify-content");
 		if (content.val() == null || content.val() == "") {
@@ -291,9 +292,10 @@
 			});
 		}
 	});
-
+	
+	//문의 글 삭제
 	function deleteAnswer(qano) {
-		if (confirm("정말로 답변을 삭제하시겠습니까?")) {
+		if (confirm("정말로 문의를 삭제하시겠습니까?")) {
 			$.ajax({
 				url: '${pageContext.request.contextPath}/qna/mngqnaDeleteAction.do',
 				type: 'POST',
@@ -311,24 +313,43 @@
 		}
 	}
 	
-	function cancel(){
+	//답변작성 취소
+	function writeCancel(){
+		
 		let item = document.querySelectorAll(".QnA-wrapper");
-		let item2 = document.querySelectorAll(".Answered-btn-area");
-		let btnAnswer = document.querySelectorAll(".QnA-wrapper + .unAnswered-btn-area");
-
+		//let item2 = document.querySelectorAll(".Answered-btn-area");
+		let unAnsweredBtn = document.querySelectorAll(".QnA-wrapper + .unAnswered-btn-area");
+		
 		for (let i = 0; i < item.length; i++) {
 			item[i].classList.remove("dp-none");
 			item[i].classList.add("dp-block");
-			document.querySelector(".write-area").classList.remove("dp-block");
-			document.querySelector(".write-area").classList.add("dp-none");
+		}
+		for (let i = 0; i < unAnsweredBtn.length; i++) {
+			if(unAnsweredBtn[i].classList.contains("active")){
+				unAnsweredBtn[i].classList.remove("active");
+			}
+		}
+		document.querySelector(".write-area").classList.remove("dp-block");
+		document.querySelector(".write-area").classList.add("dp-none");
+		document.querySelector(".pagination-area").classList.remove("dp-none");
+	}
+	
+	//답변수정 취소
+	function modifyCancel(){
+		
+		let item = document.querySelectorAll(".QnA-wrapper");
+		let answeredBtn = document.querySelectorAll(".QnA-wrapper + .Answered-btn-area");
+		for (let i = 0; i < item.length; i++) {
 			item[i].classList.remove("dp-none");
 			item[i].classList.add("dp-block");
 		}
-		for (let i = 0; i < btnAnswer.length; i++) {
-			if(btnAnswer[i].classList.contains("active")){
-				btnAnswer[i].classList.remove("active");
+		for (let i = 0; i < answeredBtn.length; i++) {
+			if(answeredBtn[i].classList.contains("active")){
+				answeredBtn[i].classList.remove("active");
 			}
 		}
+		document.querySelector(".modify-area").classList.remove("dp-block");
+		document.querySelector(".modify-area").classList.add("dp-none");
 		document.querySelector(".pagination-area").classList.remove("dp-none");
 	}
 	
