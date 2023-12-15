@@ -1,15 +1,8 @@
 @charset "UTF-8";
 
 .page-inner{	
-	width: 90%;
-	margin: 50px auto;
-}
-.page-side{
 	width: 100%;
-	margin: 0 auto;	
-}
-.page-title{
-	font-size: 30px;
+	margin: 20px auto 50px;
 }
 .contents-area{
 	margin-top: 20px;

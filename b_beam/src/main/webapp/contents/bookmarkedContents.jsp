@@ -24,13 +24,16 @@
 	<div class="container-title">
 		<h1>MyPage</h1>
 	</div>
+	
+	<div class="m-navi">
+		<div class="report-tap tap" onclick="mNavi(0)">회원정보관리</div>
+		<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
+		<div class="notice-tap tap clicked" onclick="mNavi(2)">나의즐겨찾기</div>
+		<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
+	</div>
+		
 	<div class="page-inner">
-		<div class="m-navi">
-			<div class="report-tap tap" onclick="mNavi(0)">회원정보관리</div>
-			<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
-			<div class="notice-tap tap clicked" onclick="mNavi(2)">나의즐겨찾기</div>
-			<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
-		</div>
+
 		<div class="bookmarkedContents">
 			<div class="btn-area">
 				<button type="button" class="btn1 clicked">나의 즐겨찾기</button>

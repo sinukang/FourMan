@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="app.domain.MemberVo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="app.domain.MemberVo" %>
+
+<c:if test="${empty mbno}">
+	<c:redirect url="/member/memberLogin.do"></c:redirect>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,20 +19,21 @@
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
-	<c:if test="${empty mbno}">
-		<c:redirect url="/member/memberLogin.do"></c:redirect>
-	</c:if>
+
 	<div class="container">
 		<div class="container-title">
 			<h1>MyPage</h1>
 		</div>
+		
+		<div class="m-navi">
+			<div class="report-tap tap clicked" onclick="mNavi(0)">회원정보관리</div>
+			<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
+			<div class="notice-tap tap" onclick="mNavi(2)">나의즐겨찾기</div>
+			<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
+		</div>	
+			
 		<div class="inner-container">
-			<div class="m-navi">
-				<div class="report-tap tap clicked" onclick="mNavi(0)">회원정보관리</div>
-				<div class="QnA-tap tap" onclick="mNavi(1)">포인트관리</div>
-				<div class="notice-tap tap" onclick="mNavi(2)">나의즐겨찾기</div>
-				<div class="FAQ-tap tap" onclick="mNavi(3)">1:1문의</div>
-			</div>
+		
 			<div class="btn-area">
 				<button type="button" class="btn-QnAList btn1 clicked" onclick="location.href='${pageContext.request.contextPath}/member/memberInfo.do';">내 정보</button>
 				<button type="button" class="btn-QnA btn1"  onclick="location.href='${pageContext.request.contextPath}/member/memberInfoModify.do';" >내 정보 수정</button>
