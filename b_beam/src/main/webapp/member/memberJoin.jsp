@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,9 @@
 
 </head>
 <body>
+	<c:if test="${not empty mbno}">
+		<c:redirect url="/"></c:redirect>
+	</c:if>
 	<div class="container">
 		<div class="back-btn">
 			<input type="button" id="inner-back-btn" name="btn" value="≪" onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do';">

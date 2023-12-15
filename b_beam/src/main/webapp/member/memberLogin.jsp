@@ -13,6 +13,9 @@
 	
 </head>
 <body>
+	<c:if test="${not empty mbno}">
+		<c:redirect url="/"></c:redirect>
+	</c:if>
 	<div class="container">
 		<div class="login">
 			<div class="login-logo">
