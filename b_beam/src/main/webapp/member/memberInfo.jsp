@@ -14,7 +14,9 @@
 </head>
 <body>
 	<jsp:include page="../source/include/header.jsp"/>
-	
+	<c:if test="${empty mbno}">
+		<c:redirect url="/member/memberLogin.do"></c:redirect>
+	</c:if>
 	<div class="container">
 		<div class="container-title">
 			<h1>MyPage</h1>

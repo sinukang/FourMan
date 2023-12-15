@@ -17,6 +17,9 @@
 <body>
 
 <jsp:include page="../source/include/header.jsp"/>
+	<c:if test="${empty mbno}">
+		<c:redirect url="/member/memberLogin.do"></c:redirect>
+	</c:if>
 <div class="container">
 	<div class="container-title">
 		<h1>MyPage</h1>
@@ -31,7 +34,6 @@
 		<div class="bookmarkedContents">
 			<div class="btn-area">
 				<button type="button" class="btn1 clicked">나의 즐겨찾기</button>
-				<button type="button" class="btn1">나의 후기</button>
 			</div>
 			<div class="bookmarked">
 				<header class="bookmarked-head">
