@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%@ page import="app.domain.*" %> --%>
-<%-- <%@ page import="java.util.ArrayList" %> --%>
 
 <!DOCTYPE html>
 <html>
@@ -13,41 +11,42 @@
 </head>
 <body>
 
-	
 	<jsp:include page="../source/include/header.jsp"/>
-<div class="container">
-	<div class="container-title">
-		<h1>고객지원</h1>
-	</div>
-	<div class="page-inner">
-		<div class="content">
-			<div class="notice-area">
-				<header class=notice-head>
-					<h2><span class="notice-title">${bv.bdtitle }</span></h2>
-					<div class="notice-date">${bv.bddate }</div>
-				</header>
-				<div class="notice-data">
-					<div class="notice-view">
-						<p>${bv.bdcont }</p>
+	
+	<div class="container">
+		<div class="container-title">
+			<h1>고객지원</h1>
+		</div>
+		<div class="page-inner">
+			<div class="content">
+				<div class="notice-area">
+					<header class=notice-head>
+						<h2><span class="notice-title">${bv.bdtitle }</span></h2>
+						<div class="notice-date">${bv.bddate }</div>
+					</header>
+					<div class="notice-data">
+						<div class="notice-view">
+							<p>${bv.bdcont }</p>
+						</div>
+					
 					</div>
-				
 				</div>
+				<div class="btn-area2">
+					<c:choose>
+						<c:when test="${not empty manager}">
+							<button id="btn-modify" class="btn-write">수정</button>
+							<button id="btn-delete" class="btn-write">삭제</button>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
+					<button id="btn-write" class="btn-write">공지사항 목록</button>
+				</div>			
+				
 			</div>
-			<div class="btn-area2">
-				<c:choose>
-					<c:when test="${not empty manager}">
-						<button id="btn-modify" class="btn-write">수정</button>
-						<button id="btn-delete" class="btn-write">삭제</button>
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-				</c:choose>
-				<button id="btn-write" class="btn-write">공지사항 목록</button>
-			</div>			
-			
 		</div>
 	</div>
-</div>
+	
 	<jsp:include page="../source/include/footer.jsp"/>
 	
 </body>

@@ -20,15 +20,18 @@
 		<div class="container-title">
 			<h1>고객지원</h1>
 		</div>
+		
+		<div class="m-navi">
+			<c:if test="${manager eq 'M'}">
+				<div class="report-tap tap" onclick="mNavi(2)">신고내역</div>
+				<div class="QnA-tap tap" onclick="mNavi(3)">1:1 문의내역</div>
+			</c:if>
+			<div class="notice-tap tap clicked" onclick="mNavi(0)">공지사항</div>
+			<div class="FAQ-tap tap" onclick="mNavi(1)">자주하는 질문</div>
+		</div>
+		
 		<div class="content">
-			<div class="m-navi">
-				<c:if test="${manager eq 'M'}">
-					<div class="report-tap tap" onclick="mNavi(2)">신고내역</div>
-					<div class="QnA-tap tap" onclick="mNavi(3)">1:1 문의내역</div>
-				</c:if>
-				<div class="notice-tap tap clicked" onclick="mNavi(0)">공지사항</div>
-				<div class="FAQ-tap tap" onclick="mNavi(1)">자주하는 질문</div>
-			</div>
+
 			<div class="table-area">
 				<table class="content-table">
 					<tr>
@@ -41,7 +44,7 @@
 					<c:forEach var="bv" items="${alist}" varStatus="status">
 						<tr class="tr-body">
 							<td class="td-body td-no">${bv.bdno}</td>
-							<td class="td-body td-cate">${bv.bdcate}</td>
+							<td class="td-body td-cate"><c:if test="${bv.bdcate eq 'N'}">공지사항</c:if> </td>
 							<td class="td-body td-sub">
 							<a href="${pageContext.request.contextPath}/board/notice.do?bdno=${bv.bdno}">${bv.bdtitle}</a>
 							</td>

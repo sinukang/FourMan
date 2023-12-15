@@ -2,9 +2,7 @@
 
 /*헤더 시작*/
 
-.content{
-	margin-top: 50px;
-}
+
 
 
 /*네비게이션 바*/
@@ -45,7 +43,10 @@
 }
 /*네비게이션 바*/
 
-
+.content{
+	margin: 50px auto;
+	width: 100%;
+}
 .btn-area{
 	display: flex;
 	justify-content: flex-start;
@@ -75,7 +76,6 @@
 	transform: scale(0.95);
 }
 .table-area{
-	margin-top: 20px;
 	padding: 0;
 	border: 0;
 	border-radius: 8px;
