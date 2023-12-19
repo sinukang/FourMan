@@ -72,8 +72,8 @@ public class ContentsController extends HttpServlet {
 			ArrayList<ContentsVo> aryList = new ArrayList<ContentsVo>();
 			ArrayList<String> contentidList = new ArrayList<String>();
 			JSONObject body = cd.ContentsList(pm);
-			System.out.println("" + body.get("items"));
-			if(body.get("items") != null && body.get("items") != "") {
+			System.out.println("body : " + body.get("items").toString());
+			if(body.get("items").toString() != null && body.get("items").toString() != "") {
 				JSONObject items = (JSONObject)body.get("items");
 				int totalCount = Integer.parseInt(body.get("totalCount").toString());
 				JSONArray item = (JSONArray)items.get("item");

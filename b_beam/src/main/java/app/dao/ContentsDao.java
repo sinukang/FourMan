@@ -57,10 +57,7 @@ public class ContentsDao {
 		}
 		// 반환된 정보를 String으로 저장
 		String result = br.readLine();
-//		System.out.println("result:" + result);
 		// String으로 저장된 정보중 html을 변경하는 코드 필터링
-//		result = result.replaceAll(System.getProperty("line.separator"), " ");
-//		System.out.println("result:" + result);
 		// String으로 저장된 정보를 json형식으로 파싱
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject)jsonParser.parse(result);

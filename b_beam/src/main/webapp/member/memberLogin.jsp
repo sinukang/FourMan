@@ -100,7 +100,15 @@
 						if(${not empty manager}){
 							location.href='${pageContext.request.contextPath}/index.jsp';
 						}else if(${not empty prevURL}){
-							location.href='${prevURL}';
+							var prevURL = "${prevURL}";
+							console.log(prevURL.slice(-9));
+							if(prevURL.slice(-9) == "Action.do"){
+								location.href='${pageContext.request.contextPath}/index.jsp';
+								
+							}else{
+								location.href=prevURL;
+								
+							}
 						}else{
 							location.href='${pageContext.request.contextPath}/index.jsp';					
 						}
