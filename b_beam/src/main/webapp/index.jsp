@@ -91,13 +91,13 @@ pageContext.setAttribute("festalist", festalist);
 
 	<div class="container">
 		<ul class="tab">
-			<li class="is_on">
+			<li id="tab_li_1" class="is_on">
 			<a onclick="tabSwitch(1)" class="btn">조회수 top3</a>
 			</li>
-			<li>
+			<li id="tab_li_2">
 			<a onclick="tabSwitch(2)" class="btn">별점 top3</a>
 			</li>
-			<li>
+			<li id="tab_li_3">
 			<a onclick="tabSwitch(3)" class="btn">오늘의 top3</a>
 			</li>
 		</ul>
@@ -281,14 +281,26 @@ pageContext.setAttribute("festalist", festalist);
 			$('#tab1').css('display','');
 			$('#tab2').css('display','none');
 			$('#tab3').css('display','none');
+			$('#tab_li_1').removeClass();
+			$('#tab_li_2').removeClass();
+			$('#tab_li_3').removeClass();
+			$('#tab_li_1').addClass('is_on');
 		}else if(e==2){
 			$('#tab1').css('display','none');
 			$('#tab2').css('display','');
 			$('#tab3').css('display','none');
+			$('#tab_li_1').removeClass();
+			$('#tab_li_2').removeClass();
+			$('#tab_li_3').removeClass();
+			$('#tab_li_2').addClass('is_on');
 		}else if(e==3){
 			$('#tab1').css('display','none');
 			$('#tab2').css('display','none');
 			$('#tab3').css('display','');
+			$('#tab_li_1').removeClass();
+			$('#tab_li_2').removeClass();
+			$('#tab_li_3').removeClass();
+			$('#tab_li_3').addClass('is_on');
 			relayout();
 			resizeMap();
 		}
