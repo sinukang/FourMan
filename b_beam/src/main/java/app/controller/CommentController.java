@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import app.dao.CommentDao;
 import app.dao.PointDao;
 import app.domain.CommentVo;
+import app.util.XSSUtil;
 
 /**
  * Servlet implementation class ContentsController
@@ -94,7 +93,7 @@ public class CommentController extends HttpServlet {
 				cv.setBdno(Integer.parseInt(request.getParameter("bdno")));
 			}
 			if(request.getParameter("cmcont") != null) {
-				cv.setCmcont(request.getParameter("cmcont"));
+				cv.setCmcont(XSSUtil.cleanXSS(request.getParameter("cmcont")));
 			}
 			
 			int value = 0;
