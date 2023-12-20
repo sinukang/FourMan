@@ -51,9 +51,9 @@ public class ContentsDao {
 		BufferedReader br;
 		
 		if(responseCode==200) { // 정상 호출
-			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
 		} else {  // 에러 발생
-			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
 		}
 		// 반환된 정보를 String으로 저장
 		String result = br.readLine();
