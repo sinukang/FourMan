@@ -117,8 +117,7 @@ public class ReviewController extends HttpServlet {
 			ReviewDao rd = new ReviewDao();
 			int value = 0;
 	
-			String savePath = "C:\\upload\\aws20230803\\b_beam";
-//			String savePath = request.getServletContext().getRealPath("/source/reviewImages");
+			String savePath = request.getServletContext().getRealPath("/source/reviewImages");
 			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(); // 업로드된 파일을 디스크에 저장하는데 사용되는 팩토리 객체
 			ServletFileUpload upload = new ServletFileUpload(fileItemFactory); // 실제 파일 업로드를 처리하는데 사용되는 객체
 //			System.out.println(savePath);

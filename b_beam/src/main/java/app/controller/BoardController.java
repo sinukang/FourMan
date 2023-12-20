@@ -183,9 +183,8 @@ public class BoardController extends HttpServlet {
 			}
 			
 		}else if(location.equals("galleryModifyAction.do")) { 
-			String savePath = "C:\\upload\\aws20230803\\b_beam";
-			
-			//String savePath = request.getServletContext().getRealPath("/source/galleryImages");
+			 
+			String savePath = request.getServletContext().getRealPath("/source/galleryImages");
 			//System.out.println("savePath : " + savePath);
 			//String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";  //절대경로
 			
@@ -658,9 +657,8 @@ public class BoardController extends HttpServlet {
 			out.flush(); out.close();
 			
 		}else if (location.equals("galleryWriteAction.do")) {
-			String savePath = "C:\\upload\\aws20230803\\b_beam";
 			
-			//String savePath = request.getServletContext().getRealPath("/source/galleryImages");
+			String savePath = request.getServletContext().getRealPath("/source/galleryImages");
 
 			//String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";  //절대경로
 			
