@@ -184,26 +184,41 @@
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script>
-        var IMP = window.IMP; 
-        IMP.init("imp61344517"); 
+    var IMP = window.IMP; 
+    IMP.init("imp61344517"); 	//가맹점 식별코드
+
+    function requestPay() {
+        IMP.request_pay({
+            pg : 'html5_inicis',
+            pay_method : 'card',
+            merchant_uid: creatOrderNum(), 
+            name : '당근 10kg',
+            amount : 1004,
+            buyer_email : 'Iamport@chai.finance',
+            buyer_name : '포트원 기술지원팀',
+            buyer_tel : '010-1234-5678',
+            buyer_addr : '서울특별시 강남구 삼성동',
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            console.log(rsp);
+        });
+    }
     
-        function requestPay() {
-            IMP.request_pay({
-                pg : 'html5_inicis',
-                pay_method : 'card',
-                merchant_uid: "57008833-33006", 
-                name : '당근 10kg',
-                amount : 1004,
-                buyer_email : 'Iamport@chai.finance',
-                buyer_name : '포트원 기술지원팀',
-                buyer_tel : '010-1234-5678',
-                buyer_addr : '서울특별시 강남구 삼성동',
-                buyer_postcode : '123-456'
-            }, function (rsp) { // callback
-                console.log(rsp);
-            });
-        }
+    function creatOrderNum(){
+    	const date = new Date();
+    	const year = date.getFullYear();
+   		const month = String(date.getMonth()+1).padStart(2,"0");
+   		const day = String(date.getDate()).padStart(2,"0");
+   		
+   		let orderNum = year + month + day;
+   		for(i = 0; i < 10; i++){
+   			orderNum += Math.floor(Math.random() * 8);
+   		}
+   		return orderNum;
+    }
     </script>
+    
+    
 
 </body>
 
