@@ -185,6 +185,7 @@ public class BoardController extends HttpServlet {
 		}else if(location.equals("galleryModifyAction.do")) { 
 			 
 			String savePath = request.getServletContext().getRealPath("/source/galleryImages");
+			System.out.println("path : " + savePath);
 			//System.out.println("savePath : " + savePath);
 			//String savePath = "D:\\dev0803\\git_e\\b_beam\\b_beam\\src\\main\\webapp\\source\\galleryImages";  //절대경로
 			
