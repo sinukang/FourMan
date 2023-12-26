@@ -1,4 +1,4 @@
-package com.ptconnect.myapp;
+package com.ptconnect.myapp.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
