@@ -13,7 +13,9 @@
 <body>
 	
 					<jsp:include page="../../source/include/header.jsp"/>
-					
+					<script>
+						$('.contents').addClass('coach_nav');
+					</script>
 					<section><!-- 섹션 -->
 						<div class="searchTab_wrap">
 							<div class="searchBar_wrap">
