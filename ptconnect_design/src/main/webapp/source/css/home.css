@@ -246,7 +246,6 @@ button.rbc-input::-moz-focus-inner {
     -webkit-box-pack: center;
     justify-content: center;
     height: 84px;
-    max-width: 1136px;
     padding: 0px;
     margin: auto;
     font-size: 16px;
