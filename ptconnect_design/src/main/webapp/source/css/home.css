@@ -106,10 +106,6 @@ textarea:focus {
     border-color: #ff8000
 }
 
-input[type=checkbox],input[type=radio] {
-    display: none
-}
-
 input[type=radio]+label {
     width: 24px;
     height: 24px;
