@@ -64,7 +64,7 @@ input[type=date].disabled,input[type=mail].disabled,input[type=number].disabled,
 }
 
 input[type=date]:focus,input[type=mail]:focus,input[type=number]:focus,input[type=password]:focus,input[type=tel]:focus,input[type=text]:focus,select:focus {
-    border: 1px solid #ff8000
+    border: 1px solid #5865F2
 }
 
 select {
@@ -103,7 +103,7 @@ textarea::-ms-clear {
 }
 
 textarea:focus {
-    border-color: #ff8000
+    border-color: #5865F2
 }
 
 input[type=radio]+label {
@@ -160,8 +160,8 @@ ul {
 }
 
 .active_round_box {
-    border: 1px solid #ff8000;
-    color: #ff8000
+    border: 1px solid #5865F2;
+    color: #5865F2
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -187,8 +187,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .buttonForm.activeCheck {
-    border: 1px solid #ff8000;
-    color: #ff8000
+    border: 1px solid #5865F2;
+    color: #5865F2
 }
 
 .slick-arrow {
@@ -294,8 +294,8 @@ button.rbc-input::-moz-focus-inner {
 
 .tab_wrap .active_tab{
     font-weight: bold;
-    border-bottom: 2px solid rgb(255, 136, 0);
-    color: rgb(255, 136, 0) !important;
+    border-bottom: 2px solid #5865F2;
+    color: #5865F2 !important;
 }
 
 .nav_bar_menu{
@@ -360,7 +360,7 @@ button.rbc-input::-moz-focus-inner {
     display: block;
     font-size: 18px;
     font-weight: bold;
-    color: rgb(255, 128, 0);    
+    color: #5865F2;    
 }
 
 .project_info .cs .test_id{
