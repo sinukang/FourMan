@@ -1,29 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="./source/css/coach.css" type="text/css" rel="stylesheet">
-<link href="./source/css/home.css" type="text/css" rel="stylesheet">
+<title>트레이너 찾기</title>
+<link href="${pageContext.request.contextPath}/source/css/coach.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/source/css/home.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
-	<div>
-		<div>
-			<div>
-				<div> <!--헤더+맵-->
-					<header class="main_header">
-						<nav>
-							<div class="contents">
-								<a><img class="navi_logo" src="./source/img/PTCONNECT (1).png"></a>
-								<a class="navi_name">트레이너찾기</a>
-								<a class="navi_name">공지사항</a>
-								<a class="navi_name">자주묻는질문</a>
-								<div class="nav_bar_menu">회원가입 / 로그인</div>
-							</div>
-						</nav>
-					</header>
+	
+					<jsp:include page="../../source/include/header.jsp"/>
+					
 					<section><!-- 섹션 -->
 						<div class="searchTab_wrap">
 							<div class="searchBar_wrap">
@@ -34,7 +24,7 @@
 										<div class="typeComp">필라테스</div>
 									</div>
 									<div class="filter">
-										<img src="./source/img/filtericon.png" alt="Filter Icon" width="24px" height="24px">
+										<img src="${pageContext.request.contextPath}/source/img/filtericon.png" alt="Filter Icon" width="24px" height="24px">
 									</div>
 									
 								</div>
@@ -42,12 +32,12 @@
 								<div class="searchBar">
 									<input type="text" id="search_keyword" class="bar" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="20">
 									<div class="search_btn">
-										<img src="./source/img/searchicon.png"  width="30px" height="30px">
+										<img src="${pageContext.request.contextPath}/source/img/searchicon.png"  width="30px" height="30px">
 									</div>
 								</div>
 							
 								<div class="searchBar_option">
-									<img src="./source/img//markericon.png" width="17px" height="25px">
+									<img src="${pageContext.request.contextPath}/source/img//markericon.png" width="17px" height="25px">
 									<span>
 										<span class="search_key">덕진구</span>
 										검색 결과
@@ -110,16 +100,16 @@
 									<div class="searchResultWrap">
 										<div class="coachCard">
 											<div class="coachImages">
-												<img class="trainerImg" src="./source/img/mainbanner1.png" >
-												<img class="trainerImg" src="./source/img/mainbanner2.png" >
-												<img class="gymImg" src="./source/img/mainbanner3.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
+												<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
 											</div>
 											<div class="coachInfo">
 												<div class="coachTitle">
 													<h3 class="coachName">필 히스</h3>
 												
 													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="./source/img/staricon.png">
+														<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
 														<span class="reviewText">35개</span>
 													</div>
 												</div>
@@ -134,7 +124,7 @@
 												</div>
 												
 												<div class="location">
-													<img src="./source/img/locationicon.png">
+													<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
 													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
 												</div>
 												
@@ -144,16 +134,16 @@
 										
 										<div class="coachCard">
 											<div class="coachImages">
-												<img class="trainerImg" src="./source/img/mainbanner1.png" >
-												<img class="trainerImg" src="./source/img/mainbanner2.png" >
-												<img class="gymImg" src="./source/img/mainbanner3.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
+												<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
 											</div>
 											<div class="coachInfo">
 												<div class="coachTitle">
 													<h3 class="coachName">필 히스</h3>
 												
 													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="./source/img/staricon.png">
+														<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
 														<span class="reviewText">35개</span>
 													</div>
 												</div>
@@ -168,7 +158,7 @@
 												</div>
 												
 												<div class="location">
-													<img src="./source/img/locationicon.png">
+													<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
 													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
 												</div>
 												
@@ -178,16 +168,16 @@
 										
 										<div class="coachCard">
 											<div class="coachImages">
-												<img class="trainerImg" src="./source/img/mainbanner1.png" >
-												<img class="trainerImg" src="./source/img/mainbanner2.png" >
-												<img class="gymImg" src="./source/img/mainbanner3.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
+												<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
 											</div>
 											<div class="coachInfo">
 												<div class="coachTitle">
 													<h3 class="coachName">필 히스</h3>
 												
 													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="./source/img/staricon.png">
+														<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
 														<span class="reviewText">35개</span>
 													</div>
 												</div>
@@ -202,7 +192,7 @@
 												</div>
 												
 												<div class="location">
-													<img src="./source/img/locationicon.png">
+													<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
 													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
 												</div>
 												
@@ -221,58 +211,16 @@
 						
 						<div class="mapWrap">
 							<div class="map">
-								<img src="./source/img/staricon.png">
+								<img src="${pageContext.request.contextPath}/source/img/staricon.png">
 								지도들어갈곳
 							</div>
 						</div>
 						
 						
 						
-						<div class="gray_background"><!-- 회색배경 -->
-							<div class="my_container"><!-- 코치정보(마진오토) -->
-								<div class="inner_contents"><!-- 코치정보(패딩탑) -->
-									<div><!-- 코치정보 -->
-										<div>
-										</div>
-									</div>
-									<div><!-- 코치프로필 -->
-										<div>
-											<div class="upside"></div>
-											<div class="downside"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</section>
-					<footer class="main_footer">
-						<div class="footer my_container">
-							<div class="terms">
-								<a class="menu">이용약관</a>|
-								<a class="menu">개인정보보호정책</a>|
-								<a class="menu">공지사항</a>|
-								<a class="menu">고객센터</a>
-								<div class="icon">
-									<a><img src="https://www.woondoc.com/static/images/footer/naver_link.svg"></a>
-									<a><img src="https://www.woondoc.com/static/images/footer/instagram_link.svg"></a>
-								</div>
-							</div>
-							<div class="project_info">
-								<div class="cs">
-									<div class="cs_title">PT Connect</div>
-									<a class="tel">123-456-7890</a>
-									<div class="test_id">user_id:test/pwd:1234</div>
-									<div class="test_id">trainer_id:ptman/pwd:1234</div>
-									<div class="test_id">center_id:ptcenter/pwd:1234</div>
-								</div>
-								<h5>FourMan<span>|</span>포맨</h5>
-							</div>
-						</div>
-					</footer>
-				</div>
-			</div>
-		</div>
-	</div>
+					<jsp:include page="../../source/include/footer.jsp"/>
+	
 	
 	
 	
