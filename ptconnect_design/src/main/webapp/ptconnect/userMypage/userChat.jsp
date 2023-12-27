@@ -37,9 +37,9 @@
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
-														<h5 class="chat_title">안녕하세요 개빡센트레이너 김빡빡입니...</h5>
+														<h5 class="chat_title">감사합니다! 그럼 그날 뵐께요!</h5>
 														<div class="other_user">김빡빡</div>
-														<span class="chat_time">11:32</span>
+														<span class="chat_time">11:30</span>
 													</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">

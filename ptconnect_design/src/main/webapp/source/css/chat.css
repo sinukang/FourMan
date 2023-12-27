@@ -10,11 +10,13 @@
 
 .mypage_contents .wrap{
     display: flex;
+    height: 70vh;
 }
 
 .mypage_contents .wrap .chat_list{
     min-width: 368px;
     border-right: 1px solid rgb(228, 234, 240);
+    overflow-y:auto;
 }
 
 .wrap .chat_list .header{
@@ -101,7 +103,8 @@
 }
 
 .mypage_contents .wrap .chat_contents{
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: calc(100% - 368px);
     min-width: 700px;
@@ -127,12 +130,14 @@
 
 .wrap .chat_contents .not_empty{
     background-color: rgb(255, 255, 255);
+    padding: 10px 0;
+    flex: 1;
 }
 
 .wrap .chat_contents .chat_area{
-	margin : 15px 15px 10px 15px;
+	margin : 0 15px;
 	border-radius : 10px;
-	height: calc(100% - 80px);
+	height:53vh;
     background-color: #A8C0D6;
     overflow-y : overlay;
 }
@@ -191,7 +196,10 @@
     margin-right: 20px;
     background-color: #F9EB54;
 }
-
+.send_area{
+	margin: 10px 0;
+	
+}
 .send_area .send_msg{
     width: 90%;
     resize: none;
