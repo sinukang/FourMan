@@ -1,1 +1,190 @@
 @charset "UTF-8";
+
+.homeMainBanner{
+	height:100%;
+	width:100%;
+	background-color:#dceffe;
+}
+
+.bannerBox{
+	display:flex;
+	justify-content:center;
+}
+.banner {
+	 display: grid;
+	text-align:center;
+	justify-content:center;
+	padding:50px 100px;
+	
+}
+.banner img{
+	width:200px;
+	height:250px;
+	}
+
+.banner h1{
+	color:#e68b1e;
+}
+
+.banner span{
+	color:#ff8080;
+}
+
+.mainSearchBar{
+	justify-content:center;
+	width:70%;
+	border:1px solid #b0b0ff;
+	border-radius:8px;
+	margin:50px auto;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+	transition: box-shadow 0.3s ease; /* 그림자 효과에 애니메이션 추가 (선택 사항) */
+}
+
+.swiper{
+	height:600px;
+	margin:0 auto;
+	padding:50px;
+	background-color:#fcfcad;
+	overflow:hidden;
+}
+
+.reviewBannerTitle{
+	display:grid;
+}
+
+.titleBar{
+	margin:50px auto;
+}
+
+
+.swiper-wrapper{
+	position:absolute;
+	display:flex;
+	gap:30px;
+}
+
+
+
+.swiper-slide{
+	display:grid;
+	background-color:#e3e3ff;
+	border:none;
+	border-radius:10px;
+}
+
+.mainReviewTitle{
+	display:flex;
+	align-items:center;
+	justify-content: space-between;
+	padding:10px;
+}
+
+.mainReviewTitle span{
+	color:#f59f1f;
+}
+
+.reviewDate{
+	padding-right: 200px;
+	color: #c0c0c0;
+}
+
+
+.reviewText{
+	margin:0 auto;
+	width:95%;
+	padding:5px;
+}
+
+.moveTrainerPage{
+	height:100px;
+	display:flex;
+	background-color:#d7fbda;
+	border-radius: 50px;
+}
+
+.moveTrainerPage img{
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	border: 1px solid rgb(237, 241, 245);
+  	box-shadow: rgba(108, 118, 128, 0.16) 1px 2px 4px, rgba(108, 118, 128, 0.16) 1px 4px 8px;
+}
+
+
+.trainerProfile{
+	display:flex;
+	width:100%;
+	justify-content: space-between;
+	align-items:center;
+}
+
+.profileTitle{
+	display:grid;
+	align-items:center;
+	padding:10px;
+	margin-right:200px;
+}
+
+.profileTitle span{
+	color:#8080ff;
+}
+
+.profileAddr{
+	color:#b3b3b3;
+}
+
+.movePageBtn button{
+	border:none;
+	background-color:transparent;
+	cursor: pointer;
+}
+
+.btnSymbol{
+	color: #8080ff; /* 원하는 색상 코드 */
+	font-size: 50px;
+	font-weight: bolder;
+}
+
+.titleBar{
+	display:flex;
+	align-items:center;
+}
+
+
+.titleBar h1{
+	font-size:30px;
+}
+
+
+.titleBar img{
+	width:30px;
+	height:30px;
+}
+
+
+
+    @media (max-width: 760px) {
+      .swiper-button-next {
+        right: 20px;
+        transform: rotate(90deg);
+      }
+
+      .swiper-button-prev {
+        left: 20px;
+        transform: rotate(90deg);
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
