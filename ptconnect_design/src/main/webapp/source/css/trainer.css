@@ -1,0 +1,272 @@
+@charset "UTF-8";
+
+/* 트레이너정보 */
+.left_bar{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+}
+
+.trainer_content{
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    margin-bottom: 64px;
+    position: relative;
+}
+
+.trainer_content h4{
+    font-size: 24px;
+    color: rgb(41, 46, 51);
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.trainer_content .content_wrap{
+    padding: 24px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(228, 234, 240);
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.trainer_content .content_wrap .content_text{
+    color: rgb(81, 81, 81);
+    font-size: 16px;
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.trainer_content .content_wrap .speciality{
+    margin-bottom: 12px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgb(218, 224, 230);
+}
+
+.trainer_content .content_wrap .trophy{
+    margin-bottom: 22px;
+}
+
+.trophy i{
+	font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-right: 18px;
+}
+
+.trophy span{
+    font-size: 18px;
+    width: calc(100% - 80px);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.content_wrap.rating{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content_wrap .review_rate{
+    font-size: 48px;
+    font-weight: bold;
+    color: rgb(61, 69, 77);
+}
+
+.content_wrap .review_summary{
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: start;
+    align-items: start;
+    margin-left: 12px;
+    font-size: 14px;
+    color: rgb(152, 165, 179);
+}
+
+.content_wrap .review_write_button{
+    height: 60px;
+    min-width: 180px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #5865F2;
+    border: 1px solid rgb(218, 224, 230);
+    margin: 0px;
+    cursor: pointer;
+}
+
+.content_wrap .review_write_button i{
+	font-size: 24px;
+    height: 24px;
+    width: 24px;
+    margin-right: 18px;
+}
+
+.content_wrap .photo_box{
+    margin: 0px -1%;
+}
+
+.content_wrap .photo_box .photo_wrap{
+    width: 23%;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 1%;
+}
+
+.photo_rel{
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+.photo_abs{
+    position: absolute;
+    inset: 0px;
+}
+
+.photo_size{
+    position: absolute;
+    border-radius: 6px;
+    inset: 0px;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+
+/* 프로필 */
+.right_bar{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.trainer_profile{
+    width: 100%;
+    text-align: center;
+    position: sticky;
+    top: calc(134px);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(108, 118, 128, 0.16) 0px 4px 8px;
+    border: 1px solid rgb(218, 224, 230);
+    border-radius: 12px;
+}
+
+.trainer_profile .upside{
+	padding: 24px;
+}
+
+.trainer_profile .upside .trainer_round_image{
+    cursor: pointer;
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+}
+
+.trainer_profile .upside .trainer_name{
+    font-size: 18px;
+    color: rgb(41, 46, 51);
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.upside .center_name, .upside .review_wrap{
+	cursor: pointer;
+}
+
+.trainer_profile .upside .center_name{
+    text-decoration: underline;
+    color: rgb(108, 118, 128);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.trainer_profile .upside .stars{
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.trainer_profile .upside .stars span{
+    vertical-align: top;
+    text-decoration: underline;
+}
+
+.upside .stars .rating{
+    font-weight: bold;
+    color: rgb(61, 69, 77);
+}
+
+.upside .stars .count{
+    color: rgb(108, 118, 128);
+}
+
+.trainer_profile .upside .pickup_line{
+    word-break: keep-all;
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.trainer_profile .upside .list_wrap{
+    width: 90%;
+    text-align: start;
+    margin: 12px auto 0px;
+    font-size: 14px;
+    color: rgb(61, 69, 77);
+}
+
+.trainer_profile .upside .flex_box{
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: start;
+    -webkit-box-align: start;
+    align-items: start;
+    word-break: keep-all;
+}
+
+.upside .list_wrap .left{
+    font-weight: bold;
+    margin-right: 8px;
+    min-width: 52px;
+}
+
+.trainer_profile .downside{
+    padding: 24px;
+    background-color: rgb(247, 249, 250);
+    border-radius: 12px;
+}
+
+.trainer_profile .downside .counseling{
+    color: white;
+    width: 100%;
+    border-radius: 6px;
+    background-color: #5865F2;
+    margin: auto;
+    cursor: pointer;
+    line-height: 48px;
+    font-size: 16px;
+}
+
+.trainer_profile .downside .counseling i{
+    height: 24px;
+    margin-right: 6px;
+}

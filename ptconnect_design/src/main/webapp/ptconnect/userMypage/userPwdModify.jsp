@@ -28,38 +28,34 @@
 								<div class="inner_contents"><!-- 코치정보(패딩탑) -->
 									<div class="row"><!-- 코치정보 -->
 										<div class="user_info">
+											<h1>비밀번호 변경</h1>
+											<hr>
 											<div class="user_wrap">
 												<div class="user_input">
-													<label>이름</label>
-													<input type="text" value="김빡빡" disabled>
+													<label>현재 비밀번호</label>
+													<input type="password" maxlength="20" placeholder="현재 비밀번호를 입력해주세요.">
 												</div>
 											</div>
 											<div class="user_wrap">
 												<div class="user_input">
-													<label>이메일</label>
-													<input type="text" value="ptconnect132@gmail.com" disabled>
+													<label>새로운 비밀번호</label>
+													<input type="password" name="pwd" maxlength="20" placeholder="변경할 비밀번호를 입력해주세요.">
 												</div>
 											</div>
 											<div class="user_wrap">
 												<div class="user_input">
-													<label>핸드폰 번호<span>*</span></label>
-													<div class="input_wrap">
-														<div class="input_width">
-															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="01012345678">														
-														</div>
-														<div class="send_submit">
-															<div class="send_auth_button">인증번호 발송</div>
-														</div>
-													</div>
+													<label>새로운 비밀번호 확인</label>
+													<input type="password" name="pwd2" maxlength="20" placeholder="변경할 비밀번호를 입력해주세요.">
 												</div>
 											</div>
+											
 											<hr>
 											<div class="submit">
 												<div class="half_button">
 													<button class="submit_button checked"><span>비밀번호 변경</span></button>
 												</div>
 												<div class="half_button">
-													<button class="submit_button checked"><span>정보 업데이트</span></button>
+													<button class="submit_button unchecked"><span>취소</span></button>
 												</div>
 											</div>
 											<div class="resign">

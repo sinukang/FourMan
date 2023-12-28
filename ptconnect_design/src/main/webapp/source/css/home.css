@@ -227,6 +227,8 @@ button.rbc-input::-moz-focus-inner {
     padding: 0
 }
 
+/* ---------------헤더----------------- */
+
 .main_header{
     height: 84px;
     background: rgb(255, 255, 255);
@@ -315,11 +317,21 @@ button.rbc-input::-moz-focus-inner {
     color: rgb(61, 69, 77);
 }
 
+/* ---------------컨텐츠----------------- */
 .inner_contents{
     padding-bottom: 96px;
     padding-top: 24px;
 	
 }
+
+.row{
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+/* ---------------풋터----------------- */
+
 
 .main_footer{
     font-size: 12px;
@@ -382,5 +394,5 @@ button.rbc-input::-moz-focus-inner {
     padding-bottom: 10px;
     margin: 0px;
     font-size: 14px;
-	
 }
+
