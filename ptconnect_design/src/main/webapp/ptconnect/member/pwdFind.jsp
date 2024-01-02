@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기</title>
 <link href="${pageContext.request.contextPath}/source/css/home.css" type="text/css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/source/css/find.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<div>
@@ -16,30 +16,30 @@
 				<div> <!--헤더+맵-->
 					<jsp:include page="../../source/include/header.jsp"/>
 					<section><!-- 섹션 -->
-						<div class="inner_header">
-							<div class="tab_wrap">
-								<div class="my_container tab_flex">
-									<div class="tab active_tab">내부_탭1</div>
-									<div class="tab">내부_탭2</div>
-									<div class="tab">내부_탭3</div>
-									<div class="tab">내부_탭4</div>
-								</div>
+						<div class="FindWrap">
+							<div class="FindTitle">
+								<h1>아이디 찾기</h1>
 							</div>
-						</div>
-						<div class="gray_background"><!-- 회색배경 -->
-							<div class="my_container"><!-- 코치정보(마진오토) -->
-								<div class="inner_contents"><!-- 코치정보(패딩탑) -->
-									<div><!-- 코치정보 -->
-										<div>
-										</div>
-									</div>
-									<div><!-- 코치프로필 -->
-										<div>
-											<div class="upside"></div>
-											<div class="downside"></div>
-										</div>
-									</div>
+						
+							<div class="idfindBox">
+								<div class="emailBox">
+									<h3>아이디</h3>
+									<input type="text" id="loginEmail" placeholder="example@gmail.com" >
 								</div>
+								
+								<div class="pwdBox">
+									<h3>전화번호</h3>
+									<input type="text" id="loginpPwd">
+								</div>
+								<div class="idFindBtn">
+									<button type="button">조회하기</button>
+								</div>
+								<div class="menuBox">
+										<div class="menuFindPwd">
+										<a href="${pageContext.request.contextPath}/ptconnect/member/pwdFind.jsp">비밀번호 찾기</a>
+										</div>
+								</div>		
+									
 							</div>
 						</div>
 					</section>
@@ -48,5 +48,9 @@
 			</div>
 		</div>
 	</div>
+	
+
+	
+	
 </body>
 </html>
