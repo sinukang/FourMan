@@ -8,7 +8,7 @@
 			<a class="navi_name">트레이너찾기</a>
 			<a class="navi_name">공지사항</a>
 			<a class="navi_name">자주묻는질문</a>
-			<div class="nav_bar_menu">회원가입 / 로그인</div>
+			<div class="nav_bar_menu"><a href="${pageContext.request.contextPath}/ptconnect/member/joinUser.jsp">회원가입 </a> / <a href="${pageContext.request.contextPath}/ptconnect/member/login.jsp"> 로그인</a></div>
 		</div>
 	</nav>
 </header>
