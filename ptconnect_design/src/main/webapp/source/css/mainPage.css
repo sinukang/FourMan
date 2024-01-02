@@ -87,6 +87,7 @@
 	border-radius:10px;
 	width:450px;
 	height:200px;
+	box-shadow: 0 4px 8px rgb(166 107 107 / 50%);
 }
 
 
@@ -126,6 +127,7 @@
 	background-color:#d7fbda;
 	border-radius: 50px;
   white-space: nowrap;
+	box-shadow: 0 8px 20px rgb(166 107 107 / 50%);
 }
 
 .moveTrainerPage img{
