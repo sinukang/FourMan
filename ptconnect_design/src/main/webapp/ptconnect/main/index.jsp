@@ -266,7 +266,7 @@
         prevEl: '.swiper-button-prev',
       },
       speed: 3000,
-      slidesPerView: 3, // 이 부분을 추가하여 3개의 슬라이드를 보이도록 설정
+      slidesPerView: 'auto',// 이 부분을 추가하여 3개의 슬라이드를 보이도록 설정
       loop: true, // 무한 재생을 위한 설정
     });
   });
