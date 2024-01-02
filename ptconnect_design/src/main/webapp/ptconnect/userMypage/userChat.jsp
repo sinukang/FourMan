@@ -33,7 +33,7 @@
 													<div class="read_all">모두읽음</div>
 												</div>
 												<div class="chat_comp open" onclick="location.href='userChat.jsp?crno=18'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -43,7 +43,7 @@
 													</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -54,7 +54,7 @@
 													<div class="unread">2</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=10'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">

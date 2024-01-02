@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/source/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/source/css/chat.css" type="text/css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/1f85e66bca.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div>
@@ -32,7 +33,7 @@
 													<div class="read_all">모두읽음</div>
 												</div>
 												<div class="chat_comp open" onclick="location.href='userChat.jsp?crno=18'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -42,7 +43,7 @@
 													</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -53,7 +54,7 @@
 													<div class="unread">1</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=18'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -63,7 +64,7 @@
 													</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -74,7 +75,7 @@
 													<div class="unread">1</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -85,7 +86,7 @@
 													<div class="unread">1</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -96,7 +97,7 @@
 													<div class="unread">1</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=15'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">
@@ -107,7 +108,7 @@
 													<div class="unread">1</div>
 												</div>
 												<div class="chat_comp" onclick="location.href='userChat.jsp?crno=10'">
-													<div class="chat_icon">
+													<div class="user_icon">
 														<i class="fa-solid fa-user"></i>
 													</div>
 													<div class="chat_box">

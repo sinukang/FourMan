@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,9 +213,8 @@
 						
 						
 						<div class="mapWrap">
-							<div class="map">
-								<img src="${pageContext.request.contextPath}/source/img/staricon.png">
-								지도들어갈곳
+							<div style="width:100%;height:100%;" id="map">
+								
 							</div>
 						</div>
 						
@@ -246,7 +246,72 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<script>
+	var mapX = 0;
+	var mapY = 0;
+
 	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
+	
+	mapOption = {
+	    center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	};  
+	
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	function setDraggable(draggable){
+		map.setDraggable(draggable);
+	}
+	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	
+	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	function relayout() {    
+	    
+	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+	    map.relayout();
+	}
+	
+	var positions = [
+		{	
+			title: '필 히스',
+			latlng: new kakao.maps.LatLng(35.84091345382037,127.13121724223178) // y좌표, x좌표
+		},
+		{	
+			title: '이젠 IT짐',
+			latlng: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829) 
+		}, //지도 내에서 필요한 만큼 반복
+	];
+	var bounds = new kakao.maps.LatLngBounds();
+	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
+	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
+		var data = positions[i];
+
+		displayMarker(data,i);
+	}
+	function displayMarker(data,e){
+
+	  	var content ='<div>';
+		content+='<div class="marker_wrap">';
+		content+=data.title;
+		content+='</div>';
+		content+='<div class="marker_pin">';
+		content+='</div">';
+		content+='</div">';
+			
+		var marker = new kakao.maps.CustomOverlay({	//좌표값을 지정해 마커 생성
+			map : map,
+			position : data.latlng,
+		    content: content
+		});		
+		
+	}
+</script>
 	
 	
 	
