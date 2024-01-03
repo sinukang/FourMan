@@ -490,20 +490,40 @@
     padding: 24px;
     background-color: rgb(247, 249, 250);
     border-radius: 12px;
+    display: flex;
 }
 
-.trainer_profile .downside .counseling{
+.order{
     color: white;
-    width: 100%;
     border-radius: 6px;
-    background-color: #5865F2;
+    background: #5865F2;
     margin: auto;
     cursor: pointer;
     line-height: 48px;
     font-size: 16px;
+    font-weight: bold;
+	border: none;
+	width: 60%;
+}
+
+.trainer_profile .downside .counseling{
+    color: #5865F2;
+    border-radius: 6px;
+	border: 1px solid #5865F2;
+    margin: auto;
+    cursor: pointer;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: bold;
+	background: white;
+	width: 36%;
 }
 
 .trainer_profile .downside .counseling i{
     height: 24px;
     margin-right: 6px;
+}
+
+.order:hover {
+	background: #414cc4;
 }

@@ -9,6 +9,7 @@
 <link href="${pageContext.request.contextPath}/source/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/source/css/trainer.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/source/css/photoModal.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/source/css/modal.css" type="text/css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/1f85e66bca.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
@@ -61,33 +62,27 @@
 															<div class="photo_box">
 																<div style="display: inline;">
 																<!-- a태그는 modal창을 띄우는 용도 -->
-																	<a href="${pageContext.request.contextPath}/source/img/center1.jpg">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/source/img/center1.jpg">
-																				</div>
+																	<div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/source/img/center1.jpg">
 																			</div>
 																		</div>
-																	</a>
-																	<a href="${pageContext.request.contextPath}/source/img/center2.jpg">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/source/img/center2.jpg">
-																				</div>
+																	</div>
+																	<div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/source/img/center2.jpg">
 																			</div>
 																		</div>
-																	</a>
-																	<a href="${pageContext.request.contextPath}/source/img/center3.jpg">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/source/img/center3.jpg">
-																				</div>
+																	</div>
+																	<div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/source/img/center3.jpg">
 																			</div>
 																		</div>
-																	</a>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -229,12 +224,11 @@
 												</div>
 											</div>
 											<div class="downside">
-												<div>
-													<div class="counseling">
-														<i class="fa-solid fa-comment"></i>
-														<span>상담받기</span>
-													</div>
-												</div>
+												<button class="order">1회 체험 신청 하기</button>
+												<button class="counseling">
+													<i class="fa-solid fa-comment"></i>
+													상담받기
+												</button>
 											</div>
 										</div>
 									</div>
@@ -270,6 +264,10 @@
 	</div>
 	<div>
 	</div>
+	
+	<!--결제 모달창 -->
+	<jsp:include page="../../source/include/orderModal.jsp"/>
+	
 <script>
 	var mapX = 0;
 	var mapY = 0;
@@ -328,8 +326,14 @@
 	}
 	
 </script>
-<script src="${pageContext.request.contextPath}/source/js/photoModal.js">
 
+<script src="${pageContext.request.contextPath}/source/js/order.js">
 </script>
+<script src="${pageContext.request.contextPath}/source/js/photoModal.js">
+</script>
+<script src="${pageContext.request.contextPath}/source/js/reviewPhotoModal.js">
+</script>
+
+
 </body>
 </html>
