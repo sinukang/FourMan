@@ -3,6 +3,6 @@
  
 <configuration> 
 	<typeAliases>
-		 <typeAlias alias="mv" type="com.ptconnect.myapp.domain.MemberVo"/>
+		 <typeAlias alias="mo" type="com.ptconnect.myapp.domain.MemberDTO"/>
 	</typeAliases>
 </configuration>
