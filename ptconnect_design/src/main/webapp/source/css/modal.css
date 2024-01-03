@@ -58,6 +58,11 @@
     border-radius: 12px;
 }
 
+.order_modal .modal_content{
+    min-height: calc(100vh - 3.5rem);
+    border-radius: 12px;
+}
+
 .modal_content .modal_body {
     position: relative;
     -ms-flex: 1 1 auto;
@@ -66,6 +71,10 @@
 }
 
 .review_write_modal .modal_body{
+    padding: 24px;
+}
+
+.order_modal .modal_body{
     padding: 24px;
 }
 
@@ -213,3 +222,135 @@
     border: 1px solid rgb(237, 241, 245);
     margin: 0px;
 }
+
+/* 결제창 모달 */
+
+.orientationContent {
+	padding-bottom: 25px;
+    text-align: center;
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+}
+
+.trainerBarWrap .trainerBar {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(218, 224, 230, 0.38) 0px 4px 8px;
+    border: 1px solid rgb(228, 234, 240);
+    border-radius: 40px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.trainerBarWrap .trainerBar .profileImage {
+    width: 80px;
+    height: 80px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    display: inline;
+}
+
+.trainerBarWrap .trainerBar .coachProfileWrap {
+    display: inline-flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-left: 16px;
+    vertical-align: middle;
+}
+
+.trainerBarWrap .trainerBar .coachProfileWrap .coachName {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(41, 46, 51);
+}
+
+.trainerBarWrap .trainerBar .coachProfileWrap .centerName {
+    padding-top: 2px;
+    font-size: 14px;
+    color: rgb(108, 118, 128);
+}
+
+.jMxvw label span {
+    color: #5865f2;
+}
+
+.jMxvw input:focus {
+    border-color: #5865f2;
+}
+
+.order_comment {
+    text-align: center;
+    font-size: 14px;
+    color: rgb(61, 69, 77);
+    background-color: rgb(237, 241, 245);
+    padding: 7px;
+    border-radius: 6px;
+    margin-top: 24px;
+}
+
+.usePoint, .useCoupon {
+	width: 28%;
+    margin-left: 10px;
+}
+
+.usePointButton, .useCouponButton {
+	height: 48px;
+    width: 100%;
+    background-color: #5865F2;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin: 0px;
+    border: none;
+    cursor: pointer;
+}
+
+.paymentButtom {
+    height: 48px;
+    width: 100%;
+    background-color: #5865F2;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin: 0px;
+    border: none;
+    cursor: pointer;
+}
+
+.usePointButton:hover {
+	background: #414cc4;
+}
+
+.useCouponButton:hover {
+	background: #414cc4;
+}
+
+.usePointButton:hover {
+	background: #414cc4;
+}
+
+.paymentButtom:hover {
+	background: #414cc4;
+}
+
+.option {
+	font-family: inherit;
+    resize: none;
+    color: #3d454d;
+    padding: 16px;
+    border: 1px solid #e4eaf0;
+    border-radius: 6px;
+    width: 91%;
+    display: block;
+    background-color: #fff;
+    background-clip: padding-box;
+    line-height: 1.5!important;
+}
+
+.
+

@@ -55,37 +55,31 @@
 															<div class="photo_box">
 																<div style="display: inline;">
 																<!-- a태그는 modal창을 띄우는 용도 -->
-																	<a href="${pageContext.request.contextPath}/source/img/mainbanner1.png">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/source/img/mainbanner1.png">
-																				</div>
+																	<div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/source/img/mainbanner1.png">
 																			</div>
 																		</div>
-																	</a>
-																	<a href="${pageContext.request.contextPath}/source/img/mainbanner2.png">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/source/img/mainbanner2.png">
-																				</div>
+																	</div>
+																	<div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/source/img/mainbanner2.png">
 																			</div>
 																		</div>
-																	</a>
-																	<a href="${pageContext.request.contextPath}/source/img/mainbanner3.png">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/source/img/mainbanner3.png">
-																				</div>
+																	</div>
+																	<div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/source/img/mainbanner3.png">
 																			</div>
 																		</div>
-																	</a>
-																</div>
+																	</div>
 															</div>
 														</div>
-														<div class="content_text">오늘도 기분좋은 하루되세요! 
+													</div>
+													<div class="content_text">오늘도 기분좋은 하루되세요! 
 
 이젠IT짐 운동도우미 김빡빡 트레이너입니다!
 운동하기 참 좋은날이네요^^
@@ -244,7 +238,6 @@
 																					<div class="photo_box">
 																						<div style="display: inline;">
 																							<!-- a태그는 modal창을 띄우는 용도 -->
-																							<a href="${pageContext.request.contextPath}/source/img/mainbanner1.png">
 																								<div class="photo_wrap review_photo">
 																									<div class="photo_rel">
 																										<div class="photo_abs">
@@ -252,8 +245,6 @@
 																										</div>
 																									</div>
 																								</div>
-																							</a>
-																							<a href="${pageContext.request.contextPath}/source/img/mainbanner2.png">
 																								<div class="photo_wrap review_photo">
 																									<div class="photo_rel">
 																										<div class="photo_abs">
@@ -261,8 +252,6 @@
 																										</div>
 																									</div>
 																								</div>
-																							</a>
-																							<a href="${pageContext.request.contextPath}/source/img/mainbanner3.png">
 																								<div class="photo_wrap review_photo">
 																									<div class="photo_rel">
 																										<div class="photo_abs">
@@ -270,7 +259,6 @@
 																										</div>
 																									</div>
 																								</div>
-																							</a>
 																						</div>
 																					</div>
 																				</div>
@@ -309,7 +297,6 @@
 																					<div class="photo_box">
 																						<div style="display: inline;">
 																							<!-- a태그는 modal창을 띄우는 용도 -->
-																							<a href="${pageContext.request.contextPath}/source/img/mainbanner1.png">
 																								<div class="photo_wrap review_photo">
 																									<div class="photo_rel">
 																										<div class="photo_abs">
@@ -317,8 +304,6 @@
 																										</div>
 																									</div>
 																								</div>
-																							</a>
-																							<a href="${pageContext.request.contextPath}/source/img/mainbanner2.png">
 																								<div class="photo_wrap review_photo">
 																									<div class="photo_rel">
 																										<div class="photo_abs">
@@ -326,8 +311,6 @@
 																										</div>
 																									</div>
 																								</div>
-																							</a>
-																							<a href="${pageContext.request.contextPath}/source/img/mainbanner3.png">
 																								<div class="photo_wrap review_photo">
 																									<div class="photo_rel">
 																										<div class="photo_abs">
@@ -335,7 +318,6 @@
 																										</div>
 																									</div>
 																								</div>
-																							</a>
 																						</div>
 																					</div>
 																				</div>
@@ -487,12 +469,11 @@
 												</div>
 											</div>
 											<div class="downside">
-												<div>
-													<div class="counseling">
-														<i class="fa-solid fa-comment"></i>
-														<span>상담받기</span>
-													</div>
-												</div>
+												<button class="order">1회 체험 신청 하기</button>
+												<button class="counseling">
+													<i class="fa-solid fa-comment"></i>
+													상담받기
+												</button>
 											</div>
 										</div>
 									</div>
@@ -526,81 +507,13 @@
 			<div class="swiper-button-prev" style="color: white;"></div>
 		</div>
 	</div>
-	<div>
-		<div id="review_write_modal" class="modal review_write_modal">
-			<button class="modal_close">
-				<span>&times;</span>
-			</button>
-			<div class="modal_dialog">
-				<div class="modal_content">
-					<div class="modal_body">
-						<div>
-							<h5 class="header_title">
-								솔직한 후기를 남겨주세요!
-								<span class="exit_button">&times;</span>
-							</h5>
-							<div class="review_wrap">
-								<label class="review_title">
-									후기 작성 요령
-								</label>
-							</div>
-							<ul class="help">
-								<li>
-									• 해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.<br>
-									(PT 약정서/계약서 or 코치님과 함께 찍은 사진 등 기타)
-								</li>
-								<li>• 업로드된 사진을 터치/드래그 하여 삭제/이동 할 수 있습니다.</li>
-								<li>• 증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
-							</ul>
-							<div class="flex_box review_rating">
-								<label class="review_title">
-									별점을 선택해주세요
-								</label>
-								<div>
-									<select>
-										<option>★★★★★</option>
-										<option>★★★★☆</option>
-										<option>★★★☆☆</option>
-										<option>★★☆☆☆</option>
-										<option>★☆☆☆☆</option>
-									</select>
-								</div>
-							</div>
-							<div>
-								<div class="flex_box review_wrap">
-									<label class="review_title">
-										사진을 첨부해주세요 (최대 3개)
-									</label>
-								</div>
-<!-- 								사진첨부시 위치 -->
-								<div class="review_write_photo">
-								</div>
-								<label for="review_filename">
-									<div class="add_photo_button">+ 사진 추가하기</div>
-								</label>
-								<input type="file" id="review_filename" name="p_image_1" accept="image/*" multiple style="opacity: 0; display: none">
-							</div>
-							<div style="margin: 24px 0;">
-								<div class="review_wrap">
-									<label class="review_title">
-										내용을 작성해주세요
-									</label>
-								</div>
-								<textarea rows="6" placeholder="내용을 입력해주세요" name="review_content" maxlength="400"></textarea>
-							</div>
-							<div>
-								<button class="review_write_action_button checked">
-									<span>리뷰 작성 완료</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div>
-	</div>
+	
+	
+	<!--리뷰 모달창 -->
+	<jsp:include page="../../source/include/reviewModal.jsp"/>
+	<!--결제 모달창 -->
+	<jsp:include page="../../source/include/orderModal.jsp"/>
+	
 <script>
 	var mapX = 0;
 	var mapY = 0;
@@ -661,8 +574,12 @@
 </script>
 <script src="${pageContext.request.contextPath}/source/js/review.js">
 </script>
-<script src="${pageContext.request.contextPath}/source/js/photoModal.js">
-
+<script src="${pageContext.request.contextPath}/source/js/order.js">
 </script>
+<script src="${pageContext.request.contextPath}/source/js/photoModal.js">
+</script>
+<script src="${pageContext.request.contextPath}/source/js/reviewPhotoModal.js">
+</script>
+
 </body>
 </html>
