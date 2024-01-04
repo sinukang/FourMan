@@ -23,11 +23,9 @@
 								<div class="searchType">
 									<div class="typeFilter">
 										<div class="typeComp active">전체</div>
-										<div class="typeComp">헬스</div>
-										<div class="typeComp">필라테스</div>
 									</div>
 									<div class="filter">
-										<img src="${pageContext.request.contextPath}/source/img/filtericon.png" alt="Filter Icon" width="24px" height="24px">
+										<img src="${pageContext.request.contextPath}/source/img/filter_icon_black.svg" alt="Filter Icon" width="24px" height="24px">
 									</div>
 									
 								</div>
@@ -35,23 +33,29 @@
 								<div class="searchBar">
 									<input type="text" id="search_keyword" class="bar" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="20">
 									<div class="search_btn">
-										<img src="${pageContext.request.contextPath}/source/img/searchicon.png"  width="30px" height="30px">
+										<img src="${pageContext.request.contextPath}/source/img/search.svg">
 									</div>
 								</div>
 							
 								<div class="searchBar_option">
-									<img src="${pageContext.request.contextPath}/source/img//markericon.png" width="17px" height="25px">
-									<span>
-										<span class="search_key">덕진구</span>
-										검색 결과
-									</span>
+									<div class="flex">
+										<div>
+											<img src="${pageContext.request.contextPath}/source/img//markericon.png" width="17px" height="25px">
+											<span>
+												<span class="search_key">덕진구</span>
+												검색 결과
+											</span>
+										</div>
+									</div>
 								</div>
-							</div>	
 								<div class="filter_option">
 									<div class="filter_Initialization">
-										<button class="reset_btn">&#x25C4;</button>
-										<div class="reset_filter">필터 초기화</div>
-										
+										<div class="headerComp">
+											<img src="${pageContext.request.contextPath}/source/img//arrow_left.svg" alt="search">
+										</div>
+										<div class="headerComp">
+											<div class="resetFilter">필터 초기화</div>
+										</div>
 									</div>
 									
 									<div class="filterOption_list">
@@ -86,7 +90,6 @@
 										</div>
 										
 										<div class="sorting">
-												<h3>정렬</h3>
 												<div class="sortingBtn">최저가 순</div>
 												<div class="sortingBtn">리뷰많은 순</div>
 												<div class="sortingBtn">거리 순</div>
@@ -96,119 +99,52 @@
 											<button>필터 적용하기</button>
 										</div>
 									</div>
-									
 								</div>
+							</div>	
 								
 								<div class="searchForm">
 									<div class="searchResultWrap">
-										<div class="coachCard">
-											<div class="coachImages">
-												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
-												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
-												<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
-											</div>
-											<div class="coachInfo">
-												<div class="coachTitle">
-													<h3 class="coachName">필 히스</h3>
-												
-													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
-														<span class="reviewText">35개</span>
+										<div class="searchResultArea">
+											<c:forEach var="i" begin="1" end="10" step="1">
+												<div class="coachCard">
+													<div>
+														<div class="coachImages">
+															<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
+															<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
+															<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
+														</div>
+														<div class="coachInfo">
+															<div class="coachTitle">
+																<h3 class="coachName">필 히스${i}</h3>
+															
+																<div class="coachReviewCnt">
+																	<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
+																	<span class="reviewText">35개</span>
+																</div>
+															</div>
+															
+															<div class="coachOneLine">
+																<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
+															</div>
+															
+															<div class="priceInfo">
+																<div class="priceTitle"> 1회 체험권 </div>
+																<div class="ptPrice"><strong>35000</strong> 원</div>
+															</div>
+															
+															<div class="location">
+																<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
+																<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
+															</div>
+														</div>
 													</div>
 												</div>
-												
-												<div class="coachOneLine">
-													<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-												</div>
-												
-												<div class="priceInfo">
-													<div class="priceTitle"> 1회 체험권 </div>
-													<div class="ptPrice">35000원</div>
-												</div>
-												
-												<div class="location">
-													<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
-													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-												</div>
-												
-											</div>
-											
-										</div>
-										
-										<div class="coachCard">
-											<div class="coachImages">
-												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
-												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
-												<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
-											</div>
-											<div class="coachInfo">
-												<div class="coachTitle">
-													<h3 class="coachName">필 히스</h3>
-												
-													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
-														<span class="reviewText">35개</span>
-													</div>
-												</div>
-												
-												<div class="coachOneLine">
-													<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-												</div>
-												
-												<div class="priceInfo">
-													<div class="priceTitle"> 1회 체험권 </div>
-													<div class="ptPrice">35000원</div>
-												</div>
-												
-												<div class="location">
-													<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
-													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-												</div>
-												
-											</div>
-											
-										</div>
-										
-										<div class="coachCard">
-											<div class="coachImages">
-												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
-												<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
-												<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
-											</div>
-											<div class="coachInfo">
-												<div class="coachTitle">
-													<h3 class="coachName">필 히스</h3>
-												
-													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
-														<span class="reviewText">35개</span>
-													</div>
-												</div>
-												
-												<div class="coachOneLine">
-													<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-												</div>
-												
-												<div class="priceInfo">
-													<div class="priceTitle"> 1회 체험권 </div>
-													<div class="ptPrice">35000원</div>
-												</div>
-												
-												<div class="location">
-													<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
-													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-												</div>
-												
-											</div>
-											
+											</c:forEach>
 										</div>
 									</div>
 								
-								
-								
 								</div>
 						
-							
 						</div>
 						
 						
@@ -239,8 +175,21 @@
 	<script>
 document.addEventListener("DOMContentLoaded", function() {
     var filterButton = document.querySelector(".filter");
-
+    var returnButton = document.querySelector(".headerComp");
+    
     filterButton.addEventListener("click", function() {
+        var filterOption = document.querySelector(".filter_option");
+        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
+   		
+        /* var resultWrap = document.querySelector(".searchResultArea");
+        if (filterOption.classList.contains("visible")) {
+            resultWrap.style.display = "none";
+        } else {
+            resultWrap.style.display = "";
+        } */
+    });
+    
+    returnButton.addEventListener("click", function() {
         var filterOption = document.querySelector(".filter_option");
         filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
     });

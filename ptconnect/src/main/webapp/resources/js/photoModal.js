@@ -25,7 +25,7 @@
 			$.each(photoBox,function(){
 				console.log(this.value);
 				str += '<div class="swiper-slide">';
-				str += '<img class="modal_photo" src="../../source/img/'+this.value+'">';
+				str += '<img class="modal_photo" src="../../resources/img/'+this.value+'">';
 				str += '</div>';
 			});
 			$('.swiper-wrapper').html(str);
@@ -43,7 +43,7 @@
 				bulletClass:"custom_bullet",
 				bulletActiveClass:"swiper-pagination-custom-bullet-active",
 				renderBullet: function (index, className) {
-		             return '<img class="'+className+'" src="../../source/img/'+photoBox[index].value+'">'
+		             return '<img class="'+className+'" src="../../resources/img/'+photoBox[index].value+'">'
 				}
 			},
 			navigation: {

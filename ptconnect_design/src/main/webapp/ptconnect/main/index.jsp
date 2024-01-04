@@ -41,17 +41,22 @@
 			</div>
 		</div>
 		<!-- 검색창 -->
+		
 		<div class="mainSearchBar">
-			<input type="text" id="search_keyword" class="bar" placeholder="지역, 센터, 선생님 검색"  maxlength="20">
-			<button type="button"><img src="${pageContext.request.contextPath}/source/img/searchicon.png"> </button>
+			<div class="searchKeyword">
+				<input type="text" id="search_keyword" class="bar" placeholder="지역, 지하철역, 센터, 선생님 검색" autocomplete="off" name="keyword" maxlength="20" value="">
+			</div>
+			<button class="searchButton">
+				트레이너 찾기
+			</button>
 		</div>
 		
 		<!-- 리뷰 배너 -->
 		<div class="swiper">
 			<div class="reviewBannerTitle">
 				<div class="titleBar">
-					<h1>실시간 후기</h1>
-					<img src="${pageContext.request.contextPath}/source/img/thumicon.png">
+					<h1>PTCONNECT <span>실시간</span> 후기 </h1>
+					<img src="${pageContext.request.contextPath}/source/img/thumicon2.png">
 				</div>
 			</div>
 			

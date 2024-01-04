@@ -1,4 +1,5 @@
 
+
 	/* 모달 팝업 스크립트 */
 	const modal = $('#modal_wrap');
 	const closeBtn = $('#close_btn');
