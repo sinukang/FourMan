@@ -11,4 +11,8 @@ public interface TrainerServiceMapper {
 	
 	public int trainerInsert(TrainerInfoDTO tio);
 	
+	public int qualifyInsert(TrainerInfoDTO tio);
+	
+	public int lessonPriceInsert(TrainerInfoDTO tio);
+	
 }
