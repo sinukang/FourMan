@@ -22,19 +22,20 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public ArrayList<TrainerDTO> findTrainer() {
-		
-		ArrayList<TrainerDTO> alist = new ArrayList<TrainerDTO>();
-		
-		return alist;
+		a
+		return null;
 	}
 
 	@Override
 	public int trainerInsert(TrainerInfoDTO tio) {
 		
 		int value = tsm.trainerInsert(tio);
-		int tnNo = tio.getTnNo();
 		
-		return value;
+		int value2 = tsm.qualifyInsert(tio);
+		
+		int value3 = tsm.lessonPriceInsert(tio);
+		
+		return value + value2 + value3;
 	}
 	
 	
