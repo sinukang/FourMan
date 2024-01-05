@@ -28,194 +28,209 @@
 							<div class="my_container"><!-- 코치정보(마진오토) -->
 								<div class="inner_contents row"><!-- 코치정보(패딩탑) -->
 									<div class="left_bar"><!-- 코치정보 -->
-										<div class="trainer_info">
-											<div class="trainer_photo">
-												<div class="trainer_content">
-													<h4>
-														사진
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div>
-															<div class="photo_box">
-																<div style="display: inline;">
-																<!-- a태그는 modal창을 띄우는 용도 -->
-																	<a href="${pageContext.request.contextPath}/resources/img/mainbanner1.png">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png">
-																				</div>
-																			</div>
-																		</div>
-																	</a>
-																	<a href="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-																				</div>
-																			</div>
-																		</div>
-																	</a>
-																	<a href="${pageContext.request.contextPath}/resources/img/mainbanner3.png">
-																		<div class="photo_wrap">
-																			<div class="photo_rel">
-																				<div class="photo_abs">
-																					<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png">
-																				</div>
-																			</div>
-																		</div>
-																	</a>
+										<form name="frm">
+											<div class="trainer_info">
+												<div class="trainer_photo">
+													<div class="trainer_content">
+														<h4>
+															사진
+															<div class="content_modify">
+																<span class="edit" onclick="check()">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															
+															<!-- 사진파일 업로드 미리보기 -->
+															<div class="upload-box">
+																<div id="drop-file" class="drag-file">
+																	<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+																	<!-- <img src="" alt="미리보기 이미지" class="preview"> -->
+																	<div id="previews" class="previews"></div>
 																</div>
+															</div>
+															<!-- 사진 업로드 버튼 -->
+															<div class="upload-btn">
+																<label class="file-label" for="chooseFile">사진 선택</label>
+																<input class="file" id="chooseFile" name="bdglname" multiple
+																	type="file" 
+																	onchange="if(checkFileCount(this)) { dropFile.handleFiles(this.files); }"
+																	accept="image/png, image/jpeg, image/gif">
+															</div>
+														
+														</div>
+													</div>
+												</div>
+												<div class="trainer_introduce">
+													<div class="trainer_content">
+														<h4>
+															선생님 소개
+															<div class="content_modify">
+																<span class="edit">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															<div class="content_text">
+																<textarea type="text" id="tnIntro" name="tnIntro" placeholder="소개글이 없어요."></textarea>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<div class="trainer_introduce">
-												<div class="trainer_content">
-													<h4>
-														선생님 소개
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
+												<div class="trainer_lesson">
+													<div class="trainer_content">
+														<h4>
+															1회 체험권
+															<div class="content_modify">
+																<span class="edit">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															<div style="position: absolute; top: 98px; right: 42px; font-size: 14px; color: rgb(147, 147, 147);">
+																원
+															</div>
+															<input type="text" id="tnTicket" name="tnTicket" placeholder="1회 체험권 가격을 입력해 주세요.">
 														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
+													</div>
+												</div>
+												
+												<div class="trainer_career">
+													<div class="trainer_content">
+														<h4>
+															검증된 자격사항
+															<div class="content_modify">
+																<span class="edit">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															<div class="upload-btn">
+																<label class="qualify-label" for="qualify-button">자격 사항 추가</label>
+																<input class="qualify-button" id="qualify-button" type="button" onclick="addQualification()">
+															</div>
+															<div id="qualify-container">
+																<input type="text" id="qualify" name="qualify" placeholder="자격사항을 입력해 주세요.">
+															</div>
+														</div>
+													</div>
+												</div>
+												
+												<div class="trainer_program">
+													<div class="trainer_content">
+														<h4>
+															프로그램
+															<div class="content_modify">
+																<span class="edit">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															<div class="upload-btn">
+																<label class="program-label" for="program-button">프로그램 추가</label>
+																<input class="program-button" id="program-button" type="button" onclick="addProgram()">
+															</div>
+															<div id="program-container">
+																<textarea type="text" id="pgContent" name="pgContent" placeholder="pt프로그램을 작성해 주세요."></textarea>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="trainer_price">
+													<div class="trainer_content">
+														<h4>
+															레슨 이용 가격
+															<div class="content_modify">
+																<span class="edit">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															
+															<table class="compLabel table priceTable">
+																<thead>
+																	<tr>
+																		<th scope="col">횟수 / 개월</th>
+																		<th scope="col">단위</th>
+																		<th scope="col">가격</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>
+																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
+																		</td>
+																		<td rowspan="4">
+																			<select id="lpCf" name="lpCf">
+																				<option value="C">회</option>
+																				<option value="T">개월</option>
+																			</select>
+																		</td>
+																		<td style="position: relative;">
+																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">
+																				원
+																			</div>
+																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
+																		</td>
+																		<td style="position: relative;">
+																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
+																			</div>
+																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
+																		</td>
+																		<td style="position: relative;">
+																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
+																			</div>
+																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
+																		</td>
+																		<td style="position: relative;">
+																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
+																			</div>
+																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="trainer_pickup_line">
+													<div class="trainer_content">
+														<h4>
+															한줄 인사말
+															<div class="content_modify">
+																<span class="edit">
+																	<i class="fa-solid fa-pencil"></i> 수정하기
+																</span>
+															</div>
+														</h4>
+														<div class="content_wrap">
+															<textarea type="text" id="tnOneLine" name="tnOneLine" placeholder="소개글이 없어요."></textarea>
+														</div>
 													</div>
 												</div>
 											</div>
-											<div class="trainer_lesson">
-												<div class="trainer_content">
-													<h4>
-														1회 체험권
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_career">
-												<div class="trainer_content">
-													<h4>
-														검증된 자격사항
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_schedule">
-												<div class="trainer_content">
-													<h4>
-														레슨 스케줄
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_program">
-												<div class="trainer_content">
-													<h4>
-														프로그램
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_review">
-												<div class="trainer_content">
-													<h4>
-														최근후기
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_price">
-												<div class="trainer_content">
-													<h4>
-														레슨 이용 가격
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_pickup_line">
-												<div class="trainer_content">
-													<h4>
-														한줄 인사말
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-											<div class="trainer_location">
-												<div class="trainer_content">
-													<h4>
-														위치
-														<div class="content_modify">
-															<span class="edit">
-																<i class="fa-solid fa-pencil"></i> 수정하기
-															</span>
-														</div>
-													</h4>
-													<div class="content_wrap">
-														<div class="content_text">소개글이없어요</div>
-													</div>
-												</div>
-											</div>
-										</div>
+										</form>
 									</div>
 									<div class="right_bar"><!-- 코치프로필 -->
 										<div class="trainer_profile">
@@ -254,12 +269,11 @@
 												</div>
 											</div>
 											<div class="downside">
-												<div>
-													<div class="counseling">
-														<i class="fa-solid fa-comment"></i>
-														<span>상담받기</span>
-													</div>
-												</div>
+												<button class="order">1회 체험 신청 하기</button>
+												<button class="counseling">
+													<i class="fa-solid fa-comment"></i>
+													상담받기
+												</button>
 											</div>
 										</div>
 									</div>
@@ -272,5 +286,82 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+	
+	    function addQualification() {
+	        var container = document.getElementById("qualify-container");
+	        var newInput = document.createElement("input");
+	        newInput.type = "text";
+	        newInput.id = "qualify";
+	        newInput.name = "qualify";
+	        newInput.placeholder = "자격사항을 입력해 주세요.";
+	        newInput.style = "margin-top: 15px";
+	
+	        container.appendChild(newInput);
+	    }
+	    
+	    function addProgram() {
+	        var container = document.getElementById("program-container");
+	        var newTextArea = document.createElement("textarea");
+	        newTextArea.type = "text";
+	        newTextArea.id = "pgContent";
+	        newTextArea.name = "pgContent";
+	        newTextArea.placeholder = "pt프로그램을 작성해 주세요.";
+	        newTextArea.style = "margin-top: 15px";
+	
+	        container.appendChild(newTextArea);
+	    }
+	    
+	</script>
+	
+	<script>
+		
+		function check()
+		{
+			var fm = document.frm;	
+	
+			if(fm.tnIntro.value=="") {
+				alert("소개를 입력하세요");
+				fm.tnIntro.focuse();
+				return;
+			}else if(fm.tnTicket.value=="") {
+				alert("1회 체험권 가격을 입력하세요");
+				fm.tnTicket.focus();
+				return;
+			}else if(fm.tnOneLine.value=="") {
+				alert("한 줄 소개를 입력하세요");
+				fm.tnOneLine.focus();
+				return;
+			}else if(fm.qualify.value=="") {
+				alert("자격사항을 입력하세요");
+				fm.qualify.focus();
+				return;
+			}else if(fm.pgContent.value=="") {
+				alert("프로그램 내용을 입력하세요");
+				fm.pgContent.focus();
+				return;
+			}/* else {
+				var files = document.getElementById("chooseFile").files;
+				
+				console.log(files);
+				//debugger;
+				if (files.length === 0) {
+					alert("사진을 첨부해주세요");
+					return;
+				}
+			} */
+			
+			
+			fm.action = "${pageContext.request.contextPath}/board/galleryWriteAction.do";	
+			fm.method = "post";					
+			fm.enctype="multipart/form-data";
+			fm.submit();						
+			return;
+		}
+	
+	
+	</script>
+	
 </body>
 </html>

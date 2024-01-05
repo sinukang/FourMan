@@ -13,13 +13,14 @@
     <title>관리자 공지사항 페이지</title>
 
     <!-- Custom fonts for this template-->
-    <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/css/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/normal_css/index.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/css/review-admin.css?after" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/admin/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/admin/normal_css/index.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/css/admin/review-admin.css?after" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/admin/normal_css/review-admin.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
@@ -36,7 +37,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./admin_index.jsp">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_index.do">
                 <div class="sidebar-brand-icon "> <!-- rotate-n-15 -->
                     <i class="fas fa-wrench"></i> <!-- fa-laugh-wink -->
                 </div>
@@ -57,8 +58,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item " href="#">트레이너 등록 요청</a>
-                        <a class="collapse-item " href="#">센터 등록 요청</a>
+                        <a class="collapse-item " href="trainerRegisterList.do">트레이너 등록 요청</a>
+                        <a class="collapse-item " href="centerRegisterList.do">센터 등록 요청</a>
                     </div>
                 </div>
             </li>
@@ -78,7 +79,7 @@
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="reportList.do">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>신고 관리</span></a>
             </li>
@@ -94,8 +95,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="utilities-color.html">등록 상품 리스트</a>
-                        <a class="collapse-item" href="utilities-border.html">상품 거래 내역</a>
+                        <a class="collapse-item" href="registeredProductList.do">등록 상품 리스트</a>
+                        <a class="collapse-item" href="tradedProductList.do">상품 거래 내역</a>
                         <!-- <a class="collapse-item" href="utilities-animation.html">센터 신고 내역</a>
                         <a class="collapse-item" href="utilities-other.html">Other</a> -->
                     </div>
@@ -113,8 +114,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="utilities-color.html">관리자 채팅 내역</a>
-                        <a class="collapse-item" href="utilities-border.html">고객 채팅 내역</a>
+                        <a class="collapse-item" href="managerChatList.do">관리자 채팅 내역</a>
+                        <a class="collapse-item" href="customerChatList.do">고객 채팅 내역</a>
                     </div>
                 </div>
             </li>
@@ -129,14 +130,14 @@
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="userManagement.do">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>회원 관리</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="./admin_review.jsp">
+                <a class="nav-link" href="admin_review.do">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>리뷰 관리</span></a>
             </li>
@@ -151,8 +152,8 @@
                 <div id="collapsePage3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-                        <a class="collapse-item" href="./admin_point.jsp">포인트 내역</a>
-                        <a class="collapse-item" href="./admin_point_detail.jsp">포인트 관리</a>
+                        <a class="collapse-item" href="admin_point.do">포인트 내역</a>
+                        <a class="collapse-item" href="admin_point_detail.do">포인트 관리</a>
                         <!-- <a class="collapse-item" href="forgot-password.html">1:1 문의</a> -->
                         <!-- <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
@@ -172,8 +173,8 @@
                 <div id="collapsePage4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-                        <a class="collapse-item" href="./admin_coupon_list.jsp">쿠폰 내역</a>
-                        <a class="collapse-item" href="./admin_coupon.jsp">쿠폰 발급하기</a>
+                        <a class="collapse-item" href="admin_coupon_list.do">쿠폰 내역</a>
+                        <a class="collapse-item" href="admin_coupon.do">쿠폰 발급하기</a>
                     </div>
                 </div>
             </li>
@@ -188,8 +189,8 @@
                 <div id="collapsePage5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-                        <a class="collapse-item" href="./admin_notice.jsp">공지사항</a>
-                        <a class="collapse-item" href="./admin_FAQ.jsp">자주묻는 질문</a>
+                        <a class="collapse-item" href="admin_notice.do">공지사항</a>
+                        <a class="collapse-item" href="admin_FAQ.do">자주묻는 질문</a>
                     </div>
                 </div>
             </li>
@@ -403,7 +404,7 @@
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="./admin_point.jsp">Action</a>
+                                            <a class="dropdown-item" href="admin_point">Action</a>
                                             <a class="dropdown-item" href="#">Another action</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Something else here</a>
@@ -501,23 +502,23 @@
     </div>
 
     <!-- Page level plugins -->
-    <script src="${pageContext.request.contextPath}/resources/vendor/chart.js/Chart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="${pageContext.request.contextPath}/resources/js/demo/chart-area-demo.js?after"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/demo/chart-pie-demo.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/demo/chart-bar-demo.js?after"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/js/demo/chart-area-demo.js?after"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/js/demo/chart-pie-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/js/demo/chart-bar-demo.js?after"></script>
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/admin/js/sb-admin-2.min.js"></script>
 
 	
 

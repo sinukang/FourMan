@@ -527,3 +527,140 @@
 .order:hover {
 	background: #414cc4;
 }
+
+.edit {
+    color: #5865F2;
+    padding: 6px 12px;
+    background-color: #5865f229;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 6px;
+}    
+
+.trainer_info textarea{
+	padding: 0;
+	line-height: 2.5!important;
+}
+
+/* 미리보기 이미지 영역 */
+	#previews {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+		overflow-y: scroll;
+		position: absolute;
+	}
+
+	#previews img {
+		width: 97%;
+		height: 100%;
+		margin: 5px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		object-fit: cover; 
+	}
+
+/*이미지 첨부*/
+	
+	.file {
+		display: none;
+	}
+	
+	.upload-box {
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.upload-box .drag-file {
+		position: relative;
+		width: 97%;
+		height: 360px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: 3px dashed #dbdbdb;
+		border-radius: 8px;
+	}
+	.upload-box .drag-file.highlight {
+		border: 3px dashed red;
+	}
+	.upload-box .drag-file .image {
+		width: 40px;
+	}
+	.upload-box .drag-file .message {
+		margin-bottom: 0;
+	}
+	.upload-box .drag-file .preview {
+		display: none;
+		position: absolute;
+		left: 0;
+		height: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.upload-btn {
+		margin: 25px 0 5px 0;
+	}
+
+	.file-label {
+		color: #5865f2;
+	    border-radius: 6px;
+	    background: #ffffff;
+	    cursor: pointer;
+	    line-height: 48px;
+	    font-size: 16px;
+	    font-weight: bold;
+	    border: 1px solid #5865f2;
+	    padding: 10px 280px;
+	}
+	
+.priceTable {
+    border: 1px solid rgb(218, 224, 230);
+    border-radius: 6px;
+    padding: 0px 16px 8px;
+    border-collapse: unset;
+}
+
+.priceTable th {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(61, 69, 77);
+    text-align: center;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image: initial;
+    border-bottom: 1px solid rgb(218, 224, 230);
+    padding: 16px;
+}
+
+.priceTable td {
+    border: none;
+    padding: 8px;
+}
+
+.qualify-label, .program-label {
+    color: #5865f2;
+    border-radius: 6px;
+    background: #ffffff;
+    cursor: pointer;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #5865f2;
+    padding: 10px 266px;
+}
+
+.qualify-button, .program-button {
+    display: none;
+}
+
