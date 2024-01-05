@@ -13,9 +13,7 @@
 <body>
 	
 	<jsp:include page="/WEB-INF/include/header.jsp"/>
-	<script>
-		$('.contents').addClass('coach_nav');
-	</script>
+
 	<section><!-- 섹션 -->
 		<div class="searchTab_wrap">
 			<div class="searchBar_wrap">
@@ -99,53 +97,55 @@
 						</div>
 					</div>
 				</div>
-			</div>	
-				
-				<div class="searchForm">
-					<div class="searchResultWrap">
-						<div class="searchResultArea">
-							<c:forEach var="i" begin="1" end="10" step="1">
-								<a href="trainerInfoView">
-									<div class="coachCard">
-										<div>
-											<div class="coachImages">
-												<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" >
-												<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
-												<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" >
+			</div>
+			
+			<!-- 리스트 영역 -->
+			<div class="searchForm">
+				<div class="searchResultWrap">
+					<div class="searchResultArea">
+						<c:forEach var="i" begin="1" end="10" step="1">
+							<a href="trainerInfoView">
+								<div class="coachCard">
+									<div>
+										<div class="coachImages">
+											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" >
+											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
+											<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" >
+										</div>
+										<div class="coachInfo">
+											<div class="coachTitle">
+												<h3 class="coachName">필 히스${i}</h3>
+											
+												<div class="coachReviewCnt">
+													<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
+													<span class="reviewText">35개</span>
+												</div>
 											</div>
-											<div class="coachInfo">
-												<div class="coachTitle">
-													<h3 class="coachName">필 히스${i}</h3>
-												
-													<div class="coachReviewCnt">
-														<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
-														<span class="reviewText">35개</span>
-													</div>
-												</div>
-												
-												<div class="coachOneLine">
-													<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-												</div>
-												
-												<div class="priceInfo">
-													<div class="priceTitle"> 1회 체험권 </div>
-													<div class="ptPrice"><strong>35000</strong> 원</div>
-												</div>
-												
-												<div class="location">
-													<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
-													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-												</div>
+											
+											<div class="coachOneLine">
+												<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
+											</div>
+											
+											<div class="priceInfo">
+												<div class="priceTitle"> 1회 체험권 </div>
+												<div class="ptPrice"><strong>35000</strong> 원</div>
+											</div>
+											
+											<div class="location">
+												<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
+												<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
 											</div>
 										</div>
 									</div>
-								</a>
-							</c:forEach>
-						</div>
+								</div>
+							</a>
+						</c:forEach>
 					</div>
-				
 				</div>
-		
+			</div>
+			<!-- 리스트 영역 -->
+			
+			
 		</div>
 		
 		
@@ -162,7 +162,10 @@
 	
 	
 <script>
-
+	
+	//헤더 여백 설정
+	$('.contents').addClass('coach_nav');
+	
 	document.addEventListener("DOMContentLoaded", function() {
 	    var filterButton = document.querySelector(".filter");
 	    var returnButton = document.querySelector(".headerComp");

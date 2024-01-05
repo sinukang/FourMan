@@ -3,9 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
-
+	
+	<!-- 트레이너 찾기 페이지 -->
 	<select id="findTrainer" resultType="to">
-		SELECT * FROM trainerinfo WHERE tnDelYN = 'N';
+		SELECT * FROM trainerinfo WHERE tnDelYN = 'N'
 	</select>
 	
 	<insert id="trainerInsert" parameterType="tio">
