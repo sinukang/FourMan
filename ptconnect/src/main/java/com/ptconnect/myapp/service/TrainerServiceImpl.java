@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.TrainerDTO;
+import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.TrainerServiceMapper;
 
 @Service
@@ -23,6 +24,15 @@ public class TrainerServiceImpl implements TrainerService{
 	public ArrayList<TrainerDTO> findTrainer() {
 		
 		return null;
+	}
+
+	@Override
+	public int trainerInsert(TrainerInfoDTO tio) {
+		
+		int value = tsm.trainerInsert(tio);
+		int tnNo = tio.getTnNo();
+		
+		return value;
 	}
 	
 	

@@ -35,7 +35,7 @@
 														<h4>
 															사진
 															<div class="content_modify">
-																<span class="edit" onclick="check()">
+																<span class="edit">
 																	<i class="fa-solid fa-pencil"></i> 수정하기
 																</span>
 															</div>
@@ -316,6 +316,14 @@
 	</script>
 	
 	<script>
+	
+		document.addEventListener("DOMContentLoaded", function () {
+			
+	        var editButtons = document.querySelectorAll(".edit");
+	        editButtons.forEach(function(button) {
+                button.addEventListener("click", check);
+            });
+	    });
 		
 		function check()
 		{
@@ -323,15 +331,11 @@
 	
 			if(fm.tnIntro.value=="") {
 				alert("소개를 입력하세요");
-				fm.tnIntro.focuse();
+				fm.tnIntro.focus();
 				return;
 			}else if(fm.tnTicket.value=="") {
 				alert("1회 체험권 가격을 입력하세요");
 				fm.tnTicket.focus();
-				return;
-			}else if(fm.tnOneLine.value=="") {
-				alert("한 줄 소개를 입력하세요");
-				fm.tnOneLine.focus();
 				return;
 			}else if(fm.qualify.value=="") {
 				alert("자격사항을 입력하세요");
@@ -340,6 +344,10 @@
 			}else if(fm.pgContent.value=="") {
 				alert("프로그램 내용을 입력하세요");
 				fm.pgContent.focus();
+				return;
+			}else if(fm.tnOneLine.value=="") {
+				alert("한 줄 소개를 입력하세요");
+				fm.tnOneLine.focus();
 				return;
 			}/* else {
 				var files = document.getElementById("chooseFile").files;
@@ -353,13 +361,12 @@
 			} */
 			
 			
-			fm.action = "${pageContext.request.contextPath}/board/galleryWriteAction.do";	
+			fm.action = "<%=request.getContextPath()%>/trainerMypage/trainerInfoModifyAction.do";	
 			fm.method = "post";					
 			fm.enctype="multipart/form-data";
 			fm.submit();						
 			return;
 		}
-	
 	
 	</script>
 	
