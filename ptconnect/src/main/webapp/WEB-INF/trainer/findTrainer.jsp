@@ -1,21 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>트레이너 찾기</title>
-<link href="${pageContext.request.contextPath}/resource/css/coach.css" type="text/css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resource/css/home.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/coach.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
 </head>
 <body>
 	
-	<!-- 헤더 영역 -->
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/include/header.jsp"/>
-	
+	<jsp:include page="/WEB-INF/include/header.jsp"/>
 	<script>
 		$('.contents').addClass('coach_nav');
 	</script>
@@ -25,11 +22,9 @@
 				<div class="searchType">
 					<div class="typeFilter">
 						<div class="typeComp active">전체</div>
-						<div class="typeComp">헬스</div>
-						<div class="typeComp">필라테스</div>
 					</div>
 					<div class="filter">
-						<img src="${pageContext.request.contextPath}/source/img/filtericon.png" alt="Filter Icon" width="24px" height="24px">
+						<img src="${pageContext.request.contextPath}/resources/img/filter_icon_black.svg" alt="Filter Icon" width="24px" height="24px">
 					</div>
 					
 				</div>
@@ -37,23 +32,29 @@
 				<div class="searchBar">
 					<input type="text" id="search_keyword" class="bar" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="20">
 					<div class="search_btn">
-						<img src="${pageContext.request.contextPath}/source/img/searchicon.png"  width="30px" height="30px">
+						<img src="${pageContext.request.contextPath}/resources/img/search.svg">
 					</div>
 				</div>
 			
 				<div class="searchBar_option">
-					<img src="${pageContext.request.contextPath}/source/img//markericon.png" width="17px" height="25px">
-					<span>
-						<span class="search_key">덕진구</span>
-						검색 결과
-					</span>
+					<div class="flex">
+						<div>
+							<img src="${pageContext.request.contextPath}/resources/img//markericon.png" width="17px" height="25px">
+							<span>
+								<span class="search_key">덕진구</span>
+								검색 결과
+							</span>
+						</div>
+					</div>
 				</div>
-			</div>	
 				<div class="filter_option">
 					<div class="filter_Initialization">
-						<button class="reset_btn">&#x25C4;</button>
-						<div class="reset_filter">필터 초기화</div>
-						
+						<div class="headerComp">
+							<img src="${pageContext.request.contextPath}/resources/img//arrow_left.svg" alt="search">
+						</div>
+						<div class="headerComp">
+							<div class="resetFilter">필터 초기화</div>
+						</div>
 					</div>
 					
 					<div class="filterOption_list">
@@ -88,7 +89,6 @@
 						</div>
 						
 						<div class="sorting">
-								<h3>정렬</h3>
 								<div class="sortingBtn">최저가 순</div>
 								<div class="sortingBtn">리뷰많은 순</div>
 								<div class="sortingBtn">거리 순</div>
@@ -98,119 +98,54 @@
 							<button>필터 적용하기</button>
 						</div>
 					</div>
-					
 				</div>
+			</div>	
 				
 				<div class="searchForm">
 					<div class="searchResultWrap">
-						<div class="coachCard">
-							<div class="coachImages">
-								<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
-								<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
-								<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
-							</div>
-							<div class="coachInfo">
-								<div class="coachTitle">
-									<h3 class="coachName">필 히스</h3>
-								
-									<div class="coachReviewCnt">
-										<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
-										<span class="reviewText">35개</span>
+						<div class="searchResultArea">
+							<c:forEach var="i" begin="1" end="10" step="1">
+								<a href="trainerInfoView">
+									<div class="coachCard">
+										<div>
+											<div class="coachImages">
+												<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" >
+												<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
+												<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" >
+											</div>
+											<div class="coachInfo">
+												<div class="coachTitle">
+													<h3 class="coachName">필 히스${i}</h3>
+												
+													<div class="coachReviewCnt">
+														<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
+														<span class="reviewText">35개</span>
+													</div>
+												</div>
+												
+												<div class="coachOneLine">
+													<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
+												</div>
+												
+												<div class="priceInfo">
+													<div class="priceTitle"> 1회 체험권 </div>
+													<div class="ptPrice"><strong>35000</strong> 원</div>
+												</div>
+												
+												<div class="location">
+													<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
+													<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-								
-								<div class="coachOneLine">
-									<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-								</div>
-								
-								<div class="priceInfo">
-									<div class="priceTitle"> 1회 체험권 </div>
-									<div class="ptPrice">35000원</div>
-								</div>
-								
-								<div class="location">
-									<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
-									<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-								</div>
-								
-							</div>
-							
-						</div>
-						
-						<div class="coachCard">
-							<div class="coachImages">
-								<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
-								<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
-								<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
-							</div>
-							<div class="coachInfo">
-								<div class="coachTitle">
-									<h3 class="coachName">필 히스</h3>
-								
-									<div class="coachReviewCnt">
-										<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
-										<span class="reviewText">35개</span>
-									</div>
-								</div>
-								
-								<div class="coachOneLine">
-									<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-								</div>
-								
-								<div class="priceInfo">
-									<div class="priceTitle"> 1회 체험권 </div>
-									<div class="ptPrice">35000원</div>
-								</div>
-								
-								<div class="location">
-									<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
-									<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-								</div>
-								
-							</div>
-							
-						</div>
-						
-						<div class="coachCard">
-							<div class="coachImages">
-								<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner1.png" >
-								<img class="trainerImg" src="${pageContext.request.contextPath}/source/img/mainbanner2.png" >
-								<img class="gymImg" src="${pageContext.request.contextPath}/source/img/mainbanner3.png" >
-							</div>
-							<div class="coachInfo">
-								<div class="coachTitle">
-									<h3 class="coachName">필 히스</h3>
-								
-									<div class="coachReviewCnt">
-										<img class="reviewIcon" src="${pageContext.request.contextPath}/source/img/staricon.png">
-										<span class="reviewText">35개</span>
-									</div>
-								</div>
-								
-								<div class="coachOneLine">
-									<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-								</div>
-								
-								<div class="priceInfo">
-									<div class="priceTitle"> 1회 체험권 </div>
-									<div class="ptPrice">35000원</div>
-								</div>
-								
-								<div class="location">
-									<img src="${pageContext.request.contextPath}/source/img/locationicon.png">
-									<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
-								</div>
-								
-							</div>
-							
+								</a>
+							</c:forEach>
 						</div>
 					</div>
 				
-				
-				
 				</div>
 		
-			
 		</div>
 		
 		
@@ -220,26 +155,39 @@
 			</div>
 		</div>
 		
-		
-		
 	</section>
-	<jsp:include page="${pageContext.request.contextPath}/resources/WEB-INF/include/footer.jsp"/>
-					
-					
+	
+	<!-- 푸터 -->
+	<jsp:include page="/WEB-INF/include/footer.jsp"/>
+	
+	
 <script>
 
 	document.addEventListener("DOMContentLoaded", function() {
-		var filterButton = document.querySelector(".filter");
-	
-		filterButton.addEventListener("click", function() {
-			var filterOption = document.querySelector(".filter_option");
-			filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
-		});
+	    var filterButton = document.querySelector(".filter");
+	    var returnButton = document.querySelector(".headerComp");
+	    
+	    filterButton.addEventListener("click", function() {
+	        var filterOption = document.querySelector(".filter_option");
+	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
+	   		
+	        /* var resultWrap = document.querySelector(".searchResultArea");
+	        if (filterOption.classList.contains("visible")) {
+	            resultWrap.style.display = "none";
+	        } else {
+	            resultWrap.style.display = "";
+	        } */
+	    });
+	    
+	    returnButton.addEventListener("click", function() {
+	        var filterOption = document.querySelector(".filter_option");
+	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
+	    });
 	});
 
-	
 	var mapX = 0;
 	var mapY = 0;
+
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
 	
@@ -259,6 +207,7 @@
 	
 	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	
 	function relayout() {    
 	    
 	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
@@ -277,8 +226,10 @@
 			latlng: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829) 
 		}, //지도 내에서 필요한 만큼 반복
 	];
+	
 	var bounds = new kakao.maps.LatLngBounds();
 	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
+	
 	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
 		var data = positions[i];
 
@@ -287,7 +238,7 @@
 	
 	function displayMarker(data,e){
 
-		var content ='<div>';
+	  	var content ='<div>';
 		content+='<div class="marker_wrap">';
 		content+=data.title;
 		content+='</div>';
@@ -302,6 +253,7 @@
 		});		
 		
 	}
+	
 	
 </script>
 </body>

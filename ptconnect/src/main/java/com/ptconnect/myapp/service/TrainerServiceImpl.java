@@ -23,7 +23,9 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public ArrayList<TrainerDTO> findTrainer() {
 		
-		return null;
+		ArrayList<TrainerDTO> alist = new ArrayList<TrainerDTO>();
+		
+		return alist;
 	}
 
 	@Override
