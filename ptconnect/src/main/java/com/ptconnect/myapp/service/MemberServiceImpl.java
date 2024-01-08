@@ -20,7 +20,18 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int memberInsert(MemberDTO mo) {
+		mo.setMbAddr(mo.getPostcode()+"/"+mo.getAddr()+"/"+mo.getAddrDetail());
+		mo.setMbAuth("U");
 		int value = msm.memberInsert(mo);
+		
+		return value;
+	}
+	
+	@Override
+	public int memberEmailCheck(String mbEmail) {
+		int value = msm.memberEmailCheck(mbEmail);
+		
+		
 		return value;
 	}
 }
