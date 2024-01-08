@@ -2,11 +2,7 @@ package com.ptconnect.myapp.persistance;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 import com.ptconnect.myapp.domain.FileDetailDTO;
-import com.ptconnect.myapp.domain.TrainerDTO;
-=======
->>>>>>> branch 'main' of https://github.com/sinukang/b_beam.git
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 
 public interface TrainerServiceMapper {

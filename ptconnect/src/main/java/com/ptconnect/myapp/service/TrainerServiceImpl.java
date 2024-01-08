@@ -6,11 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import com.ptconnect.myapp.domain.FileDetailDTO;
-import com.ptconnect.myapp.domain.TrainerDTO;
-=======
->>>>>>> branch 'main' of https://github.com/sinukang/b_beam.git
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.TrainerServiceMapper;
 

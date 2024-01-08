@@ -200,7 +200,7 @@
 	};  
 	
 	//지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 	
 	function setDraggable(draggable){
 		map.setDraggable(draggable);
