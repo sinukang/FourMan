@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ptconnect.myapp.domain.TrainerDTO;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.TrainerServiceMapper;
 
@@ -21,9 +20,9 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public ArrayList<TrainerDTO> findTrainer() {
+	public ArrayList<TrainerInfoDTO> findTrainer() {
 		
-		ArrayList<TrainerDTO> alist = new ArrayList<TrainerDTO>();
+		ArrayList<TrainerInfoDTO> alist = new ArrayList<TrainerInfoDTO>();
 		
 		return alist;
 	}
