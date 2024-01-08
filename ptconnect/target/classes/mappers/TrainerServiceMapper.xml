@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
 
-	<select id="findTrainer" resultType="to">
+	<select id="findTrainer" resultType="tio">
 		SELECT t.* FROM trainerinfo t WHERE tnDelYN = 'N'
 	</select>
 	
@@ -16,6 +16,7 @@
 		</selectKey>
 		insert into trainerInfo(mbNo, flNo, tnOneLine, tnIntro, tnTicket)
 	 	values(#{mbNo}, #{flNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
+	</insert>
 	<!-- 자격 정보 등록 -->
 	<insert id="qualifyInsert" parameterType="tio">
 		insert into qualify(tnNo, qualify)
