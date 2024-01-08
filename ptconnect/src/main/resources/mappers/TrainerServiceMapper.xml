@@ -8,22 +8,94 @@
 		SELECT t.* FROM trainerinfo t WHERE tnDelYN = 'N'
 	</select>
 	
-	<insert id="trainerInsert" parameterType="tio">
-	<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
-	select max(tnNo) as tnNo from trainerInfo
-	</selectKey>
-	insert into trainerInfo(tnOneLine, tnIntro, tnTicket)
- 	values(#{tnOneLine},#{tnIntro},#{tnTicket})
-	</insert>
+	<!-- 트레이너정보등록 -->
 	
+	<insert id="trainerInsert" parameterType="tio" useGeneratedKeys="true" keyProperty="tnNo">
+		<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
+		select max(tnNo) as tnNo from trainerInfo
+		</selectKey>
+		insert into trainerInfo(mbNo, flNo, tnOneLine, tnIntro, tnTicket)
+	 	values(#{mbNo}, #{flNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
+	<!-- 자격 정보 등록 -->
 	<insert id="qualifyInsert" parameterType="tio">
-	insert into qualify(qualify)
- 	values(#{qualify})
+		insert into qualify(tnNo, qualify)
+	 	values(#{tnNo}, #{qualify})
 	</insert>
 	
+	<!-- 레슨 가격 정보 등록 -->
 	<insert id="lessonPriceInsert" parameterType="tio">
-	insert into lessonPrice(lpCf, lpCount, lessonPrice)
- 	values(#{lpCf}, #{lpCount}, #{lessonPrice})
+		insert into lessonPrice(tnNo, lpCf, lpCount, lessonPrice)
+	 	values(#{tnNo}, #{lpCf}, #{lpCount}, #{lessonPrice})
 	</insert>
+	
+	<!-- 파일 정보 등록 -->
+	<insert id="fileInsert" parameterType="fdo"  useGeneratedKeys="true" keyProperty="flNo">
+		<selectKey resultType="int" keyProperty="flNo"  order="AFTER">
+		select max(flNo) as flNo from file_
+		</selectKey>
+		insert into file_(flCf, flCfNo)
+		values( CASE 
+	                WHEN #{tnNo} IS NOT NULL THEN 'T'
+	                WHEN #{ctNo} IS NOT NULL THEN 'C'
+	                WHEN #{rvNo} IS NOT NULL THEN 'R'
+	                WHEN #{bdNo} IS NOT NULL THEN 'B'
+	                ELSE NULL
+	            END,
+	            CASE 
+	                WHEN #{tnNo} IS NOT NULL THEN #{tnNo}
+	                WHEN #{ctNo} IS NOT NULL THEN #{ctNo}
+	                WHEN #{rvNo} IS NOT NULL THEN #{rvNo}
+	                WHEN #{bdNo} IS NOT NULL THEN #{bdNo}
+	                ELSE NULL
+	            END) 
+	</insert>
+	
+	<insert id="fileDetailInsert" parameterType="fdo">
+		insert into fileDetail(flNo, fdName, fdPName)
+		values(#{flNo}, #{fdName}, #{fdPName})
+	</insert>
+	
+	<update id="trainerInfoUpdate" parameterType="tio">
+	    UPDATE trainerInfo
+	    SET flNo = #{flNo}
+	    WHERE tnNo = #{tnNo}
+	</update>
+	
+	<!-- 트레이너정보등록 -->
+	
+	<select id="findTrainerOne" parameterType="int" resultType="tio">
+		select * from trainerInfo where tnNo=#{tnNo}
+	</select>
+	
+	<update id="trainerModify" parameterType="tio">
+		update trainerInfo set tnOneLine = #{tnOneLine}, tnIntro = #{tnIntro},
+		tnTicket = #{tnTicket}, modifyday = now()
+		where tnNo = #{tnNo}
+	</update>
+	
+	<update id="qualifyModify" parameterType="tio">
+		update qualify set qualify = #{qualify}, modifyday = now()
+		where tnNo = #{tnNo}
+	</update>
+	
+	<update id="lessonPriceModify" parameterType="tio">
+		update lessonPrice set lpCf = #{lpCf}, lpCount = #{lpCount},
+		lessonPrice = #{lessonPrice}, modifyday = now()
+		where tnNo = #{tnNo}
+	</update>
+	
+	<update id="file_Modify" parameterType="fdo">
+		update file_ set flCf = #{flCf}, flCfNo = #{flCfNo},
+		modifyday = now()
+		where tnNo = #{tnNo} and tnNo = #{tnNo}
+	</update>
+	
+	<update id="fileDetailModify" parameterType="fdo">
+		update file_ set fdName = #{fdName}, fdPName = #{fdPName},
+		modifyday = now()} 
+		where tnNo = #{tnNo}
+	</update>
+	
+	
 	
 </mapper>

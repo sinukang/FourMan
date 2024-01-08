@@ -361,7 +361,7 @@
 			} */
 			
 			
-			fm.action = "<%=request.getContextPath()%>/trainerMypage/trainerInfoModifyAction.do";	
+			fm.action = "<%=request.getContextPath()%>/trainerInfoModifyAction";	
 			fm.method = "post";					
 			fm.enctype="multipart/form-data";
 			fm.submit();						
