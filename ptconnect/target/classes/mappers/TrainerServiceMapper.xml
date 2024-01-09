@@ -5,7 +5,7 @@
 <mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
 
 	<select id="findTrainer" resultType="tio">
-		SELECT t.* FROM trainerinfo t WHERE tnDelYN = 'N'
+		SELECT t.* FROM trainerInfo t WHERE tnDelYN = 'N'
 	</select>
 	
 	<!-- 트레이너정보등록 -->

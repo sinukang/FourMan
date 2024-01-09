@@ -45,7 +45,6 @@ public class TrainerInfoModifyController {
 		System.out.println("qualify : " + tio.getQualify());
 		System.out.println("lpCount : " + tio.getLpCount());
 		System.out.println("lessonPrice : " + tio.getLessonPrice());
-		System.out.println("priceInfo : " + tio.getPriceInfo());
 		
 		int value = ts.trainerInsert(tio);
 		System.out.println("value : " + value);
