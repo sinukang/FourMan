@@ -4,28 +4,32 @@
 
 <mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
 
-	<select id="findTrainer" resultType="to">
+	<select id="findTrainer" resultType="tio">
 		SELECT t.* FROM trainerinfo t WHERE tnDelYN = 'N'
 	</select>
 	
 	<!-- 트레이너정보등록 -->
 	
 	<insert id="trainerInsert" parameterType="tio" useGeneratedKeys="true" keyProperty="tnNo">
-		<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
+		<selectKey resultType="int" keyProperty="tnNo" order="AFTER">
 		select max(tnNo) as tnNo from trainerInfo
 		</selectKey>
-		insert into trainerInfo(mbNo, flNo, tnOneLine, tnIntro, tnTicket)
-	 	values(#{mbNo}, #{flNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
+		insert into trainerInfo(mbNo, tnOneLine, tnIntro, tnTicket)
+	 	values(#{mbNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
+	 </insert>
+	 
 	<!-- 자격 정보 등록 -->
 	<insert id="qualifyInsert" parameterType="tio">
 		insert into qualify(tnNo, qualify)
-	 	values(#{tnNo}, #{qualify})
+	 	values (#{tnNo},
+	         #{qualify})
 	</insert>
 	
 	<!-- 레슨 가격 정보 등록 -->
 	<insert id="lessonPriceInsert" parameterType="tio">
 		insert into lessonPrice(tnNo, lpCf, lpCount, lessonPrice)
-	 	values(#{tnNo}, #{lpCf}, #{lpCount}, #{lessonPrice})
+	 	values
+	        (#{tnNo}, #{lpCf}, #{lpCount}, #{lessonPrice})
 	</insert>
 	
 	<!-- 파일 정보 등록 -->
@@ -55,7 +59,7 @@
 		values(#{flNo}, #{fdName}, #{fdPName})
 	</insert>
 	
-	<update id="trainerInfoUpdate" parameterType="tio">
+	<update id="trainerInfoUpdate" parameterType="fdo">
 	    UPDATE trainerInfo
 	    SET flNo = #{flNo}
 	    WHERE tnNo = #{tnNo}
@@ -92,7 +96,7 @@
 	
 	<update id="fileDetailModify" parameterType="fdo">
 		update file_ set fdName = #{fdName}, fdPName = #{fdPName},
-		modifyday = now()} 
+		modifyday = now()
 		where tnNo = #{tnNo}
 	</update>
 	

@@ -1,7 +1,9 @@
 package com.ptconnect.myapp.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class TrainerInfoDTO {
+public class TrainerInfoDTO extends MemberDTO{
 	
 	private int tnNo;
 	private int mbNo;
@@ -13,6 +15,23 @@ public class TrainerInfoDTO {
 	private String tnDate;
 	private String tnDateM;
 	private String tnDelYN;
+	
+	private int qlNo;
+	private String qualify;
+	private String qlDate;
+	private String qlDateM;
+	private String qlDelYN;
+	
+	
+	private int lpNo;
+	private String lpCf;
+	private String lpCount;
+	private String lessonPrice;
+	private String lpDate;
+	private String lpDateM;
+	private String lpDelYN;
+	
+	private String priceInfo;
 	
 	public int getTnNo() {
 		return tnNo;
@@ -74,4 +93,83 @@ public class TrainerInfoDTO {
 	public void setTnDelYN(String tnDelYN) {
 		this.tnDelYN = tnDelYN;
 	}
+	public int getQlNo() {
+		return qlNo;
+	}
+	public void setQlNo(int qlNo) {
+		this.qlNo = qlNo;
+	}
+	public String getQualify() {
+		return qualify;
+	}
+	public void setQualify(String qualify) {
+		this.qualify = qualify;
+	}
+	public String getQlDate() {
+		return qlDate;
+	}
+	public void setQlDate(String qlDate) {
+		this.qlDate = qlDate;
+	}
+	public String getQlDateM() {
+		return qlDateM;
+	}
+	public void setQlDateM(String qlDateM) {
+		this.qlDateM = qlDateM;
+	}
+	public String getQlDelYN() {
+		return qlDelYN;
+	}
+	public void setQlDelYN(String qlDelYN) {
+		this.qlDelYN = qlDelYN;
+	}
+	public int getLpNo() {
+		return lpNo;
+	}
+	public void setLpNo(int lpNo) {
+		this.lpNo = lpNo;
+	}
+	public String getLpCf() {
+		return lpCf;
+	}
+	public void setLpCf(String lpCf) {
+		this.lpCf = lpCf;
+	}
+	public String getLpCount() {
+		return lpCount;
+	}
+	public void setLpCount(String lpCount) {
+		this.lpCount = lpCount;
+	}
+	public String getLessonPrice() {
+		return lessonPrice;
+	}
+	public void setLessonPrice(String lessonPrice) {
+		this.lessonPrice = lessonPrice;
+	}
+	public String getLpDate() {
+		return lpDate;
+	}
+	public void setLpDate(String lpDate) {
+		this.lpDate = lpDate;
+	}
+	public String getLpDateM() {
+		return lpDateM;
+	}
+	public void setLpDateM(String lpDateM) {
+		this.lpDateM = lpDateM;
+	}
+	public String getLpDelYN() {
+		return lpDelYN;
+	}
+	public void setLpDelYN(String lpDelYN) {
+		this.lpDelYN = lpDelYN;
+	}
+	public String getPriceInfo() {
+		return priceInfo;
+	}
+	public void setPriceInfo(String priceInfo) {
+		this.priceInfo = priceInfo;
+	}
+	
 }
