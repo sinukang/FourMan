@@ -3,11 +3,14 @@ package com.ptconnect.myapp.persistance;
 import java.util.ArrayList;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 
 public interface TrainerServiceMapper {
 	
-	public ArrayList<TrainerInfoDTO> findTrainer(TrainerInfoDTO tio);
+	public ArrayList<TrainerInfoDTO> findTrainer(SearchCriteria scri);
+	
+	public int trainerTotalCount(SearchCriteria scri);
 	
 	public TrainerInfoDTO findTrainerOne(int tnNo);
 	

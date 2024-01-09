@@ -1,8 +1,5 @@
 package com.ptconnect.myapp.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TrainerInfoDTO extends MemberDTO{
 	
 	private int tnNo;

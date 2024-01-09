@@ -159,7 +159,9 @@
 	
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/include/footer.jsp"/>
-	
+	<c:forEach var="tio" items="${tio_alist}">
+		${tio.ctName}
+	</c:forEach>
 	
 <script>
 	
@@ -220,14 +222,12 @@
 	}
 	
 	var positions = [
-		{	
-			title: '필 히스',
-			latlng: new kakao.maps.LatLng(35.84091345382037,127.13121724223178) // y좌표, x좌표
-		},
-		{	
-			title: '이젠 IT짐',
-			latlng: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829) 
-		}, //지도 내에서 필요한 만큼 반복
+		<c:forEach items='${tio_alist}' var='tio'>
+			{
+				title: '${tio.ctName}',
+				latlng: new kakao.maps.LatLng(${tio.mbMapY},${tio.mbMapX}) // y좌표, x좌표
+			},
+		</c:forEach>
 	];
 	
 	var bounds = new kakao.maps.LatLngBounds();

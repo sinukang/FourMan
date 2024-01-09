@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.TrainerServiceMapper;
 
@@ -21,11 +22,23 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public ArrayList<TrainerInfoDTO> findTrainer() {
+	public ArrayList<TrainerInfoDTO> findTrainer(SearchCriteria scri) {
 		
-		ArrayList<TrainerInfoDTO> alist = new ArrayList<TrainerInfoDTO>();
+		int value = (scri.getPage()-1)*15;
+		scri.setPage(value);
+		
+		ArrayList<TrainerInfoDTO> alist = tsm.findTrainer(scri);
 		
 		return alist;
+	}
+	
+	@Override
+	public int trainerTotalCount(SearchCriteria scri) {
+		
+		int value = 0;
+		value = tsm.trainerTotalCount(scri);
+		
+		return value;
 	}
 	
 	@Override
@@ -80,6 +93,8 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return value;
 	}
+
+
 	
 	
 }

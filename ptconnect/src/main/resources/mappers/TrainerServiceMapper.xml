@@ -12,7 +12,7 @@
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage
 		<choose>
-			<when test="mbNo == null">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+			<when test="mbNo == 0">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
 				, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
 			</when>
 			<otherwise>
@@ -25,7 +25,7 @@
 		<!-- LEFT JOIN review r ON t.tnNo = r.tnNo AND r.rvDelYN = 'N' -->
 		WHERE m.mbDelYN = 'N'
 		<choose>
-			<when test="mbNo == null">
+			<when test="mbNo == 0">
 				<![CDATA[
 				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
 				]]>
@@ -39,6 +39,7 @@
 		</choose>
 		<include refid="trainerSearch"/>
 		ORDER BY distance ASC
+		LIMIT #{page}, 15
 	</select>
 	
 	<!-- 트레이너 총 개수 -->
@@ -49,7 +50,7 @@
 		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
 		WHERE m.mbDelYN = 'N'
 		<choose>
-			<when test="mbNo == null">
+			<when test="mbNo == 0">
 				<![CDATA[
 				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
 				]]>				

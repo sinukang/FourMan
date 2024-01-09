@@ -18,6 +18,22 @@ public class SearchCriteria extends Criteria{
 		this.keyword = keyword;
 	}
 	
+	private int mbNo;
+	private int distance;
+	
+	public int getMbNo() {
+		return mbNo;
+	}
+	public void setMbNo(int mbNo) {
+		this.mbNo = mbNo;
+	}
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
 	
 	
 	
