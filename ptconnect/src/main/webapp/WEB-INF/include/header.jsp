@@ -4,7 +4,7 @@
 <header class="main_header">
 	<nav>
 		<div class="contents">
-			<a href="index"><img class="navi_logo" src="${pageContext.request.contextPath}/resources/img/logo.png"></a>
+			<a href="${pageContext.request.contextPath}/"><img class="navi_logo" src="${pageContext.request.contextPath}/resources/img/logo.png"></a>
 			<a class="navi_name" href="coach">트레이너찾기</a>
 			<a class="navi_name">공지사항</a>
 			<a class="navi_name">자주묻는질문</a>
