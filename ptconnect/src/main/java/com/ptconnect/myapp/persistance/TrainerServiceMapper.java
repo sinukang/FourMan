@@ -7,7 +7,7 @@ import com.ptconnect.myapp.domain.TrainerInfoDTO;
 
 public interface TrainerServiceMapper {
 	
-	public ArrayList<TrainerInfoDTO> findTrainer();
+	public ArrayList<TrainerInfoDTO> findTrainer(TrainerInfoDTO tio);
 	
 	public TrainerInfoDTO findTrainerOne(int tnNo);
 	
@@ -21,5 +21,5 @@ public interface TrainerServiceMapper {
 	
 	public int fileDetailInsert(FileDetailDTO fdo);
 	
-	public int trainerInfoUpdate(TrainerInfoDTO tio);
+	public int trainerInfoUpdate(FileDetailDTO fdo);
 }

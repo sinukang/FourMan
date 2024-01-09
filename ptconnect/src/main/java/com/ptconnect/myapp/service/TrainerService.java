@@ -15,5 +15,5 @@ public interface TrainerService {
 	
 	public int fileInsert(FileDetailDTO fdo);
 	
-	public int trainerInfoUpdate(TrainerInfoDTO tio);
+	public int trainerInfoUpdate(FileDetailDTO fdo);
 }

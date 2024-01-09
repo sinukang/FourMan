@@ -75,9 +75,9 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public int trainerInfoUpdate(TrainerInfoDTO tio) {
+	public int trainerInfoUpdate(FileDetailDTO fdo) {
 		
-		int value = tsm.trainerInfoUpdate(tio);
+		int value = tsm.trainerInfoUpdate(fdo);
 		
 		return value;
 	}
