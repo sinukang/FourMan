@@ -29,7 +29,6 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	
 	public TrainerInfoDTO findTrainerOne(int tnNo) {
 		TrainerInfoDTO tio = null;
 		

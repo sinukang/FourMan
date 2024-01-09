@@ -4,12 +4,79 @@
 
 <mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
 
-	<select id="findTrainer" resultType="tio">
-		SELECT t.* FROM trainerinfo t WHERE tnDelYN = 'N'
+	<!-- 트레이너 찾기 비 로그인 or 로그인-->
+	<select id="findTrainer" parameterType="scri" resultType="tio">
+		SELECT m.*
+		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, t.tnDate, t.tnDateM, t.tnDelYN
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
+		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage
+		<choose>
+			<when test="mbNo == null">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+				, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
+			</when>
+			<otherwise>
+				, (SELECT ST_DISTANCE_SPHERE(POINT(u.mbMapX , u.mbMapY), POINT(m.mbMapX, m.mbMapY)) FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') AS distance
+			</otherwise>
+		</choose>
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		<!-- LEFT JOIN review r ON t.tnNo = r.tnNo AND r.rvDelYN = 'N' -->
+		WHERE m.mbDelYN = 'N'
+		<choose>
+			<when test="mbNo == null">
+				<![CDATA[
+				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				AND (SELECT ST_DISTANCE_SPHERE(POINT(u.mbMapX, u.mbMapY), POINT(m.mbMapX, m.mbMapY)) FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') <= #{distance}
+				AND NOT m.mbNo = #{mbNo}
+				]]>
+			</otherwise>
+		</choose>
+		<include refid="trainerSearch"/>
+		ORDER BY distance ASC
 	</select>
 	
-	<!-- 트레이너정보등록 -->
+	<!-- 트레이너 총 개수 -->
+	<select id="trainerTotalCount" parameterType="scri" resultType="int">
+		SELECT COUNT(t.tnNo) AS trainerCNT
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		<choose>
+			<when test="mbNo == null">
+				<![CDATA[
+				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+				]]>				
+			</when>
+			<otherwise>
+				<![CDATA[
+				AND (SELECT ST_Distance_Sphere(POINT(u.mbMapX, u.mbMapY)
+				, POINT(m.mbMapX, m.mbMapY)) FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') <= #{distance}
+				]]>
+				AND m.mbNo NOT IN(#{mbNo})				
+			</otherwise>
+		</choose>
+		<include refid="trainerSearch"/>
+	</select>
 	
+	<!-- 트레이너 검색 조건 -->
+	<sql id="trainerSearch">
+		<if test="searchType != null">
+			AND (
+				m.mbName LIKE CONCAT("%",#{keyword},"%")
+				OR m.mbAddr LIKE CONCAT("%",#{keyword},"%")
+				OR c.ctName LIKE CONCAT("%",#{keyword},"%")
+				)
+		</if>
+	</sql>	
+	
+	<!-- 트레이너정보등록 -->
 	<insert id="trainerInsert" parameterType="tio" useGeneratedKeys="true" keyProperty="tnNo">
 		<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
 		select max(tnNo) as tnNo from trainerInfo
@@ -18,10 +85,10 @@
 	 	values(#{mbNo}, #{flNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
 	</insert>
 	<!-- 자격 정보 등록 -->
-	<insert id="qualifyInsert" parameterType="tio">
+	<!-- <insert id="qualifyInsert" parameterType="tio">
 		insert into qualify(tnNo, qualify)
 	 	values(#{tnNo}, #{qualify})
-	</insert>
+	</insert> -->
 	
 	<!-- 레슨 가격 정보 등록 -->
 	<insert id="lessonPriceInsert" parameterType="tio">

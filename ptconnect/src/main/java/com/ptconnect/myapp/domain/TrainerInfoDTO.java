@@ -17,6 +17,7 @@ public class TrainerInfoDTO extends MemberDTO{
 	private String tnDelYN;
 	
 	private int qlNo;
+	private String qualify;
 	private String qlDate;
 	private String qlDateM;
 	private String qlDelYN;
@@ -30,21 +31,8 @@ public class TrainerInfoDTO extends MemberDTO{
 	private String lpDateM;
 	private String lpDelYN;
 	
-	private List<String> qualify;
-	private List<String> program;
+	private String priceInfo;
 	
-	public List<String> getQualify() {
-		return qualify;
-	}
-	public void setQualify(List<String> qualify) {
-		this.qualify = qualify;
-	}
-	public List<String> getProgram() {
-		return program;
-	}
-	public void setProgram(List<String> program) {
-		this.program = program;
-	}
 	public int getTnNo() {
 		return tnNo;
 	}
@@ -111,6 +99,12 @@ public class TrainerInfoDTO extends MemberDTO{
 	public void setQlNo(int qlNo) {
 		this.qlNo = qlNo;
 	}
+	public String getQualify() {
+		return qualify;
+	}
+	public void setQualify(String qualify) {
+		this.qualify = qualify;
+	}
 	public String getQlDate() {
 		return qlDate;
 	}
@@ -170,6 +164,12 @@ public class TrainerInfoDTO extends MemberDTO{
 	}
 	public void setLpDelYN(String lpDelYN) {
 		this.lpDelYN = lpDelYN;
+	}
+	public String getPriceInfo() {
+		return priceInfo;
+	}
+	public void setPriceInfo(String priceInfo) {
+		this.priceInfo = priceInfo;
 	}
 	
 }
