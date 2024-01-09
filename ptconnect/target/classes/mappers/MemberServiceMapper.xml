@@ -4,8 +4,10 @@
 
 <mapper namespace="com.ptconnect.myapp.persistance.MemberServiceMapper">
 	<insert id="memberInsert" parameterType="mo">
-		INSERT INTO member(mbAuth, mbEmail, mbPwd, mbPwdSalt, mbName, mbphone, mbAddr)
-		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbPwdSalt}, #{subject}, #{contents}, #{writer}, #{filename2}, #{pwd})
+		INSERT INTO member(mbAuth, mbEmail, mbPwd, mbName, mbPhone, mbAddr, mbMapY, mbMapX)
+		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbName}, #{mbPhone}, #{mbAddr}, #{mbMapY}, #{mbMapX})
 	</insert>
-
+	<select id="memberEmailCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail}
+	</select>
 </mapper>
