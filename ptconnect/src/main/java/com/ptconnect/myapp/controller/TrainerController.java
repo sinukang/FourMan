@@ -29,7 +29,7 @@ public class TrainerController {
 	@GetMapping(value = "/findTrainer.do")
 	public String findTrainer(HttpServletRequest request, SearchCriteria scri, Model model) {
 		
-		scri.setMbNo(0);
+		scri.setMbNo(17);
 		scri.setDistance(3000);
 		HttpSession session = request.getSession(false);
 		
@@ -44,6 +44,7 @@ public class TrainerController {
 		
 		pm.setCurrentPage(scri.getPage());
 		int totalCount = ts.trainerTotalCount(scri);
+		System.out.println("totalCount : " + totalCount);
 		pm.setScri(scri);
 		pm.setTotalCount(totalCount);
 		model.addAttribute("pm", pm);

@@ -160,7 +160,7 @@
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/include/footer.jsp"/>
 	<c:forEach var="tio" items="${tio_alist}">
-		${tio.ctName}
+		${tio.mbAddr}
 	</c:forEach>
 	
 <script>
@@ -224,8 +224,8 @@
 	var positions = [
 		<c:forEach items='${tio_alist}' var='tio'>
 			{
-				title: '${tio.ctName}',
-				latlng: new kakao.maps.LatLng(${tio.mbMapY},${tio.mbMapX}) // y좌표, x좌표
+				title: '${tio.mbName}',
+				latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
 			},
 		</c:forEach>
 	];
