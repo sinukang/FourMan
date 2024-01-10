@@ -8,6 +8,7 @@
 <title>트레이너 찾기</title>
 <link href="${pageContext.request.contextPath}/resources/css/coach.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
 </head>
 <body>
@@ -27,83 +28,111 @@
 					
 				</div>
 				
-				<div class="searchBar">
-					<input type="text" id="search_keyword" class="bar" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="20">
-					<div class="search_btn">
-						<img src="${pageContext.request.contextPath}/resources/img/search.svg">
+				<form id="filter_Form" action="${pageContext.request.contextPath}/findTrainer.do" method="get">
+					<div class="searchBar">
+							<input type="text" id="search_keyword" name="keyword" class="bar" value="${pm.scri.keyword}" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="30">
+							<div class="search_btn">
+								<img src="${pageContext.request.contextPath}/resources/img/search.svg">
+							</div>
 					</div>
-				</div>
+				
 			
-				<div class="searchBar_option">
-					<div class="flex">
-						<div>
-							<img src="${pageContext.request.contextPath}/resources/img//markericon.png" width="17px" height="25px">
-							<span>
-								<span class="search_key">덕진구</span>
-								검색 결과
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="filter_option">
-					<div class="filter_Initialization">
-						<div class="headerComp">
-							<img src="${pageContext.request.contextPath}/resources/img//arrow_left.svg" alt="search">
-						</div>
-						<div class="headerComp">
-							<div class="resetFilter">필터 초기화</div>
+					<div class="searchBar_option">
+						<div class="flex">
+							<div>
+								<img src="${pageContext.request.contextPath}/resources/img//markericon.png" width="17px" height="25px">
+								<span>
+									<span class="search_key">금암동</span> 검색 결과
+								</span>
+							</div>
 						</div>
 					</div>
 					
-					<div class="filterOption_list">
-						<div class="radius">
-							<h3>검색 반경
-							<span class="radius_key">1km 이내</span>
-							</h3>
-						</div>
-						
-						<div class="radius_slider">
-							<input type="range" id="radius-slider" min="1" max="200" step="1" value="10">
-						</div>
-						
-						<ul class="distance">
-							<li style="text-align:left;">500m</li>
-							<li style="text-align:right;">5km</li>
-						</ul>
-						
-						<div class="gender">
-							<h3>선생님 성별</h3>
-							<div class="radioBox">
-								<label for="all">
-									<input type="radio" name="Gender" value="1" id="all" checked>전체
-									</label>
-								<label for="male">
-									<input type="radio" name="Gender" value="2" id="male" >남성
-									</label>
-								<label for="female">
-									<input type="radio" name="Gender" value="3" id="female">여성
-								</label>
+					<div class="filter_option <c:if test='${filterOnOff eq 1}'>visible</c:if>">
+						<div class="filter_Initialization">
+							<div class="headerComp">
+								<img src="${pageContext.request.contextPath}/resources/img//arrow_left.svg" alt="search">
+							</div>
+							<div class="headerComp">
+								<div class="resetFilter">필터 초기화</div>
 							</div>
 						</div>
 						
-						<div class="sorting">
-								<div class="sortingBtn">최저가 순</div>
-								<div class="sortingBtn">리뷰많은 순</div>
-								<div class="sortingBtn">거리 순</div>
-						</div>
-						
-						<div class="filterBtn">
-							<button>필터 적용하기</button>
+						<div class="filterOption_list">
+							<div class="radius">
+								<h3>검색 반경
+									<span class="radius_key">1km 이내</span>
+								</h3>
+							</div>
+							
+							<div class="radius_slider">
+								<input type="range" id="radius-slider" name="distance" min="500" max="5000" step="500" value="${pm.scri.distance}">
+							</div>
+							
+							<ul class="distance">
+								<li style="text-align:left;">500m</li>
+								<li style="text-align:right;">5km</li>
+							</ul>
+							
+							<div class="sorting">
+									<div class="sortingBtn" name="testName" value="test111">거리 순</div>
+									<div class="sortingBtn">리뷰많은 순</div>
+									<div class="sortingBtn">최저가 순</div>
+							</div>
+							
+							<div class="filterBtn">
+								<button class="btn_filter">필터 적용하기</button>
+							</div>
 						</div>
 					</div>
-				</div>
+					
+				</form>
 			</div>
 			
-			<!-- 리스트 영역 -->
+			<!-- 검색된 결과 리스트 영역 -->
 			<div class="searchForm">
 				<div class="searchResultWrap">
 					<div class="searchResultArea">
-						<c:forEach var="i" begin="1" end="10" step="1">
+						<!-- 샘플 데이터 -->
+						<a href="trainerInfoView">
+							<div class="coachCard">
+								<div>
+									<div class="coachImages">
+										<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" >
+										<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
+										<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" >
+									</div>
+									<div class="coachInfo">
+										<div class="coachTitle">
+											<h3 class="coachName">이젠 트레이너</h3>
+										
+											<div class="coachReviewCnt">
+												<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
+												<span class="reviewText">35개</span>
+											</div>
+										</div>
+										
+										<div class="coachOneLine">
+											<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
+										</div>
+										
+										<div class="priceInfo">
+											<div class="priceTitle"> 1회 체험권 </div>
+											<div class="ptPrice"><strong>35000</strong> 원</div>
+										</div>
+										
+										<div class="location">
+											<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
+											<p class="locationAddr">이젠 피트니스 센터</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+						<!-- 샘플 데이터 -->
+						
+						<!-- DB 데이터 -->
+						<c:forEach var="tio" items="${tio_alist}">
 							<a href="trainerInfoView">
 								<div class="coachCard">
 									<div>
@@ -114,32 +143,34 @@
 										</div>
 										<div class="coachInfo">
 											<div class="coachTitle">
-												<h3 class="coachName">필 히스${i}</h3>
+												<h3 class="coachName">${tio.mbName}</h3>
 											
 												<div class="coachReviewCnt">
 													<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
-													<span class="reviewText">35개</span>
+													<span class="reviewText">${tio.reviewCnt}</span>
 												</div>
 											</div>
 											
 											<div class="coachOneLine">
-												<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
+												<p>${tio.tnOneLine}</p>
 											</div>
 											
 											<div class="priceInfo">
 												<div class="priceTitle"> 1회 체험권 </div>
-												<div class="ptPrice"><strong>35000</strong> 원</div>
+												<div class="ptPrice"><strong>${tio.tnTicket}</strong> 원</div>
 											</div>
 											
 											<div class="location">
 												<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
-												<p class="locationAddr">서울특별시 중구 태평로1가 세종대로 110 (서울시청)</p>
+												<p class="locationAddr">${tio.ctName}</p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</c:forEach>
+						<!-- 샘플 데이터 -->
+						
 					</div>
 				</div>
 			</div>
@@ -159,9 +190,19 @@
 	
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/include/footer.jsp"/>
-	<c:forEach var="tio" items="${tio_alist}">
-		${tio.mbAddr}
+	
+	<c:forEach var="tio" items="${tio_alist}" varStatus="tioIDX">
+		${tio.mbAddr}<c:if test="${tioIDX.last eq false}">,</c:if>
 	</c:forEach>
+	<br>
+	<c:choose>
+		<c:when test="${tio_alist[0].uMapX ne null}">
+			center: new kakao.maps.LatLng(${tio_alist[0].uMapY}, ${tio_alist[0].uMapX}), // 지도의 중심좌표
+		</c:when>
+		<c:otherwise>
+			center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 학원 35.84026098258203, 127.1324143491829
+		</c:otherwise>
+	</c:choose>
 	
 <script>
 	
@@ -196,9 +237,11 @@
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
 	
+	
 	mapOption = {
-	    center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
+	
+		center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 학원 35.84026098258203, 127.1324143491829
+		level: 3 // 지도의 확대 레벨
 	};  
 	
 	//지도를 생성합니다    
@@ -222,11 +265,15 @@
 	}
 	
 	var positions = [
-		<c:forEach items='${tio_alist}' var='tio'>
+		{
+			title: '이젠 피트니스 센터',
+			latlng: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
+		},
+		<c:forEach items='${tio_alist}' var='tio' varStatus="tioIDX">
 			{
 				title: '${tio.mbName}',
 				latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
-			},
+			}<c:if test='${tioIDX.last eq false}'>,</c:if>
 		</c:forEach>
 	];
 	
@@ -256,6 +303,45 @@
 		});		
 		
 	}
+
+	function rangeSlider(){
+		
+		let range = $('#radius-slider');
+		let value = $(".radius_key");
+		
+		let spanVal = $('#radius-slider').attr('value');
+		value.html((spanVal*0.001)+'km 이내')
+		
+		range.on('input', function(){
+			if(this.value < 1000){
+				value.html((this.value) + 'm 이내');
+			}else{
+				value.html((this.value*0.001) + 'km 이내');
+			}
+		});
+			
+	}
+	rangeSlider();	
+	
+	$(document).ready(function(){
+		
+		$(".search_btn, .btn_filter").on("click", function(){	//검색 버튼
+			
+			$("#filter_Form").submit();
+			
+		});
+		
+		$(".resetFilter").on("click",function(){	//검색 조건 초기화
+			
+			history.replaceState({}, null, location.pathname);
+			location.reload();
+			
+// 			$("#filter_Form")[0].reset(); //선택한 form 내부의 조건 초기화
+		});
+		
+		
+		
+	});
 	
 	
 </script>

@@ -1,6 +1,6 @@
 package com.ptconnect.myapp.domain;
 
-public class TrainerInfoDTO extends MemberDTO{
+public class TrainerInfoDTO extends CenterInfoDTO{
 	
 	private int tnNo;
 	private int mbNo;
@@ -29,6 +29,30 @@ public class TrainerInfoDTO extends MemberDTO{
 	private String lpDelYN;
 	
 	private String priceInfo;
+	
+	private double uMapY;	//로그인 한 유저 주소의 위도 좌표
+	private double uMapX;	//로그인 한 유저 주소의 경도 좌표
+	private int reviewCnt; //리뷰 개수 임시로 추가함
+	
+	public int getReviewCnt() {
+		return reviewCnt;
+	}
+	public void setReviewCnt(int reviewCnt) {
+		this.reviewCnt = reviewCnt;
+	}
+	public double getuMapY() {
+		return uMapY;
+	}
+	public void setuMapY(double uMapY) {
+		this.uMapY = uMapY;
+	}
+	public double getuMapX() {
+		return uMapX;
+	}
+	public void setuMapX(double uMapX) {
+		this.uMapX = uMapX;
+	}
+	
 	
 	public int getTnNo() {
 		return tnNo;

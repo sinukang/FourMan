@@ -17,7 +17,6 @@ import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.TrainerService;
 
 @Controller
-@RequestMapping(value = "/trainer")
 public class TrainerController {
 	
 	@Autowired
@@ -29,9 +28,9 @@ public class TrainerController {
 	@GetMapping(value = "/findTrainer.do")
 	public String findTrainer(HttpServletRequest request, SearchCriteria scri, Model model) {
 		
-		scri.setMbNo(17);
-		scri.setDistance(3000);
 		HttpSession session = request.getSession(false);
+		scri.setMbNo(17);
+		int filterOnOff = 0;
 		
 		if(session != null) {
 			if(session.getAttribute("mbNo") != null) {
@@ -39,15 +38,28 @@ public class TrainerController {
 			}
 		}
 		if(request.getParameter("distance") != null) {
-			scri.setDistance(Integer.parseInt(request.getParameter("distance")));
+			if(Integer.parseInt(request.getParameter("distance")) > 5000) {
+				scri.setDistance(5000);
+			}else if(Integer.parseInt(request.getParameter("distance")) < 500) {
+				scri.setDistance(500);
+			}else {
+				scri.setDistance(Integer.parseInt(request.getParameter("distance")));
+			}
+			filterOnOff = 1;
+		}else {
+			scri.setDistance(1000);
 		}
 		
+		System.out.println("scri.getDistance() : " + scri.getDistance());
+		System.out.println("scri.getKeyword() : " + scri.getKeyword());
 		pm.setCurrentPage(scri.getPage());
 		int totalCount = ts.trainerTotalCount(scri);
 		System.out.println("totalCount : " + totalCount);
 		pm.setScri(scri);
 		pm.setTotalCount(totalCount);
 		model.addAttribute("pm", pm);
+		model.addAttribute("filterOnOff", filterOnOff);
+		
 		
 		ArrayList<TrainerInfoDTO> tio_alist = ts.findTrainer(scri);
 		model.addAttribute("tio_alist", tio_alist);

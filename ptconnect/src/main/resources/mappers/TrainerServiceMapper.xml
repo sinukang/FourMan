@@ -6,11 +6,14 @@
 
 	<!-- 트레이너 찾기 비 로그인 or 로그인-->
 	<select id="findTrainer" parameterType="scri" resultType="tio">
-		SELECT m.*
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
 		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, t.tnDate, t.tnDateM, t.tnDelYN, c.ctName
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage
+		, (SELECT u.mbMapY FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') AS uMapY
+		, (SELECT u.mbMapX FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') AS uMapX
 		<choose>
 			<when test="mbNo == 0">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
 				, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
@@ -68,7 +71,7 @@
 	
 	<!-- 트레이너 검색 조건 -->
 	<sql id="trainerSearch">
-		<if test="searchType != null">
+		<if test="keyword != null">
 			AND (
 				m.mbName LIKE CONCAT("%",#{keyword},"%")
 				OR m.mbAddr LIKE CONCAT("%",#{keyword},"%")

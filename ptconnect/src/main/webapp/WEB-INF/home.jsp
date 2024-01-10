@@ -13,6 +13,6 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <br>
-<a href="${pageContext.request.contextPath}/trainer/findTrainer.do">트레이너 찾기</a>
+<a href="${pageContext.request.contextPath}/findTrainer.do">트레이너 찾기</a>
 </body>
 </html>
