@@ -44,12 +44,20 @@ public class MemberServiceImpl implements MemberService{
 		
 		return value;
 	}
-	
+
 	@Override
 	public int memberEmailCheck(String mbEmail) {
 		int value = msm.memberEmailCheck(mbEmail);
 		
 		
 		return value;
+	}
+	
+	@Override
+	public MemberDTO memberLogin(String mbEmail) {
+		
+		MemberDTO mo = msm.memberLogin(mbEmail);
+		
+		return mo;
 	}
 }

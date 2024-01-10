@@ -8,6 +8,7 @@
 <title>로그인</title>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/login.css" type="text/css" rel="stylesheet">
+<script src="/webjars/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 	<div>
@@ -24,69 +25,81 @@
 									<div class="tab" id="trainerTab">트레이너</div>
 									<div class="tab" id="centerTab">센터</div>
 								</div>
+								<div style="display:contents;">
+									<span class="errMsg" style="display:none; text-align:center; color:red;"></span>
+								</div>
 								
 								 <div id="normalLogin" class="loginSection">
-									<div class="emailBox">
-										<h3>이메일</h3>
-										<input type="text" id="loginEmail" placeholder="example@gmail.com" >
-									</div>
-									
-									<div class="pwdBox">
-										<h3>비밀번호</h3>
-										<input type="text" id="loginpPwd">
-									</div>
-									<div class="loginBtn">
-									<button type="button">로그인</button>
-									</div>
+								 	<form name="userForm" id="userForm">
+								 		<input type="hidden" name="cate"  value="user">
+										<div class="emailBox">
+											<h3>이메일</h3>
+											<input type="text" id="userLoginEmail" name="mbEmail" placeholder="example@gmail.com" >
+										</div>
 										
-									<div class="menuBox">
-										<div class="menuJoin"><a href="${pageContext.request.contextPath}/ptconnect/member/joinUser.jsp">회원가입</a></div>|
-										<div class="menuFindId">아이디찾기</div>|
-										<div class="menuFindPwd">비밀번호찾기</div>
-									</div>
+										<div class="pwdBox">
+											<h3>비밀번호</h3>
+											<input type="text" name="mbPwd" id="userLoginPwd">
+										</div>
+										<div class="loginBtn">
+										<button type="button" id="userLoginBtn">로그인</button>
+										</div>
+											
+										<div class="menuBox">
+											<div class="menuJoin"><a href="${pageContext.request.contextPath}/joinUser">회원가입</a></div>|
+											<div class="menuFindId">아이디찾기</div>|
+											<div class="menuFindPwd">비밀번호찾기</div>
+										</div>
+								 	</form>
 								</div>
 								
 								<div id="trainerLogin" class="loginSection" style="display: none;">
-									<div class="emailBox">
-										<h3>이메일</h3>
-										<input type="text" id="loginEmail" placeholder="example@gmail.com" >
-									</div>
-									
-									<div class="pwdBox">
-										<h3>비밀번호</h3>
-										<input type="text" id="loginpPwd">
-									</div>
-									
-									<div class="loginBtn">
-										<button type="button">로그인</button>
-									</div>
+								 	<form name="trainerForm" id="trainerForm">
+								 		<input type="hidden" name="cate" value="trainer">
+										<div class="emailBox">
+											<h3>이메일</h3>
+											<input type="text" id="trainerLoginEmail" name="mbEmail" placeholder="example@gmail.com" >
+										</div>
 										
-									<div class="menuBox">
-										<div class="menuJoin"><a href="${pageContext.request.contextPath}/ptconnect/member/joinTrainer.jsp">트레이너가입</a></div>|
-										<div class="menuFindId">아이디찾기</div>|
-										<div class="menuFindPwd">비밀번호찾기</div>
-									</div>
+										<div class="pwdBox">
+											<h3>비밀번호</h3>
+											<input type="text" name="mbPwd" id="trainerLoginPwd">
+										</div>
+										
+										<div class="loginBtn">
+											<button type="button" id="trainerLoginBtn">로그인</button>
+										</div>
+											
+										<div class="menuBox">
+											<div class="menuJoin"><a href="${pageContext.request.contextPath}/joinTrainer">트레이너가입</a></div>|
+											<div class="menuFindId">아이디찾기</div>|
+											<div class="menuFindPwd">비밀번호찾기</div>
+										</div>
+									</form>
 								</div>
 								
 								<div id="centerLogin" class="loginSection" style="display: none;">
-									<div class="emailBox">
-										<h3>이메일</h3>
-										<input type="text" id="loginEmail" placeholder="example@gmail.com" >
-									</div>
-									
-									<div class="pwdBox">
-										<h3>비밀번호</h3>
-										<input type="text" id="loginpPwd">
-									</div>
-									<div class="loginBtn">
-										<button type="button">로그인</button>
-									</div>
+								 	<form name="centerForm" id="centerForm">
+								 		<input type="hidden" name="cate" value="center">
+										<div class="emailBox">
+											<h3>이메일</h3>
+											<input type="text" id="centerLoginEmail" name="mbEmail" placeholder="example@gmail.com" >
+										</div>
 										
-									<div class="menuBox">
-										<div class="menuJoin"><a href="${pageContext.request.contextPath}/ptconnect/member/joinCenter.jsp">센터가입</a></div>|
-										<div class="menuFindId">아이디찾기</div>|
-										<div class="menuFindPwd">비밀번호찾기</div>
-									</div>
+										<div class="pwdBox">
+											<h3>비밀번호</h3>
+											<input type="text" name="mbPwd" id="centerLoginPwd">
+										</div>
+										<div class="loginBtn">
+											<button type="button" id="centerLoginBtn">로그인</button>
+										</div>
+											
+										<div class="menuBox">
+											<div class="menuJoin"><a href="${pageContext.request.contextPath}/joinCenter">센터가입</a></div>|
+											<div class="menuFindId">아이디찾기</div>|
+											<div class="menuFindPwd">비밀번호찾기</div>
+										</div>
+									</form>
 								</div>
 								
 							</div>
@@ -97,7 +110,37 @@
 			</div>
 		</div>
 	</div>
-	
+	<script>
+		$(document).ready(function(){
+			if(${not empty errMsg}){
+				$('.errMsg').html('${errMsg}');
+				$('.errMsg').css('display','');
+                // 모든 로그인 섹션 숨기기
+                $('#normalLogin').css('display','none');
+                $('#trainerLogin').css('display','none');
+                $('#centerLogin').css('display','none');
+
+                // 선택된 탭에 대한 배경 색상 설정
+                $('#normalTab').removeClass('selectedTab');
+                $('#trainerTab').removeClass('selectedTab');
+                $('#centerTab').removeClass('selectedTab');
+                
+                if(${cate eq 'user'}){
+                    $('#nomalTab').addClass('selectedTab');
+                    $('#nomalTab').css('display','block');
+                    $('#userLoginEmail').val('${mbEmail}');
+                }else if(${cate eq 'trainer'}){
+                    $('#trainerTab').addClass('selectedTab');
+                    $('#trainerTab').css('display','block');
+                    $('#trainerLoginEmail').val('${mbEmail}');
+                }else if(${cate eq 'center'}){
+                    $('#centerTab').addClass('selectedTab');
+                    $('#centerTab').css('display','block');
+                    $('#centerLoginEmail').val('${mbEmail}');
+                }
+			}
+		});
+	</script>
 	
   <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -135,7 +178,42 @@
             }
         });
     </script>	
-	
+	<script>
+		$('.loginBtn button').click(function(){
+// 			console.log($(this).attr("id"));
+			$('.errMsg').css('display','none');
+			var email = "";
+			var pwd = ""; 
+			var cate = "";
+			if($(this).attr("id")=="userLoginBtn"){
+				email = $('#userLoginEmail').val();
+				pwd = $('#userLoginPwd').val();
+				cate = "user";
+			}else if($(this).attr("id")=="trainerLoginBtn"){
+				email = $('#trainerLoginEmail').val();
+				pwd = $('#trainerLoginPwd').val();
+				cate = "trainer";
+			}else if($(this).attr("id")=="centerLoginBtn"){
+				email = $('#centerLoginEmail').val();
+				pwd = $('#centerLoginPwd').val();
+				cate = "center";
+			}
+			
+			if(email==""){
+				$('.errMsg').html('이메일을 입력해주세요.');
+				$('.errMsg').css('display','');
+			}else if (pwd==""){
+				$('.errMsg').html('비밀번호를 입력해주세요.');
+				$('.errMsg').css('display','');
+			}else{
+				console.log($('#'+cate+'LoginEmail').val());
+				$('#'+cate+'Form').attr('action','${pageContext.request.contextPath}/loginAction');
+				$('#'+cate+'Form').attr('method','POST');
+				$('#'+cate+'Form').submit();
+			}
+			
+		});
+	</script>
 	
 </body>
 </html>

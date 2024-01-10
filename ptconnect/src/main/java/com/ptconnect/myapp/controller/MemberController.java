@@ -1,10 +1,14 @@
 package com.ptconnect.myapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
@@ -26,11 +31,21 @@ public class MemberController {
 	MemberService ms;
 	@Autowired
 	MailSender mail;
-	
+	@Autowired
+	private BCryptPasswordEncoder bCrptPasswordEncoderer;
 	
 	@RequestMapping(value = "joinUser", method = RequestMethod.GET)
 	public String joinUser() {
 		return "member/joinUser";
+	}
+	@RequestMapping(value = "joinTrainer", method = RequestMethod.GET)
+	public String joinTrainer() {
+		return "member/joinTrainer";
+	}
+	
+	@RequestMapping(value = "joinCenter", method = RequestMethod.GET)
+	public String joinCenter() {
+		return "member/joinCenter";
 	}
 	@ResponseBody
 	@RequestMapping(value = "memberEmailCheck.ajax", method = RequestMethod.POST)
@@ -91,6 +106,8 @@ public class MemberController {
 				FieldError fieldError = bindingResult.getFieldError();
 				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
 			}else {
+				String mbPwd2 = bCrptPasswordEncoderer.encode(mo.getMbPwd());
+				mo.setMbPwd(mbPwd2);
 				value=1;		
 				ms.memberInsert(mo);		
 			}
@@ -114,6 +131,8 @@ public class MemberController {
 				FieldError fieldError = bindingResult.getFieldError();
 				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
 			}else {
+				String mbPwd2 = bCrptPasswordEncoderer.encode(mo.getMbPwd());
+				mo.setMbPwd(mbPwd2);
 				value=1;		
 				ms.trainerInsert(mo);		
 			}
@@ -137,6 +156,8 @@ public class MemberController {
 				FieldError fieldError = bindingResult.getFieldError();
 				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
 			}else {
+				String mbPwd2 = bCrptPasswordEncoderer.encode(cio.getMbPwd());
+				cio.setMbPwd(mbPwd2);
 				value=1;		
 				ms.centerInsert(cio);
 			}
@@ -145,24 +166,51 @@ public class MemberController {
 		return jo;
 	}
 	
-	@RequestMapping(value = "joinTrainer", method = RequestMethod.GET)
-	public String joinTrainer() {
-		return "member/joinTrainer";
-	}
 	
-	@RequestMapping(value = "joinCenter", method = RequestMethod.GET)
-	public String joinCenter() {
-		return "member/joinCenter";
-	}
-	
-	@RequestMapping(value = "idFind", method = RequestMethod.GET)
-	public String idFind() {
-		return "member/idFind";
-	}
-	
+
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login() {
 		return "member/login";
+	}
+	
+	@RequestMapping(value = "loginAction", method = RequestMethod.POST)
+	public String loginAction(
+			@RequestParam("mbEmail") String mbEmail, 
+			@RequestParam("mbPwd") String mbPwd,
+			@RequestParam("cate") String cate,
+			HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response, 
+			RedirectAttributes rttr) {
+
+		MemberDTO mo = ms.memberLogin(mbEmail);
+		String path = "";
+		if(mo!=null) {
+			if(bCrptPasswordEncoderer.matches(mbPwd, mo.getMbPwd())) {
+
+				rttr.addAttribute("mbNo", mo.getMbNo());
+				rttr.addAttribute("mbAuth", mo.getMbAuth());
+				rttr.addAttribute("mbName", mo.getMbName());
+				rttr.addAttribute("mbMapY", mo.getMbMapY());
+				rttr.addAttribute("mbMapX", mo.getMbMapX());
+			}else {
+				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
+				rttr.addFlashAttribute("mbEmail",mbEmail);
+				rttr.addFlashAttribute("cate",cate);
+				path = "login";
+			}
+		}else{
+			rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
+			rttr.addFlashAttribute("mbEmail",mbEmail);
+			rttr.addFlashAttribute("cate",cate);
+			path = "login";
+		}
+		
+		return "redirect:/"+path;
+	}
+
+	@RequestMapping(value = "idFind", method = RequestMethod.GET)
+	public String idFind() {
+		return "member/idFind";
 	}
 	
 	@RequestMapping(value = "pwdFind", method = RequestMethod.GET)

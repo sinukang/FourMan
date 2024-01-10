@@ -317,6 +317,32 @@ button.rbc-input::-moz-focus-inner {
     color: rgb(61, 69, 77);
 }
 
+.nav_bar_menu .name_button{
+    font-weight: normal;
+    color: rgb(61, 69, 77);
+}
+
+.nav_bar_menu .name_button .name{
+    font-weight: 500;
+}
+
+.drop_down_menu{
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(0px, 36px, 0px);
+    padding: 0px;
+    top: 16px !important;
+}
+
+.drop_down_menu .drop_down_divider{
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+}
+
 /* ---------------컨텐츠----------------- */
 .inner_contents{
     padding-bottom: 96px;
