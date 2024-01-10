@@ -8,4 +8,8 @@ public interface MemberService {
 	public int trainerInsert(MemberDTO mo);
 	public int centerInsert(CenterInfoDTO cio);
 	public int memberEmailCheck(String mbEmail);
+	
+	public MemberDTO memberLogin(String mbEmail);
+	
+	
 }

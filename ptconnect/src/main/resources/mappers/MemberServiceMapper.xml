@@ -21,4 +21,8 @@
 	<select id="memberEmailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail}
 	</select>
+	<select id="memberLogin" parameterType="String" resultType="mo">
+		SELECT * FROM member WHERE mbEmail = #{mbEmail}
+	</select>
+	
 </mapper>
