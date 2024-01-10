@@ -50,7 +50,7 @@
 								
 								<div class="pwdCheckBox">
 									<h3>비밀번호 확인</h3>
-									<input type="text" id="joinpPwd2"  placeholder="비밀번호를 다시 입력해주세요">
+									<input type="text" id="joinPwd2"  placeholder="비밀번호를 다시 입력해주세요">
 								</div>
 								
 								<div class="userName">
@@ -66,10 +66,10 @@
 								<div class="kakao-address userAddr">
 									<h3>주소</h3>
 									<div id="address-btn-area" class="flexBox">
-										<input type="text" name="postcode" id="postcode" placeholder="우편번호">
+										<input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly>
 										<button id="address-btn" onclick="DaumPostcode()">우편번호 찾기</button>
 									</div>
-									<input type="text" name="addr" id="addr" placeholder="주소">
+									<input type="text" name="addr" id="addr" placeholder="주소" readonly>
 									<div class="flexBox">
 										<input type="text" name="detail_addr" id="detail_addr" placeholder="상세주소">
 										<input type="text" name="extra_addr" id="extra_addr" placeholder="추가정보">
@@ -265,7 +265,6 @@
 <script>
 function EmailCheck(){
 	var email = $('#joinEmail').val();
-	
 	$.ajax({
 		type : "post",
 		url : "${pageContext.request.contextPath}/memberEmailCheck.ajax",
@@ -274,6 +273,8 @@ function EmailCheck(){
 		success : function(data){
 			if(data.value == 0){
 				StartTimer();
+			}else if(data.value==5){
+				alert("이메일 인증 실패, 이메일을 확인해주세요.");
 			}else{
 				alert("중복 이메일 있음");
 			}
@@ -404,8 +405,10 @@ var isRunning = false;
 <script>
 
 $('#joinUserBtn').click(function(){
+	$('#errorMsg').css('display','none');
 	var memberInfo = {
 			'mbEmail' : $('#joinEmail').val(),
+			'mbAuth' : $('#userCheck').val(),
 			'mbPwd': $('#joinPwd').val(),
 			'mbName': $('#userName').val(),
 			'mbPhone': $('#userPhone').val(),
@@ -415,27 +418,40 @@ $('#joinUserBtn').click(function(){
 			'mbMapY': $('#mapY').val(),
 			'mbMapX': $('#mapX').val(),
 	};
-	$.ajax({
-		contentType:'application/json;',
-		type: "POST",
-		url: '${pageContext.request.contextPath}/joinUserAction.ajax',
-		dataType: "json",
-		data: JSON.stringify(memberInfo),
-		success: function(data){
-			if(data.value==1){
-				alert('가입이 완료되었습니다.');
-				location.href='{pageContext.request.contextPath}/login';
-			}else{
-				$('#errorMsg').html(data.msg);
-				$('#errorMsg').css('display','');
+	console.log(memberInfo);
+	if($('#joinPwd2').val()==""){
+		$('#errorMsg').html("비밀번호 확인을 입력해주세요");
+		$('#errorMsg').css('display','');
+	}else if($('#joinPwd2').val()!=$('#joinPwd').val()){
+		$('#errorMsg').html("비밀번호와 일치하는 값을 입력해주세요.");
+		$('#errorMsg').css('display','');
+	}else if($('#mapY').val()==""){
+		$('#errorMsg').html("주소찾기를 통해 주소를 입력해주세요.");
+		$('#errorMsg').css('display','');
+	}else{
+		$.ajax({
+			contentType:'application/json;',
+			type: "POST",
+			url: '${pageContext.request.contextPath}/joinUserAction.ajax',
+			dataType: "json",
+			data: JSON.stringify(memberInfo),
+			success: function(data){
+				if(data.value==1){
+					alert('가입이 완료되었습니다.');
+					location.href='${pageContext.request.contextPath}/login';
+				}else{
+					$('#errorMsg').html(data.msg);
+					$('#errorMsg').css('display','');
+				}
+			},
+			error: function(){
+				console.log("join user action error");
+				return;
 			}
-		},
-		error: function(){
-			console.log("join user action error");
-			return;
-		}
-		
-	});
+			
+		});
+	}
+	
 });
 	
 </script>

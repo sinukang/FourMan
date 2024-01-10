@@ -5,7 +5,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /*
@@ -41,8 +40,9 @@ public class MemberDTO {
 	@NotEmpty(message = "이름을 입력해주세요.")
 	@Size(min=2, max=12, message="이름은 2자~12자 사이로 입력해주세요")
 	private String mbName;
-	@NotNull(message = "전화번호를 입력해주세요.")
-	private int mbPhone;
+	@Pattern(regexp="^[0-9]{2,3}[0-9]{3,4}[0-9]{4}$", message="전화번호를 정확히 입력해주세요.")
+	@NotEmpty(message = "전화번호를 입력해주세요.")
+	private String mbPhone;
 	private String mbAddr;
 	@NotEmpty(message = "주소를 입력해주세요.")
 	private String postcode;
@@ -87,10 +87,10 @@ public class MemberDTO {
 	public void setMbName(String mbName) {
 		this.mbName = mbName;
 	}
-	public int getMbPhone() {
+	public String getMbPhone() {
 		return mbPhone;
 	}
-	public void setMbPhone(int mbPhone) {
+	public void setMbPhone(String mbPhone) {
 		this.mbPhone = mbPhone;
 	}
 	public String getPostcode() {

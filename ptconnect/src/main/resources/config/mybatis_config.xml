@@ -5,6 +5,7 @@
 	<typeAliases>
 		 <typeAlias alias="mo" type="com.ptconnect.myapp.domain.MemberDTO"/>
 		 <typeAlias alias="ao" type="com.ptconnect.myapp.domain.AdminDTO"/>
+		 <typeAlias alias="cio" type="com.ptconnect.myapp.domain.CenterInfoDTO"/>
 		 <typeAlias alias="tio" type="com.ptconnect.myapp.domain.TrainerInfoDTO"/>
 		 <typeAlias alias="scri" type="com.ptconnect.myapp.domain.SearchCriteria"/>
 		 <typeAlias alias="fdo" type="com.ptconnect.myapp.domain.FileDetailDTO"/>
