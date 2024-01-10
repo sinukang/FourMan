@@ -7,6 +7,17 @@
 		INSERT INTO member(mbAuth, mbEmail, mbPwd, mbName, mbPhone, mbAddr, mbMapY, mbMapX)
 		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbName}, #{mbPhone}, #{mbAddr}, #{mbMapY}, #{mbMapX})
 	</insert>
+	<insert id="centerInsert" parameterType="cio">
+		<selectKey keyProperty="mbNo" resultType="int" order="AFTER">
+			SELECT MAX(mbNo) as mbNo FROM member
+		</selectKey>
+		INSERT INTO member(mbAuth, mbEmail, mbPwd, mbName, mbPhone, mbAddr, mbMapY, mbMapX)
+		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbName}, #{mbPhone}, #{mbAddr}, #{mbMapY}, #{mbMapX})
+	</insert>
+	<insert id="centerInfoInsert" parameterType="cio">
+		INSERT INTO centerInfo(mbNo,ctName,ctBn)
+		VALUES(#{mbNo},#{ctName},#{ctBn})
+	</insert>
 	<select id="memberEmailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail}
 	</select>

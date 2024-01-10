@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.service.MemberService;
 import com.ptconnect.myapp.util.MailSender;
@@ -38,7 +39,7 @@ public class MemberController {
 		int value = 0;
 		
 		value = ms.memberEmailCheck(email);
-		
+		JSONObject jo = new JSONObject();
 		if (value == 0) {
 			String authNumber = mail.getTempPassword();
 	        String title = "회원가입 인증 메일입니다.";
@@ -49,9 +50,10 @@ public class MemberController {
 	            session.setAttribute("MAIL_NUMBER", authNumber);
 	            System.out.println((String)session.getAttribute("MAIL_NUMBER"));
 	            System.out.println("send mail ok");
+	        }else {
+	        	value=5;
 	        }
 	    }
-		JSONObject jo = new JSONObject();
 		jo.put("value", value);
 		return jo;
 	}
@@ -72,20 +74,71 @@ public class MemberController {
 		jo.put("value", value);
 		return jo;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "joinUserAction.ajax", method = RequestMethod.POST)
 	public JSONObject joinUserAction(@RequestBody @Valid MemberDTO mo,
-			 BindingResult bindingResult) {
+			 BindingResult bindingResult,
+				HttpSession session) {
 		int value = 0;
 		JSONObject jo = new JSONObject();
 		if(mo.getMbEmail() != null) {
-			if(bindingResult.hasErrors()){ // VO로 받은 데이터의 문제가 있을시
+			if(session.getAttribute("MAIL_NUMBER")==null) {
+				jo.put("msg", "이메일 인증을 진행해주세요.");
+			}else if((String)session.getAttribute("MAIL_NUMBER")!=""&&!mo.getMbAuth().equals((String)session.getAttribute("MAIL_NUMBER"))){
+				jo.put("msg", "이메일 인증번호를 입력해주세요.");
+			}else if(bindingResult.hasErrors()){ // VO로 받은 데이터의 문제가 있을시
 				FieldError fieldError = bindingResult.getFieldError();
 				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
 			}else {
 				value=1;		
 				ms.memberInsert(mo);		
+			}
+		}
+		jo.put("value", value);
+		return jo;
+	}
+	@ResponseBody
+	@RequestMapping(value = "joinTrainerAction.ajax", method = RequestMethod.POST)
+	public JSONObject joinTrainerAction(@RequestBody @Valid MemberDTO mo,
+			 BindingResult bindingResult,
+				HttpSession session) {
+		int value = 0;
+		JSONObject jo = new JSONObject();
+		if(mo.getMbEmail() != null) {
+			if(session.getAttribute("MAIL_NUMBER")==null) {
+				jo.put("msg", "이메일 인증을 진행해주세요.");
+			}else if((String)session.getAttribute("MAIL_NUMBER")!=""&&!mo.getMbAuth().equals((String)session.getAttribute("MAIL_NUMBER"))){
+				jo.put("msg", "이메일 인증번호를 입력해주세요.");
+			}else if(bindingResult.hasErrors()){ // VO로 받은 데이터의 문제가 있을시
+				FieldError fieldError = bindingResult.getFieldError();
+				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
+			}else {
+				value=1;		
+				ms.trainerInsert(mo);		
+			}
+		}
+		jo.put("value", value);
+		return jo;
+	}
+	@ResponseBody
+	@RequestMapping(value = "joinCenterAction.ajax", method = RequestMethod.POST)
+	public JSONObject joinCenterAction(@RequestBody @Valid CenterInfoDTO cio,
+			 BindingResult bindingResult,
+				HttpSession session) {
+		int value = 0;
+		JSONObject jo = new JSONObject();
+		if(cio.getMbEmail() != null) {
+			if(session.getAttribute("MAIL_NUMBER")==null) {
+				jo.put("msg", "이메일 인증을 진행해주세요.");
+			}else if((String)session.getAttribute("MAIL_NUMBER")!=""&&!cio.getMbAuth().equals((String)session.getAttribute("MAIL_NUMBER"))){
+				jo.put("msg", "이메일 인증번호를 입력해주세요.");
+			}else if(bindingResult.hasErrors()){ // VO로 받은 데이터의 문제가 있을시
+				FieldError fieldError = bindingResult.getFieldError();
+				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
+			}else {
+				value=1;		
+				ms.centerInsert(cio);
 			}
 		}
 		jo.put("value", value);
