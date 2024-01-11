@@ -47,8 +47,8 @@
 											
 										<div class="menuBox">
 											<div class="menuJoin"><a href="${pageContext.request.contextPath}/joinUser">회원가입</a></div>|
-											<div class="menuFindId">아이디찾기</div>|
-											<div class="menuFindPwd">비밀번호찾기</div>
+											<div class="menuFindId"><a href="${pageContext.request.contextPath}/idFind">아이디찾기</a></div>|
+											<div class="menuFindPwd"><a href="${pageContext.request.contextPath}/pwdFind">비밀번호찾기</a></div>
 										</div>
 								 	</form>
 								</div>
@@ -72,8 +72,8 @@
 											
 										<div class="menuBox">
 											<div class="menuJoin"><a href="${pageContext.request.contextPath}/joinTrainer">트레이너가입</a></div>|
-											<div class="menuFindId">아이디찾기</div>|
-											<div class="menuFindPwd">비밀번호찾기</div>
+											<div class="menuFindId"><a href="${pageContext.request.contextPath}/idFind">아이디찾기</a></div>|
+											<div class="menuFindPwd"><a href="${pageContext.request.contextPath}/pwdFind">비밀번호찾기</a></div>
 										</div>
 									</form>
 								</div>
@@ -96,8 +96,8 @@
 											
 										<div class="menuBox">
 											<div class="menuJoin"><a href="${pageContext.request.contextPath}/joinCenter">센터가입</a></div>|
-											<div class="menuFindId">아이디찾기</div>|
-											<div class="menuFindPwd">비밀번호찾기</div>
+											<div class="menuFindId"><a href="${pageContext.request.contextPath}/idFind">아이디찾기</a></div>|
+											<div class="menuFindPwd"><a href="${pageContext.request.contextPath}/pwdFind">비밀번호찾기</a></div>
 										</div>
 									</form>
 								</div>

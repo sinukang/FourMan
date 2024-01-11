@@ -334,6 +334,19 @@ button.rbc-input::-moz-focus-inner {
     transform: translate3d(0px, 36px, 0px);
     padding: 0px;
     top: 16px !important;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
 }
 
 .drop_down_menu .drop_down_divider{
@@ -341,6 +354,28 @@ button.rbc-input::-moz-focus-inner {
     margin: 0;
     overflow: hidden;
     border-top: 1px solid #e9ecef;
+}
+
+.drop_down_menu .drop_down_item{
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 700;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 16px;
+    
+}
+
+.drop_down_menu .drop_down_item:hover{
+    background-color: #f7f9fa;
+    
 }
 
 /* ---------------컨텐츠----------------- */

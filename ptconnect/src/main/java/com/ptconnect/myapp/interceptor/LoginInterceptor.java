@@ -19,8 +19,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String mbName = "";
 		String mbMapY = "";
 		String mbMapX = "";
-		String mbEmail = "";
-		String cate = "";
 		if(modelAndView.getModel().get("mbNo") != null) {
 			mbNo = modelAndView.getModel().get("mbNo").toString();
 		}
@@ -40,7 +38,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		modelAndView.getModel().clear();  
 		
-		if(mbNo.equals("")){
+		if(mbNo!=null){
 
 			request.getSession().setAttribute("mbNo", mbNo);
 			request.getSession().setAttribute("mbAuth", mbAuth);

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 //�α��� üũ ���� ���ͼ��� Ŭ���� 
-public class AuthInterceptor  extends HandlerInterceptorAdapter{
+public class TrainerAuthInterceptor  extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(
@@ -20,9 +20,13 @@ public class AuthInterceptor  extends HandlerInterceptorAdapter{
 		
 		boolean tf = false;
 		if (session.getAttribute("mbAuth") == null) {
-			
+
 			String location =request.getContextPath()+"/error/loginAuthError";
 			response.sendRedirect(location);			
+			tf = false;			
+		}else if(!"T".equals((String)session.getAttribute("mbAuth"))){
+			String location =request.getContextPath()+"/error/authError";
+			response.sendRedirect(location);
 			tf = false;			
 		}else{
 			tf = true;			
@@ -33,9 +37,9 @@ public class AuthInterceptor  extends HandlerInterceptorAdapter{
 
 	public void saveUrl(HttpServletRequest req) {
 		
-		String uri = req.getRequestURI();   //주소창의 프로젝트명+파일경로 ex) spring0803/board/boardList.do
+		String uri = req.getRequestURI();   //
 		System.out.println(uri);
-		String query =req.getQueryString();  //주소창의 parameter 부분
+		String query =req.getQueryString();  //
 		System.out.println(query);
 		
 		if (query == null || query.equals("null")) {
