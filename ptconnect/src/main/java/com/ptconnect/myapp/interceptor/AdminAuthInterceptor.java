@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 //�α��� üũ ���� ���ͼ��� Ŭ���� 
-public class AuthInterceptor  extends HandlerInterceptorAdapter{
+public class AdminAuthInterceptor  extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(
@@ -20,9 +20,13 @@ public class AuthInterceptor  extends HandlerInterceptorAdapter{
 		
 		boolean tf = false;
 		if (session.getAttribute("mbAuth") == null) {
-			
+
 			String location =request.getContextPath()+"/error/loginAuthError";
 			response.sendRedirect(location);			
+			tf = false;			
+		}else if(!"M".equals((String)session.getAttribute("mbAuth"))){
+			String location =request.getContextPath()+"/error/authError";
+			response.sendRedirect(location);
 			tf = false;			
 		}else{
 			tf = true;			

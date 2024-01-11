@@ -24,6 +24,12 @@
 							<div class="joinTitle">
 								<h1>트레이너 회원가입</h1>
 							</div>
+							<div style="text-align:center;">
+								<span>
+									<a href="${pageContext.request.contextPath}/joinUser">일반 회원가입</a> /
+									<a href="${pageContext.request.contextPath}/joinCenter">센터 회원가입</a>
+								</span>
+							</div>
 
 							<div class="joinBox">
 								

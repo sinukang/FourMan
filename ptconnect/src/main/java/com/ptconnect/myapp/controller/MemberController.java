@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -180,18 +180,20 @@ public class MemberController {
 			@RequestParam("cate") String cate,
 			HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response, 
-			RedirectAttributes rttr) {
+			RedirectAttributes rttr,
+			Model model) {
 
 		MemberDTO mo = ms.memberLogin(mbEmail);
 		String path = "";
 		if(mo!=null) {
 			if(bCrptPasswordEncoderer.matches(mbPwd, mo.getMbPwd())) {
 
-				rttr.addAttribute("mbNo", mo.getMbNo());
-				rttr.addAttribute("mbAuth", mo.getMbAuth());
-				rttr.addAttribute("mbName", mo.getMbName());
-				rttr.addAttribute("mbMapY", mo.getMbMapY());
-				rttr.addAttribute("mbMapX", mo.getMbMapX());
+				session.setAttribute("mbNo", mo.getMbNo());
+				session.setAttribute("mbAuth", mo.getMbAuth());
+				session.setAttribute("mbName", mo.getMbName());
+				session.setAttribute("mbMapY", mo.getMbMapY());
+				session.setAttribute("mbMapX", mo.getMbMapX());
+				path = "findTrainer.do";
 			}else {
 				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
 				rttr.addFlashAttribute("mbEmail",mbEmail);
@@ -208,6 +210,16 @@ public class MemberController {
 		return "redirect:/"+path;
 	}
 
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String logout(
+			HttpSession session) {
+		session.removeAttribute("mbNo");
+		session.removeAttribute("mbAuth");
+		session.removeAttribute("mbName");
+		session.removeAttribute("mbMapX");
+		session.removeAttribute("mbMapY");
+		return "redirect:/findTrainer.do";
+	}
 	@RequestMapping(value = "idFind", method = RequestMethod.GET)
 	public String idFind() {
 		return "member/idFind";

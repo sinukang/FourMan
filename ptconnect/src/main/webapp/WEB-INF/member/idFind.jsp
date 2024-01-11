@@ -22,23 +22,25 @@
 							</div>
 						
 							<div class="idfindBox">
-								<div class="emailBox">
-									<h3>아이디</h3>
-									<input type="text" id="loginEmail" placeholder="example@gmail.com" >
-								</div>
-								
-								<div class="pwdBox">
-									<h3>전화번호</h3>
-									<input type="text" id="loginpPwd">
-								</div>
-								<div class="idFindBtn">
-									<button type="button">조회하기</button>
-								</div>
-								<div class="menuBox">
-										<div class="menuFindPwd">
-										<a href="${pageContext.request.contextPath}/ptconnect/member/pwdFind.jsp">비밀번호 찾기</a>
-										</div>
-								</div>		
+								<form name="idFind">
+									<div class="emailBox">
+										<h3>이름</h3>
+										<input type="text" id="mbName" name="mbName" placeholder="example@gmail.com" >
+									</div>
+									
+									<div class="pwdBox">
+										<h3>전화번호</h3>
+										<input type="text" id="mbPhone" name="mbPhone">
+									</div>
+									<div class="idFindBtn">
+										<button type="button">조회하기</button>
+									</div>
+									<div class="menuBox">
+											<div class="menuFindPwd">
+											<a href="${pageContext.request.contextPath}/ptconnect/member/pwdFind.jsp">비밀번호 찾기</a>
+											</div>
+									</div>		
+								</form>
 									
 							</div>
 						</div>
