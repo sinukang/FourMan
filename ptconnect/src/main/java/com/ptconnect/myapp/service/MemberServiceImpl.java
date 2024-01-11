@@ -60,4 +60,18 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mo;
 	}
+	@Override
+	public String memberEmailFind(String mbName, String mbPhone) {
+		
+		String mbEmail = msm.memberEmailFind(mbName,mbPhone);
+		
+		return mbEmail;
+	}
+	@Override
+	public int memberPwdFind(String mbEmail, String mbPhone) {
+		
+		int value = msm.memberPwdFind(mbEmail,mbPhone);
+		
+		return value;
+	}
 }

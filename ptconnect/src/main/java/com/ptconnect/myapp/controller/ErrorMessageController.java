@@ -15,4 +15,9 @@ public class ErrorMessageController {
 		return "error/authError";
 	}
 
+	@RequestMapping(value = "error/tempPage", method = RequestMethod.GET)
+	public String tempPage() {
+		return "error/tempPage";
+	}
+
 }

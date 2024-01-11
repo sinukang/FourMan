@@ -1,5 +1,7 @@
 package com.ptconnect.myapp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,7 +107,9 @@ public class MemberController {
 				jo.put("msg", "이메일 인증번호를 입력해주세요.");
 			}else if(bindingResult.hasErrors()){ // VO로 받은 데이터의 문제가 있을시
 				FieldError fieldError = bindingResult.getFieldError();
+//				List<ObjectError> allErrors = bindingResult.getAllErrors();
 				jo.put("msg", fieldError.getDefaultMessage()); //message를 출력한다.
+//				jo.put("error", allErrors);
 			}else {
 				String mbPwd2 = bCrptPasswordEncoderer.encode(mo.getMbPwd());
 				mo.setMbPwd(mbPwd2);
@@ -220,14 +225,105 @@ public class MemberController {
 		session.removeAttribute("mbMapY");
 		return "redirect:/findTrainer.do";
 	}
+	
 	@RequestMapping(value = "idFind", method = RequestMethod.GET)
 	public String idFind() {
 		return "member/idFind";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "emailFindCheck.ajax", method = RequestMethod.POST)
+	public JSONObject emailFindCheck(@RequestBody MemberDTO mo,
+			BindingResult bindingResult) {
+		JSONObject jo = new JSONObject();
+		if(mo==null) {
+	    	jo.put("msg","이름,전화번호를 입력해주세요.");
+		}else if(mo.getMbName()==null||mo.getMbPhone()==null){
+	    	jo.put("msg","이름,전화번호를 입력해주세요.");
+		}else {
+			String mbEmail = ms.memberEmailFind(mo.getMbName(), mo.getMbPhone());
+			if (mbEmail != null) {
+		        String star = "";
+		        String[] mbId = mbEmail.split("@");
+		        for (int i = 0; i < (mbId[0].length() - 4); i++) {
+		            star += "*";
+		        }
+		        String mbId0 = mbId[0].substring(0, 2) + star + mbId[0].substring(mbId[0].length() - 2);
+		        mbEmail = mbId0 + "@" + mbId[1];
+		        
+			    //아이디 일부 가리기
+		        jo.put("mbEmail",mbEmail);
+		    }else {
+		    	jo.put("msg","일치하는 이메일이 없습니다.");
+		    }
+		}
+		return jo;
+	}
 	@RequestMapping(value = "pwdFind", method = RequestMethod.GET)
 	public String pwdFind() {
 		return "member/pwdFind";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "pwdFindCheck.ajax", method = RequestMethod.POST)
+	public JSONObject pwdFindCheck(@RequestBody MemberDTO mo,
+			BindingResult bindingResult,
+			HttpSession session) {
+		JSONObject jo = new JSONObject();
+		if(mo==null) {
+	    	jo.put("msg","이메일,전화번호를 입력해주세요.");
+		}else if(mo.getMbEmail()==null||mo.getMbPhone()==null){
+	    	jo.put("msg","이메일,전화번호를 입력해주세요.");
+		}else {
+			int value = ms.memberPwdFind(mo.getMbEmail(), mo.getMbPhone());
+			if(value>0) {
+				String authNumber = mail.getTempPassword();
+		        String title = "임시 비밀번호입니다.";
+		        String body = "임시 비밀번호 : " + authNumber;
+
+		        if (mail.MailSend(mo.getMbEmail(), title, body)) {
+		            session.removeAttribute("MAIL_PWD");
+		            session.setAttribute("MAIL_PWD", authNumber);
+		            System.out.println((String)session.getAttribute("MAIL_PWD"));
+		            System.out.println("send mail ok");
+					jo.put("value", value);
+		        }else {
+			    	jo.put("msg","잘못된 계정입니다. 확인해주세요.");
+		        }
+			}else {
+		    	jo.put("msg","일치하는 계정 정보가 없습니다.");
+			}
+		}
+		return jo;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "tempPwdCheck.ajax", method = RequestMethod.POST)
+	public JSONObject tempPwdCheck(@RequestParam("mbPwd") String mbPwd,
+			HttpSession session) {
+		int value = 0;
+		if(mbPwd != null) {
+			if(mbPwd.equals(session.getAttribute("MAIL_PWD"))) {
+				value=1;
+			}else {
+				value=2;
+			}
+		}
+		JSONObject jo = new JSONObject();
+		jo.put("value", value);
+		return jo;
+	}
+	@RequestMapping(value = "pwdFound", method = RequestMethod.GET)
+	public String pwdFound(@RequestParam("mbPwd") String mbPwd,
+			HttpSession session) {
+		String path="";
+		if(mbPwd != null) {
+			if(mbPwd.equals(session.getAttribute("MAIL_PWD"))) {
+				path="/error/tempPage";
+			}else {
+				path="/error/authError";
+			}
+		}
+		return "redirect:/"+path;
+	}
 }

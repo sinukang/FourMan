@@ -11,4 +11,7 @@ public interface MemberServiceMapper {
 	public int centerInfoInsert(CenterInfoDTO cio);
 	public int memberEmailCheck(String mbEmail);
 	public MemberDTO memberLogin(@Param("mbEmail")String mbEmail);
+	public String memberEmailFind(@Param("mbName")String mbName, @Param("mbPhone")String mbPhone);
+	public int memberPwdFind(@Param("mbEmail")String mbEmail, @Param("mbPhone")String mbPhone);
+	
 }

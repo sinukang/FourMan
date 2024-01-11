@@ -24,5 +24,11 @@
 	<select id="memberLogin" parameterType="String" resultType="mo">
 		SELECT * FROM member WHERE mbEmail = #{mbEmail}
 	</select>
+	<select id="memberEmailFind" parameterType="String" resultType="String">
+		SELECT mbEmail FROM member WHERE mbName = #{mbName} AND mbPhone = #{mbPhone} limit 1
+	</select>
+	<select id="memberPwdFind" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail} AND mbPhone = #{mbPhone} limit 1
+	</select>
 	
 </mapper>

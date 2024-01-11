@@ -22,7 +22,6 @@
 							</div>
 						
 							<div class="idfindBox">
-								<form name="idFind">
 									<div class="emailBox">
 										<h3>이름</h3>
 										<input type="text" id="mbName" name="mbName" placeholder="example@gmail.com" >
@@ -32,15 +31,20 @@
 										<h3>전화번호</h3>
 										<input type="text" id="mbPhone" name="mbPhone">
 									</div>
+									<div>
+										<span id="errorMsg" style="color:red;"></span>
+									</div>
+									<div>
+										<span id="mbEmail" style="color:blue;"></span>
+									</div>
 									<div class="idFindBtn">
-										<button type="button">조회하기</button>
+										<button id="idFindBtn" type="button">조회하기</button>
 									</div>
 									<div class="menuBox">
 											<div class="menuFindPwd">
-											<a href="${pageContext.request.contextPath}/ptconnect/member/pwdFind.jsp">비밀번호 찾기</a>
+											<a href="${pageContext.request.contextPath}/pwdFind">비밀번호 찾기</a>
 											</div>
-									</div>		
-								</form>
+									</div>	
 									
 							</div>
 						</div>
@@ -52,7 +56,36 @@
 	</div>
 	
 
-	
+<script>
+	$('#idFindBtn').click(function(){
+		var memberInfo = {
+				'mbName' : $('#mbName').val(),
+				'mbPhone' : $('#mbPhone').val(), 
+		};
+		$.ajax({
+			contentType:'application/json;',
+			type: "POST",
+			url: '${pageContext.request.contextPath}/emailFindCheck.ajax',
+			dataType: "json",
+			data: JSON.stringify(memberInfo),
+			success: function(data){
+				if(data.mbEmail === undefined){
+					$('#errorMsg').html(data.msg);
+					$('#errorMsg').css('display','');
+					$('#mbEmail').css('display','none');
+				}else{
+					$('#mbEmail').html('가입된 이메일은 ' + data.mbEmail + ' 입니다!');
+					$('#errorMsg').css('display','');
+				}
+			},
+			error: function(){
+				console.log("idFindError");
+				return;
+			}
+			
+		});
+	});
+</script>	
 	
 </body>
 </html>
