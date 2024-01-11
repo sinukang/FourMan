@@ -75,9 +75,10 @@
 							</ul>
 							
 							<div class="sorting">
-									<div class="sortingBtn" name="testName" value="test111">거리 순</div>
-									<div class="sortingBtn">리뷰많은 순</div>
-									<div class="sortingBtn">최저가 순</div>
+								<div class="sortingBtn" data-value="distance">거리 순</div>
+								<div class="sortingBtn" data-value="reviewCnt">리뷰많은 순</div>
+								<div class="sortingBtn" data-value="tnTicket">최저가 순</div>
+								<input type="hidden" id="orderBy" name="orderBy" value="${pm.scri.orderBy}">
 							</div>
 							
 							<div class="filterBtn">
@@ -133,7 +134,7 @@
 						
 						<!-- DB 데이터 -->
 						<c:forEach var="tio" items="${tio_alist}">
-							<a href="trainerInfoView">
+							<a href="trainerInfoView?tnNo=${tio.tnNo}">
 								<div class="coachCard">
 									<div>
 										<div class="coachImages">
@@ -205,7 +206,9 @@
 	</c:choose>
 	
 <script>
-	
+
+
+
 	//헤더 여백 설정
 	$('.contents').addClass('coach_nav');
 	
@@ -230,10 +233,32 @@
 	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
 	    });
 	});
+	
+	//필터 정렬 순서 버튼 클릭 시 색상변화, 클릭 감지 이벤트 리스너 달아줌
+	var sortingBtn = document.querySelectorAll(".sortingBtn");
+	
+	function handleClick1(e){
+		for(let i = 0; i < sortingBtn.length; i++){
+			sortingBtn[i].classList.remove("active_round_box");
+		}
+		e.target.classList.add("active_round_box");
+		let orderByVal = $(".active_round_box").data("value");
+		$("#orderBy").val(orderByVal);
+	}
+	
+	function init1(){
+		for(let i = 0; i < sortingBtn.length; i++){
+			sortingBtn[i].addEventListener("click", handleClick1);
+			if($("#orderBy").val() == sortingBtn[i].dataset['value']){
+				sortingBtn[i].classList.add("active_round_box");
+			}
+		}
+	}
+	init1();		
+	
 
 	var mapX = 0;
 	var mapY = 0;
-
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
 	

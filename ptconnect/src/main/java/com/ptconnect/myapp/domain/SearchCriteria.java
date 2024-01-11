@@ -20,6 +20,7 @@ public class SearchCriteria extends Criteria{
 	
 	private int mbNo;
 	private int distance;
+	private String orderBy;
 	
 	public int getMbNo() {
 		return mbNo;
@@ -32,6 +33,12 @@ public class SearchCriteria extends Criteria{
 	}
 	public void setDistance(int distance) {
 		this.distance = distance;
+	}
+	public String getOrderBy() {
+		return orderBy;
+	}
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
 	}
 	
 	

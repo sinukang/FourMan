@@ -200,7 +200,10 @@ input::placeholder {
     font-size: 14px;
 	margin-right: 8px;
 }
-
+.active_round_box{
+	color: #5865F2;
+	border: 1px solid #5865F2;
+}
 
   
   .filterBtn button{
@@ -323,7 +326,7 @@ input::placeholder {
     right: 0px;
     left: 520px;
     width: calc(100% - 512px);
-    height: calc(100% - 50px);
+    height: calc(100vh - 50px);
 }
 
 .marker_wrap{
