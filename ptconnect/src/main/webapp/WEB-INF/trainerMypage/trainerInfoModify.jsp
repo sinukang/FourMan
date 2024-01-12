@@ -41,22 +41,13 @@
 															</div>
 														</h4>
 														<div class="content_wrap">
-															
-															<!-- 사진파일 업로드 미리보기 
-															<div class="upload-box">
-																<div id="drop-file" class="drag-file">
-																	<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-																	<img src="" alt="미리보기 이미지" class="preview">
-																	<div id="previews" class="previews"></div>
-																</div>
-															</div> -->
-															
+															<!-- 이미지 미리보기 -->
+   															<div id="imagePreviewContainer"></div>
 															<!-- 사진 업로드 버튼 -->
 															<div class="upload-btn">
 																<label class="file-label" for="chooseFile">사진 선택</label>
-																<input class="file" id="chooseFile" name="bdglname" type="file">
+																<input class="files" type="file" id="chooseFile" name="files" multiple="multiple" onchange="previewImages(this)">
 															</div>
-														
 														</div>
 													</div>
 												</div>
@@ -164,7 +155,7 @@
 																		<td>
 																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
 																		</td>
-																		<td>
+																		<td rowspan=4>
 																			<select id="lpCf" name="lpCf">
 																				<option value="C">회</option>
 																				<option value="T">개월</option>
@@ -181,12 +172,6 @@
 																		<td>
 																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
 																		</td>
-																		<td>
-																			<select id="lpCf" name="lpCf">
-																				<option value="C">회</option>
-																				<option value="T">개월</option>
-																			</select>
-																		</td>
 																		<td style="position: relative;">
 																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
 																			</div>
@@ -197,12 +182,6 @@
 																		<td>
 																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
 																		</td>
-																		<td>
-																			<select id="lpCf" name="lpCf">
-																				<option value="C">회</option>
-																				<option value="T">개월</option>
-																			</select>
-																		</td>
 																		<td style="position: relative;">
 																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
 																			</div>
@@ -212,12 +191,6 @@
 																	<tr>
 																		<td>
 																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
-																		</td>
-																		<td>
-																			<select id="lpCf" name="lpCf">
-																				<option value="C">회</option>
-																				<option value="T">개월</option>
-																			</select>
 																		</td>
 																		<td style="position: relative;">
 																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
@@ -333,6 +306,60 @@
 	
 	<script>
 	
+	var imageCount = 0; // 각 이미지의 고유한 카운터
+
+	function previewImages(input) {
+	    var container = document.getElementById("imagePreviewContainer");
+
+	    // 이미지를 추가하기 전에 기존의 미리보기를 모두 제거
+	    container.innerHTML = '';
+
+	    if (input.files && input.files.length > 0) {
+	        for (var i = 0; i < input.files.length; i++) {
+	            var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                var imagePreview = document.createElement("img");
+	                imagePreview.src = e.target.result;
+	                imagePreview.alt = "이미지 미리보기";
+	                imagePreview.style.maxWidth = "100%";
+
+	                var imageId = "image_" + imageCount;
+
+	                var cancelButton = document.createElement("button");
+	                cancelButton.type = "button";
+	                cancelButton.innerText = "취소";
+	                cancelButton.onclick = function () {
+	                    cancelFileUpload(imageId);
+	                };
+
+	                var imageDiv = document.createElement("div");
+	                imageDiv.id = imageId;
+	                imageDiv.appendChild(imagePreview);
+	                imageDiv.appendChild(cancelButton);
+
+	                container.appendChild(imageDiv);
+
+	                imageCount++;
+	            };
+
+	            reader.readAsDataURL(input.files[i]);
+	        }
+	    }
+	}
+
+	function cancelFileUpload(imageId) {
+	    var container = document.getElementById("imagePreviewContainer");
+	    var imageDiv = document.getElementById(imageId);
+
+	    // 해당 미리보기를 삭제
+	    container.removeChild(imageDiv);
+	}
+		
+	</script>
+	
+	<script>
+	
 		document.addEventListener("DOMContentLoaded", function () {
 			
 	        var editButtons = document.querySelectorAll(".edit");
@@ -385,7 +412,7 @@
 
 		    for (var i = 0; i < lessonPrices.length; i++) {
 		        var lpCount = lpCountValues[i].value;
-		        var lpCf = lpCfValues[i].value;
+		        var lpCf = lpCfValues.value;
 		        var lessonPrice = lessonPrices[i].value;
 
 		        var priceInfo = {
@@ -425,20 +452,22 @@
 		        programData.push(programInfo);
 		    }
 		    
+		    var files = document.getElementById("chooseFile").files;
 		    console.log(JSON.stringify(lessonPriceData));
 			console.log(JSON.stringify(qualifyData));
 			console.log(JSON.stringify(programData));
+			console.log(files);
 			
-			debugger;
-
 		    var formData = new FormData();
 		    formData.append('lessonPriceData', JSON.stringify(lessonPriceData));
 		    formData.append('qualifyData', JSON.stringify(qualifyData));
 		    formData.append('programData', JSON.stringify(programData));
-			
+		    
+		    debugger;
+		    
 			fm.action = "<%=request.getContextPath()%>/trainerInfoModifyAction";	
 			fm.method = "post";					
-			//fm.enctype="multipart/form-data";
+			fm.enctype="multipart/form-data";
 			fm.submit();						
 			return;
 		}
