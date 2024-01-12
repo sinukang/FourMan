@@ -21,6 +21,8 @@ public class SearchCriteria extends Criteria{
 	private int mbNo;
 	private int distance;
 	private String orderBy;
+	private double mbMapY;	//로그인한 유저의 위도
+	private double mbMapX;	//로그인한 유저의 경도
 	
 	public int getMbNo() {
 		return mbNo;
@@ -39,6 +41,18 @@ public class SearchCriteria extends Criteria{
 	}
 	public void setOrderBy(String orderBy) {
 		this.orderBy = orderBy;
+	}
+	public double getMbMapY() {
+		return mbMapY;
+	}
+	public void setMbMapY(double mbMapY) {
+		this.mbMapY = mbMapY;
+	}
+	public double getMbMapX() {
+		return mbMapX;
+	}
+	public void setMbMapX(double mbMapX) {
+		this.mbMapX = mbMapX;
 	}
 	
 	

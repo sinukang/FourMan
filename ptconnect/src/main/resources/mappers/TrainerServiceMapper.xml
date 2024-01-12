@@ -7,19 +7,18 @@
 	<!-- 트레이너 찾기 비 로그인 or 로그인-->
 	<select id="findTrainer" parameterType="scri" resultType="tio">
 		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
-		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, t.tnDate, t.tnDateM, t.tnDelYN, c.ctName
+		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage
-		, (SELECT u.mbMapY FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') AS uMapY
-		, (SELECT u.mbMapX FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') AS uMapX
 		<choose>
-			<when test="mbNo == 0">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+			<when test="mbNo == 0 or mbNo == null">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
 				, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
 			</when>
 			<otherwise>
-				, (SELECT ST_DISTANCE_SPHERE(POINT(u.mbMapX , u.mbMapY), POINT(m.mbMapX, m.mbMapY)) FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') AS distance
+				, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+				, (SELECT u.mbAddr FROM member u WHERE u.mbNo = #{mbNo}) AS mbAddr
 			</otherwise>
 		</choose>
 		FROM member m
@@ -28,20 +27,23 @@
 		<!-- LEFT JOIN review r ON t.tnNo = r.tnNo AND r.rvDelYN = 'N' -->
 		WHERE m.mbDelYN = 'N'
 		<choose>
-			<when test="mbNo == 0">
+			<when test="mbNo == 0 or mbNo == null">
 				<![CDATA[
 				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
 				]]>
 			</when>
 			<otherwise>
 				<![CDATA[
-				AND (SELECT ST_DISTANCE_SPHERE(POINT(u.mbMapX, u.mbMapY), POINT(m.mbMapX, m.mbMapY)) FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') <= #{distance}
+				AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
 				AND NOT m.mbNo = #{mbNo}
 				]]>
 			</otherwise>
 		</choose>
 		<include refid="trainerSearch"/>
 		<choose>
+			<when test="orderBy == null or orderBy.equals('') or orderBy.equals(' ')">
+				ORDER BY distance ASC
+			</when>
 			<when test="orderBy.equals('distance')">
 				ORDER BY #{orderBy} ASC
 			</when>
@@ -52,6 +54,11 @@
 		LIMIT #{page}, 15
 	</select>
 	
+	<!-- 로그인 한 유저의 주소 -->
+	<select id="loginUserAddr" parameterType="int" resultType="String">
+		SELECT mbAddr FROM member WHERE mbNo = #{mbNo} AND mbDelYN = 'N';
+	</select>
+	
 	<!-- 트레이너 총 개수 -->
 	<select id="trainerTotalCount" parameterType="scri" resultType="int">
 		SELECT COUNT(t.tnNo) AS trainerCNT
@@ -60,17 +67,17 @@
 		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
 		WHERE m.mbDelYN = 'N'
 		<choose>
-			<when test="mbNo == 0">
+			<when test="mbNo == 0 or mbNo == null">
 				<![CDATA[
 				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
 				]]>				
 			</when>
 			<otherwise>
 				<![CDATA[
-				AND (SELECT ST_Distance_Sphere(POINT(u.mbMapX, u.mbMapY)
-				, POINT(m.mbMapX, m.mbMapY)) FROM member u WHERE u.mbNo = #{mbNo} AND u.mbDelYn = 'N') <= #{distance}
+				AND (SELECT ST_Distance_Sphere(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
 				]]>
 				AND m.mbNo NOT IN(#{mbNo})				
+				
 			</otherwise>
 		</choose>
 		<include refid="trainerSearch"/>
@@ -78,7 +85,7 @@
 	
 	<!-- 트레이너 검색 조건 -->
 	<sql id="trainerSearch">
-		<if test="keyword != null">
+		<if test="keyword != null and keyword != ''">
 			AND (
 				m.mbName LIKE CONCAT("%",#{keyword},"%")
 				OR m.mbAddr LIKE CONCAT("%",#{keyword},"%")
@@ -142,8 +149,17 @@
 	
 	<!-- 트레이너정보등록 -->
 	
-	<select id="findTrainerOne" parameterType="int" resultType="tio">
-		select * from trainerInfo where tnNo=#{tnNo}
+	<select id="TrainerInfoView" parameterType="int" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
+		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		AND t.tnNo = #{tnNo};		
 	</select>
 	
 	<update id="trainerModify" parameterType="tio">

@@ -134,7 +134,8 @@ input::placeholder {
   
   
 .searchForm {
-	margin-top: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .filter_option.visible {
@@ -230,18 +231,26 @@ input::placeholder {
   }
   
   .searchResultWrap{
-  	align-items: center;
   	height: calc(100vh - 242px);
     overflow: auto;
-    padding-top: 16px;
+    /* padding-top: 16px; */
   }
-  
-  
+.searchResultWrap .searchResultArea{
+	width: 100%;
+}
+.filter_height_reCalc .searchResultArea{
+	padding-right: 5px; 
+}
+.searchResultArea .searchResultCard{
+	display: block;
+	margin-bottom: 10px;
+}
+.filter_height_reCalc{
+	height: calc(100vh - 602px);
+}
 .coachCard{
 	border: 1px solid rgb(218, 224, 230);
     border-radius: 12px;
-    margin-bottom: 12px;
-    margin-right: 10px;
     background-color: rgb(255, 255, 255);
 }
   
@@ -319,14 +328,16 @@ input::placeholder {
 	height:25px;
 	margin-right: 10px;
 }
-
+.location .locationDistance{
+	margin-left: auto;
+}
 .mapWrap{
 	position: absolute;
     top: 84px;
     right: 0px;
     left: 520px;
-    width: calc(100% - 512px);
-    height: calc(100vh - 50px);
+    width: calc(100% - 520px);
+    height: calc(100vh - 84px);
 }
 
 .marker_wrap{

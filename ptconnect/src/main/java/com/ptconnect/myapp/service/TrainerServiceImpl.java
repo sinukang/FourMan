@@ -26,11 +26,28 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		int value = (scri.getPage()-1)*15;
 		scri.setPage(value);
+
+//		System.out.println("\n"+"TrainerServiceImpl");
+//		System.out.println("scri.getMbNo() : " + scri.getMbNo());
+//		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
+//		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
+//		System.out.println("scri.getPage() : " + scri.getPage());
+//		System.out.println("scri.getKeyword() : " + scri.getKeyword());
+//		System.out.println("scri.getDistance() : " + scri.getDistance());
+//		System.out.println("scri.getOrderBy() : " + scri.getOrderBy());
 		
 		ArrayList<TrainerInfoDTO> alist = tsm.findTrainer(scri);
 		
 		return alist;
 	}
+	
+	@Override
+	public String loginUserAddr(int mbNo) {
+		
+		String uAddr = "";
+		uAddr = tsm.loginUserAddr(mbNo);
+		return uAddr;
+	}	
 	
 	@Override
 	public int trainerTotalCount(SearchCriteria scri) {
@@ -42,10 +59,11 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public TrainerInfoDTO findTrainerOne(int tnNo) {
-		TrainerInfoDTO tio = null;
+	public TrainerInfoDTO TrainerInfoView(int tnNo) {
 		
-		tio = tsm.findTrainerOne(tnNo);
+		TrainerInfoDTO tio = new TrainerInfoDTO();
+		
+		tio = tsm.TrainerInfoView(tnNo);
 		
 		return tio;
 	}
@@ -93,6 +111,8 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return value;
 	}
+
+
 
 
 

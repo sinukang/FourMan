@@ -1,28 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>트레이너 정보</title>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/trainer.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/photoModal.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/modal.css" type="text/css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/1f85e66bca.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://kit.fontawesome.com/1f85e66bca.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
 <body>
 	<div>
 		<div>
 			<div>
-				<div> <!--헤더+맵-->
+				<div>
+					
+					<!--헤더+맵-->
 					<jsp:include page="../include/header.jsp"/>
-					<section><!-- 섹션 -->
+					
+					<!-- 섹션 -->
+					<section>
 						<div class="center_photo_box">
 							<div class="photo_box">
 								<img class="first" src="${pageContext.request.contextPath}/resources/img/center1.jpg">
@@ -34,12 +40,9 @@
 								</div>
 							</div>
 						</div>
+						
 						<jsp:include page="../include/trainerViewHeader.jsp"/>
-						<script>
-							window.onload = function() {
-								$('#trainer_tab1').addClass('active_tab');
-							}
-						</script>
+						
 						<div class="gray_background"><!-- 회색배경 -->
 							<div class="my_container"><!-- 코치정보(마진오토) -->
 								<div class="inner_contents row"><!-- 코치정보(패딩탑) -->
@@ -79,29 +82,31 @@
 															</div>
 														</div>
 													</div>
-													<div class="content_text">오늘도 기분좋은 하루되세요! 
-
-이젠IT짐 운동도우미 김빡빡 트레이너입니다!
-운동하기 참 좋은날이네요^^
-
-- 언제까지 식사량 줄여가며 요요 다이어트 하실 건가요? 
-빙빙 돌아가며 목표 달성도 못하고 포기하는 것보다
-"지름길"로 가서 원하는 몸으로 바꾸시는 게 더 좋지 않을까요?
-
-- 더 이상 본인체형에 맞지 않는 움직임 따라하며 운동하지마세요!
-흉내내는 운동이 아닌 회원님 체형에 맞게 
-올바르게 바른움직임으로 운동기구 사용하시면서 
-바른체형! 강한근력!
-만들 수 있도록 도움드리겠습니다! :-)
-
-• 헬린이 전문
-• 바디프로필 &amp; 시합준비
-• 뱃살 가장 빨리 빼는 효율적인 다이어트 방법
-• 쳐진살 탄력 잡는 가장 빠른 방법
-• 어깨 파열 회복 &amp; 강화
-• 허리근육 회복 &amp; 강화
-• 다리 근력 회복 &amp; 강화 
-• 각종 신체부위 손상에 따른 복구 전문								</div>
+													<div class="content_text">
+														오늘도 기분좋은 하루되세요!
+														
+														이젠IT짐 운동도우미 김빡빡 트레이너입니다!
+														운동하기 참 좋은날이네요^^
+														
+														- 언제까지 식사량 줄여가며 요요 다이어트 하실 건가요? 
+														빙빙 돌아가며 목표 달성도 못하고 포기하는 것보다
+														"지름길"로 가서 원하는 몸으로 바꾸시는 게 더 좋지 않을까요?
+														
+														- 더 이상 본인체형에 맞지 않는 움직임 따라하며 운동하지마세요!
+														흉내내는 운동이 아닌 회원님 체형에 맞게 
+														올바르게 바른움직임으로 운동기구 사용하시면서 
+														바른체형! 강한근력!
+														만들 수 있도록 도움드리겠습니다! :-)
+														
+														• 헬린이 전문
+														• 바디프로필 &amp; 시합준비
+														• 뱃살 가장 빨리 빼는 효율적인 다이어트 방법
+														• 쳐진살 탄력 잡는 가장 빠른 방법
+														• 어깨 파열 회복 &amp; 강화
+														• 허리근육 회복 &amp; 강화
+														• 다리 근력 회복 &amp; 강화 
+														• 각종 신체부위 손상에 따른 복구 전문
+													</div>
 													</div>
 												</div>	
 											</div>
@@ -416,11 +421,11 @@
 													</h4>
 													<div class="content_wrap">
 														<div class="center">
-															<strong>이젠IT짐 금암점</strong>
+															<strong>${tio.ctName}</strong>
 															<div class="contact" onclick="setCenter()">상세 정보</div>
 														</div>
 														<div class="center">
-															<span>전북 전주시 덕진구 백제대로 572 5층 이젠IT짐 금암점</span>
+															<span>${tio.mbAddr}</span>
 														</div>
 														<div id="map" class="center_location">
 														</div>
@@ -515,45 +520,82 @@
 	<jsp:include page="../include/orderModal.jsp"/>
 	
 <script>
+
+	window.onload = function() {
+		$('#trainer_tab1').addClass('active_tab');
+	}
+
 	var mapX = 0;
 	var mapY = 0;
-
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
-	
 	mapOption = {
-	    center: new kakao.maps.LatLng(35.813605625795276, 127.09494840838936), // 지도의 중심좌표
+	    center: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}), // 지도의 중심좌표
 	    level: 3 // 지도의 확대 레벨
 	};  
 	
 	//지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	//주소로 좌표를 검색합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	geocoder.addressSearch('전북 전주시 덕진구 백제대로 572 5층', function(result, status) {
 	
-	// 정상적으로 검색이 완료됐으면 
-		if (status === kakao.maps.services.Status.OK) {
+	var positions = [
+		{
+			title: '${tio.ctName}',
+			latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
+		}
+	];
 	
-		    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-			mapX = result[0].x;
-			mapY = result[0].y;
-		    // 결과값으로 받은 위치를 마커로 표시합니다
-		    var marker = new kakao.maps.Marker({
-		        map: map,
-		        position: coords
-		    });
+	var bounds = new kakao.maps.LatLngBounds();
+	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
+	
+	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
+		var data = positions[i];
+
+		displayMarker(data,i);
+	}
+	
+	function displayMarker(data,e){
+
+	  	var content ='<div>';
+		content+='<div class="marker_wrap">';
+		content+=data.title;
+		content+='</div>';
+		content+='<div class="marker_pin">';
+		content+='</div">';
+		content+='</div">';
+			
+		var marker = new kakao.maps.CustomOverlay({	//좌표값을 지정해 마커 생성
+			map : map,
+			position : data.latlng,
+		    content: content
+		});		
+	}	
+	
+// 	//주소로 좌표를 검색합니다
+// 	var geocoder = new kakao.maps.services.Geocoder();
+// 	geocoder.addressSearch('전북 전주시 덕진구 백제대로 572 5층', function(result, status) {
+	
+// 	// 정상적으로 검색이 완료됐으면 
+// 		if (status === kakao.maps.services.Status.OK) {
+	
+// 		    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+// 			mapX = result[0].x;
+// 			mapY = result[0].y;
+// 		    // 결과값으로 받은 위치를 마커로 표시합니다
+// 		    var marker = new kakao.maps.Marker({
+// 		        map: map,
+// 		        position: coords
+// 		    });
 		
-		    // 인포윈도우로 장소에 대한 설명을 표시합니다
-		    var infowindow = new kakao.maps.InfoWindow({
-		        content: '<div style="width:150px;text-align:center;padding:6px 0;">이젠IT짐</div>'
-		    });
-		    infowindow.open(map, marker);
+// 		    // 인포윈도우로 장소에 대한 설명을 표시합니다
+// 		    var infowindow = new kakao.maps.InfoWindow({
+// 		        content: '<div style="width:150px;text-align:center;padding:6px 0;">'+${tio.ctName}+'</div>'
+// 		    });
+// 		    infowindow.open(map, marker);
 		
-		    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		    map.setCenter(coords);
-		} 
-	}); 
+// 		    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+// 		    map.setCenter(coords);
+// 		} 
+// 	}); 
 
 	function setDraggable(draggable){
 		map.setDraggable(draggable);
@@ -563,7 +605,8 @@
 	
 	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	function relayout() {    
+	
+	function relayout() {
 	    
 	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
 	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 

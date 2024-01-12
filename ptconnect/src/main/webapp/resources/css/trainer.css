@@ -664,3 +664,58 @@
     display: none;
 }
 
+.marker_wrap{
+    background-color: white;
+    border: 1px solid rgb(255, 128, 0);
+    border-radius: 4px;
+    padding: 6px 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    max-width: 110px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    color: rgb(61, 69, 77);
+}
+
+.marker_pin{
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    left: calc(50% - 8px);
+    width: 16px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11px solid rgb(255, 128, 0);
+}
+
+
+
+/* 지도 위에 마커 CSS 영역 */
+.marker_pin::before{
+    content: "";
+    position: absolute;
+    bottom: 1.5px;
+    left: -8px;
+    width: 16px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11.5px solid white;
+}
+.marker_pin::after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    bottom: -3px;
+    z-index: -1;
+    left: calc(50% - 5px);
+    border-radius: 50%;
+    background: gray;
+    filter: blur(2px);
+}
+/* 지도 위에 마커 CSS 영역 */

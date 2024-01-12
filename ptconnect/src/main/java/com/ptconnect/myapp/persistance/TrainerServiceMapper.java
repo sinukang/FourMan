@@ -10,9 +10,11 @@ public interface TrainerServiceMapper {
 	
 	public ArrayList<TrainerInfoDTO> findTrainer(SearchCriteria scri);
 	
+	public String loginUserAddr(int mbNo);
+	
 	public int trainerTotalCount(SearchCriteria scri);
 	
-	public TrainerInfoDTO findTrainerOne(int tnNo);
+	public TrainerInfoDTO TrainerInfoView(int tnNo);
 	
 	public int trainerInsert(TrainerInfoDTO tio);
 	

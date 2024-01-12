@@ -18,6 +18,7 @@ public class CenterInfoDTO extends MemberDTO{
 	@NotEmpty(message = "전화번호를 입력해주세요.")
 	private String ctBn;
 	
+	
 
 	private int cpNo;
 	private String cpCount;
@@ -27,6 +28,10 @@ public class CenterInfoDTO extends MemberDTO{
 	
 	private String ctDate;
 	private String ctDateM;
+	
+	
+	
+	
 	public int getCtNo() {
 		return ctNo;
 	}

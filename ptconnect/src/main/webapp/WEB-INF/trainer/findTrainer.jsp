@@ -42,7 +42,16 @@
 							<div>
 								<img src="${pageContext.request.contextPath}/resources/img//markericon.png" width="17px" height="25px">
 								<span>
-									<span class="search_key">금암동</span> 검색 결과
+									<span class="search_key">
+									<c:choose>
+										<c:when test="${uAddr ne null}">
+											${uAddr}
+										</c:when>
+										<c:otherwise>
+											금암동
+										</c:otherwise>
+									</c:choose> 
+									</span> 검색 결과
 								</span>
 							</div>
 						</div>
@@ -94,8 +103,9 @@
 			<div class="searchForm">
 				<div class="searchResultWrap">
 					<div class="searchResultArea">
+					
 						<!-- 샘플 데이터 -->
-						<a href="trainerInfoView">
+						<a href="trainerInfoView" class="searchResultCard">
 							<div class="coachCard">
 								<div>
 									<div class="coachImages">
@@ -134,7 +144,7 @@
 						
 						<!-- DB 데이터 -->
 						<c:forEach var="tio" items="${tio_alist}">
-							<a href="trainerInfoView?tnNo=${tio.tnNo}">
+							<a href="trainerInfoView?tnNo=${tio.tnNo}" class="searchResultCard">
 								<div class="coachCard">
 									<div>
 										<div class="coachImages">
@@ -164,6 +174,7 @@
 											<div class="location">
 												<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
 												<p class="locationAddr">${tio.ctName}</p>
+												<p class="locationDistance">약 ${tio.distance/1000} km</p>
 											</div>
 										</div>
 									</div>
@@ -182,7 +193,7 @@
 		
 		
 		<div class="mapWrap">
-			<div style="width:100%;height:100%;" id="map">
+			<div style="width:100%; height:100%;" id="map">
 				
 			</div>
 		</div>
@@ -197,13 +208,21 @@
 	</c:forEach>
 	<br>
 	<c:choose>
-		<c:when test="${tio_alist[0].uMapX ne null}">
-			center: new kakao.maps.LatLng(${tio_alist[0].uMapY}, ${tio_alist[0].uMapX}), // 지도의 중심좌표
+		<c:when test="${mbNo ne null}">
+			center: new kakao.maps.LatLng(${mbMapY}, ${mbMapX}), // 지도의 중심좌표
 		</c:when>
 		<c:otherwise>
 			center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 학원 35.84026098258203, 127.1324143491829
 		</c:otherwise>
 	</c:choose>
+	<br>
+	<c:forEach items='${tio_alist}' var='tio' varStatus="tioIDX">
+		asd
+		{
+			title: '${tio.mbName}',
+			latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
+		}<c:if test='${tioIDX.last eq false}'>,</c:if>
+	</c:forEach>	
 	
 <script>
 
@@ -215,24 +234,30 @@
 	document.addEventListener("DOMContentLoaded", function() {
 	    var filterButton = document.querySelector(".filter");
 	    var returnButton = document.querySelector(".headerComp");
+	    let filter_option = $(".filter_option");
 	    
 	    filterButton.addEventListener("click", function() {
 	        var filterOption = document.querySelector(".filter_option");
 	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
-	   		
-	        /* var resultWrap = document.querySelector(".searchResultArea");
-	        if (filterOption.classList.contains("visible")) {
-	            resultWrap.style.display = "none";
-	        } else {
-	            resultWrap.style.display = "";
-	        } */
+	        $(".searchResultWrap").toggleClass("filter_height_reCalc");
 	    });
 	    
 	    returnButton.addEventListener("click", function() {
 	        var filterOption = document.querySelector(".filter_option");
 	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
+	        $(".searchResultWrap").toggleClass("filter_height_reCalc");
+	        
 	    });
 	});
+	
+// 	function filter_height_reCalc(){
+		
+// 		let filter_option = $(".filter_option");
+// 		if($(filter_option).hasClass("visibel")){
+// 			$(".searchResultWrap").toggleClass("filter_height_reCalc");
+// 		}
+// 	}
+// 	filter_height_reCalc();	
 	
 	//필터 정렬 순서 버튼 클릭 시 색상변화, 클릭 감지 이벤트 리스너 달아줌
 	var sortingBtn = document.querySelectorAll(".sortingBtn");
@@ -254,18 +279,23 @@
 			}
 		}
 	}
-	init1();		
+	init1();
 	
 
+	
 	var mapX = 0;
 	var mapY = 0;
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
-	
-	
 	mapOption = {
-	
-		center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 학원 35.84026098258203, 127.1324143491829
+		<c:choose>
+			<c:when test="${mbNo ne null}">
+				center: new kakao.maps.LatLng(${mbMapY}, ${mbMapX}), // 지도의 중심좌표
+			</c:when>
+			<c:otherwise>
+				center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 이젠IT학원 35.84026098258203, 127.1324143491829
+			</c:otherwise>
+		</c:choose>	
 		level: 3 // 지도의 확대 레벨
 	};  
 	
@@ -326,7 +356,6 @@
 			position : data.latlng,
 		    content: content
 		});		
-		
 	}
 
 	function rangeSlider(){

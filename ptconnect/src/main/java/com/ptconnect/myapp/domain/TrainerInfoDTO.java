@@ -30,9 +30,9 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	
 	private String priceInfo;
 	
-	private double uMapY;	//로그인 한 유저 주소의 위도 좌표
-	private double uMapX;	//로그인 한 유저 주소의 경도 좌표
-	private int reviewCnt; //리뷰 개수 임시로 추가함
+	private int reviewCnt; //리뷰 개수 임시 추가
+	private float reviewRate;
+	private double distance;
 	
 	public int getReviewCnt() {
 		return reviewCnt;
@@ -40,17 +40,17 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	public void setReviewCnt(int reviewCnt) {
 		this.reviewCnt = reviewCnt;
 	}
-	public double getuMapY() {
-		return uMapY;
+	public float getReviewRate() {
+		return reviewRate;
 	}
-	public void setuMapY(double uMapY) {
-		this.uMapY = uMapY;
+	public void setReviewRate(float reviewRate) {
+		this.reviewRate = reviewRate;
 	}
-	public double getuMapX() {
-		return uMapX;
+	public double getDistance() {
+		return distance;
 	}
-	public void setuMapX(double uMapX) {
-		this.uMapX = uMapX;
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 	
 	
