@@ -28,6 +28,12 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	private String lpDateM;
 	private String lpDelYN;
 	
+	private int pgNo;
+	private String pgContent;
+	private String pgDate;
+	private String pgDateM;
+	private String pgDelYN;
+
 	private String priceInfo;
 	
 	private int reviewCnt; //리뷰 개수 임시 추가
@@ -52,67 +58,35 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
-	
-	
-	public int getTnNo() {
-		return tnNo;
+	public int getPgNo() {
+		return pgNo;
 	}
-	public void setTnNo(int tnNo) {
-		this.tnNo = tnNo;
+	public void setPgNo(int pgNo) {
+		this.pgNo = pgNo;
 	}
-	public int getMbNo() {
-		return mbNo;
+	public String getPgContent() {
+		return pgContent;
 	}
-	public void setMbNo(int mbNo) {
-		this.mbNo = mbNo;
+	public void setPgContent(String pgContent) {
+		this.pgContent = pgContent;
 	}
-	public int getCtNo() {
-		return ctNo;
+	public String getPgDate() {
+		return pgDate;
 	}
-	public void setCtNo(int ctNo) {
-		this.ctNo = ctNo;
+	public void setPgDate(String pgDate) {
+		this.pgDate = pgDate;
 	}
-	public int getFlNo() {
-		return flNo;
+	public String getPgDateM() {
+		return pgDateM;
 	}
-	public void setFlNo(int flNo) {
-		this.flNo = flNo;
+	public void setPgDateM(String pgDateM) {
+		this.pgDateM = pgDateM;
 	}
-	public String getTnOneLine() {
-		return tnOneLine;
+	public String getPgDelYN() {
+		return pgDelYN;
 	}
-	public void setTnOneLine(String tnOneLine) {
-		this.tnOneLine = tnOneLine;
-	}
-	public String getTnIntro() {
-		return tnIntro;
-	}
-	public void setTnIntro(String tnIntro) {
-		this.tnIntro = tnIntro;
-	}
-	public int getTnTicket() {
-		return tnTicket;
-	}
-	public void setTnTicket(int tnTicket) {
-		this.tnTicket = tnTicket;
-	}
-	public String getTnDate() {
-		return tnDate;
-	}
-	public void setTnDate(String tnDate) {
-		this.tnDate = tnDate;
-	}
-	public String getTnDateM() {
-		return tnDateM;
-	}
-	public void setTnDateM(String tnDateM) {
-		this.tnDateM = tnDateM;
-	}
-	public String getTnDelYN() {
-		return tnDelYN;
-	}
-	public void setTnDelYN(String tnDelYN) {
-		this.tnDelYN = tnDelYN;
+	public void setPgDelYN(String pgDelYN) {
+		this.pgDelYN = pgDelYN;
 	}
 	public int getQlNo() {
 		return qlNo;
@@ -186,11 +160,64 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	public void setLpDelYN(String lpDelYN) {
 		this.lpDelYN = lpDelYN;
 	}
-	public String getPriceInfo() {
-		return priceInfo;
+	public int getTnNo() {
+		return tnNo;
 	}
-	public void setPriceInfo(String priceInfo) {
-		this.priceInfo = priceInfo;
+	public void setTnNo(int tnNo) {
+		this.tnNo = tnNo;
 	}
-	
-}
+	public int getMbNo() {
+		return mbNo;
+	}
+	public void setMbNo(int mbNo) {
+		this.mbNo = mbNo;
+	}
+	public int getCtNo() {
+		return ctNo;
+	}
+	public void setCtNo(int ctNo) {
+		this.ctNo = ctNo;
+	}
+	public int getFlNo() {
+		return flNo;
+	}
+	public void setFlNo(int flNo) {
+		this.flNo = flNo;
+	}
+	public String getTnOneLine() {
+		return tnOneLine;
+	}
+	public void setTnOneLine(String tnOneLine) {
+		this.tnOneLine = tnOneLine;
+	}
+	public String getTnIntro() {
+		return tnIntro;
+	}
+	public void setTnIntro(String tnIntro) {
+		this.tnIntro = tnIntro;
+	}
+	public int getTnTicket() {
+		return tnTicket;
+	}
+	public void setTnTicket(int tnTicket) {
+		this.tnTicket = tnTicket;
+	}
+	public String getTnDate() {
+		return tnDate;
+	}
+	public void setTnDate(String tnDate) {
+		this.tnDate = tnDate;
+	}
+	public String getTnDateM() {
+		return tnDateM;
+	}
+	public void setTnDateM(String tnDateM) {
+		this.tnDateM = tnDateM;
+	}
+	public String getTnDelYN() {
+		return tnDelYN;
+	}
+	public void setTnDelYN(String tnDelYN) {
+		this.tnDelYN = tnDelYN;
+	}
+	}
