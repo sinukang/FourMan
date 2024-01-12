@@ -1,6 +1,7 @@
 package com.ptconnect.myapp.domain;
 
-public class FileDetailDTO {
+
+public class FileDetailDTO extends TrainerInfoDTO {
 	
 	private int flNo;
 	private String flCf;
@@ -14,6 +15,14 @@ public class FileDetailDTO {
 	private String fdPName;
 	private String fdDelYN;
 	
+	private int tnNo;
+	
+	public int getTnNo() {
+		return tnNo;
+	}
+	public void setTnNo(int tnNo) {
+		this.tnNo = tnNo;
+	}
 	public int getFdNo() {
 		return fdNo;
 	}

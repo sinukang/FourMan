@@ -15,5 +15,13 @@ public interface TrainerService {
 	
 	public int fileInsert(FileDetailDTO fdo);
 	
+	public int fileDetailInsert(FileDetailDTO fdo);
+	
 	public int trainerInfoUpdate(TrainerInfoDTO tio);
+	
+	public int trainerModify(TrainerInfoDTO tio);
+	
+	public int file_Modify(FileDetailDTO fdo);
+	
+	public int fileDetailModify(FileDetailDTO fdo);
 }

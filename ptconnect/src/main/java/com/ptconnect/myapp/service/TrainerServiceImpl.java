@@ -52,7 +52,12 @@ public class TrainerServiceImpl implements TrainerService{
 				
 				int value3 = tsm.lessonPriceInsert(tio);
 				
-				value = value1 + value2 + value3;
+				if(value3 > 0) { 
+					
+					int value4 = tsm.programInsert(tio);
+					
+					value = value1 + value2 + value3 + value4;
+				}
 			}
 		}
 		
@@ -61,15 +66,16 @@ public class TrainerServiceImpl implements TrainerService{
 	
 	@Override
 	public int fileInsert(FileDetailDTO fdo) {
-		int value = 0;
-		int value1 = tsm.fileInsert(fdo);
+	
+		int value = tsm.fileInsert(fdo);
 		
-		if(value1 > 0) {
-		
-			int value2 = tsm.fileDetailInsert(fdo);
-			
-			value = value1 + value2;
-		}
+		return value;
+	}
+	
+	@Override
+	public int fileDetailInsert(FileDetailDTO fdo) {
+
+		int value = tsm.fileDetailInsert(fdo);
 		
 		return value;
 	}
@@ -81,6 +87,51 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return value;
 	}
+	
+	@Override
+	public int trainerModify(TrainerInfoDTO tio) {
+		
+		int value = 0;
+		int value1 = tsm.trainerModify(tio);
+		
+		if(value1 > 0) {
+		
+			int value2 = tsm.qualifyModify(tio);
+			
+			
+			if(value2 > 0) {
+				
+				int value3 = tsm.lessonPriceModify(tio);
+				
+				if(value3 > 0) {
+					
+					int value4 = tsm.programModify(tio);
+					
+					value = value1 + value2 + value3 + value4;
+				}
+				
+			}
+		}
+		
+		return  value;
+	}
+	
+	@Override
+	public int file_Modify(FileDetailDTO fdo) {
+		
+		int value = tsm.file_Modify(fdo);
+		
+		return value;
+	}
+	
+	@Override
+	public int fileDetailModify(FileDetailDTO fdo) {
+
+		int value = tsm.fileDetailModify(fdo);
+		
+		return value;
+	}
+	
 	
 	
 }

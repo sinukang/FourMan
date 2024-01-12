@@ -5,7 +5,7 @@
 <mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
 
 	<select id="findTrainer" resultType="tio">
-		SELECT t.* FROM trainerinfo t WHERE tnDelYN = 'N'
+		SELECT t.* FROM trainerInfo t WHERE tnDelYN = 'N'
 	</select>
 	
 	<!-- 트레이너정보등록 -->
@@ -14,8 +14,8 @@
 		<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
 		select max(tnNo) as tnNo from trainerInfo
 		</selectKey>
-		insert into trainerInfo(mbNo, flNo, tnOneLine, tnIntro, tnTicket)
-	 	values(#{mbNo}, #{flNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
+		insert into trainerInfo(mbNo, tnOneLine, tnIntro, tnTicket)
+	 	values(#{mbNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
 	</insert>
 	<!-- 자격 정보 등록 -->
 	<insert id="qualifyInsert" parameterType="tio">
@@ -29,6 +29,12 @@
 	 	values(#{tnNo}, #{lpCf}, #{lpCount}, #{lessonPrice})
 	</insert>
 	
+	<!-- 프로그램 등록 -->
+	<insert id="programInsert" parameterType="tio">
+		insert into program(tnNo, pgContent)
+	 	values(#{tnNo}, #{pgContent})
+	</insert>
+	
 	<!-- 파일 정보 등록 -->
 	<insert id="fileInsert" parameterType="fdo"  useGeneratedKeys="true" keyProperty="flNo">
 		<selectKey resultType="int" keyProperty="flNo"  order="AFTER">
@@ -37,16 +43,16 @@
 		insert into file_(flCf, flCfNo)
 		values( CASE 
 	                WHEN #{tnNo} IS NOT NULL THEN 'T'
-	                WHEN #{ctNo} IS NOT NULL THEN 'C'
-	                WHEN #{rvNo} IS NOT NULL THEN 'R'
-	                WHEN #{bdNo} IS NOT NULL THEN 'B'
+<!-- 	                WHEN #{ctNo} IS NOT NULL THEN 'C' -->
+<!-- 	                WHEN #{rvNo} IS NOT NULL THEN 'R' -->
+<!-- 	                WHEN #{bdNo} IS NOT NULL THEN 'B' -->
 	                ELSE NULL
 	            END,
 	            CASE 
 	                WHEN #{tnNo} IS NOT NULL THEN #{tnNo}
-	                WHEN #{ctNo} IS NOT NULL THEN #{ctNo}
-	                WHEN #{rvNo} IS NOT NULL THEN #{rvNo}
-	                WHEN #{bdNo} IS NOT NULL THEN #{bdNo}
+<!-- 	                WHEN #{ctNo} IS NOT NULL THEN #{ctNo} -->
+<!-- 	                WHEN #{rvNo} IS NOT NULL THEN #{rvNo} -->
+<!-- 	                WHEN #{bdNo} IS NOT NULL THEN #{bdNo} -->
 	                ELSE NULL
 	            END) 
 	</insert>
@@ -64,37 +70,47 @@
 	
 	<!-- 트레이너정보등록 -->
 	
+	<!-- 수정 -->
 	<select id="findTrainerOne" parameterType="int" resultType="tio">
 		select * from trainerInfo where tnNo=#{tnNo}
 	</select>
 	
 	<update id="trainerModify" parameterType="tio">
 		update trainerInfo set tnOneLine = #{tnOneLine}, tnIntro = #{tnIntro},
-		tnTicket = #{tnTicket}, modifyday = now()
+		tnTicket = #{tnTicket}, tnDateM = now()
 		where tnNo = #{tnNo}
 	</update>
 	
 	<update id="qualifyModify" parameterType="tio">
-		update qualify set qualify = #{qualify}, modifyday = now()
+		update qualify set qualify = #{qualify}, qlDateM = now()
 		where tnNo = #{tnNo}
 	</update>
 	
 	<update id="lessonPriceModify" parameterType="tio">
 		update lessonPrice set lpCf = #{lpCf}, lpCount = #{lpCount},
-		lessonPrice = #{lessonPrice}, modifyday = now()
+		lessonPrice = #{lessonPrice}, lpDateM = now()
+		where tnNo = #{tnNo}
+	</update>
+	
+	<update id="programModify" parameterType="tio">
+		update program set pgContent = #{pgContent}, pgDateM = now()
 		where tnNo = #{tnNo}
 	</update>
 	
 	<update id="file_Modify" parameterType="fdo">
-		update file_ set flCf = #{flCf}, flCfNo = #{flCfNo},
-		modifyday = now()
-		where tnNo = #{tnNo} and tnNo = #{tnNo}
+		update file_ set flCf = 'T', flCfNo = #{tnNo},
+		flDateM = now()
+		where flCf = 'T' and flCfNo = #{tnNo}
+		<selectKey keyProperty="flNo" resultType="int" order="AFTER">
+        SELECT flNo
+        FROM file_
+        WHERE flCf = 'T' AND flCfNo = #{tnNo}
+    </selectKey>
 	</update>
 	
 	<update id="fileDetailModify" parameterType="fdo">
-		update file_ set fdName = #{fdName}, fdPName = #{fdPName},
-		modifyday = now()} 
-		where tnNo = #{tnNo}
+		update fileDetail set fdDelYN = 'Y'
+		where flNo = #{flNo}
 	</update>
 	
 	

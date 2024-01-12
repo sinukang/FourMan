@@ -19,6 +19,8 @@
     margin-bottom: 60px;
     max-width: 920px;
     position: relative;
+    height: 960px;
+    overflow: auto;
 }
 
 .modal_photo{
@@ -98,3 +100,19 @@
 .swiper-pagination-custom-bullet-active{
     border: solid 2px rgb(255, 255, 255);
 }
+
+.modal_body::-webkit-scrollbar {
+	width: 8px;
+	border: 1px solid #5865f229;
+    border-radius: 8px;
+} 
+
+.modal_body::-webkit-scrollbar-thumb {
+    background-color: #5865F2;
+	border: 1px solid #5865F2;
+    border-radius: 8px;
+  }
+.modal_body::-webkit-scrollbar-track {
+    background-color: #5865f229;
+}
+
