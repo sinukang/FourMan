@@ -1,14 +1,34 @@
 package com.ptconnect.myapp.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ptconnect.myapp.domain.CenterInfoDTO;
+import com.ptconnect.myapp.domain.PageMaker;
+import com.ptconnect.myapp.service.AdminService;
+
 
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+
+@Autowired
+AdminService as;
+
+	@GetMapping(value = "/admin_login")
+	public String admin_login(
+			HttpSession session) {
+		
+		return "admin/admin_login";
+	}
+	
 	
 	@GetMapping(value = "/admin_index")
 	public String admin_index(
@@ -17,9 +37,16 @@ public class AdminController {
 		
 		return "admin/admin_index";
 	}
-	
+
 	@GetMapping(value = "/trainerRegisterList")
+	public String trainerRegisterListNoPage(
+			HttpSession session) {
+		
+		return "redirect:/admin/trainerRegisterList/0";
+	}	
+	@GetMapping(value = "/trainerRegisterList/{page}")
 	public String trainerRegisterList(
+			@PathVariable int page,
 			HttpSession session) {
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","0,1");
@@ -27,13 +54,26 @@ public class AdminController {
 		
 		return "admin/trainerRegisterList";
 	}	
-	
+
 	@GetMapping(value = "/centerRegisterList")
+	public String centerRegisterListNoPage(
+			HttpSession session) {
+		
+		return "redirect:/admin/centerRegisterList/0";
+	}	
+	@GetMapping(value = "/centerRegisterList/{page}")
 	public String centerRegisterList(
+			@PathVariable int page,
 			HttpSession session) {
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","0,2");
+		session.setAttribute("menu_location","0,2");
+		PageMaker pm = new PageMaker();
+		pm.setCurrentPage(page);
+		ArrayList<CenterInfoDTO> cList = as.centerRegisterList(pm);
 		
+		session.setAttribute("cList", cList);
+		session.setAttribute("pm", pm);
 		return "admin/centerRegisterList";
 	}	
 	

@@ -33,6 +33,54 @@
 						</div>
 					</div>	
 					</c:when>
+					<c:when test="${mbAuth eq 'T'}">
+					<div style="position:relative; display:inline-flex; vertical-align:middle;">
+						<div>
+							<span class="name_button">
+								<span class="name">${mbName}</span>선생님! 반갑습니다.
+							</span>
+						</div>
+						<div class="drop_down_menu">
+							<a href="trainerInfo">
+								<button class="drop_down_item">마이페이지</button>
+							</a>
+							<div class="drop_down_divider"></div>
+							<a href="trainerInfoModify">
+								<button class="drop_down_item">트레이너정보변경</button>
+							</a>
+							<div class="drop_down_divider"></div>
+							<a href="trainerSales">
+								<button class="drop_down_item">판매내역</button>
+							</a>
+							<div class="drop_down_divider"></div>
+							<a href="logout">
+								<button class="drop_down_item">로그아웃</button>
+							</a>
+						</div>
+					</div>	
+					</c:when>
+					<c:when test="${mbAuth eq 'C'}">
+					<div style="position:relative; display:inline-flex; vertical-align:middle;">
+						<div>
+							<span class="name_button">
+								<span class="name">${mbName}</span>센터님! 반갑습니다.
+							</span>
+						</div>
+						<div class="drop_down_menu">
+							<a href="centerInfo">
+								<button class="drop_down_item">마이페이지</button>
+							</a>
+							<div class="drop_down_divider"></div>
+							<a href="centerSales">
+								<button class="drop_down_item">결제내역</button>
+							</a>
+							<div class="drop_down_divider"></div>
+							<a href="logout">
+								<button class="drop_down_item">로그아웃</button>
+							</a>
+						</div>
+					</div>	
+					</c:when>
 					<c:otherwise>
 						<a href="joinUser">회원가입 </a> / <a href="login"> 로그인</a>
 					</c:otherwise>

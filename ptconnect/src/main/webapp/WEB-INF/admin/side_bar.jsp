@@ -25,8 +25,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item " href="trainerRegisterList">트레이너 등록 요청</a>
-                        <a class="collapse-item " href="centerRegisterList">센터 등록 요청</a>
+                        <a class="collapse-item " href="trainerRegisterList/0">트레이너 등록 요청</a>
+                        <a class="collapse-item " href="centerRegisterList/0">센터 등록 요청</a>
                     </div>
                 </div>
             </li>

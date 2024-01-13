@@ -10,7 +10,7 @@
 <body>
     <script>
         alert("페이지 접근권한이 없습니다.");
-        self.location = "${pageContext.request.contextPath}/findTrainer.do";
+        self.location = "${pageContext.request.contextPath}/findTrainer";
     </script>
 </body>
 </html>

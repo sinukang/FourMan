@@ -8,6 +8,7 @@
 		 <typeAlias alias="cio" type="com.ptconnect.myapp.domain.CenterInfoDTO"/>
 		 <typeAlias alias="tio" type="com.ptconnect.myapp.domain.TrainerInfoDTO"/>
 		 <typeAlias alias="scri" type="com.ptconnect.myapp.domain.SearchCriteria"/>
+		 <typeAlias alias="pm" type="com.ptconnect.myapp.domain.PageMaker"/>
 		 <typeAlias alias="fdo" type="com.ptconnect.myapp.domain.FileDetailDTO"/>
 		 <typeAlias alias="rvo" type="com.ptconnect.myapp.domain.ReviewDTO"/>
 		 <typeAlias alias="po" type="com.ptconnect.myapp.domain.PaymentDTO"/>

@@ -21,7 +21,7 @@ public class AdminAuthInterceptor  extends HandlerInterceptorAdapter{
 		boolean tf = false;
 		if (session.getAttribute("mbAuth") == null) {
 
-			String location =request.getContextPath()+"/error/loginAuthError";
+			String location =request.getContextPath()+"/admin/admin_login";
 			response.sendRedirect(location);			
 			tf = false;			
 		}else if(!"M".equals((String)session.getAttribute("mbAuth"))){

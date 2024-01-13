@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-//�α��� üũ ���� ���ͼ��� Ŭ���� 
 public class AuthInterceptor  extends HandlerInterceptorAdapter{
 
 	@Override
@@ -19,9 +18,9 @@ public class AuthInterceptor  extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		boolean tf = false;
-		if (session.getAttribute("mbAuth") == null) {
+		if (session.getAttribute("mbAuth") != null) {
 			
-			String location =request.getContextPath()+"/error/loginAuthError";
+			String location =request.getContextPath()+"/error/authError";
 			response.sendRedirect(location);			
 			tf = false;			
 		}else{
@@ -29,27 +28,27 @@ public class AuthInterceptor  extends HandlerInterceptorAdapter{
 		}		
 		return tf;
 	}
-	
-
-	public void saveUrl(HttpServletRequest req) {
-		
-		String uri = req.getRequestURI();   //주소창의 프로젝트명+파일경로 ex) spring0803/board/boardList.do
-		System.out.println(uri);
-		String query =req.getQueryString();  //주소창의 parameter 부분
-		System.out.println(query);
-		
-		if (query == null || query.equals("null")) {
-			query = "";
-		}else {
-			query = "?" +query;
-		}
-		System.out.println(uri+query);
-		
-		if (req.getMethod().equals("GET")) {   
-			req.getSession().setAttribute("saveUrl", uri+query);
-		}		
-	}
-	
+//	
+//
+//	public void saveUrl(HttpServletRequest req) {
+//		
+//		String uri = req.getRequestURI();   //주소창의 프로젝트명+파일경로 ex) spring0803/board/boardList.do
+//		System.out.println(uri);
+//		String query =req.getQueryString();  //주소창의 parameter 부분
+//		System.out.println(query);
+//		
+//		if (query == null || query.equals("null")) {
+//			query = "";
+//		}else {
+//			query = "?" +query;
+//		}
+//		System.out.println(uri+query);
+//		
+//		if (req.getMethod().equals("GET")) {   
+//			req.getSession().setAttribute("saveUrl", uri+query);
+//		}		
+//	}
+//	
 	
 	
 	

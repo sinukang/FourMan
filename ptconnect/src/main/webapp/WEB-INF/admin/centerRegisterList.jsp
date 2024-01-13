@@ -70,14 +70,14 @@
                             			<th>가입일</th>
                             			<th>승인여부</th>
                             		</tr>
-                            		<c:forEach var="i" begin="0" end="9" step="1">
+                            		<c:forEach var="cio" items="${cList}">
                             			<tr>
-	                            			<td>${i}</td>
-	                            			<td>센터 이름${i}</td>
-	                            			<td>010-${i}${i}${i}${i}-${i}${i}${i}${i}</td>
-	                            			<td>센터 위치${i}</td>
-	                            			<td>이메일${i}</td>
-	                            			<td>가입일${i}</td>
+	                            			<td>${cio.ctNo}</td>
+	                            			<td>${cio.ctName}</td>
+	                            			<td>${cio.mbPhone}</td>
+	                            			<td>${cio.mbAddr}</td>
+	                            			<td>${cio.mbEmail}</td>
+	                            			<td>${cio.mbDate}</td>
 	                            			<td>
 	                            				<div>
 	                            					<a href="#" class="btn btn-circle color-discord">
@@ -102,18 +102,18 @@
                             							◀
                             						</a>
                             					</li>
-                            					<c:forEach var="i" begin="1" end="5" step="1">
+                            					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="${pm.startPage}">
                             						<c:choose>
-                            							<c:when test="${i eq 1}">
+                            							<c:when test="${i eq pm.currentPage}">
                             								<li class="paginate_button page-item active">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="i" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
                             							</c:when>
                             							<c:otherwise>
                             								<li class="paginate_button page-item">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="i" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>

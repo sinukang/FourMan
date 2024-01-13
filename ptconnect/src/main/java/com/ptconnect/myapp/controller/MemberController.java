@@ -223,7 +223,7 @@ public class MemberController {
 		session.removeAttribute("mbName");
 		session.removeAttribute("mbMapX");
 		session.removeAttribute("mbMapY");
-		return "redirect:/findTrainer.do";
+		return "redirect:/findTrainer";
 	}
 	
 	@RequestMapping(value = "idFind", method = RequestMethod.GET)
@@ -320,10 +320,41 @@ public class MemberController {
 		if(mbPwd != null) {
 			if(mbPwd.equals(session.getAttribute("MAIL_PWD"))) {
 				path="/error/tempPage";
+				session.removeAttribute("MAIL_PWD");
 			}else {
 				path="/error/authError";
 			}
 		}
+		return "redirect:/"+path;
+	}
+	
+	@RequestMapping(value = "/adminLoginAction", method=RequestMethod.POST)
+	public String adminLoginAction(@RequestParam("mbEmail") String mbEmail,
+			@RequestParam("mbPwd") String mbPwd,
+			RedirectAttributes rttr,
+			HttpSession session) {
+		MemberDTO mo = ms.memberLogin(mbEmail);
+		String path = "";
+		if(mo!=null) {
+			if(bCrptPasswordEncoderer.matches(mbPwd, mo.getMbPwd())) {
+
+				session.setAttribute("mbNo", mo.getMbNo());
+				session.setAttribute("mbAuth", mo.getMbAuth());
+				session.setAttribute("mbName", mo.getMbName());
+				session.setAttribute("mbMapY", mo.getMbMapY());
+				session.setAttribute("mbMapX", mo.getMbMapX());
+				path = "admin/admin_index";
+			}else {
+				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
+				rttr.addFlashAttribute("mbEmail",mbEmail);
+				path = "admin/admin_login";
+			}
+		}else{
+			rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
+			rttr.addFlashAttribute("mbEmail",mbEmail);
+			path = "admin/admin_login";
+		}
+		
 		return "redirect:/"+path;
 	}
 }
