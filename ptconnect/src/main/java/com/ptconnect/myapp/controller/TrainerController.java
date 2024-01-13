@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ptconnect.myapp.domain.FileDetailDTO;
 import com.ptconnect.myapp.domain.PageMaker;
+import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.TrainerService;
@@ -117,9 +119,17 @@ public class TrainerController {
 	public String trainerInfoView(int tnNo, Model model) {
 		
 		
-		
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
+		ArrayList<ReviewDTO> rvo_alist = ts.TrainerInfoView_reviews(tnNo);
+		
+		for(int i = 0; i < rvo_alist.size(); i++) {
+			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
+			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
+			rvo_alist.get(i).setRvFilename(fdo_alist);
+		}
+		
 		model.addAttribute("tio", tio);
+		model.addAttribute("rvo_alist", rvo_alist);
 		
 		return "trainer/trainerInfoView";
 	}

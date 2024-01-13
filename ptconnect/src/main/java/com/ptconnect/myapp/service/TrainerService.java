@@ -3,18 +3,23 @@ package com.ptconnect.myapp.service;
 import java.util.ArrayList;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 
 public interface TrainerService {
 	
-	public ArrayList<TrainerInfoDTO> findTrainer(SearchCriteria scri);
+	public ArrayList<TrainerInfoDTO> findTrainer(SearchCriteria scri);	//트레이너 찾기 페이지 트레이너 리스트
 	
-	public String loginUserAddr(int mbNo);
+	public String loginUserAddr(int mbNo);	//로그인 한 유저의 주소
 	
-	public int trainerTotalCount(SearchCriteria scri);
+	public int trainerTotalCount(SearchCriteria scri);	//검색된 트레이너 사람 수
 	
-	public TrainerInfoDTO TrainerInfoView(int tnNo);
+	public TrainerInfoDTO TrainerInfoView(int tnNo);	//트레이너 리스트에서 선택한 트레이너의 정보
+	
+	public ArrayList<ReviewDTO> TrainerInfoView_reviews(int tnNo); //선택한 트레이너의 리뷰들 정보
+	
+	public ArrayList<FileDetailDTO> TrainerInfoView_reviews_files(int flNo); //선택한 트레이너의 리뷰들 각각에 첨부된 파일들 정보
 	
 	public int trainerInsert(TrainerInfoDTO tio);
 	

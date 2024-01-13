@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.TrainerServiceMapper;
@@ -68,6 +69,26 @@ public class TrainerServiceImpl implements TrainerService{
 		return tio;
 	}
 
+@Override
+	public ArrayList<ReviewDTO> TrainerInfoView_reviews(int tnNo) {
+		
+		ArrayList<ReviewDTO> rvo_alist = new ArrayList<ReviewDTO>();
+		
+		rvo_alist = tsm.TrainerInfoView_reviews(tnNo);
+		
+		return rvo_alist;
+	}
+	
+	@Override
+	public ArrayList<FileDetailDTO> TrainerInfoView_reviews_files(int flNo) {
+		
+		ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
+		
+		fdo_alist = tsm.TrainerInfoView_reviews_files(flNo);
+		
+		return fdo_alist;
+	}	
+	
 	@Override
 	public int trainerInsert(TrainerInfoDTO tio) {
 		int value = 0;

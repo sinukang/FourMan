@@ -3,6 +3,7 @@ package com.ptconnect.myapp.persistance;
 import java.util.ArrayList;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 
@@ -15,6 +16,10 @@ public interface TrainerServiceMapper {
 	public int trainerTotalCount(SearchCriteria scri);
 	
 	public TrainerInfoDTO TrainerInfoView(int tnNo);
+
+	public ArrayList<ReviewDTO> TrainerInfoView_reviews(int tnNo);
+	
+	public ArrayList<FileDetailDTO> TrainerInfoView_reviews_files(int flNo);
 	
 	public int trainerInsert(TrainerInfoDTO tio);
 	

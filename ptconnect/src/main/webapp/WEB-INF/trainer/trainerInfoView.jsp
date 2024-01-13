@@ -268,11 +268,11 @@
 																					</div>
 																				</div>
 																				<div class="review_text">
-																				헬스를 처음 접해보는데 그만큼 어색하고 생소했지만 트레이너님 께서 굉장히 부드럽게 잘 이끌어주셔서 피티받는 시간동안 힘들지만 집중력있게 배울수있었습니다
-
-일단 느낀점은 평소 유튜브로 이것저것 찾아봤을때와는 달리 직접 피티를받아보니까 나를 가르처주시는 트레이너님의 꼼꼼함이 느껴저서 만족스러웠고 부족한 부분들을 이해시켜주시려는 전문성도 좋았고, 다소 벽이 느껴질수도 있는 첫수업이었지만 전혀 어색하지않게 접근해주셨던 그런점에 믿음이가고  나머지 피티횟수도 열심히 하고싶은 마음이들었습니다
-
-자주 마음만 있고 미루다보니 등록하기 힘든 헬스였는데 첫 수업 이후 오기를 잘했구나 라는 생각이들어서 그점도 뿌듯하고 좋았습니다 회원에게 건성인 트레이너분들도 많다고 들었었는데 신준배 트레이너님과 만나게되어 다행입니다😁👍
+																					헬스를 처음 접해보는데 그만큼 어색하고 생소했지만 트레이너님 께서 굉장히 부드럽게 잘 이끌어주셔서 피티받는 시간동안 힘들지만 집중력있게 배울수있었습니다
+	
+																					일단 느낀점은 평소 유튜브로 이것저것 찾아봤을때와는 달리 직접 피티를받아보니까 나를 가르처주시는 트레이너님의 꼼꼼함이 느껴저서 만족스러웠고 부족한 부분들을 이해시켜주시려는 전문성도 좋았고, 다소 벽이 느껴질수도 있는 첫수업이었지만 전혀 어색하지않게 접근해주셨던 그런점에 믿음이가고  나머지 피티횟수도 열심히 하고싶은 마음이들었습니다
+																					
+																					자주 마음만 있고 미루다보니 등록하기 힘든 헬스였는데 첫 수업 이후 오기를 잘했구나 라는 생각이들어서 그점도 뿌듯하고 좋았습니다 회원에게 건성인 트레이너분들도 많다고 들었었는데 신준배 트레이너님과 만나게되어 다행입니다😁👍
 																				</div>
 																			</div>
 																		</div>
@@ -327,24 +327,111 @@
 																					</div>
 																				</div>
 																				<div class="review_text">
-																				헬스를 처음 접해보는데 그만큼 어색하고 생소했지만 트레이너님 께서 굉장히 부드럽게 잘 이끌어주셔서 피티받는 시간동안 힘들지만 집중력있게 배울수있었습니다
-
-일단 느낀점은 평소 유튜브로 이것저것 찾아봤을때와는 달리 직접 피티를받아보니까 나를 가르처주시는 트레이너님의 꼼꼼함이 느껴저서 만족스러웠고 부족한 부분들을 이해시켜주시려는 전문성도 좋았고, 다소 벽이 느껴질수도 있는 첫수업이었지만 전혀 어색하지않게 접근해주셨던 그런점에 믿음이가고  나머지 피티횟수도 열심히 하고싶은 마음이들었습니다
-
-자주 마음만 있고 미루다보니 등록하기 힘든 헬스였는데 첫 수업 이후 오기를 잘했구나 라는 생각이들어서 그점도 뿌듯하고 좋았습니다 회원에게 건성인 트레이너분들도 많다고 들었었는데 신준배 트레이너님과 만나게되어 다행입니다😁👍
-																				</div>
-																				<div class="reply_comment">
-																					<div class="user_name">김빡빡 선생님</div>
-																					안녕하세요~! 첫수업이 하체운동이라 힘드셨을텐데 만족스러워하셨다니 기분이 좋네요 첫수업 후 후기작성까지 감사합니다~!
-다리근육도 단순히 앉았다 일어났다가 아닌 발바닥 접지부터 잡아주며, 허벅지근육은 어디부터 사용되어야 하는지 
-근육을 사용할때도 순차가 있습니다~
-앞으로도 근육에 움직임 하나하나 회원님 체형에 맞는 움직임 인지 시켜드리며, 운동에 대한 흥미 가질 수 있도록 최선을 다해 도움드리겠습니다 ~!
-감사합니다 !💪💪
+																					<div class="review_text">
+																						헬스를 처음 접해보는데 그만큼 어색하고 생소했지만 트레이너님 께서 굉장히 부드럽게 잘 이끌어주셔서 피티받는 시간동안 힘들지만 집중력있게 배울수있었습니다
+		
+																						일단 느낀점은 평소 유튜브로 이것저것 찾아봤을때와는 달리 직접 피티를받아보니까 나를 가르처주시는 트레이너님의 꼼꼼함이 느껴저서 만족스러웠고 부족한 부분들을 이해시켜주시려는 전문성도 좋았고, 다소 벽이 느껴질수도 있는 첫수업이었지만 전혀 어색하지않게 접근해주셨던 그런점에 믿음이가고  나머지 피티횟수도 열심히 하고싶은 마음이들었습니다
+																						
+																						자주 마음만 있고 미루다보니 등록하기 힘든 헬스였는데 첫 수업 이후 오기를 잘했구나 라는 생각이들어서 그점도 뿌듯하고 좋았습니다 회원에게 건성인 트레이너분들도 많다고 들었었는데 신준배 트레이너님과 만나게되어 다행입니다😁👍
+																					</div>
+																					<div class="reply_comment">
+																						<div class="user_name">김빡빡 선생님</div>
+																						안녕하세요~! 첫수업이 하체운동이라 힘드셨을텐데 만족스러워하셨다니 기분이 좋네요 첫수업 후 후기작성까지 감사합니다~!
+																						다리근육도 단순히 앉았다 일어났다가 아닌 발바닥 접지부터 잡아주며, 허벅지근육은 어디부터 사용되어야 하는지 
+																						근육을 사용할때도 순차가 있습니다~
+																						앞으로도 근육에 움직임 하나하나 회원님 체형에 맞는 움직임 인지 시켜드리며, 운동에 대한 흥미 가질 수 있도록 최선을 다해 도움드리겠습니다 ~!
+																						감사합니다 !💪💪
+																					</div>
 																				</div>
 																			</div>
 																		</div>
 																	</li>
 																</div>
+																
+																<!-- DB에서 가져온 댓글 리스트 영역 -->
+																<c:forEach var="rvo" items="${rvo_alist}">
+																	<div class="review">
+																		<li>
+																			<div>
+																				<div class="review_header">
+																					<div>
+																						<span class="user_icon">
+																							<i class="fa-solid fa-user"></i>
+																						</span>
+																						<span class="user_name">${rvo.mbName}</span>
+																						<span class="date">${rvo.rvDate}</span>
+																					</div>
+																					<div class="review_star">
+																						<c:choose>
+																							<c:when test="${rvo.rvRate eq 5}">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																							</c:when>
+																							<c:when test="${rvo.rvRate eq 4}">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																							</c:when>
+																							<c:when test="${rvo.rvRate eq 3}">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																							</c:when>
+																							<c:when test="${rvo.rvRate eq 2}">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																							</c:when>
+																							<c:otherwise>
+																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																							</c:otherwise>
+																						</c:choose>
+																					</div>
+																				</div>
+																				<div class="review_context">
+																					<div class="review_photo">
+																						<div class="photo_box">
+																							<div style="display: inline;">
+																								<!-- a태그는 modal창을 띄우는 용도 -->
+																								<c:forEach var="rvo_file" items="${rvo.rvFilename}">
+																									<div class="photo_wrap review_photo">
+																										<div class="photo_rel">
+																											<div class="photo_abs">
+																												${rvo_file.fdName}
+																											</div>
+																										</div>
+																									</div>
+																								</c:forEach>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="review_text">
+																						${rvo.rvContent}
+																					</div>
+																					<div class="reply_comment">
+																						<div class="user_name">김빡빡 선생님</div>
+																						후기 감사합니다~
+																					</div>
+																				</div>
+																			</div>
+																		</li>
+																	</div>
+																</c:forEach>
+																<!-- DB에서 가져온 댓글 리스트 영역 -->
+																
 															</ul>
 														</div>
 														<div>
