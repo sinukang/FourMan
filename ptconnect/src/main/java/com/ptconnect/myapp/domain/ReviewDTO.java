@@ -7,7 +7,7 @@ public class ReviewDTO extends TrainerInfoDTO{
 	private int rvNo;
 	private String rvContent;
 	private ArrayList<FileDetailDTO> rvFilename;
-	private float rvRate;
+	private int rvRate;
 	private String rvDate;
 	private String rvDateM;
 	private String rvDelYN;
@@ -30,10 +30,10 @@ public class ReviewDTO extends TrainerInfoDTO{
 	public void setRvFilename(ArrayList<FileDetailDTO> rvFilename) {
 		this.rvFilename = rvFilename;
 	}
-	public float getRvRate() {
+	public int getRvRate() {
 		return rvRate;
 	}
-	public void setRvRate(float rvRate) {
+	public void setRvRate(int rvRate) {
 		this.rvRate = rvRate;
 	}
 	public String getRvDate() {

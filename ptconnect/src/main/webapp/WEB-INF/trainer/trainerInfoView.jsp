@@ -36,12 +36,12 @@
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center3.jpg">
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center4.jpg">
 								<div class="rest popup_btn" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${pageContext.request.contextPath}/resources/img/fitness1.jpg');">
-									<div class="center_photo_view"><i class="fa-solid fa-images"></i>8개 사진 전체보기</div>
+									<div class="center_photo_view"><i class="fa-solid fa-images"></i>사진 전체보기</div>
 								</div>
 							</div>
 						</div>
 						
-						<jsp:include page="../include/trainerViewHeader.jsp"/>
+						<%-- <jsp:include page="../include/trainerViewHeader.jsp"/> --%>
 						
 						<div class="gray_background"><!-- 회색배경 -->
 							<div class="my_container"><!-- 코치정보(마진오토) -->
@@ -50,9 +50,7 @@
 										<div class="trainer_info">
 											<div class="trainer_introduce">
 												<div class="trainer_content">
-													<h4>
-														선생님 소개
-													</h4>
+													<h4>선생님 소개</h4>
 													<div class="content_wrap">
 														<div>
 															<div class="photo_box">
@@ -184,23 +182,55 @@
 													</div>
 												</div>
 											</div>
-											<div class="trainer_review">
+											<div class="trainer_review" style="display: none;">
 												<div class="trainer_content">
 													<h4>
 														최근후기
 													</h4>
 													<div class="content_wrap rating">
 														<div style="display: flex;">
-															<span class="review_rate">3.2</span>
+															<span class="review_rate">${tio.reviewRate}</span>
 															<div class="review_summary">
 																<div style="display: flex;">
-																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
-																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<c:choose>
+																		<c:when test="${tio.reviewRate ge 4.5}">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																		</c:when>
+																		<c:when test="${tio.reviewRate ge 4}">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																		</c:when>
+																		<c:when test="${tio.reviewRate ge 3}">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																		</c:when>
+																		<c:when test="${tio.reviewRate ge 2}">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																		</c:when>
+																		<c:otherwise>
+																			<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																			<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																		</c:otherwise>
+																	</c:choose>
 																</div>
-																<div>5개의 후기</div>
+																<div>${tio.reviewCnt}개의 후기</div>
 															</div>
 														</div>
 														<div>
@@ -349,7 +379,7 @@
 																</div>
 																
 																<!-- DB에서 가져온 댓글 리스트 영역 -->
-																<c:forEach var="rvo" items="${rvo_alist}">
+																<c:forEach var="rvo" items="${rvo_alist}" end="1">
 																	<div class="review">
 																		<li>
 																			<div>
@@ -422,7 +452,7 @@
 																						${rvo.rvContent}
 																					</div>
 																					<div class="reply_comment">
-																						<div class="user_name">김빡빡 선생님</div>
+																						<div class="user_name">${tio.mbName}</div>
 																						후기 감사합니다~
 																					</div>
 																				</div>
@@ -435,7 +465,7 @@
 															</ul>
 														</div>
 														<div>
-															<button class="view_review_button">
+															<button class="view_review_button" onclick="review()">
 																<span>전체 후기 보기</span>
 															</button>
 														</div>
@@ -509,7 +539,7 @@
 													<div class="content_wrap">
 														<div class="center">
 															<strong>${tio.ctName}</strong>
-															<div class="contact" onclick="setCenter()">상세 정보</div>
+															<div class="contact" onclick="centerInfoView()">상세 정보</div>
 														</div>
 														<div class="center">
 															<span>${tio.mbAddr}</span>
@@ -532,20 +562,52 @@
 														<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 													</div>
 													<div>
-														<div class="trainer_name">김빡빡 선생님</div>
-														<div class="center_name">이젠IT짐</div>
-														<div class="stars">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+														<div class="trainer_name">${tio.mbName}</div>
+														<div class="center_name">${tio.ctName}</div>
+														<div class="stars" style="display: none;">
+															<c:choose>
+																<c:when test="${tio.reviewRate ge 4.5}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																</c:when>
+																<c:when test="${tio.reviewRate ge 4}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:when test="${tio.reviewRate ge 3}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:when test="${tio.reviewRate ge 2}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:otherwise>
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:otherwise>
+															</c:choose>
 															<span class="review_wrap">
-																<span class="rating">(3.2)</span>
-																<span class="count">(5)</span>
+																<span class="rating">${tio.reviewRate}</span>
+																<span class="count">(${tio.reviewCnt})</span>
 															</span>
 														</div>
-														<div class="pickup_line">"안녕하세요, 개빡센 트레이너 김빡빡입니다."</div>
+														<div class="pickup_line">${tio.tnOneLine}</div>
 														<div class="list_wrap">
 															<div class="flex_box">
 																<span class="left">자격검증</span><span class="right">자격사항을 등록하세요</span>
@@ -603,6 +665,7 @@
 	
 	<!--리뷰 모달창 -->
 	<jsp:include page="../include/reviewModal.jsp"/>
+	
 	<!--결제 모달창 -->
 	<jsp:include page="../include/orderModal.jsp"/>
 	
@@ -610,83 +673,73 @@
 
 	window.onload = function() {
 		$('#trainer_tab1').addClass('active_tab');
+		
+		//탭 a 태그 주소에 매개변수 받는 부분 추가
+		let a_tap_link = $(".a_tap_link");
+		let href;
+		for(var i = 0; i < a_tap_link.length; i++){
+			href = $(a_tap_link[i]).prop('href');
+			href += "?tnNo=${tio.tnNo}";
+			$(a_tap_link[i]).attr("href", href);
+			
+// 			if(i == 2){
+// 				a_tap_link[i].text("후기(${tio.reviewCnt})");
+// 			}
+		}
+		$(a_tap_link[2]).text("후기(${tio.reviewCnt})");
 	}
-
-	var mapX = 0;
-	var mapY = 0;
+	
+	function centerInfoView(){
+		location.href = "${pageContext.request.contextPath}/centerInfoView?tnNo=${tio.tnNo}";
+	}
+	
+	function review(){
+		location.href = "${pageContext.request.contextPath}/review?tnNo=${tio.tnNo}";
+	}
+	
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
 	mapOption = {
-	    center: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
+		center: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}), // 지도의 중심좌표
+		level: 3 // 지도의 확대 레벨
 	};  
 	
 	//지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-	var positions = [
-		{
-			title: '${tio.ctName}',
-			latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
-		}
-	];
-	
-	var bounds = new kakao.maps.LatLngBounds();
-	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
-	
-	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
-		var data = positions[i];
+	var markerPosition  = new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}); 
 
-		displayMarker(data,i);
-	}
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+		position: markerPosition
+	});	
 	
-	function displayMarker(data,e){
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map)
+	
+	var iwContent = '<div style="padding:5px;">${tio.ctName}<div class="close" onclick="closeInfoWindow()"></div><br><a href="https://map.kakao.com/link/map/${tio.ctName},${tio.mbMapY}, ${tio.mbMapX}" style="color:blue" target="_blank">큰 지도보기</a> <a href="https://map.kakao.com/link/to/${tio.ctName},${tio.mbMapY}, ${tio.mbMapX}" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	iwPosition = new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}); //인포윈도우 표시 위치입니다
 
-	  	var content ='<div>';
-		content+='<div class="marker_wrap">';
-		content+=data.title;
-		content+='</div>';
-		content+='<div class="marker_pin">';
-		content+='</div">';
-		content+='</div">';
-			
-		var marker = new kakao.maps.CustomOverlay({	//좌표값을 지정해 마커 생성
-			map : map,
-			position : data.latlng,
-		    content: content
-		});		
-	}	
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+		position : iwPosition, 
+		content : iwContent 
+	});	
 	
-// 	//주소로 좌표를 검색합니다
-// 	var geocoder = new kakao.maps.services.Geocoder();
-// 	geocoder.addressSearch('전북 전주시 덕진구 백제대로 572 5층', function(result, status) {
+	// 마커에 클릭이벤트를 등록합니다
+	kakao.maps.event.addListener(marker, 'click', function() {
+		// 마커 위에 인포윈도우를 표시합니다
+		infowindow.open(map, marker);
+	});
 	
-// 	// 정상적으로 검색이 완료됐으면 
-// 		if (status === kakao.maps.services.Status.OK) {
-	
-// 		    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-// 			mapX = result[0].x;
-// 			mapY = result[0].y;
-// 		    // 결과값으로 받은 위치를 마커로 표시합니다
-// 		    var marker = new kakao.maps.Marker({
-// 		        map: map,
-// 		        position: coords
-// 		    });
-		
-// 		    // 인포윈도우로 장소에 대한 설명을 표시합니다
-// 		    var infowindow = new kakao.maps.InfoWindow({
-// 		        content: '<div style="width:150px;text-align:center;padding:6px 0;">'+${tio.ctName}+'</div>'
-// 		    });
-// 		    infowindow.open(map, marker);
-		
-// 		    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-// 		    map.setCenter(coords);
-// 		} 
-// 	}); 
+// 	function closeInfoWindow(){
+// 		infowindow.close();
+// 	}
 
 	function setDraggable(draggable){
 		map.setDraggable(draggable);
 	}
+	
 	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 	
@@ -699,8 +752,8 @@
 	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
 	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 	    map.relayout();
-	}
-	
+	}	
+
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/review.js">
 </script>
@@ -710,6 +763,21 @@
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/reviewPhotoModal.js">
 </script>
-
 </body>
+<style>
+	.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+	.wrap * {padding: 0;margin: 0;}
+	.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+	.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+	.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+	.close {position: absolute;top: 5px;right: -5px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+	.close:hover {cursor: pointer;}
+	.info .body {position: relative;overflow: hidden;}
+	.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+	.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+	.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+	.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+	.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	.info .link {color: #5085BB;}
+</style>
 </html>

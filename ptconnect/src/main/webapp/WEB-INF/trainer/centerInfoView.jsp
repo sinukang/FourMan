@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>센터 정보</title>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/trainer.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/photoModal.css" type="text/css" rel="stylesheet">
@@ -30,16 +30,12 @@
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center3.jpg">
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center4.jpg">
 								<div class="rest popup_btn" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${pageContext.request.contextPath}/resources/img/fitness1.jpg');">
-									<div class="center_photo_view"><i class="fa-solid fa-images"></i>8개 사진 전체보기</div>
+									<div class="center_photo_view"><i class="fa-solid fa-images"></i>사진 전체보기</div>
 								</div>
 							</div>
 						</div>
 						<jsp:include page="../include/trainerViewHeader.jsp"/>
-						<script>
-							window.onload = function() {
-								$('#trainer_tab2').addClass('active_tab');
-							}
-						</script>
+
 						<div class="gray_background"><!-- 회색배경 -->
 							<div class="my_container"><!-- 코치정보(마진오토) -->
 								<div class="inner_contents row"><!-- 코치정보(패딩탑) -->
@@ -49,14 +45,14 @@
 												<div class="trainer_content">
 													<div class="content_wrap">
 														<div class="center">
-															<strong>이젠IT짐 금암점</strong>
-															<div class="contact" onclick="setCenter()">상세 정보</div>
+															<strong>${tio.ctName}</strong>
+															<!-- <div class="contact" onclick="setCenter()">상세 정보</div> -->
 														</div>
 														<div class="center">
-															<span>전북 전주시 덕진구 백제대로 572 5층 이젠IT짐 금암점</span>
+															<span>${tio.mbAddr}</span>
 														</div>
 														<div class="center">
-															<span>전북대학교 정문 맞은편 1층 롯데후레쉬</span>
+															<!-- <span>전북대학교 정문 맞은편 1층 롯데후레쉬</span> -->
 														</div>
 														<div>
 															<div class="photo_box">
@@ -95,11 +91,13 @@
 														센터 소개
 													</h4>
 													<div class="content_wrap">
-														<div class="content_text">오늘도 기분좋은 하루되세요! 
-
-이젠IT짐 입니다!
-운동하기 참 좋은날이네요^^
-
+														<div class="content_text">
+															${tio.ctIntro}
+															오늘도 기분좋은 하루되세요!
+															
+															이젠IT짐 입니다!
+															운동하기 참 좋은날이네요^^
+															
 														</div>
 													</div>
 												</div>
@@ -112,19 +110,19 @@
 														<div>
 															<div class="trophy">
 																<i class="fa-solid fa-square-parking"></i>
-																<span>주차 3시간 무료</span>
+																<span>${tio.ctInfo}주차 3시간 무료</span>
 															</div>
 															<div class="trophy">
 																<i class="fa-solid fa-shirt"></i>
-																<span>운동복, 수건 무료</span>
+																<span>${tio.ctInfo}운동복, 수건 무료</span>
 															</div>
 															<div class="trophy">
 																<i class="fa-solid fa-box"></i>
-																<span>개인 사물함 1개월 10,000원</span>
+																<span>${tio.ctInfo}개인 사물함 1개월 10,000원</span>
 															</div>
 															<div class="trophy">
 																<i class="fa-solid fa-shower"></i>
-																<span>샤워시설</span>
+																<span>${tio.ctInfo}샤워시설</span>
 															</div>
 														</div>
 													</div>
@@ -171,11 +169,11 @@
 													</h4>
 													<div class="content_wrap">
 														<div class="center">
-															<strong>이젠IT짐 금암점</strong>
-															<div class="contact" onclick="setCenter()">상세 정보</div>
+															<strong>${tio.ctName}</strong>
+															<!-- <div class="contact" onclick="centerInfoView()">상세 정보</div> -->
 														</div>
 														<div class="center">
-															<span>전북 전주시 덕진구 백제대로 572 5층 이젠IT짐 금암점</span>
+															<span>${tio.mbAddr}</span>
 														</div>
 														<div id="map" class="center_location">
 														</div>
@@ -195,20 +193,52 @@
 														<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 													</div>
 													<div>
-														<div class="trainer_name">김빡빡 선생님</div>
-														<div class="center_name">이젠IT짐</div>
+														<div class="trainer_name">${tio.mbName}</div>
+														<div class="center_name">${tio.ctName}</div>
 														<div class="stars">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
-															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+															<c:choose>
+																<c:when test="${tio.reviewRate ge 4.5}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																</c:when>
+																<c:when test="${tio.reviewRate ge 4}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:when test="${tio.reviewRate ge 3}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:when test="${tio.reviewRate ge 2}">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:otherwise>
+																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:otherwise>
+															</c:choose>
 															<span class="review_wrap">
-																<span class="rating">(3.2)</span>
-																<span class="count">(5)</span>
+																<span class="rating">${tio.reviewRate}</span>
+																<span class="count">(${tio.reviewCnt})</span>
 															</span>
 														</div>
-														<div class="pickup_line">"안녕하세요, 개빡센 트레이너 김빡빡입니다."</div>
+														<div class="pickup_line">${tio.tnOneLine}</div>
 														<div class="list_wrap">
 															<div class="flex_box">
 																<span class="left">자격검증</span><span class="right">자격사항을 등록하세요</span>
@@ -269,60 +299,65 @@
 	<jsp:include page="../include/orderModal.jsp"/>
 	
 <script>
-	var mapX = 0;
-	var mapY = 0;
-
+	
+	window.onload = function() {
+		$('#trainer_tab2').addClass('active_tab');
+		
+		//탭 a 태그 주소에 매개변수 받는 부분 추가
+		let a_tap_link = $(".a_tap_link");
+		let href;
+		for(var i = 0; i < a_tap_link.length; i++){
+			href = $(a_tap_link[i]).prop('href');
+			href += "?tnNo=${tio.tnNo}";
+			$(a_tap_link[i]).attr("href", href);
+		}
+		$(a_tap_link[2]).text("후기(${tio.reviewCnt})");
+	}
+	
+	function centerInfoView(){
+		location.href = "${pageContext.request.contextPath}/centerInfoView?tnNo=${tio.tnNo}";
+	}
+	
+	function review(){
+		location.href = "${pageContext.request.contextPath}/review?tnNo=${tio.tnNo}";
+	}
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
-	
 	mapOption = {
-	    center: new kakao.maps.LatLng(35.813605625795276, 127.09494840838936), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
+		center: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}), // 지도의 중심좌표
+		level: 3 // 지도의 확대 레벨
 	};  
 	
 	//지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	//주소로 좌표를 검색합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	geocoder.addressSearch('전북 전주시 덕진구 백제대로 572 5층', function(result, status) {
 	
-	// 정상적으로 검색이 완료됐으면 
-		if (status === kakao.maps.services.Status.OK) {
-	
-		    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-			mapX = result[0].x;
-			mapY = result[0].y;
-		    // 결과값으로 받은 위치를 마커로 표시합니다
-		    var marker = new kakao.maps.Marker({
-		        map: map,
-		        position: coords
-		    });
-		
-		    // 인포윈도우로 장소에 대한 설명을 표시합니다
-		    var infowindow = new kakao.maps.InfoWindow({
-		        content: '<div style="width:150px;text-align:center;padding:6px 0;">이젠IT짐</div>'
-		    });
-		    infowindow.open(map, marker);
-		
-		    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		    map.setCenter(coords);
-		} 
-	}); 
+	var markerPosition  = new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}); 
 
-	function setDraggable(draggable){
-		map.setDraggable(draggable);
-	}
-	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+		position: markerPosition
+	});	
 	
-	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	function relayout() {    
-	    
-	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-	    map.relayout();
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map)
+	
+	var iwContent = '<div style="padding:5px;">${tio.ctName}<div class="close" onclick="closeInfoWindow()"></div><br><a href="https://map.kakao.com/link/map/${tio.ctName},${tio.mbMapY}, ${tio.mbMapX}" style="color:blue" target="_blank">큰 지도보기</a> <a href="https://map.kakao.com/link/to/${tio.ctName},${tio.mbMapY}, ${tio.mbMapX}" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	iwPosition = new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}); //인포윈도우 표시 위치입니다
+
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+		position : iwPosition, 
+		content : iwContent 
+	});	
+	
+	// 마커에 클릭이벤트를 등록합니다
+	kakao.maps.event.addListener(marker, 'click', function() {
+		// 마커 위에 인포윈도우를 표시합니다
+		infowindow.open(map, marker);
+	});
+	
+	function closeInfoWindow(){
+		infowindow.close();
 	}
 	
 </script>
@@ -333,7 +368,21 @@
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/reviewPhotoModal.js">
 </script>
-
-
 </body>
+<style>
+	.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+	.wrap * {padding: 0;margin: 0;}
+	.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+	.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+	.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+	.close {position: absolute;top: 5px;right: -5px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+	.close:hover {cursor: pointer;}
+	.info .body {position: relative;overflow: hidden;}
+	.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+	.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+	.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+	.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+	.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	.info .link {color: #5085BB;}
+</style>
 </html>

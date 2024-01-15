@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.CenterServiceMapper">
+
+	<!-- TrainerInfoView 중 센터 탭 -->
+	<select id="centerInfoView" parameterType="int" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
+		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket
+		, c.ctName, c.ctIntro, c.ctInfo
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		AND t.tnNo = #{tnNo};		
+	</select>
+	
+	
+	
+</mapper>

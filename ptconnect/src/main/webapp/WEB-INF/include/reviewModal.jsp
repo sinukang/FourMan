@@ -37,11 +37,11 @@
 								</label>
 								<div>
 									<select>
-										<option>★★★★★</option>
-										<option>★★★★☆</option>
-										<option>★★★☆☆</option>
-										<option>★★☆☆☆</option>
-										<option>★☆☆☆☆</option>
+										<option style="color: #FFBB33;">★★★★★</option>
+										<option style="color: #FFBB33;">★★★★☆</option>
+										<option style="color: #FFBB33;">★★★☆☆</option>
+										<option style="color: #FFBB33;">★★☆☆☆</option>
+										<option style="color: #FFBB33;">★☆☆☆☆</option>
 									</select>
 								</div>
 							</div>

@@ -155,7 +155,7 @@
 	</update>
 	
 	<!-- 선택한 트레이너 정보 불러옴 -->
-		<select id="TrainerInfoView" parameterType="int" resultType="tio">
+	<select id="TrainerInfoView" parameterType="int" resultType="tio">
 		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
 		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
@@ -165,12 +165,12 @@
 		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
 		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
 		WHERE m.mbDelYN = 'N'
-		AND t.tnNo = #{tnNo};		
+		AND t.tnNo = #{tnNo};
 	</select>
 
 	<!-- 선택한 트레이너에 대한 리뷰들 불러옴 -->
 	<select id="TrainerInfoView_reviews" parameterType="int" resultType="rvo">
-		SELECT m.mbName, r.*
+		SELECT m.mbName, r.rvNo, r.mbNo, r.tnNo, r.flNo, r.rvContent, r.rvRate, r.rvDate, r.rvDateM, r.rvDelYN
 		FROM review r
 		JOIN member m ON r.mbNo = m.mbNo
 		JOIN trainerinfo t ON r.tnno = t.tnno AND r.tnno = #{tnNo}
