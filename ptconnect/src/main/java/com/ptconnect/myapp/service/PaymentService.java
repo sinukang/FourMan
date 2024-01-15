@@ -10,6 +10,10 @@ public interface PaymentService {
 	
 	public int payment(PaymentDTO po);
 	
+	public int pointInsert(PaymentDTO po);
+	
+	public int usePoint(PaymentDTO po);
+	
 	public int orderInsert(PaymentDTO po);
 	
 	public String getToken() throws Exception;
@@ -21,4 +25,6 @@ public interface PaymentService {
 	public int paymentCancleInsert(PaymentDTO po);
 	
 	public int nonmember(PaymentDTO po);
+	
+	public int nonUserOrderInsert(PaymentDTO po);
 }

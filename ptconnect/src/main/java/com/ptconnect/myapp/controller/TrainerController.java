@@ -115,26 +115,48 @@ public class TrainerController {
 		return "trainer/findTrainer";
 	}
 	
-	@GetMapping(value = "trainerInfoView")
-	public String trainerInfoView(int tnNo, Model model) {
-		
-		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
-		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
-		
-		//해당 트레이너에 대한 리뷰(후기)들 가져옴
-		ArrayList<ReviewDTO> rvo_alist = ts.TrainerInfoView_reviews(tnNo);
-		
-		//각각의 리뷰들에 대해 리뷰의 flNo 가져가서 리뷰가 첨부한 사진들 가져옴
-		for(int i = 0; i < rvo_alist.size(); i++) {
-			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
-			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
-			rvo_alist.get(i).setRvFilename(fdo_alist);
+//	@GetMapping(value = "trainerInfoView")
+//	public String trainerInfoView(int tnNo, Model model) {
+//		
+//		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
+//		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
+//		
+//		//해당 트레이너에 대한 리뷰(후기)들 가져옴
+//		ArrayList<ReviewDTO> rvo_alist = ts.TrainerInfoView_reviews(tnNo);
+//		
+//		//각각의 리뷰들에 대해 리뷰의 flNo 가져가서 리뷰가 첨부한 사진들 가져옴
+//		for(int i = 0; i < rvo_alist.size(); i++) {
+//			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
+//			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
+//			rvo_alist.get(i).setRvFilename(fdo_alist);
+//		}
+//		
+//		model.addAttribute("tio", tio);
+//		model.addAttribute("rvo_alist", rvo_alist);
+//		
+//		return "trainer/trainerInfoView";
+//	}
+	
+	@Controller
+	public class TrainerInfoViewController {
+		@RequestMapping(value = "trainerInfoView", method = RequestMethod.GET)
+		public String example(HttpSession session) {
+			
+			int mbNo = 1; 
+			System.out.println("mbNo : " + mbNo);
+			 
+			int tnNo = 71;
+			System.out.println("tnNo : " + tnNo);
+			 
+			session.setAttribute("mbNo", mbNo);
+			session.setAttribute("tnNo", tnNo);
+			
+			return "trainer/trainerInfoView";
 		}
-		
-		model.addAttribute("tio", tio);
-		model.addAttribute("rvo_alist", rvo_alist);
-		
-		return "trainer/trainerInfoView";
+
 	}
 
 }
+
+
+

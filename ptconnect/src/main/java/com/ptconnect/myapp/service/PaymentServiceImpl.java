@@ -36,19 +36,21 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Override
 	public int payment(PaymentDTO po) {
+		int value = psm.payment(po);
 		
-		int value = 0;
+		return value;
+	}
+	
+	@Override
+	public int pointInsert(PaymentDTO po) {
+		int value = psm.pointInsert(po);
 		
-		int value1 = psm.payment(po);
-		
-		if(value1 > 0) {
-			
-			int value2 = psm.pointInsert(po);
-			
-			int value3 = psm.usePoint(po);
-			
-			value = value1 + value2 + value3;
-		}
+		return value;
+	}
+	
+	@Override
+	public int usePoint(PaymentDTO po) {
+		int value = psm.usePoint(po);
 		
 		return value;
 	}
@@ -73,6 +75,14 @@ public class PaymentServiceImpl implements PaymentService {
 			
 			value = value1 + value2;
 		}
+		
+		return value;
+	}
+	
+	@Override
+	public int nonUserOrderInsert(PaymentDTO po) {
+		
+		int value = psm.nonUserOrderInsert(po);
 		
 		return value;
 	}
@@ -177,10 +187,10 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		JsonObject json = new JsonObject();
 
-		json.addProperty("pcContent", reason);
+//		json.addProperty("pcContent", reason);
 		json.addProperty("odNo", merchant_uid);
-		json.addProperty("pcNo", imp_uid);
-		json.addProperty("pcPrice", amount);
+//		json.addProperty("pmNo", imp_uid);
+//		json.addProperty("pcPrice", amount);
 		po.setPcContent(reason);
 		po.setPcPrice(Integer.parseInt(amount));
 		

@@ -10,8 +10,13 @@
 	</insert>
 	
 	<insert id="orderInsert"  parameterType="po">
-		insert into order_(odNo, odPoint, odCoupon, odPrice)
-		values(#{odNo}, #{usePoint}, #{odCoupon}, #{odPrice})
+		insert into order_(odNo, mbNo, odPoint, odCoupon, odPrice)
+		values(#{odNo}, #{mbNo}, #{usePoint}, #{odCoupon}, #{odPrice})
+	</insert>
+	
+	<insert id="nonUserOrderInsert"  parameterType="po">
+		insert into order_(odNo, nmNo, odPoint, odCoupon, odPrice)
+		values(#{odNo}, #{nmNo}, #{usePoint}, #{odCoupon}, #{odPrice})
 	</insert>
 	
 	<insert id="orderProductInsert"  parameterType="po">
@@ -46,6 +51,9 @@
 	</insert>
 	
 	<insert id="nonmember" parameterType="po">
+		<selectKey keyProperty="nmNo" resultType="int" order="AFTER">
+	        select max(nmNo) as nmNo from nonmember
+	    </selectKey>
 	    insert into nonmember(nmName, nmPhone, nmPwd)
 	    values(#{nmName}, #{nmPhone}, #{nmPwd})
 	</insert>

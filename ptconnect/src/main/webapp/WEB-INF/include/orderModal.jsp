@@ -182,10 +182,21 @@
 	        var odPriceElement = document.getElementById('odPrice');
 	        var amountValue = parseInt(odPriceElement.textContent.replace(/[^0-9]/g, ''), 10);
 	        
-	
-	        // "usePoint" 입력 필드에 입력된 값 가져오기
+	     	// "usePoint" 입력 필드에 입력된 값 가져오기
 	        var usePointInput = parseInt($('input[name="usePoint"]').val(), 10) || 0;
-	
+	     	
+	     	// 사용포인트가 양수인지 정수인지 확인
+	        if (usePointInput <= 0 || !Number.isInteger(usePointInput)) {
+	            alert('숫자만 입력해주세요.');
+	            return;
+	        }
+	     	
+	        if (usePointInput > amountValue) {
+	            alert('결제금액보다 많은 포인트를 사용할 수 없습니다.');
+	            return;
+	        }
+			
+	     	
 	        // 사용된 포인트를 뺀 새로운 주문 가격 계산
 	        var newPrice = amountValue - usePointInput;
 	
