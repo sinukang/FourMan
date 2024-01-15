@@ -102,16 +102,16 @@
                             			<th>1회 체험권 가격</th>
                             			<th>등록일</th>
                             		</tr>
-                            		<c:forEach var="i" begin="10" end="19" step="1">
+                            		<c:forEach var="tio" items="${tList}">
                             			<tr>
                             				<td>
                             					<input type="checkbox">
                             				</td>
-	                            			<td>상품 번호${i}</td>
-	                            			<td>이름${i}</td>
-	                            			<td>소속 센터${i}</td>
-	                            			<td>${i * 2000}</td>
-	                            			<td>2023-12-${i}</td>
+	                            			<td>${tio.tnNo}</td>
+	                            			<td>${tio.mbName}</td>
+	                            			<td>${tio.ctName}</td>
+	                            			<td>${tio.tnTicket}</td>
+	                            			<td>${tio.tnDate}</td>
 	                            		</tr>
                             		</c:forEach>
                             	</table>
@@ -142,23 +142,25 @@
                             		<div class="col-lg-12">
                             			<div class="pagination-area">
                             				<ul class="pagination">
-                            					<li class="paginate_button page-item previous disabled">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+                            					<li class="paginate_button page-item previous">
+													<c:if test="${pm.prev eq true}">
+                            						<a href="${pm.prev}" aria-controls="dataTable" class="page-link">
                             							◀
                             						</a>
+                            						</c:if>
                             					</li>
-                            					<c:forEach var="i" begin="1" end="5" step="1">
+                            					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
                             						<c:choose>
-                            							<c:when test="${i eq 1}">
+                            							<c:when test="${i eq currentPage}">
                             								<li class="paginate_button page-item active">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="${pageContext.request.contextPath}/admin/registeredProductList/${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
                             							</c:when>
                             							<c:otherwise>
                             								<li class="paginate_button page-item">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="${pageContext.request.contextPath}/admin/registeredProductList/${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
@@ -168,9 +170,11 @@
                             					</c:forEach>
 	                            					
                             					<li class="paginate_button page-item next">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+												<c:if test="${pm.next eq true && pm.endPage > 0}">
+                            						<a href="${pm.next}" aria-controls="dataTable" class="page-link">
                             							▶
                             						</a>
+                            					</c:if>
                             					</li>
                             				</ul>
                             			</div>

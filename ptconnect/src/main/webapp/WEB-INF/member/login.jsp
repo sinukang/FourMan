@@ -24,6 +24,7 @@
 									<div class="tab selectedTab" id="normalTab">일반회원</div>
 									<div class="tab" id="trainerTab">트레이너</div>
 									<div class="tab" id="centerTab">센터</div>
+									<div class="tab" id="nonTab">비회원</div>
 								</div>
 								<div style="display:contents;">
 									<span class="errMsg" style="display:none; text-align:center; color:red;"></span>
@@ -102,6 +103,25 @@
 									</form>
 								</div>
 								
+								<div id="nonLogin" class="loginSection" style="display: none;">
+								 	<form name="nonForm" id="nonForm">
+								 		<input type="hidden" name="cate" value="center">
+										<div class="emailBox">
+											<h3>전화번호</h3>
+											<input type="text" id="nonLoginPhone" name="nmPhone" placeholder="'-'없이 작성해주세요." >
+										</div>
+										
+										<div class="pwdBox">
+											<h3>비밀번호</h3>
+											<input type="text" name="nmPwd" id="nonLoginPwd">
+										</div>
+										<div class="loginBtn" onclick="nonMemberLogin()">
+											<button type="button" id="nonLoginBtn">로그인</button>
+										</div>
+										
+									</form>
+								</div>
+								
 							</div>
 						</div>
 					</section>
@@ -111,35 +131,35 @@
 		</div>
 	</div>
 	<script>
-		$(document).ready(function(){
-			if(${not empty errMsg}){
-				$('.errMsg').html('${errMsg}');
-				$('.errMsg').css('display','');
-                // 모든 로그인 섹션 숨기기
-                $('#normalLogin').css('display','none');
-                $('#trainerLogin').css('display','none');
-                $('#centerLogin').css('display','none');
+// 		$(document).ready(function(){
+// 			if(${not empty errMsg}){
+// 				$('.errMsg').html('${errMsg}');
+// 				$('.errMsg').css('display','');
+//                 // 모든 로그인 섹션 숨기기
+//                 $('#normalLogin').css('display','none');
+//                 $('#trainerLogin').css('display','none');
+//                 $('#centerLogin').css('display','none');
 
-                // 선택된 탭에 대한 배경 색상 설정
-                $('#normalTab').removeClass('selectedTab');
-                $('#trainerTab').removeClass('selectedTab');
-                $('#centerTab').removeClass('selectedTab');
+//                 // 선택된 탭에 대한 배경 색상 설정
+//                 $('#normalTab').removeClass('selectedTab');
+//                 $('#trainerTab').removeClass('selectedTab');
+//                 $('#centerTab').removeClass('selectedTab');
                 
-                if(${cate eq 'user'}){
-                    $('#nomalTab').addClass('selectedTab');
-                    $('#nomalTab').css('display','block');
-                    $('#userLoginEmail').val('${mbEmail}');
-                }else if(${cate eq 'trainer'}){
-                    $('#trainerTab').addClass('selectedTab');
-                    $('#trainerTab').css('display','block');
-                    $('#trainerLoginEmail').val('${mbEmail}');
-                }else if(${cate eq 'center'}){
-                    $('#centerTab').addClass('selectedTab');
-                    $('#centerTab').css('display','block');
-                    $('#centerLoginEmail').val('${mbEmail}');
-                }
-			}
-		});
+//                 if(${cate eq 'user'}){
+//                     $('#nomalTab').addClass('selectedTab');
+//                     $('#nomalTab').css('display','block');
+//                     $('#userLoginEmail').val('${mbEmail}');
+//                 }else if(${cate eq 'trainer'}){
+//                     $('#trainerTab').addClass('selectedTab');
+//                     $('#trainerTab').css('display','block');
+//                     $('#trainerLoginEmail').val('${mbEmail}');
+//                 }else if(${cate eq 'center'}){
+//                     $('#centerTab').addClass('selectedTab');
+//                     $('#centerTab').css('display','block');
+//                     $('#centerLoginEmail').val('${mbEmail}');
+//                 }
+// 			}
+// 		});
 	</script>
 	
   <script>
@@ -159,17 +179,22 @@
             document.getElementById('centerTab').addEventListener('click', function () {
                 showLogin('centerTab');
             });
+            document.getElementById('nonTab').addEventListener('click', function () {
+                showLogin('nonTab');
+            });
 
             function showLogin(tabId) {
                 // 모든 로그인 섹션 숨기기
                 document.getElementById('normalLogin').style.display = 'none';
                 document.getElementById('trainerLogin').style.display = 'none';
                 document.getElementById('centerLogin').style.display = 'none';
+                document.getElementById('nonLogin').style.display = 'none';
 
                 // 선택된 탭에 대한 배경 색상 설정
                 document.getElementById('normalTab').classList.remove('selectedTab');
                 document.getElementById('trainerTab').classList.remove('selectedTab');
                 document.getElementById('centerTab').classList.remove('selectedTab');
+                document.getElementById('nonTab').classList.remove('selectedTab');
                 
                 document.getElementById(tabId).classList.add('selectedTab');
 
@@ -214,6 +239,21 @@
 			
 		});
 	</script>
-	
+	<script>
+		function nonMemberLogin(){
+			$('.errMsg').css('display','none');
+			if($('#nonLoginPhone').val()==""){
+				$('.errMsg').html('전화번호를 입력해주세요.');
+				$('.errMsg').css('display','');
+			}else if($('#nonLoginPwd').val()==""){
+				$('.errMsg').html('비밀번호를 입력해주세요.');
+				$('.errMsg').css('display','');
+			}else{
+				$('#nonForm').attr('action','${pageContext.request.contextPath}/nonLoginAction');
+				$('#nonForm').attr('method','POST');
+				$('#nonForm').submit();
+			}
+		}
+	</script>
 </body>
 </html>

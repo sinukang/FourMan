@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.AdminDTO;
 import com.ptconnect.myapp.domain.CenterInfoDTO;
-import com.ptconnect.myapp.domain.PageMaker;
+import com.ptconnect.myapp.domain.SearchCriteria;
+import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.AdminServiceMapper;
 
 @Service
@@ -37,12 +38,30 @@ public class AdminServiceImpl implements AdminService{
 		return value;
 	}
 	@Override
-	public ArrayList<CenterInfoDTO> centerRegisterList(PageMaker pm) {
-		
-		ArrayList<CenterInfoDTO> cList = asm.centerRegisterList(pm);
+	public ArrayList<CenterInfoDTO> centerRegisterList(SearchCriteria scri) {
+		int value = (scri.getPage()-1)*scri.getPerPageNum();
+		scri.setPage(value);
+		ArrayList<CenterInfoDTO> cList = asm.centerRegisterList(scri);
 		
 		
 		return cList;
+	}
+	@Override
+	public ArrayList<TrainerInfoDTO> registredProductList(SearchCriteria scri) {
+		int value = (scri.getPage()-1)*scri.getPerPageNum();
+		scri.setPage(value);
+		ArrayList<TrainerInfoDTO> tList = asm.registredProductList(scri);
+		
+		
+		return tList;
+	}
+	@Override
+	public int registredProductTotalCount() {
+
+		int value = asm.registredProductTotalCount();
+		
+		
+		return value;
 	}
 	@Override
 	public int centerRegist(int ctNo) {

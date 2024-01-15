@@ -1,11 +1,12 @@
 package com.ptconnect.myapp.interceptor;
 
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
@@ -53,7 +54,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();	
 		boolean tf = false;	 
-		 
+		String path = request.getServletPath();
+		String query = request.getQueryString();
 		if(session != null){
 			if (session.getAttribute("mbAuth") == null) {
 				session.removeAttribute("mbNo");
@@ -63,12 +65,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				session.removeAttribute("mbMapX");
 				tf = true;			
 			}else {
-				String location =request.getContextPath()+"/error/loginAuthError";
-				response.sendRedirect(location);			
-				tf = false;		
+				tf = false;
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter(); 
+				out.println("<script>alert('접근오류입니다.'); history.go(-1);</script>");
+				out.flush();
 			}
 		}else {
-			tf = true;
+			tf=true;
 		}
 		return tf;	
 	}

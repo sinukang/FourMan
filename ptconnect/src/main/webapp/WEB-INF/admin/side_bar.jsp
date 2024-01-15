@@ -25,8 +25,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item " href="trainerRegisterList/1">트레이너 등록 요청</a>
-                        <a class="collapse-item " href="centerRegisterList/1">센터 등록 요청</a>
+                        <a class="collapse-item " href="${pageContext.request.contextPath}/admin/trainerRegisterList/1">트레이너 등록 요청</a>
+                        <a class="collapse-item " href="${pageContext.request.contextPath}/admin/centerRegisterList/1">센터 등록 요청</a>
                     </div>
                 </div>
             </li>
@@ -46,7 +46,7 @@
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="reportList">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/reportList">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>신고 관리</span></a>
             </li>
@@ -62,8 +62,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="registeredProductList">등록 상품 리스트</a>
-                        <a class="collapse-item" href="tradedProductList">상품 거래 내역</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/registeredProductList">등록 상품 리스트</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/tradedProductList">상품 거래 내역</a>
                         <!-- <a class="collapse-item" href="utilities-animation.html">센터 신고 내역</a>
                         <a class="collapse-item" href="utilities-other.html">Other</a> -->
                     </div>
@@ -81,8 +81,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="managerChatList">관리자 채팅 내역</a>
-                        <a class="collapse-item" href="customerChatList">고객 채팅 내역</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/managerChatList">관리자 채팅 내역</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/customerChatList">고객 채팅 내역</a>
                     </div>
                 </div>
             </li>
@@ -97,14 +97,14 @@
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="userManagement">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/userManagement">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>회원 관리</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="admin_review">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/admin_review">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>리뷰 관리</span></a>
             </li>
@@ -119,8 +119,8 @@
                 <div id="collapsePage3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-                        <a class="collapse-item" href="admin_point">포인트 내역</a>
-                        <a class="collapse-item" href="admin_point_detail">포인트 관리</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/admin_point">포인트 내역</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/admin_point_detail">포인트 관리</a>
                         <!-- <a class="collapse-item" href="forgot-password.html">1:1 문의</a> -->
                         <!-- <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
@@ -140,8 +140,8 @@
                 <div id="collapsePage4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-                        <a class="collapse-item" href="admin_coupon_list">쿠폰 내역</a>
-                        <a class="collapse-item" href="admin_coupon">쿠폰 발급하기</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/admin_coupon_list">쿠폰 내역</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/admin_coupon">쿠폰 발급하기</a>
                     </div>
                 </div>
             </li>
@@ -156,8 +156,8 @@
                 <div id="collapsePage5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-                        <a class="collapse-item" href="admin_notice">공지사항</a>
-                        <a class="collapse-item" href="admin_FAQ">자주묻는 질문</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/admin_notice">공지사항</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/admin_FAQ">자주묻는 질문</a>
                     </div>
                 </div>
             </li>

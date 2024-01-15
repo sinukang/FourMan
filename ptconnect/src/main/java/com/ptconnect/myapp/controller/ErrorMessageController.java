@@ -19,5 +19,9 @@ public class ErrorMessageController {
 	public String tempPage() {
 		return "error/tempPage";
 	}
+	@RequestMapping(value = "error/doubleLoginError", method = RequestMethod.GET)
+	public String doubleLoginError() {
+		return "error/doubleLoginError";
+	}
 
 }

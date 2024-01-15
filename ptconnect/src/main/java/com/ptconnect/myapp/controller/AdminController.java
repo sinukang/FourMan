@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.PageMaker;
 import com.ptconnect.myapp.domain.SearchCriteria;
+import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.AdminService;
 
 
@@ -78,21 +79,23 @@ AdminService as;
 		}
 		rttr.addFlashAttribute("msg", msg);
 		return "redirect:/admin/centerRegisterList/"+page;
-	}	
+	}
+
+	
 	@GetMapping(value = "/centerRegisterList/{page}")
 	public String centerRegisterList(
 			@PathVariable int page,
 			HttpSession session) {
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","0,2");
-		session.setAttribute("menu_location","0,2");
 		PageMaker pm = new PageMaker();
 		SearchCriteria scri = new SearchCriteria();
 		scri.setPage(page);
 		scri.setPerPageNum(10);
+		pm.setCurrentPage(page);
 		pm.setScri(scri);
 		pm.setTotalCount(as.centerRegisterTotalCount());
-		ArrayList<CenterInfoDTO> cList = as.centerRegisterList(pm);
+		ArrayList<CenterInfoDTO> cList = as.centerRegisterList(scri);
 		
 		session.setAttribute("cList", cList);
 		session.setAttribute("pm", pm);
@@ -107,12 +110,31 @@ AdminService as;
 		
 		return "admin/reportList";
 	}	
-	
+
 	@GetMapping(value = "/registeredProductList")
 	public String registeredProductList(
 			HttpSession session) {
+		
+		return "redirect:/admin/registeredProductList/1";
+	}
+	
+	@GetMapping(value = "/registeredProductList/{page}")
+	public String registeredProductList(
+			@PathVariable int page,
+			HttpSession session) {
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","2,1");
+		PageMaker pm = new PageMaker();
+		SearchCriteria scri = new SearchCriteria();
+		scri.setPage(page);
+		scri.setPerPageNum(10);
+		pm.setCurrentPage(page);
+		pm.setScri(scri);
+		pm.setTotalCount(as.registredProductTotalCount());
+		ArrayList<TrainerInfoDTO> tList = as.registredProductList(scri);
+
+		session.setAttribute("tList", tList);
+		session.setAttribute("pm", pm);
 		return "admin/registeredProductList";
 	}	
 	
