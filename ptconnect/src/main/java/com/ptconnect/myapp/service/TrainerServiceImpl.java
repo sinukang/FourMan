@@ -68,8 +68,17 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return tio;
 	}
+	
+	@Override
+	public ArrayList<TrainerInfoDTO> trainerInfoView_Programs(int tnNo) {
+		
+		ArrayList<TrainerInfoDTO> tio_alist = new ArrayList<TrainerInfoDTO>();
+		tio_alist = tsm.trainerInfoView_Programs(tnNo);
+		
+		return tio_alist;
+	}	
 
-@Override
+	@Override
 	public ArrayList<ReviewDTO> TrainerInfoView_reviews(int tnNo) {
 		
 		ArrayList<ReviewDTO> rvo_alist = new ArrayList<ReviewDTO>();
@@ -182,6 +191,8 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return value;
 	}
+
+
 
 	
 	

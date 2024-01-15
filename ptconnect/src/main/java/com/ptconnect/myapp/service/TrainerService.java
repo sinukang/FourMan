@@ -17,6 +17,8 @@ public interface TrainerService {
 	
 	public TrainerInfoDTO TrainerInfoView(int tnNo);	//트레이너 리스트에서 선택한 트레이너의 정보
 	
+	public ArrayList<TrainerInfoDTO> trainerInfoView_Programs(int tnNo);
+	
 	public ArrayList<ReviewDTO> TrainerInfoView_reviews(int tnNo); //선택한 트레이너의 리뷰들 정보
 	
 	public ArrayList<FileDetailDTO> TrainerInfoView_reviews_files(int flNo); //선택한 트레이너의 리뷰들 각각에 첨부된 파일들 정보

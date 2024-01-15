@@ -3,10 +3,12 @@
 *, ::after, ::before {
     box-sizing: border-box;
 }
-
+.overflow-hidden{
+	overflow: hidden;
+}
 .searchTab_wrap{
 	width: 512px;
-    padding: 16px 16px 0px;
+	padding: 16px 16px 0px;
 }
 
 .searchBar_wrap {
@@ -231,9 +233,9 @@ input::placeholder {
   }
   
   .searchResultWrap{
-  	height: calc(100vh - 242px);
-    overflow: auto;
-    /* padding-top: 16px; */
+	height: calc(100vh - 242px);
+	overflow: auto;
+	/* padding-top: 16px; */
   }
 .searchResultWrap .searchResultArea{
 	width: 100%;
@@ -245,9 +247,9 @@ input::placeholder {
 	display: block;
 	margin-bottom: 10px;
 }
-.filter_height_reCalc{
-	height: calc(100vh - 602px);
-}
+/* .filter_height_reCalc{ */
+/* 	height: calc(100vh - 602px); */
+/* } */
 .coachCard{
 	border: 1px solid rgb(218, 224, 230);
     border-radius: 12px;

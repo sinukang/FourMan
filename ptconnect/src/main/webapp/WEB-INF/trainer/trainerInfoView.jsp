@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +29,7 @@
 					<jsp:include page="../include/header.jsp"/>
 					
 					<!-- 섹션 -->
-					<section>
+					<section >
 						<div class="center_photo_box">
 							<div class="photo_box">
 								<img class="first" src="${pageContext.request.contextPath}/resources/img/center1.jpg">
@@ -81,29 +82,7 @@
 														</div>
 													</div>
 													<div class="content_text">
-														오늘도 기분좋은 하루되세요!
-														
-														이젠IT짐 운동도우미 김빡빡 트레이너입니다!
-														운동하기 참 좋은날이네요^^
-														
-														- 언제까지 식사량 줄여가며 요요 다이어트 하실 건가요? 
-														빙빙 돌아가며 목표 달성도 못하고 포기하는 것보다
-														"지름길"로 가서 원하는 몸으로 바꾸시는 게 더 좋지 않을까요?
-														
-														- 더 이상 본인체형에 맞지 않는 움직임 따라하며 운동하지마세요!
-														흉내내는 운동이 아닌 회원님 체형에 맞게 
-														올바르게 바른움직임으로 운동기구 사용하시면서 
-														바른체형! 강한근력!
-														만들 수 있도록 도움드리겠습니다! :-)
-														
-														• 헬린이 전문
-														• 바디프로필 &amp; 시합준비
-														• 뱃살 가장 빨리 빼는 효율적인 다이어트 방법
-														• 쳐진살 탄력 잡는 가장 빠른 방법
-														• 어깨 파열 회복 &amp; 강화
-														• 허리근육 회복 &amp; 강화
-														• 다리 근력 회복 &amp; 강화 
-														• 각종 신체부위 손상에 따른 복구 전문
+														${tio.tnIntro}
 													</div>
 													</div>
 												</div>	
@@ -115,26 +94,14 @@
 													</h4>
 													<div class="content_wrap">
 														<div>
-															<div class="trophy">
-																<i class="fa-solid fa-award"></i>
-																<span>생활스포츠지도사 2급</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-trophy"></i>
-																<span>2018 미스터 전북 70kg 2위</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-trophy"></i>
-																<span>2019 미스터 전북 70kg 2위</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-trophy"></i>
-																<span>2020 미스터 전북 70kg 2위</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-dumbbell"></i>
-																<span>전)이젠그래픽체육관 트레이너</span>
-															</div>
+															<c:forEach var="Qualify" items="${QualifyArr}">
+																<div class="trophy">
+																	<i class="fa-solid fa-award"></i>
+																	<!-- <i class="fa-solid fa-dumbbell"></i> -->
+																	<!-- <i class="fa-solid fa-award"></i> -->
+																	<span>${Qualify}</span>
+																</div>	
+															</c:forEach>
 														</div>
 													</div>
 												</div>
@@ -154,32 +121,11 @@
 													<h4>
 														프로그램
 													</h4>
-													<div class="content_wrap">
-														<div class="speciality">
-														체형에 맞는 체형관리 및 다이어트 방법/ 체형에 따른 운동 기구 사용법
-														</div>
-														<div class="content_text">
-														회원님 안녕하세요! 혹시!
-														퍼스널 체형이라고 들어보셨나요?
-														✅ 움직임 깨우기
-														✅ 올바른 움직임으로 운동기구 사용하기
-														회원님 ! 맞춤 근육 착용할 준비 되셨나요?
-														</div>
-													</div>
-													<div class="content_wrap">
-														<div class="speciality content_wrap_title">
-														대회준비 및 바디프로필 전문
-														</div>
-														<div class="content_text">
-														언제까지 헬스장가서 런닝머신만 타실건가요? 
-														헬스라는 종목을 꾸준히 진행하게 된지도 10년이라는 시간이 흘렀는데요.
-														지금까지도 아침마다 변화되는 제 모습을 보며 신나 합니다:) 
-														✅ 확실한 비포에프터를 원하시는 분
-														✅ 운동 경력이 꽤 있지만 변화가 없으신 분들
-														✅ 본인의 신체부위 약점과 강점을 정확히 알고 약점 보완을 원하시는 분들 
-														☝️올해의 체형대상은 바로 회원님 당신입니다~!
-														</div>
-													</div>
+													<c:forEach var="tio_alist" items="${tio_alist}">
+														<div class="content_wrap">
+															<div class="content_text">${tio_alist.pgContent}</div>
+														</div>	
+													</c:forEach>
 												</div>
 											</div>
 											<div class="trainer_review" style="display: none;">
@@ -480,27 +426,18 @@
 													<div class="content_wrap">
 														<div class="price_head">개인레슨</div>
 														<div class="price_table">
-															<div class="price_line">
-																<div class="price_count">30회</div>
-																<div class="price">
-																	<div class="price_per">회당<strong>50,000</strong>원</div>
-																	<div class="price_total">1,500,000원</div>
+															<c:forEach var="i" begin="0" end="${fn:length(lessonCount)-1}">
+																<div class="price_line">
+																	<div class="price_count">
+																		<!-- String 태그 안에 글자 입력 X -->
+																		<Strong class="numberFormat">${lessonCount[i]}</Strong> 회
+																	</div>
+																	<div class="price">
+																		<div class="price_per">회당<strong class="numberFormat"> ${lessonPrice[i]}</strong> 원</div>
+																		<div class="price_total">총 <Strong class="numberFormat">${lessonCount[i] * lessonPrice[i]}</Strong> 원</div>
+																	</div>
 																</div>
-															</div>
-															<div class="price_line">
-																<div class="price_count">20회</div>
-																<div class="price">
-																	<div class="price_per">회당<strong>55,000</strong>원</div>
-																	<div class="price_total">1,100,000원</div>
-																</div>
-															</div>
-															<div class="price_line">
-																<div class="price_count">10회</div>
-																<div class="price">
-																	<div class="price_per">회당<strong>60,000</strong>원</div>
-																	<div class="price_total">600,000원</div>
-																</div>
-															</div>
+															</c:forEach>
 														</div>
 													</div>
 													<div class="content_wrap">
@@ -509,22 +446,22 @@
 															<div class="price_line">
 																<div class="price_count">30회</div>
 																<div class="price">
-																	<div class="price_per">회당<strong>28,333</strong>원</div>
-																	<div class="price_total">850,000원</div>
+																	<div class="price_per">회당 <strong>28,333</strong> 원</div>
+																	<div class="price_total">850,000 원</div>
 																</div>
 															</div>
 															<div class="price_line">
 																<div class="price_count">20회</div>
 																<div class="price">
-																	<div class="price_per">회당<strong>32,500</strong>원</div>
-																	<div class="price_total">650,000원</div>
+																	<div class="price_per">회당 <strong>32,500</strong> 원</div>
+																	<div class="price_total">650,000 원</div>
 																</div>
 															</div>
 															<div class="price_line">
 																<div class="price_count">10회</div>
 																<div class="price">
-																	<div class="price_per">회당<strong>45,000</strong>원</div>
-																	<div class="price_total">450,000원</div>
+																	<div class="price_per">회당 <strong>45,000</strong> 원</div>
+																	<div class="price_total">450,000 원</div>
 																</div>
 															</div>
 														</div>
@@ -563,7 +500,7 @@
 													</div>
 													<div>
 														<div class="trainer_name">${tio.mbName}</div>
-														<div class="center_name">${tio.ctName}</div>
+														<div class="center_name" onclick="centerInfoView()">${tio.ctName}</div>
 														<div class="stars" style="display: none;">
 															<c:choose>
 																<c:when test="${tio.reviewRate ge 4.5}">
@@ -651,12 +588,12 @@
 				<div class="modal_body">
 					<div class="swiper my_swiper">
 						<div class="swiper-wrapper">
-					
+						
 						</div>
 					</div>
 				</div>
 			</div>
-						<div class="swiper-pagination-custom"></div>
+			<div class="swiper-pagination-custom"></div>
 			<div class="swiper-button-next" style="color: white;"></div>
 			<div class="swiper-button-prev" style="color: white;"></div>
 		</div>
@@ -681,12 +618,25 @@
 			href = $(a_tap_link[i]).prop('href');
 			href += "?tnNo=${tio.tnNo}";
 			$(a_tap_link[i]).attr("href", href);
-			
-// 			if(i == 2){
-// 				a_tap_link[i].text("후기(${tio.reviewCnt})");
-// 			}
 		}
 		$(a_tap_link[2]).text("후기(${tio.reviewCnt})");
+	}
+	
+// 	number.toLocaleString(ko-KR, options)
+	
+	function numberFormat(){
+		let numberFormats = $(".numberFormat");
+		for(var i = 0; i < numberFormats.length; i++){
+			let str = addComma($(numberFormats[i]).text());
+			$(numberFormats[i]).text(str);
+		}
+	}
+	numberFormat();
+	
+	//천단위 콤마
+	function addComma(value){
+		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return value; 
 	}
 	
 	function centerInfoView(){
@@ -732,9 +682,9 @@
 		infowindow.open(map, marker);
 	});
 	
-// 	function closeInfoWindow(){
-// 		infowindow.close();
-// 	}
+	function closeInfoWindow(){
+		infowindow.close();
+	}
 
 	function setDraggable(draggable){
 		map.setDraggable(draggable);
@@ -754,13 +704,116 @@
 	    map.relayout();
 	}	
 
+	/* 모달 팝업 스크립트 */
+	const modal = $('#modal_wrap');
+	const closeBtn = $('#close_btn');
+	//모달 영역 밖 클릭 시 모달 닫음
+	window.onclick = function(e){
+		if(e.target.classList.contains('modal_wrap')){
+			
+			modal.css('display','none');
+		}
+	}
+
+	//X버튼 클릭 시 모달 닫음
+	closeBtn.click(function() {
+		
+		modal.css('display','none');
+	});
+
+	
+	$(document).ready(function(){
+		
+		var photoBox = [{'value':'center1.jpg'},{'value':'center2.jpg'},{'value':'center3.jpg'}
+						,{'value':'center4.jpg'},{'value':'fitness1.jpg'},{'value':'fitness2.jpg'}
+						,{'value':'fitness3.jpg'},{'value':'fitness4.jpg'},{'value':'img_640x640.jpg'}];
+		
+		$(document).on("click",".popup_btn", function(){
+
+			$('.swiper-wrapper').html('');
+			var str = '';
+			
+			$.each(photoBox, function(){
+				str += '<div class="swiper-slide">';
+				str += '<img class="modal_photo" src="${pageContext.request.contextPath}/resources/img/'+this.value+'">';
+				str += '</div>';
+			});
+			
+			$('.swiper-wrapper').html(str);
+			
+			$("#modal_wrap").css('display', 'flex');
+			
+		});
+		
+		var swiper = new Swiper(".my_swiper", {
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoHeight : true,
+			slidesPerView: 1,
+			pagination: {
+				el: ".swiper-pagination-custom",
+				clickable: true,
+				bulletClass:"custom_bullet",
+				bulletActiveClass:"swiper-pagination-custom-bullet-active",
+				renderBullet: function (index, className) {
+					return '<img class="'+className+'" src="${pageContext.request.contextPath}/resources/img/'+photoBox[index].value+'">'
+				}
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});
+		
+	});
+	
+	const orderModal = $('.order_modal');
+	const exitButton2 = $('.exit_button');
+	const modalColse2 = $('.modal_close');
+	// 리뷰 작성하기 버튼
+	$('.order').click(function(){
+//		if($('.review_button_expand_wrap').css('opacity')==1){
+//			$('.review_button_expand_wrap').css('opacity',0);
+//		}else{
+//			$('.review_button_expand_wrap').css('opacity',1);
+//		}
+		orderModal.css('display','flex');
+		$("body").addClass("overflow-hidden");
+		$(".modal").addClass("overflow-auto");
+		$(".modal_dialog").addClass("mt-10p");
+		$(".modal_dialog").addClass("pt-10p");
+//		console.log('order_button');
+	});
+
+	exitButton2.click(function() {
+		orderModal.css('display','none');
+		$("body").removeClass("overflow-hidden");
+		$(".modal").removeClass("overflow-auto");
+		$(".modal_dialog").removeClass("mt-10p");
+		$(".modal_dialog").removeClass("pt-10p");
+	});
+
+	modalColse2.click(function() {
+		orderModal.css('display','none');
+		$("body").removeClass("overflow-hidden");
+		$(".modal").removeClass("overflow-auto");
+		$(".modal_dialog").removeClass("mt-10p");
+		$(".modal_dialog").removeClass("pt-10p");
+	});
+
+	window.onclick = function(e){
+		if(!e.target.classList.contains("modal_body")){
+			document.querySelector(".modal_body").style.display = "none";
+		}
+	}
+	
+	
+	
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/review.js">
 </script>
-<script src="${pageContext.request.contextPath}/resources/js/order.js">
-</script>
-<script src="${pageContext.request.contextPath}/resources/js/photoModal.js">
-</script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/order.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/photoModal.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/js/reviewPhotoModal.js">
 </script>
 </body>

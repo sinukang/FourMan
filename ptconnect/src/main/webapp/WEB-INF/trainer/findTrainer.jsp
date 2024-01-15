@@ -105,7 +105,7 @@
 					<div class="searchResultArea">
 					
 						<!-- 샘플 데이터 -->
-						<a href="trainerInfoView" class="searchResultCard">
+						<a href="#" class="searchResultCard">
 							<div class="coachCard">
 								<div>
 									<div class="coachImages">

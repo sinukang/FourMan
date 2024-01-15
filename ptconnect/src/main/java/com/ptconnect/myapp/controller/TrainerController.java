@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
 import com.ptconnect.myapp.domain.PageMaker;
@@ -93,7 +94,7 @@ public class TrainerController {
 //		System.out.println("scri.getKeyword() : " + scri.getKeyword());
 //		System.out.println("scri.getDistance() : " + scri.getDistance());
 //		System.out.println("scri.getOrderBy() : " + scri.getOrderBy());
-//		System.out.println("\n");
+//		System.out.println();
 		pm.setCurrentPage(scri.getPage());
 		int totalCount = ts.trainerTotalCount(scri);
 //		System.out.println("totalCount : " + totalCount);
@@ -108,55 +109,51 @@ public class TrainerController {
 		for(int i = 0; i < tio_alist.size(); i++) {
 			tio_alist.get(i).setDistance(Math.round((tio_alist.get(i).getDistance()*10)/10));
 		}
-		System.out.println("\n");
+//		System.out.println();
 //		System.out.println("tio_alist.size() : " + tio_alist.size());
 		model.addAttribute("tio_alist", tio_alist);
 		
 		return "trainer/findTrainer";
 	}
 	
-//	@GetMapping(value = "trainerInfoView")
-//	public String trainerInfoView(int tnNo, Model model) {
-//		
-//		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
-//		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
-//		
-//		//해당 트레이너에 대한 리뷰(후기)들 가져옴
-//		ArrayList<ReviewDTO> rvo_alist = ts.TrainerInfoView_reviews(tnNo);
-//		
-//		//각각의 리뷰들에 대해 리뷰의 flNo 가져가서 리뷰가 첨부한 사진들 가져옴
-//		for(int i = 0; i < rvo_alist.size(); i++) {
-//			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
-//			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
-//			rvo_alist.get(i).setRvFilename(fdo_alist);
-//		}
-//		
-//		model.addAttribute("tio", tio);
-//		model.addAttribute("rvo_alist", rvo_alist);
-//		
-//		return "trainer/trainerInfoView";
-//	}
-	
-	@Controller
-	public class TrainerInfoViewController {
-		@RequestMapping(value = "trainerInfoView", method = RequestMethod.GET)
-		public String example(HttpSession session) {
-			
-			int mbNo = 1; 
-			System.out.println("mbNo : " + mbNo);
-			 
-			int tnNo = 71;
-			System.out.println("tnNo : " + tnNo);
-			 
-			session.setAttribute("mbNo", mbNo);
-			session.setAttribute("tnNo", tnNo);
-			
-			return "trainer/trainerInfoView";
+	@GetMapping(value = "trainerInfoView")
+	public String trainerInfoView(@RequestParam(name = "tnNo", required = true) int tnNo, Model model) {
+		
+		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
+		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
+		
+		String[] QualifyArr = null;
+		QualifyArr = tio.getQualify().split(",");
+		
+		String[] lessonCount = null;
+		lessonCount = tio.getLpCount().split(",");
+		String[] lessonPrice = null;
+		lessonPrice = tio.getLessonPrice().split(",");
+		int length = tio.getLpCount().split(",").length;
+		
+		ArrayList<TrainerInfoDTO> tio_alist = new ArrayList<TrainerInfoDTO>();
+		tio_alist = ts.trainerInfoView_Programs(tnNo);
+		
+		//해당 트레이너에 대한 리뷰(후기)들 가져옴
+		ArrayList<ReviewDTO> rvo_alist = ts.TrainerInfoView_reviews(tnNo);
+		
+		//각각의 리뷰들에 대해 리뷰의 flNo 가져가서 리뷰가 첨부한 사진들 가져옴
+		for(int i = 0; i < rvo_alist.size(); i++) {
+			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
+			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
+			rvo_alist.get(i).setRvFilename(fdo_alist);
 		}
-
+		
+		model.addAttribute("tio", tio);
+		model.addAttribute("tio_alist", tio_alist);
+		model.addAttribute("QualifyArr", QualifyArr);
+		model.addAttribute("lessonCount", lessonCount);
+		model.addAttribute("lessonPrice", lessonPrice);
+		
+		
+		model.addAttribute("rvo_alist", rvo_alist);
+		
+		return "trainer/trainerInfoView";
 	}
 
 }
-
-
-

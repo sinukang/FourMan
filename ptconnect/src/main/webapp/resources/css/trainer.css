@@ -1,6 +1,19 @@
 @charset "UTF-8";
 /* 센터 사진 (페이지 네비게이션 위에있는)*/
 
+.overflow-hidden{
+	overflow: hidden !important;
+}
+.overflow-auto{
+	overflow: auto !important;
+}
+.mt-10p{
+	margin-top: 10% !important;
+}
+.pt-10p{
+	padding-top: 10% !important;
+}
+
 .center_photo_box{
     display: block;
     height: 360px;

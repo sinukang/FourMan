@@ -16,7 +16,9 @@ public interface TrainerServiceMapper {
 	public int trainerTotalCount(SearchCriteria scri);
 	
 	public TrainerInfoDTO TrainerInfoView(int tnNo);
-
+	
+	public ArrayList<TrainerInfoDTO> trainerInfoView_Programs(int tnNo); 
+	
 	public ArrayList<ReviewDTO> TrainerInfoView_reviews(int tnNo);
 	
 	public ArrayList<FileDetailDTO> TrainerInfoView_reviews_files(int flNo);

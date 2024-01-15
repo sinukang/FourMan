@@ -161,11 +161,20 @@
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		, (SELECT q.qualify FROM qualify q WHERE q.tnNo = t.tnNo AND q.qlDelYN = 'N') AS qualify
+		, l.lpCF, l.lpCount, l.lessonPrice
 		FROM member m
 		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
 		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		JOIN lessonprice l ON t.tnNo = l.tnNo AND l.lpDelYN = 'N'
 		WHERE m.mbDelYN = 'N'
 		AND t.tnNo = #{tnNo};
+	</select>
+	
+	<select id="trainerInfoView_Programs" parameterType="int" resultType="tio">
+		SELECT p.* FROM program p
+		JOIN trainerinfo t ON p.tnNo = t.tnNo AND t.tnDelYN = 'N'
+		WHERE p.pgDelYN = 'N' AND p.tnNo = #{tnNo};
 	</select>
 
 	<!-- 선택한 트레이너에 대한 리뷰들 불러옴 -->
