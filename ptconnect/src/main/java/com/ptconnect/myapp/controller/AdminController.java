@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.PageMaker;
+import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.service.AdminService;
 
 
@@ -42,7 +43,7 @@ AdminService as;
 	public String trainerRegisterListNoPage(
 			HttpSession session) {
 		
-		return "redirect:/admin/trainerRegisterList/0";
+		return "redirect:/admin/trainerRegisterList/1";
 	}	
 	@GetMapping(value = "/trainerRegisterList/{page}")
 	public String trainerRegisterList(
@@ -59,7 +60,7 @@ AdminService as;
 	public String centerRegisterListNoPage(
 			HttpSession session) {
 		
-		return "redirect:/admin/centerRegisterList/0";
+		return "redirect:/admin/centerRegisterList/1";
 	}	
 	@GetMapping(value = "/centerRegisterList/{page}")
 	public String centerRegisterList(
@@ -69,7 +70,11 @@ AdminService as;
 		session.setAttribute("menu_location","0,2");
 		session.setAttribute("menu_location","0,2");
 		PageMaker pm = new PageMaker();
-		pm.setCurrentPage(page);
+		SearchCriteria scri = new SearchCriteria();
+		scri.setPage(page);
+		scri.setPerPageNum(10);
+		pm.setScri(scri);
+		pm.setTotalCount(as.centerRegisterTotalCount());
 		ArrayList<CenterInfoDTO> cList = as.centerRegisterList(pm);
 		
 		session.setAttribute("cList", cList);

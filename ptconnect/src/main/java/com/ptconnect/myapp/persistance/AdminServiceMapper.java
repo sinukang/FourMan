@@ -11,4 +11,5 @@ public interface AdminServiceMapper {
 	public AdminDTO adminMain();
 	
 	public ArrayList<CenterInfoDTO> centerRegisterList(PageMaker pm);
+	public int centerRegisterTotalCount();
 }

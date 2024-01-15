@@ -97,14 +97,16 @@
                             		<div class="col-lg-12">
                             			<div class="pagination-area">
                             				<ul class="pagination">
-                            					<li class="paginate_button page-item previous disabled">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+                            					<li class="paginate_button page-item previous">
+													<c:if test="${pm.prev eq true}">
+                            						<a href="${pm.prev}" aria-controls="dataTable" class="page-link">
                             							◀
                             						</a>
+                            						</c:if>
                             					</li>
-                            					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="${pm.startPage}">
+                            					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
                             						<c:choose>
-                            							<c:when test="${i eq pm.currentPage}">
+                            							<c:when test="${i eq currentPage}">
                             								<li class="paginate_button page-item active">
 			                            						<a href="i" aria-controls="dataTable" class="page-link">
 			                            							${i}
@@ -123,9 +125,11 @@
                             					</c:forEach>
 	                            					
                             					<li class="paginate_button page-item next">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+												<c:if test="${pm.next eq true && pm.endPage > 0}">
+                            						<a href="${pm.next}" aria-controls="dataTable" class="page-link">
                             							▶
                             						</a>
+                            					</c:if>
                             					</li>
                             				</ul>
                             			</div>

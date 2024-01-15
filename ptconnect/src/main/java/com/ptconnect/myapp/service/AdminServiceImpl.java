@@ -29,6 +29,14 @@ public class AdminServiceImpl implements AdminService{
 		return ao;
 	}
 	@Override
+	public int centerRegisterTotalCount() {
+		
+		int value = asm.centerRegisterTotalCount();
+		
+		
+		return value;
+	}
+	@Override
 	public ArrayList<CenterInfoDTO> centerRegisterList(PageMaker pm) {
 		
 		ArrayList<CenterInfoDTO> cList = asm.centerRegisterList(pm);

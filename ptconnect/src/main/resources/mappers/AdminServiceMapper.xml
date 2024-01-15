@@ -9,6 +9,10 @@
 		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbPwdSalt}, #{subject}, #{contents}, #{writer}, #{filename2}, #{pwd})
 	</select>
 	
+	<select id="centerRegisterTotalCount" resultType="int">
+		select COUNT(*) from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
+		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC
+	</select>
 	<select id="centerRegisterList" parameterType="pm" resultType="cio">
 		select * from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
 		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC limit #{currentPage},#{displayPageNum}
