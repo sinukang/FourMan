@@ -110,14 +110,14 @@
                             						<c:choose>
                             							<c:when test="${i eq currentPage}">
                             								<li class="paginate_button page-item active">
-			                            						<a href="i" aria-controls="dataTable" class="page-link">
+			                            						<a href="${pageContext.request.contextPath}/admin/centerRegisterList/${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
                             							</c:when>
                             							<c:otherwise>
                             								<li class="paginate_button page-item">
-			                            						<a href="i" aria-controls="dataTable" class="page-link">
+			                            						<a href="${pageContext.request.contextPath}/admin/centerRegisterList/${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
@@ -211,7 +211,7 @@
 <script>
 	function doCheck(value){
 		if(confirm('승인하시겠습니까?')){
-			location.href="${pageContext.request.contextPath}/admin/centerRegister/"+value+"/${pm.scri.page}";
+			location.href="${pageContext.request.contextPath}/admin/centerRegister/"+value+"/${pm.currentPage}";
 		}
 	}
 </script>

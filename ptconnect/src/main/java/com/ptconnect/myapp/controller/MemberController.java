@@ -1,7 +1,5 @@
 package com.ptconnect.myapp.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
+import com.ptconnect.myapp.domain.NonMemberDTO;
 import com.ptconnect.myapp.service.MemberService;
 import com.ptconnect.myapp.util.MailSender;
 
@@ -174,13 +172,14 @@ public class MemberController {
 	
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login() {
+	public String login(HttpSession session) {
+		session.removeAttribute("nmNo");
 		return "member/login";
 	}
-	
+
 	@RequestMapping(value = "loginAction", method = RequestMethod.POST)
 	public String loginAction(
-			@RequestParam("mbEmail") String mbEmail, 
+			@RequestParam("mbEmail") String mbEmail,
 			@RequestParam("mbPwd") String mbPwd,
 			@RequestParam("cate") String cate,
 			HttpSession session, HttpServletRequest request, 
@@ -198,7 +197,7 @@ public class MemberController {
 				session.setAttribute("mbName", mo.getMbName());
 				session.setAttribute("mbMapY", mo.getMbMapY());
 				session.setAttribute("mbMapX", mo.getMbMapX());
-				path = "findTrainer.do";
+				path = "findTrainer";
 			}else {
 				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
 				rttr.addFlashAttribute("mbEmail",mbEmail);
@@ -214,7 +213,8 @@ public class MemberController {
 		
 		return "redirect:/"+path;
 	}
-
+	
+	
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(
 			HttpSession session) {

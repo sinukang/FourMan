@@ -1,9 +1,13 @@
 package com.ptconnect.myapp.persistance;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
+import com.ptconnect.myapp.domain.NonMemberDTO;
+import com.ptconnect.myapp.domain.PaymentDTO;
 
 public interface MemberServiceMapper {
 	public int memberInsert(MemberDTO mo);
@@ -13,5 +17,7 @@ public interface MemberServiceMapper {
 	public MemberDTO memberLogin(@Param("mbEmail")String mbEmail);
 	public String memberEmailFind(@Param("mbName")String mbName, @Param("mbPhone")String mbPhone);
 	public int memberPwdFind(@Param("mbEmail")String mbEmail, @Param("mbPhone")String mbPhone);
+	public NonMemberDTO nonMemberLogin(@Param("nmPhone")String nmPhone);
+	public ArrayList<PaymentDTO> nonMemberOrderList(@Param("nmNo")int nmNo);
 	
 }

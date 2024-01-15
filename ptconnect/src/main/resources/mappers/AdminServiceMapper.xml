@@ -13,9 +13,25 @@
 		select COUNT(*) from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
 		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC
 	</select>
-	<select id="centerRegisterList" parameterType="pm" resultType="cio">
+	<select id="centerRegisterList" parameterType="scri" resultType="cio">
 		select * from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
-		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC limit #{currentPage},#{displayPageNum}
+		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC limit #{page},#{perPageNum}
+	</select>
+	<select id="registredProductTotalCount" resultType="int">
+		select Count(*) 
+		from trainerinfo t 
+		join member m on t.mbNo=m.mbNo 
+		left join (select * from centerinfo where ctDelYN='N') c on t.ctNo = c.ctNo
+		where t.tnDelYN = 'N' and t.ctNo is not null and m.mbDelYN='N' and c.ctDelYN ='N'
+		order by t.tnNo DESC
+	</select>
+	<select id="registredProductList" parameterType="scri" resultType="tio">
+		select * 
+		from trainerinfo t 
+		join member m on t.mbNo=m.mbNo 
+		left join (select * from centerinfo where ctDelYN='N') c on t.ctNo = c.ctNo
+		where t.tnDelYN = 'N' and t.ctNo is not null and m.mbDelYN='N' and c.ctDelYN ='N'
+		order by t.tnNo DESC limit #{page},#{perPageNum}
 	</select>
 	<update id="centerRegist" parameterType="int">
 		update centerInfo set ctDelYN = 'N', ctDateM = now()

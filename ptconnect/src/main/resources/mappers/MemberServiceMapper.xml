@@ -24,6 +24,16 @@
 	<select id="memberLogin" parameterType="String" resultType="mo">
 		SELECT * FROM member WHERE mbEmail = #{mbEmail}
 	</select>
+	<select id="nonMemberLogin" parameterType="String" resultType="nmo">
+		SELECT * FROM nonMember WHERE nmPhone = #{nmPhone}
+	</select>
+	<select id="nonMemberOrderList" parameterType="int" resultType="po">
+		SELECT * 
+		FROM order_ od
+		join orderproduct op on od.odNo = op.odNo 
+		join nonmember nm on od.nmNo = nm.nmNo 
+		WHERE od.nmNo = #{nmNo}
+	</select>
 	<select id="memberEmailFind" parameterType="String" resultType="String">
 		SELECT mbEmail FROM member WHERE mbName = #{mbName} AND mbPhone = #{mbPhone} limit 1
 	</select>
