@@ -126,7 +126,7 @@
 							<div style="padding: 25px 0px;">
 								<span style="font-size: 20px;">결제 금액</span>
 								<span style="float: right;">
-									<span id="odPrice" style="font-size: 20px; font-weight: bold;">1000원</span>
+									<span id="odPrice" style="font-size: 20px; font-weight: bold;">${tio.tnTicket} 원</span>
 								</span>
 							</div>
 							
@@ -231,8 +231,8 @@
 	            pg: "html5_inicis",       // KG이니시스 pg 파라미터 값
 	            pay_method: "card",       // 결제 방법
 	            merchant_uid: createOrderNum(), // 주문번호
-	            name: "김빡빡 트레이너",          // 상품 명
-	            amount: amountValue,          // 주문 금액
+	            name: "${tio.mbName}",          // 상품 명
+	            amount: "${tio.tnTicket}",          // 주문 금액
 	            buyer_email: "gildong@gmail.com",
 	            buyer_name: "홍길동",
 	            buyer_tel: "010-4242-4242",

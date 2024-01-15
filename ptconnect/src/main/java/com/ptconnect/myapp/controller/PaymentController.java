@@ -23,7 +23,7 @@ public class PaymentController {
 	    Integer mbNo = (Integer) session.getAttribute("mbNo");
 		
 	    System.out.println("mbNo : " + mbNo);
-	    
+	    System.out.println("페이먼트 : " + session.getAttribute("tnNo"));
 	    int tnNo = Integer.parseInt(session.getAttribute("tnNo").toString());
 	    
 	    System.out.println("tnNo : " + tnNo);

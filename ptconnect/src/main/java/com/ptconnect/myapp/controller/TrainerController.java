@@ -117,7 +117,11 @@ public class TrainerController {
 	}
 	
 	@GetMapping(value = "trainerInfoView")
-	public String trainerInfoView(@RequestParam(name = "tnNo", required = true) int tnNo, Model model) {
+	public String trainerInfoView(@RequestParam(name = "tnNo", required = true) int tnNo, HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession(false);
+		session.setAttribute("tnNo", tnNo);
+		System.out.println("trainer info view tnNo : " + session.getAttribute("tnNo"));
 		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
@@ -143,7 +147,7 @@ public class TrainerController {
 			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
 			rvo_alist.get(i).setRvFilename(fdo_alist);
 		}
-		
+
 		model.addAttribute("tio", tio);
 		model.addAttribute("tio_alist", tio_alist);
 		model.addAttribute("QualifyArr", QualifyArr);
