@@ -778,7 +778,7 @@
 //			$('.review_button_expand_wrap').css('opacity',1);
 //		}
 		orderModal.css('display','flex');
-// 		$("body").addClass("overflow-hidden");
+		$("body").addClass("overflow-hidden");
 // 		$(".modal").addClass("overflow-auto");
 // 		$(".modal_dialog").addClass("mt-10p");
 // 		$(".modal_dialog").addClass("pt-10p");
@@ -787,7 +787,7 @@
 
 	exitButton2.click(function() {
 		orderModal.css('display','none');
-// 		$("body").removeClass("overflow-hidden");
+		$("body").removeClass("overflow-hidden");
 // 		$(".modal").removeClass("overflow-auto");
 // 		$(".modal_dialog").removeClass("mt-10p");
 // 		$(".modal_dialog").removeClass("pt-10p");
@@ -795,7 +795,7 @@
 
 	modalColse2.click(function() {
 		orderModal.css('display','none');
-// 		$("body").removeClass("overflow-hidden");
+		$("body").removeClass("overflow-hidden");
 // 		$(".modal").removeClass("overflow-auto");
 // 		$(".modal_dialog").removeClass("mt-10p");
 // 		$(".modal_dialog").removeClass("pt-10p");
