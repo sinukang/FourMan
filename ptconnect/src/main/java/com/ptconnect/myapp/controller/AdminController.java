@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.PageMaker;
@@ -61,6 +62,22 @@ AdminService as;
 			HttpSession session) {
 		
 		return "redirect:/admin/centerRegisterList/1";
+	}	
+	@GetMapping(value = "/centerRegister/{ctNo}/{page}")
+	public String centerRegister(
+			@PathVariable int ctNo,
+			@PathVariable int page,
+			HttpSession session,
+			RedirectAttributes rttr) {
+		int value = as.centerRegist(ctNo);
+		String msg = "";
+		if(value>0) {
+			msg = ctNo + "번 센터 승인 완료.";
+		}else {
+			msg = ctNo + "번 센터 승인 실패";
+		}
+		rttr.addFlashAttribute("msg", msg);
+		return "redirect:/admin/centerRegisterList/"+page;
 	}	
 	@GetMapping(value = "/centerRegisterList/{page}")
 	public String centerRegisterList(

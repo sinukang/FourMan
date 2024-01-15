@@ -67,6 +67,7 @@
                             			<th>센터 연락처</th>
                             			<th>센터 위치</th>
                             			<th>이메일</th>
+                            			<th>사업자번호</th>
                             			<th>가입일</th>
                             			<th>승인여부</th>
                             		</tr>
@@ -77,15 +78,16 @@
 	                            			<td>${cio.mbPhone}</td>
 	                            			<td>${cio.mbAddr}</td>
 	                            			<td>${cio.mbEmail}</td>
+	                            			<td>${cio.ctBn}</td>
 	                            			<td>${cio.mbDate}</td>
 	                            			<td>
 	                            				<div>
-	                            					<a href="#" class="btn btn-circle color-discord">
+	                            					<div onclick="doCheck(${cio.ctNo})" class="btn btn-circle color-discord doCheck">
 	                            						<i class="fas fa-check"></i>
-	                            					</a>
-	                            					<a href="#" class="btn btn-circle color-cancel">
+	                            					</div>
+	                            					<div onclick="unDoCheck(${cio.ctNo})" class="btn btn-circle color-cancel unDoCheck">
 	                            						<i class="fas fa-times"></i>
-	                            					</a>
+	                            					</div>
 	                            				</div>
 	                            			</td>
 	                            		</tr>
@@ -199,6 +201,19 @@
 
     <!-- Custom scripts for all pages-->
     <script src="${pageContext.request.contextPath}/resources/css/admin/js/sb-admin-2.min.js"></script>
-
+<script>
+	$(document).ready(function(){
+		if(${not empty msg}){
+			alert('${msg}');
+		}
+	});
+</script>
+<script>
+	function doCheck(value){
+		if(confirm('승인하시겠습니까?')){
+			location.href="${pageContext.request.contextPath}/admin/centerRegister/"+value+"/${pm.scri.page}";
+		}
+	}
+</script>
 </body>
 </html>

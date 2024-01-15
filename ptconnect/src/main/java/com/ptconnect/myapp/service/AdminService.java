@@ -12,4 +12,5 @@ public interface AdminService {
 
 	public ArrayList<CenterInfoDTO> centerRegisterList(PageMaker pm);
 	public int centerRegisterTotalCount();
+	public int centerRegist(int ctNo);
 }

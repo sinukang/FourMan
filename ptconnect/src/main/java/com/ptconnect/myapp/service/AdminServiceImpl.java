@@ -44,4 +44,12 @@ public class AdminServiceImpl implements AdminService{
 		
 		return cList;
 	}
+	@Override
+	public int centerRegist(int ctNo) {
+		
+		int value = asm.centerRegist(ctNo);
+		
+		
+		return value;
+	}
 }

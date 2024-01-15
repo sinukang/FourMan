@@ -17,4 +17,8 @@
 		select * from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
 		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC limit #{currentPage},#{displayPageNum}
 	</select>
+	<update id="centerRegist" parameterType="int">
+		update centerInfo set ctDelYN = 'N', ctDateM = now()
+		where ctNo = #{ctNo}
+	</update>
 </mapper>
