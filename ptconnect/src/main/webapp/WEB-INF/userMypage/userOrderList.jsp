@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/orderList.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -27,12 +28,50 @@
 								<div class="inner_contents"><!-- 코치정보(패딩탑) -->
 									<div><!-- 코치정보 -->
 										<div>
-										</div>
-									</div>
-									<div><!-- 코치프로필 -->
-										<div>
-											<div class="upside"></div>
-											<div class="downside"></div>
+											<div>
+											<c:forEach var="po" items="${pList}">
+									        <div class="orderListBox">
+									            <div class="">
+									                <img class="orderProfile" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"/>
+									            </div>
+									            <div class="orderContainer">
+									                <span class="orderText">주문번호 :</span>
+									                <span class="orderText">트레이너 :</span>
+									                <span class="orderText">전화번호:</span>
+									            </div>
+									            <div class="orderContainer">
+									                <span class="orderName">${po.odNo}</span>
+									                <span class="orderText">${po.tnName}</span>
+									                <span class="orderText">${po.mbPhone}</span>
+									            </div>
+									            <div class="orderContainer">
+									                <span class="orderText">사용쿠폰 :</span>
+									                <span class="orderText">사용포인트 :</span>
+									                <span class="orderText">결제금액 :</span>
+									            </div>
+									            <div class="orderContainer">
+									                <span class="orderName">${po.odCoupon}</span>
+									                <span class="orderText"><strong>${po.odPoint}</strong>포인트</span>
+									                <span class="orderText"><strong>${po.odPrice}</strong>원</span>
+									            </div>
+									            <div class="orderContainer">
+									                <span class="orderText">결제상태 :</span>
+									                <span class="orderText">결제수단 :</span>
+									                <span class="orderText">결제시간 :</span>
+									            </div>
+									            <div class="orderContainer">
+									                <span class="orderName">
+									                <c:choose>
+										                <c:when test="${not empty po.pcState}">${po.pcState}</c:when>
+										                <c:otherwise>${po.pmState}</c:otherwise>
+									                </c:choose>
+									                </span>
+									                <span class="orderText">${po.pmCard}</span>
+									                <span class="orderText">${po.odDate}</span>
+									            </div>
+									        </div>
+											</c:forEach>
+											</div>
 										</div>
 									</div>
 								</div>

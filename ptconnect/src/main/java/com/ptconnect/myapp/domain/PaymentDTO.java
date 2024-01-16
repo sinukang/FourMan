@@ -13,7 +13,7 @@ public class PaymentDTO {
 	private String pmDate;
 	private String pmState;
 	
-	/*mbName=구매자이름 , mbPhone=구매자 번호, tnName=판매자이름*/
+	/*mbName=구매자이름 , tnName=판매자이름*/
 
 	private String mbName;
 	private String mbPhone;
