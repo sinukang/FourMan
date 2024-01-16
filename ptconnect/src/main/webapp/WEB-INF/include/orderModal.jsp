@@ -24,7 +24,7 @@
 										<img class="profileImage" src="https://file.woondoc.com/gym/cover/QwqvhHp2HYATzi9nTEUEnjjzZaxQ3KTX_1700440964_5752163.jpg" alt="profile">
 										<div class="coachProfileWrap">
 											<div class="coachName">레슨 1회 체험</div>
-											<div class="centerName">김빡빡 | 이젠IT짐</div>
+											<div class="centerName">${tio.mbName} | ${tio.ctName}</div>
 										</div>
 									</div>
 								</div>
@@ -33,14 +33,15 @@
 							<div style="padding: 25px 0px;">
 								<span style="font-size: 20px;">상품 금액</span>
 								<span style="float: right;">
-									<span style="text-decoration: line-through; font-size: 17px; color: rgb(207, 207, 207);">55,000원</span>
-									<span style="font-size: 20px; font-weight: bold;">20,000원</span>
+									<span style="text-decoration: line-through; font-size: 17px; color: rgb(207, 207, 207);">${tio.tnTicket * 2} 원</span>
+									<span style="font-size: 20px; font-weight: bold;">${tio.tnTicket} 원</span>
 								</span>
 							</div>
+							
 							<div style="margin-top: 0px;">
 								<div class="style_input__InputDiv-sc-139qydd-0 jMxvw">
 									<label>이름 <span class="required">*</span></label>
-									<input id="nmName" type="text" name="nmName" placeholder="필수 입력" maxlength="10" value="${mo.mbName}" <c:if test="${not empty mo.mbName}">readonly</c:if>>
+									<input id="nmName" type="text" name="nmName" placeholder="필수 입력" maxlength="10" value="">
 								</div>
 							</div>
 							
@@ -49,23 +50,23 @@
 									<label>휴대폰 번호 <span>*</span></label>
 									<div class="inputWrap">
 										<div class="inputWidth">
-											<input type="tel" id="nmPhone" name="nmPhone" placeholder="'-'없이 입력" maxlength="20" autocomplete="off" value="${mo.mbPhone}" <c:if test="${not empty mo.mbName}">readonly</c:if>>
+											<input type="tel" id="nmPhone" name="nmPhone" placeholder="'-'없이 입력" maxlength="20" autocomplete="off" value="">
 										</div>
 									</div>
 								</div>
 							</div>
-							<div style="<c:if test='${not empty mbNo}'>display:none;</c:if>">
-								<div style="margin-top: 24px;">
-									<div class="style_input__InputDiv-sc-139qydd-0 jMxvw">
-										<label>비밀번호 <span>*</span></label>
-										<div class="inputWrap">
-											<div class="inputWidth">
-												<input type="text" id="nmPwd" name="nmPwd" placeholder="필수 입력" maxlength="20" autocomplete="off" value="">
-											</div>
+							
+							<div style="margin-top: 24px;">
+								<div class="style_input__InputDiv-sc-139qydd-0 jMxvw">
+									<label>비밀번호 <span>*</span></label>
+									<div class="inputWrap">
+										<div class="inputWidth">
+											<input type="text" id="nmPwd" name="nmPwd" placeholder="필수 입력" maxlength="20" autocomplete="off" value="">
 										</div>
 									</div>
 								</div>
 							</div>
+							
 							<div class="order_comment">
 								트레이너님이 일정 협의를 위해 연락드립니다.
 							</div>
@@ -84,7 +85,7 @@
 									<label>포인트 사용</label>
 									<div class="inputWrap" style="display: flex;">
 										<div class="inputWidth" style="width: 70%;">
-											<input type="text" name="usePoint" placeholder="12430p 사용가능" maxlength="20" autocomplete="off" value="">
+											<input type="text" name="usePoint" placeholder="0p 사용가능" maxlength="20" autocomplete="off" value="">
 										</div>
 										
 										<div class="usePoint">

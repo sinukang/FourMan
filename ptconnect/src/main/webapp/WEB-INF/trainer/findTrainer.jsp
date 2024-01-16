@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	
@@ -42,15 +43,17 @@
 							<div>
 								<img src="${pageContext.request.contextPath}/resources/img//markericon.png" width="17px" height="25px">
 								<span>
-									<span class="search_key">
-									<c:choose>
-										<c:when test="${uAddr ne null}">
-											${uAddr}
-										</c:when>
-										<c:otherwise>
-											금암동
-										</c:otherwise>
-									</c:choose> 
+									<span id="address-1" class="search_key">
+										<input type="hidden" id="zip-code" placeholder="우편번호">
+										<!-- <input type="hidden" id="address-1" placeholder="도로명주소" style="width: 500px"> -->
+										<c:choose>
+											<c:when test="${uAddr ne null}">
+												${uAddr}
+											</c:when>
+											<c:otherwise>
+												금암동
+											</c:otherwise>
+										</c:choose> 
 									</span> 검색 결과
 								</span>
 							</div>
@@ -109,9 +112,9 @@
 							<div class="coachCard">
 								<div>
 									<div class="coachImages">
-										<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" >
-										<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
-										<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" >
+										<img class="trainerImg" src="https://file.woondoc.com/gym/cover/QwqvhHp2HYATzi9nTEUEnjjzZaxQ3KTX_1700440964_5752163.jpg" style="border-radius: 12px 0px 0px;">
+										<img class="trainerImg" src="https://file.woondoc.com/coach/cover/OaoQaz2DvlRkKKWa7Hus5PXygL16og8g_1679379451_8321288.jpg" >
+										<img class="gymImg" src="https://file.woondoc.com/gym/cover/t7Z8VcBc9tARxDJ1WR8SuEaEhbaEDEk5_1704162000_4361267.jpg" style="border-radius: 0px 12px 0px 0px;">
 									</div>
 									<div class="coachInfo">
 										<div class="coachTitle">
@@ -148,9 +151,9 @@
 								<div class="coachCard">
 									<div>
 										<div class="coachImages">
-											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" >
+											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" style="border-radius: 12px 0px 0px;">
 											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
-											<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" >
+											<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png"  style="border-radius: 0px 12px 0px 0px;">
 										</div>
 										<div class="coachInfo">
 											<div class="coachTitle">
@@ -202,27 +205,6 @@
 	
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/include/footer.jsp"/>
-	
-	<c:forEach var="tio" items="${tio_alist}" varStatus="tioIDX">
-		${tio.mbAddr}<c:if test="${tioIDX.last eq false}">,</c:if>
-	</c:forEach>
-	<br>
-	<c:choose>
-		<c:when test="${mbNo ne null}">
-			center: new kakao.maps.LatLng(${mbMapY}, ${mbMapX}), // 지도의 중심좌표
-		</c:when>
-		<c:otherwise>
-			center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 학원 35.84026098258203, 127.1324143491829
-		</c:otherwise>
-	</c:choose>
-	<br>
-	<c:forEach items='${tio_alist}' var='tio' varStatus="tioIDX">
-		asd
-		{
-			title: '${tio.mbName}',
-			latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
-		}<c:if test='${tioIDX.last eq false}'>,</c:if>
-	</c:forEach>	
 	
 <script>
 
@@ -282,9 +264,42 @@
 	init1();
 	
 
+	function rangeSlider(){
+		
+		let range = $('#radius-slider');
+		let value = $(".radius_key");
+		
+		let spanVal = $('#radius-slider').attr('value');
+		value.html((spanVal*0.001)+'km 이내')
+		
+		range.on('input', function(){
+			if(this.value < 1000){
+				value.html((this.value) + 'm 이내');
+			}else{
+				value.html((this.value*0.001) + 'km 이내');
+			}
+		});
+			
+	}
+	rangeSlider();	
 	
-	var mapX = 0;
-	var mapY = 0;
+	$(document).ready(function(){
+		
+		$(".search_btn, .btn_filter").on("click", function(){	//검색 버튼
+			
+			$("#filter_Form").submit();
+			
+		});
+		
+		$(".resetFilter").on("click",function(){	//검색 조건 초기화
+			
+			history.replaceState({}, null, location.pathname);
+			location.reload();
+			
+// 			$("#filter_Form")[0].reset(); //선택한 form 내부의 조건 초기화
+		});
+		
+	});	
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
 	mapOption = {
@@ -358,44 +373,85 @@
 		});		
 	}
 
-	function rangeSlider(){
-		
-		let range = $('#radius-slider');
-		let value = $(".radius_key");
-		
-		let spanVal = $('#radius-slider').attr('value');
-		value.html((spanVal*0.001)+'km 이내')
-		
-		range.on('input', function(){
-			if(this.value < 1000){
-				value.html((this.value) + 'm 이내');
-			}else{
-				value.html((this.value*0.001) + 'km 이내');
-			}
-		});
-			
-	}
-	rangeSlider();	
 	
-	$(document).ready(function(){
-		
-		$(".search_btn, .btn_filter").on("click", function(){	//검색 버튼
-			
-			$("#filter_Form").submit();
-			
-		});
-		
-		$(".resetFilter").on("click",function(){	//검색 조건 초기화
-			
-			history.replaceState({}, null, location.pathname);
-			location.reload();
-			
-// 			$("#filter_Form")[0].reset(); //선택한 form 내부의 조건 초기화
-		});
-		
-		
-		
+ 	$(".searchBar_option").on("click", function(e){
+ 		e.preventDefault();
+ 		execDaumPostcode();
+	
 	});
+	
+	var markers = [];
+	
+	function removeMarkers(){
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(null);
+		}
+		markers = [];
+	}
+	
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+		
+		// 클릭한 위치에 마커를 표시합니다 
+		addMarker(mouseEvent.latLng);
+	});	
+	
+	function addMarker(position) {
+		
+		removeMarkers();
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			position: position
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+// 		map.setCenter(position);
+		// 생성된 마커를 배열에 추가합니다
+		markers.push(marker);
+		console.log(position);
+	}
+	
+	//카카오 다음 우편번호 찾기
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				removeMarkers();
+				
+				document.getElementById( 'zip-code' ).value = data.zonecode;
+				$('#address-1').text(data.address);
+				
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new kakao.maps.services.Geocoder();
+				
+				// 주소로 좌표를 검색합니다
+				geocoder.addressSearch(data.address, function (result, status) {
+					if (status === kakao.maps.services.Status.OK) {
+						
+						// 검색된 좌표를 변수에 저장합니다
+						var coords = new kakao.maps.LatLng(result[0].y, result[0].x);+
+						
+						console.log(coords);
+		
+						// 결과값으로 받은 위치를 마커로 표시합니다
+						var marker = new kakao.maps.Marker({
+							map: map,
+							position: coords
+						});
+						markers.push(marker);
+		
+						// 검색된 좌표로 지도 중심을 이동시킵니다
+						map.setCenter(coords);
+					
+					} else {
+						// 검색 실패 시 예시 좌표로 이동합니다
+						var exampleCoords = new kakao.maps.LatLng(35.86302160353555, 127.148340249);
+						alert("검색 실패! 예시 좌표 " + exampleCoords.toString() + " 로 이동합니다.");
+						map.setCenter(exampleCoords);
+					}
+				});
+			}
+		}).open();
+	}	
 	
 	
 </script>

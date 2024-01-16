@@ -1,11 +1,9 @@
 package com.ptconnect.myapp.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
-import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.PageMaker;
 import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
@@ -36,7 +33,6 @@ public class TrainerController {
 	
 	@GetMapping(value = "/findTrainer")
 	public String findTrainer(HttpServletRequest request, SearchCriteria scri, Model model) {
-		
 		
 		HttpSession session = request.getSession(false);
 		int filterOnOff = 0;	//검색 or 필터 사용시 화면에 필터 펼쳐짐 상태 1:펼쳐짐, 0:졉혀짐
@@ -60,7 +56,7 @@ public class TrainerController {
 			scri.setKeyword(null);
 		}
 		
-		//반경이 null이 아니면, 설정한 최대 최소 범위를 초과한 값을 누가 억지로 넣으면 범위 조정
+		//반경이 null이 아니면, findTrainer.jsp의 <input type="range">에서 설정한 최대 최소 범위를 초과한 값을 억지로 넣으면 범위 조정
 		//기본값으로 1000(1km) 설정
 		if(request.getParameter("distance") != null) {
 			if(Integer.parseInt(request.getParameter("distance")) > 5000) {
@@ -124,12 +120,8 @@ public class TrainerController {
 		int tnNo = 0;
 		tnNo = idx;
 		
-		HttpSession session = request.getSession(false);
-		session.setAttribute("tnNo", tnNo);
-		
-		Integer mbNo = (Integer) session.getAttribute("mbNo");
-		System.out.println("mbNo : " + mbNo);
-		
+		HttpSession session = request.getSession();
+		session.setAttribute("tnNo", idx);
 		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
@@ -157,27 +149,25 @@ public class TrainerController {
 			}
 		}else {
 			lpCount = new String[1];
+			lessonPrice = new String[1];
 			lpCount[0] = tio.getLpCount();
+			lessonPrice[0] = tio.getLessonPrice();
 		}
 		
 		String testStr = ",,,,";
 		String[] testStrArr = testStr.split(",");
 		for (int i = 0; i < testStrArr.length; i++) {
-			System.out.println("testStrArr[i] : te" + testStrArr[i] + "st");
+			System.out.println("testStrArr["+i+"] : te" + testStrArr[i] + "st");
 		}
 		
-	
-		int length = tio.getLpCount().split(",").length;
-		
-		
-		
+		//트레이너가 진행하는 프로그램들  가져옴
 		ArrayList<TrainerInfoDTO> tio_alist = new ArrayList<TrainerInfoDTO>();
 		tio_alist = ts.trainerInfoView_Programs(tnNo);
 		
 		//해당 트레이너에 대한 리뷰(후기)들 가져옴
 		ArrayList<ReviewDTO> rvo_alist = ts.TrainerInfoView_reviews(tnNo);
 		
-		//각각의 리뷰들에 대해 리뷰의 flNo 가져가서 리뷰가 첨부한 사진들 가져옴
+		//리뷰들에 대해 리뷰들 각각의  flNo 가져가서 리뷰가 첨부한 사진들 가져옴
 		for(int i = 0; i < rvo_alist.size(); i++) {
 			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
 			fdo_alist = ts.TrainerInfoView_reviews_files(rvo_alist.get(i).getFlNo());
@@ -188,13 +178,6 @@ public class TrainerController {
 		model.addAttribute("tio_alist", tio_alist);
 		model.addAttribute("QualifyArr", QualifyArr);
 		model.addAttribute("aryList", jsAry);
-		
-		if (mbNo != null) {
-		MemberDTO mo = ts.memberSelectOne(mbNo);
-		System.out.println("mbName :" + mo.getMbName());
-		model.addAttribute("mo",mo);
-		}
-		
 		model.addAttribute("rvo_alist", rvo_alist);
 		
 		return "trainer/trainerInfoView";

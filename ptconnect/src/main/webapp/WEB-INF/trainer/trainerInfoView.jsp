@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
 </head>
 <body>
 	<div>
@@ -425,72 +424,30 @@
 													</h4>
 													<div class="content_wrap">
 														<div class="price_head">개인레슨</div>
-														<%-- <div class="price_table">
-															<c:forEach var="i" begin="0" end="${fn:length(lessonCount)-1}">
-																<div class="price_line">
-																	<div class="price_count">
-																		String 태그 안에 글자 입력 X
-																		<Strong class="numberFormat">${lessonCount[i]}</Strong> 회
+															<div class="price_table">
+																<c:forEach var="i" items="${aryList}">
+																	<div class="price_line">
+																		<div class="price_count">
+																			<!-- String 태그 안에 글자 입력 X -->
+																			<Strong class="numberFormat">${i.lpCount}</Strong> 회
+																		</div>
+																		<div class="price">
+																			<div class="price_per">회당 <strong class="numberFormat perLessonPrice">${i.lessonPrice/i.lpCount}</strong> 원</div>
+																			<div class="price_total">총 <Strong class="numberFormat">${i.lessonPrice}</Strong> 원</div>
+																		</div>
 																	</div>
-																	<div class="price">
-																		<div class="price_per">회당<strong class="numberFormat"> ${lessonPrice[i]}</strong> 원</div>
-																		<div class="price_total">총 <Strong class="numberFormat">${lessonCount[i] * lessonPrice[i]}</Strong> 원</div>
-																	</div>
-																</div>
-															</c:forEach>
-														</div> --%>
-														<div class="price_table">
-															<c:forEach var="i" items="${aryList}">
-																<div class="price_line">
-																	<div class="price_count">
-																		<!-- String 태그 안에 글자 입력 X -->
-																		<Strong class="numberFormat">${i.lpCount}</Strong> 회
-																	</div>
-																	<div class="price">
-																		<div class="price_per">회당 <strong class="numberFormat perLessonPrice">${i.lessonPrice/i.lpCount}</strong> 원</div>
-																		<div class="price_total">총 <Strong class="numberFormat">${i.lessonPrice}</Strong> 원</div>
-																	</div>
-																</div>
-															</c:forEach>
-														</div>
+																</c:forEach>
+															</div>
 													</div>
-													<!-- <div class="content_wrap">
-														<div class="price_head">그룹레슨</div>
-														<div class="price_table">
-															<div class="price_line">
-																<div class="price_count">30회</div>
-																<div class="price">
-																	<div class="price_per">회당 <strong>28,333</strong> 원</div>
-																	<div class="price_total">850,000 원</div>
-																</div>
-															</div>
-															<div class="price_line">
-																<div class="price_count">20회</div>
-																<div class="price">
-																	<div class="price_per">회당 <strong>32,500</strong> 원</div>
-																	<div class="price_total">650,000 원</div>
-																</div>
-															</div>
-															<div class="price_line">
-																<div class="price_count">10회</div>
-																<div class="price">
-																	<div class="price_per">회당 <strong>45,000</strong> 원</div>
-																	<div class="price_total">450,000 원</div>
-																</div>
-															</div>
-														</div>
-													</div> -->
 												</div>
 											</div>
 											<div class="trainer_location">
 												<div class="trainer_content">
-													<h4>
-														위치
-													</h4>
+													<h4>위치</h4>
 													<div class="content_wrap">
 														<div class="center">
 															<strong>${tio.ctName}</strong>
-															<div class="contact" onclick="centerInfoView()">상세 정보</div>
+															<!-- <div class="contact" onclick="centerInfoView()">상세 정보</div> -->
 														</div>
 														<div class="center">
 															<span>${tio.mbAddr}</span>
@@ -502,7 +459,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="right_bar"><!-- 코치프로필 -->
+									
+									<!-- 코치프로필 -->
+									<div class="right_bar">
 										<div class="trainer_profile">
 											<div class="upside">
 												<div class="report_button">
@@ -510,11 +469,12 @@
 												</div>
 												<div>
 													<div>
-														<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
+														<img class="trainer_round_image" src="https://file.woondoc.com/gym/cover/QwqvhHp2HYATzi9nTEUEnjjzZaxQ3KTX_1700440964_5752163.jpg">
+														<%-- <img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png"> --%>
 													</div>
 													<div>
 														<div class="trainer_name">${tio.mbName}</div>
-														<div class="center_name" onclick="centerInfoView()">${tio.ctName}</div>
+														<div class="center_name">${tio.ctName}</div>
 														<div class="stars" style="display: none;">
 															<c:choose>
 																<c:when test="${tio.reviewRate ge 4.5}">
@@ -594,11 +554,16 @@
 											</div>
 										</div>
 									</div>
+									<!-- 코치프로필 -->
+									
 								</div>
 							</div>
 						</div>
 					</section>
+					
+					<!-- footer 영역 -->
 					<jsp:include page="../include/footer.jsp"/>
+					
 				</div>
 			</div>
 		</div>
