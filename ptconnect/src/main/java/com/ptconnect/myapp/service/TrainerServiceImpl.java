@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
@@ -192,7 +193,15 @@ public class TrainerServiceImpl implements TrainerService{
 		return value;
 	}
 
-
+	@Override
+	public MemberDTO memberSelectOne(int mbNo) {
+		 
+		MemberDTO mo = new MemberDTO();
+		
+		mo = tsm.memberSelectOne(mbNo);
+		
+		return mo;
+	}
 
 	
 	

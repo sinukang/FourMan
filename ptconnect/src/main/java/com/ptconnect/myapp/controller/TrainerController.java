@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.PageMaker;
 import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
@@ -126,6 +127,10 @@ public class TrainerController {
 		HttpSession session = request.getSession(false);
 		session.setAttribute("tnNo", tnNo);
 		
+		Integer mbNo = (Integer) session.getAttribute("mbNo");
+		System.out.println("mbNo : " + mbNo);
+		
+		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
 		
@@ -184,6 +189,11 @@ public class TrainerController {
 		model.addAttribute("QualifyArr", QualifyArr);
 		model.addAttribute("aryList", jsAry);
 		
+		if (mbNo != null) {
+		MemberDTO mo = ts.memberSelectOne(mbNo);
+		System.out.println("mbName :" + mo.getMbName());
+		model.addAttribute("mo",mo);
+		}
 		
 		model.addAttribute("rvo_alist", rvo_alist);
 		

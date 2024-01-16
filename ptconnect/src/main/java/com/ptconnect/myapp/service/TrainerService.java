@@ -3,6 +3,7 @@ package com.ptconnect.myapp.service;
 import java.util.ArrayList;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
@@ -36,4 +37,6 @@ public interface TrainerService {
 	public int file_Modify(FileDetailDTO fdo);
 	
 	public int fileDetailModify(FileDetailDTO fdo);
+	
+	public MemberDTO memberSelectOne(int mbNo);
 }

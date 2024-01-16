@@ -229,6 +229,10 @@
 		where flNo = #{flNo}
 	</update>
 	
-	
+	<select id="memberSelectOne" parameterType="int" resultType="mo">
+		SELECT mbNo, mbEmail, mbName, mbPhone
+		FROM member
+		WHERE mbNo = #{mbNo}
+	</select>
 	
 </mapper>

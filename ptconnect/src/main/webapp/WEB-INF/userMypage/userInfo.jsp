@@ -31,13 +31,13 @@
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>이름</label>
-													<input type="text" value="김빡빡" disabled>
+													<input type="text" value="${mo.mbName}" disabled>
 												</div>
 											</div>
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>이메일</label>
-													<input type="text" value="ptconnect132@gmail.com" disabled>
+													<input type="text" value="${mo.mbEmail}" disabled>
 												</div>
 											</div>
 											<div class="user_wrap">

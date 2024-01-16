@@ -37,11 +37,10 @@
 									<span style="font-size: 20px; font-weight: bold;">20,000원</span>
 								</span>
 							</div>
-							
 							<div style="margin-top: 0px;">
 								<div class="style_input__InputDiv-sc-139qydd-0 jMxvw">
 									<label>이름 <span class="required">*</span></label>
-									<input id="nmName" type="text" name="nmName" placeholder="필수 입력" maxlength="10" value="">
+									<input id="nmName" type="text" name="nmName" placeholder="필수 입력" maxlength="10" value="${mo.mbName}" <c:if test="${not empty mo.mbName}">readonly</c:if>>
 								</div>
 							</div>
 							
@@ -50,23 +49,23 @@
 									<label>휴대폰 번호 <span>*</span></label>
 									<div class="inputWrap">
 										<div class="inputWidth">
-											<input type="tel" id="nmPhone" name="nmPhone" placeholder="'-'없이 입력" maxlength="20" autocomplete="off" value="">
+											<input type="tel" id="nmPhone" name="nmPhone" placeholder="'-'없이 입력" maxlength="20" autocomplete="off" value="${mo.mbPhone}" <c:if test="${not empty mo.mbName}">readonly</c:if>>
 										</div>
 									</div>
 								</div>
 							</div>
-							
-							<div style="margin-top: 24px;">
-								<div class="style_input__InputDiv-sc-139qydd-0 jMxvw">
-									<label>비밀번호 <span>*</span></label>
-									<div class="inputWrap">
-										<div class="inputWidth">
-											<input type="text" id="nmPwd" name="nmPwd" placeholder="필수 입력" maxlength="20" autocomplete="off" value="">
+							<div style="<c:if test='${not empty mbNo}'>display:none;</c:if>">
+								<div style="margin-top: 24px;">
+									<div class="style_input__InputDiv-sc-139qydd-0 jMxvw">
+										<label>비밀번호 <span>*</span></label>
+										<div class="inputWrap">
+											<div class="inputWidth">
+												<input type="text" id="nmPwd" name="nmPwd" placeholder="필수 입력" maxlength="20" autocomplete="off" value="">
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							
 							<div class="order_comment">
 								트레이너님이 일정 협의를 위해 연락드립니다.
 							</div>
