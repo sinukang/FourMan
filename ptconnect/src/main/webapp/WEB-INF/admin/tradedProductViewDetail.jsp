@@ -64,7 +64,7 @@
 
                             <div class="card shadow mb-5">
                             	<div class="card-header py-3">
-                            		<a href="./tradedProductList.jsp" class="btn btn-icon-split btn-discord">
+                            		<a href="../tradedProductList" class="btn btn-icon-split btn-discord">
                             			<span class="icon">
 	                            			<i class="fas fa-arrow-left"></i>
                             			</span>
@@ -75,21 +75,40 @@
                             	<div class="card-body p-5">
                             		<div class="my-4 d-flex jc-between">
                             			<span class="text-gray-800 text-lg font-weight-bold">주문번호</span>
-                            			<span class="">202318280000001</span>
+                            			<span class="">${po.odNo}</span>
                             		</div>
                             		<div class="my-4 d-flex jc-between">
                             			<span class="text-gray-800 text-lg font-weight-bold">결제일</span>
-                            			<span class="">2023-12-28 13:58:40</span>
+                            			<span class="">${po.odDate}</span>
                             		</div>
                             		<div class="my-4 d-flex jc-between">
                             			<span class="text-gray-800 text-lg font-weight-bold">판매자</span>
-                            			<span class="">둘리</span>
+                            			<span class="">${po.tnName}</span>
                             		</div>
                             		<div class="my-4 d-flex jc-between">
                             			<span class="text-gray-800 text-lg font-weight-bold">구매자</span>
                             			<div class="">
-                            				<span class="">고길동</span>
-	                            			<span class="ml-4">010-1111-2222</span>
+                            				<c:choose>
+                            					<c:when test="${not empty po.nmName}">
+                            						<span class="">${po.nmName}</span>
+                            					</c:when>
+                            					<c:when test="${not empty po.mbName}">
+                            						<span class="">${po.mbName}</span>
+                            					</c:when>
+                            				</c:choose>
+                            			</div>
+                            		</div>
+                            		<div class="my-4 d-flex jc-between">
+                            			<span class="text-gray-800 text-lg font-weight-bold">구매자연락처</span>
+                            			<div class="">
+                            				<c:choose>
+                            					<c:when test="${not empty po.nmPhone}">
+                            						<span class="">${po.nmPhone}</span>
+                            					</c:when>
+                            					<c:when test="${not empty po.mbPhone}">
+                            						<span class="">${po.mbPhone}</span>
+                            					</c:when>
+                            				</c:choose>
                             			</div>
                             		</div>
                             		<div class="my-4 d-flex div-discount jc-between">
@@ -98,25 +117,25 @@
 	                            			<span class="d-flex align-items-center text-gray-800 font-weight-bold">쿠폰</span>
 	                            			<div class="d-flex div-amount">
 	                            				<span class="">쿠폰 이름 ( - 20 % )</span>
-		                            			<input type="text" class="ml-3 input-amount" readonly>
+		                            			<input type="text" class="ml-3 input-amount" readonly value="${po.odCoupon}">
 	                            			</div>
                             			</div>
 	                            		<div class="py-2 pl-3 d-flex jc-between">
                             				<span class="d-flex align-items-center text-gray-800 font-weight-bold">포인트</span>
                             				<div class="d-flex div-amount">
-		                            			<input type="text" class="input-amount" readonly>
+		                            			<input type="text" class="input-amount" readonly value="${po.odPoint}">
                             				</div>
                             			</div>
                             		</div>
                             		<div class="my-4 d-flex jc-between">
                             			<span class="text-gray-800 text-lg font-weight-bold">총 결제금액</span>
                             			<div class="d-flex div-amount">
-	                            			<input type="text" class="input-amount" readonly>
+	                            			<input type="text" class="input-amount" readonly value="${po.odPrice}">
                             			</div>
                             		</div>
                             		<div class="my-4 d-flex jc-between">
                             			<span class="text-gray-800 text-lg font-weight-bold">결제수단</span>
-                            			<span class="">현금카드/KG이니시스</span>
+                            			<span class="">${po.pmCard}/${po.pmMethod}</span>
                             		</div>
                             	</div>
                             </div>

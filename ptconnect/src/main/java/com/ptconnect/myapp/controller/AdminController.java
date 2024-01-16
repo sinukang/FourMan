@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.PageMaker;
+import com.ptconnect.myapp.domain.PaymentDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.AdminService;
@@ -137,22 +138,51 @@ AdminService as;
 		session.setAttribute("pm", pm);
 		return "admin/registeredProductList";
 	}	
-	
+
 	@GetMapping(value = "/tradedProductList")
-	public String tradedProductList(
+	public String tradedProductListNoPage(
 			HttpSession session) {
+		
+		return "redirect:/admin/tradedProductList/1";
+	}	
+	@GetMapping(value = "/tradedProductList/{page}")
+	public String tradedProductList(
+			@PathVariable int page,
+			HttpSession session) {
+		PageMaker pm = new PageMaker();
+		SearchCriteria scri = new SearchCriteria();
+		scri.setPage(page);
+		scri.setPerPageNum(10);
+		pm.setCurrentPage(page);
+		pm.setScri(scri);
+		pm.setTotalCount(as.tradedProductTotalCount());
+		ArrayList<PaymentDTO> oList = as.tradedProductList(scri);
+		
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","2,2");
-		
+		session.setAttribute("oList", oList);
+		session.setAttribute("pm", pm);
 		return "admin/tradedProductList";
 	}	
-	
+
 	@GetMapping(value = "/tradedProductViewDetail")
+	public String tradedProductViewDetailNoNumber(
+			HttpSession session) {
+		
+		return "redirect:/admin/tradedProductList/1";
+	}	
+	@GetMapping(value = "/tradedProductViewDetail/{odNo}")
 	public String tradedProductViewDetail(
+			@PathVariable String odNo,
 			HttpSession session) {
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","2,2");
-		
+		PaymentDTO po = as.tradedProductDetail(odNo);
+		if(po != null) {
+			session.setAttribute("po", po);
+		}else {
+			return "redirect:/admin/tradedProductList/1";
+		}
 		return "admin/tradedProductViewDetail";
 	}	
 	

@@ -112,17 +112,35 @@
                             			<th>거래 번호</th>
                             			<th>대행사</th>
                             			<th>수단</th>
+                            			<th>구매자</th>
+                            			<th>판매자</th>
                             			<th>결제 승인 시간</th>
                             		</tr>
-                            		<c:forEach var="i" begin="1" end="9" step="1">
+                            		<c:forEach var="po" items="${oList}">
                             			<tr>
-	                            			<td>상태${i}</td>
+                            				<c:choose>
+                            					<c:when test="${not empty po.pcState}">
+	                            					<td>${po.pcState}</td>
+                            					</c:when>
+                            					<c:otherwise>
+	                            					<td>${po.pmState}</td>
+                            					</c:otherwise>
+	                            			</c:choose>
 	                            			<td>
-	                            				<a href="./tradedProductViewDetail.jsp" class="a-viewDetail">${i}${i}${i}${i}-${i}${i}</a>
+	                            				<a href="${pageContext.request.contextPath}/admin/tradedProductViewDetail/${po.odNo}" class="a-viewDetail">${po.odNo}</a>
 	                            			</td>
-	                            			<td>대행사${i}</td>
-	                            			<td>수단${i}</td>
-	                            			<td>2023-12-0${i} 17:50:0${i}</td>
+	                            			<td>${po.pmMethod}</td>
+	                            			<td>${po.pmCard}</td>
+                            				<c:choose>
+                            					<c:when test="${not empty po.nmName}">
+	                            					<td>${po.nmName}</td>
+                            					</c:when>
+                            					<c:otherwise>
+	                            					<td>${po.mbName}</td>
+                            					</c:otherwise>
+	                            			</c:choose>
+	                            			<td>${po.tnName}</td>
+	                            			<td>${po.odDate}</td>
 	                            		</tr>
                             		</c:forEach>
                             	</table>
@@ -132,23 +150,25 @@
                             		<div class="col-lg-12">
                             			<div class="pagination-area">
                             				<ul class="pagination">
-                            					<li class="paginate_button page-item previous disabled">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+                            					<li class="paginate_button page-item previous">
+													<c:if test="${pm.prev eq true}">
+                            						<a href="./${pm.prev}" aria-controls="dataTable" class="page-link">
                             							◀
                             						</a>
+                            						</c:if>
                             					</li>
-                            					<c:forEach var="i" begin="1" end="5" step="1">
+                            					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
                             						<c:choose>
-                            							<c:when test="${i eq 1}">
+                            							<c:when test="${i eq currentPage}">
                             								<li class="paginate_button page-item active">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="./${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
                             							</c:when>
                             							<c:otherwise>
                             								<li class="paginate_button page-item">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="./${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
@@ -158,9 +178,11 @@
                             					</c:forEach>
 	                            					
                             					<li class="paginate_button page-item next">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+												<c:if test="${pm.next eq true && pm.endPage > 0}">
+                            						<a href="./${pm.next}" aria-controls="dataTable" class="page-link">
                             							▶
                             						</a>
+                            					</c:if>
                             					</li>
                             				</ul>
                             			</div>

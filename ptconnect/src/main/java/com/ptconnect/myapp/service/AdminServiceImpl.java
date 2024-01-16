@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.AdminDTO;
 import com.ptconnect.myapp.domain.CenterInfoDTO;
+import com.ptconnect.myapp.domain.PaymentDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.AdminServiceMapper;
@@ -30,14 +31,6 @@ public class AdminServiceImpl implements AdminService{
 		return ao;
 	}
 	@Override
-	public int centerRegisterTotalCount() {
-		
-		int value = asm.centerRegisterTotalCount();
-		
-		
-		return value;
-	}
-	@Override
 	public ArrayList<CenterInfoDTO> centerRegisterList(SearchCriteria scri) {
 		int value = (scri.getPage()-1)*scri.getPerPageNum();
 		scri.setPage(value);
@@ -45,6 +38,23 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return cList;
+	}
+	@Override
+	public ArrayList<PaymentDTO> tradedProductList(SearchCriteria scri) {
+		int value = (scri.getPage()-1)*scri.getPerPageNum();
+		scri.setPage(value);
+		ArrayList<PaymentDTO> oList = asm.tradedProductList(scri);
+		
+		
+		return oList;
+	}
+	@Override
+	public int centerRegisterTotalCount() {
+		
+		int value = asm.centerRegisterTotalCount();
+		
+		
+		return value;
 	}
 	@Override
 	public ArrayList<TrainerInfoDTO> registredProductList(SearchCriteria scri) {
@@ -64,11 +74,27 @@ public class AdminServiceImpl implements AdminService{
 		return value;
 	}
 	@Override
+	public int tradedProductTotalCount() {
+		
+		int value = asm.tradedProductTotalCount();
+		
+		
+		return value;
+	}
+	@Override
 	public int centerRegist(int ctNo) {
 		
 		int value = asm.centerRegist(ctNo);
 		
 		
 		return value;
+	}
+	@Override
+	public PaymentDTO tradedProductDetail(String odNo) {
+		
+		PaymentDTO po = asm.tradedProductDetail(odNo);
+		
+		
+		return po;
 	}
 }

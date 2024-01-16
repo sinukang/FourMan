@@ -91,7 +91,7 @@ public class TrainerInfoWriteController {
 		int value4 = ts.trainerInfoUpdate(fdo);
 		System.out.println("value4 : " + value4);
 		
-		return "redirect:/trainerMypage/trainerInfoWrite";
+		return "redirect:/trainerInfoWrite";
 	}
 
 }

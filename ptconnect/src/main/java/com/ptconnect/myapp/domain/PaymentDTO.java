@@ -13,6 +13,12 @@ public class PaymentDTO {
 	private String pmDate;
 	private String pmState;
 	
+	/*mbName=구매자이름 , mbPhone=구매자 번호, tnName=판매자이름*/
+
+	private String mbName;
+	private String mbPhone;
+	private String tnName;
+	
 	private int mbNo;
 	private int nmNo;
 	private int odPoint;
@@ -44,15 +50,15 @@ public class PaymentDTO {
 	
 	private String nmName;
 	private String nmPwd;
-	private int nmPhone;
+	private String nmPhone;
 	private String nmDate;
 	private String nmDelYN;
 	
 	
-	public int getNmPhone() {
+	public String getNmPhone() {
 		return nmPhone;
 	}
-	public void setNmPhone(int nmPhone) {
+	public void setNmPhone(String nmPhone) {
 		this.nmPhone = nmPhone;
 	}
 	public String getNmName() {
@@ -270,6 +276,24 @@ public class PaymentDTO {
 	}
 	public void setPmState(String pmState) {
 		this.pmState = pmState;
+	}
+	public String getMbName() {
+		return mbName;
+	}
+	public void setMbName(String mbName) {
+		this.mbName = mbName;
+	}
+	public String getTnName() {
+		return tnName;
+	}
+	public void setTnName(String tnName) {
+		this.tnName = tnName;
+	}
+	public String getMbPhone() {
+		return mbPhone;
+	}
+	public void setMbPhone(String mbPhone) {
+		this.mbPhone = mbPhone;
 	}
 	
 }

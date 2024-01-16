@@ -37,4 +37,39 @@
 		update centerInfo set ctDelYN = 'N', ctDateM = now()
 		where ctNo = #{ctNo}
 	</update>
+	<select id="tradedProductTotalCount" resultType="int">
+		select COUNT(*) 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerInfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.mbNo is not null or o.nmNo is not null
+		order by o.odDate DESC
+	</select>
+	<select id="tradedProductList" parameterType="scri" resultType="po">
+		select * 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerInfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.mbNo is not null or o.nmNo is not null
+		order by o.odDate DESC limit #{page},#{perPageNum}
+	</select>
+	<select id="tradedProductDetail" parameterType="String" resultType="po">
+		select * 
+		from order_ o
+		join payment p ON o.odNo = p.odNo
+		join orderproduct op on o.odNo = op.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerInfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.odNo = #{odNo}
+	</select>
 </mapper>
