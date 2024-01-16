@@ -226,13 +226,14 @@
 	        var nmPhoneValue = document.getElementById('nmPhone').value;
 	        var nmPwdValue = document.getElementById('nmPwd').value;
 	        
+	        var realPriceValue = "${tio.tnTicket}" - usePointInputValue;	// 포인트 사용 후 최종 결제 금액
 	        
 	        IMP.request_pay({
 	            pg: "html5_inicis",       // KG이니시스 pg 파라미터 값
 	            pay_method: "card",       // 결제 방법
 	            merchant_uid: createOrderNum(), // 주문번호
 	            name: "${tio.mbName}",          // 상품 명
-	            amount: "${tio.tnTicket}",          // 주문 금액
+	            amount: realPriceValue,          // 주문 금액
 	            buyer_email: "gildong@gmail.com",
 	            buyer_name: "홍길동",
 	            buyer_tel: "010-4242-4242",
@@ -250,51 +251,74 @@
 	
 	            if (amountValue !== rsp.paid_amount) {
 	                // 결제 성공하지만 금액이 일치하지 않을 때
-	                var msg = '결제 금액이 일치하지 않습니다.';
+	                
+	                var result = {
+	                    "pmNo": rsp.imp_uid, // 결제번호
+	                    "odNo": rsp.merchant_uid, // 주문번호
+	                    "odPrice": realPriceValue,	// 주문금액
+	                };
+
+	                console.log(result);
+
+	                $.ajax({
+	                    url: 'paymentCancle',
+	                    type: 'POST',
+	                    contentType: 'application/json',
+	                    data: JSON.stringify(result),
+	                    success: function (res) {
+	                        console.log(res);
+	                    },
+	                    error: function (err) {
+	                        console.log(err);
+	                    }
+	                }); //ajax
+	                var msg = '결제 금액이 일치하지 않아 결제가 취소됩니다.';
 	                alert(msg);
 	                return;
+	                
+	            } else {
+	                // 결제 성공 및 금액 일치하는 경우에만 서버로 데이터 전송
+	                var result = {
+	                    "pmNo": rsp.imp_uid, // 결제번호
+	                    "portOneNo": rsp.merchant_uid, // 결제번호
+	                    "odNo": rsp.merchant_uid, // 주문번호
+	                    "pgCorp": rsp.pg_provider, // pg사 구분코드
+	                    "pmMethod": rsp.pay_method, // 결제수단
+	                    "pmCard": rsp.card_name, // 결제 카드
+	                    "pmPrice": rsp.paid_amount, // 결제금액
+	                    "pmDate": rsp.paid_at, // 결제일
+	                    "pmState": rsp.status,  // 결제상태
+	                    "opIntro": opIntroValue, // 간단상담내용
+	                    "odPrice": realPriceValue,	// 주문금액
+	                    "ptPoint": accumulatedPoints, // 적립 포인트
+	                    "ptContent": '상품구매',	// 적립 내용
+	                    "usePoint": usePointInputValue,	// 사용포인트
+	                    "useContent": '상품구매',	// 포인트 사용내용
+	                    "nmName" : nmNameValue,
+	                    "nmPhone" : nmPhoneValue,
+	                    "nmPwd" : nmPwdValue
+	                };
+
+	                console.log(result);
+
+	                $.ajax({
+	                    url: 'payment',
+	                    type: 'POST',
+	                    contentType: 'application/json',
+	                    data: JSON.stringify(result),
+	                    success: function (res) {
+	                        console.log(res);
+	                    },
+	                    error: function (err) {
+	                        console.log(err);
+	                    }
+	                }); //ajax
+
+	                // 결제 성공 및 데이터 전송 후에만 알림 표시
+	                var msg = '결제가 완료되었습니다.';
+	                alert(msg);
+	                
 	            }
-	
-	            // 결제 성공 및 금액 일치하는 경우에만 서버로 데이터 전송
-	            var result = {
-	                "pmNo": rsp.imp_uid, // 결제번호
-	                "portOneNo": rsp.merchant_uid, // 결제번호
-	                "odNo": rsp.merchant_uid, // 주문번호
-	                "pgCorp": rsp.pg_provider, // pg사 구분코드
-	                "pmMethod": rsp.pay_method, // 결제수단
-	                "pmCard": rsp.card_name, // 결제 카드
-	                "pmPrice": rsp.paid_amount, // 결제금액
-	                "pmDate": rsp.paid_at, // 결제일
-	                "pmState": rsp.status,  // 결제상태
-	                "opIntro": opIntroValue, // 간단상담내용
-	                "odPrice": amountValue,	// 주문금액
-	                "ptPoint": accumulatedPoints, // 적립 포인트
-	                "ptContent": '상품구매',	// 적립 내용
-	                "usePoint": usePointInputValue,	// 사용포인트
-	                "useContent": '상품구매',	// 포인트 사용내용
-	                "nmName" : nmNameValue,
-	                "nmPhone" : nmPhoneValue,
-	                "nmPwd" : nmPwdValue
-	            };
-	
-	            console.log(result);
-	
-	            $.ajax({
-	                url: 'payment',
-	                type: 'POST',
-	                contentType: 'application/json',
-	                data: JSON.stringify(result),
-	                success: function (res) {
-	                    console.log(res);
-	                },
-	                error: function (err) {
-	                    console.log(err);
-	                }
-	            }); //ajax
-	
-	            // 결제 성공 및 데이터 전송 후에만 알림 표시
-	            var msg = '결제가 완료되었습니다.';
-	            alert(msg);
 	        });
 	    }
 	    

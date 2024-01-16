@@ -10,8 +10,8 @@
 	</insert>
 	
 	<insert id="orderInsert"  parameterType="po">
-		insert into order_(odNo, mbNo, odPoint, odCoupon, odPrice)
-		values(#{odNo}, #{mbNo}, #{usePoint}, #{odCoupon}, #{odPrice})
+		insert into order_(odNo, mbNo, nmNo, odPoint, odCoupon, odPrice)
+		values(#{odNo}, #{mbNo}, #{nmNo}, #{usePoint}, #{odCoupon}, #{odPrice})
 	</insert>
 	
 	<insert id="nonUserOrderInsert"  parameterType="po">

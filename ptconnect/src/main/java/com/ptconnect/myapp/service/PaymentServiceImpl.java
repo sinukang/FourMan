@@ -169,7 +169,7 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Override
 	/* 결제 취소 */
-	public void payMentCancle(String access_token,String merchant_uid, String imp_uid, String amount,String reason,
+	public void payMentCancle(String access_token,String merchant_uid, String imp_uid, String amount, String reason,
 							PaymentDTO po) throws IOException, ParseException {
 		System.out.println("imp_uid : " + imp_uid);
 		HttpsURLConnection conn = null;
@@ -187,10 +187,10 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		JsonObject json = new JsonObject();
 
-//		json.addProperty("pcContent", reason);
-		json.addProperty("odNo", merchant_uid);
-//		json.addProperty("pmNo", imp_uid);
-//		json.addProperty("pcPrice", amount);
+		json.addProperty("reason", reason);
+		json.addProperty("merchant_uid", merchant_uid);
+		json.addProperty("imp_uid", imp_uid);
+		json.addProperty("amount", amount);
 		po.setPcContent(reason);
 		po.setPcPrice(Integer.parseInt(amount));
 		
@@ -205,6 +205,8 @@ public class PaymentServiceImpl implements PaymentService {
 		bw.close();
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+		
+		 System.out.println("요청이 성공적으로 전송되었습니다.");
 		
 	}
 	
