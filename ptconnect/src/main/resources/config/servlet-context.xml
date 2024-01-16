@@ -34,6 +34,8 @@
 	
 	<beans:bean id="loginInterceptor" class="com.ptconnect.myapp.interceptor.LoginInterceptor">
 	</beans:bean>
+	<beans:bean id="TrainerNumberInterceptor" class="com.ptconnect.myapp.interceptor.TrainerNumberInterceptor">
+	</beans:bean>
 	
 	<!-- 파일업로드시 multipart 받는 reslover 클래스 사용 -->
 	<beans:bean id="multipartResolver" 
@@ -61,14 +63,16 @@
 		</interceptor>	
 		<interceptor>
 			<mapping path="/admin/*" />
-			<mapping path="/admin/*/*" />
-			<mapping path="/admin/*/*/*" />
 			<exclude-mapping path="/admin/admin_login"/>
 			<beans:ref bean="adminAuthInterceptor" />
 		</interceptor>	
 		<interceptor>
 			<mapping path="/login" />
 			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/trainerInfoView" />
+			<beans:ref bean="TrainerNumberInterceptor" />
 		</interceptor>	
 	</interceptors>	
 	

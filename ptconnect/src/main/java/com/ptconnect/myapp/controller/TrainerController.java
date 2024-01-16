@@ -1,18 +1,19 @@
 package com.ptconnect.myapp.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
@@ -117,23 +118,53 @@ public class TrainerController {
 	}
 	
 	@GetMapping(value = "trainerInfoView")
-	public String trainerInfoView(@RequestParam(name = "tnNo", required = true) int tnNo, HttpServletRequest request, Model model) {
+	public String trainerInfoView(@RequestParam(name = "tnNo", required = true) int idx, HttpServletRequest request, Model model) throws IOException {
+		
+		int tnNo = 0;
+		tnNo = idx;
 		
 		HttpSession session = request.getSession(false);
 		session.setAttribute("tnNo", tnNo);
-		System.out.println("trainer info view tnNo : " + session.getAttribute("tnNo"));
 		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
 		
 		String[] QualifyArr = null;
-		QualifyArr = tio.getQualify().split(",");
+		if(tio.getQualify().contains(",")) {
+			QualifyArr = tio.getQualify().split(",");
+		}else {
+			QualifyArr = new String[0];
+			QualifyArr[0] = tio.getQualify();
+		}
 		
-		String[] lessonCount = null;
-		lessonCount = tio.getLpCount().split(",");
+		JSONArray jsAry = new JSONArray();
+		String[] lpCount = null;
 		String[] lessonPrice = null;
-		lessonPrice = tio.getLessonPrice().split(",");
+		if(tio.getLpCount().contains(",")) {
+			lpCount = tio.getLpCount().split(",");
+			lessonPrice = tio.getLessonPrice().split(",");
+			for(int i = 0; i < lpCount.length; i++) {
+				String CP = "{\"lpCount\" : \""+lpCount[i]+"\", \"lessonPrice\" : \""+lessonPrice[i]+"\"}";
+				JSONObject js = new JSONObject();
+				js.put("lpCount",lpCount[i]);
+				js.put("lessonPrice",lessonPrice[i]);
+				jsAry.add(js);
+			}
+		}else {
+			lpCount = new String[1];
+			lpCount[0] = tio.getLpCount();
+		}
+		
+		String testStr = ",,,,";
+		String[] testStrArr = testStr.split(",");
+		for (int i = 0; i < testStrArr.length; i++) {
+			System.out.println("testStrArr[i] : te" + testStrArr[i] + "st");
+		}
+		
+	
 		int length = tio.getLpCount().split(",").length;
+		
+		
 		
 		ArrayList<TrainerInfoDTO> tio_alist = new ArrayList<TrainerInfoDTO>();
 		tio_alist = ts.trainerInfoView_Programs(tnNo);
@@ -151,8 +182,7 @@ public class TrainerController {
 		model.addAttribute("tio", tio);
 		model.addAttribute("tio_alist", tio_alist);
 		model.addAttribute("QualifyArr", QualifyArr);
-		model.addAttribute("lessonCount", lessonCount);
-		model.addAttribute("lessonPrice", lessonPrice);
+		model.addAttribute("aryList", jsAry);
 		
 		
 		model.addAttribute("rvo_alist", rvo_alist);

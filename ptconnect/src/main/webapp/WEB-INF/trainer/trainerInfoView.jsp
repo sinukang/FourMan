@@ -96,9 +96,9 @@
 														<div>
 															<c:forEach var="Qualify" items="${QualifyArr}">
 																<div class="trophy">
-																	<i class="fa-solid fa-award"></i>
-																	<!-- <i class="fa-solid fa-dumbbell"></i> -->
 																	<!-- <i class="fa-solid fa-award"></i> -->
+																	<!-- <i class="fa-solid fa-dumbbell"></i> -->
+																	<i class="fa-solid fa-award"></i>
 																	<span>${Qualify}</span>
 																</div>	
 															</c:forEach>
@@ -425,11 +425,11 @@
 													</h4>
 													<div class="content_wrap">
 														<div class="price_head">개인레슨</div>
-														<div class="price_table">
+														<%-- <div class="price_table">
 															<c:forEach var="i" begin="0" end="${fn:length(lessonCount)-1}">
 																<div class="price_line">
 																	<div class="price_count">
-																		<!-- String 태그 안에 글자 입력 X -->
+																		String 태그 안에 글자 입력 X
 																		<Strong class="numberFormat">${lessonCount[i]}</Strong> 회
 																	</div>
 																	<div class="price">
@@ -438,9 +438,23 @@
 																	</div>
 																</div>
 															</c:forEach>
+														</div> --%>
+														<div class="price_table">
+															<c:forEach var="i" items="${aryList}">
+																<div class="price_line">
+																	<div class="price_count">
+																		<!-- String 태그 안에 글자 입력 X -->
+																		<Strong class="numberFormat">${i.lpCount}</Strong> 회
+																	</div>
+																	<div class="price">
+																		<div class="price_per">회당 <strong class="numberFormat perLessonPrice">${i.lessonPrice/i.lpCount}</strong> 원</div>
+																		<div class="price_total">총 <Strong class="numberFormat">${i.lessonPrice}</Strong> 원</div>
+																	</div>
+																</div>
+															</c:forEach>
 														</div>
 													</div>
-													<div class="content_wrap">
+													<!-- <div class="content_wrap">
 														<div class="price_head">그룹레슨</div>
 														<div class="price_table">
 															<div class="price_line">
@@ -465,7 +479,7 @@
 																</div>
 															</div>
 														</div>
-													</div>
+													</div> -->
 												</div>
 											</div>
 											<div class="trainer_location">
@@ -547,13 +561,25 @@
 														<div class="pickup_line">${tio.tnOneLine}</div>
 														<div class="list_wrap">
 															<div class="flex_box">
-																<span class="left">자격검증</span><span class="right">자격사항을 등록하세요</span>
+																<span class="left">자격검증</span>
+																<span class="right">
+																	<c:choose>
+																		<c:when test="${QualifyArr ne null}">
+																			<c:forEach var="Qualify" items="${QualifyArr}" end="0">
+																				${Qualify}
+																			</c:forEach>
+																		</c:when>
+																		<c:otherwise>
+																			자격사항을 등록하세요
+																		</c:otherwise>
+																	</c:choose>
+																</span>
 															</div>
-															<div class="flex_box">
+															<!-- <div class="flex_box">
 																<span class="left">전문분야</span><span class="right">프로그램을 추가하세요</span>
-															</div>
+															</div> -->
 															<div class="flex_box">
-																<span class="left">대표가격</span><span class="right">가격정보를 등록하세요</span>
+																<span class="left">대표가격</span><span class="right">1회 체험권 ${tio.tnTicket} 원</span>
 															</div>
 														</div>
 													</div>
@@ -620,24 +646,50 @@
 			$(a_tap_link[i]).attr("href", href);
 		}
 		$(a_tap_link[2]).text("후기(${tio.reviewCnt})");
+		
+		
+		function numberFormat(){
+			let perLessonPrices = $(".perLessonPrice");
+			for (var i = 0; i < perLessonPrices.length; i++) {
+				let str = $(perLessonPrices[i]).text().toString();
+				let strToNum = parseFloat(str);
+				strToNum = strToNum.toFixed(0);	// toFixed(n) : 원하는 소수점 길이만큼 남기고 반올림
+				$(perLessonPrices[i]).text(strToNum);
+			}
+			let numberFormats = $(".numberFormat");
+			for(var i = 0; i < numberFormats.length; i++){
+				let str = addComma($(numberFormats[i]).text());
+				$(numberFormats[i]).text(str);
+			}
+			
+		}
+		numberFormat();
+		
+		//천단위 콤마
+		function addComma(value){
+			value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			return value; 
+		}
 	}
+	
+// 	function perLessonPrice(){
+// 		let perLessonPrices = $(".perLessonPrice");
+// 		for (var i = 0; i < perLessonPrices.length; i++) {
+// 			let str = $(perLessonPrices[i]).text().toString();
+// 			console.log($(perLessonPrices[i]).text());
+// 			console.log(str);
+// 			console.log(typeof str);
+// 			let strToNum = str;
+// 			strToNum = parseInt(str, 10);
+// 			console.log(strToNum);
+// 			console.log(typeof strToNum);
+// 			$(perLessonPrices[i]).text(strToNum);
+// 		}
+// 	}
+	
 	
 // 	number.toLocaleString(ko-KR, options)
 	
-	function numberFormat(){
-		let numberFormats = $(".numberFormat");
-		for(var i = 0; i < numberFormats.length; i++){
-			let str = addComma($(numberFormats[i]).text());
-			$(numberFormats[i]).text(str);
-		}
-	}
-	numberFormat();
-	
-	//천단위 콤마
-	function addComma(value){
-		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		return value; 
-	}
 	
 	function centerInfoView(){
 		location.href = "${pageContext.request.contextPath}/centerInfoView?tnNo=${tio.tnNo}";
