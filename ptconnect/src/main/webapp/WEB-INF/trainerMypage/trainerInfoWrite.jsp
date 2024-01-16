@@ -28,7 +28,7 @@
 							<div class="my_container"><!-- 코치정보(마진오토) -->
 								<div class="inner_contents row"><!-- 코치정보(패딩탑) -->
 									<div class="left_bar"><!-- 코치정보 -->
-										<form name="frm">
+										<form name="frm" accept-charset="utf-8">
 											<div class="trainer_info">
 												<div class="trainer_photo">
 													<div class="trainer_content">
