@@ -21,4 +21,6 @@ public interface PaymentServiceMapper {
 	public int nonmember(PaymentDTO po);
 	
 	public int nonUserOrderInsert(PaymentDTO po);
+	
+	public int paymentStateUpdate(PaymentDTO po);
 }

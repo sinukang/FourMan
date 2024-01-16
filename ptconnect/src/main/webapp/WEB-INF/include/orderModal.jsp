@@ -253,9 +253,20 @@
 	                // 결제 성공하지만 금액이 일치하지 않을 때
 	                
 	                var result = {
-	                    "pmNo": rsp.imp_uid, // 결제번호
-	                    "odNo": rsp.merchant_uid, // 주문번호
-	                    "odPrice": realPriceValue,	// 주문금액
+	                	"pmNo": rsp.imp_uid, // 결제번호
+	 	                "portOneNo": rsp.merchant_uid, // 결제번호
+	 					"odNo": rsp.merchant_uid, // 주문번호
+	 					"pgCorp": rsp.pg_provider, // pg사 구분코드
+	 					"pmMethod": rsp.pay_method, // 결제수단
+	 					"pmCard": rsp.card_name, // 결제 카드
+	 					"pmPrice": rsp.paid_amount, // 결제금액
+	 					"pmDate": rsp.paid_at, // 결제일
+		 				"pmState": rsp.status,  // 결제상태
+	 					"opIntro": opIntroValue, // 간단상담내용
+	 					"odPrice": realPriceValue,	// 주문금액
+	 					"nmName" : nmNameValue,
+	 					"nmPhone" : nmPhoneValue,
+	 					"nmPwd" : nmPwdValue
 	                };
 
 	                console.log(result);

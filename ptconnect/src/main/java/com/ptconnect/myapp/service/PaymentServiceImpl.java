@@ -92,7 +92,9 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		int value = psm.paymentCancleInsert(po);
 		
-		return value;
+		int value2= psm.paymentStateUpdate(po);
+		
+		return value + value2;
 	}
 	
 	/* 토큰 생성 */

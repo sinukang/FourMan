@@ -19,16 +19,54 @@ public class PaymentController {
 	private PaymentService ps;
 	
 	@RequestMapping(value = "paymentCancle")
-	public void paymentCancle(@RequestBody PaymentDTO po) throws Exception {
+	public void paymentCancle(@RequestBody PaymentDTO po, HttpSession session) throws Exception {
+		
+		Integer mbNo = (Integer) session.getAttribute("mbNo");
+		System.out.println("mbNo : " + mbNo);
+	    System.out.println("페이먼트 : " + session.getAttribute("tnNo"));
+	    int tnNo = Integer.parseInt(session.getAttribute("tnNo").toString());
+	    
+	    po.setTnNo(tnNo);
+	    System.out.println("tnNo : " + po.getTnNo());
+		
 		String token = ps.getToken();
         System.out.println("토큰 : " + token);
         
         String amount = ps.paymentInfo(po.getPmNo(), token);
+        
         System.out.println("amount : " + amount);
         System.out.println("odPrice : " + Integer.toString(po.getOdPrice()));
         
         ps.payMentCancle(token, po.getOdNo(), po.getPmNo(), amount, "결제 금액 오류", po);
-	    
+        
+        if (session.getAttribute("mbNo") != null) {
+	        
+	        po.setMbNo(mbNo);
+	            
+	        int value = ps.orderInsert(po);
+	        int value2 = ps.payment(po);
+	        int value3 = ps.paymentCancleInsert(po);
+	            
+	        System.out.println("value : " + value);
+	        System.out.println("value2 : " + value2);
+	        System.out.println("value3 : " + value3);
+	            
+	   }else if(session.getAttribute("mbNo") == null) {
+	    	
+	       int value1 = ps.nonmember(po);
+		   System.out.println("비회원정보 : " + value1);
+		   System.out.println("nmNo : " + po.getNmNo());
+		    	
+		   int value2 = ps.nonUserOrderInsert(po);
+		   System.out.println("비회원 주문정보 : " + value2);
+			    	
+		   int value3 = ps.payment(po);
+		   System.out.println("결제정보 : " + value3);
+			    		
+		   int value4 = ps.paymentCancleInsert(po);
+		   System.out.println("주문취소 : " + value4);
+		    	
+	    }
 	}
 	
 	
@@ -61,15 +99,11 @@ public class PaymentController {
 	            ps.payMentCancle(token, po.getOdNo(), po.getPmNo(), amount, "결제 금액 오류", po);
 	            
 	            int value = ps.orderInsert(po);
-	            
 	            int value2 = ps.payment(po);
-	            
 	            int value3 = ps.paymentCancleInsert(po);
 	            
 	            System.out.println("value : " + value);
-	            
 	            System.out.println("value2 : " + value2);
-	            
 	            System.out.println("value3 : " + value3);
 	            
 	        } else {
