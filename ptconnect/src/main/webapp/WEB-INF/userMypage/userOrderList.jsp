@@ -29,7 +29,7 @@
 									<div><!-- 코치정보 -->
 										<div>
 											<div>
-											<c:forEach var="po" items="${pList}">
+											<c:forEach var="po" items="${pList}" varStatus="loop">
 									        <div class="orderListBox">
 									            <div class="">
 									                <img class="orderProfile" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"/>
@@ -40,9 +40,10 @@
 									                <span class="orderText">전화번호:</span>
 									            </div>
 									            <div class="orderContainer">
-									                <span class="orderName">${po.odNo}</span>
+									                <span id="odNo_${loop.index}">${po.odNo}</span>
 									                <span class="orderText">${po.tnName}</span>
 									                <span class="orderText">${po.mbPhone}</span>
+									                <span id="pmNo_${loop.index}" style="display: none;">${po.pmNo}</span>
 									            </div>
 									            <div class="orderContainer">
 									                <span class="orderText">사용쿠폰 :</span>
@@ -52,7 +53,7 @@
 									            <div class="orderContainer">
 									                <span class="orderName">${po.odCoupon}</span>
 									                <span class="orderText"><strong>${po.odPoint}</strong>포인트</span>
-									                <span class="orderText"><strong>${po.odPrice}</strong>원</span>
+									                <span id="odPrice_${loop.index}"><strong>${po.odPrice}</strong>원</span>
 									            </div>
 									            <div class="orderContainer">
 									                <span class="orderText">결제상태 :</span>
@@ -67,7 +68,24 @@
 									                </c:choose>
 									                </span>
 									                <span class="orderText">${po.pmCard}</span>
-									                <span class="orderText">${po.odDate}</span>
+									                <span id="odDate_${loop.index}">${po.odDate}</span>
+									            </div>
+									            <div>
+<%-- 									            	<button type="button" class="paymentCancle" onclick="paymentCancle(${loop.index})"> --%>
+<!-- 														결제취소 -->
+<!-- 													</button> -->
+													<c:choose>
+												    <c:when test="${po.pcState ne 'cancle'}">
+												        <button type="button" class="paymentCancle" onclick="paymentCancle(${loop.index})">
+												           	 결제취소
+												        </button>
+												    </c:when>
+												    <c:otherwise>
+												        <button type="button" class="paymentComplete" disabled>
+												            취소완료
+												        </button>
+												    </c:otherwise>
+													</c:choose>
 									            </div>
 									        </div>
 											</c:forEach>
@@ -84,4 +102,55 @@
 		</div>
 	</div>
 </body>
+
+<script>
+
+function paymentCancle(index) {
+	console.log('index :', index);
+	
+            var confirmation = window.confirm('결제를 취소하시겠습니까?');
+
+            if (confirmation) {
+            	var pmNo = document.getElementById('pmNo_' + index).textContent;
+            	var odNo = document.getElementById('odNo_' + index).textContent;
+                var odPriceWon = document.getElementById('odPrice_' + index).textContent;
+                var odPrice = odPriceWon.replace('원', '').trim();
+                var odDate = document.getElementById('odDate_' + index).textContent;
+            	
+            	var result = {
+                     	"pmNo": pmNo, // 결제번호
+        				"odNo": odNo, // 주문번호
+        				"pmPrice": odPrice, // 결제금액
+        				"pmDate": odDate // 결제일
+                    };
+
+                    console.log(pmNo);
+                    console.log(odNo);
+                    console.log(odPrice);
+                    console.log(odDate);
+                   
+                $.ajax({
+                    url: 'userPaymentCancle',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result),
+                    success: function (res) {
+                        console.log(res);
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+                var msg = '결제가 취소되었습니다.';
+                alert(msg);
+            } else {
+                var msg = '취소되었습니다.';
+                alert(msg);
+            }
+}
+
+</script>
+
 </html>

@@ -45,7 +45,7 @@
 													<label>핸드폰 번호<span>*</span></label>
 													<div class="input_wrap">
 														<div class="input_width">
-															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="01012345678">														
+															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="${mo.mbPhone}">														
 														</div>
 														<div class="send_submit">
 															<div class="send_auth_button">인증번호 발송</div>

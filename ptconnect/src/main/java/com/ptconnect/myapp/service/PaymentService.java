@@ -27,4 +27,6 @@ public interface PaymentService {
 	public int nonmember(PaymentDTO po);
 	
 	public int nonUserOrderInsert(PaymentDTO po);
+	
+	public int paymentStateUpdate(PaymentDTO po);
 }

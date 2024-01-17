@@ -174,4 +174,26 @@ public class PaymentController {
 	    }
 	}
 	
+	@RequestMapping(value = "userPaymentCancle")
+	public void userPaymentCancle(@RequestBody PaymentDTO po, HttpSession session) throws Exception {
+		
+		Integer mbNo = (Integer) session.getAttribute("mbNo");
+		System.out.println("mbNo : " + mbNo);
+		
+		String token = ps.getToken();
+        System.out.println("토큰 : " + token);
+        
+        String amount = ps.paymentInfo(po.getPmNo(), token);
+        
+        System.out.println("amount : " + amount);
+        
+        ps.payMentCancle(token, po.getOdNo(), po.getPmNo(), amount, "결제 금액 오류", po);
+        
+        int value = ps.paymentStateUpdate(po);
+        int value2 = ps.paymentCancleInsert(po);
+	            
+        System.out.println("value : " + value);
+        System.out.println("value2 : " + value2);
+	            
+	}
 }

@@ -97,6 +97,14 @@ public class PaymentServiceImpl implements PaymentService {
 		return value + value2;
 	}
 	
+	@Override
+	public int paymentStateUpdate(PaymentDTO po) {
+		
+		int value = psm.paymentStateUpdate(po);
+		
+		return value;
+	}
+	
 	/* 토큰 생성 */
 	@Value("4176882764844470")
 	private String impKey;
