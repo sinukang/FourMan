@@ -33,8 +33,8 @@
 							<div style="padding: 25px 0px;">
 								<span style="font-size: 20px;">상품 금액</span>
 								<span style="float: right;">
-									<span style="text-decoration: line-through; font-size: 17px; color: rgb(207, 207, 207);">55,000원</span>
-									<span style="font-size: 20px; font-weight: bold;">20,000원</span>
+<!-- 									<span style="text-decoration: line-through; font-size: 17px; color: rgb(207, 207, 207);">55,000원</span> -->
+									<span style="font-size: 20px; font-weight: bold;">${tio.tnTicket}원</span>
 								</span>
 							</div>
 							<div style="margin-top: 0px;">
@@ -316,8 +316,9 @@
 	                    type: 'POST',
 	                    contentType: 'application/json',
 	                    data: JSON.stringify(result),
-	                    success: function (res) {
-	                        console.log(res);
+	                    success: function (path) {
+	                        console.log(path);
+	                        window.location.href = path;
 	                    },
 	                    error: function (err) {
 	                        console.log(err);
