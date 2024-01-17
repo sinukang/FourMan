@@ -46,9 +46,23 @@ public class TrainerController {
 				scri.setMbMapY((double)session.getAttribute("mbMapY"));
 				scri.setMbMapX((double)session.getAttribute("mbMapX"));
 				uAddr = ts.loginUserAddr((int)session.getAttribute("mbNo"));
-				uAddrReturn = uAddr.split(" ");
-				uAddr = uAddrReturn[2];	//예시 
+				uAddrReturn = uAddr.split("/");
+				uAddr = uAddrReturn[1];	//예시 
 			}
+		}
+		
+		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
+		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
+		
+		if(request.getParameter("selectMapY") != null && request.getParameter("selectMapY") != "") {
+			if(request.getParameter("selectMapX") != null && request.getParameter("selectMapX") != "") {
+				
+//				scri.setMbMapY(Double.parseDouble(request.getParameter("selectMapY")));
+//				scri.setMbMapX(Double.parseDouble(request.getParameter("selectMapX")));
+				System.out.println("request.getParameter(selectMapY) : " + request.getParameter("selectMapY"));
+				System.out.println("request.getParameter(selectMapX) : " + request.getParameter("selectMapX"));
+			}
+			
 		}
 		
 		//검색 키워드가 없거나 공백이면 null할당

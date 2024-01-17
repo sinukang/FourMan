@@ -29,32 +29,32 @@
 					
 				</div>
 				
+				<!-- 검색 필터 부분 -->
 				<form id="filter_Form" action="${pageContext.request.contextPath}/findTrainer.do" method="get">
 					<div class="searchBar">
-							<input type="text" id="search_keyword" name="keyword" class="bar" value="${pm.scri.keyword}" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="30">
-							<div class="search_btn">
-								<img src="${pageContext.request.contextPath}/resources/img/search.svg">
-							</div>
+						<input type="text" id="search_keyword" name="keyword" class="bar" value="${pm.scri.keyword}" placeholder="지역, 센터, 선생님 검색" autocomplete="off" maxlength="30">
+						<div class="search_btn">
+							<img src="${pageContext.request.contextPath}/resources/img/search.svg">
+						</div>
 					</div>
-				
-			
 					<div class="searchBar_option">
 						<div class="flex">
 							<div>
 								<img src="${pageContext.request.contextPath}/resources/img//markericon.png" width="17px" height="25px">
 								<span>
 									<span id="address-1" class="search_key">
-										<input type="hidden" id="zip-code" placeholder="우편번호">
-										<!-- <input type="hidden" id="address-1" placeholder="도로명주소" style="width: 500px"> -->
 										<c:choose>
 											<c:when test="${uAddr ne null}">
 												${uAddr}
 											</c:when>
 											<c:otherwise>
-												금암동
+												전라북도 전주시 덕진구 백제대로 572
 											</c:otherwise>
 										</c:choose> 
 									</span> 검색 결과
+									<input type="hidden" id="zip-code" placeholder="우편번호">
+									<input type="hidden" id="selectMapY" name="selectMapY" value="">
+									<input type="hidden" id="selectMapX" name="selectMapX" value="">
 								</span>
 							</div>
 						</div>
@@ -98,8 +98,9 @@
 							</div>
 						</div>
 					</div>
-					
 				</form>
+				<!-- 검색 필터 부분 -->
+				
 			</div>
 			
 			<!-- 검색된 결과 리스트 영역 -->
@@ -196,8 +197,10 @@
 		
 		
 		<div class="mapWrap">
-			<div style="width:100%; height:100%;" id="map">
-				
+			<div style="width:100%; height:100%;" id="map"></div>
+			<div class="hAddr">
+				<span class="title">지도중심기준 행정동 주소정보</span>
+				<span id="centerAddr"></span>
 			</div>
 		</div>
 		
@@ -205,6 +208,18 @@
 	
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/include/footer.jsp"/>
+	
+	<c:choose>
+		<c:when test="${mbNo ne null}">
+			${mbMapX}
+		</c:when>
+		<c:when test="${mbMapY ne null && mbNo ne null}">
+			${mbMapY}
+		</c:when>
+		<c:otherwise>
+			asd
+		</c:otherwise>
+	</c:choose>
 	
 <script>
 
@@ -301,6 +316,14 @@
 		
 	});	
 	
+
+
+	
+ 	$(".searchBar_option").on("click", function(e){
+ 		e.preventDefault();
+ 		execDaumPostcode();
+	});
+	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
 	mapOption = {
 		<c:choose>
@@ -315,24 +338,7 @@
 	};  
 	
 	//지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption);
-	
-	function setDraggable(draggable){
-		map.setDraggable(draggable);
-	}
-	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-	
-	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	
-	function relayout() {    
-	    
-	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-	    map.relayout();
-	}
+	var map = new kakao.maps.Map(mapContainer, mapOption);	
 	
 	var positions = [
 		{
@@ -341,15 +347,12 @@
 		},
 		<c:forEach items='${tio_alist}' var='tio' varStatus="tioIDX">
 			{
-				title: '${tio.mbName}',
+				title: '${tio.ctName}',
 				latlng: new kakao.maps.LatLng(${tio.mbMapY}, ${tio.mbMapX}) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
 			}<c:if test='${tioIDX.last eq false}'>,</c:if>
 		</c:forEach>
 	];
-	
-	var bounds = new kakao.maps.LatLngBounds();
-	var overlayArray = [];	//마커 클릭 시 띄울 오버레이들 담는 배열
-	
+
 	for (var i = 0; i < positions.length; i++) {	//데이터 개수만큼 반복문 돌면서 마커, 오버레이 생성
 		var data = positions[i];
 
@@ -359,56 +362,107 @@
 	function displayMarker(data,e){
 
 	  	var content ='<div>';
-		content+='<div class="marker_wrap">';
-		content+=data.title;
-		content+='</div>';
-		content+='<div class="marker_pin">';
-		content+='</div">';
-		content+='</div">';
+		content += '<div class="marker_wrap">';
+		content += data.title;
+		content += '</div>';
+		content += '<div class="marker_pin">';
+		content += '</div">';
+		content += '</div">';
 			
 		var marker = new kakao.maps.CustomOverlay({	//좌표값을 지정해 마커 생성
 			map : map,
 			position : data.latlng,
-		    content: content
+			content: content
 		});		
-	}
-
+	}	
 	
- 	$(".searchBar_option").on("click", function(e){
- 		e.preventDefault();
- 		execDaumPostcode();
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();	
 	
-	});
+	var marker = new kakao.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
+	var infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다 	
 	
 	var markers = [];
-	
+	var infoWindowArr = [];
 	function removeMarkers(){
 		for (var i = 0; i < markers.length; i++) {
 			markers[i].setMap(null);
+			infoWindowArr[i].close();
 		}
 		markers = [];
+		infoWindowArr = [];
 	}
 	
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-		
-		// 클릭한 위치에 마커를 표시합니다 
-		addMarker(mouseEvent.latLng);
-	});	
+	// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 	
-	function addMarker(position) {
-		
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 		removeMarkers();
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-			position: position
+		searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+				detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+				var content = '<div class="bAddr">' +
+							'<span class="title">법정동 주소정보</span>' + 
+								detailAddr + 
+							'</div>';
+				var address_1 = $('#address-1');
+				if(!result[0].road_address){
+					$(address_1).text(result[0].address.address_name);
+				}else{
+					$(address_1).text(result[0].road_address.address_name);
+				}
+				
+				$("#selectMapY").val(mouseEvent.latLng.Ma);	//Ma : 위도, La : 경도
+				$("#selectMapX").val(mouseEvent.latLng.La);
+				
+				// 마커를 클릭한 위치에 표시합니다 
+				marker.setPosition(mouseEvent.latLng);
+				marker.setMap(map);
+				
+				markers.push(marker);
+				
+				// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+				infowindow.setContent(content);
+				infowindow.open(map, marker);
+				
+				infoWindowArr.push(infowindow);
+				
+				$("#filter_Form").submit();
+			}
 		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-// 		map.setCenter(position);
-		// 생성된 마커를 배열에 추가합니다
-		markers.push(marker);
-		console.log(position);
+		
+		
+	});
+	
+	// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+	kakao.maps.event.addListener(map, 'idle', function() {
+		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	});
+	
+	function searchAddrFromCoords(coords, callback) {
+		// 좌표로 행정동 주소 정보를 요청합니다
+		geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+	}
+	
+	function searchDetailAddrFromCoords(coords, callback) {
+		// 좌표로 법정동 상세 주소 정보를 요청합니다
+		geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	}
+	
+	// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+	function displayCenterInfo(result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			var infoDiv = document.getElementById('centerAddr');
+			
+			for(var i = 0; i < result.length; i++) {
+				// 행정동의 region_type 값은 'H' 이므로
+				if (result[i].region_type === 'H') {
+					infoDiv.innerHTML = result[i].address_name;
+					break;
+				}
+			}
+		}
 	}
 	
 	//카카오 다음 우편번호 찾기
@@ -416,7 +470,6 @@
 		new daum.Postcode({
 			oncomplete: function(data) {
 				removeMarkers();
-				
 				document.getElementById( 'zip-code' ).value = data.zonecode;
 				$('#address-1').text(data.address);
 				
@@ -429,8 +482,10 @@
 						
 						// 검색된 좌표를 변수에 저장합니다
 						var coords = new kakao.maps.LatLng(result[0].y, result[0].x);+
-						
-						console.log(coords);
+						$("#selectMapY").val(result[0].y);
+						$("#selectMapX").val(result[0].x);
+						console.log($("#selectMapY").val());
+						console.log($("#selectMapX").val());
 		
 						// 결과값으로 받은 위치를 마커로 표시합니다
 						var marker = new kakao.maps.Marker({
@@ -438,6 +493,7 @@
 							position: coords
 						});
 						markers.push(marker);
+						infoWindowArr.push(infowindow);
 		
 						// 검색된 좌표로 지도 중심을 이동시킵니다
 						map.setCenter(coords);
@@ -448,12 +504,30 @@
 						alert("검색 실패! 예시 좌표 " + exampleCoords.toString() + " 로 이동합니다.");
 						map.setCenter(exampleCoords);
 					}
+					
+					$("#filter_Form").submit();
 				});
 			}
 		}).open();
 	}	
 	
+	function setDraggable(draggable){
+		map.setDraggable(draggable);
+	}
+	
+	var mapTypeControl = new kakao.maps.MapTypeControl();	//지도, 스카이뷰 버튼 추가
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	
+	var zoomControl = new kakao.maps.ZoomControl();		//확대, 축소 UI 추가
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);	
 	
 </script>
 </body>
+<style>
+.map_wrap {position:relative;width:100%;height:350px;}
+.title {font-weight:bold;display:block;}
+.hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+#centerAddr {display:block;margin-top:2px;font-weight: normal;}
+.bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+</style>
 </html>

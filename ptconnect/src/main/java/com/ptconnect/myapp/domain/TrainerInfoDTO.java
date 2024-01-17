@@ -39,6 +39,8 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	private int reviewCnt; //리뷰 개수 임시 추가
 	private float reviewRate;
 	private double distance;
+	private double selectMapY;
+	private double selectMapX;
 	
 	public int getReviewCnt() {
 		return reviewCnt;
@@ -57,6 +59,27 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	}
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+	public double getSelectMapY() {
+		return selectMapY;
+	}
+	public void setSelectMapY(double selectMapY) {
+		this.selectMapY = selectMapY;
+	}
+	public double getSelectMapX() {
+		return selectMapX;
+	}
+	public void setSelectMapX(double selectMapX) {
+		this.selectMapX = selectMapX;
+	}	
+	
+	
+	
+	public String getPriceInfo() {
+		return priceInfo;
+	}
+	public void setPriceInfo(String priceInfo) {
+		this.priceInfo = priceInfo;
 	}
 	public int getPgNo() {
 		return pgNo;

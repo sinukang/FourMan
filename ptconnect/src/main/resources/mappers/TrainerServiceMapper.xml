@@ -9,6 +9,8 @@
 		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
 		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT #{mbMapY}) AS selectMapY
+		, (SELECT #{mbMapX}) AS selectMapX
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage
@@ -18,7 +20,6 @@
 			</when>
 			<otherwise>
 				, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
-				, (SELECT u.mbAddr FROM member u WHERE u.mbNo = #{mbNo}) AS mbAddr
 			</otherwise>
 		</choose>
 		FROM member m

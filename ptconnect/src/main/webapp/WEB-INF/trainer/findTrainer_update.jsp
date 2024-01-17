@@ -443,22 +443,6 @@
 		}
 	}
 	
-// 	function addMarker(position) {
-		
-// 		removeMarkers();
-// 		// 마커를 생성합니다
-// 		var marker = new kakao.maps.Marker({
-// 			position: position
-// 		});
-
-// 		// 마커가 지도 위에 표시되도록 설정합니다
-// 		marker.setMap(map);
-// // 		map.setCenter(position);
-// 		// 생성된 마커를 배열에 추가합니다
-// 		markers.push(marker);
-// 		console.log(position);
-// 	}
-	
 	//카카오 다음 우편번호 찾기
 	function execDaumPostcode() {
 		new daum.Postcode({
