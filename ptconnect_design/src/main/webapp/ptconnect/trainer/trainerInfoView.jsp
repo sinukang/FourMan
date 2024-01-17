@@ -604,7 +604,7 @@ function requestPay() {
     IMP.request_pay({
         pg: "html5_inicis",       // KG이니시스 pg 파라미터 값
         pay_method: "card",       // 결제 방법
-        merchant_uid: "202401171234567890", // 주문번호
+        merchant_uid: "createOrderNum()", // 주문번호
         name: "안녕하세요",          // 상품 명
         amount: 100,          // 주문 금액
         buyer_email: "gildong@gmail.com",
