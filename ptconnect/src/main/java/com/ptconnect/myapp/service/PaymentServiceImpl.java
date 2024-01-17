@@ -81,8 +81,16 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Override
 	public int nonUserOrderInsert(PaymentDTO po) {
+		int value = 0;
 		
-		int value = psm.nonUserOrderInsert(po);
+		int value1 = psm.nonUserOrderInsert(po);
+		
+		if(value1 > 0) {
+			
+			int value2 = psm.orderProductInsert(po);
+			
+			value = value1 + value2;
+		}
 		
 		return value;
 	}
