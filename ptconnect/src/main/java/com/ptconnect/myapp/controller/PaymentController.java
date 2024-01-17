@@ -175,7 +175,7 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "userPaymentCancle")
-	public void userPaymentCancle(@RequestBody PaymentDTO po, HttpSession session) throws Exception {
+	public String userPaymentCancle(@RequestBody PaymentDTO po, HttpSession session) throws Exception {
 		
 		Integer mbNo = (Integer) session.getAttribute("mbNo");
 		System.out.println("mbNo : " + mbNo);
@@ -194,6 +194,7 @@ public class PaymentController {
 	            
         System.out.println("value : " + value);
         System.out.println("value2 : " + value2);
-	            
+	    
+        return "redirect:/userOrderList";
 	}
 }

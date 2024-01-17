@@ -136,15 +136,18 @@ function paymentCancle(index) {
                     data: JSON.stringify(result),
                     success: function (res) {
                         console.log(res);
-                        location.reload();
                     },
-                    error: function () {
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                        console.log(status);
+                        console.log(error);
                         alert("error");
                     }
                 });
 
                 var msg = '결제가 취소되었습니다.';
                 alert(msg);
+                window.location.href = window.location.href;
             } else {
                 var msg = '취소되었습니다.';
                 alert(msg);
