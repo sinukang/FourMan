@@ -53,8 +53,8 @@
 										</c:choose> 
 									</span> 검색 결과
 									<input type="hidden" id="zip-code" placeholder="우편번호">
-									<input type="hidden" id="selectMapY" name="selectMapY" value="">
-									<input type="hidden" id="selectMapX" name="selectMapX" value="">
+									<input type="hidden" id="selectMapY" name="selectMapY" value="${tio_alist[0].selectMapY}">
+									<input type="hidden" id="selectMapX" name="selectMapX" value="${tio_alist[0].selectMapX}">
 								</span>
 							</div>
 						</div>
