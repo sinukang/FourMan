@@ -341,10 +341,13 @@ input::placeholder {
     width: calc(100% - 520px);
     height: calc(100vh - 84px);
 }
-
+.mapResize{
+	height: 1280px;
+}
 .marker_wrap{
+    color: #5865F2;
     background-color: white;
-    border: 1px solid rgb(255, 128, 0);
+    border: 1px solid #5865F2;
     border-radius: 4px;
     padding: 6px 10px;
     width: 100%;
@@ -355,7 +358,6 @@ input::placeholder {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: 500;
-    color: rgb(61, 69, 77);
 }
 
 .marker_pin{
@@ -367,7 +369,7 @@ input::placeholder {
     height: 0px;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 11px solid rgb(255, 128, 0);
+    border-top: 11px solid #5865F2;
 }
 .marker_pin::before{
     content: "";

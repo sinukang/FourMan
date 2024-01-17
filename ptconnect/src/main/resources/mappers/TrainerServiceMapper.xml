@@ -9,17 +9,35 @@
 		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
 		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
-		, (SELECT #{mbMapY}) AS selectMapY
-		, (SELECT #{mbMapX}) AS selectMapX
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
 		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage
 		<choose>
-			<when test="mbNo == 0 or mbNo == null">	<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
-				, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
+			<when test="mbNo == 0">
+				<choose>
+					<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+					<when test="mbMapY == 0.0">
+						, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</when>
+					<!-- 비 로그인 시 && 특정 좌표 클릭 시 해당 좌표 기준으로 반경 검색 -->
+					<otherwise>
+						, (SELECT #{mbMapY}) AS selectMapY
+						, (SELECT #{mbMapX}) AS selectMapX
+						, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</otherwise>
+				</choose>
 			</when>
 			<otherwise>
-				, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+				<choose>
+					<when test="mbMapY == 0.0">
+						, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</when>
+					<otherwise>
+						, (SELECT #{mbMapY}) AS selectMapY
+						, (SELECT #{mbMapX}) AS selectMapX
+						, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</otherwise>
+				</choose>
 			</otherwise>
 		</choose>
 		FROM member m
@@ -28,16 +46,36 @@
 		<!-- LEFT JOIN review r ON t.tnNo = r.tnNo AND r.rvDelYN = 'N' -->
 		WHERE m.mbDelYN = 'N'
 		<choose>
-			<when test="mbNo == 0 or mbNo == null">
-				<![CDATA[
-				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
-				]]>
+			<when test="mbNo == 0">
+				<choose>
+					<when test="mbMapY == 0.0">
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						]]>
+					</when>
+					<!-- 지도에서 주소검색 or 좌표찍을 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+					<otherwise>
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						]]>
+					</otherwise>
+				</choose>
 			</when>
 			<otherwise>
-				<![CDATA[
-				AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
-				AND NOT m.mbNo = #{mbNo}
-				]]>
+				<choose>
+					<when test="mbMapY == 0.0">
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						AND NOT m.mbNo = #{mbNo}
+						]]>		
+					</when>
+					<otherwise>
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						AND NOT m.mbNo = #{mbNo}
+						]]>		
+					</otherwise>
+				</choose>
 			</otherwise>
 		</choose>
 		<include refid="trainerSearch"/>

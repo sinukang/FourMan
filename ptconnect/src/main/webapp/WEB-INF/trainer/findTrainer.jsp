@@ -45,16 +45,31 @@
 									<span id="address-1" class="search_key">
 										<c:choose>
 											<c:when test="${uAddr ne null}">
-												${uAddr}
+												<c:choose>
+													<c:when test="${tio_alist[0].selectMapY eq 0.0}">
+														${uAddr}
+													</c:when>
+													<c:otherwise>
+														${selectedAddr}
+													</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:otherwise>
-												전라북도 전주시 덕진구 백제대로 572
+												<c:choose>
+													<c:when test="${tio_alist[0].selectMapY eq 0.0}">
+														전라북도 전주시 덕진구 백제대로 572
+													</c:when>
+													<c:otherwise>
+														${selectedAddr}
+													</c:otherwise>
+												</c:choose>
 											</c:otherwise>
 										</c:choose> 
 									</span> 검색 결과
 									<input type="hidden" id="zip-code" placeholder="우편번호">
 									<input type="hidden" id="selectMapY" name="selectMapY" value="${tio_alist[0].selectMapY}">
 									<input type="hidden" id="selectMapX" name="selectMapX" value="${tio_alist[0].selectMapX}">
+									<input type="hidden" id="selectedAddr" name="selectedAddr" value="${selectedAddr}">
 								</span>
 							</div>
 						</div>
@@ -237,12 +252,14 @@
 	        var filterOption = document.querySelector(".filter_option");
 	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
 	        $(".searchResultWrap").toggleClass("filter_height_reCalc");
+// 	        $(".mapWrap").toggleClass("mapResize");
 	    });
 	    
 	    returnButton.addEventListener("click", function() {
 	        var filterOption = document.querySelector(".filter_option");
 	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
 	        $(".searchResultWrap").toggleClass("filter_height_reCalc");
+// 	        $(".mapWrap").toggleClass("mapResize");
 	        
 	    });
 	});
@@ -324,16 +341,37 @@
  		execDaumPostcode();
 	});
 	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div var geocoder = new kakao.maps.services.Geocoder();
+ 	var testCenter = [2];
+	<c:choose>
+		<c:when test="${mbNo eq null}">
+			<c:choose>
+				<c:when test='${tio_alist[0].selectMapY eq 0.0}'>
+					testCenter[0] = 35.84026098258203;
+					testCenter[1] = 127.1324143491829;
+				</c:when>
+				<c:otherwise>
+					testCenter[0] = ${tio_alist[0].selectMapY};
+					testCenter[1] = ${tio_alist[0].selectMapX};
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			<c:choose>
+				<c:when test='${tio_alist[0].selectMapY eq 0.0}'>
+					testCenter[0] = ${mbMapY};
+					testCenter[1] = ${mbMapX};
+				</c:when>
+				<c:otherwise>
+					testCenter[0] = ${tio_alist[0].selectMapY};
+					testCenter[1] = ${tio_alist[0].selectMapX};				
+				</c:otherwise>
+			</c:choose>		
+		</c:otherwise>
+	</c:choose>
+	
+	var mapContainer = document.getElementById('map'),
 	mapOption = {
-		<c:choose>
-			<c:when test="${mbNo ne null}">
-				center: new kakao.maps.LatLng(${mbMapY}, ${mbMapX}), // 지도의 중심좌표
-			</c:when>
-			<c:otherwise>
-				center: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829), // 지도의 중심좌표 이젠IT학원 35.84026098258203, 127.1324143491829
-			</c:otherwise>
-		</c:choose>	
+		center: new kakao.maps.LatLng(testCenter[0], testCenter[1]),
 		level: 3 // 지도의 확대 레벨
 	};  
 	
@@ -393,6 +431,26 @@
 		infoWindowArr = [];
 	}
 	
+	var markerPosition  =	<c:choose>
+								<c:when test="${tio_alist[0].selectMapY eq 0.0}">
+									new kakao.maps.LatLng(35.84026098258203, 127.1324143491829);
+								</c:when>
+								<c:otherwise>
+									new kakao.maps.LatLng(${tio_alist[0].selectMapY}, ${tio_alist[0].selectMapX});
+								</c:otherwise>
+							</c:choose>
+							
+	function firstMarker(){
+	
+		var marker = new kakao.maps.Marker({
+		map: map,
+		position: markerPosition
+		});
+		markers.push(marker);
+		infoWindowArr.push(infowindow);
+	}
+	firstMarker();	
+	
 	// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 	
@@ -409,8 +467,10 @@
 				var address_1 = $('#address-1');
 				if(!result[0].road_address){
 					$(address_1).text(result[0].address.address_name);
+					$("#selectedAddr").val(result[0].address.address_name);
 				}else{
 					$(address_1).text(result[0].road_address.address_name);
+					$("#selectedAddr").val(result[0].address.address_name);
 				}
 				
 				$("#selectMapY").val(mouseEvent.latLng.Ma);	//Ma : 위도, La : 경도
@@ -472,6 +532,7 @@
 				removeMarkers();
 				document.getElementById( 'zip-code' ).value = data.zonecode;
 				$('#address-1').text(data.address);
+				$("#selectedAddr").val(data.address);
 				
 				// 주소-좌표 변환 객체를 생성합니다
 				var geocoder = new kakao.maps.services.Geocoder();

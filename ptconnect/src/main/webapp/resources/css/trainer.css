@@ -734,7 +734,7 @@
     height: 0px;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 11.5px solid white;
+    border-top: 11.5px solid #5865F2;
 }
 .marker_pin::after{
     content: "";
