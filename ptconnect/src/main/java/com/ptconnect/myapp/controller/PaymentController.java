@@ -89,10 +89,12 @@ public class PaymentController {
         System.out.println("amount : " + amount);
         System.out.println("odPrice : " + Integer.toString(po.getOdPrice()));
 	    
-	    if (session.getAttribute("mbNo") != null) {
+//        String path = "";
+        
+	    if (session.getAttribute("mbNo") != null) {	// 회원
 	        
 	        
-	        if (!Integer.toString(po.getOdPrice()).equals(amount)) {
+	        if (!Integer.toString(po.getOdPrice()).equals(amount)) {	// 결제금액 불일치
 	            // 결제 취소
 	        	po.setMbNo(mbNo);
 	        	
@@ -106,7 +108,9 @@ public class PaymentController {
 	            System.out.println("value2 : " + value2);
 	            System.out.println("value3 : " + value3);
 	            
-	        } else {
+//	            path = "redirect:/findtrainer";
+	            
+	        } else {	// 결제금액 일치 정상 결제 진행
 	            
 	        	po.setMbNo(mbNo);
 	        	
@@ -127,12 +131,14 @@ public class PaymentController {
 			            		
 			        int value5 = ps.paymentCancleInsert(po);
 			        System.out.println("결제취소 : " + value5);
-			    }    
+			    }
+			    
+//			    path = "redirect:/userOrderList";
 	        }
 	        
-	    } else if(session.getAttribute("mbNo") == null) {
+	    } else if(session.getAttribute("mbNo") == null) {	// 비회원
 	    	
-	        if (!Integer.toString(po.getOdPrice()).equals(amount)) {
+	        if (!Integer.toString(po.getOdPrice()).equals(amount)) {	// 결제금액 불일치
 	        	
 	        	ps.payMentCancle(token, po.getOdNo(), po.getPmNo(), amount, "결제 금액 오류", po);
 	        	
@@ -148,8 +154,10 @@ public class PaymentController {
 			    		
 			    int value4 = ps.paymentCancleInsert(po);
 	            System.out.println("주문취소 : " + value4);
+	            
+//	            path = "redirect:/findtrainer";
 		    	
-	    	}else {
+	    	}else {	//결제금액 일치 정상결제 진행
 	    		int value = ps.nonmember(po);
 		    	System.out.println("비회원정보 : " + value);
 		    	System.out.println("nmNo : " + po.getNmNo());
@@ -169,13 +177,16 @@ public class PaymentController {
             	
 			    }
 			    
+//			    path = "redirect:/findtrainer";
+			    
 	    	}
 	        
 	    }
+//		return path;
 	}
 	
 	@RequestMapping(value = "userPaymentCancle")
-	public String userPaymentCancle(@RequestBody PaymentDTO po, HttpSession session) throws Exception {
+	public void userPaymentCancle(@RequestBody PaymentDTO po, HttpSession session) throws Exception {
 		
 		Integer mbNo = (Integer) session.getAttribute("mbNo");
 		System.out.println("mbNo : " + mbNo);
@@ -195,6 +206,5 @@ public class PaymentController {
         System.out.println("value : " + value);
         System.out.println("value2 : " + value2);
 	    
-        return "redirect:/userOrderList";
 	}
 }

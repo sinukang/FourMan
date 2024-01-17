@@ -316,9 +316,8 @@
 	                    type: 'POST',
 	                    contentType: 'application/json',
 	                    data: JSON.stringify(result),
-	                    success: function (path) {
-	                        console.log(path);
-	                        window.location.href = path;
+	                    success: function (res) {
+	                        console.log(res);
 	                    },
 	                    error: function (err) {
 	                        console.log(err);
@@ -328,6 +327,16 @@
 	                // 결제 성공 및 데이터 전송 후에만 알림 표시
 	                var msg = '결제가 완료되었습니다.';
 	                alert(msg);
+// 	                location.href = window.location.href;
+
+					var mbNo = '${mbNo}';
+					console.log(mbNo);
+					
+	                if(mbNo != ''){
+	                	location.href = 'userOrderList';
+	                } else {
+	                	window.location.href = window.location.href;
+	                }
 	                
 	            }
 	        });
