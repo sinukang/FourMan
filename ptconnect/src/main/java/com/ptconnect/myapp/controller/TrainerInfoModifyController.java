@@ -28,15 +28,6 @@ public class TrainerInfoModifyController {
 	@RequestMapping(value = "trainerInfoModify", method = RequestMethod.GET)
 	public String trainerInfoModify(HttpSession session) throws Exception {
 
-		int mbNo = 1; 
-		
-		 System.out.println("mbNo : " + mbNo);
-		 int tnNo = 71;
-		System.out.println("tnNo : " + tnNo);
-		 
-session.setAttribute("tnNo", tnNo);
-		 session.setAttribute("mbNo", mbNo);
-
 		return "trainerMypage/trainerInfoModify";
 	}
 	

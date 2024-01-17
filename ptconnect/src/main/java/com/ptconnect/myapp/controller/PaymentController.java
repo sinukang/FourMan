@@ -187,7 +187,7 @@ public class PaymentController {
         
         System.out.println("amount : " + amount);
         
-        ps.payMentCancle(token, po.getOdNo(), po.getPmNo(), amount, "결제 금액 오류", po);
+        ps.payMentCancle(token, po.getOdNo(), po.getPmNo(), amount, "회원 결제 취소", po);
         
         int value = ps.paymentStateUpdate(po);
         int value2 = ps.paymentCancleInsert(po);

@@ -26,13 +26,6 @@ public class TrainerInfoWriteController {
 	@RequestMapping(value = "trainerInfoWrite", method = RequestMethod.GET)
 	public String trainerInfoWrite(HttpSession session) {
 		
-		int mbNo = 1; 
-		
-		 System.out.println("mbNo : " + mbNo);
-		 
-		 
-		 session.setAttribute("mbNo", mbNo);
-		
 		return "trainerMypage/trainerInfoWrite";
 	}
 	
