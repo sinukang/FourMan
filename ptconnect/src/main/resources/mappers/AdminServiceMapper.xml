@@ -17,12 +17,26 @@
 		select * from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
 		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC limit #{page},#{perPageNum}
 	</select>
+	<select id="trainerRegisterTotalCount" resultType="int">
+		select COUNT(*)
+		from trainerInfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'R'
+		order by t.tnNo DESC
+	</select>
+	<select id="trainerRegisterList" parameterType="scri" resultType="tio">
+		select *
+		from trainerInfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'R'
+		order by t.tnNo DESC limit #{page},#{perPageNum}
+	</select>
 	<select id="registredProductTotalCount" resultType="int">
 		select Count(*) 
 		from trainerinfo t 
 		join member m on t.mbNo=m.mbNo 
 		left join (select * from centerinfo where ctDelYN='N') c on t.ctNo = c.ctNo
-		where t.tnDelYN = 'N' and t.ctNo is not null and m.mbDelYN='N' and c.ctDelYN ='N'
+		where t.tnDelYN = 'N' and m.mbDelYN='N' 
 		order by t.tnNo DESC
 	</select>
 	<select id="registredProductList" parameterType="scri" resultType="tio">
@@ -30,12 +44,23 @@
 		from trainerinfo t 
 		join member m on t.mbNo=m.mbNo 
 		left join (select * from centerinfo where ctDelYN='N') c on t.ctNo = c.ctNo
-		where t.tnDelYN = 'N' and t.ctNo is not null and m.mbDelYN='N' and c.ctDelYN ='N'
+		where t.tnDelYN = 'N' and m.mbDelYN='N'
 		order by t.tnNo DESC limit #{page},#{perPageNum}
 	</select>
 	<update id="centerRegist" parameterType="int">
 		update centerInfo set ctDelYN = 'N', ctDateM = now()
 		where ctNo = #{ctNo}
+	</update>
+	<update id="trainerRegist" parameterType="int">
+		update trainerInfo set tnDelYN = 'N', tnDateM = now()
+		where tnNo = #{tnNo}
+	</update>
+	<select id="otherTrainerSelect" parameterType="int" resultType="int">
+		select COUNT(*) from trainerInfo where mbNo = #{mbNo} and tnDelYN = 'R'
+	</select>
+	<update id="otherTrainerUnregist" parameterType="tio">
+		update trainerInfo set tnDelYN = 'Y', tnDateM = now()
+		where tnNo not in(#{tnNo}) and mbNo = #{mbNo};
 	</update>
 	<select id="tradedProductTotalCount" resultType="int">
 		select COUNT(*) 

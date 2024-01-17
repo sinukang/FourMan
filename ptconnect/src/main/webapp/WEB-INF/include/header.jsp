@@ -81,6 +81,24 @@
 						</div>
 					</div>	
 					</c:when>
+					<c:when test="${not empty nmNo}">
+					<div style="position:relative; display:inline-flex; vertical-align:middle;">
+						<div>
+							<span class="name_button">
+								<span class="name">${nmName}</span>님! 반갑습니다.
+							</span>
+						</div>
+						<div class="drop_down_menu">
+							<a href="nonMemberMypage">
+								<button class="drop_down_item">주문목록</button>
+							</a>
+							<div class="drop_down_divider"></div>
+							<a href="logout">
+								<button class="drop_down_item">로그아웃</button>
+							</a>
+						</div>
+					</div>	
+					</c:when>
 					<c:otherwise>
 						<a href="joinUser">회원가입 </a> / <a href="login"> 로그인</a>
 					</c:otherwise>

@@ -14,7 +14,10 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<%
+session.setAttribute("tnNo","111");
 
+%>
 </head>
 <body>
 	<div>
@@ -580,6 +583,88 @@
 </script>
 <script src="${pageContext.request.contextPath}/source/js/reviewPhotoModal.js">
 </script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script>
 
+var IMP = window.IMP;
+IMP.init("imp61344517");
+
+function requestPay() {
+    var opIntroValue = 'ptconnect_design에서 작성되었습니다.';
+    var odPriceValue = 100; // 주문 금액
+    var amountValue = 100; // 최종 주문 금액 정수로
+    var usePointInputValue = 0;	// 사용 포인트
+    var accumulatedPoints = 2;	// 최종 적립 포인트
+    var nmNameValue = "ㅎㅇㅇ";
+    var nmPhoneValue = "01012123434";
+    var nmPwdValue = "1234";
+    
+    var realPriceValue = 100;	// 포인트 사용 후 최종 결제 금액
+    
+    IMP.request_pay({
+        pg: "html5_inicis",       // KG이니시스 pg 파라미터 값
+        pay_method: "card",       // 결제 방법
+        merchant_uid: "202401171234567890", // 주문번호
+        name: "안녕하세요",          // 상품 명
+        amount: 100,          // 주문 금액
+        buyer_email: "gildong@gmail.com",
+        buyer_name: "반갑습니다",
+        buyer_tel: "010-4242-4242",
+    },
+    function (rsp) { // callback
+        console.log(rsp);
+
+        if (!rsp.success) {
+            // 결제가 실패한 경우
+            var msg = '결제 실패';
+            msg += '\n에러내용 : ' + rsp.error_msg;
+            alert(msg);
+            return;
+        }
+            // 결제 성공 및 금액 일치하는 경우에만 서버로 데이터 전송
+            var result = {
+                "pmNo": rsp.imp_uid, // 결제번호
+                "portOneNo": rsp.merchant_uid, // 결제번호
+                "odNo": rsp.merchant_uid, // 주문번호
+                "pgCorp": rsp.pg_provider, // pg사 구분코드
+                "pmMethod": rsp.pay_method, // 결제수단
+                "pmCard": rsp.card_name, // 결제 카드
+                "pmPrice": rsp.paid_amount, // 결제금액
+                "pmDate": rsp.paid_at, // 결제일
+                "pmState": rsp.status,  // 결제상태
+                "opIntro": opIntroValue, // 간단상담내용
+                "odPrice": realPriceValue,	// 주문금액
+                "ptPoint": accumulatedPoints, // 적립 포인트
+                "ptContent": '상품구매',	// 적립 내용
+                "usePoint": usePointInputValue,	// 사용포인트
+                "useContent": '상품구매',	// 포인트 사용내용
+                "nmName" : nmNameValue,
+                "nmPhone" : nmPhoneValue,
+                "nmPwd" : nmPwdValue
+            };
+
+            console.log(result);
+
+            $.ajax({
+                url: 'http://192.168.0.48:8080/ptconnect/payment',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(result),
+                success: function (path) {
+                    console.log(path);
+                    window.location.href = path;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            }); //ajax
+
+            // 결제 성공 및 데이터 전송 후에만 알림 표시
+            var msg = '결제가 완료되었습니다.';
+            alert(msg);
+           
+    });
+}
+</script>
 </body>
 </html>

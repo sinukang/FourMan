@@ -31,6 +31,15 @@ public class AdminServiceImpl implements AdminService{
 		return ao;
 	}
 	@Override
+	public ArrayList<TrainerInfoDTO> trainerRegisterList(SearchCriteria scri) {
+		int value = (scri.getPage()-1)*scri.getPerPageNum();
+		scri.setPage(value);
+		ArrayList<TrainerInfoDTO> tList = asm.trainerRegisterList(scri);
+		
+		
+		return tList;
+	}
+	@Override
 	public ArrayList<CenterInfoDTO> centerRegisterList(SearchCriteria scri) {
 		int value = (scri.getPage()-1)*scri.getPerPageNum();
 		scri.setPage(value);
@@ -47,14 +56,6 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return oList;
-	}
-	@Override
-	public int centerRegisterTotalCount() {
-		
-		int value = asm.centerRegisterTotalCount();
-		
-		
-		return value;
 	}
 	@Override
 	public ArrayList<TrainerInfoDTO> registredProductList(SearchCriteria scri) {
@@ -74,6 +75,22 @@ public class AdminServiceImpl implements AdminService{
 		return value;
 	}
 	@Override
+	public int trainerRegisterTotalCount() {
+		
+		int value = asm.trainerRegisterTotalCount();
+		
+		
+		return value;
+	}
+	@Override
+	public int centerRegisterTotalCount() {
+		
+		int value = asm.centerRegisterTotalCount();
+		
+		
+		return value;
+	}
+	@Override
 	public int tradedProductTotalCount() {
 		
 		int value = asm.tradedProductTotalCount();
@@ -88,6 +105,20 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return value;
+	}
+	@Override
+	public int trainerRegist(TrainerInfoDTO tio) {
+
+		int value = asm.trainerRegist(tio.getTnNo());
+		int value2 = 0;
+		if(asm.otherTrainerSelect(tio.getMbNo()) > 1) {
+			value2 = asm.otherTrainerUnregist(tio);
+		}else {
+			value = value + 1;			
+		}
+		
+		
+		return value+value2;
 	}
 	@Override
 	public PaymentDTO tradedProductDetail(String odNo) {

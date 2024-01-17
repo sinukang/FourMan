@@ -256,28 +256,28 @@
                             		<tr>
                             			<th>승인번호</th>
                             			<th>트레이너 이름</th>
-                            			<th>소속 센터</th>
+<!--                             			<th>소속 센터</th> -->
                             			<th>이메일</th>
-                            			<th>생년월일</th>
-                            			<th>가입일</th>
+                            			<th>전화번호</th>
+                            			<th>생성일</th>
                             			<th>승인여부</th>
                             		</tr>
-                            		<c:forEach var="i" begin="0" end="9" step="1">
+                            		<c:forEach var="tio" items="${tList}">
                             			<tr>
-	                            			<td>${i}</td>
-	                            			<td>트레이너 이름${i}</td>
-	                            			<td>010-${i}${i}${i}${i}-${i}${i}${i}${i}</td>
-	                            			<td>이메일${i}</td>
-	                            			<td>생년월일${i}</td>
-	                            			<td>가입일${i}</td>
+	                            			<td>${tio.tnNo}</td>
+	                            			<td>${tio.mbName}</td>
+<%-- 	                            			<td>${tio.tnNo}</td> --%>
+	                            			<td>${tio.mbEmail}</td>
+	                            			<td>${tio.mbPhone}</td>
+	                            			<td>${tio.tnDate}</td>
 	                            			<td>
 	                            				<div>
-	                            					<a href="#" class="btn btn-circle color-discord">
+	                            					<div onclick="doCheck(${tio.tnNo},${tio.mbNo})" class="btn btn-circle color-discord">
 	                            						<i class="fas fa-check"></i>
-	                            					</a>
-	                            					<a href="#" class="btn btn-circle color-cancel">
+	                            					</div>
+	                            					<div onclick="unDoCheck(${tio.tnNo},${tio.mbNo})" class="btn btn-circle color-cancel">
 	                            						<i class="fas fa-times"></i>
-	                            					</a>
+	                            					</div>
 	                            				</div>
 	                            			</td>
 	                            		</tr>
@@ -308,23 +308,25 @@
                             		<div class="col-lg-12">
                             			<div class="pagination-area">
                             				<ul class="pagination">
-                            					<li class="paginate_button page-item previous disabled">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+                            					<li class="paginate_button page-item previous">
+													<c:if test="${pm.prev eq true}">
+                            						<a href="./${pm.prev}" aria-controls="dataTable" class="page-link">
                             							◀
                             						</a>
+                            						</c:if>
                             					</li>
-                            					<c:forEach var="i" begin="1" end="5" step="1">
+                            					<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
                             						<c:choose>
-                            							<c:when test="${i eq 1}">
+                            							<c:when test="${i eq currentPage}">
                             								<li class="paginate_button page-item active">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="./${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
                             							</c:when>
                             							<c:otherwise>
                             								<li class="paginate_button page-item">
-			                            						<a href="#" aria-controls="dataTable" class="page-link">
+			                            						<a href="./${i}" aria-controls="dataTable" class="page-link">
 			                            							${i}
 			                            						</a>
 			                            					</li>
@@ -334,9 +336,11 @@
                             					</c:forEach>
 	                            					
                             					<li class="paginate_button page-item next">
-                            						<a href="#" aria-controls="dataTable" class="page-link">
+												<c:if test="${pm.next eq true && pm.endPage > 0}">
+                            						<a href="./${pm.next}" aria-controls="dataTable" class="page-link">
                             							▶
                             						</a>
+                            					</c:if>
                             					</li>
                             				</ul>
                             			</div>
@@ -406,6 +410,19 @@
 
     <!-- Custom scripts for all pages-->
     <script src="${pageContext.request.contextPath}/resources/css/admin/js/sb-admin-2.min.js"></script>
-
+<script>
+	$(document).ready(function(){
+		if(${not empty msg}){
+			alert('${msg}');
+		}
+	});
+</script>
+<script>
+	function doCheck(tnNo,mbNo){
+		if(confirm('승인하시겠습니까?')){
+			location.href="${pageContext.request.contextPath}/admin/trainerRegister/"+tnNo+"/"+mbNo+"/${pm.currentPage}";
+		}
+	}
+</script>
 </body>
 </html>

@@ -40,6 +40,7 @@ public class NonMemberController {
 			if(mbPwd.equals(nmo.getNmPwd())) {
 
 				session.setAttribute("nmNo", nmo.getNmNo());
+				session.setAttribute("nmName", nmo.getNmName());
 				path = "nonMemberMypage";
 			}else {
 				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");

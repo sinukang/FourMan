@@ -14,5 +14,11 @@
 <P>  The time on the server is ${serverTime}. </P>
 <br>
 <a href="${pageContext.request.contextPath}/findTrainer">트레이너 찾기</a>
+<script>
+	document.addEventListener("DOMContentLoaded", ready);
+	function ready(){
+		location.href="${pageContext.request.contextPath}/findTrainer";
+	}
+</script>
 </body>
 </html>

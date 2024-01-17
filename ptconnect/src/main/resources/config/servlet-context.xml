@@ -25,7 +25,11 @@
 	
 	<beans:bean id="authInterceptor" class="com.ptconnect.myapp.interceptor.AuthInterceptor">
 	</beans:bean>
+	<beans:bean id="devAuthInterceptor" class="com.ptconnect.myapp.interceptor.devAuthInterceptor">
+	</beans:bean>
 	<beans:bean id="userAuthInterceptor" class="com.ptconnect.myapp.interceptor.UserAuthInterceptor">
+	</beans:bean>
+	<beans:bean id="NonmemberAuthInterceptor" class="com.ptconnect.myapp.interceptor.NonmemberAuthInterceptor">
 	</beans:bean>
 	<beans:bean id="trainerAuthInterceptor" class="com.ptconnect.myapp.interceptor.TrainerAuthInterceptor">
 	</beans:bean>
@@ -47,6 +51,43 @@
 		<interceptor>
 			<mapping path="/admin/admin_login" />
 			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/userChat" />
+			<mapping path="/userReview" />
+			<mapping path="/userPwdModify" />
+			<mapping path="/userChat" />
+			<mapping path="/userPoint" />
+			<mapping path="/trainerChat" />
+			<mapping path="/trainerInfoModify" />
+			<mapping path="/trainerSales" />
+			<mapping path="/trainerSchedule" />
+			<mapping path="/centerInfoView" />
+			<mapping path="/review" />
+			<mapping path="/centerInfo" />
+			<mapping path="/centerInfoModify" />
+			<mapping path="/centerSales" />
+			<mapping path="/centerTrainer" />
+			<!-- 어드민 -->
+			<mapping path="/admin/admin_coupon_list" />
+			<mapping path="/admin/admin_coupon_modify" />
+			<mapping path="/admin/admin_coupon" />
+			<mapping path="/admin/admin_FAQ_modify" />
+			<mapping path="/admin/admin_FAQ_write" />
+			<mapping path="/admin/admin_FAQ" />
+			<mapping path="/admin/admin_notice_detail" />
+			<mapping path="/admin/admin_notice_modify" />
+			<mapping path="/admin/admin_notice_write" />
+			<mapping path="/admin/admin_notice" />
+			<mapping path="/admin/admin_point_detail" />
+			<mapping path="/admin/admin_point" />
+			<mapping path="/admin/admin_review" />
+			<mapping path="/admin/customerChatList" />
+			<mapping path="/admin/managerChatList" />
+			<mapping path="/admin/penaltyUserManagement" />
+			<mapping path="/admin/reportList" />
+			<mapping path="/admin/userManagement" />
+			<beans:ref bean="devAuthInterceptor" />
 		</interceptor>	
 		<interceptor>
 			<mapping path="/userInfo" />
@@ -58,7 +99,17 @@
 			<beans:ref bean="userAuthInterceptor" />
 		</interceptor>	
 		<interceptor>
+			<mapping path="/nonMemberMypage" />
+			<beans:ref bean="NonmemberAuthInterceptor" />
+		</interceptor>	
+		<interceptor>
 			<mapping path="/trainerInfo" />
+			<mapping path="/trainerInfoWrite" />
+			<mapping path="/trainerChat" />
+			<mapping path="/trainerInfoModify" />
+			<mapping path="/trainerSales" />
+			<mapping path="/trainerSchedule" />
+			<mapping path="/centerInfoView" />
 			<beans:ref bean="trainerAuthInterceptor" />
 		</interceptor>	
 		<interceptor>

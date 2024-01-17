@@ -223,6 +223,8 @@ public class MemberController {
 		session.removeAttribute("mbName");
 		session.removeAttribute("mbMapX");
 		session.removeAttribute("mbMapY");
+		session.removeAttribute("nmNo");
+		session.removeAttribute("nmName");
 		return "redirect:/findTrainer";
 	}
 	

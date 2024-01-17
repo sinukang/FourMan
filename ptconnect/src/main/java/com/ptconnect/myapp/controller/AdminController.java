@@ -33,7 +33,7 @@ AdminService as;
 		return "admin/admin_login";
 	}
 	
-	
+
 	@GetMapping(value = "/admin_index")
 	public String admin_index(
 			HttpSession session) {
@@ -47,14 +47,44 @@ AdminService as;
 			HttpSession session) {
 		
 		return "redirect:/admin/trainerRegisterList/1";
-	}	
+	}		
+	@GetMapping(value = "/trainerRegister/{tnNo}/{mbNo}/{page}")
+	public String trainerRegister(
+			@PathVariable int tnNo,
+			@PathVariable int mbNo,
+			@PathVariable int page,
+			HttpSession session,
+			RedirectAttributes rttr) {
+		TrainerInfoDTO tio = new TrainerInfoDTO();
+		tio.setTnNo(tnNo);
+		tio.setMbNo(mbNo);
+		int value = as.trainerRegist(tio);
+		String msg = "";
+		if(value>=2) {
+			msg = tnNo + "번 트레이너 승인 완료.";
+		}else {
+			msg = tnNo + "번 트레이너 승인 실패";
+		}
+		rttr.addFlashAttribute("msg", msg);
+		return "redirect:/admin/trainerRegisterList/"+page;
+	}
 	@GetMapping(value = "/trainerRegisterList/{page}")
 	public String trainerRegisterList(
 			@PathVariable int page,
 			HttpSession session) {
 		session.removeAttribute("menu_location");
 		session.setAttribute("menu_location","0,1");
-		
+		PageMaker pm = new PageMaker();
+		SearchCriteria scri = new SearchCriteria();
+		scri.setPage(page);
+		scri.setPerPageNum(10);
+		pm.setCurrentPage(page);
+		pm.setScri(scri);
+		pm.setTotalCount(as.trainerRegisterTotalCount());
+		ArrayList<TrainerInfoDTO> tList = as.trainerRegisterList(scri);
+
+		session.setAttribute("tList", tList);
+		session.setAttribute("pm", pm);
 		
 		return "admin/trainerRegisterList";
 	}	

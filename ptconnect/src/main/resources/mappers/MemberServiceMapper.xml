@@ -31,7 +31,10 @@
 		SELECT * 
 		FROM order_ od
 		join orderproduct op on od.odNo = op.odNo 
+		join payment p ON od.odNo = p.odNo
+		left join paymentcancle pc ON od.odNO = pc.odNo
 		join nonmember nm on od.nmNo = nm.nmNo 
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerInfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
 		WHERE od.nmNo = #{nmNo}
 	</select>
 	<select id="memberEmailFind" parameterType="String" resultType="String">

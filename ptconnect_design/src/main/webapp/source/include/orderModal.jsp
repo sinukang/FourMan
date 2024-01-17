@@ -65,7 +65,7 @@
 										상담에 필요한 간단한 정보를 입력해주세요.
 									</label>
 								</div>
-								<textarea rows="6" placeholder="ex) pt를 신청한 목적, 성별, 나이, 시간대, 간단한 건강정보 등" name="review_content" maxlength="400"></textarea>
+								<textarea rows="6" placeholder="ex) pt를 신청한 목적, 성별, 나이, 시간대, 간단한 건강정보 등" name="review_content" maxlength="400" class="opIntro"></textarea>
 							</div>
 							
 							<div style="margin-top: 24px;">
@@ -73,7 +73,7 @@
 									<label>포인트 사용</label>
 									<div class="inputWrap" style="display: flex;">
 										<div class="inputWidth" style="width: 70%;">
-											<input type="text" placeholder="12430p 사용가능" maxlength="20" autocomplete="off" value="">
+											<input type="text" placeholder="12430p 사용가능" maxlength="20" autocomplete="off" value="" name="usePoint">
 										</div>
 										
 										<div class="usePoint">
@@ -107,13 +107,14 @@
 							<div style="padding: 25px 0px;">
 								<span style="font-size: 20px;">결제 금액</span>
 								<span style="float: right;">
+									<span id="accumulatedPoints" style="font-size: 20px; font-weight: bold;">2</span>
 									<span style="text-decoration: line-through; font-size: 17px; color: rgb(207, 207, 207);">55,000원</span>
 									<span style="font-size: 20px; font-weight: bold;">20,000원</span>
 								</span>
 							</div>
 							
 							<div>
-								<button class="paymentButtom">
+								<button class="paymentButtom" onclick="requestPay()">
 									<span>결제하기</span>
 								</button>
 							</div>
@@ -122,3 +123,7 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+
+		</script>

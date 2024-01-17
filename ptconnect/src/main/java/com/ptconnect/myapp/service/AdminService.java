@@ -13,14 +13,17 @@ public interface AdminService {
 	public AdminDTO adminMain();
 
 	public ArrayList<CenterInfoDTO> centerRegisterList(SearchCriteria scri);
+	public ArrayList<TrainerInfoDTO> trainerRegisterList(SearchCriteria scri);
 	public ArrayList<TrainerInfoDTO> registredProductList(SearchCriteria scri);
 	public ArrayList<PaymentDTO> tradedProductList(SearchCriteria scri);
-	
+
 	public int centerRegisterTotalCount();
+	public int trainerRegisterTotalCount();
 	public int registredProductTotalCount();
 	public int tradedProductTotalCount();
 	
 	public int centerRegist(int ctNo);
+	public int trainerRegist(TrainerInfoDTO tio);
 	
 	public PaymentDTO tradedProductDetail(String odNo);
 }

@@ -109,41 +109,41 @@
 					<div class="searchResultArea">
 					
 						<!-- 샘플 데이터 -->
-						<a href="#" class="searchResultCard">
-							<div class="coachCard">
-								<div>
-									<div class="coachImages">
-										<img class="trainerImg" src="https://file.woondoc.com/gym/cover/QwqvhHp2HYATzi9nTEUEnjjzZaxQ3KTX_1700440964_5752163.jpg" style="border-radius: 12px 0px 0px;">
-										<img class="trainerImg" src="https://file.woondoc.com/coach/cover/OaoQaz2DvlRkKKWa7Hus5PXygL16og8g_1679379451_8321288.jpg" >
-										<img class="gymImg" src="https://file.woondoc.com/gym/cover/t7Z8VcBc9tARxDJ1WR8SuEaEhbaEDEk5_1704162000_4361267.jpg" style="border-radius: 0px 12px 0px 0px;">
-									</div>
-									<div class="coachInfo">
-										<div class="coachTitle">
-											<h3 class="coachName">이젠 트레이너</h3>
+<!-- 						<a href="#" class="searchResultCard"> -->
+<!-- 							<div class="coachCard"> -->
+<!-- 								<div> -->
+<!-- 									<div class="coachImages"> -->
+<!-- 										<img class="trainerImg" src="https://file.woondoc.com/gym/cover/QwqvhHp2HYATzi9nTEUEnjjzZaxQ3KTX_1700440964_5752163.jpg" style="border-radius: 12px 0px 0px;"> -->
+<!-- 										<img class="trainerImg" src="https://file.woondoc.com/coach/cover/OaoQaz2DvlRkKKWa7Hus5PXygL16og8g_1679379451_8321288.jpg" > -->
+<!-- 										<img class="gymImg" src="https://file.woondoc.com/gym/cover/t7Z8VcBc9tARxDJ1WR8SuEaEhbaEDEk5_1704162000_4361267.jpg" style="border-radius: 0px 12px 0px 0px;"> -->
+<!-- 									</div> -->
+<!-- 									<div class="coachInfo"> -->
+<!-- 										<div class="coachTitle"> -->
+<!-- 											<h3 class="coachName">이젠 트레이너</h3> -->
 										
-											<div class="coachReviewCnt">
-												<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
-												<span class="reviewText">35개</span>
-											</div>
-										</div>
+<!-- 											<div class="coachReviewCnt"> -->
+<%-- 												<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png"> --%>
+<!-- 												<span class="reviewText">35개</span> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										
-										<div class="coachOneLine">
-											<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p>
-										</div>
+<!-- 										<div class="coachOneLine"> -->
+<!-- 											<p>물리치료사 출신,체형교정,다이어트,보디빌딩</p> -->
+<!-- 										</div> -->
 										
-										<div class="priceInfo">
-											<div class="priceTitle"> 1회 체험권 </div>
-											<div class="ptPrice"><strong>35000</strong> 원</div>
-										</div>
+<!-- 										<div class="priceInfo"> -->
+<!-- 											<div class="priceTitle"> 1회 체험권 </div> -->
+<!-- 											<div class="ptPrice"><strong>35000</strong> 원</div> -->
+<!-- 										</div> -->
 										
-										<div class="location">
-											<img src="${pageContext.request.contextPath}/resources/img/locationicon.png">
-											<p class="locationAddr">이젠 피트니스 센터</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a>
+<!-- 										<div class="location"> -->
+<%-- 											<img src="${pageContext.request.contextPath}/resources/img/locationicon.png"> --%>
+<!-- 											<p class="locationAddr">이젠 피트니스 센터</p> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</a> -->
 						<!-- 샘플 데이터 -->
 						
 						<!-- DB 데이터 -->
