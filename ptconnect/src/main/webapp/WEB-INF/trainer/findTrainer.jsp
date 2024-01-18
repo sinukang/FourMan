@@ -340,30 +340,33 @@
  		e.preventDefault();
  		execDaumPostcode();
 	});
-	
+ 	let testString = "testString";
  	var testCenter = [2];
 	<c:choose>
-		<c:when test="${mbNo eq null}">
+		<c:when test='${mbNo eq null}'>
 			<c:choose>
-				<c:when test='${tio_alist[0].selectMapY eq 0.0}'>
+				<c:when test='${selectMapY eq 0.0}'>
 					testCenter[0] = 35.84026098258203;
 					testCenter[1] = 127.1324143491829;
+					console.log(testCenter[0]);
+					console.log(testCenter[1]);
 				</c:when>
 				<c:otherwise>
-					testCenter[0] = ${tio_alist[0].selectMapY};
-					testCenter[1] = ${tio_alist[0].selectMapX};
+					alert(testString);
+					testCenter[0] = ${selectMapY};
+					testCenter[1] = ${selectMapX};
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
 			<c:choose>
-				<c:when test='${tio_alist[0].selectMapY eq 0.0}'>
+				<c:when test='${selectMapY eq 0.0}'>
 					testCenter[0] = ${mbMapY};
 					testCenter[1] = ${mbMapX};
 				</c:when>
 				<c:otherwise>
-					testCenter[0] = ${tio_alist[0].selectMapY};
-					testCenter[1] = ${tio_alist[0].selectMapX};				
+					testCenter[0] = ${selectMapY};
+					testCenter[1] = ${selectMapX};
 				</c:otherwise>
 			</c:choose>		
 		</c:otherwise>
@@ -379,10 +382,10 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);	
 	
 	var positions = [
-		{
-			title: '이젠 피트니스 센터',
-			latlng: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
-		},
+// 		{
+// 			title: '이젠 피트니스 센터',
+// 			latlng: new kakao.maps.LatLng(35.84026098258203, 127.1324143491829) // y좌표-위도, x좌표-경도  (latlng에는 위도, 경도 순 입력)
+// 		},
 		<c:forEach items='${tio_alist}' var='tio' varStatus="tioIDX">
 			{
 				title: '${tio.ctName}',
@@ -436,7 +439,7 @@
 									new kakao.maps.LatLng(35.84026098258203, 127.1324143491829);
 								</c:when>
 								<c:otherwise>
-									new kakao.maps.LatLng(${tio_alist[0].selectMapY}, ${tio_alist[0].selectMapX});
+									new kakao.maps.LatLng(${selectMapY}, ${selectMapX});
 								</c:otherwise>
 							</c:choose>
 							

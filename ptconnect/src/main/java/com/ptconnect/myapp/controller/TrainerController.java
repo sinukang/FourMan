@@ -39,7 +39,11 @@ public class TrainerController {
 		int filterOnOff = 0;	//검색 or 필터 사용시 화면에 필터 펼쳐짐 상태 1:펼쳐짐, 0:졉혀짐
 		String uAddr = null;	//로그인 한 유저 주소내용 전체에서 " "로 잘라서 n번째 주소값만 가져와 담기 위한 변수
 		String[] uAddrReturn = null;
+		
+		//카카오맵에 찍은 좌표와 좌표로 변환한 주소
 		String selectedAddr = null;
+		double selectMapY = 0.0;
+		double selectMapX = 0.0;
 		
 		//세션이 null이 아니면 그리고 세션의 mbNo가 널이 아니고 빈 문자열이 아니면 값 할당
 		if(session != null) {
@@ -59,6 +63,8 @@ public class TrainerController {
 				scri.setMbMapY(Double.parseDouble(request.getParameter("selectMapY")));
 				scri.setMbMapX(Double.parseDouble(request.getParameter("selectMapX")));
 				selectedAddr = request.getParameter("selectedAddr");
+				selectMapY = Double.parseDouble(request.getParameter("selectMapY"));
+				selectMapX = Double.parseDouble(request.getParameter("selectMapX"));
 				System.out.println("request.getParameter(selectMapY) : " + request.getParameter("selectMapY"));
 				System.out.println("request.getParameter(selectMapX) : " + request.getParameter("selectMapX"));
 			}
@@ -121,8 +127,11 @@ public class TrainerController {
 		model.addAttribute("filterOnOff", filterOnOff);
 		model.addAttribute("uAddr", uAddr);
 		model.addAttribute("selectedAddr", selectedAddr);
+		model.addAttribute("selectMapY", selectMapY);
+		model.addAttribute("selectMapX", selectMapX);
 		
 		ArrayList<TrainerInfoDTO> tio_alist = ts.findTrainer(scri);
+		System.out.println("tio_alist.size() : " + tio_alist.size());
 		for(int i = 0; i < tio_alist.size(); i++) {
 			tio_alist.get(i).setDistance(Math.round((tio_alist.get(i).getDistance()*10)/10));
 			System.out.println("tio_alist.get("+i+").getSelectMapY() : " + tio_alist.get(i).getSelectMapY());
