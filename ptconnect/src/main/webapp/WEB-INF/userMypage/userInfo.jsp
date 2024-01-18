@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/info.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/modal.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -56,7 +57,7 @@
 											<hr>
 											<div class="submit">
 												<div class="half_button">
-													<button class="submit_button checked"><span>비밀번호 변경</span></button>
+													<button class="submit_button checked pwd_check_button" onclick="pwdCheck()"><span>비밀번호 변경</span></button>
 												</div>
 												<div class="half_button">
 													<button class="submit_button checked"><span>정보 업데이트</span></button>
@@ -76,5 +77,40 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 비밀번호 변경으로 이동하기 전에 사용자를 확인하는 모달 결제창 -->
+	<jsp:include page="../include/pwdCheckModal.jsp"/>
+<script>
+const pwdCheckModal = $('.pwd_check_modal');
+const exitButton = $('.exit_button');
+const modalColse = $('.modal_close');
+// 리뷰 작성하기 버튼
+function pwdCheck(){
+//		if($('.review_button_expand_wrap').css('opacity')==1){
+//			$('.review_button_expand_wrap').css('opacity',0);
+//		}else{
+//			$('.review_button_expand_wrap').css('opacity',1);
+//		}
+		pwdCheckModal.css('display','flex');
+		
+//		console.log('review_write_button');
+	}
+
+window.onclick = function(e){
+	console.log('pwd_check_modal : ' + e.target.classList.contains('pwd_check_modal'));
+	
+	if(e.target.classList.contains('pwd_check_modal')){
+		pwdCheckModal.css('display','none');
+	}
+}
+
+exitButton.click(function() {
+	pwdCheckModal.css('display','none');
+});
+
+modalColse.click(function() {
+	pwdCheckModal.css('display','none');
+});
+</script>	
 </body>
 </html>

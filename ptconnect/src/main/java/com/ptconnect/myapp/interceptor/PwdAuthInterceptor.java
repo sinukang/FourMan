@@ -1,5 +1,7 @@
 package com.ptconnect.myapp.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 //�α��� üũ ���� ���ͼ��� Ŭ���� 
-public class NonmemberAuthInterceptor  extends HandlerInterceptorAdapter{
+public class PwdAuthInterceptor  extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(
@@ -18,12 +20,21 @@ public class NonmemberAuthInterceptor  extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("nmNo") == null) {
-
-			String location =request.getContextPath()+"/error/loginAuthError";
-			response.sendRedirect(location);			
+		if (session.getAttribute("PCA") == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter(); 
+			out.println("<script>alert('잘못된 접근입니다!'); history.go(-1);</script>");
+			out.flush();		
 			return false;			
-		}	
+		}else if(!"T".equals((String)session.getAttribute("PCA"))){
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter(); 
+			out.println("<script>alert('잘못된 접근입니다!'); history.go(-1);</script>");
+			out.flush();		
+			return false;			
+		}
+		
+		
 		return true;
 	}
 	

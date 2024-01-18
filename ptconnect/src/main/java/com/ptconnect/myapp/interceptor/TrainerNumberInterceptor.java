@@ -18,7 +18,6 @@ public class TrainerNumberInterceptor  extends HandlerInterceptorAdapter{
 			Object handler
 			) throws Exception{
 		
-		boolean tf = false;
 		String location = request.getContextPath()+"/findTrainer";
 		if (request.getParameter("tnNo") == null || request.getParameter("tnNo") == "") {
 
@@ -27,11 +26,9 @@ public class TrainerNumberInterceptor  extends HandlerInterceptorAdapter{
 			out.println("<script>alert('잘못된 접근입니다!'); location.href = '"+location+"';</script>");
 			out.flush();
 					
-			tf = false;			
-		}else {
-			tf = true;
+			return false;			
 		}
-		return tf;
+		return true;
 	}
 	
 	

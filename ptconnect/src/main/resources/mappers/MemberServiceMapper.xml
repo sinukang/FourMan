@@ -44,4 +44,7 @@
 		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail} AND mbPhone = #{mbPhone} limit 1
 	</select>
 	
+	<select id="memberPwdCheck" parameterType="int" resultType="mo">
+		SELECT * FROM member where mbNo=#{mbNo}
+	</select>
 </mapper>

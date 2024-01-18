@@ -54,8 +54,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();	
 		boolean tf = false;	 
-		String path = request.getServletPath();
-		String query = request.getQueryString();
 		if(session != null){
 			if (session.getAttribute("mbAuth") == null) {
 				session.removeAttribute("mbNo");

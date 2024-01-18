@@ -18,20 +18,17 @@ public class TrainerAuthInterceptor  extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		boolean tf = false;
 		if (session.getAttribute("mbAuth") == null) {
 
 			String location =request.getContextPath()+"/error/loginAuthError";
 			response.sendRedirect(location);			
-			tf = false;			
+			return false;			
 		}else if(!"T".equals((String)session.getAttribute("mbAuth"))){
 			String location =request.getContextPath()+"/error/authError";
 			response.sendRedirect(location);
-			tf = false;			
-		}else{
-			tf = true;			
-		}		
-		return tf;
+			return false;			
+		}	
+		return true;
 	}
 	
 

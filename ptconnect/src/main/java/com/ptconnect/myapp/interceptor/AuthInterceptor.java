@@ -17,16 +17,13 @@ public class AuthInterceptor  extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		boolean tf = false;
 		if (session.getAttribute("mbAuth") != null) {
 			
 			String location =request.getContextPath()+"/error/authError";
 			response.sendRedirect(location);			
-			tf = false;			
-		}else{
-			tf = true;			
+			return false;			
 		}		
-		return tf;
+		return true;
 	}
 //	
 //

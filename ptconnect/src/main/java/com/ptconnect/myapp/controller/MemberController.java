@@ -278,6 +278,9 @@ public class MemberController {
 	    	jo.put("msg","이메일,전화번호를 입력해주세요.");
 		}else {
 			int value = ms.memberPwdFind(mo.getMbEmail(), mo.getMbPhone());
+			System.out.println(mo.getMbEmail());
+			System.out.println(mo.getMbPhone());
+			System.out.println(value);
 			if(value>0) {
 				String authNumber = mail.getTempPassword();
 		        String title = "임시 비밀번호입니다.";
@@ -286,6 +289,7 @@ public class MemberController {
 		        if (mail.MailSend(mo.getMbEmail(), title, body)) {
 		            session.removeAttribute("MAIL_PWD");
 		            session.setAttribute("MAIL_PWD", authNumber);
+		            session.setAttribute("mbEmail", mo.getMbEmail());
 		            System.out.println((String)session.getAttribute("MAIL_PWD"));
 		            System.out.println("send mail ok");
 					jo.put("value", value);
@@ -294,6 +298,7 @@ public class MemberController {
 		        }
 			}else {
 		    	jo.put("msg","일치하는 계정 정보가 없습니다.");
+		    	jo.put("value",value);
 			}
 		}
 		return jo;
@@ -321,8 +326,24 @@ public class MemberController {
 		String path="";
 		if(mbPwd != null) {
 			if(mbPwd.equals(session.getAttribute("MAIL_PWD"))) {
-				path="/error/tempPage";
+				String mbEmail=(String)session.getAttribute("mbEmail");
+				session.removeAttribute("mbEmail");
 				session.removeAttribute("MAIL_PWD");
+				session.setAttribute("PCA", "T");
+				MemberDTO mo = ms.memberLogin(mbEmail);
+				session.setAttribute("mbNo", mo.getMbNo());
+				session.setAttribute("mbAuth", mo.getMbAuth());
+				session.setAttribute("mbName", mo.getMbName());
+				session.setAttribute("mbMapY", mo.getMbMapY());
+				session.setAttribute("mbMapX", mo.getMbMapX());
+				if(mo.getMbAuth().equals("U")) {
+					path="/userPwdModify";
+				}else if(mo.getMbAuth().equals("T")) {
+					path="/userPwdModify"; //01-18 변경필요
+				}else if(mo.getMbAuth().equals("C")) {
+					path="/userPwdModify"; //01-18 변경필요
+				}
+				
 			}else {
 				path="/error/authError";
 			}

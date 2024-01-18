@@ -70,7 +70,7 @@
 			dataType: "json",
 			data: JSON.stringify(memberInfo),
 			success: function(data){
-				if(data.value=1){
+				if(data.value==1){
 					$('#msg').html('해당 이메일로 임시 비밀번호가 발송되었습니다.<br>페이지를 이동하시지 마시고 임시 비밀번호를 입력해주세요.');
 					$('#errorMsg').css('display','');
 					$('#mbEmail').prop('readonly', true);
@@ -79,11 +79,11 @@
 					$('#pwdBox2').css('display','');
 					$('#idFindBtn').css('display','none');
 					$('#idFindBtn2').css('display','');
+					$('#errorMsg').css('display','none');
 					
 				}else{
 					$('#errorMsg').html(data.msg);
 					$('#errorMsg').css('display','');
-					$('#mbEmail').css('display','none');
 				}
 			},
 			error: function(){
