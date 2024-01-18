@@ -85,11 +85,19 @@ public class MemberServiceImpl implements MemberService{
 		
 		return value;
 	}
+	
 	@Override
 	public ArrayList<PaymentDTO> nonMemberOrderList(int nmNo){
 		
 		ArrayList<PaymentDTO> alist = msm.nonMemberOrderList(nmNo);
 		
 		return alist;
+	}
+	@Override
+	public MemberDTO memberPwdCheck(int mbNo) {
+		
+		MemberDTO mo = msm.memberPwdCheck(mbNo);
+		
+		return mo;
 	}
 }

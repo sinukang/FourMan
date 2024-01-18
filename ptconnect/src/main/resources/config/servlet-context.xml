@@ -35,6 +35,8 @@
 	</beans:bean>
 	<beans:bean id="adminAuthInterceptor" class="com.ptconnect.myapp.interceptor.AdminAuthInterceptor">
 	</beans:bean>
+	<beans:bean id="PwdAuthInterceptor" class="com.ptconnect.myapp.interceptor.PwdAuthInterceptor">
+	</beans:bean>
 	
 	<beans:bean id="loginInterceptor" class="com.ptconnect.myapp.interceptor.LoginInterceptor">
 	</beans:bean>
@@ -55,7 +57,6 @@
 		<interceptor>
 			<mapping path="/userChat" />
 			<mapping path="/userReview" />
-			<mapping path="/userPwdModify" />
 			<mapping path="/userChat" />
 			<mapping path="/userPoint" />
 			<mapping path="/trainerChat" />
@@ -97,6 +98,10 @@
 			<mapping path="/userReview" />
 			<mapping path="/userChat" />
 			<beans:ref bean="userAuthInterceptor" />
+		</interceptor>	
+		<interceptor>
+			<mapping path="/userPwdModify" />
+			<beans:ref bean="PwdAuthInterceptor" />
 		</interceptor>	
 		<interceptor>
 			<mapping path="/nonMemberMypage" />

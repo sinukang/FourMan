@@ -19,5 +19,6 @@ public interface MemberServiceMapper {
 	public int memberPwdFind(@Param("mbEmail")String mbEmail, @Param("mbPhone")String mbPhone);
 	public NonMemberDTO nonMemberLogin(@Param("nmPhone")String nmPhone);
 	public ArrayList<PaymentDTO> nonMemberOrderList(@Param("nmNo")int nmNo);
+	public MemberDTO memberPwdCheck(@Param("mbNo")int mbNo);
 	
 }

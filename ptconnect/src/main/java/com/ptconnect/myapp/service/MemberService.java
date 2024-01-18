@@ -20,4 +20,6 @@ public interface MemberService {
 	public ArrayList<PaymentDTO> nonMemberOrderList(int nmNo);
 	public String memberEmailFind(String mbName, String mbPhone);
 	public int memberPwdFind(String mbEmail, String mbPhone);
+	
+	public MemberDTO memberPwdCheck(int mbNo);
 }
