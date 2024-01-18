@@ -17,14 +17,13 @@ public class devAuthInterceptor  extends HandlerInterceptorAdapter{
 			Object handler
 			) throws Exception{
 				
-		boolean tf = false;
 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter(); 
 		out.println("<script>alert('현재 개발중인 페이지입니다!'); history.go(-1);</script>");
 		out.flush();
 		
-		return tf;
+		return false;
 	}
 //	
 //

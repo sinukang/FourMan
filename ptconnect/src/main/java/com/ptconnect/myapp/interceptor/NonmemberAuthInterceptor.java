@@ -18,16 +18,13 @@ public class NonmemberAuthInterceptor  extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		boolean tf = false;
 		if (session.getAttribute("nmNo") == null) {
 
 			String location =request.getContextPath()+"/error/loginAuthError";
 			response.sendRedirect(location);			
-			tf = false;			
-		}else{
-			tf = true;			
-		}		
-		return tf;
+			return false;			
+		}	
+		return true;
 	}
 	
 
