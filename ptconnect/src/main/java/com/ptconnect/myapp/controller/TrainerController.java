@@ -57,6 +57,7 @@ public class TrainerController {
 			}
 		}
 		
+		//findTrainer 카카오맵 위에 마우스 클릭 시 클릭한 지점 좌표 받아와서 scri의 mbMapY, mbMapX에 할당 
 		if(request.getParameter("selectMapY") != null && request.getParameter("selectMapY") != "") {
 			if(request.getParameter("selectMapX") != null && request.getParameter("selectMapX") != "") {
 				
@@ -65,7 +66,7 @@ public class TrainerController {
 				selectedAddr = request.getParameter("selectedAddr");
 				selectMapY = Double.parseDouble(request.getParameter("selectMapY"));
 				selectMapX = Double.parseDouble(request.getParameter("selectMapX"));
-				System.out.println("request.getParameter(selectMapY) : " + request.getParameter("selectMapY"));
+				System.out.println("request.getParameter(selectMapY) != null 조건 통과함 : " + request.getParameter("selectMapY"));
 				System.out.println("request.getParameter(selectMapX) : " + request.getParameter("selectMapX"));
 			}
 			
