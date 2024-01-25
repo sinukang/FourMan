@@ -66,15 +66,15 @@ public class TrainerController {
 				selectedAddr = request.getParameter("selectedAddr");
 				selectMapY = Double.parseDouble(request.getParameter("selectMapY"));
 				selectMapX = Double.parseDouble(request.getParameter("selectMapX"));
-				System.out.println("request.getParameter(selectMapY) != null 조건 통과함 : " + request.getParameter("selectMapY"));
-				System.out.println("request.getParameter(selectMapX) : " + request.getParameter("selectMapX"));
+//				System.out.println("request.getParameter(selectMapY) != null 조건 통과함 : " + request.getParameter("selectMapY"));
+//				System.out.println("request.getParameter(selectMapX) : " + request.getParameter("selectMapX"));
 			}
 			
 		}
 		
-		System.out.println("scri.getMbNo() : " + scri.getMbNo());
-		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
-		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
+//		System.out.println("scri.getMbNo() : " + scri.getMbNo());
+//		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
+//		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
 		
 		//검색 키워드가 없거나 공백이면 null할당
 		if(scri.getKeyword() == null || scri.getKeyword().equals("") || scri.getKeyword().equals(" ")) {
@@ -132,11 +132,11 @@ public class TrainerController {
 		model.addAttribute("selectMapX", selectMapX);
 		
 		ArrayList<TrainerInfoDTO> tio_alist = ts.findTrainer(scri);
-		System.out.println("tio_alist.size() : " + tio_alist.size());
+//		System.out.println("tio_alist.size() : " + tio_alist.size());
 		for(int i = 0; i < tio_alist.size(); i++) {
 			tio_alist.get(i).setDistance(Math.round((tio_alist.get(i).getDistance()*10)/10));
-			System.out.println("tio_alist.get("+i+").getSelectMapY() : " + tio_alist.get(i).getSelectMapY());
-			System.out.println("tio_alist.get("+i+").getSelectMapX() : " + tio_alist.get(i).getSelectMapX());
+//			System.out.println("tio_alist.get("+i+").getSelectMapY() : " + tio_alist.get(i).getSelectMapY());
+//			System.out.println("tio_alist.get("+i+").getSelectMapX() : " + tio_alist.get(i).getSelectMapX());
 		}
 		
 		model.addAttribute("tio_alist", tio_alist);

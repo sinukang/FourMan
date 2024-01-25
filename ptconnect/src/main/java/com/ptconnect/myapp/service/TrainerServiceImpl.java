@@ -29,14 +29,14 @@ public class TrainerServiceImpl implements TrainerService{
 		int value = (scri.getPage()-1)*15;
 		scri.setPage(value);
 
-		System.out.println("TrainerServiceImpl");
-		System.out.println("scri.getMbNo() : " + scri.getMbNo());
-		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
-		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
-		System.out.println("scri.getPage() : " + scri.getPage());
-		System.out.println("scri.getKeyword() : " + scri.getKeyword());
-		System.out.println("scri.getDistance() : " + scri.getDistance());
-		System.out.println("scri.getOrderBy() : " + scri.getOrderBy());
+//		System.out.println("TrainerServiceImpl");
+//		System.out.println("scri.getMbNo() : " + scri.getMbNo());
+//		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
+//		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
+//		System.out.println("scri.getPage() : " + scri.getPage());
+//		System.out.println("scri.getKeyword() : " + scri.getKeyword());
+//		System.out.println("scri.getDistance() : " + scri.getDistance());
+//		System.out.println("scri.getOrderBy() : " + scri.getOrderBy());
 		
 		ArrayList<TrainerInfoDTO> alist = tsm.findTrainer(scri);
 		

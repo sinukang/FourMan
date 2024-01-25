@@ -340,7 +340,6 @@
  		e.preventDefault();
  		execDaumPostcode();
 	});
- 	let testString = "testString";
  	var testCenter = [2];
 	<c:choose>
 		<c:when test='${mbNo eq null}'>
@@ -352,7 +351,6 @@
 					console.log(testCenter[1]);
 				</c:when>
 				<c:otherwise>
-					alert(testString);
 					testCenter[0] = ${selectMapY};
 					testCenter[1] = ${selectMapX};
 				</c:otherwise>
