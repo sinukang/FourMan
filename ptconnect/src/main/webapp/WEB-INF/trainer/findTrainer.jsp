@@ -9,7 +9,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/coach.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7bf35d83cfc2f31f5a3bc48bf7f1605&libraries=services"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>

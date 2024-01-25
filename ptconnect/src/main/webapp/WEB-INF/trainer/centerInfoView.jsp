@@ -11,7 +11,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/photoModal.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/modal.css" type="text/css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/1f85e66bca.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6eaf7ed9af48a5319b75a0937ac3096&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7bf35d83cfc2f31f5a3bc48bf7f1605&libraries=services"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
