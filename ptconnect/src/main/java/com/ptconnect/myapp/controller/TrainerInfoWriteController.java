@@ -65,7 +65,7 @@ public class TrainerInfoWriteController {
 	            System.out.println("filename : " + filename);
 	            System.out.println("originalFilename : " + originalFilename);
 	            
-	            String path = request.getSession().getServletContext().getRealPath("/resources/img");
+	            String path = request.getSession().getServletContext().getRealPath("/resources/download");
 	            
 	            File uploadPath = new File(path, filename);
 	            file.transferTo(uploadPath);
