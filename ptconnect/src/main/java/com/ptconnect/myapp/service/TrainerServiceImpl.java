@@ -207,11 +207,11 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public TrainerInfoDTO trainerSelectOne(int tnNo) {
+	public TrainerInfoDTO trainerSelectOne(int mbNo) {
 		
 		TrainerInfoDTO tio = new TrainerInfoDTO();
 		
-		tio = tsm.trainerSelectOne(tnNo);
+		tio = tsm.trainerSelectOne(mbNo);
 		
 		return tio;
 	}

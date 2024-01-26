@@ -755,3 +755,22 @@
     filter: blur(2px);
 }
 /* 지도 위에 마커 CSS 영역 */
+
+.search_wrap h4 {
+	font-size: 24px;
+    color: rgb(41, 46, 51);
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.center_search {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.user_input .search_btn {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+}

@@ -43,7 +43,7 @@ public interface TrainerService {
 	
 	public MemberDTO memberSelectOne(int mbNo);
 
-	public TrainerInfoDTO trainerSelectOne(int tnNo);
+	public TrainerInfoDTO trainerSelectOne(int mbNo);
 	
 	public QualifyInfo qualifySelectOne(int tnNo);
 	

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -33,9 +34,18 @@ public class TrainerInfoModifyController {
 	@RequestMapping(value = "trainerInfoModify", method = RequestMethod.GET)
 	public String trainerInfoModify(Model model,
 									HttpSession session) throws Exception {
-		int tnNo = 118;
+		int mbNo = Integer.parseInt(session.getAttribute("mbNo").toString());
 		
-		TrainerInfoDTO tio = ts.trainerSelectOne(tnNo);
+		System.out.println("mbNo : " + mbNo);
+		
+		TrainerInfoDTO tio = new TrainerInfoDTO();
+		tio.setMbNo(mbNo);
+		tio = ts.trainerSelectOne(mbNo);
+		
+		System.out.println("tnNo : " + tio.getTnNo());
+		int tnNo = tio.getTnNo();
+		session.setAttribute("tnNo", tnNo);
+		
 		QualifyInfo qo = ts.qualifySelectOne(tnNo);
 		PriceInfo pro = ts.lessonPriceSelectOne(tnNo);
 		ProgramDTO pgo = ts.programSelectOne(tnNo);
@@ -89,7 +99,8 @@ public class TrainerInfoModifyController {
 	public String trainerInfoInsertAction(TrainerInfoDTO tio,
 										FileDetailDTO fdo,
 										@RequestParam("files") MultipartFile[] files,
-										HttpSession session) throws Exception {	
+										HttpSession session,
+										HttpServletRequest request) throws Exception {	
 
 		
 		int mbNo = Integer.parseInt(session.getAttribute("mbNo").toString());
@@ -97,8 +108,8 @@ public class TrainerInfoModifyController {
 		System.out.println("mbNo : " + mbNo);
 		tio.setMbNo(mbNo);
 		
-//		int tnNo = Integer.parseInt(session.getAttribute("tnNo").toString());
-		int tnNo = 118;
+		int tnNo = Integer.parseInt(session.getAttribute("tnNo").toString());
+		
 		
 		System.out.println("tnNo : " + tnNo);
 		tio.setTnNo(tnNo);
@@ -122,9 +133,13 @@ public class TrainerInfoModifyController {
 	            System.out.println("filename" + filename);
 	            System.out.println("originalFilename" + originalFilename);
 	            
-	            File uploadPath = new File("C:/upload/my0803/" + filename);
+	            String path = request.getSession().getServletContext().getRealPath("/resources/img");
+	            
+	            File uploadPath = new File(path, filename);
 	            file.transferTo(uploadPath);
-
+	            System.out.println("path : " + path);
+	            System.out.println("uploadPath : " + uploadPath);
+	            
 	            // 각 파일에 대한 FileDetailDTO 객체 생성
 	            fdo.setFdName(filename);
 	            fdo.setFdPName(originalFilename);

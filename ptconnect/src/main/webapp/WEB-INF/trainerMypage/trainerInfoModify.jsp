@@ -21,7 +21,7 @@
 						<jsp:include page="../include/trainerHeader.jsp"/>
 						<script>
 							window.onload = function() {
-								$('#trainer_tab2').addClass('active_tab');
+								$('#trainer_tab6').addClass('active_tab');
 							}
 						</script>
 						<div class="gray_background"><!-- 회색배경 -->

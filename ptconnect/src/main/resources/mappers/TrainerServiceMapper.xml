@@ -277,7 +277,7 @@
 	<select id="trainerSelectOne" parameterType="int" resultType="tio">
 		SELECT *
 		FROM trainerinfo
-		WHERE tnNo = #{tnNo}
+		WHERE mbNo = #{mbNo} AND tnDelYN = 'N' ORDER BY tnNo desc limit 1
 	</select>
 	
 	<select id="qualifySelectOne" parameterType="int" resultType="qo">

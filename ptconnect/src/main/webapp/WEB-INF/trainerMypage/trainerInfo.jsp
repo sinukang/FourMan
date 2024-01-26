@@ -32,13 +32,13 @@
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>이름</label>
-													<input type="text" value="김빡빡" disabled>
+													<input type="text" value="${mo.mbName}" disabled>
 												</div>
 											</div>
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>이메일</label>
-													<input type="text" value="ptconnect132@gmail.com" disabled>
+													<input type="text" value="${mo.mbEmail}" disabled>
 												</div>
 											</div>
 											<div class="user_wrap">
@@ -52,25 +52,25 @@
 													</div>
 												</div>
 											</div>
-											<div class="user_wrap">
-												<div class="user_input">
-													<label>성별</label>
-													<div class="flex">
-														<div class="button_wrap">
-															<button class="button active"><span>남성</span></button>
-														</div>
-														<div class="button_wrap">
-															<button class="button"><span>여성</span></button>
-														</div>
-													</div>
-												</div>
-											</div>
+<!-- 											<div class="user_wrap"> -->
+<!-- 												<div class="user_input"> -->
+<!-- 													<label>성별</label> -->
+<!-- 													<div class="flex"> -->
+<!-- 														<div class="button_wrap"> -->
+<!-- 															<button class="button active"><span>남성</span></button> -->
+<!-- 														</div> -->
+<!-- 														<div class="button_wrap"> -->
+<!-- 															<button class="button"><span>여성</span></button> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>핸드폰 번호<span>*</span></label>
 													<div class="input_wrap">
 														<div class="input_width">
-															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="01012345678">														
+															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="${mo.mbPhone}">														
 														</div>
 														<div class="send_submit">
 															<div class="send_auth_button">인증번호 발송</div>
