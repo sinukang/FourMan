@@ -2,15 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+			
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/admin_index">
                 <div class="sidebar-brand-icon "> <!-- rotate-n-15 -->
                     <i class="fas fa-wrench"></i> <!-- fa-laugh-wink -->
                 </div>
                 <div class="sidebar-brand-text mx-3">관리자 페이지</div>
             </a>
-
+			
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span style="font-weight:600; font-size:16px;">로그아웃</span></a>
+            </li>
+            
+            
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             

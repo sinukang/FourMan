@@ -99,8 +99,22 @@
 						</div>
 					</div>	
 					</c:when>
-					<c:otherwise>
+					<c:when test="${empty mbNo && empty nmNo}">
 						<a href="joinUser">회원가입 </a> / <a href="login"> 로그인</a>
+					</c:when>
+					<c:otherwise>
+					<div style="position:relative; display:inline-flex; vertical-align:middle;">
+						<div>
+							<span class="name_button">
+								<span class="name">${mbName}</span>관리자님! 반갑습니다.
+							</span>
+						</div>
+						<div class="drop_down_menu">
+							<a href="logout">
+								<button class="drop_down_item">로그아웃</button>
+							</a>
+						</div>
+					</div>	
 					</c:otherwise>
 				</c:choose>
 			</div>

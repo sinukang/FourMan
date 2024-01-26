@@ -1,5 +1,8 @@
 package com.ptconnect.myapp.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -185,8 +188,9 @@ public class MemberController {
 			HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response, 
 			RedirectAttributes rttr,
-			Model model) {
+			Model model) throws IOException {
 
+		PrintWriter out = response.getWriter(); 
 		MemberDTO mo = ms.memberLogin(mbEmail);
 		String path = "";
 		if(mo!=null) {
@@ -199,16 +203,23 @@ public class MemberController {
 				session.setAttribute("mbMapX", mo.getMbMapX());
 				path = "findTrainer";
 			}else {
-				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
-				rttr.addFlashAttribute("mbEmail",mbEmail);
-				rttr.addFlashAttribute("cate",cate);
-				path = "login";
+
+				response.setContentType("text/html; charset=UTF-8");
+				out.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.'); history.go(-1);</script>");
+				out.flush();
+//				rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
+//				rttr.addFlashAttribute("mbEmail",mbEmail);
+//				rttr.addFlashAttribute("cate",cate);
+//				path = "login";
 			}
 		}else{
-			rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
-			rttr.addFlashAttribute("mbEmail",mbEmail);
-			rttr.addFlashAttribute("cate",cate);
-			path = "login";
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.'); history.go(-1);</script>");
+			out.flush();
+//			rttr.addFlashAttribute("errMsg","아이디 또는 비밀번호가 일치하지 않습니다.");
+//			rttr.addFlashAttribute("mbEmail",mbEmail);
+//			rttr.addFlashAttribute("cate",cate);
+//			path = "login";
 		}
 		
 		return "redirect:/"+path;
