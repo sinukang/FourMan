@@ -74,6 +74,16 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
+	public ArrayList<FileDetailDTO> TrainerInfoView_photos(int tlno) {
+		
+		ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
+		
+		fdo_alist = tsm.TrainerInfoView_photos(tlno);
+		
+		return fdo_alist;
+	}
+	
+	@Override
 	public ArrayList<TrainerInfoDTO> trainerInfoView_Programs(int tnNo) {
 		
 		ArrayList<TrainerInfoDTO> tio_alist = new ArrayList<TrainerInfoDTO>();
@@ -254,6 +264,23 @@ public class TrainerServiceImpl implements TrainerService{
 		tio = tsm.trainerSelectAll();
 		
 		return tio;
+	}
+
+	@Override
+	public FileDetailDTO center_photo_one(int flNo) {
+		
+		FileDetailDTO fDTO = tsm.center_photo_one(flNo);
+		
+		return fDTO;
+	}
+
+	@Override
+	public ArrayList<FileDetailDTO> TrainerInfoView_photo_two(int flNo) {
+		
+		ArrayList<FileDetailDTO> tio_alist = new ArrayList<FileDetailDTO>();
+		tio_alist = tsm.TrainerInfoView_photo_two(flNo);
+		
+		return tio_alist;
 	}
 	
 }

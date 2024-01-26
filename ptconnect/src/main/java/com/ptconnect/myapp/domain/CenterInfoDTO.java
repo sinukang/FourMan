@@ -28,10 +28,17 @@ public class CenterInfoDTO extends MemberDTO{
 	
 	private String ctDate;
 	private String ctDateM;
+
+	private ArrayList<FileDetailDTO> cioFileName;
 	
 	
 	
-	
+	public ArrayList<FileDetailDTO> getCioFileName() {
+		return cioFileName;
+	}
+	public void setCioFileName(ArrayList<FileDetailDTO> cioFileName) {
+		this.cioFileName = cioFileName;
+	}
 	public int getCtNo() {
 		return ctNo;
 	}

@@ -15,11 +15,17 @@ public interface TrainerServiceMapper {
 	
 	public ArrayList<TrainerInfoDTO> findTrainer(SearchCriteria scri);
 	
+	public ArrayList<FileDetailDTO> TrainerInfoView_photo_two(int tlno);
+	
+	public FileDetailDTO center_photo_one(int flNo);
+	
 	public String loginUserAddr(int mbNo);
 	
 	public int trainerTotalCount(SearchCriteria scri);
 	
 	public TrainerInfoDTO TrainerInfoView(int tnNo);
+	
+	public ArrayList<FileDetailDTO> TrainerInfoView_photos(int tlno);
 	
 	public ArrayList<TrainerInfoDTO> trainerInfoView_Programs(int tnNo); 
 	

@@ -56,27 +56,15 @@
 															<div class="photo_box">
 																<div style="display: inline;">
 																<!-- a태그는 modal창을 띄우는 용도 -->
+																<c:forEach var="t_photos" items="${tio_photo_alist}">
 																	<div class="photo_wrap">
 																		<div class="photo_rel">
 																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/${t_photos.fdName}">
 																			</div>
 																		</div>
 																	</div>
-																	<div class="photo_wrap">
-																		<div class="photo_rel">
-																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-																			</div>
-																		</div>
-																	</div>
-																	<div class="photo_wrap">
-																		<div class="photo_rel">
-																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png">
-																			</div>
-																		</div>
-																	</div>
+																</c:forEach>
 															</div>
 														</div>
 													</div>

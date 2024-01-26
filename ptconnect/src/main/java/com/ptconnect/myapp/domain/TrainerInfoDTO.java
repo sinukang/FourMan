@@ -1,11 +1,15 @@
 package com.ptconnect.myapp.domain;
 
+import java.util.ArrayList;
+
 public class TrainerInfoDTO extends CenterInfoDTO{
 	
 	private int tnNo;
 	private int mbNo;
 	private int ctNo;
 	private int flNo;
+	private int ctFlNo;
+	private ArrayList<FileDetailDTO> tioFileName;
 	private String tnOneLine;
 	private String tnIntro;
 	private int tnTicket;
@@ -206,6 +210,18 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	}
 	public void setFlNo(int flNo) {
 		this.flNo = flNo;
+	}
+	public int getCtFlNo() {
+		return ctFlNo;
+	}
+	public void setCtFlNo(int ctFlNo) {
+		this.ctFlNo = ctFlNo;
+	}
+	public ArrayList<FileDetailDTO> getTioFileName() {
+		return tioFileName;
+	}
+	public void setTioFileName(ArrayList<FileDetailDTO> tioFileName) {
+		this.tioFileName = tioFileName;
 	}
 	public String getTnOneLine() {
 		return tnOneLine;

@@ -66,15 +66,9 @@ public class TrainerController {
 				selectedAddr = request.getParameter("selectedAddr");
 				selectMapY = Double.parseDouble(request.getParameter("selectMapY"));
 				selectMapX = Double.parseDouble(request.getParameter("selectMapX"));
-//				System.out.println("request.getParameter(selectMapY) != null 조건 통과함 : " + request.getParameter("selectMapY"));
-//				System.out.println("request.getParameter(selectMapX) : " + request.getParameter("selectMapX"));
 			}
 			
 		}
-		
-//		System.out.println("scri.getMbNo() : " + scri.getMbNo());
-//		System.out.println("scri.getMbMapY() : " + scri.getMbMapY());
-//		System.out.println("scri.getMbMapX() : " + scri.getMbMapX());
 		
 		//검색 키워드가 없거나 공백이면 null할당
 		if(scri.getKeyword() == null || scri.getKeyword().equals("") || scri.getKeyword().equals(" ")) {
@@ -112,12 +106,6 @@ public class TrainerController {
 			scri.setOrderBy("distance");
 		}
 		
-//		System.out.println("uAddr : " + uAddr);
-//		System.out.println("scri.getPage() : " + scri.getPage());
-//		System.out.println("scri.getKeyword() : " + scri.getKeyword());
-//		System.out.println("scri.getDistance() : " + scri.getDistance());
-//		System.out.println("scri.getOrderBy() : " + scri.getOrderBy());
-//		System.out.println();
 		pm.setCurrentPage(scri.getPage());
 		int totalCount = ts.trainerTotalCount(scri);
 //		System.out.println("totalCount : " + totalCount);
@@ -132,11 +120,16 @@ public class TrainerController {
 		model.addAttribute("selectMapX", selectMapX);
 		
 		ArrayList<TrainerInfoDTO> tio_alist = ts.findTrainer(scri);
-//		System.out.println("tio_alist.size() : " + tio_alist.size());
+		
+		//사용자의 위치로부터 각 트레이너들 간의 거리 할당
 		for(int i = 0; i < tio_alist.size(); i++) {
+			ArrayList<FileDetailDTO> fdo_alist = new ArrayList<FileDetailDTO>();
+			ArrayList<FileDetailDTO> fdo_alist2 = new ArrayList<FileDetailDTO>();
+			fdo_alist = ts.TrainerInfoView_photo_two(tio_alist.get(i).getFlNo());
+			fdo_alist2.add(ts.center_photo_one(tio_alist.get(i).getCtFlNo()));
+			tio_alist.get(i).setTioFileName(fdo_alist);
+			tio_alist.get(i).setCioFileName(fdo_alist2);
 			tio_alist.get(i).setDistance(Math.round((tio_alist.get(i).getDistance()*10)/10));
-//			System.out.println("tio_alist.get("+i+").getSelectMapY() : " + tio_alist.get(i).getSelectMapY());
-//			System.out.println("tio_alist.get("+i+").getSelectMapX() : " + tio_alist.get(i).getSelectMapX());
 		}
 		
 		model.addAttribute("tio_alist", tio_alist);
@@ -159,7 +152,9 @@ public class TrainerController {
 		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
-//		System.out.println("qualify : " + tio.getQualify());
+		
+		//해당 트레이너에 대한 사진들 가져옴
+		ArrayList<FileDetailDTO> tio_photo_alist = ts.TrainerInfoView_photos(tio.getFlNo());
 		
 		String[] QualifyArr = null;
 		if(tio.getQualify().contains(",")) {
@@ -214,6 +209,7 @@ public class TrainerController {
 		model.addAttribute("QualifyArr", QualifyArr);
 		model.addAttribute("aryList", jsAry);
 		model.addAttribute("rvo_alist", rvo_alist);
+		model.addAttribute("tio_photo_alist", tio_photo_alist);
 		
 		if (mbNo != null) {
 			MemberDTO mo = ts.memberSelectOne(mbNo);

@@ -167,9 +167,30 @@
 								<div class="coachCard">
 									<div>
 										<div class="coachImages">
-											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" style="border-radius: 12px 0px 0px;">
-											<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" >
-											<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png"  style="border-radius: 0px 12px 0px 0px;">
+											<c:choose>
+												<c:when test="${not empty tio.tioFileName[0].fdName}">
+													<img class="trainerImg" src="${pageContext.request.contextPath}/resources/download/${tio.tioFileName[0].fdName}" style="border-radius: 12px 0px 0px;">
+												</c:when>
+												<c:otherwise>
+													<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner1.png" style="border-radius: 12px 0px 0px;">
+												</c:otherwise>
+											</c:choose>
+											<c:choose>
+												<c:when test="${not empty tio.tioFileName[1].fdName}">
+													<img class="trainerImg" src="${pageContext.request.contextPath}/resources/download/${tio.tioFileName[1].fdName}">
+												</c:when>
+												<c:otherwise>
+													<img class="trainerImg" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
+												</c:otherwise>
+											</c:choose>
+											<c:choose>
+												<c:when test="${not empty tio.cioFileName[0].fdName}">
+													<img class="gymImg" src="${pageContext.request.contextPath}/resources/download/${tio.cioFileName[0].fdName}" style="border-radius: 12px 0px 0px;">
+												</c:when>
+												<c:otherwise>
+													<img class="gymImg" src="${pageContext.request.contextPath}/resources/img/mainbanner3.png" style="border-radius: 12px 0px 0px;">
+												</c:otherwise>
+											</c:choose>
 										</div>
 										<div class="coachInfo">
 											<div class="coachTitle">
