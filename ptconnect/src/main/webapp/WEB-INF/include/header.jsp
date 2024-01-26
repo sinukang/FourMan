@@ -45,9 +45,19 @@
 								<button class="drop_down_item">마이페이지</button>
 							</a>
 							<div class="drop_down_divider"></div>
-							<a href="trainerInfoModify">
-								<button class="drop_down_item">트레이너정보변경</button>
-							</a>
+							
+							<c:choose>
+								<c:when test="${not empty tnNo}">
+									<a href="trainerInfoModify">
+										<button class="drop_down_item">트레이너정보관리</button>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a href="trainerInfoWrite">
+										<button class="drop_down_item">트레이너등록</button>
+									</a>
+								</c:otherwise>
+							</c:choose>
 							<div class="drop_down_divider"></div>
 							<a href="trainerSales">
 								<button class="drop_down_item">판매내역</button>

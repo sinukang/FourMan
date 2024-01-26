@@ -24,8 +24,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
-import com.ptconnect.myapp.domain.NonMemberDTO;
+import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.MemberService;
+import com.ptconnect.myapp.service.TrainerService;
 import com.ptconnect.myapp.util.MailSender;
 
 @Controller
@@ -33,6 +34,8 @@ public class MemberController {
 
 	@Autowired
 	MemberService ms;
+	@Autowired
+	TrainerService ts;
 	@Autowired
 	MailSender mail;
 	@Autowired
@@ -201,6 +204,13 @@ public class MemberController {
 				session.setAttribute("mbName", mo.getMbName());
 				session.setAttribute("mbMapY", mo.getMbMapY());
 				session.setAttribute("mbMapX", mo.getMbMapX());
+				if (mo.getMbAuth().equals("T")) {
+
+					TrainerInfoDTO tio = ts.trainerSelectOne(mo.getMbNo());
+					if(tio!=null) {
+						session.setAttribute("tnNo", tio.getTnNo());
+					}
+				}
 				path = "findTrainer";
 			}else {
 
@@ -236,6 +246,7 @@ public class MemberController {
 		session.removeAttribute("mbMapY");
 		session.removeAttribute("nmNo");
 		session.removeAttribute("nmName");
+		session.removeAttribute("tnNo");
 		return "redirect:/findTrainer";
 	}
 	

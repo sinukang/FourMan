@@ -177,7 +177,7 @@
 													<div class="user_input">
 														<h4>활동하는 센터를 선택해주세요<span>*</span></h4>
 														<div class="center_search">
-															<input type="text" name="centerName">
+															<input type="text" name="centerName" placeholder="센터의 이메일을 입력해주세요!">
 															<div class="search_btn">
 																<i class="fa-solid fa-magnifying-glass"></i>
 															</div>
@@ -246,8 +246,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="../include/reviewModal.jsp"/>
-	<jsp:include page="../include/orderModal.jsp"/>
 	
 	<script>
 	
@@ -330,7 +328,9 @@
 	}
 		
 	</script>
-	
+	<script>
+	// 센터 이메일 스크립트
+	</script>
 	<script>
 	
 		document.addEventListener("DOMContentLoaded", function () {
@@ -458,112 +458,6 @@
 	
 	</script>
 	
-	<script>
-	
-	/* 모달 팝업 스크립트 */
-	const modal = $('#modal_wrap');
-	const closeBtn = $('#close_btn');
-	//모달 영역 밖 클릭 시 모달 닫음
-	window.onclick = function(e){
-		if(e.target.classList.contains('modal_wrap')){
-			
-			modal.css('display','none');
-		}
-	}
-
-	//X버튼 클릭 시 모달 닫음
-	closeBtn.click(function() {
-		
-		modal.css('display','none');
-	});
-
-	
-	$(document).ready(function(){
-		
-		var photoBox = [{'value':'center1.jpg'},{'value':'center2.jpg'},{'value':'center3.jpg'}
-						,{'value':'center4.jpg'},{'value':'fitness1.jpg'},{'value':'fitness2.jpg'}
-						,{'value':'fitness3.jpg'},{'value':'fitness4.jpg'},{'value':'img_640x640.jpg'}];
-		
-		$(document).on("click",".popup_btn", function(){
-
-			$('.swiper-wrapper').html('');
-			var str = '';
-			
-			$.each(photoBox, function(){
-				str += '<div class="swiper-slide">';
-				str += '<img class="modal_photo" src="${pageContext.request.contextPath}/resources/img/'+this.value+'">';
-				str += '</div>';
-			});
-			
-			$('.swiper-wrapper').html(str);
-			
-			$("#modal_wrap").css('display', 'flex');
-			
-		});
-		
-		var swiper = new Swiper(".my_swiper", {
-			spaceBetween: 30,
-			centeredSlides: true,
-			autoHeight : true,
-			slidesPerView: 1,
-			pagination: {
-				el: ".swiper-pagination-custom",
-				clickable: true,
-				bulletClass:"custom_bullet",
-				bulletActiveClass:"swiper-pagination-custom-bullet-active",
-				renderBullet: function (index, className) {
-					return '<img class="'+className+'" src="${pageContext.request.contextPath}/resources/img/'+photoBox[index].value+'">'
-				}
-			},
-			navigation: {
-				nextEl: ".swiper-button-next",
-				prevEl: ".swiper-button-prev",
-			},
-		});
-		
-	});
-	
-	const orderModal = $('.order_modal');
-	const exitButton2 = $('.exit_button');
-	const modalColse2 = $('.modal_close');
-	// 리뷰 작성하기 버튼
-	$('.order').click(function(){
-//		if($('.review_button_expand_wrap').css('opacity')==1){
-//			$('.review_button_expand_wrap').css('opacity',0);
-//		}else{
-//			$('.review_button_expand_wrap').css('opacity',1);
-//		}
-		orderModal.css('display','flex');
-		$("body").addClass("overflow-hidden");
-// 		$(".modal").addClass("overflow-auto");
-// 		$(".modal_dialog").addClass("mt-10p");
-// 		$(".modal_dialog").addClass("pt-10p");
-//		console.log('order_button');
-	});
-
-	exitButton2.click(function() {
-		orderModal.css('display','none');
-		$("body").removeClass("overflow-hidden");
-// 		$(".modal").removeClass("overflow-auto");
-// 		$(".modal_dialog").removeClass("mt-10p");
-// 		$(".modal_dialog").removeClass("pt-10p");
-	});
-
-	modalColse2.click(function() {
-		orderModal.css('display','none');
-		$("body").removeClass("overflow-hidden");
-// 		$(".modal").removeClass("overflow-auto");
-// 		$(".modal_dialog").removeClass("mt-10p");
-// 		$(".modal_dialog").removeClass("pt-10p");
-	});
-
-	window.onclick = function(e){
-		if(!e.target.classList.contains("modal_body")){
-			document.querySelector(".modal_body").style.display = "none";
-		}
-	}
-	
-	</script>
 	
 </body>
 </html>
