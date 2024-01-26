@@ -25,7 +25,14 @@ public class HomeController {
 		
 		ArrayList<TrainerInfoDTO> tio_alist = ts.trainerSelectAll();
 		
+		int countMember = ts.countMember();
+		int countTrainer = ts.countTrainer();
+		int countOrder = ts.countOrder();
+		
 		model.addAttribute("tio_alist", tio_alist);
+		model.addAttribute("countMember", countMember);
+		model.addAttribute("countTrainer", countTrainer);
+		model.addAttribute("countOrder", countOrder);
 		
 		return "index";
 	}

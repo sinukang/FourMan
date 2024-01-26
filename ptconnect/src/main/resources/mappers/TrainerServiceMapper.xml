@@ -336,4 +336,16 @@
 		ORDER BY m.mbNo desc limit 10
 	</select>
 	
+	<select id="countMember" resultType="int">
+		SELECT COUNT(*) FROM member where mbAuth='U' AND mbDelYN='N'
+	</select>
+	
+	<select id="countTrainer" resultType="int">
+		SELECT COUNT(*) FROM member where mbAuth='T' AND mbDelYN='N'
+	</select>
+	
+	<select id="countOrder" resultType="int">
+		SELECT COUNT(*) FROM order_
+	</select>
+	
 </mapper>

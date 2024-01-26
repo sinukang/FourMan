@@ -73,4 +73,10 @@ public interface TrainerServiceMapper {
 	
 	public ArrayList<TrainerInfoDTO> trainerSelectAll();
 	
+	public int countMember();
+	
+	public int countTrainer();
+	
+	public int countOrder();
+	
 }

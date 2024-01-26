@@ -22,34 +22,34 @@
 			<div class="bannerBox">
 				<div class="banner">
 					<img src="${pageContext.request.contextPath}/resources/img/mainbanner1.png">
-					<h4>가입 고객</h4>
-					<h1>13,000</h1>
-					<p><span>13,000</span>명의 고객님이 <br> PTConnect를 믿고 찾아주세요! </p>
+					<h4>가입 회원</h4>
+					<h1>${countMember}</h1>
+					<p><span>${countMember}</span>명의 회원님이 <br> PTConnect를 믿고 찾아주세요! </p>
 				</div>
 				<div class="banner">
 					<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 					<h4>등록 트레이너</h4>
-					<h1>2,500</h1>
-					<p><span>2,500</span>명의 전문트레이너가 <br> 활동중이에요! </p>
+					<h1>${countTrainer}</h1>
+					<p><span>${countTrainer}</span>명의 전문트레이너가 <br> 활동중이에요! </p>
 				</div>
 				<div class="banner">
 					<img src="${pageContext.request.contextPath}/resources/img/mainbanner3.png">
-					<h4>이용 후기</h4>
-					<h1>120,000</h1>
-					<p><span>120,000</span>건의 후기를 <br> 확인해 보세요!</p>
+					<h4>PT이용 회원</h4>
+					<h1>${countOrder}</h1>
+					<p><span>${countOrder}</span>명의 회원님이 <br> 1회 체험권을 구매해 주셨어요!</p>
 				</div>
 			</div>
 		</div>
 		<!-- 검색창 -->
 		
-		<div class="mainSearchBar">
-			<div class="searchKeyword">
-				<input type="text" id="search_keyword" class="bar" placeholder="지역, 지하철역, 센터, 선생님 검색" autocomplete="off" name="keyword" maxlength="20" value="">
-			</div>
-			<button class="searchButton">
-				트레이너 찾기
-			</button>
-		</div>
+<!-- 		<div class="mainSearchBar"> -->
+<!-- 			<div class="searchKeyword"> -->
+<!-- 				<input type="text" id="search_keyword" class="bar" placeholder="지역, 지하철역, 센터, 선생님 검색" autocomplete="off" name="keyword" maxlength="20" value=""> -->
+<!-- 			</div> -->
+<!-- 			<button class="searchButton"> -->
+<!-- 				트레이너 찾기 -->
+<!-- 			</button> -->
+<!-- 		</div> -->
 		
 		<!-- 리뷰 배너 -->
 		<div class="swiper">
@@ -68,9 +68,9 @@
 			 
 				<div class="swiper-slide">
 					<div class="mainReviewTitle">
-						<h4 class="reviewUser">${tio.mbName} 회원님</h4>
+						<h4 class="reviewUser">${tio.mbName} 선생님</h4>
 <!-- 						<h5 class="reviewDate">10분전</h5> -->
-						<span class="reviewStar"> ${tio.tnTicket}원</span>
+						<span class="reviewStar">1회 체험권 | ${tio.tnTicket}원</span>
 					</div>
 					
 					<div class="reviewText">
@@ -82,7 +82,7 @@
 							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 							<div class="profileTitle">
 								<h4>${tio.mbName} <span>트레이너</span></h4>
-								<h5 class="profileAddr">미국 11번가 골드짐</h5>
+								<h5 class="profileAddr">${tio.ctName}</h5>
 							</div>
 							<div class="movePageBtn">
 								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>

@@ -58,4 +58,10 @@ public interface TrainerService {
 	public ProgramDTO programSelectOne(int tnNo);
 	
 	public ArrayList<TrainerInfoDTO> trainerSelectAll();
+	
+	public int countMember();
+	
+	public int countTrainer();
+	
+	public int countOrder();
 }
