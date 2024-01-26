@@ -55,7 +55,7 @@
 		<div class="swiper">
 			<div class="reviewBannerTitle">
 				<div class="titleBar">
-					<h1>PTCONNECT <span>실시간</span> 후기 </h1>
+					<h1>PTCONNECT 신규 <span>트레이너</span> </h1>
 					<img src="${pageContext.request.contextPath}/resources/img/thumicon2.png">
 				</div>
 			</div>
@@ -63,27 +63,25 @@
 			
 			<div class="swiper-wrapper">
 			 <div class="swiper-button-prev"></div>
+			 
+			 <c:forEach var="tio" items="${tio_alist}">
+			 
 				<div class="swiper-slide">
-				
-					<c:forEach var="tio" items="${tio_alist}">
-				
 					<div class="mainReviewTitle">
-						<h4 class="reviewUser">${tio.mbName} 선생님</h4>
-						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> 30000원</span>
+						<h4 class="reviewUser">${tio.mbName} 회원님</h4>
+<!-- 						<h5 class="reviewDate">10분전</h5> -->
+						<span class="reviewStar"> ${tio.tnTicket}원</span>
 					</div>
 					
 					<div class="reviewText">
-						<p>저는 피티를 처음 받았어요 하두 커뮤니티에서 피티에 대해 말이 많아서 망설이다가 포기하곤 했는데  새해 목표로 바디프로필을 계획해서 선생님을 찾다가
-						pt커넥트를 알게되었고 주변에서 근무하시는 평 좋은 선생님을 찾아 수업받고 3개월의 대장정 끝에 생애 첫 바디프로필에 성공했습니다ㅜㅜ  정말 강추합니다!!!!
-						</p>
+						<p>${tio.tnIntro}</p>
 					</div>
 					
 					<div class="moveTrainerPage">
 						<div class="trainerProfile">
 							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 							<div class="profileTitle">
-								<h4>플렉스휠러 <span>트레이너</span></h4>
+								<h4>${tio.mbName} <span>트레이너</span></h4>
 								<h5 class="profileAddr">미국 11번가 골드짐</h5>
 							</div>
 							<div class="movePageBtn">
@@ -91,14 +89,11 @@
 							</div>
 						</div>
 					</div>
-					
-					</c:forEach>
-					
 				</div>
-			
-			</div>
 				
-		</div>
+			</c:forEach>
+				
+			</div>
 			
 			
 			

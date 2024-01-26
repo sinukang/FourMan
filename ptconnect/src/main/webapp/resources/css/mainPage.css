@@ -89,10 +89,12 @@ input:focus {
 	align-items:center;
 	justify-content: space-between;
 	padding:10px;
+	color: #5865f2;
 }
 
 .mainReviewTitle span{
-	color:#f59f1f;
+	color: rgb(108 118 128 / 68%);
+    font-weight: bold;
 }
 
 .reviewDate{
