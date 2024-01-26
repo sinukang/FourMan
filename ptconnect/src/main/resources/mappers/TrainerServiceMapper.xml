@@ -298,4 +298,16 @@
 		WHERE tnNo = #{tnNo}
 	</select>
 	
+	<select id="trainerSelectAll" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N' AND m.mbAuth ='T'
+		ORDER BY m.mbNo desc limit 10
+	</select>
+	
 </mapper>

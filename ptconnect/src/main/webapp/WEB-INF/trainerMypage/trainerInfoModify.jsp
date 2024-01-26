@@ -46,7 +46,7 @@
 															<!-- 사진 업로드 버튼 -->
 															<div class="upload-btn">
 																<label class="file-label" for="chooseFile">사진 선택</label>
-																<input class="files" type="file" id="chooseFile" name="files" multiple="multiple" onchange="previewImages(this)">
+																<input class="files" type="file" id="chooseFile" name="files" multiple="multiple" onchange="previewImages(this)" style="display: none">
 															</div>
 														</div>
 													</div>
@@ -103,7 +103,6 @@
 																<input class="qualify-button" id="qualify-button" type="button" onclick="addQualification()">
 															</div>
 															<div id="qualify-container">
-																
 																<c:forEach var="Qualify" items="${QualifyArr}">
 																<div class="trophy">
 																	<!-- <i class="fa-solid fa-award"></i> -->
@@ -210,29 +209,29 @@
 														<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 													</div>
 													<div>
-														<div class="trainer_name">김빡빡 선생님</div>
+														<div class="trainer_name">${mo.mbName}</div>
 														<div class="center_name">센터없음</div>
-														<div class="stars">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;">
-															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;">
-															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;">
-															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;">
-															<span class="review_wrap">
-																<span class="rating">(3.2)</span>
-																<span class="count">(5)</span>
-															</span>
-														</div>
-														<div class="pickup_line">"안녕하세요, 개빡센 트레이너 김빡빡입니다."</div>
+<!-- 														<div class="stars"> -->
+<%-- 															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;"> --%>
+<%-- 															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;"> --%>
+<%-- 															<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;"> --%>
+<%-- 															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;"> --%>
+<%-- 															<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" style="margin: 0px 0.5px; display: inline; vertical-align: baseline;"> --%>
+<!-- 															<span class="review_wrap"> -->
+<!-- 																<span class="rating">(3.2)</span> -->
+<!-- 																<span class="count">(5)</span> -->
+<!-- 															</span> -->
+<!-- 														</div> -->
+														<div class="pickup_line">"${tio.tnOneLine}"</div>
 														<div class="list_wrap">
 															<div class="flex_box">
-																<span class="left">자격검증</span><span class="right">자격사항을 등록하세요</span>
+																<span class="left">자격검증</span><span class="right">${qo.qualify}</span>
 															</div>
 															<div class="flex_box">
-																<span class="left">전문분야</span><span class="right">프로그램을 추가하세요</span>
+																<span class="left">전문분야</span><span class="right">${pgo.pgContent}</span>
 															</div>
 															<div class="flex_box">
-																<span class="left">대표가격</span><span class="right">가격정보를 등록하세요</span>
+																<span class="left">대표가격</span><span class="right">${tio.tnTicket}원</span>
 															</div>
 														</div>
 													</div>
@@ -240,10 +239,10 @@
 											</div>
 											<div class="downside">
 												<button class="order">1회 체험 신청 하기</button>
-												<button class="counseling">
-													<i class="fa-solid fa-comment"></i>
-													상담받기
-												</button>
+<!-- 												<button class="counseling"> -->
+<!-- 													<i class="fa-solid fa-comment"></i> -->
+<!-- 													상담받기 -->
+<!-- 												</button> -->
 											</div>
 										</div>
 									</div>

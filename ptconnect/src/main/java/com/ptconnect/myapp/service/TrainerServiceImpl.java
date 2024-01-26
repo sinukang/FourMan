@@ -246,4 +246,14 @@ public class TrainerServiceImpl implements TrainerService{
 		return pgo;
 	}
 	
+	@Override
+	public ArrayList<TrainerInfoDTO> trainerSelectAll() {
+		
+		ArrayList<TrainerInfoDTO> tio = new ArrayList<TrainerInfoDTO>();
+		
+		tio = tsm.trainerSelectAll();
+		
+		return tio;
+	}
+	
 }

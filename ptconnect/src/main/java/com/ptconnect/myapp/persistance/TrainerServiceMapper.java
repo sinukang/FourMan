@@ -65,5 +65,6 @@ public interface TrainerServiceMapper {
 
 	public ProgramDTO programSelectOne(int tnNo);
 	
-
+	public ArrayList<TrainerInfoDTO> trainerSelectAll();
+	
 }

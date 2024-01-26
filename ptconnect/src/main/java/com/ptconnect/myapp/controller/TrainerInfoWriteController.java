@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.TrainerService;
 
@@ -25,7 +27,14 @@ public class TrainerInfoWriteController {
 	private TrainerService ts;	
 	
 	@RequestMapping(value = "trainerInfoWrite", method = RequestMethod.GET)
-	public String trainerInfoWrite(HttpSession session) {
+	public String trainerInfoWrite(Model model, HttpSession session) {
+		
+		int mbNo = Integer.parseInt(session.getAttribute("mbNo").toString());
+		System.out.println("mbNo : " + mbNo);
+		
+		
+		MemberDTO mo = ts.memberSelectOne(mbNo);
+		model.addAttribute("mo",mo);
 		
 		return "trainerMypage/trainerInfoWrite";
 	}

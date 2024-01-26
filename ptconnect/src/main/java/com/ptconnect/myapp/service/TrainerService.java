@@ -50,4 +50,6 @@ public interface TrainerService {
 	public PriceInfo lessonPriceSelectOne(int tnNo);
 	
 	public ProgramDTO programSelectOne(int tnNo);
+	
+	public ArrayList<TrainerInfoDTO> trainerSelectAll();
 }

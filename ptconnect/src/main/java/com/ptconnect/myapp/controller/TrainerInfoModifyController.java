@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
+import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.PriceInfo;
 import com.ptconnect.myapp.domain.ProgramDTO;
 import com.ptconnect.myapp.domain.QualifyInfo;
@@ -91,6 +92,11 @@ public class TrainerInfoModifyController {
 		model.addAttribute("QualifyArr", QualifyArr);
 		model.addAttribute("aryList", jsAry);
 		model.addAttribute("ProgramArr", ProgramArr);
+		MemberDTO mo = ts.memberSelectOne(mbNo);
+		System.out.println("mbName :" + mo.getMbName());
+		model.addAttribute("mo",mo);
+		model.addAttribute("qo", qo);
+		model.addAttribute("pgo", pgo);
 		
 		return "trainerMypage/trainerInfoModify";
 	}
@@ -133,7 +139,7 @@ public class TrainerInfoModifyController {
 	            System.out.println("filename" + filename);
 	            System.out.println("originalFilename" + originalFilename);
 	            
-	            String path = request.getSession().getServletContext().getRealPath("/resources/img");
+	            String path = request.getSession().getServletContext().getRealPath("/resources/download");
 	            
 	            File uploadPath = new File(path, filename);
 	            file.transferTo(uploadPath);

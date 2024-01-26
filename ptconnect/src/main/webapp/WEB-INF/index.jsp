@@ -64,10 +64,13 @@
 			<div class="swiper-wrapper">
 			 <div class="swiper-button-prev"></div>
 				<div class="swiper-slide">
+				
+					<c:forEach var="tio" items="${tio_alist}">
+				
 					<div class="mainReviewTitle">
-						<h4 class="reviewUser">유재석 회원님</h4>
+						<h4 class="reviewUser">${tio.mbName} 선생님</h4>
 						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> &#9733;&#9733;&#9733;&#9733;&#9733;</span>
+						<span class="reviewStar"> 30000원</span>
 					</div>
 					
 					<div class="reviewText">
@@ -88,154 +91,14 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				
-				<div class="swiper-slide">
-					<div class="mainReviewTitle">
-						<h4 class="reviewUser">정준하 회원님</h4>
-						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> &#9733;&#9733;&#9733;&#9733;&#9733;</span>
-					</div>
 					
-					<div class="reviewText">
-						<p> 정말 강추합니다!!!!쌤 최고 ! 
-						</p>
-					</div>
+					</c:forEach>
 					
-					<div class="moveTrainerPage">
-						<div class="trainerProfile">
-							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-							<div class="profileTitle">
-								<h4>제이커틀러 <span>트레이너</span></h4>
-								<h5 class="profileAddr">미국 11번가 골드짐</h5>
-							</div>
-							<div class="movePageBtn">
-								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="swiper-slide">
-					<div class="mainReviewTitle">
-						<h4 class="reviewUser">하동훈 회원님</h4>
-						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> &#9733;&#9733;&#9733;&#9733;&#9733;</span>
-					</div>
-					
-					<div class="reviewText">
-						<p>혼자서 낑낑대고 몇년을 고생했는데 왜 이제야 받을생각을 했을까요 ... 시간이 아깝고 도움이 정말많이 되었습니다!!
-						</p>
-					</div>
-					
-					<div class="moveTrainerPage">
-						<div class="trainerProfile">
-							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-							<div class="profileTitle">
-								<h4>하디 추판 <span>트레이너</span></h4>
-								<h5 class="profileAddr">미국 11번가 골드짐</h5>
-							</div>
-							<div class="movePageBtn">
-								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
-							</div>
-						</div>
-					</div>
 				</div>
 			
-				<div class="swiper-slide">
-					<div class="mainReviewTitle">
-						<h4 class="reviewUser">노홍철 회원님</h4>
-						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> &#9733;&#9733;&#9733;&#9733;&#9733;</span>
-					</div>
-					
-					<div class="reviewText">
-						<p>저는 피티를 처음 받았어요 하두 커뮤니티에서 피티에 대해 말이 많아서 망설이다가 포기하곤 했는데  새해 목표로 바디프로필을 계획해서 선생님을 찾다가
-						pt커넥트를 알게되었고 주변에서 근무하시는 평 좋은 선생님을 찾아 수업받고 3개월의 대장정 끝에 생애 첫 바디프로필에 성공했습니다ㅜㅜ 물론 목표를 달성한것도 
-						좋지만 선생님이 운동방법,식사는 물론이고 운동하며 체형이 틀어진것에 대한 정보나 올바른 자세에 대해 자세히 설명해주셔서 앞으로 살면서 내야할 병원비도 
-						아낀것같은 정말 뜻깊은 시간이었어요!!!ㅎㅎ 정말 강추합니다!!!!
-						</p>
-					</div>
-					
-					<div class="moveTrainerPage">
-						<div class="trainerProfile">
-							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-							<div class="profileTitle">
-								<h4>필히스 <span>트레이너</span></h4>
-								<h5 class="profileAddr">미국 11번가 골드짐</h5>
-							</div>
-							<div class="movePageBtn">
-								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
-							</div>
-						</div>
-					</div>
-			
-				</div>
-				
-				<div class="swiper-slide">
-					<div class="mainReviewTitle">
-						<h4 class="reviewUser">정형돈 회원님</h4>
-						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> &#9733;&#9733;&#9733;&#9733;&#9733;</span>
-					</div>
-					
-					<div class="reviewText">
-						<p>저는 피티를 처음 받았어요 하두 커뮤니티에서 피티에 대해 말이 많아서 망설이다가 포기하곤 했는데  새해 목표로 바디프로필을 계획해서 선생님을 찾다가
-						pt커넥트를 알게되었고 주변에서 근무하시는 평 좋은 선생님을 찾아 수업받고 3개월의 대장정 끝에 생애 첫 바디프로필에 성공했습니다ㅜㅜ 물론 목표를 달성한것도 
-						좋지만 선생님이 운동방법,식사는 물론이고 운동하며 체형이 틀어진것에 대한 정보나 올바른 자세에 대해 자세히 설명해주셔서 앞으로 살면서 내야할 병원비도 
-						아낀것같은 정말 뜻깊은 시간이었어요!!!ㅎㅎ 정말 강추합니다!!!!저는 피티를 처음 받았어요 하두 커뮤니티에서 피티에 대해 말이 많아서 망설이다가 포기하곤 했는데  새해 목표로 바디프로필을 계획해서 선생님을 찾다가
-						pt커넥트를 알게되었고 주변에서 근무하시는 평 좋은 선생님을 찾아 수업받고 3개월의 대장정 끝에 생애 첫 바디프로필에 성공했습니다ㅜㅜ 물론 목표를 달성한것도 
-						좋지만 선생님이 운동방법,식사는 물론이고 운동하며 체형이 틀어진것에 대한 정보나 올바른 자세에 대해 자세히 설명해주셔서 앞으로 살면서 내야할 병원비도 
-						아낀것같은 정말 뜻깊은 시간이었어요!!!ㅎㅎ 정말 강추합니다!!!!
-						</p>
-					</div>
-					
-					<div class="moveTrainerPage">
-						<div class="trainerProfile">
-							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-							<div class="profileTitle">
-								<h4>리 헤이니 <span>트레이너</span></h4>
-								<h5 class="profileAddr">미국 11번가 골드짐</h5>
-							</div>
-							<div class="movePageBtn">
-								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
-							</div>
-						</div>
-					</div>
-			
-				</div>
-				
-				<div class="swiper-slide">
-					<div class="mainReviewTitle">
-						<h4 class="reviewUser">정준하 회원님</h4>
-						<h5 class="reviewDate">10분전</h5>
-						<span class="reviewStar"> &#9733;&#9733;&#9733;&#9733;&#9733;</span>
-					</div>
-					
-					<div class="reviewText">
-						<p>저는 피티를 처음 받았어요 하두 커뮤니티에서 피티에 대해 말이 많아서 망설이다가 포기하곤 했는데  새해 목표로 바디프로필을 계획해서 선생님을 찾다가
-						pt커넥트를 알게되었고 주변에서 근무하시는 평 좋은 선생님을 찾아 수업받고 3개월의 대장정 끝에 생애 첫 바디프로필에 성공했습니다ㅜㅜ 물론 목표를 달성한것도 
-						좋지만 선생님이 운동방법,식사는 물론이고 운동하며 체형이 틀어진것에 대한 정보나 올바른 자세에 대해 자세히 설명해주셔서 앞으로 살면서 내야할 병원비도 
-						아낀것같은 정말 뜻깊은 시간이었어요!!!ㅎㅎ 정말 강추합니다!!!!
-						</p>
-					</div>
-					
-					<div class="moveTrainerPage">
-						<div class="trainerProfile">
-							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
-							<div class="profileTitle">
-								<h4>로니콜먼 <span>트레이너</span></h4>
-								<h5 class="profileAddr">미국 11번가 골드짐</h5>
-							</div>
-							<div class="movePageBtn">
-								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
-							</div>
-						</div>
-					</div>
-			
-				</div>
-				
 			</div>
+				
+		</div>
 			
 			
 			

@@ -210,7 +210,7 @@
 														<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
 													</div>
 													<div>
-														<div class="trainer_name">김빡빡 선생님</div>
+														<div class="trainer_name">${mo.mbName} 선생님</div>
 														<div class="center_name">센터없음</div>
 														<div class="pickup_line">"한줄소개를 등록하세요"</div>
 														<div class="list_wrap">
@@ -229,10 +229,10 @@
 											</div>
 											<div class="downside">
 												<button class="order">1회 체험 신청 하기</button>
-												<button class="counseling">
-													<i class="fa-solid fa-comment"></i>
-													상담받기
-												</button>
+<!-- 												<button class="counseling"> -->
+<!-- 													<i class="fa-solid fa-comment"></i> -->
+<!-- 													상담받기 -->
+<!-- 												</button> -->
 											</div>
 										</div>
 									</div>
