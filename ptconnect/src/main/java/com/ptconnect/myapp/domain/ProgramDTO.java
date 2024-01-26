@@ -3,8 +3,15 @@ package com.ptconnect.myapp.domain;
 
 public class ProgramDTO extends TrainerInfoDTO{
 	
-	private int pgNo; 
-    private String programValue;
+    private String pgContent;
+
+	public String getPgContent() {
+		return pgContent;
+	}
+
+	public void setPgContent(String pgContent) {
+		this.pgContent = pgContent;
+	}
 
 	
 }

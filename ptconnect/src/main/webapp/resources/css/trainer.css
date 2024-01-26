@@ -633,7 +633,8 @@
 	    font-size: 16px;
 	    font-weight: bold;
 	    border: 1px solid #5865f2;
-	    padding: 10px 280px;
+	    display: block;
+		text-align: center;
 	}
 	
 .priceTable {
@@ -670,7 +671,8 @@
     font-size: 16px;
     font-weight: bold;
     border: 1px solid #5865f2;
-    padding: 10px 266px;
+	display: block;
+    text-align: center;
 }
 
 .qualify-button, .program-button {
@@ -684,6 +686,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#lpCf {
+	text-align: right;
 }
 
 #imagePreviewContainer {

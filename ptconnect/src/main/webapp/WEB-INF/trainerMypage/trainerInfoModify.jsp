@@ -63,7 +63,7 @@
 														</h4>
 														<div class="content_wrap">
 															<div class="content_text">
-																<textarea type="text" id="tnIntro" name="tnIntro" placeholder="소개글이 없어요."></textarea>
+																<textarea type="text" id="tnIntro" name="tnIntro" placeholder="소개글이 없어요.">${tio.tnIntro}</textarea>
 															</div>
 														</div>
 													</div>
@@ -82,7 +82,7 @@
 															<div style="position: absolute; top: 98px; right: 42px; font-size: 14px; color: rgb(147, 147, 147);">
 																원
 															</div>
-															<input type="text" id="tnTicket" name="tnTicket" placeholder="1회 체험권 가격을 입력해 주세요.">
+															<input type="text" id="tnTicket" name="tnTicket" value="${tio.tnTicket}" placeholder="1회 체험권 가격을 입력해 주세요.">
 														</div>
 													</div>
 												</div>
@@ -103,7 +103,14 @@
 																<input class="qualify-button" id="qualify-button" type="button" onclick="addQualification()">
 															</div>
 															<div id="qualify-container">
-																<input type="text" id="qualify" name="qualify" placeholder="자격사항을 입력해 주세요.">
+																
+																<c:forEach var="Qualify" items="${QualifyArr}">
+																<div class="trophy">
+																	<!-- <i class="fa-solid fa-award"></i> -->
+																	<!-- <i class="fa-solid fa-dumbbell"></i> -->
+																	<input type="text" id="qualify" name="qualify" value="${Qualify}" placeholder="자격사항을 입력해 주세요.">
+																</div>	
+																</c:forEach>
 															</div>
 														</div>
 													</div>
@@ -124,9 +131,11 @@
 																<label class="program-label" for="program-button">프로그램 추가</label>
 																<input class="program-button" id="program-button" type="button" onclick="addProgram()">
 															</div>
-															<div id="program-container">
-																<textarea type="text" id="pgContent" name="pgContent" placeholder="pt프로그램을 작성해 주세요."></textarea>
-															</div>
+															<c:forEach var="Program" items="${ProgramArr}">
+																<div class="trophy">
+																	<textarea type="text" id="pgContent" name="pgContent" placeholder="pt프로그램을 작성해 주세요.">${Program}</textarea>
+																</div>	
+															</c:forEach>
 														</div>
 													</div>
 												</div>
@@ -151,11 +160,12 @@
 																	</tr>
 																</thead>
 																<tbody>
+																	<c:forEach var="i" items="${aryList}">
 																	<tr>
 																		<td>
-																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
+																			<input type="text" id="lpCount" value="${i.lpCount}" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
 																		</td>
-																		<td rowspan=4>
+																		<td>
 																			<select id="lpCf" name="lpCf">
 																				<option value="C">회</option>
 																				<option value="T">개월</option>
@@ -165,39 +175,10 @@
 																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">
 																				원
 																			</div>
-																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
+																			<input type="text" id="lessonPrice" value="${i.lessonPrice}" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
 																		</td>
 																	</tr>
-																	<tr>
-																		<td>
-																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
-																		</td>
-																		<td style="position: relative;">
-																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
-																			</div>
-																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
-																		</td>
-																		<td style="position: relative;">
-																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
-																			</div>
-																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<input type="text" id="lpCount" placeholder="숫자만 입력" name="lpCount" maxlength="5" value="" style="text-align: center;">
-																		</td>
-																		<td style="position: relative;">
-																			<div style="position: absolute; top: 24px; right: 20px; font-size: 14px; color: rgb(147, 147, 147);">원
-																			</div>
-																			<input type="text" id="lessonPrice" placeholder="숫자만 입력" name="lessonPrice" maxlength="9" value="" style="text-align: right; padding-right: 36px;">
-																		</td>
-																	</tr>
+																	</c:forEach>
 																</tbody>
 															</table>
 														</div>
@@ -214,7 +195,7 @@
 															</div>
 														</h4>
 														<div class="content_wrap">
-															<textarea type="text" id="tnOneLine" name="tnOneLine" placeholder="소개글이 없어요."></textarea>
+															<textarea type="text" id="tnOneLine" name="tnOneLine" placeholder="소개글이 없어요.">${tio.tnOneLine}</textarea>
 														</div>
 													</div>
 												</div>

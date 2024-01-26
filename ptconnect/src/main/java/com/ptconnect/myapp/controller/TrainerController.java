@@ -151,18 +151,20 @@ public class TrainerController {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("tnNo", idx);
+		System.out.println("tnNo : " + tnNo);
 		
 		Integer mbNo = (Integer) session.getAttribute("mbNo");
 		System.out.println("mbNo : " + mbNo);
 		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
+//		System.out.println("qualify : " + tio.getQualify());
 		
 		String[] QualifyArr = null;
 		if(tio.getQualify().contains(",")) {
 			QualifyArr = tio.getQualify().split(",");
 		}else {
-			QualifyArr = new String[0];
+			QualifyArr = new String[1];
 			QualifyArr[0] = tio.getQualify();
 		}
 		

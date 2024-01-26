@@ -40,7 +40,7 @@
 										
 										<div class="pwdBox">
 											<h3>비밀번호</h3>
-											<input type="text" name="mbPwd" id="userLoginPwd">
+											<input type="password" name="mbPwd" id="userLoginPwd">
 										</div>
 										<div class="loginBtn">
 										<button type="button" id="userLoginBtn">로그인</button>
@@ -64,7 +64,7 @@
 										
 										<div class="pwdBox">
 											<h3>비밀번호</h3>
-											<input type="text" name="mbPwd" id="trainerLoginPwd">
+											<input type="password" name="mbPwd" id="trainerLoginPwd">
 										</div>
 										
 										<div class="loginBtn">
@@ -89,7 +89,7 @@
 										
 										<div class="pwdBox">
 											<h3>비밀번호</h3>
-											<input type="text" name="mbPwd" id="centerLoginPwd">
+											<input type="password" name="mbPwd" id="centerLoginPwd">
 										</div>
 										<div class="loginBtn">
 											<button type="button" id="centerLoginBtn">로그인</button>
@@ -113,7 +113,7 @@
 										
 										<div class="pwdBox">
 											<h3>비밀번호</h3>
-											<input type="text" name="nmPwd" id="nonLoginPwd">
+											<input type="password" name="nmPwd" id="nonLoginPwd">
 										</div>
 										<div class="loginBtn" onclick="nonMemberLogin()">
 											<button type="button" id="nonLoginBtn">로그인</button>

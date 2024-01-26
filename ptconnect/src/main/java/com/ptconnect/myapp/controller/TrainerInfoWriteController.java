@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,9 @@ public class TrainerInfoWriteController {
 	public String trainerInfoInsertAction(TrainerInfoDTO tio,
 										FileDetailDTO fdo,
 										@RequestParam("files") MultipartFile[] files,
-										HttpSession session) throws Exception {	
-		
+										HttpSession session,
+										HttpServletRequest request) throws Exception {	
+		System.out.println("lpCf : " + tio.getLpCf());
 		
 		int mbNo = Integer.parseInt(session.getAttribute("mbNo").toString());
 		
@@ -51,10 +53,12 @@ public class TrainerInfoWriteController {
 	        	String uniqueIdentifier = Long.toString(System.currentTimeMillis());
 	            String filename = uniqueIdentifier + "_" + originalFilename;
 	            
-	            System.out.println("filename" + filename);
-	            System.out.println("originalFilename" + originalFilename);
+	            System.out.println("filename : " + filename);
+	            System.out.println("originalFilename : " + originalFilename);
 	            
-	            File uploadPath = new File("C:/upload/my0803/" + filename);
+	            String path = request.getSession().getServletContext().getRealPath("/resources/img");
+	            
+	            File uploadPath = new File(path, filename);
 	            file.transferTo(uploadPath);
 
 	            // 각 파일에 대한 FileDetailDTO 객체 생성

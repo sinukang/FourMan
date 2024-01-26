@@ -50,7 +50,7 @@
 	</beans:bean>	
 	
 	<interceptors>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/admin/admin_login" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
@@ -69,7 +69,7 @@
 			<mapping path="/centerInfoModify" />
 			<mapping path="/centerSales" />
 			<mapping path="/centerTrainer" />
-			<!-- 어드민 -->
+			어드민
 			<mapping path="/admin/admin_coupon_list" />
 			<mapping path="/admin/admin_coupon_modify" />
 			<mapping path="/admin/admin_coupon" />
@@ -89,7 +89,7 @@
 			<mapping path="/admin/reportList" />
 			<mapping path="/admin/userManagement" />
 			<beans:ref bean="devAuthInterceptor" />
-		</interceptor>	
+		</interceptor>	 -->
 		<interceptor>
 			<mapping path="/userInfo" />
 			<mapping path="/userPwdModify" />

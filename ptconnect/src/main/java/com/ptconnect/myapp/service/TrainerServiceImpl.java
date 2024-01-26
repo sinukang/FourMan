@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.ptconnect.myapp.domain.FileDetailDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
+import com.ptconnect.myapp.domain.PriceInfo;
+import com.ptconnect.myapp.domain.ProgramDTO;
+import com.ptconnect.myapp.domain.QualifyInfo;
 import com.ptconnect.myapp.domain.ReviewDTO;
 import com.ptconnect.myapp.domain.SearchCriteria;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
@@ -202,7 +205,45 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return mo;
 	}
-
 	
+	@Override
+	public TrainerInfoDTO trainerSelectOne(int tnNo) {
+		
+		TrainerInfoDTO tio = new TrainerInfoDTO();
+		
+		tio = tsm.trainerSelectOne(tnNo);
+		
+		return tio;
+	}
+	
+	@Override
+	public QualifyInfo qualifySelectOne(int tnNo) {
+		
+		QualifyInfo qo = new QualifyInfo();
+		
+		qo = tsm.qualifySelectOne(tnNo);
+		
+		return qo;
+	}
+	
+	@Override
+	public PriceInfo lessonPriceSelectOne(int tnNo) {
+		
+		PriceInfo pro = new PriceInfo();
+		
+		pro = tsm.lessonPriceSelectOne(tnNo);
+		
+		return pro;
+	}
+	
+	@Override
+	public ProgramDTO programSelectOne(int tnNo) {
+		
+		ProgramDTO pgo = new ProgramDTO();
+		
+		pgo = tsm.programSelectOne(tnNo);
+		
+		return pgo;
+	}
 	
 }

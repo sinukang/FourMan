@@ -284,6 +284,9 @@
 	                }); //ajax
 	                var msg = '결제 금액이 일치하지 않아 결제가 취소됩니다.';
 	                alert(msg);
+	                
+	                window.location.href = window.location.href;
+	                
 	                return;
 	                
 	            } else {

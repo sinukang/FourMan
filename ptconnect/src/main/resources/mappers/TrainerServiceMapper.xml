@@ -260,7 +260,7 @@
         SELECT flNo
         FROM file_
         WHERE flCf = 'T' AND flCfNo = #{tnNo}
-</selectKey>
+		</selectKey>
 	</update>
 	
 	<update id="fileDetailModify" parameterType="fdo">
@@ -272,6 +272,30 @@
 		SELECT mbNo, mbEmail, mbName, mbPhone
 		FROM member
 		WHERE mbNo = #{mbNo}
+	</select>
+	
+	<select id="trainerSelectOne" parameterType="int" resultType="tio">
+		SELECT *
+		FROM trainerinfo
+		WHERE tnNo = #{tnNo}
+	</select>
+	
+	<select id="qualifySelectOne" parameterType="int" resultType="qo">
+		SELECT qualify
+		FROM qualify
+		WHERE tnNo = #{tnNo}
+	</select>
+	
+	<select id="lessonPriceSelectOne" parameterType="int" resultType="pro">
+		SELECT *
+		FROM lessonprice
+		WHERE tnNo = #{tnNo}
+	</select>
+	
+	<select id="programSelectOne" parameterType="int" resultType="pgo">
+		SELECT pgContent
+		FROM program
+		WHERE tnNo = #{tnNo}
 	</select>
 	
 </mapper>
