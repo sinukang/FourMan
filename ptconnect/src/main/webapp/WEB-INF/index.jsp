@@ -76,7 +76,7 @@
 					<div class="reviewText">
 						<p>${tio.tnIntro}</p>
 					</div>
-					
+					<a href="trainerInfoView?tnNo=${tio.tnNo}">
 					<div class="moveTrainerPage">
 						<div class="trainerProfile">
 							<img src="${pageContext.request.contextPath}/resources/download/${tio.tnImage}">
@@ -85,10 +85,11 @@
 								<h5 class="profileAddr">${tio.ctName}</h5>
 							</div>
 							<div class="movePageBtn">
-								<button type="button" onclick="location.href='trainerInfoView?tnNo=${tio.tnNo}';"><span class="btnSymbol">&#x27E9;</span></button>
+								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
 				
 			</c:forEach>

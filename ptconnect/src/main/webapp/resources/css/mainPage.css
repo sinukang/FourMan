@@ -90,6 +90,7 @@ input:focus {
 	justify-content: space-between;
 	padding:10px;
 	color: #5865f2;
+	border-bottom: 1px solid #0000001f;
 }
 
 .mainReviewTitle span{
