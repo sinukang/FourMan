@@ -16,6 +16,7 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	private String tnDate;
 	private String tnDateM;
 	private String tnDelYN;
+	private String tnImage;
 	
 	private int qlNo;
 	private String qualify;
@@ -258,5 +259,11 @@ public class TrainerInfoDTO extends CenterInfoDTO{
 	}
 	public void setTnDelYN(String tnDelYN) {
 		this.tnDelYN = tnDelYN;
+	}
+	public String getTnImage() {
+		return tnImage;
+	}
+	public void setTnImage(String tnImage) {
+		this.tnImage = tnImage;
 	}
 	}

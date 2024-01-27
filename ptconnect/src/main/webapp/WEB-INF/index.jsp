@@ -68,7 +68,7 @@
 			 
 				<div class="swiper-slide">
 					<div class="mainReviewTitle">
-						<h4 class="reviewUser">${tio.mbName} 선생님</h4>
+						<h4 class="reviewUser">"${tio.mbName} 선생님"</h4>
 <!-- 						<h5 class="reviewDate">10분전</h5> -->
 						<span class="reviewStar">1회 체험권 | ${tio.tnTicket}원</span>
 					</div>
@@ -79,13 +79,13 @@
 					
 					<div class="moveTrainerPage">
 						<div class="trainerProfile">
-							<img src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
+							<img src="${pageContext.request.contextPath}/resources/download/${tio.tnImage}">
 							<div class="profileTitle">
 								<h4>${tio.mbName} <span>트레이너</span></h4>
 								<h5 class="profileAddr">${tio.ctName}</h5>
 							</div>
 							<div class="movePageBtn">
-								<button type="button"><span class="btnSymbol">&#x27E9;</span></button>
+								<button type="button" onclick="location.href='trainerInfoView?tnNo=${tio.tnNo}';"><span class="btnSymbol">&#x27E9;</span></button>
 							</div>
 						</div>
 					</div>
@@ -97,8 +97,8 @@
 			
 			
 			
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+		  <div class="swiper-button-prev"></div>
+		  <div class="swiper-button-next"></div>
 		</div>
 		
 		
