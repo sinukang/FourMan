@@ -195,7 +195,6 @@
 										<div class="coachInfo">
 											<div class="coachTitle">
 												<h3 class="coachName">${tio.mbName}</h3>
-											
 												<div class="coachReviewCnt">
 													<img class="reviewIcon" src="${pageContext.request.contextPath}/resources/img/staricon.png">
 													<span class="reviewText">${tio.reviewCnt}</span>
