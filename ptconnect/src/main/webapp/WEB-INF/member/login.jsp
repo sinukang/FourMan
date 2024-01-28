@@ -16,14 +16,16 @@
 			<div>
 				<div> <!--헤더+맵-->
 					<jsp:include page="../include/header.jsp"/>
-					<section><!-- 섹션 -->
+					<section style="background-color: #f7f9fa;"><!-- 섹션 -->
 						<div class="loginWrap">
-							
 							<div class="loginBox">
 								<div class="tabWrap">
 									<div class="tab selectedTab" id="normalTab">일반회원</div>
+									|
 									<div class="tab" id="trainerTab">트레이너</div>
+									|
 									<div class="tab" id="centerTab">센터</div>
+									|
 									<div class="tab" id="nonTab">비회원</div>
 								</div>
 								<div style="display:contents;">

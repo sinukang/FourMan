@@ -774,3 +774,8 @@
     top: 12px;
     cursor: pointer;
 }
+
+.centerCheckbox {
+	display: flex;
+    justify-content: space-around;
+}

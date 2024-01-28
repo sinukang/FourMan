@@ -22,12 +22,12 @@
 						<div class="joinWrap">
 
 							<div class="joinTitle">
-								<h1>센터 회원가입</h1>
+								<h4>센터 회원가입</h4>
 							</div>
-							<div style="text-align:center;">
+							<div class="joinSelect">
 								<span>
-									<a href="${pageContext.request.contextPath}/joinUser">일반 회원가입</a>
-									<a href="${pageContext.request.contextPath}/joinTrainer">트레이너 회원가입</a> /
+									<a href="${pageContext.request.contextPath}/joinUser">일반 회원가입</a>/
+									<a href="${pageContext.request.contextPath}/joinTrainer">트레이너 회원가입</a> 
 								</span>
 							</div>
 

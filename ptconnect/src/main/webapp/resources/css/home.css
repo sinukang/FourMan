@@ -18,7 +18,13 @@ body {
     -webkit-text-size-adjust: none;
     -moz-text-size-adjust: none;
     -ms-text-size-adjust: none;
-    font-family: Spoqa Han Sans Neo,"sans-serif"
+    font-family: Spoqa Han Sans Neo,"sans-serif";
+    min-width: 600px;
+}
+
+section {
+	min-height: calc(100vh - 401.5px);
+	background-color: #f7f9fa;
 }
 
 .middle {
@@ -27,13 +33,14 @@ body {
 
 .my_container {
     max-width: 1136px;
-    min-width: 700px;
+/*     min-width: 700px; */
     margin: auto;
     font-size: 16px
 }
 
 .gray_background {
-    background-color: #f7f9fa
+    background-color: #f7f9fa;
+    min-height: calc(100vh - 460.5px);
 }
 
 img {
@@ -278,6 +285,7 @@ button.rbc-input::-moz-focus-inner {
     z-index: 999;
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid rgb(218, 224, 230);
+    border-top: 1px solid rgb(218, 224, 230);
 	
 }
 

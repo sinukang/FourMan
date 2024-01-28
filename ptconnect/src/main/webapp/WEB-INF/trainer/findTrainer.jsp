@@ -16,7 +16,7 @@
 	
 	<jsp:include page="/WEB-INF/include/header.jsp"/>
 
-	<section><!-- 섹션 -->
+	<section style="margin-bottom: -20px;"><!-- 섹션 -->
 		<div class="searchTab_wrap">
 			<div class="searchBar_wrap">
 				<div class="searchType">
@@ -231,6 +231,12 @@
 		</div>
 		
 		
+		
+	</section>
+	
+	<!-- 푸터 -->
+	<jsp:include page="/WEB-INF/include/footer.jsp"/>
+	
 		<div class="mapWrap">
 			<div style="width:100%; height:100%;" id="map"></div>
 			<div class="hAddr">
@@ -238,12 +244,7 @@
 				<span id="centerAddr"></span>
 			</div>
 		</div>
-		
-	</section>
-	
-	<!-- 푸터 -->
-	<jsp:include page="/WEB-INF/include/footer.jsp"/>
-	
+
 	<c:choose>
 		<c:when test="${mbNo ne null}">
 			${mbMapX}
@@ -260,7 +261,7 @@
 
 
 
-	//헤더 여백 설정
+	//헤더 여백 설정ㄱ
 	$('.contents').addClass('coach_nav');
 	
 	document.addEventListener("DOMContentLoaded", function() {
@@ -274,11 +275,11 @@
 	        $(".searchResultWrap").toggleClass("filter_height_reCalc");
 // 	        $(".mapWrap").toggleClass("mapResize");
 	    });
-	    
 	    returnButton.addEventListener("click", function() {
 	        var filterOption = document.querySelector(".filter_option");
 	        filterOption.classList.toggle("visible"); // "visible" 클래스를 토글하여 나타나거나 숨겨짐
 	        $(".searchResultWrap").toggleClass("filter_height_reCalc");
+	        $(".searchResultWrap").height("calc(100vh - 242px)");
 // 	        $(".mapWrap").toggleClass("mapResize");
 	        
 	    });

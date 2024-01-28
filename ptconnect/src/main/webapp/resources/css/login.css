@@ -13,11 +13,11 @@
 	background-color:#dff2fd;
 	border-radius:30px;
 	margin:0 auto;
+	box-shadow: 1px 1px 9px 0px #0f294138;
 }
 
 .tabWrap{
 	display:flex;
-	width:50%;
 	height:30px;
 	align-items:center;
 	justify-content: space-between;
@@ -25,6 +25,7 @@
 	margin-top:30px;
 	cursor:pointer;
 	color:#a09fc2;
+	gap:20px;
 }
 
 .tabWrap tab{

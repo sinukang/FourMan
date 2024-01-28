@@ -72,7 +72,6 @@
 					<otherwise>
 						<![CDATA[
 						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
-						AND NOT m.mbNo = #{mbNo}
 						]]>		
 					</otherwise>
 				</choose>
@@ -295,7 +294,7 @@
 	</update>
 	
 	<select id="memberSelectOne" parameterType="int" resultType="mo">
-		SELECT mbNo, mbEmail, mbName, mbPhone
+		SELECT *
 		FROM member
 		WHERE mbNo = #{mbNo}
 	</select>

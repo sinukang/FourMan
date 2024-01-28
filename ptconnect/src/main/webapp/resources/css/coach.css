@@ -15,6 +15,7 @@
     box-shadow: rgba(108, 118, 128, 0.16) 1px 2px 4px, rgba(108, 118, 128, 0.16) 1px 4px 8px;
     border-radius: 6px;
     border: 1px solid rgb(237, 241, 245);
+    width: 480.5px;
 }
  .searchType {
  	display: flex;
@@ -24,6 +25,7 @@
     align-items: center;
     padding: 0px 16px;
     border-bottom: 1px solid rgb(228, 234, 240);
+    background: white;
 }
   .typeFilter {
 	display: flex;
@@ -76,6 +78,7 @@ input::placeholder {
 	padding: 12px 16px;
     border-top: 1px solid rgb(228, 234, 240);
     cursor: pointer;
+    background: white;
 }
   
 .flex {
@@ -142,6 +145,14 @@ input::placeholder {
 
 .filter_option.visible {
     display: block; /* "visible" 클래스가 추가되면 나타남 */
+    background: white;
+/* 	position: absolute; */
+/*     z-index: 3; */
+    width: 480px;
+    margin-left: -1px;
+    box-shadow: rgba(108, 118, 128, 0.16) 1px 2px 4px, rgba(108, 118, 128, 0.16) 1px 4px 8px;
+    border-radius:0 0 6px 6px;
+    border: 1px solid rgb(237, 241, 245);
 }
   
   
@@ -243,6 +254,10 @@ input::placeholder {
 .filter_height_reCalc .searchResultArea{
 	padding-right: 5px; 
 }
+.filter_height_reCalc {
+	height:calc(100vh - 546px);
+}
+
 .searchResultArea .searchResultCard{
 	display: block;
 	margin-bottom: 10px;
@@ -254,6 +269,7 @@ input::placeholder {
 	border: 1px solid rgb(218, 224, 230);
     border-radius: 12px;
     background-color: rgb(255, 255, 255);
+	width: 468px;
 }
   
   .coachImages{
@@ -339,7 +355,7 @@ input::placeholder {
     right: 0px;
     left: 520px;
     width: calc(100% - 520px);
-    height: calc(100vh - 84px);
+    height: calc(100vh - 55px);
 }
 .mapResize{
 	height: 1280px;

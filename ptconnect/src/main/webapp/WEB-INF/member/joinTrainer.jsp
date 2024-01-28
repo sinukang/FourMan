@@ -22,9 +22,9 @@
 						<div class="joinWrap">
 
 							<div class="joinTitle">
-								<h1>트레이너 회원가입</h1>
+								<h4>트레이너 회원가입</h4>
 							</div>
-							<div style="text-align:center;">
+							<div class="joinSelect">
 								<span>
 									<a href="${pageContext.request.contextPath}/joinUser">일반 회원가입</a> /
 									<a href="${pageContext.request.contextPath}/joinCenter">센터 회원가입</a>
