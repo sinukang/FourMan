@@ -22,4 +22,5 @@ public interface MemberService {
 	public int memberPwdFind(String mbEmail, String mbPhone);
 	
 	public MemberDTO memberPwdCheck(int mbNo);
+	public int memberPwdUpdate(MemberDTO mo);
 }

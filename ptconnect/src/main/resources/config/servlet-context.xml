@@ -102,6 +102,9 @@
 <!-- 		</interceptor>	 -->
 <!-- 		<interceptor> -->
 <!-- 			<mapping path="/userPwdModify" /> -->
+<!-- 			<mapping path="/trainerPwdModify" /> -->
+<!-- 			<mapping path="/centerPwdModify" /> -->
+<!-- 			<mapping path="/pwdModifyAction" /> -->
 <!-- 			<beans:ref bean="PwdAuthInterceptor" /> -->
 <!-- 		</interceptor>	 -->
 <!-- 		<interceptor> -->

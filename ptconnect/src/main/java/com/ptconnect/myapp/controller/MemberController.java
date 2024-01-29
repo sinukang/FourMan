@@ -247,6 +247,7 @@ public class MemberController {
 		session.removeAttribute("nmNo");
 		session.removeAttribute("nmName");
 		session.removeAttribute("tnNo");
+		session.removeAttribute("PCA");
 		return "redirect:/findTrainer";
 	}
 	
@@ -359,11 +360,11 @@ public class MemberController {
 				session.setAttribute("mbMapY", mo.getMbMapY());
 				session.setAttribute("mbMapX", mo.getMbMapX());
 				if(mo.getMbAuth().equals("U")) {
-					path="/userPwdModify";
+					path="userPwdModify";
 				}else if(mo.getMbAuth().equals("T")) {
-					path="/userPwdModify"; //01-18 변경필요
+					path="trainerPwdModify";
 				}else if(mo.getMbAuth().equals("C")) {
-					path="/userPwdModify"; //01-18 변경필요
+					path="centerPwdModify";
 				}
 				
 			}else {

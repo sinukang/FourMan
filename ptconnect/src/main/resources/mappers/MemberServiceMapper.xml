@@ -47,4 +47,7 @@
 	<select id="memberPwdCheck" parameterType="int" resultType="mo">
 		SELECT * FROM member where mbNo=#{mbNo}
 	</select>
+	<update id="memberPwdUpdate" parameterType="mo">
+		update member set mbPwd = #{mbPwd} where mbNo = #{mbNo};
+	</update>
 </mapper>

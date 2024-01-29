@@ -100,4 +100,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mo;
 	}
+	
+	public int memberPwdUpdate(MemberDTO mo) {
+		int value = msm.memberPwdUpdate(mo);
+		return value;
+	}
 }

@@ -37,6 +37,15 @@
 <script>
 	const pwdSubmit = document.querySelector('.review_write_action_button');
 	const errMsg = document.querySelector('.err_msg');
+	const currentPath = window.location.pathname;
+	let postPath = "";
+	if(currentPath=="/ptconnect/userInfo"){
+		postPath='${pageContext.request.contextPath}/userPwdModify';
+	}else if(currentPath=="/ptconnect/trainerInfo"){
+		postPath='${pageContext.request.contextPath}/trainerPwdModify';
+	}else if(currentPath=="/ptconnect/centerInfo"){
+		postPath='${pageContext.request.contextPath}/centerPwdModify';
+	}
 	pwdSubmit.onclick = function(){
 		let pwd = document.querySelector('#pwd').value
 // 		errMsg.style.color='red';
@@ -51,7 +60,7 @@
 			success : function (data){
 				if(data.value==1){
 					alert(data.msg);
-					location.href="userPwdModify";
+					location.href=postPath;
 				}else if(data.value==2){
 					alert(data.msg);
 					location.href="login";
