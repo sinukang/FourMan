@@ -348,40 +348,6 @@
             });
 	    });
 		
-		function check()
-		{
-			var fm = document.frm;	
-	
-// 			if(fm.tnIntro.value=="") {
-// 				alert("소개를 입력하세요");
-// 				fm.tnIntro.focus();
-// 				return;
-// 			}else if(fm.tnTicket.value=="") {
-// 				alert("1회 체험권 가격을 입력하세요");
-// 				fm.tnTicket.focus();
-// 				return;
-// 			}else if(fm.qualify.value=="") {
-// 				alert("자격사항을 입력하세요");
-// 				fm.qualify.focus();
-// 				return;
-// 			}else if(fm.pgContent.value=="") {
-// 				alert("프로그램 내용을 입력하세요");
-// 				fm.pgContent.focus();
-// 				return;
-// 			}else if(fm.tnOneLine.value=="") {
-// 				alert("한 줄 소개를 입력하세요");
-// 				fm.tnOneLine.focus();
-// 				return;
-// 			} else {
-// 				var files = document.getElementById("chooseFile").files;
-				
-// 				console.log(files);
-// 				//debugger;
-// 				if (files.length === 0) {
-// 					alert("사진을 첨부해주세요");
-// 					return;
-// 				}
-// 			} 
 			
 			// lessonprice
 		    var lessonPrices = document.querySelectorAll('input[name="lessonPrice"]');
@@ -431,6 +397,52 @@
 
 		        programData.push(programInfo);
 		    }
+		    
+		    function check()
+			{
+				var fm = document.frm;	
+		
+				if(fm.tnIntro.value=="") {
+					alert("소개를 입력하세요");
+					fm.tnIntro.focus();
+					return;
+				}
+				if(fm.tnTicket.value=="") {
+					alert("1회 체험권 가격을 입력하세요");
+					fm.tnTicket.focus();
+					return;
+				}
+				for (var i = 0; i < qualifyInputs.length; i++) {
+			        var qualify = qualifyInputs[i].value;
+
+			        if (qualify.trim() === "") {
+			            alert("자격사항을 입력하세요.");
+			            qualifyInputs[i].focus();
+			            return;
+			        }
+			    }
+				for (var i = 0; i < programInputs.length; i++) {
+			        var program = programInputs[i].value;
+
+			        if (program.trim() === "") {
+			            alert("프로그램 내용을 입력하세요.");
+			            programInputs[i].focus();
+			            return;
+			        }
+			    }
+				if(fm.tnOneLine.value=="") {
+					alert("한 줄 소개를 입력하세요");
+					fm.tnOneLine.focus();
+					return;
+				}
+				var files = document.getElementById("chooseFile").files;
+					
+				console.log(files);
+				//debugger;
+				if (files.length === 0) {
+					alert("사진을 첨부해주세요");
+					return;
+				} 
 		    
 		    var files = document.getElementById("chooseFile").files;
 		    console.log(JSON.stringify(lessonPriceData));

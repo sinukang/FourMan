@@ -14,9 +14,10 @@ public class CenterInfoDTO extends MemberDTO{
 	private String ctIntro;
 	private String ctOperate;
 	private String ctInfo;
-	@Pattern(regexp="^[0-9]{3}[0-9]{2}[0-9]{5}$", message="전화번호를 정확히 입력해주세요.")
-	@NotEmpty(message = "전화번호를 입력해주세요.")
+//	@Pattern(regexp="^[0-9]{3}[0-9]{2}[0-9]{5}$", message="전화번호를 정확히 입력해주세요.")
+//	@NotEmpty(message = "전화번호를 입력해주세요.")
 	private String ctBn;
+	private String ctPrice;
 	
 	
 
@@ -123,6 +124,12 @@ public class CenterInfoDTO extends MemberDTO{
 	}
 	public void setCtDateM(String ctDateM) {
 		this.ctDateM = ctDateM;
+	}
+	public String getCtPrice() {
+		return ctPrice;
+	}
+	public void setCtPrice(String ctPrice) {
+		this.ctPrice = ctPrice;
 	}
 
 }

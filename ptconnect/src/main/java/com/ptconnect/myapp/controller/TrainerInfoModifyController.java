@@ -44,8 +44,14 @@ public class TrainerInfoModifyController {
 		tio = ts.trainerSelectOne(mbNo);
 		
 		System.out.println("tnNo : " + tio.getTnNo());
-		int tnNo = tio.getTnNo();
-		session.setAttribute("tnNo", tnNo);
+//		int tnNo = tio.getTnNo();
+//		session.setAttribute("tnNo", tnNo);
+		
+		int tnNo = Integer.parseInt(session.getAttribute("tnNo").toString());
+		
+		int flNo= tio.getFlNo();
+		System.out.println("flNo : " + flNo);
+		session.setAttribute("flNo", flNo);
 		
 		QualifyInfo qo = ts.qualifySelectOne(tnNo);
 		PriceInfo pro = ts.lessonPriceSelectOne(tnNo);
@@ -116,6 +122,8 @@ public class TrainerInfoModifyController {
 		
 		int tnNo = Integer.parseInt(session.getAttribute("tnNo").toString());
 		
+		int flNo = Integer.parseInt(session.getAttribute("flNo").toString());
+		
 		
 		System.out.println("tnNo : " + tnNo);
 		tio.setTnNo(tnNo);
@@ -143,17 +151,18 @@ public class TrainerInfoModifyController {
 	            
 	            File uploadPath = new File(path, filename);
 	            file.transferTo(uploadPath);
-	            System.out.println("path : " + path);
 	            System.out.println("uploadPath : " + uploadPath);
 	            
+	            
 	            // 각 파일에 대한 FileDetailDTO 객체 생성
-	            fdo.setFdName(filename);
-	            fdo.setFdPName(originalFilename);
-
-	            fileDetailsList.add(fdo);
+	            FileDetailDTO fdo2 = new FileDetailDTO();
+	            fdo2.setFdName(filename);
+	            fdo2.setFdPName(originalFilename);
+	            fdo2.setFlNo(flNo);
+	            
+	            fileDetailsList.add(fdo2);
 	        }
 	    }
-		
 		int value = ts.trainerModify(tio);
 		System.out.println("value : " + value);
 		
@@ -165,6 +174,7 @@ public class TrainerInfoModifyController {
 	    System.out.println("value3 : " + value3);
 	    
 	    for (FileDetailDTO newFdo : fileDetailsList) {
+	    	System.out.println("파일 이름: " + newFdo.getFdName());
 	        int value4 = ts.fileDetailInsert(newFdo);
 	        System.out.println("value4 : " + value4);
 	    }

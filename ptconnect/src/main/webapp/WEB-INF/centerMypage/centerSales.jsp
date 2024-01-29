@@ -16,16 +16,12 @@
 				<div> <!--헤더+맵-->
 					<jsp:include page="../include/header.jsp"/>
 					<section><!-- 섹션 -->
-						<div class="inner_header">
-							<div class="tab_wrap">
-								<div class="my_container tab_flex">
-									<div class="tab active_tab">내부_탭1</div>
-									<div class="tab">내부_탭2</div>
-									<div class="tab">내부_탭3</div>
-									<div class="tab">내부_탭4</div>
-								</div>
-							</div>
-						</div>
+						<jsp:include page="../include/centerHeader.jsp"/>
+						<script>
+							window.onload = function() {
+								$('#trainer_tab5').addClass('active_tab');
+							}
+						</script>
 						<div class="gray_background"><!-- 회색배경 -->
 							<div class="my_container"><!-- 코치정보(마진오토) -->
 								<div class="inner_contents"><!-- 코치정보(패딩탑) -->

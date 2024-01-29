@@ -15,8 +15,29 @@ public class FileDetailDTO extends TrainerInfoDTO {
 	private String fdPName;
 	private String fdDelYN;
 	
-private int tnNo;
+	private int tnNo;
+	private int rvNo;
+	private int ctNo;
+	private int bdNo;
 	
+	public int getRvNo() {
+		return rvNo;
+	}
+	public void setRvNo(int rvNo) {
+		this.rvNo = rvNo;
+	}
+	public int getCtNo() {
+		return ctNo;
+	}
+	public void setCtNo(int ctNo) {
+		this.ctNo = ctNo;
+	}
+	public int getBdNo() {
+		return bdNo;
+	}
+	public void setBdNo(int bdNo) {
+		this.bdNo = bdNo;
+	}
 	public int getTnNo() {
 		return tnNo;
 	}

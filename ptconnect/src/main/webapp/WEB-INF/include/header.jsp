@@ -81,6 +81,10 @@
 								<button class="drop_down_item">마이페이지</button>
 							</a>
 							<div class="drop_down_divider"></div>
+							<a href="centerInfoWrite">
+								<button class="drop_down_item">센터정보관리</button>
+							</a>
+							<div class="drop_down_divider"></div>
 							<a href="centerSales">
 								<button class="drop_down_item">결제내역</button>
 							</a>

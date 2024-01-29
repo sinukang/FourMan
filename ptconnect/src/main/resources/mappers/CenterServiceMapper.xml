@@ -19,6 +19,16 @@
 		AND t.tnNo = #{tnNo};		
 	</select>
 	
+	<update id="centerModify" parameterType="cio">
+		UPDATE centerinfo SET flNo=#{flNo}, ctName = #{ctName}, ctIntro = #{ctIntro}, ctPrice = #{ctPrice},
+		ctOperate = #{ctOperate}, ctInfo = #{ctInfo}, ctDateM = now()
+		WHERE ctNo = #{ctNo} and mbNo = #{mbNo}
+	</update>
 	
+	<select id="centerSelectOne" parameterType="int" resultType="cio">
+		SELECT *
+		FROM centerinfo
+		WHERE mbNo = #{mbNo} AND ctDelYN = 'N' ORDER BY ctNo desc limit 1
+	</select>
 	
 </mapper>

@@ -51,92 +51,92 @@
 	<beans:property name="maxUploadSize" value="10485760" />	
 	</beans:bean>	
 	
-	<interceptors>
-		<interceptor>
-			<mapping path="/admin/admin_login" />
-			<beans:ref bean="authInterceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/userChat" />
-			<mapping path="/userReview" />
-			<mapping path="/userChat" />
-			<mapping path="/userPoint" />
-			<mapping path="/trainerChat" />
-			<mapping path="/trainerSales" />
-			<mapping path="/trainerSchedule" />
-			<mapping path="/centerInfoView" />
-			<mapping path="/review" />
-			<mapping path="/centerInfo" />
-			<mapping path="/centerInfoModify" />
-			<mapping path="/centerSales" />
-			<mapping path="/centerTrainer" />
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/admin/admin_login" /> -->
+<!-- 			<beans:ref bean="authInterceptor" /> -->
+<!-- 		</interceptor> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/userChat" /> -->
+<!-- 			<mapping path="/userReview" /> -->
+<!-- 			<mapping path="/userChat" /> -->
+<!-- 			<mapping path="/userPoint" /> -->
+<!-- 			<mapping path="/trainerChat" /> -->
+<!-- 			<mapping path="/trainerSales" /> -->
+<!-- 			<mapping path="/trainerSchedule" /> -->
+<!-- 			<mapping path="/centerInfoView" /> -->
+<!-- 			<mapping path="/review" /> -->
+<!-- 			<mapping path="/centerInfo" /> -->
+<!-- 			<mapping path="/centerInfoModify" /> -->
+<!-- 			<mapping path="/centerSales" /> -->
+<!-- 			<mapping path="/centerTrainer" /> -->
 <!-- 			어드민 -->
-			<mapping path="/admin/admin_coupon_list" />
-			<mapping path="/admin/admin_coupon_modify" />
-			<mapping path="/admin/admin_coupon" />
-			<mapping path="/admin/admin_FAQ_modify" />
-			<mapping path="/admin/admin_FAQ_write" />
-			<mapping path="/admin/admin_FAQ" />
-			<mapping path="/admin/admin_notice_detail" />
-			<mapping path="/admin/admin_notice_modify" />
-			<mapping path="/admin/admin_notice_write" />
-			<mapping path="/admin/admin_notice" />
-			<mapping path="/admin/admin_point_detail" />
-			<mapping path="/admin/admin_point" />
-			<mapping path="/admin/admin_review" />
-			<mapping path="/admin/customerChatList" />
-			<mapping path="/admin/managerChatList" />
-			<mapping path="/admin/penaltyUserManagement" />
-			<mapping path="/admin/reportList" />
-			<mapping path="/admin/userManagement" />
-			<beans:ref bean="devAuthInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/userInfo" />
-			<mapping path="/userPwdModify" />
-			<mapping path="/userOrderList" />
-			<mapping path="/userPoint" />
-			<mapping path="/userReview" />
-			<mapping path="/userChat" />
-			<beans:ref bean="userAuthInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/userPwdModify" />
-			<beans:ref bean="PwdAuthInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/nonMemberMypage" />
-			<beans:ref bean="NonmemberAuthInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/trainerInfo" />
-			<mapping path="/trainerInfoWrite" />
-			<mapping path="/trainerChat" />
-			<mapping path="/trainerInfoModify" />
-			<mapping path="/trainerSales" />
-			<mapping path="/trainerSchedule" />
-			<mapping path="/centerInfoView" />
-			<beans:ref bean="trainerAuthInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/trainerInfoWrite" />
-			<mapping path="/trainerInfoModify" />
-			<beans:ref bean="TrainerInfoInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/admin/*" />
-			<exclude-mapping path="/admin/admin_login"/>
-			<beans:ref bean="adminAuthInterceptor" />
-		</interceptor>	
-		<interceptor>
-			<mapping path="/login" />
-			<beans:ref bean="loginInterceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/trainerInfoView" />
-			<beans:ref bean="TrainerNumberInterceptor" />
-		</interceptor>	
-	</interceptors>	
+<!-- 			<mapping path="/admin/admin_coupon_list" /> -->
+<!-- 			<mapping path="/admin/admin_coupon_modify" /> -->
+<!-- 			<mapping path="/admin/admin_coupon" /> -->
+<!-- 			<mapping path="/admin/admin_FAQ_modify" /> -->
+<!-- 			<mapping path="/admin/admin_FAQ_write" /> -->
+<!-- 			<mapping path="/admin/admin_FAQ" /> -->
+<!-- 			<mapping path="/admin/admin_notice_detail" /> -->
+<!-- 			<mapping path="/admin/admin_notice_modify" /> -->
+<!-- 			<mapping path="/admin/admin_notice_write" /> -->
+<!-- 			<mapping path="/admin/admin_notice" /> -->
+<!-- 			<mapping path="/admin/admin_point_detail" /> -->
+<!-- 			<mapping path="/admin/admin_point" /> -->
+<!-- 			<mapping path="/admin/admin_review" /> -->
+<!-- 			<mapping path="/admin/customerChatList" /> -->
+<!-- 			<mapping path="/admin/managerChatList" /> -->
+<!-- 			<mapping path="/admin/penaltyUserManagement" /> -->
+<!-- 			<mapping path="/admin/reportList" /> -->
+<!-- 			<mapping path="/admin/userManagement" /> -->
+<!-- 			<beans:ref bean="devAuthInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/userInfo" /> -->
+<!-- 			<mapping path="/userPwdModify" /> -->
+<!-- 			<mapping path="/userOrderList" /> -->
+<!-- 			<mapping path="/userPoint" /> -->
+<!-- 			<mapping path="/userReview" /> -->
+<!-- 			<mapping path="/userChat" /> -->
+<!-- 			<beans:ref bean="userAuthInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/userPwdModify" /> -->
+<!-- 			<beans:ref bean="PwdAuthInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/nonMemberMypage" /> -->
+<!-- 			<beans:ref bean="NonmemberAuthInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/trainerInfo" /> -->
+<!-- 			<mapping path="/trainerInfoWrite" /> -->
+<!-- 			<mapping path="/trainerChat" /> -->
+<!-- 			<mapping path="/trainerInfoModify" /> -->
+<!-- 			<mapping path="/trainerSales" /> -->
+<!-- 			<mapping path="/trainerSchedule" /> -->
+<!-- 			<mapping path="/centerInfoView" /> -->
+<!-- 			<beans:ref bean="trainerAuthInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/trainerInfoWrite" /> -->
+<!-- 			<mapping path="/trainerInfoModify" /> -->
+<!-- 			<beans:ref bean="TrainerInfoInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/admin/*" /> -->
+<!-- 			<exclude-mapping path="/admin/admin_login"/> -->
+<!-- 			<beans:ref bean="adminAuthInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/login" /> -->
+<!-- 			<beans:ref bean="loginInterceptor" /> -->
+<!-- 		</interceptor> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/trainerInfoView" /> -->
+<!-- 			<beans:ref bean="TrainerNumberInterceptor" /> -->
+<!-- 		</interceptor>	 -->
+<!-- 	</interceptors>	 -->
 	
 	
 </beans:beans>

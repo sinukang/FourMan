@@ -52,6 +52,19 @@ public class TrainerInfoWriteController {
 		System.out.println("mbNo : " + mbNo);
 		tio.setMbNo(mbNo);
 		
+		System.out.println("qualify : " + tio.getQualify());
+		System.out.println("lpCount : " + tio.getLpCount());
+		System.out.println("lessonPrice : " + tio.getLessonPrice());
+		
+		int value = ts.trainerInsert(tio);
+		System.out.println("value : " + value);
+		fdo.setTnNo(tio.getTnNo());
+		
+		int value2 = ts.fileInsert(fdo);
+		System.out.println("value2 : " + value2);
+		int flNo = fdo.getFlNo();
+		System.out.println("flNo : " + flNo);
+		
 		// 다중 파일 업로드 처리
 	    List<FileDetailDTO> fileDetailsList = new ArrayList<>();
 	    for (MultipartFile file : files) {
@@ -70,24 +83,15 @@ public class TrainerInfoWriteController {
 	            File uploadPath = new File(path, filename);
 	            file.transferTo(uploadPath);
 
-	            // 각 파일에 대한 FileDetailDTO 객체 생성
-	            fdo.setFdName(filename);
-	            fdo.setFdPName(originalFilename);
-
-	            fileDetailsList.add(fdo);
+	         // 각 파일에 대한 FileDetailDTO 객체 생성
+	            FileDetailDTO fdo2 = new FileDetailDTO();
+	            fdo2.setFdName(filename);
+	            fdo2.setFdPName(originalFilename);
+	            fdo2.setFlNo(flNo);
+	            
+	            fileDetailsList.add(fdo2);
 	        }
 	    }
-		
-		System.out.println("qualify : " + tio.getQualify());
-		System.out.println("lpCount : " + tio.getLpCount());
-		System.out.println("lessonPrice : " + tio.getLessonPrice());
-		
-		int value = ts.trainerInsert(tio);
-		System.out.println("value : " + value);
-		
-		fdo.setTnNo(tio.getTnNo());
-		int value2 = ts.fileInsert(fdo);
-		System.out.println("value2 : " + value2);
 		
 		for (FileDetailDTO newFdo : fileDetailsList) {
 	        int value3 = ts.fileDetailInsert(newFdo);

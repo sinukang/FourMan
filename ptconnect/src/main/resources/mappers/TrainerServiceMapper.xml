@@ -177,25 +177,47 @@
 	</insert>
 	
 	<!-- 파일 정보 등록 -->
-	<insert id="fileInsert" parameterType="fdo"  useGeneratedKeys="true" keyProperty="flNo">
-		<selectKey resultType="int" keyProperty="flNo"  order="AFTER">
-		select max(flNo) as flNo from file_
-		</selectKey>
-		insert into file_(flCf, flCfNo)
-		values( CASE 
-	                WHEN #{tnNo} IS NOT NULL THEN 'T'
-	                <!-- 	                WHEN #{ctNo} IS NOT NULL THEN 'C' -->
+<!-- 	<insert id="fileInsert" parameterType="fdo"  useGeneratedKeys="true" keyProperty="flNo"> -->
+<!-- 		<selectKey resultType="int" keyProperty="flNo"  order="AFTER"> -->
+<!-- 		select max(flNo) as flNo from file_ -->
+<!-- 		</selectKey> -->
+<!-- 		insert into file_(flCf, flCfNo) -->
+<!-- 		values( CASE  -->
+<!-- 	                WHEN #{tnNo} IS NOT NULL THEN 'T' -->
+<!-- 	               	WHEN #{ctNo} IS NOT NULL THEN 'C' -->
 <!-- 	                WHEN #{rvNo} IS NOT NULL THEN 'R' -->
 <!-- 	                WHEN #{bdNo} IS NOT NULL THEN 'B' -->
-	                ELSE NULL
-	            END,
-	            CASE 
-	                WHEN #{tnNo} IS NOT NULL THEN #{tnNo}
-	                <!-- 	                WHEN #{ctNo} IS NOT NULL THEN #{ctNo} -->
+<!-- 	                ELSE NULL -->
+<!-- 	            END, -->
+<!-- 	            CASE  -->
+<!-- 	                WHEN #{tnNo} IS NOT NULL THEN #{tnNo} -->
+<!-- 	                WHEN #{ctNo} IS NOT NULL THEN #{ctNo} -->
 <!-- 	                WHEN #{rvNo} IS NOT NULL THEN #{rvNo} -->
 <!-- 	                WHEN #{bdNo} IS NOT NULL THEN #{bdNo} -->
-	                ELSE NULL
-	            END) 
+<!-- 	                ELSE NULL -->
+<!-- 	            END)  -->
+<!-- 	</insert> -->
+	
+	<!-- 파일 정보 등록 -->
+	<insert id="fileInsert" parameterType="fdo" useGeneratedKeys="true" keyProperty="flNo">
+    <selectKey resultType="int" keyProperty="flNo" order="AFTER">
+        SELECT MAX(flNo) AS flNo FROM file_
+    </selectKey>
+    INSERT INTO file_ (flCf, flCfNo)
+    VALUES (
+            <if test="tnNo != 0">
+            'T', #{tnNo}
+	        </if>
+	        <if test="ctNo != 0">
+	            'C', #{ctNo}
+	        </if>
+	        <if test="rvNo != 0">
+	            'R', #{rvNo}
+	        </if>
+	        <if test="bdNo != 0">
+	            'B', #{bdNo}
+	        </if>
+    )
 	</insert>
 	
 	<insert id="fileDetailInsert" parameterType="fdo">
@@ -207,6 +229,7 @@
 	    UPDATE trainerInfo
 	    SET flNo = #{flNo}
 	    WHERE tnNo = #{tnNo}
+	    ORDER BY tnNo desc limit 1;
 	</update>
 	
 	<!-- 선택한 트레이너 정보 불러옴 -->
@@ -258,45 +281,78 @@
 	<update id="trainerModify" parameterType="tio">
 		update trainerInfo set tnOneLine = #{tnOneLine}, tnIntro = #{tnIntro},
 		tnTicket = #{tnTicket}, tnDateM = now()
-		where tnNo = #{tnNo}
+		where tnNo = #{tnNo} and mbNo = #{mbNo} and tnDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
 	</update>
 	
 	<update id="qualifyModify" parameterType="tio">
 		update qualify set qualify = #{qualify}, qlDateM = now()
-		where tnNo = #{tnNo}
+		where tnNo = #{tnNo} and qlDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
 	</update>
 	
 	<update id="lessonPriceModify" parameterType="tio">
 		update lessonPrice set lpCf = #{lpCf}, lpCount = #{lpCount},
 		lessonPrice = #{lessonPrice}, lpDateM = now()
-		where tnNo = #{tnNo}
+		where tnNo = #{tnNo} and lpDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
 	</update>
 	
 	<update id="programModify" parameterType="tio">
 		update program set pgContent = #{pgContent}, pgDateM = now()
-		where tnNo = #{tnNo}
+		where tnNo = #{tnNo} and pgDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
 	</update>
 	
 	<update id="file_Modify" parameterType="fdo">
-		update file_ set flCf = 'T', flCfNo = #{tnNo},
-		flDateM = now()
-		where flCf = 'T' and flCfNo = #{tnNo}
+		update file_ set flDateM = now()
+		where 
+		<if test="tnNo != ''">
+		flCf = 'T' and flCfNo = #{tnNo}
+		</if>
+		<if test="ctNo != ''">
+		flCf = 'C' and flCfNo = #{ctNo}
+		</if>
+		<if test="rvNo != ''">
+		flCf = 'R' and flCfNo = #{rvNo}
+		</if>
+		<if test="bdNo != ''">
+		flCf = 'B' and flCfNo = #{bdNo}
+		</if>
+		and flDelYN = 'N'
+		ORDER BY flNo desc limit 1;
+<!-- 		flCf = 'T' and flCfNo = #{tnNo} -->
 		<selectKey keyProperty="flNo" resultType="int" order="AFTER">
         SELECT flNo
         FROM file_
-        WHERE flCf = 'T' AND flCfNo = #{tnNo}
+        WHERE
+        <if test="tnNo != ''">
+		flCf = 'T' and flCfNo = #{tnNo}
+		</if>
+		<if test="ctNo != ''">
+		flCf = 'C' and flCfNo = #{ctNo}
+		</if>
+		<if test="rvNo != ''">
+		flCf = 'R' and flCfNo = #{rvNo}
+		</if>
+		<if test="bdNo != ''">
+		flCf = 'B' and flCfNo = #{bdNo}
+		</if>
+		and flDelYN = 'N'
+		ORDER BY flNo desc limit 1;
 		</selectKey>
 	</update>
 	
 	<update id="fileDetailModify" parameterType="fdo">
 		update fileDetail set fdDelYN = 'Y' 
-		where flNo = #{flNo}
+		where flNo = #{flNo} and fdDelYN = 'N'
 	</update>
 	
 	<select id="memberSelectOne" parameterType="int" resultType="mo">
 		SELECT *
 		FROM member
 		WHERE mbNo = #{mbNo}
+		ORDER BY mbNo desc limit 1;
 	</select>
 	
 	<select id="trainerSelectOne" parameterType="int" resultType="tio">
@@ -309,18 +365,21 @@
 		SELECT qualify
 		FROM qualify
 		WHERE tnNo = #{tnNo}
+		ORDER BY tnNo desc limit 1;
 	</select>
 	
 	<select id="lessonPriceSelectOne" parameterType="int" resultType="pro">
 		SELECT *
 		FROM lessonprice
 		WHERE tnNo = #{tnNo}
+		ORDER BY tnNo desc limit 1;
 	</select>
 	
 	<select id="programSelectOne" parameterType="int" resultType="pgo">
 		SELECT pgContent
 		FROM program
 		WHERE tnNo = #{tnNo}
+		ORDER BY tnNo desc limit 1;
 	</select>
 	
 	<select id="trainerSelectAll" resultType="tio">

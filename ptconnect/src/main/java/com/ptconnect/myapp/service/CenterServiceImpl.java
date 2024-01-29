@@ -4,9 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.persistance.CenterServiceMapper;
-import com.ptconnect.myapp.persistance.TrainerServiceMapper;
 
 @Service
 public class CenterServiceImpl implements CenterService{
@@ -25,8 +25,22 @@ public class CenterServiceImpl implements CenterService{
 		
 		return tio;
 	}
+	
+	@Override
+	public int centerModify(CenterInfoDTO cio) {
+	
+		int value = csm.centerModify(cio);
+		
+		return value;
+	}
 
-
+	@Override
+	public CenterInfoDTO centerSelectOne(int mbNo) {
+		
+		CenterInfoDTO cio = csm.centerSelectOne(mbNo);
+		
+		return cio;
+	}
 	
 	
 }
