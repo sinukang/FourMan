@@ -17,4 +17,6 @@ public interface CenterServiceMapper {
 	public int centerModify(CenterInfoDTO cio);
 
 	public CenterInfoDTO centerSelectOne(int mbNo);
+
+	public ArrayList<CenterInfoDTO> centerFind(@Param("ctName")String ctName);
 }

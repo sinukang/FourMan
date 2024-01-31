@@ -187,7 +187,7 @@
     line-height: 1.5!important;
 }
 
-.modal_content .modal_body .review_write_action_button{
+.modal_content .modal_body .review_write_action_button,.modal_content .modal_body .modal_button{
     display: flex;
     flex-direction: row;
     -webkit-box-pack: center;
@@ -200,7 +200,7 @@
     cursor:pointer;
 }
 
-.review_write_action_button.checked{
+.review_write_action_button.checked,.modal_button.checked{
     height: 48px;
     width: 100%;
     background-color: #5865F2;
@@ -211,7 +211,7 @@
     margin: 0px;
 }
 
-.review_write_action_button.unchecked{
+.review_write_action_button.unchecked,.modal_button.unchecked{
     height: 48px;
     width: 100%;
     background-color: rgb(237, 241, 245);
@@ -352,5 +352,21 @@
     line-height: 1.5!important;
 }
 
-.
+/* 센터 목록 모달 */
+.center_info {
+    margin: 10px 5px;
+    background-color: #5865F2;
+    padding: 10px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+.center_info .center_name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+.center_info .center_addr {
+    font-size: 1.1rem;
+    color: lightgrey;
+}
 

@@ -16,4 +16,6 @@ public interface CenterService {
 	
 	public CenterInfoDTO centerSelectOne(int mbNo);
 	
+public ArrayList<CenterInfoDTO> centerFind(String ctName);
+	
 }

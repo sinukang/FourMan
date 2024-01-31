@@ -55,5 +55,9 @@ public class CenterServiceImpl implements CenterService{
 	}
 
 	
+public ArrayList<CenterInfoDTO> centerFind(String ctName) {
+		ArrayList<CenterInfoDTO> cList = csm.centerFind(ctName);
 	
+return cList;
+	}
 }

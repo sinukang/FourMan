@@ -18,8 +18,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="db" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://192.168.0.48:3306/ptconnect?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
-		<property name="username" value="ksw"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/ptconnect?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
+		<property name="username" value="root"/>
 		<property name="password" value="1234"/>
 	</bean>
 <!-- 	Root Context: defines shared resources visible to all other web components -->

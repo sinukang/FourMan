@@ -45,10 +45,19 @@
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>활동하는 센터를 선택해주세요<span>*</span></label>
-													<div class="center_search">
-														<input type="text" name="centerName">
-														<div class="search_btn">
+													<div class="center_find" style="position:relative;">
+														<input type="text" name="centerSearch" id="center_search">
+														<div class="search_btn" onclick="ctFound()">
 															<i class="fa-solid fa-magnifying-glass"></i>
+														</div>
+													</div>
+													<div class="center_found" style="display:none;">
+														<input type="text" name="centerName" id="center_name" readonly>
+														<input type="hidden" name="centerNo" id="center_no">
+														<div class="submit">
+														<div class="submit_button checked" onclick="searchActivation()">
+															<span>센터 검색하기</span>
+														</div>
 														</div>
 													</div>
 												</div>
@@ -91,7 +100,7 @@
 													<button class="submit_button checked pwd_check_button" onclick="pwdCheck()"><span>비밀번호 변경</span></button>
 												</div>
 												<div class="half_button">
-													<button class="submit_button checked"><span>정보 업데이트</span></button>
+													<button class="submit_button checked" onclick="trainerInfoUpdate()"><span>정보 업데이트</span></button>
 												</div>
 											</div>
 											<div class="resign">
@@ -110,7 +119,9 @@
 	</div>
 	<!-- 비밀번호 변경으로 이동하기 전에 사용자를 확인하는 모달 결제창 -->
 	<jsp:include page="../include/pwdCheckModal.jsp"/>
+	<jsp:include page="../include/centerFindModal.jsp"/>
 	
+<!-- 비밀번호 변경 모달 -->
 <script>
 const pwdCheckModal = $('.pwd_check_modal');
 const exitButton = $('.exit_button');
@@ -133,6 +144,7 @@ window.onclick = function(e){
 	if(e.target.classList.contains('pwd_check_modal')){
 		pwdCheckModal.css('display','none');
 	}
+	
 }
 
 exitButton.click(function() {
@@ -142,6 +154,118 @@ exitButton.click(function() {
 modalColse.click(function() {
 	pwdCheckModal.css('display','none');
 });
-</script>	
+</script>
+<!-- 센터 검색 -->
+<script>
+// const centerSelectBtn = document.querySelector(".search_btn");
+const centerFind = document.querySelector(".center_find");
+const centerFound = document.querySelector(".center_found");
+const centerSearch = document.getElementById("center_search");
+const centerName = document.getElementById("center_name");
+const centerNo = document.getElementById("center_no");
+const centerFindModal = document.getElementById("center_find_modal");
+const centerList = document.getElementById("center_list");
+function ctFound(){
+// 	console.log(centerName.value);
+	$.ajax({
+			url: 'centerFind.ajax',
+			type: 'GET',
+			dataType: "json",
+			data : {'ctName':centerSearch.value},
+			success : function (data){
+				if(data[0].value=='none'){
+					alert("센터 이름을 입력해주세요.");
+					return;
+				}
+				if(data[0].value == 0){
+					alert("해당하는 센터가 존재하지 않습니다. 다시 확인해주세요.");
+					return;
+				}
+				if(data[0].value > 0){
+					console.log(data);
+					let centerInfoHtml = '<div>';
+					data.forEach(function(centerInfo){
+						if(centerInfo.ctName===undefined){
+							return;
+						}
+						centerInfoHtml+='<div class="center_info" onclick="centerSelect('+centerInfo.ctNo+')">';
+						centerInfoHtml+='<span class="center_name" id="ctName('+centerInfo.ctNo+')">'+centerInfo.ctName+'</span>';
+						centerInfoHtml+='<br><span class="center_addr">'+centerInfo.ctAddr+'</span></div>';
+					});
+					centerInfoHtml += '</div>';
+					centerFindModal.style.display='flex';		
+					centerList.innerHTML=centerInfoHtml;					
+				}
+			},
+			error: function (err){
+		 		centerList.style.color='red';
+		 		centerList.textContent='통신연결 실패';
+			}
+		});
+}
+
+function centerSelect(ctNo){
+	let selectedCenterName = document.getElementById('ctName('+ctNo+')').textContent;
+// 	console.log(ctNo);
+// 	console.log(selectedCenterName);
+	centerName.value = selectedCenterName;
+	centerNo.value = ctNo;
+	centerFind.style.display='none';
+	centerFound.style.display='';
+	centerFindModal.style.display='none';
+	
+}
+
+
+function searchActivation(){
+	centerFind.style.display='';
+	centerFound.style.display='none';
+}
+window.onclick = function(e){
+// 	console.log('pwd_check_modal : ' + e.target.classList.contains('pwd_check_modal'));
+	
+	if(e.target.classList.contains('center_find_modal')){
+		centerFindModal.style.display='none';
+	}
+	
+}
+
+exitButton.click(function() {
+	centerFindModal.style.display='none';
+});
+
+modalColse.click(function() {
+	centerFindModal.style.display='none';
+});
+
+
+</script>
+<!-- 정보 업데이트 -->
+<script>
+	function trainerInfoUpdate(){
+		if(centerNo.value==''){
+			alert('센터를 선택해주세요.');
+			return;
+		}else{
+			$.ajax({
+				url: 'centerTrainerConnect.ajax',
+				type: 'POST',
+				dataType: "json",
+				data : {'ctNo':centerNo.value},
+				success : function (data){
+					if(data.value==1){
+						alert(data.value);
+					}else{
+				 		alert("데이터없음");
+					}
+				},
+				error: function (err){
+					alert("통신실패");
+				}
+			});	
+		}
+	}
+
+</script>
 </body>
 </html>

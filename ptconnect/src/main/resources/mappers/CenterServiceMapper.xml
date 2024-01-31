@@ -39,4 +39,15 @@
 		WHERE mbNo = #{mbNo} AND ctDelYN = 'N' ORDER BY ctNo desc limit 1
 	</select>
 	
+<!-- 트레이너정보에서 센터검색에 필요한 기능 -->
+	<select id="centerFind" parameterType="String" resultType="cio">
+		select ci.ctNo, ci.ctName, m.mbAddr
+		from centerinfo ci 
+		join member m on ci.mbNo = m.mbNo 
+		where ci.ctName like '%${ctName}%'
+		order by 1 desc;
+	</select>
+	
+	
+	
 </mapper>
