@@ -36,7 +36,7 @@
 									별점을 선택해주세요
 								</label>
 								<div>
-									<select>
+									<select style="color: #FFBB33;">
 										<option style="color: #FFBB33;">★★★★★</option>
 										<option style="color: #FFBB33;">★★★★☆</option>
 										<option style="color: #FFBB33;">★★★☆☆</option>

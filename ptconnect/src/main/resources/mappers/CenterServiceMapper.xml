@@ -7,16 +7,24 @@
 	<!-- TrainerInfoView 중 센터 탭 -->
 	<select id="centerInfoView" parameterType="int" resultType="tio">
 		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
-		, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket
+		, t.tnNo, t.ctNo, c.flNo, t.tnOneLine, t.tnIntro, t.tnTicket
 		, c.ctName, c.ctIntro, c.ctInfo
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		, (SELECT q.qualify FROM qualify q WHERE q.tnNo = t.tnNo AND q.qlDelYN = 'N') AS qualify
 		FROM member m
 		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
 		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
 		WHERE m.mbDelYN = 'N'
-		AND t.tnNo = #{tnNo};		
+		AND t.tnNo = #{tnNo};
+	</select>
+	
+	<select id="centerInfoView_photos" parameterType="int" resultType="fdo">
+		SELECT fdNo, flNo, fdName, fdPName, fdDelYN
+		FROM filedetail
+		WHERE flno = #{flNo} AND fdDelYN = 'N'
+		ORDER BY fdno ASC;
 	</select>
 	
 	<update id="centerModify" parameterType="cio">

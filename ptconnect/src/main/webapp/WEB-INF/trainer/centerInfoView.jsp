@@ -46,22 +46,27 @@
 													<div class="content_wrap">
 														<div class="center">
 															<strong>${tio.ctName}</strong>
-															<!-- <div class="contact" onclick="setCenter()">상세 정보</div> -->
 														</div>
 														<div class="center">
 															<span>${tio.mbAddr}</span>
-														</div>
-														<div class="center">
-															<!-- <span>전북대학교 정문 맞은편 1층 롯데후레쉬</span> -->
 														</div>
 														<div>
 															<div class="photo_box">
 																<div style="display: inline;">
 																<!-- a태그는 modal창을 띄우는 용도 -->
+																<c:forEach var="centerPhotos" items="${centerPhotos}">
 																	<div class="photo_wrap">
 																		<div class="photo_rel">
 																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/center1.jpg">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/${centerPhotos.fdName}">
+																			</div>
+																		</div>
+																	</div>
+																</c:forEach>
+																	<%-- <div class="photo_wrap">
+																		<div class="photo_rel">
+																			<div class="photo_abs">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/center1.jpg">
 																			</div>
 																		</div>
 																	</div>
@@ -78,7 +83,7 @@
 																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/center3.jpg">
 																			</div>
 																		</div>
-																	</div>
+																	</div> --%>
 																</div>
 															</div>
 														</div>
@@ -93,11 +98,6 @@
 													<div class="content_wrap">
 														<div class="content_text">
 															${tio.ctIntro}
-															오늘도 기분좋은 하루되세요!
-															
-															이젠IT짐 입니다!
-															운동하기 참 좋은날이네요^^
-															
 														</div>
 													</div>
 												</div>
@@ -170,7 +170,6 @@
 													<div class="content_wrap">
 														<div class="center">
 															<strong>${tio.ctName}</strong>
-															<!-- <div class="contact" onclick="centerInfoView()">상세 정보</div> -->
 														</div>
 														<div class="center">
 															<span>${tio.mbAddr}</span>
@@ -182,7 +181,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="right_bar"><!-- 코치프로필 -->
+									
+									<!-- 코치프로필 영역-->
+									<div class="right_bar">
 										<div class="trainer_profile">
 											<div class="upside">
 												<div class="report_button">
@@ -190,7 +191,14 @@
 												</div>
 												<div>
 													<div>
-														<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png">
+														<c:choose>
+															<c:when test="${tio.flNo ne 0}">
+																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/download/${tio_photo_alist[0].fdName}" style="border: 1px solid #5865F2">
+															</c:when>
+															<c:otherwise>
+																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" alt="트레이너의 사진이 없습니다." style="border: 1px solid #5865F2">
+															</c:otherwise>
+														</c:choose>														
 													</div>
 													<div>
 														<div class="trainer_name">${tio.mbName}</div>
@@ -241,13 +249,23 @@
 														<div class="pickup_line">${tio.tnOneLine}</div>
 														<div class="list_wrap">
 															<div class="flex_box">
-																<span class="left">자격검증</span><span class="right">자격사항을 등록하세요</span>
+																<span class="left">자격검증</span>
+																<span class="right">
+																	<c:choose>
+																		<c:when test="${QualifyArr ne null}">
+																			<c:forEach var="Qualify" items="${QualifyArr}" varStatus="index">
+																				${Qualify}
+																				<c:if test="${false eq index.last}">,&nbsp</c:if>
+																			</c:forEach>
+																		</c:when>
+																		<c:otherwise>
+																			자격사항을 등록하세요
+																		</c:otherwise>
+																	</c:choose>																
+																</span>
 															</div>
 															<div class="flex_box">
-																<span class="left">전문분야</span><span class="right">프로그램을 추가하세요</span>
-															</div>
-															<div class="flex_box">
-																<span class="left">대표가격</span><span class="right">가격정보를 등록하세요</span>
+																<span class="left">대표가격</span><span class="right">1회 체험권 <span class="span_tnTicket">${tio.tnTicket}</span> 원</span>
 															</div>
 														</div>
 													</div>
@@ -262,11 +280,15 @@
 											</div>
 										</div>
 									</div>
+									<!-- 코치프로필 영역-->
+									
 								</div>
 							</div>
 						</div>
 					</section>
+					
 					<jsp:include page="../include/footer.jsp"/>
+					
 				</div>
 			</div>
 		</div>
@@ -287,7 +309,7 @@
 					</div>
 				</div>
 			</div>
-						<div class="swiper-pagination-custom"></div>
+			<div class="swiper-pagination-custom"></div>
 			<div class="swiper-button-next" style="color: white;"></div>
 			<div class="swiper-button-prev" style="color: white;"></div>
 		</div>

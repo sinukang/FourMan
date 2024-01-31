@@ -186,7 +186,7 @@
     font-size: 18px;
     font-weight: bold;
     color: #5865F2;
-    border: 1px solid rgb(218, 224, 230);
+    border: 1px solid #5865F2;
     margin: 0px;
     cursor: pointer;
 }
@@ -296,16 +296,16 @@
 }
 
 .view_review_button{
+    margin: 0px;
+    padding: 12px 24px;
     height: 48px;
     width: 100%;
+    color: #5865F2;
     background-color: rgb(255, 255, 255);
-    border-radius: 6px;
-    padding: 12px 24px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    color: rgb(61, 69, 77);
-    border: 1px solid rgb(218, 224, 230);
-    margin: 0px;
+    border: 1px solid #5865F2;
+    border-radius: 6px;
     cursor: pointer;
 }
 
@@ -382,7 +382,7 @@
 .content_wrap .center_location{
 	margin-top: 20px;	
     height: 360px;
-    border: solid 3px #5865F2;
+    border: solid 2px #5865F2;
     border-radius: 10px;
 }
 
@@ -439,33 +439,38 @@
 }
 
 .upside .center_name, .upside .review_wrap{
-	cursor: pointer;
+	margin-left: 5px;
 }
 
 .trainer_profile .upside .center_name{
-    text-decoration: underline;
-    color: rgb(108, 118, 128);
-    font-size: 14px;
-    margin-top: 4px;
+	text-decoration: underline;
+	color: rgb(108, 118, 128);
+	font-size: 14px;
+	margin-top: 4px;
+	cursor: pointer;
 }
 
 .trainer_profile .upside .stars{
-    margin-top: 8px;
-    font-size: 14px;
+	margin-top: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
 }
 
-.trainer_profile .upside .stars span{
-    vertical-align: top;
-    text-decoration: underline;
+.trainer_profile .upside .stars .count{
+	text-decoration: underline;
 }
 
 .upside .stars .rating{
-    font-weight: bold;
-    color: rgb(61, 69, 77);
+	font-weight: bold;
+	color: rgb(61, 69, 77);
 }
 
 .upside .stars .count{
-    color: rgb(108, 118, 128);
+	font-weight: bold;
+	color: rgb(108, 118, 128);
+	cursor: pointer;
 }
 
 .trainer_profile .upside .pickup_line{
