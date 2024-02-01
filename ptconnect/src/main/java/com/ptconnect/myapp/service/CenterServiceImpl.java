@@ -54,10 +54,17 @@ public class CenterServiceImpl implements CenterService{
 		return cio;
 	}
 
-	
-public ArrayList<CenterInfoDTO> centerFind(String ctName) {
+	@Override
+	public CenterInfoDTO trainerCenterSelectOne(int ctNo) {
+		CenterInfoDTO cio = csm.trainerCenterSelectOne(ctNo);
+		
+		return cio;
+	}
+
+	@Override
+	public ArrayList<CenterInfoDTO> centerFind(String ctName) {
 		ArrayList<CenterInfoDTO> cList = csm.centerFind(ctName);
-	
-return cList;
+		
+		return cList;
 	}
 }

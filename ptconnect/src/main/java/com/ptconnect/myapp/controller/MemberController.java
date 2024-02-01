@@ -205,10 +205,13 @@ public class MemberController {
 				session.setAttribute("mbMapY", mo.getMbMapY());
 				session.setAttribute("mbMapX", mo.getMbMapX());
 				if (mo.getMbAuth().equals("T")) {
-
+					System.out.println("mo.getMbAuth T true");
+					System.out.println("mbNo : " + mo.getMbNo());
 					TrainerInfoDTO tio = ts.trainerSelectOne(mo.getMbNo());
 					if(tio!=null) {
 						session.setAttribute("tnNo", tio.getTnNo());
+						session.setAttribute("tnCtNo", tio.getCtNo());
+						System.out.println("tnCtNo : " + tio.getCtNo());
 					}
 				}
 				path = "findTrainer";
@@ -247,6 +250,7 @@ public class MemberController {
 		session.removeAttribute("nmNo");
 		session.removeAttribute("nmName");
 		session.removeAttribute("tnNo");
+		session.removeAttribute("tnCtNo");
 		session.removeAttribute("PCA");
 		return "redirect:/findTrainer";
 	}

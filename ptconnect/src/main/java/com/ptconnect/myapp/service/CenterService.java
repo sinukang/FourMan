@@ -15,7 +15,9 @@ public interface CenterService {
 	public int centerModify(CenterInfoDTO cio);
 	
 	public CenterInfoDTO centerSelectOne(int mbNo);
+
+	public CenterInfoDTO trainerCenterSelectOne(int ctNo);
 	
-public ArrayList<CenterInfoDTO> centerFind(String ctName);
+	public ArrayList<CenterInfoDTO> centerFind(String ctName);
 	
 }

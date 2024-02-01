@@ -45,19 +45,21 @@
 											<div class="user_wrap">
 												<div class="user_input">
 													<label>활동하는 센터를 선택해주세요<span>*</span></label>
-													<div class="center_find" style="position:relative;">
-														<input type="text" name="centerSearch" id="center_search">
-														<div class="search_btn" onclick="ctFound()">
+													<div class="center_find input_wrap" style="position:relative;<c:if test="${not empty tnCtNo}">display:none;</c:if>">
+														<div class="input_width">
+															<input type="text" name="centerSearch" id="center_search">
+														</div>
+														<div class="send_auth_button" onclick="ctFound()">
 															<i class="fa-solid fa-magnifying-glass"></i>
 														</div>
 													</div>
-													<div class="center_found" style="display:none;">
-														<input type="text" name="centerName" id="center_name" readonly>
-														<input type="hidden" name="centerNo" id="center_no">
-														<div class="submit">
-														<div class="submit_button checked" onclick="searchActivation()">
-															<span>센터 검색하기</span>
+													<div class="center_found input_wrap" style="<c:if test="${empty tnCtNo}">display:none;</c:if>">
+														<div class="input_width">
+															<input type="text" name="centerName" id="center_name" readonly value="${ctName}">
+															<input type="hidden" name="centerNo" id="center_no" value="${tnCtNo}">
 														</div>
+														<div class="send_auth_button" onclick="searchActivation()">
+															<span>센터 변경하기</span>
 														</div>
 													</div>
 												</div>
@@ -80,20 +82,20 @@
 													<label>핸드폰 번호<span>*</span></label>
 													<div class="input_wrap">
 														<div class="input_width">
-															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="${mo.mbPhone}">														
+															<input type="tel" name="tel" placeholder="'-' 없이 입력" maxlength="20" autocomplete="off" value="${mo.mbPhone}" readonly>														
 														</div>
-														<div class="send_submit">
-															<div class="send_auth_button">인증번호 발송</div>
-														</div>
+<!-- 														<div class="send_submit"> -->
+<!-- 															<div class="send_auth_button">인증번호 발송</div> -->
+<!-- 														</div> -->
 													</div>
 												</div>
 											</div>
-											<div class="user_wrap">
-												<div class="user_input">
-													<label>상담요청 인삿말 설정(연락 시 참고사항)<span>*</span></label>
-													<textarea name="counseling" placeholder="ex) 오후 6시~10시는 상담이 어렵습니다. 문자를 남겨주시면 확인 후 연락드리겠습니다. 감사합니다." ></textarea>
-												</div>
-											</div>
+<!-- 											<div class="user_wrap"> -->
+<!-- 												<div class="user_input"> -->
+<!-- 													<label>상담요청 인삿말 설정(연락 시 참고사항)<span>*</span></label> -->
+<!-- 													<textarea name="counseling" placeholder="ex) 오후 6시~10시는 상담이 어렵습니다. 문자를 남겨주시면 확인 후 연락드리겠습니다. 감사합니다." ></textarea> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											<hr>
 											<div class="submit">
 												<div class="half_button">
@@ -254,9 +256,14 @@ modalColse.click(function() {
 				data : {'ctNo':centerNo.value},
 				success : function (data){
 					if(data.value==1){
-						alert(data.value);
+						alert('트레이너 정보가');
+					}else if(data.value==2){
+				 		if(confirm("트레이너 정보가 없습니다. 트레이너 정보 입력 페이지로 이동하시겠습니까?")){
+				 			location.href="trainerInfoWrite";
+				 		}
 					}else{
 				 		alert("데이터없음");
+				 		return;
 					}
 				},
 				error: function (err){

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
 import com.ptconnect.myapp.service.CenterService;
+import com.ptconnect.myapp.service.TrainerService;
 
 
 
@@ -22,6 +23,8 @@ import com.ptconnect.myapp.service.CenterService;
 public class CenterTrainerController {
 	@Autowired
 	CenterService cs;
+	@Autowired
+	TrainerService ts;
 	
 	@RequestMapping(value = "centerTrainer", method = RequestMethod.GET)
 	public String example() {
@@ -64,7 +67,16 @@ public class CenterTrainerController {
 			jo.put("value", 0);
 			return jo;
 		}else {
-			jo.put("value", 1);
+			if(session.getAttribute("tnNo")==null) {
+				jo.put("value", 2);
+				return jo;
+			}
+			System.out.println("ctNo : " + ctNo);
+			System.out.println("tnNo : " + session.getAttribute("tnNo"));
+			int centerNo = Integer.parseInt(ctNo);
+			int trainerNo = (int)session.getAttribute("tnNo");
+			int value = ts.trainerCenterConnect(centerNo, trainerNo);
+			jo.put("value", value);
 			return jo;
 		}
 	}
