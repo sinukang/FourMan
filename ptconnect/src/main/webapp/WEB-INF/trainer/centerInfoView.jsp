@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,8 @@
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center2.jpg">
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center3.jpg">
 								<img class="rest" src="${pageContext.request.contextPath}/resources/img/center4.jpg">
-								<div class="rest popup_btn" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${pageContext.request.contextPath}/resources/img/fitness1.jpg');">
+								<div class="rest popup_btn"
+									style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${pageContext.request.contextPath}/resources/img/fitness1.jpg');">
 									<div class="center_photo_view"><i class="fa-solid fa-images"></i>사진 전체보기</div>
 								</div>
 							</div>
@@ -53,37 +55,16 @@
 														<div>
 															<div class="photo_box">
 																<div style="display: inline;">
-																<!-- a태그는 modal창을 띄우는 용도 -->
-																<c:forEach var="centerPhotos" items="${centerPhotos}">
-																	<div class="photo_wrap">
-																		<div class="photo_rel">
-																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/${centerPhotos.fdName}">
+																	<!-- a태그는 modal창을 띄우는 용도 -->
+																	<c:forEach var="centerPhotos" items="${centerPhotos}">
+																		<div class="photo_wrap">
+																			<div class="photo_rel">
+																				<div class="photo_abs">
+																					<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/${centerPhotos.fdName}">
+																				</div>
 																			</div>
 																		</div>
-																	</div>
-																</c:forEach>
-																	<%-- <div class="photo_wrap">
-																		<div class="photo_rel">
-																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/center1.jpg">
-																			</div>
-																		</div>
-																	</div>
-																	<div class="photo_wrap">
-																		<div class="photo_rel">
-																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/center2.jpg">
-																			</div>
-																		</div>
-																	</div>
-																	<div class="photo_wrap">
-																		<div class="photo_rel">
-																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/img/center3.jpg">
-																			</div>
-																		</div>
-																	</div> --%>
+																	</c:forEach>
 																</div>
 															</div>
 														</div>
@@ -108,22 +89,33 @@
 													</h4>
 													<div class="content_wrap">
 														<div>
-															<div class="trophy">
-																<i class="fa-solid fa-square-parking"></i>
-																<span>${tio.ctInfo}주차 3시간 무료</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-shirt"></i>
-																<span>${tio.ctInfo}운동복, 수건 무료</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-box"></i>
-																<span>${tio.ctInfo}개인 사물함 1개월 10,000원</span>
-															</div>
-															<div class="trophy">
-																<i class="fa-solid fa-shower"></i>
-																<span>${tio.ctInfo}샤워시설</span>
-															</div>
+															<c:forEach var="centerInfo" items="${centerInfo}">
+																<div class="trophy">
+																	<c:choose>
+																		<c:when test="${fn:contains(centerInfo, '주차')}">
+																			<div class="div-icon">
+																				<i class="fa-solid fa-square-parking"></i>
+																			</div>
+																		</c:when>
+																		<c:when test="${fn:contains(centerInfo, '운동복')}">
+																			<div class="div-icon">
+																				<i class="fa-solid fa-shirt"></i>
+																			</div>
+																		</c:when>
+																		<c:when test="${fn:contains(centerInfo, '사물함')}">
+																			<div class="div-icon">
+																				<i class="fa-solid fa-box"></i>
+																			</div>
+																		</c:when>
+																		<c:when test="${fn:contains(centerInfo, '샤워')}">
+																			<div class="div-icon">
+																				<i class="fa-solid fa-shower"></i>
+																			</div>
+																		</c:when>	
+																	</c:choose> 
+																	<span>${centerInfo}</span>
+																</div>	
+															</c:forEach>
 														</div>
 													</div>
 												</div>
@@ -137,27 +129,36 @@
 													<div class="content_wrap">
 														<div class="price_head">센터 이용료</div>
 														<div class="price_table">
+														<c:forEach var="centerPrice" items="${centerPrice}">
 															<div class="price_line">
+																<div class="price_count">${centerPrice.ctUsePeriods} 개월</div>
+																<div class="price">
+																	<div class="price_per">월 <strong>${centerPrice.ctPrices / centerPrice.ctUsePeriods}</strong> 원</div>
+																	<div class="price_total">총 <strong>${centerPrice.ctPrices}</strong> 원</div>
+																</div>
+															</div>
+														</c:forEach>
+															<!-- <div class="price_line">
 																<div class="price_count">3개월</div>
 																<div class="price">
-																	<div class="price_per">월<strong>60,000</strong>원</div>
-																	<div class="price_total">180,000원</div>
+																	<div class="price_per">월 <strong>60,000</strong> 원</div>
+																	<div class="price_total">총 <strong>180,000</strong> 원</div>
 																</div>
 															</div>
 															<div class="price_line">
 																<div class="price_count">2개월</div>
 																<div class="price">
-																	<div class="price_per">월<strong>75,000</strong>원</div>
-																	<div class="price_total">150,000원</div>
+																	<div class="price_per">월 <strong>75,000</strong> 원</div>
+																	<div class="price_total">총 <strong>150,000</strong> 원</div>
 																</div>
 															</div>
 															<div class="price_line">
 																<div class="price_count">1개월</div>
 																<div class="price">
-																	<div class="price_per">월<strong>90,000</strong>원</div>
-																	<div class="price_total">90,000원</div>
+																	<div class="price_per">월 <strong>90,000</strong> 원</div>
+																	<div class="price_total">총 <strong>90,000</strong> 원</div>
 																</div>
-															</div>
+															</div> -->
 														</div>
 													</div>
 												</div>
@@ -182,7 +183,7 @@
 										</div>
 									</div>
 									
-									<!-- 코치프로필 영역-->
+									<!-- 트레이너 프로필 영역-->
 									<div class="right_bar">
 										<div class="trainer_profile">
 											<div class="upside">
@@ -193,10 +194,13 @@
 													<div>
 														<c:choose>
 															<c:when test="${tio.flNo ne 0}">
-																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/download/${tio_photo_alist[0].fdName}" style="border: 1px solid #5865F2">
+																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/download/${tio_photo_alist[0].fdName}"
+																	style="border: 1px solid #5865F2">
 															</c:when>
 															<c:otherwise>
-																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" alt="트레이너의 사진이 없습니다." style="border: 1px solid #5865F2">
+																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png"
+																	alt="트레이너의 사진이 없습니다."
+																	style="border: 1px solid #5865F2">
 															</c:otherwise>
 														</c:choose>														
 													</div>
@@ -226,15 +230,15 @@
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																</c:when>
-																<c:when test="${tio.reviewRate ge 2}">
+																<c:when test="${tio.reviewRate gt 0}">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																</c:when>
 																<c:otherwise>
-																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">

@@ -152,6 +152,7 @@ public class TrainerController {
 		
 		//트레이너 번호 받아서 해당 트레이너 정보 가져옴
 		TrainerInfoDTO tio = ts.TrainerInfoView(tnNo);
+		
 		//리뷰 평점 소수점 1자리까지만 표기
 		float round1 = tio.getReviewRate()*10;
 		round1 = Math.round(round1);
@@ -189,9 +190,11 @@ public class TrainerController {
 			lessonPrice[0] = tio.getLessonPrice();
 		}
 		
-		String testStr = ",,,,";
-		String[] testStrArr = testStr.split(",");
-		System.out.println(testStrArr.length);
+//		String testStr = ",,,,";
+//		String[] testStrArr = testStr.split(",");
+//		for (int i = 0; i <= testStrArr.length; i++) {
+//			System.out.println("testStrArr["+i+"] : " + testStrArr[i] + "");
+//		}
 		
 		//트레이너가 진행하는 프로그램들  가져옴
 		ArrayList<TrainerInfoDTO> tio_alist = new ArrayList<TrainerInfoDTO>();

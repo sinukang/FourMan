@@ -4,11 +4,10 @@
 
 <mapper namespace="com.ptconnect.myapp.persistance.CenterServiceMapper">
 
-	<!-- TrainerInfoView 중 센터 탭 -->
 	<select id="centerInfoView" parameterType="int" resultType="tio">
 		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
 		, t.tnNo, t.ctNo, c.flNo, t.tnOneLine, t.tnIntro, t.tnTicket
-		, c.ctName, c.ctIntro, c.ctInfo
+		, c.ctName, c.ctIntro, c.ctInfo, c.ctPrice
 		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
 		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
 		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate

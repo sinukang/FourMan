@@ -60,17 +60,18 @@
 																	<div class="photo_wrap">
 																		<div class="photo_rel">
 																			<div class="photo_abs">
-																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/${t_photos.fdName}">
+																				<img class="photo_size" src="${pageContext.request.contextPath}/resources/download/${t_photos.fdName}"
+																					onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/img/mainbanner2.png'">
 																			</div>
 																		</div>
 																	</div>
 																</c:forEach>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="content_text">
-														${tio.tnIntro}
-													</div>
+														<div class="content_text">
+															${tio.tnIntro}
+														</div>
 													</div>
 												</div>	
 											</div>
@@ -219,15 +220,15 @@
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																							</c:when>
-																							<c:when test="${rvo.rvRate eq 2}">
+																							<c:when test="${tio.reviewRate gt 0}">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
-																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																							</c:when>
 																							<c:otherwise>
-																								<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																								<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
@@ -322,7 +323,7 @@
 										</div>
 									</div>
 									
-									<!-- 코치프로필 -->
+									<!-- 트레이너 프로필 -->
 									<div class="right_bar">
 										<div class="trainer_profile">
 											<div class="upside">
@@ -333,10 +334,15 @@
 													<div>
 														<c:choose>
 															<c:when test="${tio.flNo ne 0}">
-																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/download/${tio_photo_alist[0].fdName}" style="border: 1px solid #5865F2">
+																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/download/${tio_photo_alist[0].fdName}"
+																	style="border: 1px solid #5865F2"
+																	alt="트레이너 프로필 사진"
+																	onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/img/mainbanner2.png'">
 															</c:when>
 															<c:otherwise>
-																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png" alt="트레이너의 사진이 없습니다." style="border: 1px solid #5865F2">
+																<img class="trainer_round_image" src="${pageContext.request.contextPath}/resources/img/mainbanner2.png"
+																	alt="트레이너의 사진이 없습니다."
+																	style="border: 1px solid #5865F2">
 															</c:otherwise>
 														</c:choose>
 													</div>
@@ -373,8 +379,15 @@
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																</c:when>
-																<c:otherwise>
+																<c:when test="${tio.reviewRate gt 0}">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_on.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
+																</c:when>
+																<c:otherwise>
+																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
 																	<img src="${pageContext.request.contextPath}/resources/img/star_off.svg" class="review_star">
