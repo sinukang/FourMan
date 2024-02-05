@@ -220,8 +220,10 @@ function centerSelect(ctNo){
 
 
 function searchActivation(){
-	centerFind.style.display='';
-	centerFound.style.display='none';
+	if(confirm("센터를 변경시 센터에서 승인하기 까지 트레이너 정보가 비공개로 전환됩니다. 진행하시겠습니까?")){
+		centerFind.style.display='';
+		centerFound.style.display='none';
+	}
 }
 window.onclick = function(e){
 // 	console.log('pwd_check_modal : ' + e.target.classList.contains('pwd_check_modal'));
@@ -253,10 +255,11 @@ modalColse.click(function() {
 				url: 'centerTrainerConnect.ajax',
 				type: 'POST',
 				dataType: "json",
-				data : {'ctNo':centerNo.value},
+				data : {'ctNo':centerNo.value,'ctName':centerName.value},
 				success : function (data){
 					if(data.value==1){
-						alert('트레이너 정보가');
+						alert('센터가 성공적으로 변경되었습니다.');
+						location.reload();
 					}else if(data.value==2){
 				 		if(confirm("트레이너 정보가 없습니다. 트레이너 정보 입력 페이지로 이동하시겠습니까?")){
 				 			location.href="trainerInfoWrite";

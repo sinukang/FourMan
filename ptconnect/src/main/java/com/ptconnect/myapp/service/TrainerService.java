@@ -2,6 +2,8 @@ package com.ptconnect.myapp.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ptconnect.myapp.domain.FileDetailDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.PriceInfo;
@@ -64,4 +66,10 @@ public interface TrainerService {
 	public int countTrainer();
 	
 	public int countOrder();
+
+	public ArrayList<TrainerInfoDTO> centerTrainer(int mbNo);
+	
+	public int trainerCenterConnect(int ctNo, int tnNo);
+	
+	public int trainerRegistered(int tnNo);
 }

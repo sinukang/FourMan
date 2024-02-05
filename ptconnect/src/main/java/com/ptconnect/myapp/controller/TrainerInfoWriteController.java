@@ -55,6 +55,8 @@ public class TrainerInfoWriteController {
 		System.out.println("qualify : " + tio.getQualify());
 		System.out.println("lpCount : " + tio.getLpCount());
 		System.out.println("lessonPrice : " + tio.getLessonPrice());
+		System.out.println("ctNo : " + tio.getCtNo());
+		System.out.println("ctName : " + tio.getCtName());
 		
 		int value = ts.trainerInsert(tio);
 		System.out.println("value : " + value);

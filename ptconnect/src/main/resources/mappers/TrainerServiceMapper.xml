@@ -155,8 +155,8 @@
 		<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
 		select max(tnNo) as tnNo from trainerInfo
 		</selectKey>
-		insert into trainerInfo(mbNo, tnOneLine, tnIntro, tnTicket)
-	 	values(#{mbNo}, #{tnOneLine},#{tnIntro},#{tnTicket})
+		insert into trainerInfo(mbNo, ctNo, tnOneLine, tnIntro, tnTicket, tnDelYN)
+	 	values(#{mbNo}, #{ctNo}, #{tnOneLine},#{tnIntro},#{tnTicket}, 'C')
 	</insert>
 	<!-- 자격 정보 등록 -->
 	<insert id="qualifyInsert" parameterType="tio">
@@ -208,7 +208,7 @@
             <if test="tnNo != 0">
             'T', #{tnNo}
 	        </if>
-	        <if test="ctNo != 0">
+	        <if test="tnNo == 0 and ctNo != 0">
 	            'C', #{ctNo}
 	        </if>
 	        <if test="rvNo != 0">
@@ -358,7 +358,7 @@
 	<select id="trainerSelectOne" parameterType="int" resultType="tio">
 		SELECT *
 		FROM trainerinfo
-		WHERE mbNo = #{mbNo} AND tnDelYN = 'N' ORDER BY tnNo desc limit 1
+		WHERE mbNo = #{mbNo} AND (tnDelYN = 'N' or tnDelYN='C') ORDER BY tnNo desc limit 1
 	</select>
 	
 	<select id="qualifySelectOne" parameterType="int" resultType="qo">
@@ -405,5 +405,23 @@
 	<select id="countOrder" resultType="int">
 		SELECT COUNT(*) FROM order_
 	</select>
+		
+	<!-- 트레이너-센터 변경 -->
+	<update id="trainerCenterConnect" parameterType="int">
+		update trainerInfo set ctNo = #{ctNo}, tnDelYN = 'C' where tnNo = #{tnNo}
+	</update>
 	
+	<update id="trainerRegistered" parameterType="int">
+		update trainerInfo set tnDelYN = 'R' where tnNo = #{tnNo}
+	</update>
+	
+	<select id="centerTrainer" parameterType="int" resultType="tio">
+		select * 
+		from trainerInfo t
+		join member m on t.mbNo = m.mbNo
+		where t.ctNo = (select ctNo from centerInfo where mbNo = #{mbNo})
+		and (t.tnDelYN='N' or t.tnDelYN='C')
+		order by t.mbNo desc
+	
+	</select>
 </mapper>

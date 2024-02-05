@@ -353,19 +353,19 @@
 }
 
 /* 센터 목록 모달 */
-.center_list .center_info {
+#center_list .center_info {
     margin: 10px 5px;
     background-color: #5865F2;
     padding: 10px;
     border-radius: 10px;
     cursor:pointer;
 }
-.center_list .center_info .center_name {
+#center_list .center_info .center_name {
     font-size: 1.5rem;
     font-weight: 600;
     color: white;
 }
-.center_list .center_info .center_addr {
+#center_list .center_info .center_addr {
     font-size: 1.1rem;
     color: lightgrey;
 }

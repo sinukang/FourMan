@@ -2,6 +2,8 @@ package com.ptconnect.myapp.persistance;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ptconnect.myapp.domain.FileDetailDTO;
 import com.ptconnect.myapp.domain.MemberDTO;
 import com.ptconnect.myapp.domain.PriceInfo;
@@ -78,5 +80,11 @@ public interface TrainerServiceMapper {
 	public int countTrainer();
 	
 	public int countOrder();
+
+	public int trainerRegistered(int tnNo);
+	
+	public ArrayList<TrainerInfoDTO> centerTrainer(int mbNo);
+	
+	public int trainerCenterConnect(@Param("ctNo")int ctNo, @Param("tnNo")int tnNo);
 	
 }

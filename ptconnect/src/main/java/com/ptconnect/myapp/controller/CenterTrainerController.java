@@ -8,12 +8,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ptconnect.myapp.domain.CenterInfoDTO;
+import com.ptconnect.myapp.domain.TrainerInfoDTO;
 import com.ptconnect.myapp.service.CenterService;
 import com.ptconnect.myapp.service.TrainerService;
 
@@ -27,10 +29,34 @@ public class CenterTrainerController {
 	TrainerService ts;
 	
 	@RequestMapping(value = "centerTrainer", method = RequestMethod.GET)
-	public String example() {
+	public String centerTrainer(Model model, HttpSession session) {
+		int mbNo = (int)session.getAttribute("mbNo");
+		ArrayList<TrainerInfoDTO> tList = ts.centerTrainer(mbNo);
+		ArrayList<TrainerInfoDTO> cTList = new ArrayList<>();
+		ArrayList<TrainerInfoDTO> rTList = new ArrayList<>();
+		for(TrainerInfoDTO tio : tList) {
+			if(tio.getTnDelYN().equals("N")) {
+				cTList.add(tio);
+			}else {
+				rTList.add(tio);
+			}
+		}
+		model.addAttribute("cTList",cTList);
+		model.addAttribute("rTList",rTList);
+		
 		return "centerMypage/centerTrainer";
 	}
-	
+
+	@ResponseBody
+	@RequestMapping(value="trainerRegistered.ajax", method = RequestMethod.GET)
+	public JSONObject trainerRegistered(
+			@RequestParam String tnNo,
+			HttpSession session) {
+		JSONObject jo = new JSONObject();
+		int value = 0;
+		value = ts.trainerRegistered(Integer.parseInt(tnNo));
+		return jo;
+	}
 	@ResponseBody
 	@RequestMapping(value="centerFind.ajax", method = RequestMethod.GET)
 	public JSONArray centerFind(
@@ -61,6 +87,7 @@ public class CenterTrainerController {
 	@RequestMapping(value="centerTrainerConnect.ajax", method = RequestMethod.POST)
 	public JSONObject centerTrainerConnect(
 			@RequestParam String ctNo,
+			@RequestParam String ctName,
 			HttpSession session) {
 		JSONObject jo = new JSONObject();
 		if(ctNo.equals("")) {
@@ -76,6 +103,8 @@ public class CenterTrainerController {
 			int centerNo = Integer.parseInt(ctNo);
 			int trainerNo = (int)session.getAttribute("tnNo");
 			int value = ts.trainerCenterConnect(centerNo, trainerNo);
+			session.setAttribute("tnCtNo", centerNo);
+			session.setAttribute("tnCtName", ctName);
 			jo.put("value", value);
 			return jo;
 		}

@@ -302,4 +302,25 @@ public class TrainerServiceImpl implements TrainerService {
 		return countOrder;
 	}
 
+	@Override
+	public ArrayList<TrainerInfoDTO> centerTrainer(int mbNo){
+		ArrayList<TrainerInfoDTO> tList = tsm.centerTrainer(mbNo);
+		return tList;
+	}
+	
+	@Override
+	public int trainerCenterConnect(int ctNo, int tnNo){
+		
+		int value = tsm.trainerCenterConnect(ctNo, tnNo);
+		
+		return value;
+	}
+
+	@Override
+	public int trainerRegistered(int tnNo) {
+		int value = tsm.trainerRegistered(tnNo);
+		return value;
+				
+	}
+	
 }

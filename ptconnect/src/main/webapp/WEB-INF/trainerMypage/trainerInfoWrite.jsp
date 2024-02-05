@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/trainer.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/modal.css" type="text/css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/1f85e66bca.js" crossorigin="anonymous"></script>
 
 </head>
@@ -177,8 +178,9 @@
 													<div class="user_input">
 														<h4>활동하는 센터를 선택해주세요<span>*</span></h4>
 														<div class="center_search">
-															<input type="text" name="centerName" placeholder="센터의 이메일을 입력해주세요!">
-															<div class="search_btn">
+															<input type="text" name="ctName" id="center_name" placeholder="센터의 이름을 입력해주세요.">
+															<input type="hidden" name="ctNo" id="center_no">
+															<div class="search_btn" onclick="ctFound()">
 																<i class="fa-solid fa-magnifying-glass"></i>
 															</div>
 														</div>
@@ -245,6 +247,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../include/centerFindModal.jsp"/>
 	
 	
 	<script>
@@ -329,7 +332,79 @@
 		
 	</script>
 	<script>
-	// 센터 이메일 스크립트
+		// 센터 검색 스크립트
+		const exitButton = $('.exit_button');
+		const modalColse = $('.modal_close');
+		const centerName = document.getElementById("center_name");
+		const centerNo = document.getElementById("center_no");
+		const centerFindModal = document.getElementById("center_find_modal");
+		const centerList = document.getElementById("center_list");
+		function ctFound(){
+		// 검색한 센터 목록 불러오는 ajax
+			$.ajax({
+					url: 'centerFind.ajax',
+					type: 'GET',
+					dataType: "json",
+					data : {'ctName':centerName.value},
+					success : function (data){
+						if(data[0].value=='none'){
+							alert("센터 이름을 입력해주세요.");
+							return;
+						}
+						if(data[0].value == 0){
+							alert("해당하는 센터가 존재하지 않습니다. 다시 확인해주세요.");
+							return;
+						}
+						if(data[0].value > 0){
+							console.log(data);
+							let centerInfoHtml = '<div>';
+							data.forEach(function(centerInfo){
+								if(centerInfo.ctName===undefined){
+									return;
+								}
+								centerInfoHtml+='<div class="center_info" onclick="centerSelect('+centerInfo.ctNo+')">';
+								centerInfoHtml+='<span class="center_name" id="ctName('+centerInfo.ctNo+')">'+centerInfo.ctName+'</span>';
+								centerInfoHtml+='<br><span class="center_addr">'+centerInfo.ctAddr+'</span></div>';
+							});
+							centerInfoHtml += '</div>';
+							centerFindModal.style.display='flex';		
+							centerList.innerHTML=centerInfoHtml;					
+						}
+					},
+					error: function (err){
+				 		centerList.style.color='red';
+				 		centerList.textContent='통신연결 실패';
+					}
+				});
+		}
+		// 센터를 선택하는 메소드
+		function centerSelect(ctNo){
+			let selectedCenterName = document.getElementById('ctName('+ctNo+')').textContent;
+//		 	console.log(ctNo);
+//		 	console.log(selectedCenterName);
+			centerName.value = selectedCenterName;
+			centerNo.value = ctNo;
+			centerFindModal.style.display='none';
+			
+		}
+		
+		window.onclick = function(e){
+//		 	console.log('pwd_check_modal : ' + e.target.classList.contains('pwd_check_modal'));
+			
+			if(e.target.classList.contains('center_find_modal')){
+				centerFindModal.style.display='none';
+			}
+			
+		}
+
+		exitButton.click(function() {
+			centerFindModal.style.display='none';
+		});
+
+		modalColse.click(function() {
+			centerFindModal.style.display='none';
+		});
+		
 	</script>
 	<script>
 	
@@ -435,7 +510,11 @@
 					alert("사진을 첨부해주세요");
 					return;
 				} 
-		    
+		    	if(fm.ctNo.value==""){
+		    		alert("센터를 선택해주세요.");
+		    		fm.ctName.focus();
+		    		return;
+		    	}
 		    var files = document.getElementById("chooseFile").files;
 		    console.log(JSON.stringify(lessonPriceData));
 			console.log(JSON.stringify(qualifyData));
